@@ -1,0 +1,255 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E1C3D508-E62F-4986-8DA9-BF3C930F903A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>CAMM.My.MyApplication</StartupObject>
+    <RootNamespace>CAMM</RootNamespace>
+    <AssemblyName>CAMM (Crystal Alien Map Maker)</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <OptionInfer>On</OptionInfer>
+    <ApplicationIcon>Crystal.ico</ApplicationIcon>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+    <SignManifests>false</SignManifests>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>false</GenerateManifests>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>false</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Background</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>CAMM (Crystal Alien Map Maker).xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <AdditionalParameters>
+    </AdditionalParameters>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>CAMM %28Crystal Alien Map Maker%29.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <AdditionalParameters>
+    </AdditionalParameters>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Nini">
+      <HintPath>..\..\DLL Assets\Nini.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Unit.vb" />
+    <Compile Include="FRMExportAS.Designer.vb">
+      <DependentUpon>FRMExportAS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FRMExportAS.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="c_Object.vb" />
+    <Compile Include="Entry_Object.Designer.vb">
+      <DependentUpon>Entry_Object.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Entry_Object.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Entry_Terrain.Designer.vb">
+      <DependentUpon>Entry_Terrain.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Entry_Terrain.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FRMEditor.Designer.vb">
+      <DependentUpon>FRMEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FRMEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FRMImportAS.Designer.vb">
+      <DependentUpon>FRMImportAS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FRMImportAS.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FRMTileData.Designer.vb">
+      <DependentUpon>FRMTileData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FRMTileData.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="FRMLoading.Designer.vb">
+      <DependentUpon>FRMLoading.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FRMLoading.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tile.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FRMExportAS.resx">
+      <DependentUpon>FRMExportAS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entry_Object.resx">
+      <DependentUpon>Entry_Object.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Entry_Terrain.resx">
+      <DependentUpon>Entry_Terrain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRMEditor.resx">
+      <DependentUpon>FRMEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRMImportAS.resx">
+      <DependentUpon>FRMImportAS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRMTileData.resx">
+      <DependentUpon>FRMTileData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRMLoading.resx">
+      <DependentUpon>FRMLoading.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Tile Data\Default Maps\*" />
+    <None Include="Tile Data\Other Data\BuildingButtonTest.xcf" />
+    <None Include="Tile Data\*" />
+    <None Include="Tile Data\_Save Data\*" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Crystal.ico" />
+    <Content Include="Nini.dll" />
+    <Content Include="Tile Data\Buttons\*" />
+    <Content Include="Tile Data\Buttons\Buildings\*" />
+    <Content Include="Tile Data\Other Data\*" />
+    <Content Include="Tile Data\Units\Alien Commander\*" />
+    <Content Include="Tile Data\Units\Alien Sprites\*" />
+    <Content Include="Tile Data\Units\Alien Vehicles\*" />
+    <Content Include="Tile Data\Units\Astro Sprites\*" />
+    <Content Include="Tile Data\Units\Astro Vehicles\*" />
+    <Content Include="Tile Data\Units\Santa\*" />
+    <Content Include="Tile Data\Buildings\Aliens\*" />
+    <Content Include="Tile Data\Buildings\Astros\*" />
+    <Content Include="Tile Data\Buildings\Santa\*" />
+    <Content Include="Tile Data\Buildings\Custom Merged\*" />
+    <Content Include="Tile Data\Minerals\*" />
+    <Content Include="Tile Data\Other Data\Background.png" />
+    <Content Include="Tile Data\Special\*" />
+    <Content Include="Tile Data\Terrain\*" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,116 @@
+﻿[CAMM]
+vFormat = 3
+
+[Level]
+Title = Test
+W = 10
+H = 10
+Team = 1
+
+[Terrain]
+; Terrain Format: {str_ID|i_posX|i_posY}
+Terrain0 = {4376|0|0}
+Terrain1 = {4368|1|0}
+Terrain2 = {4368|2|0}
+Terrain3 = {4354|3|0}
+Terrain4 = {4414|4|0}
+Terrain5 = {4426|5|0}
+Terrain6 = {4430|6|0}
+Terrain7 = {4418|7|0}
+Terrain8 = {4492|8|0}
+Terrain9 = {4358|9|0}
+Terrain10 = {4392|0|1}
+Terrain11 = {4404|1|1}
+Terrain12 = {4404|2|1}
+Terrain13 = {4394|3|1}
+Terrain14 = {4420|4|1}
+Terrain15 = {4412|5|1}
+Terrain16 = {4418|6|1}
+Terrain17 = {4490|7|1}
+Terrain18 = {4490|8|1}
+Terrain19 = {4358|9|1}
+Terrain20 = {4492|0|2}
+Terrain21 = {4490|1|2}
+Terrain22 = {4488|2|2}
+Terrain23 = {4486|3|2}
+Terrain24 = {4486|4|2}
+Terrain25 = {4486|5|2}
+Terrain26 = {4486|6|2}
+Terrain27 = {4488|7|2}
+Terrain28 = {4490|8|2}
+Terrain29 = {4364|9|2}
+Terrain30 = {4490|0|3}
+Terrain31 = {4488|1|3}
+Terrain32 = {4366|2|3}
+Terrain33 = {4352|3|3}
+Terrain34 = {4352|4|3}
+Terrain35 = {4352|5|3}
+Terrain36 = {4352|6|3}
+Terrain37 = {4360|7|3}
+Terrain38 = {4488|8|3}
+Terrain39 = {4490|9|3}
+Terrain40 = {4488|0|4}
+Terrain41 = {4366|1|4}
+Terrain42 = {4378|2|4}
+Terrain43 = {4368|3|4}
+Terrain44 = {4370|4|4}
+Terrain45 = {4368|5|4}
+Terrain46 = {4368|6|4}
+Terrain47 = {4372|7|4}
+Terrain48 = {4388|8|4}
+Terrain49 = {4488|9|4}
+Terrain50 = {4488|0|5}
+Terrain51 = {4364|1|5}
+Terrain52 = {4376|2|5}
+Terrain53 = {4368|3|5}
+Terrain54 = {4374|4|5}
+Terrain55 = {4376|5|5}
+Terrain56 = {4368|6|5}
+Terrain57 = {4368|7|5}
+Terrain58 = {4402|8|5}
+Terrain59 = {4488|9|5}
+Terrain60 = {4490|0|6}
+Terrain61 = {4396|1|6}
+Terrain62 = {4378|2|6}
+Terrain63 = {4368|3|6}
+Terrain64 = {4372|4|6}
+Terrain65 = {4378|5|6}
+Terrain66 = {4368|6|6}
+Terrain67 = {4368|7|6}
+Terrain68 = {4402|8|6}
+Terrain69 = {4486|9|6}
+Terrain70 = {4406|1|7}
+Terrain71 = {4368|2|7}
+Terrain72 = {4368|3|7}
+Terrain73 = {4374|4|7}
+Terrain74 = {4376|5|7}
+Terrain75 = {4370|6|7}
+Terrain76 = {4374|7|7}
+Terrain77 = {4390|8|7}
+Terrain78 = {4486|9|7}
+Terrain79 = {4398|1|8}
+Terrain80 = {4376|2|8}
+Terrain81 = {4370|3|8}
+Terrain82 = {4354|4|8}
+Terrain83 = {4364|5|8}
+Terrain84 = {4356|6|8}
+Terrain85 = {4362|7|8}
+Terrain86 = {4408|0|9}
+Terrain87 = {4416|1|9}
+Terrain88 = {4364|2|9}
+Terrain89 = {4356|3|9}
+Terrain90 = {4362|4|9}
+
+[Buildings]
+; Building Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
+Building0 = {1037|6|5|0|0|0}
+
+[Units]
+; Unit Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
+Unit0 = {2770|560|222|0|0|0}
+Unit1 = {3372|331|218|-1|0|0}
+Unit2 = {3172|148|118|-1|0|0}
+Unit3 = {3039|528|70|-1|0|0}
+Unit4 = {3759|947|474|-1|0|0}
+
+; -= Map Created Using CAMM Crystal Alien Map Maker =-

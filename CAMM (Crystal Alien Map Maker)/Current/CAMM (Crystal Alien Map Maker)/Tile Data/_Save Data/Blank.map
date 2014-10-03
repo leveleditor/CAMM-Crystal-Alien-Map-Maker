@@ -1,0 +1,19 @@
+﻿[CAMM]
+vFormat = 3
+
+[Level]
+Title = 
+W = 10
+H = 10
+Team = 1
+
+[Terrain]
+; Terrain Format: {str_ID|i_posX|i_posY}
+
+[Buildings]
+; Building Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
+
+[Units]
+; Unit Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
+
+; -= Map Created Using CAMM Crystal Alien Map Maker =-

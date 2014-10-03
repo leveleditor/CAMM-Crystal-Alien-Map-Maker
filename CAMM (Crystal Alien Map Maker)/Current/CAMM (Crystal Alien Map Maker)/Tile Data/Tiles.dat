@@ -1,0 +1,128 @@
+﻿[CAMM]
+vFormat = 4
+
+[SPECIAL CHARACTERS LIST]
+Get File Name = "%file%"
+INI Comment = ";"
+Array Modifiers = "{}"
+Array Separator = "|"
+
+[ANSI LOOKUP]
+Ansi Separator = "]["
+Ansi Array = {[ ][!][#][$][%][&]['][(][)][*][+][,][-][.][/][0][1][2][3][4][5][6][7][8][9][:][;][<][=][>][?][@][A][B][C][D][E][F][G][H][I][J][K][L][M][N][O][P][Q][R][S][T][U][V][W][X][Y][Z][[][]][^][_][`][a][b][c][d][e][f][g][h][i][j][k][l][m][n][o][p][q][r][s][t][u][v][w][x][y][z][{][|][}][~][€][ƒ][„][…][†][‡][ˆ][‰][Š][‹][Œ][Ž][‘][’][“][”][•][–][—][˜][™][š][›][œ][][ž][Ÿ][¡][¢][£][¤][¥][¦][§][¨][©][ª][«][¬][­][®][¯][°][±][²][³][´][µ][¶][·][¸][¹][º][»][¼][½][¾][¿][À][Á][Â][Ã][Ä][Å][Æ][Ç][È][É][Ê][Ë][Ì][Í][Î][Ï][Ð][Ñ][Ò][Ó][Ô][Õ][Ö][×][Ø][Ù][Ú][Û][Ü][Ý][Þ][ß][à][á][â][ã][ä][å][æ][ç][è][é][ê][ë][ì][í][î][ï][ð][ñ][ò][ó][ô][õ][ö][÷][ø][ù][ú][û][ü][ý][þ][ÿ]}
+
+[DEFINE TERRAIN]
+; Terrain Definition Format:
+; {str_ID|bool_IsPassable|bool_IsMinerals|url_Image}
+Terrain0 = {%file%|False|False|Tile Data/Terrain/4360.png}
+Terrain1 = {%file%|False|False|Tile Data/Terrain/4354.png}
+Terrain2 = {%file%|False|False|Tile Data/Terrain/4362.png}
+Terrain3 = {%file%|False|False|Tile Data/Terrain/4366.png}
+Terrain4 = {%file%|False|False|Tile Data/Terrain/4358.png}
+Terrain5 = {%file%|False|False|Tile Data/Terrain/4364.png}
+Terrain6 = {%file%|False|False|Tile Data/Terrain/4352.png}
+Terrain7 = {%file%|True|False|Tile Data/Terrain/4368.png}
+Terrain8 = {%file%|False|False|Tile Data/Terrain/4370.png}
+Terrain9 = {%file%|False|False|Tile Data/Terrain/4356.png}
+Terrain10 = {%file%|False|False|Tile Data/Terrain/4374.png}
+Terrain11 = {%file%|False|False|Tile Data/Terrain/4372.png}
+Terrain12 = {%file%|False|False|Tile Data/Terrain/4376.png}
+Terrain13 = {%file%|False|False|Tile Data/Terrain/4378.png}
+Terrain14 = {%file%|False|False|Tile Data/Terrain/4380.png}
+Terrain15 = {%file%|False|False|Tile Data/Terrain/4382.png}
+Terrain16 = {%file%|False|False|Tile Data/Terrain/4384.png}
+Terrain17 = {%file%|False|False|Tile Data/Terrain/4392.png}
+Terrain18 = {%file%|False|False|Tile Data/Terrain/4386.png}
+Terrain19 = {%file%|False|False|Tile Data/Terrain/4394.png}
+Terrain20 = {%file%|False|False|Tile Data/Terrain/4388.png}
+Terrain21 = {%file%|False|False|Tile Data/Terrain/4390.png}
+Terrain22 = {%file%|False|False|Tile Data/Terrain/4396.png}
+Terrain23 = {%file%|False|False|Tile Data/Terrain/4398.png}
+Terrain24 = {%file%|True|False|Tile Data/Terrain/4400.png}
+Terrain25 = {%file%|True|False|Tile Data/Terrain/4402.png}
+Terrain26 = {%file%|True|False|Tile Data/Terrain/4404.png}
+Terrain27 = {%file%|True|False|Tile Data/Terrain/4406.png}
+Terrain28 = {%file%|False|False|Tile Data/Terrain/4416.png}
+Terrain29 = {%file%|False|False|Tile Data/Terrain/4410.png}
+Terrain30 = {%file%|False|False|Tile Data/Terrain/4418.png}
+Terrain31 = {%file%|False|False|Tile Data/Terrain/4422.png}
+Terrain32 = {%file%|False|False|Tile Data/Terrain/4414.png}
+Terrain33 = {%file%|False|False|Tile Data/Terrain/4420.png}
+Terrain34 = {%file%|False|False|Tile Data/Terrain/4408.png}
+Terrain35 = {%file%|False|False|Tile Data/Terrain/4424.PNG}
+Terrain36 = {%file%|False|False|Tile Data/Terrain/4426.PNG}
+Terrain37 = {%file%|False|False|Tile Data/Terrain/4412.png}
+Terrain38 = {%file%|False|False|Tile Data/Terrain/4430.png}
+Terrain39 = {%file%|False|False|Tile Data/Terrain/4428.png}
+Terrain40 = {%file%|False|False|Tile Data/Terrain/4432.png}
+Terrain41 = {%file%|False|False|Tile Data/Terrain/4434.png}
+Terrain42 = {%file%|False|False|Tile Data/Terrain/4438.png}
+Terrain43 = {%file%|False|False|Tile Data/Terrain/4436.png}
+Terrain44 = {%file%|True|True|Tile Data/Minerals/4486.png}
+Terrain45 = {%file%|True|True|Tile Data/Minerals/4488.png}
+Terrain46 = {%file%|True|True|Tile Data/Minerals/4490.png}
+Terrain47 = {%file%|True|True|Tile Data/Minerals/4492.png}
+Terrain48 = {%file%|True|True|Tile Data/Special/4444.png}
+Terrain49 = {%file%|False|False|Tile Data/Special/4440.png}
+Terrain50 = {%file%|True|False|Tile Data/Special/4442.png}
+Terrain51 = {%file%|True|False|Tile Data/Special/4446.png}
+Terrain52 = {%file%|True|False|Tile Data/Special/4448.png}
+Terrain53 = {%file%|False|False|Tile Data/Special/4450.png}
+
+[DEFINE BUILDINGS]
+; Building Definition Format:
+; {str_ID|i_Width|i_Height|i_Team|f_Angle|f_Damage|i_OffsetY|url_Image}
+Building0 = {BA_good|2|4|0|0|0|0|Tile Data/Buildings/Astros/BA_good.png}
+Building1 = {BB_good|1|2|0|0|0|0|Tile Data/Buildings/Astros/BB_good.png}
+Building2 = {BC_good|2|2|0|0|0|0|Tile Data/Buildings/Astros/BC_good.png}
+Building3 = {BD_good|1|2|0|0|0|0|Tile Data/Buildings/Astros/BD_good.png}
+Building4 = {BE_good|2|3|0|0|0|0|Tile Data/Buildings/Astros/BE_good.png}
+Building5 = {BF_good|2|3|0|0|0|0|Tile Data/Buildings/Astros/BF_good.png}
+Building6 = {BG_good|1|2|0|0|0|0|Tile Data/Buildings/Astros/BG_good.png}
+Building7 = {BH_good|1|2|0|0|0|0|Tile Data/Buildings/Astros/BH_good.png}
+Building8 = {BK_good|2|4|0|0|0|0|Tile Data/Buildings/Astros/BK_good.png}
+Building9 = {BL_good|2|3|0|0|0|0|Tile Data/Buildings/Astros/BL_good.png}
+Building10 = {BX_good|2|4|0|0|0|0|Tile Data/Buildings/Astros/BX_good.png}
+Building11 = {BJ_evil|1|2|1|0|0|0|Tile Data/Buildings/Santa/BJ_evil.png}
+Building12 = {BA_evil|2|4|1|0|0|0|Tile Data/Buildings/Aliens/BA_evil.png}
+Building13 = {BB_evil|1|2|1|0|0|0|Tile Data/Buildings/Aliens/BB_evil.png}
+Building14 = {BC_evil|2|2|1|0|0|0|Tile Data/Buildings/Aliens/BC_evil.png}
+Building15 = {BD_evil|1|2|1|0|0|0|Tile Data/Buildings/Aliens/BD_evil.png}
+Building16 = {BE_evil|2|3|1|0|0|0|Tile Data/Buildings/Aliens/BE_evil.png}
+Building17 = {BF_evil|2|3|1|0|0|20|Tile Data/Buildings/Aliens/BF_evil.png}
+Building18 = {BG_evil|1|2|1|0|0|0|Tile Data/Buildings/Aliens/BG_evil.png}
+Building19 = {BH_evil|1|2|1|0|0|0|Tile Data/Buildings/Aliens/BH_evil.png}
+Building20 = {BK_evil|2|4|1|0|0|40|Tile Data/Buildings/Aliens/BK_evil.png}
+Building21 = {BI_good|4|3|0|0|0|25|Tile Data/Buildings/Neutral/BI_good.png}
+
+[DEFINE UNITS]
+; Unit Definition Format:
+; {str_ID|i_Width|i_Height|i_Team|f_Angle|f_Damage|i_OffsetY|url_Image}
+Unit0 = {UB_evil|1|1|1|0|0|10|Tile Data/Units/Aliens/UB_evil.png}
+Unit1 = {UA_evil|1|1|1|0|0|10|Tile Data/Units/Aliens/UA_evil.png}
+Unit2 = {UQ_evil|1|1|1|0|0|10|Tile Data/Units/Aliens/UQ_evil.png}
+Unit3 = {UC_evil|1|1|1|0|0|20|Tile Data/Units/Aliens/UC_evil.png}
+Unit4 = {UD_evil|1|1|1|0|0|5|Tile Data/Units/Aliens/UD_evil.png}
+Unit5 = {UE_evil|1|1|1|0|0|20|Tile Data/Units/Aliens/UE_evil.png}
+Unit6 = {UF_evil|1|1|1|0|0|15|Tile Data/Units/Aliens/UF_evil.png}
+Unit7 = {UG_evil|1|1|1|0|0|18|Tile Data/Units/Aliens/UG_evil.png}
+Unit8 = {UH_evil|1|1|1|0|0|15|Tile Data/Units/Aliens/UH_evil.png}
+Unit9 = {UP_evil|1|1|1|0|0|20|Tile Data/Units/Aliens/UP_evil.png}
+Unit10 = {UM_evil|1|1|1|0|0|10|Tile Data/Units/Santa/UM_evil.png}
+Unit11 = {UN_evil|1|1|1|0|0|12|Tile Data/Units/Santa/UN_evil.png}
+Unit12 = {UB_good|1|1|0|0|0|10|Tile Data/Units/Astros/UB_good.png}
+Unit13 = {UA_good|1|1|0|0|0|10|Tile Data/Units/Astros/UA_good.png}
+Unit14 = {UC_good|1|1|0|0|0|15|Tile Data/Units/Astros/UC_good.png}
+Unit15 = {UF_good|1|1|0|0|0|10|Tile Data/Units/Astros/UF_good.png}
+Unit16 = {UD_good|1|1|0|0|0|10|Tile Data/Units/Astros/UD_good.png}
+Unit17 = {UE_good|1|1|0|0|0|17|Tile Data/Units/Astros/UE_good.png}
+Unit18 = {UG_good|1|1|0|0|0|20|Tile Data/Units/Astros/UG_good.png}
+Unit19 = {UH_good|1|1|0|0|0|7|Tile Data/Units/Astros/UH_good.png}
+Unit20 = {UP_good|1|1|0|0|0|20|Tile Data/Units/Astros/UP_good.png}
+Unit21 = {UR_good|1|1|0|0|0|5|Tile Data/Units/Astros/UR_good.png}
+Unit22 = {UI_evil|1|1|1|0|0|20|Tile Data/Units/Items/UI_evil.png}
+Unit23 = {UI_good|1|1|0|0|0|15|Tile Data/Units/Items/UI_good.png}
+Unit24 = {UO_evil|1|1|1|0|0|15|Tile Data/Units/Items/UO_evil_01.png}
+Unit25 = {UJ_good|1|1|0|0|0|15|Tile Data/Units/Items/UJ_good.png}
+
+; -= CAMM Crystal Alien Map Maker (c) 2014 Leveleditor6680 // Josh =-

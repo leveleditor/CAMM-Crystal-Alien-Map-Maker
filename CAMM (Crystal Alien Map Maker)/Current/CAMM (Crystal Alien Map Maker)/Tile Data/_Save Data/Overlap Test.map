@@ -1,0 +1,81 @@
+﻿[CAMM]
+vFormat = 3
+
+[Level]
+Title = Overlap Test
+W = 10
+H = 10
+Team = 1
+
+[Terrain]
+; Terrain Format: {str_ID|i_posX|i_posY}
+Terrain0 = {4366|0|0}
+Terrain1 = {4352|1|0}
+Terrain2 = {4352|2|0}
+Terrain3 = {4360|3|0}
+Terrain4 = {4366|4|0}
+Terrain5 = {4352|5|0}
+Terrain6 = {4352|6|0}
+Terrain7 = {4352|7|0}
+Terrain8 = {4352|8|0}
+Terrain9 = {4360|9|0}
+Terrain10 = {4358|0|1}
+Terrain11 = {4368|1|1}
+Terrain12 = {4368|2|1}
+Terrain13 = {4354|3|1}
+Terrain14 = {4358|4|1}
+Terrain15 = {4368|5|1}
+Terrain16 = {4368|6|1}
+Terrain17 = {4368|7|1}
+Terrain18 = {4368|8|1}
+Terrain19 = {4354|9|1}
+Terrain20 = {4358|0|2}
+Terrain21 = {4368|1|2}
+Terrain22 = {4368|2|2}
+Terrain23 = {4354|3|2}
+Terrain24 = {4358|4|2}
+Terrain25 = {4368|5|2}
+Terrain26 = {4368|6|2}
+Terrain27 = {4368|7|2}
+Terrain28 = {4368|8|2}
+Terrain29 = {4354|9|2}
+Terrain30 = {4358|0|3}
+Terrain31 = {4368|1|3}
+Terrain32 = {4368|2|3}
+Terrain33 = {4354|3|3}
+Terrain34 = {4358|4|3}
+Terrain35 = {4368|5|3}
+Terrain36 = {4368|6|3}
+Terrain37 = {4368|7|3}
+Terrain38 = {4368|8|3}
+Terrain39 = {4354|9|3}
+Terrain40 = {4364|0|4}
+Terrain41 = {4356|1|4}
+Terrain42 = {4356|2|4}
+Terrain43 = {4362|3|4}
+Terrain44 = {4358|4|4}
+Terrain45 = {4368|5|4}
+Terrain46 = {4368|6|4}
+Terrain47 = {4368|7|4}
+Terrain48 = {4368|8|4}
+Terrain49 = {4354|9|4}
+Terrain50 = {4358|4|5}
+Terrain51 = {4368|5|5}
+Terrain52 = {4368|6|5}
+Terrain53 = {4368|7|5}
+Terrain54 = {4368|8|5}
+Terrain55 = {4354|9|5}
+Terrain56 = {4364|4|6}
+Terrain57 = {4356|5|6}
+Terrain58 = {4356|6|6}
+Terrain59 = {4356|7|6}
+Terrain60 = {4356|8|6}
+Terrain61 = {4354|9|6}
+
+[Buildings]
+; Building Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
+
+[Units]
+; Unit Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
+
+; -= Map Created Using CAMM Crystal Alien Map Maker =-

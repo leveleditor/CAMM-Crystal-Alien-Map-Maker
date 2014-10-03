@@ -1,0 +1,62 @@
+﻿[CAMM]
+vFormat = 1
+
+[Level]
+Title = Test
+W = 10
+H = 10
+Team = 1
+
+[Terrain]
+; Terrain Format: {str_ID|i_posX|i_posY}
+Terrain0 = {4384|1|2}
+Terrain1 = {4400|2|2}
+Terrain2 = {4386|3|2}
+Terrain3 = {4396|0|3}
+Terrain4 = {4378|1|3}
+Terrain5 = {4368|2|3}
+Terrain6 = {4372|3|3}
+Terrain7 = {4388|4|3}
+Terrain8 = {4406|0|4}
+Terrain9 = {4368|1|4}
+Terrain10 = {4368|2|4}
+Terrain11 = {4368|3|4}
+Terrain12 = {4402|4|4}
+Terrain13 = {4422|6|4}
+Terrain14 = {4416|7|4}
+Terrain15 = {4422|8|4}
+Terrain16 = {4416|9|4}
+Terrain17 = {4398|0|5}
+Terrain18 = {4376|1|5}
+Terrain19 = {4368|2|5}
+Terrain20 = {4374|3|5}
+Terrain21 = {4390|4|5}
+Terrain22 = {4422|5|5}
+Terrain23 = {4438|6|5}
+Terrain24 = {4436|7|5}
+Terrain25 = {4438|8|5}
+Terrain26 = {4418|9|5}
+Terrain27 = {4392|1|6}
+Terrain28 = {4404|2|6}
+Terrain29 = {4394|3|6}
+Terrain30 = {4422|4|6}
+Terrain31 = {4438|5|6}
+Terrain32 = {4436|6|6}
+Terrain33 = {4438|7|6}
+Terrain34 = {4418|8|6}
+Terrain35 = {4414|4|7}
+Terrain36 = {4428|5|7}
+Terrain37 = {4438|6|7}
+Terrain38 = {4418|7|7}
+Terrain39 = {4420|4|8}
+Terrain40 = {4412|5|8}
+Terrain41 = {4418|6|8}
+
+[Objects]
+; Object Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
+Object0 = {1059|6|3|0|0|0}
+Object1 = {1537|2|4|1|0|0}
+Object2 = {1037|0|9|0|0|0}
+Object3 = {1331|1|9|1|0|0}
+
+; -= Map Created Using CAMM Crystal Alien Map Maker =-

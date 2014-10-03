@@ -1,0 +1,17 @@
+﻿[CAMM]
+vFormat = 1
+
+[Level]
+Title = Test
+W = 10
+H = 10
+Team = 1
+
+[Terrain]
+; Terrain Format: {str_ID|i_posX|i_posY}
+
+[Objects]
+; Object Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
+
+-= Map Created Using CAMM Crystal Alien Map Maker =-
+-= CAMM Crystal Alien Map Maker (c) 2012 Leveleditor6680 // Josh =-

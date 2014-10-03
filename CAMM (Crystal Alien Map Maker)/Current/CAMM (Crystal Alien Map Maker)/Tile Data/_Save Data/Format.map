@@ -1,0 +1,26 @@
+﻿[CAMM]
+vFormat = 2
+
+[Level]
+Title = Format Test Map
+W = 10
+H = 10
+Team = 1
+Final = true
+
+[Undo]
+; TODO: Add undo feature and save undo stack in the save file (maybe (or optional)(probably not though, because of security reasons)).
+
+[Terrain]
+; Terrain Format: {str_ID|i_posX|i_posY}
+Terrain0 = {4486|0|0}
+
+[Buildings]
+; Building Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
+Building0 = {1037|2|2|0|0|0}
+
+[Units]
+; Unit Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
+Unit0 = {2770|5|5|0|0|0}
+
+; -= Map Created Using CAMM Crystal Alien Map Maker =-

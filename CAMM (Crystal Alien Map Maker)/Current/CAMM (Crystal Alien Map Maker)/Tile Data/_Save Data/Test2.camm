@@ -1,0 +1,25 @@
+﻿[CAMM]
+vFormat = 4
+
+[Level]
+Title = New Map
+W = 10
+H = 10
+Team = 1
+
+[Terrain]
+; Terrain Format: {str_ID|i_posX|i_posY}
+
+[Buildings]
+; Building Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
+Building0 = {BD_good|1|3|0|0|0}
+Building1 = {BB_good|2|3|0|0|0}
+Building2 = {BD_good|3|3|0|0|0}
+Building3 = {BD_evil|6|7|1|0|0}
+Building4 = {BB_evil|7|7|1|0|0}
+Building5 = {BD_evil|8|7|1|0|0}
+
+[Units]
+; Unit Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
+
+; -= Map Created Using CAMM Crystal Alien Map Maker =-
