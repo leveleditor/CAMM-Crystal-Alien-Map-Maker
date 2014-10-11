@@ -184,4 +184,5 @@ UpgradeLog*.htm
 FakesAssemblies/
 
 # CAMM Specific
-CAMM (Crystal Alien Map Maker).exe
+/CAMM (Crystal Alien Map Maker)/CAMM (Crystal Alien Map Maker)/CAMM (Crystal Alien Map Maker).exe
+/CAMM (Crystal Alien Map Maker)/CAMM (Crystal Alien Map Maker)/Nini.dll
