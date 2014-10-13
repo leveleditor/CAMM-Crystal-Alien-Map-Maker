@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Create maps for the CrystAlien Conflict game.")> 
 <Assembly: AssemblyCompany("Mars Mission Fan Wiki")> 
 <Assembly: AssemblyProduct("CAMM (Crystal Alien Map Maker)")> 
-<Assembly: AssemblyCopyright("GNU GPL v3 License")> 
+<Assembly: AssemblyCopyright("GNU GPL v2 License")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(True)> 
