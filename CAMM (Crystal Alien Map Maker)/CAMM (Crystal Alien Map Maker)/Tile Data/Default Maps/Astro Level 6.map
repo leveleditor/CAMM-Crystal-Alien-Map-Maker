@@ -1,5 +1,5 @@
 ﻿[CAMM]
-vFormat = 2
+vFormat = 4
 
 [Level]
 Title = Astro Level 6
@@ -156,13 +156,13 @@ Terrain143 = {4424|16|16}
 
 [Buildings]
 ; Building Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
-Building0 = {1331|14|2|1|0|0}
-Building1 = {1359|15|4|1|0|0}
-Building2 = {1399|10|7|1|0|0}
-Building3 = {1399|13|12|1|0|0}
-Building4 = {1203|0|13|0|0|0}
-Building5 = {989|4|14|0|0|0}
-Building6 = {1037|0|15|0|0|0}
+Building0 = {BB_evil|14|1|1|0|0}
+Building1 = {BC_evil|14|3|1|0|0}
+Building2 = {BD_evil|10|6|1|0|0}
+Building3 = {BD_evil|13|11|1|0|0}
+Building4 = {BG_good|0|12|0|0|0}
+Building5 = {BA_good|3|12|0|0|0}
+Building6 = {BB_good|0|14|0|0|0}
 
 [Units]
 ; Unit Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
