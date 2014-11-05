@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CAMM (Crystal Alien Map Maker) VS2013", "CAMM (Crystal Alien Map Maker)\CAMM (Crystal Alien Map Maker) VS2013.vbproj", "{E1C3D508-E62F-4986-8DA9-BF3C930F903A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1C3D508-E62F-4986-8DA9-BF3C930F903A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1C3D508-E62F-4986-8DA9-BF3C930F903A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1C3D508-E62F-4986-8DA9-BF3C930F903A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1C3D508-E62F-4986-8DA9-BF3C930F903A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = CAMM (Crystal Alien Map Maker)\CAMM (Crystal Alien Map Maker).vbproj
+		Policies = $0
+		$0.StandardHeader = $1
+		$1.Text = 
+		$1.IncludeInNewFiles = True
+		outputpath = CAMM (Crystal Alien Map Maker)\bin
+	EndGlobalSection
+EndGlobal
