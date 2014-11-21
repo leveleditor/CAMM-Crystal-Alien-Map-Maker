@@ -23,6 +23,7 @@ Public Class FRMEditor
     Private IsMouseOnMap As Boolean = False
     Public IsDrawing As Boolean = False
     Public PenTileHover As Pen = New Pen(Pens.DarkOrange.Brush, 2)
+    Public PenTileErase As Pen = New Pen(Pens.Red.Brush, 2)
     Public PenGrid As Pen = Pens.Black
     Private MouseX As Integer
     Private MouseY As Integer
@@ -116,6 +117,8 @@ Public Class FRMEditor
             MsgBox("The 'Tiles.dat' file is missing!" + vbNewLine + "Please make sure you have all required files before using CAMM.", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly)
             Me.Close()
         End If
+
+        CheckFileAssociations()
 
         Dim Y1 As Integer = 0
         Dim Y2 As Integer = 0
@@ -282,6 +285,11 @@ Public Class FRMEditor
 
         'Initialize map.
         InitMap()
+
+        If My.Application.CommandLineArgs.Count > 0 Then
+            BeginLoadMap(My.Application.CommandLineArgs(0))
+        End If
+
     End Sub
 
     Private Sub FRMEditor_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
@@ -797,7 +805,11 @@ Public Class FRMEditor
 
             ' Draw the rectangle cursor / selector thingy.
             If IsMouseInBounds() Then
-                g.DrawRectangle(PenTileHover, MouseX - (PenTileHover.Width / 2), MouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
+                If ToolMode = 2 Or My.Computer.Keyboard.CtrlKeyDown Then
+                    g.DrawRectangle(PenTileErase, MouseX - (PenTileHover.Width / 2), MouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
+                Else
+                    g.DrawRectangle(PenTileHover, MouseX - (PenTileHover.Width / 2), MouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
+                End If
                 If EditMode = 0 Then
                     'g.DrawImage(ActiveTile.Image, MouseX, MouseY)
                 ElseIf EditMode = 1 And ActiveBuilding.ObjectID <> "" Then
@@ -1147,19 +1159,22 @@ Public Class FRMEditor
         Me.OpenMap.InitialDirectory = My.Application.Info.DirectoryPath + RelBasePath + "/_Save Data/"
 
         If Me.OpenMap.ShowDialog = DialogResult.OK Then
-            Dim source As New IniConfigSource(Me.OpenMap.FileName)
-            Dim config As IConfig = source.Configs.Item("CAMM")
-            If config Is Nothing Then
-                LoadMapv0(source, config)
-            Else
-                Dim v As Integer = config.GetInt("vFormat", -1)
-                If v > vFormat Then
-                    MsgBox("This map file was created with a newer version of CAMM and cannot be opened.")
-                ElseIf v = 1 Then
-                    LoadMapv1(source, config)
-                ElseIf v = 2 Or v = 3 Or v = vFormat Then
-                    LoadMapv2v3v4(source, config, v)
-                End If
+            BeginLoadMap(Me.OpenMap.FileName)
+        End If
+    End Sub
+    Public Sub BeginLoadMap(ByVal FileName As String)
+        Dim source As New IniConfigSource(FileName)
+        Dim config As IConfig = source.Configs.Item("CAMM")
+        If config Is Nothing Then
+            LoadMapv0(source, config)
+        Else
+            Dim v As Integer = config.GetInt("vFormat", -1)
+            If v > vFormat Then
+                MsgBox("This map file was created with a newer version of CAMM and cannot be opened.")
+            ElseIf v = 1 Then
+                LoadMapv1(source, config)
+            ElseIf v = 2 Or v = 3 Or v = vFormat Then
+                LoadMapv2v3v4(source, config, v)
             End If
         End If
     End Sub
@@ -1825,7 +1840,92 @@ Public Class FRMEditor
         PICActive.Invalidate()
     End Sub
 
+    Private Sub CHKAssociateFileTypeCAMM_CheckStateChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CHKAssociateFileTypeCAMM.CheckStateChanged
+        If IsLoaded Then
+            If CHKAssociateFileTypeCAMM.CheckState = CheckState.Checked Then
+
+                Try
+                    My.Computer.Registry.ClassesRoot.CreateSubKey(".camm").SetValue("", "CAMM", Microsoft.Win32.RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey(".camm").SetValue("Content Type", "text/plain", Microsoft.Win32.RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey(".camm").SetValue("PerceivedType", "document", Microsoft.Win32.RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("", "CAMM Map File", Microsoft.Win32.RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("AlwaysShowExt", "", Microsoft.Win32.RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("BrowserFlags", 8, Microsoft.Win32.RegistryValueKind.DWord)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("EditFlags", 40000, Microsoft.Win32.RegistryValueKind.DWord)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\DefaultIcon").SetValue("", """" + Application.ExecutablePath + """" + ",0", Microsoft.Win32.RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\shell").SetValue("", "open")
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\shell\open").SetValue("", "&Edit with CAMM")
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\shell\open\command").SetValue("", Application.ExecutablePath + " ""%l"" ", Microsoft.Win32.RegistryValueKind.String)
+                Catch ex As UnauthorizedAccessException
+                    ' No access to register the .camm file extension, just ignore this.
+                Catch ex As Exception
+                    ' I'm sure there's any number of other things that could happen here,
+                    ' we are dealing with a core system feature after all.
+                    MsgBox(ex.Message + vbNewLine + vbNewLine + ex.StackTrace)
+                End Try
+
+            ElseIf CHKAssociateFileTypeCAMM.CheckState = CheckState.Unchecked Then
+
+                Try
+                    If My.Computer.Registry.ClassesRoot.GetSubKeyNames().Contains(".camm") Then
+                        My.Computer.Registry.ClassesRoot.DeleteSubKeyTree(".camm")
+                    End If
+                    If My.Computer.Registry.ClassesRoot.GetSubKeyNames().Contains("CAMM") Then
+                        My.Computer.Registry.ClassesRoot.DeleteSubKeyTree("CAMM")
+                    End If
+                Catch ex As UnauthorizedAccessException
+                    ' No access to unregister the .camm file extension, just ignore this.
+                Catch ex As Exception
+                    ' I'm sure there's any number of other things that could happen here,
+                    ' we are dealing with a core system feature after all.
+                    'MsgBox(ex.Message + vbNewLine + vbNewLine + ex.StackTrace)
+                End Try
+
+            End If
+
+            CheckFileAssociations()
+        End If
+    End Sub
+
+    Private Sub CHKAssociateFileTypeMap_CheckStateChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CHKAssociateFileTypeMap.CheckStateChanged
+        ' TODO: Associate .map files, though it may not be such a good idea.
+    End Sub
+
 #End Region
+
+    Private Sub CheckFileAssociations()
+
+        Try
+            If My.Computer.Registry.ClassesRoot.GetSubKeyNames().Contains(".camm") And My.Computer.Registry.ClassesRoot.GetSubKeyNames().Contains("CAMM") Then
+                If My.Computer.Registry.ClassesRoot.OpenSubKey(".camm", False).GetValue("", "-1") <> "CAMM" Or My.Computer.Registry.ClassesRoot.OpenSubKey("CAMM", False).GetValue("", "-1") <> "CAMM Map File" Then
+                    CHKAssociateFileTypeCAMM.CheckState = CheckState.Indeterminate
+                Else
+                    CHKAssociateFileTypeCAMM.CheckState = CheckState.Checked
+                End If
+            Else
+                CHKAssociateFileTypeCAMM.CheckState = CheckState.Unchecked
+            End If
+            My.Computer.Registry.ClassesRoot.OpenSubKey(".camm", True) '.SetValue("PermissionTest", True, Microsoft.Win32.RegistryValueKind.Binary)
+            'My.Computer.Registry.ClassesRoot.OpenSubKey(".camm", True).DeleteValue("PermissionTest", True)
+            My.Computer.Registry.ClassesRoot.OpenSubKey("CAMM", True) '.SetValue("PermissionTest", True, Microsoft.Win32.RegistryValueKind.Binary)
+            'My.Computer.Registry.ClassesRoot.OpenSubKey("CAMM", True).DeleteValue("PermissionTest", True)
+        Catch ex As UnauthorizedAccessException
+            ' No access to read or write the registry...
+            CHKAssociateFileTypeCAMM.Enabled = False
+            CHKAssociateFileTypeCAMM.ToolTipText = "You must run CAMM as an Administrator to change this."
+            'CHKAssociateFileTypeMap.Enabled = False
+        Catch ex As Security.SecurityException
+            ' No access to read or write the registry...
+            CHKAssociateFileTypeCAMM.Enabled = False
+            CHKAssociateFileTypeCAMM.ToolTipText = "You must run CAMM as an Administrator to change this."
+            'CHKAssociateFileTypeMap.Enabled = False
+        Catch ex As Exception
+            ' I'm sure there's any number of other things that could happen here,
+            ' we are dealing with a core system feature after all.
+            ' MsgBox(ex.Message + vbNewLine + vbNewLine + ex.StackTrace)
+        End Try
+
+    End Sub
 
 #Region "Export & Import"
 

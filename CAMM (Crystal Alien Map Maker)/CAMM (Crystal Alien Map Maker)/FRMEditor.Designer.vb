@@ -55,6 +55,9 @@ Partial Class FRMEditor
         Me.MNUCHKDebugBuildingPos = New System.Windows.Forms.ToolStripMenuItem
         Me.MNUHelp = New System.Windows.Forms.ToolStripMenuItem
         Me.CMDAbout = New System.Windows.Forms.ToolStripMenuItem
+        Me.Separator4 = New System.Windows.Forms.ToolStripSeparator
+        Me.CHKAssociateFileTypeCAMM = New System.Windows.Forms.ToolStripMenuItem
+        Me.CHKAssociateFileTypeMap = New System.Windows.Forms.ToolStripMenuItem
         Me.Separator3 = New System.Windows.Forms.ToolStripMenuItem
         Me.MNUDev = New System.Windows.Forms.ToolStripMenuItem
         Me.CMDTileDataEditor = New System.Windows.Forms.ToolStripMenuItem
@@ -337,17 +340,38 @@ Partial Class FRMEditor
         '
         'MNUHelp
         '
-        Me.MNUHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMDAbout})
-        Me.MNUHelp.Enabled = False
+        Me.MNUHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMDAbout, Me.Separator4, Me.CHKAssociateFileTypeCAMM, Me.CHKAssociateFileTypeMap})
         Me.MNUHelp.Name = "MNUHelp"
         Me.MNUHelp.Size = New System.Drawing.Size(44, 20)
         Me.MNUHelp.Text = "&Help"
         '
         'CMDAbout
         '
+        Me.CMDAbout.Enabled = False
         Me.CMDAbout.Name = "CMDAbout"
-        Me.CMDAbout.Size = New System.Drawing.Size(157, 22)
+        Me.CMDAbout.Size = New System.Drawing.Size(209, 22)
         Me.CMDAbout.Text = "&About CAMM..."
+        '
+        'Separator4
+        '
+        Me.Separator4.Name = "Separator4"
+        Me.Separator4.Size = New System.Drawing.Size(206, 6)
+        '
+        'CHKAssociateFileTypeCAMM
+        '
+        Me.CHKAssociateFileTypeCAMM.CheckOnClick = True
+        Me.CHKAssociateFileTypeCAMM.Name = "CHKAssociateFileTypeCAMM"
+        Me.CHKAssociateFileTypeCAMM.Size = New System.Drawing.Size(209, 22)
+        Me.CHKAssociateFileTypeCAMM.Text = "Associate file type .camm"
+        '
+        'CHKAssociateFileTypeMap
+        '
+        Me.CHKAssociateFileTypeMap.CheckOnClick = True
+        Me.CHKAssociateFileTypeMap.Enabled = False
+        Me.CHKAssociateFileTypeMap.Name = "CHKAssociateFileTypeMap"
+        Me.CHKAssociateFileTypeMap.Size = New System.Drawing.Size(209, 22)
+        Me.CHKAssociateFileTypeMap.Text = "Associate file type .map"
+        Me.CHKAssociateFileTypeMap.Visible = False
         '
         'Separator3
         '
@@ -732,4 +756,7 @@ Partial Class FRMEditor
     Friend WithEvents CMDDeveloper As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CMDExportAS As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MNUCHKDebugBuildingPos As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Separator4 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents CHKAssociateFileTypeCAMM As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents CHKAssociateFileTypeMap As System.Windows.Forms.ToolStripMenuItem
 End Class
