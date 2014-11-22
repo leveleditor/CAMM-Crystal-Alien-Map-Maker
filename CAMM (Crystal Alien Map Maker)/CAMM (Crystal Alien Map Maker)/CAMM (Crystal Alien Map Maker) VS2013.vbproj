@@ -197,6 +197,7 @@
     <None Include="Tile Data\_Save Data\*" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CAMMFile.ico" />
     <Content Include="Crystal.ico" />
     <Content Include="lib\*">
     </Content>
@@ -251,6 +252,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"$(ProjectDir)InsertIcons.exe" "$(TargetPath)" "$(ProjectDir)CAMMFile.ico"</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

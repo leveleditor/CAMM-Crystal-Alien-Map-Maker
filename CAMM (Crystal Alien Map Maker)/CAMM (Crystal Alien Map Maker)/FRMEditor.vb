@@ -1851,8 +1851,9 @@ Public Class FRMEditor
                     My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("", "CAMM Map File", Microsoft.Win32.RegistryValueKind.String)
                     My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("AlwaysShowExt", "", Microsoft.Win32.RegistryValueKind.String)
                     My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("BrowserFlags", 8, Microsoft.Win32.RegistryValueKind.DWord)
-                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("EditFlags", 40000, Microsoft.Win32.RegistryValueKind.DWord)
-                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\DefaultIcon").SetValue("", """" + Application.ExecutablePath + """" + ",0", Microsoft.Win32.RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("EditFlags", 302144, Microsoft.Win32.RegistryValueKind.DWord)
+                    ' Thanks to ETXAlienRobot201 for making the .camm file icon.
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\DefaultIcon").SetValue("", """" + Application.ExecutablePath + """" + ",1", Microsoft.Win32.RegistryValueKind.String)
                     My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\shell").SetValue("", "open")
                     My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\shell\open").SetValue("", "&Edit with CAMM")
                     My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\shell\open\command").SetValue("", Application.ExecutablePath + " ""%l"" ", Microsoft.Win32.RegistryValueKind.String)
@@ -1905,10 +1906,8 @@ Public Class FRMEditor
             Else
                 CHKAssociateFileTypeCAMM.CheckState = CheckState.Unchecked
             End If
-            My.Computer.Registry.ClassesRoot.OpenSubKey(".camm", True) '.SetValue("PermissionTest", True, Microsoft.Win32.RegistryValueKind.Binary)
-            'My.Computer.Registry.ClassesRoot.OpenSubKey(".camm", True).DeleteValue("PermissionTest", True)
-            My.Computer.Registry.ClassesRoot.OpenSubKey("CAMM", True) '.SetValue("PermissionTest", True, Microsoft.Win32.RegistryValueKind.Binary)
-            'My.Computer.Registry.ClassesRoot.OpenSubKey("CAMM", True).DeleteValue("PermissionTest", True)
+            My.Computer.Registry.ClassesRoot.OpenSubKey(".camm", True)
+            My.Computer.Registry.ClassesRoot.OpenSubKey("CAMM", True)
         Catch ex As UnauthorizedAccessException
             ' No access to read or write the registry...
             CHKAssociateFileTypeCAMM.Enabled = False
