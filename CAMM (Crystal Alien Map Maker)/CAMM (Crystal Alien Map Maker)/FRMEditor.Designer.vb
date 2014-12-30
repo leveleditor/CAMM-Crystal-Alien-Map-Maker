@@ -299,7 +299,6 @@ Partial Class FRMEditor
         'MNUEdit
         '
         Me.MNUEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMDMapProperties})
-        Me.MNUEdit.Enabled = False
         Me.MNUEdit.Name = "MNUEdit"
         Me.MNUEdit.Size = New System.Drawing.Size(39, 20)
         Me.MNUEdit.Text = "&Edit"

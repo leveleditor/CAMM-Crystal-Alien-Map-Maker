@@ -93,6 +93,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="FRMMapProperties.Designer.vb">
+      <DependentUpon>FRMMapProperties.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FRMMapProperties.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Unit.vb" />
     <Compile Include="FRMExportAS.Designer.vb">
       <DependentUpon>FRMExportAS.vb</DependentUpon>
@@ -169,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FRMImportAS.resx">
       <DependentUpon>FRMImportAS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FRMMapProperties.resx">
+      <DependentUpon>FRMMapProperties.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FRMTileData.resx">
       <DependentUpon>FRMTileData.vb</DependentUpon>

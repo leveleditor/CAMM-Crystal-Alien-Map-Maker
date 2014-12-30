@@ -11,7 +11,24 @@ Public Class FRMEditor
     Public MapSizeX As Integer = 10
     Public MapSizeY As Integer = 10
     Public MapTitle As String = ""
-    Dim LevelTeam As Integer = 1
+    Public LevelTeam As Integer = 0
+    Public Const LevelCashPlayerDefault = 2000
+    Public LevelCashPlayer As Integer = LevelCashPlayerDefault
+    Public Const LevelCashEnemyDefault = 20000
+    Public LevelCashEnemy As Integer = LevelCashEnemyDefault
+    Public Class LevelFlags
+        Public Const isTrainingDefault As Boolean = False
+        Public Const isConflictDefault As Boolean = False
+        Public Const isSpecialLevelDefault As Boolean = False
+        Public Const isLastSpecialLevelDefault As Boolean = False
+        Public Const isBonusLevelDefault As Boolean = False
+
+        Public Shared isTraining As Boolean = isTrainingDefault
+        Public Shared isConflict As Boolean = isConflictDefault
+        Public Shared isSpecialLevel As Boolean = isSpecialLevelDefault
+        Public Shared isLastSpecialLevel As Boolean = isBonusLevelDefault
+        Public Shared isBonusLevel As Boolean = isBonusLevelDefault
+    End Class
     Dim IsMapOpen As Boolean = False
     Dim OpenMapFile As String = ""
     Dim FormTitle As String = ""
@@ -1295,6 +1312,13 @@ Public Class FRMEditor
         MapSizeX = config.GetInt("W")
         MapSizeY = config.GetInt("H")
         LevelTeam = config.GetInt("Team")
+        LevelCashPlayer = config.GetInt("CashPlayer", LevelCashPlayerDefault)
+        LevelCashEnemy = config.GetInt("CashEnemy", LevelCashEnemyDefault)
+        LevelFlags.isTraining = config.GetBoolean("isTraining", LevelFlags.isTrainingDefault)
+        LevelFlags.isConflict = config.GetBoolean("isConflict", LevelFlags.isConflictDefault)
+        LevelFlags.isSpecialLevel = config.GetBoolean("isSpecialLevel", LevelFlags.isLastSpecialLevelDefault)
+        LevelFlags.isLastSpecialLevel = config.GetBoolean("isLastSpecialLevel", LevelFlags.isLastSpecialLevelDefault)
+        LevelFlags.isBonusLevel = config.GetBoolean("isBonusLevel", LevelFlags.isBonusLevelDefault)
         IsMapFinal = config.GetBoolean("Final", False)
 
         InitMap()
@@ -1555,6 +1579,13 @@ Public Class FRMEditor
             "W = " + MapSizeX.ToString + vbNewLine + _
             "H = " + MapSizeY.ToString + vbNewLine + _
             "Team = " + LevelTeam.ToString + vbNewLine + _
+            "CashPlayer = " + LevelCashPlayer.ToString + vbNewLine + _
+            "CashEnemy = " + LevelCashEnemy.ToString + vbNewLine + _
+            "isTraining = " + LevelFlags.isTraining.ToString + vbNewLine + _
+            "isConflict = " + LevelFlags.isConflict.ToString + vbNewLine + _
+            "isSpecialLevel = " + LevelFlags.isSpecialLevel.ToString + vbNewLine + _
+            "isLastSpecialLevel = " + LevelFlags.isLastSpecialLevel.ToString + vbNewLine + _
+            "isBonusLevel = " + LevelFlags.isBonusLevel.ToString + vbNewLine + _
             vbNewLine + _
             "[Terrain]" + vbNewLine + _
             "; Terrain Format: {str_ID|i_posX|i_posY}" + vbNewLine
@@ -1599,7 +1630,7 @@ Public Class FRMEditor
         If FileExists And IsReadOnly Then
             MsgBox("Unable to save map file, the file is set to read-only." + vbNewLine + "Please try saving using File > SaveAs.")
         Else
-            My.Computer.FileSystem.WriteAllText(FileName, FormulateSaveData, False)
+            My.Computer.FileSystem.WriteAllText(FileName, FormulateSaveData(), False)
             Me.Text = (Me.FormTitle & " - " & MapTitle & " - " & My.Computer.FileSystem.GetFileInfo(FileName).Name)
             IsMapOpen = True
             IsMapFinal = False
@@ -2013,4 +2044,7 @@ Public Class FRMEditor
 
 #End Region
 
+    Private Sub CMDMapProperties_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDMapProperties.Click
+        FRMMapProperties.ShowDialog(Me)
+    End Sub
 End Class
