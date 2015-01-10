@@ -1,6 +1,4 @@
-﻿Imports System.Windows.Forms
-
-Public Class FRMImportAS
+﻿Public Class FRMImportAS
 
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
         'MsgBox("""" + Ansi(45) + """") '45 should be an "N" according to the tiler.php...

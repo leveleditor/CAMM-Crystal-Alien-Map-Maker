@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="CustomColorTable.vb" />
     <Compile Include="FRMMapProperties.Designer.vb">
       <DependentUpon>FRMMapProperties.vb</DependentUpon>
     </Compile>

@@ -48,20 +48,24 @@ Partial Class FRMEditor
         Me.CMDExportAS = New System.Windows.Forms.ToolStripMenuItem
         Me.Separator2 = New System.Windows.Forms.ToolStripSeparator
         Me.CMDExit = New System.Windows.Forms.ToolStripMenuItem
+        Me.Separator5 = New System.Windows.Forms.ToolStripSeparator
         Me.MNUEdit = New System.Windows.Forms.ToolStripMenuItem
         Me.CMDMapProperties = New System.Windows.Forms.ToolStripMenuItem
+        Me.Separator6 = New System.Windows.Forms.ToolStripSeparator
         Me.MNUView = New System.Windows.Forms.ToolStripMenuItem
         Me.MNUCHKGrid = New System.Windows.Forms.ToolStripMenuItem
         Me.MNUCHKDebugBuildingPos = New System.Windows.Forms.ToolStripMenuItem
+        Me.Separator7 = New System.Windows.Forms.ToolStripSeparator
         Me.MNUHelp = New System.Windows.Forms.ToolStripMenuItem
         Me.CMDAbout = New System.Windows.Forms.ToolStripMenuItem
         Me.Separator4 = New System.Windows.Forms.ToolStripSeparator
         Me.CHKAssociateFileTypeCAMM = New System.Windows.Forms.ToolStripMenuItem
         Me.CHKAssociateFileTypeMap = New System.Windows.Forms.ToolStripMenuItem
-        Me.Separator3 = New System.Windows.Forms.ToolStripMenuItem
+        Me.Separator8 = New System.Windows.Forms.ToolStripSeparator
         Me.MNUDev = New System.Windows.Forms.ToolStripMenuItem
         Me.CMDTileDataEditor = New System.Windows.Forms.ToolStripMenuItem
         Me.CMDDeveloper = New System.Windows.Forms.ToolStripMenuItem
+        Me.Separator3 = New System.Windows.Forms.ToolStripSeparator
         Me.CMDEditBuildings = New System.Windows.Forms.Button
         Me.CMDEditTiles = New System.Windows.Forms.Button
         Me.CMDEditShroud = New System.Windows.Forms.Button
@@ -132,7 +136,7 @@ Partial Class FRMEditor
         Me.StatusBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LBLCursorLoc, Me.LBLAboutVersion})
         Me.StatusBar.Location = New System.Drawing.Point(0, 428)
         Me.StatusBar.Name = "StatusBar"
-        Me.StatusBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode
+        Me.StatusBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.StatusBar.Size = New System.Drawing.Size(764, 24)
         Me.StatusBar.TabIndex = 8
         Me.StatusBar.Text = "StatusStrip1"
@@ -204,9 +208,11 @@ Partial Class FRMEditor
         '
         'MNUMain
         '
-        Me.MNUMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MNUFile, Me.MNUEdit, Me.MNUView, Me.MNUHelp, Me.Separator3, Me.MNUDev})
+        Me.MNUMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MNUFile, Me.Separator5, Me.MNUEdit, Me.Separator6, Me.MNUView, Me.Separator7, Me.MNUHelp, Me.Separator8, Me.MNUDev, Me.Separator3})
         Me.MNUMain.Location = New System.Drawing.Point(0, 0)
         Me.MNUMain.Name = "MNUMain"
+        Me.MNUMain.Padding = New System.Windows.Forms.Padding(0)
+        Me.MNUMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.MNUMain.Size = New System.Drawing.Size(764, 24)
         Me.MNUMain.TabIndex = 0
         Me.MNUMain.Text = "MenuStrip1"
@@ -215,7 +221,7 @@ Partial Class FRMEditor
         '
         Me.MNUFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMDNew, Me.CMDOpen, Me.CMDSave, Me.CMDSaveAs, Me.Separator1, Me.MNUImport, Me.MNUExport, Me.Separator2, Me.CMDExit})
         Me.MNUFile.Name = "MNUFile"
-        Me.MNUFile.Size = New System.Drawing.Size(37, 20)
+        Me.MNUFile.Size = New System.Drawing.Size(37, 24)
         Me.MNUFile.Text = "&File"
         '
         'CMDNew
@@ -296,11 +302,17 @@ Partial Class FRMEditor
         Me.CMDExit.Size = New System.Drawing.Size(155, 22)
         Me.CMDExit.Text = "E&xit"
         '
+        'Separator5
+        '
+        Me.Separator5.AutoSize = False
+        Me.Separator5.Name = "Separator5"
+        Me.Separator5.Size = New System.Drawing.Size(3, 24)
+        '
         'MNUEdit
         '
         Me.MNUEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMDMapProperties})
         Me.MNUEdit.Name = "MNUEdit"
-        Me.MNUEdit.Size = New System.Drawing.Size(39, 20)
+        Me.MNUEdit.Size = New System.Drawing.Size(39, 24)
         Me.MNUEdit.Text = "&Edit"
         '
         'CMDMapProperties
@@ -310,11 +322,17 @@ Partial Class FRMEditor
         Me.CMDMapProperties.Size = New System.Drawing.Size(208, 22)
         Me.CMDMapProperties.Text = "&Map Properties..."
         '
+        'Separator6
+        '
+        Me.Separator6.AutoSize = False
+        Me.Separator6.Name = "Separator6"
+        Me.Separator6.Size = New System.Drawing.Size(3, 24)
+        '
         'MNUView
         '
         Me.MNUView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MNUCHKGrid, Me.MNUCHKDebugBuildingPos})
         Me.MNUView.Name = "MNUView"
-        Me.MNUView.Size = New System.Drawing.Size(44, 20)
+        Me.MNUView.Size = New System.Drawing.Size(44, 24)
         Me.MNUView.Text = "&View"
         '
         'MNUCHKGrid
@@ -337,11 +355,17 @@ Partial Class FRMEditor
         Me.MNUCHKDebugBuildingPos.Text = "Debug - Show Building Positions"
         Me.MNUCHKDebugBuildingPos.Visible = False
         '
+        'Separator7
+        '
+        Me.Separator7.AutoSize = False
+        Me.Separator7.Name = "Separator7"
+        Me.Separator7.Size = New System.Drawing.Size(3, 24)
+        '
         'MNUHelp
         '
         Me.MNUHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMDAbout, Me.Separator4, Me.CHKAssociateFileTypeCAMM, Me.CHKAssociateFileTypeMap})
         Me.MNUHelp.Name = "MNUHelp"
-        Me.MNUHelp.Size = New System.Drawing.Size(44, 20)
+        Me.MNUHelp.Size = New System.Drawing.Size(44, 24)
         Me.MNUHelp.Text = "&Help"
         '
         'CMDAbout
@@ -372,22 +396,18 @@ Partial Class FRMEditor
         Me.CHKAssociateFileTypeMap.Text = "Associate file type .map"
         Me.CHKAssociateFileTypeMap.Visible = False
         '
-        'Separator3
+        'Separator8
         '
-        Me.Separator3.AutoSize = False
-        Me.Separator3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.Separator3.Enabled = False
-        Me.Separator3.Name = "Separator3"
-        Me.Separator3.Size = New System.Drawing.Size(8, 20)
-        Me.Separator3.Text = "|"
-        Me.Separator3.Visible = False
+        Me.Separator8.AutoSize = False
+        Me.Separator8.Name = "Separator8"
+        Me.Separator8.Size = New System.Drawing.Size(3, 24)
         '
         'MNUDev
         '
         Me.MNUDev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.MNUDev.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMDTileDataEditor, Me.CMDDeveloper})
         Me.MNUDev.Name = "MNUDev"
-        Me.MNUDev.Size = New System.Drawing.Size(39, 20)
+        Me.MNUDev.Size = New System.Drawing.Size(39, 24)
         Me.MNUDev.Text = "Dev"
         Me.MNUDev.Visible = False
         '
@@ -407,6 +427,13 @@ Partial Class FRMEditor
         Me.CMDDeveloper.Size = New System.Drawing.Size(250, 22)
         Me.CMDDeveloper.Text = "Activate Dev Mode"
         Me.CMDDeveloper.Visible = False
+        '
+        'Separator3
+        '
+        Me.Separator3.AutoSize = False
+        Me.Separator3.Name = "Separator3"
+        Me.Separator3.Size = New System.Drawing.Size(3, 24)
+        Me.Separator3.Visible = False
         '
         'CMDEditBuildings
         '
@@ -743,7 +770,6 @@ Partial Class FRMEditor
     Friend WithEvents MNUEdit As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MNUView As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MNUHelp As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Separator3 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MNUCHKGrid As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CMDMapProperties As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CMDAbout As System.Windows.Forms.ToolStripMenuItem
@@ -758,4 +784,9 @@ Partial Class FRMEditor
     Friend WithEvents Separator4 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents CHKAssociateFileTypeCAMM As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CHKAssociateFileTypeMap As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Separator5 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents Separator6 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents Separator7 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents Separator8 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents Separator3 As System.Windows.Forms.ToolStripSeparator
 End Class

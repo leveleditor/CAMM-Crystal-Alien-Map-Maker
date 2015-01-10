@@ -2,8 +2,8 @@
 '  CAMM (Crystal Alien Map Maker) program created by Josh (aka. leveleditor / Leveleditor6680) '
 '-============================================================================================-'
 
-Imports Nini.Ini
 Imports Nini.Config
+Imports Nini.Ini
 Public Class FRMEditor
 
 #Region "Declarations"
@@ -61,6 +61,8 @@ Public Class FRMEditor
     Dim SelY_Buildings As Integer
     Dim SelX_Units As Integer
     Dim SelY_Units As Integer
+
+    Dim CustomToolStripRenderer As ToolStripProfessionalRenderer = New ToolStripProfessionalRenderer(New CustomColorTable())
 
 #If DEBUG Then
     Dim RelBasePath As String = "/../../Tile Data"
@@ -126,6 +128,16 @@ Public Class FRMEditor
             LBLAboutVersion.Text += "." + My.Application.Info.Version.Build.ToString
         End If
         LBLAboutVersion.Text += " by Leveleditor6680 // Josh"
+
+        'Setting ToolStrip renderers
+        MNUMain.Renderer = CustomToolStripRenderer
+        StatusBar.Renderer = CustomToolStripRenderer
+
+        For Each MenuItem As ToolStripMenuItem In MNUMain.Items.OfType(Of ToolStripMenuItem)()
+            'Dim dropDown As ToolStripDropDownMenu = MenuItem.DropDown
+            'dropDown.ShowImageMargin = False
+            MenuItem.Text = MenuItem.Text.ToUpper()
+        Next
 
         Dim TilesDatVersion As Integer = FRMTileData.TilesDatVersion
         'Loading Tiles.dat data file.
@@ -578,7 +590,7 @@ Public Class FRMEditor
 
                 ' Reorder the list based on the Y locations of the units.
                 ' This ensures that units closer to the top of the map render
-                ' beneath buildings closer to the bottom of the map.
+                ' beneath units closer to the bottom of the map.
                 MapUnits = (From u In MapUnits Order By u.Position.Y, u.Position.X).ToList()
             End If
         End If
