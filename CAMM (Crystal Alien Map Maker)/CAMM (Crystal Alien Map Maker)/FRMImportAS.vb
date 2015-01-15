@@ -111,13 +111,13 @@
         If index > 213 Then
             Return "INVALID"
         End If
-        Return FRMEditor.ANSI(index)
+        Return FRMEditor.Ascii(index)
     End Function
     Function Ansi(ByVal character As Char) As Integer
-        Return Array.IndexOf(FRMEditor.ANSI, character.ToString)
+        Return Array.IndexOf(FRMEditor.Ascii, character.ToString)
     End Function
     Function Ansi(ByVal character As String) As Integer
-        Return Array.IndexOf(FRMEditor.ANSI, character)
+        Return Array.IndexOf(FRMEditor.Ascii, character)
     End Function
 
 End Class

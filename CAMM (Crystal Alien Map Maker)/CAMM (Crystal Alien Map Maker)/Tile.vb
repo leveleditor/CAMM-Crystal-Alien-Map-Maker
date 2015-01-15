@@ -1,65 +1,61 @@
 ﻿Public Class Tile
-    Public HasData As Boolean = False
 
-    Public Sub New(ByVal Position As Point)
-        Me.Position = Position
-        Me._image = Nothing
-        Me.TileId = -1
-    End Sub
     Public Sub New(ByVal X As Integer, ByVal Y As Integer)
-        Me.X = X
-        Me.Y = Y
-        Me._image = Nothing
+        Me.Position = New Point(X, Y)
+        Me.Image = Nothing
         Me.TileId = -1
-    End Sub
-    Public Sub New(ByVal Location As Point, ByVal Image As Image)
-        Me.Position = Location
-        Me.Image = Image
-        Me.TileId = -1
+        Me.IsPassable = False
+        Me.IsMinerals = False
     End Sub
     Public Sub New(ByVal X As Integer, ByVal Y As Integer, ByVal Image As Image)
-        Me.Position = New Point(X, Y)
+        Me.New(X, Y)
         Me.Image = Image
-        Me.TileId = -1
-    End Sub
-    Public Sub New(ByVal Location As Point, ByVal Image As Image, ByVal TileId As String)
-        Me.Position = Location
-        Me.Image = Image
-        Me.TileId = TileId
     End Sub
     Public Sub New(ByVal X As Integer, ByVal Y As Integer, ByVal Image As Image, ByVal TileId As String)
-        Me.Position = New Point(X, Y)
-        Me.Image = Image
+        Me.New(X, Y, Image)
         Me.TileId = TileId
     End Sub
+    Public Sub New(ByVal X As Integer, ByVal Y As Integer, ByVal Image As Image, ByVal TileId As String, ByVal IsPassable As Boolean, ByVal IsMinerals As Boolean)
+        Me.New(X, Y, Image, TileId)
+        Me.IsPassable = IsPassable
+        Me.IsMinerals = IsMinerals
+    End Sub
 
-    Private i_gridX As Integer = -1
+    Public ReadOnly Property HasData() As Boolean
+        Get
+            Dim value As Boolean = False
+            If Image IsNot Nothing Then
+                value = True
+            End If
+            Return value
+        End Get
+    End Property
+
     Public Property X() As Integer
         Get
-            Return i_gridX
+            Return Position.X
         End Get
         Set(ByVal value As Integer)
-            i_gridX = value
+            pt_Position.X = value
         End Set
     End Property
 
-    Private i_gridY As Integer = -1
     Public Property Y() As Integer
         Get
-            Return i_gridY
+            Return Position.Y
         End Get
         Set(ByVal value As Integer)
-            i_gridY = value
+            pt_Position.Y = value
         End Set
     End Property
 
+    Private pt_Position As Point
     Public Property Position() As Point
         Get
-            Return New Point(X, Y)
+            Return pt_Position
         End Get
         Set(ByVal value As Point)
-            X = value.X
-            Y = value.Y
+            pt_Position = value
         End Set
     End Property
 
@@ -70,11 +66,6 @@
         End Get
         Set(ByVal value As Image)
             _image = value
-            If _image Is Nothing Then
-                HasData = False
-            Else
-                HasData = True
-            End If
         End Set
     End Property
 
@@ -85,6 +76,26 @@
         End Get
         Set(ByVal value As String)
             str_Id = value
+        End Set
+    End Property
+
+    Private b_IsPassable As Boolean = False
+    Public Property IsPassable() As Boolean
+        Get
+            Return b_IsPassable
+        End Get
+        Set(ByVal value As Boolean)
+            b_IsPassable = value
+        End Set
+    End Property
+
+    Private b_IsMinerals As Boolean = False
+    Public Property IsMinerals() As Boolean
+        Get
+            Return b_IsMinerals
+        End Get
+        Set(ByVal value As Boolean)
+            b_IsMinerals = value
         End Set
     End Property
 

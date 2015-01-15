@@ -3,7 +3,7 @@ Imports Nini.Config
 Public Class FRMTileData
 
     Dim TileDataFile As String = FRMEditor.TileDataFile
-    Dim RelativeBasePath As String = "/../../Tile Data"
+    Dim RelativeBasePath As String = FRMEditor.RelBasePath
     Dim ANSI As String = ""
     Public Const TilesDatVersion As Integer = 4
 

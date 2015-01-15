@@ -65,13 +65,13 @@ Public Class FRMEditor
     Dim CustomToolStripRenderer As ToolStripProfessionalRenderer = New ToolStripProfessionalRenderer(New CustomColorTable())
 
 #If DEBUG Then
-    Dim RelBasePath As String = "/../../Tile Data"
+    Public RelBasePath As String = "/../../Tile Data"
 #Else
-    Dim RelBasePath As String = "/Tile Data"
+    Public RelBasePath As String = "/Tile Data"
 #End If
     Dim FullBasePath As String = My.Application.Info.DirectoryPath & RelBasePath
     Public TileDataFile As String = FullBasePath & "/Tiles.dat"
-    Public Const vFormat As Integer = 4
+    Public Const vFormat As Integer = 5
 
     'Button graphics.
     Dim ButtonNeutral As Image = Image.FromFile(FullBasePath & "/Other Data/ButtonNeutralUnderlay.png")
@@ -92,7 +92,7 @@ Public Class FRMEditor
     Dim INISeparator As Char
 
     'ASCII Lookup Array
-    Public Shared ANSI As String() = {}
+    Public Shared Ascii As String() = {}
 
     'Arrays and Tile stuff.
     Dim MapTiles() As Tile = {} 'Map Tiles.
@@ -177,7 +177,7 @@ Public Class FRMEditor
 
             config = source.Configs.Item("ANSI LOOKUP")
             Dim ANSISeparator As String() = {config.GetString("Ansi Separator")}
-            ANSI = config.Get("Ansi Array").Trim(INIArray.ToCharArray).Trim(ANSISeparator(0).ToCharArray).Split(ANSISeparator, StringSplitOptions.None)
+            Ascii = config.Get("Ansi Array").Trim(INIArray.ToCharArray).Trim(ANSISeparator(0).ToCharArray).Split(ANSISeparator, StringSplitOptions.None)
 
             config = source.Configs.Item("DEFINE TERRAIN")
             For i As Integer = 0 To config.GetKeys().Length - 1
@@ -193,8 +193,8 @@ Public Class FRMEditor
                     Dim TheImage As Image = Image.FromFile(FullImageURL)
 
                     ReDim Preserve SelTiles(Y1)
-                    SelTiles(Y1) = New Tile(0, Y1 * TileSizeY, TheImage, TerrainID)
-                    SelTiles(Y1).HasData = True
+                    SelTiles(Y1) = New Tile(0, Y1 * TileSizeY, TheImage, TerrainID, IsPassable, IsMinerals)
+
                     If SelTiles(Y1).TileId = INIGetFileName Then
                         SelTiles(Y1).TileId = My.Computer.FileSystem.GetDirectoryInfo(FullImageURL).Name.Replace(My.Computer.FileSystem.GetDirectoryInfo(FullImageURL).Extension, "")
                     End If
@@ -495,7 +495,6 @@ Public Class FRMEditor
                         MapTiles(i) = New Tile(xMouse, yMouse)
                     Else
                         MapTiles(i) = New Tile(xMouse, yMouse, PICActive.Image, ActiveTile.TileId)
-                        MapTiles(i).HasData = True
                         Exit For
                     End If
                 End If
@@ -522,7 +521,6 @@ Public Class FRMEditor
                         For j As Integer = 0 To SelTiles.Length - 1
                             If FinalID = SelTiles(j).TileId Then
                                 MapTiles(i) = New Tile(xMouse, yMouse, SelTiles(j).Image, SelTiles(j).TileId)
-                                MapTiles(i).HasData = True
                                 Exit For
                             End If
                         Next
@@ -1215,8 +1213,8 @@ Public Class FRMEditor
                 MsgBox("This map file was created with a newer version of CAMM and cannot be opened.")
             ElseIf v = 1 Then
                 LoadMapv1(source, config)
-            ElseIf v = 2 Or v = 3 Or v = vFormat Then
-                LoadMapv2v3v4(source, config, v)
+            ElseIf v = 2 Or v = 3 Or v = 4 Or v = vFormat Then
+                LoadMapv2v3v4v5(source, config, v)
             End If
         End If
     End Sub
@@ -1234,6 +1232,10 @@ Public Class FRMEditor
             Dim TempTileID As String = TempArray(0)
             'There is no need of getting the 'Team' info since it should have always been set as 'Neutral' and it's useless now.
             Dim TempTileType As String = TempArray(2)
+
+            ' Upgrade old terrain Ids
+            TempTileID = UpgradeTerrainId(0, vFormat, TempTileID)
+
             MapTiles(i).TileId = TempTileID
             'Tiles(i).Tile_Type = TempTileType
             For j As Integer = 0 To SelTiles.Length - 1
@@ -1267,6 +1269,10 @@ Public Class FRMEditor
                     Dim TerrainID As String = KeyArray(0)
                     Dim PosX As Integer = KeyArray(1)
                     Dim PosY As Integer = KeyArray(2)
+
+                    ' Upgrade old terrain Ids
+                    TerrainID = UpgradeTerrainId(1, vFormat, TerrainID)
+
                     MapTiles(i).TileId = TerrainID
                     MapTiles(i).Position = New Point(PosX * TileSizeX, PosY * TileSizeY)
                     For j As Integer = 0 To SelTiles.Length - 1
@@ -1333,7 +1339,7 @@ Public Class FRMEditor
         Me.Text = (Me.FormTitle & " - " & MapTitle & " - " & My.Computer.FileSystem.GetFileInfo(Me.OpenMap.FileName).Name)
         PICMap.Invalidate()
     End Sub
-    Public Sub LoadMapv2v3v4(ByVal source As IniConfigSource, ByVal config As IConfig, ByVal v As Integer)
+    Public Sub LoadMapv2v3v4v5(ByVal source As IniConfigSource, ByVal config As IConfig, ByVal v As Integer)
         config = source.Configs.Item("Level")
         MapTitle = config.GetString("Title")
         MapSizeX = config.GetInt("W")
@@ -1357,7 +1363,12 @@ Public Class FRMEditor
                 Dim TerrainID As String = KeyArray(0)
                 Dim PosX As Integer = KeyArray(1)
                 Dim PosY As Integer = KeyArray(2)
+
+                ' Upgrade old terrain Ids
+                TerrainID = UpgradeTerrainId(v, vFormat, TerrainID)
+
                 MapTiles(i).TileId = TerrainID
+
                 MapTiles(i).Position = New Point(PosX * TileSizeX, PosY * TileSizeY)
                 For j As Integer = 0 To SelTiles.Length - 1
                     If MapTiles(i).TileId = SelTiles(j).TileId Then
@@ -1475,7 +1486,7 @@ Public Class FRMEditor
         PICMap.Invalidate()
     End Sub
     Public Sub UpgradeBuildingLocation(ByVal oldv As Integer, ByVal newv As Integer, ByVal i As Integer, ByVal xpos As Integer)
-        If oldv < 4 And newv = 4 Then
+        If oldv < 4 And (newv = 4 Or newv = 5) Then
             ' <<< Start old SetDrawPos code >>>
 
             MapBuildings(i).DrawPos = MapBuildings(i).Location
@@ -1526,7 +1537,7 @@ Public Class FRMEditor
         End If
     End Sub
     Public Sub UpgradeObjectId(ByVal oldv As Integer, ByVal newv As Integer, ByVal i As Integer)
-        If oldv < 4 And newv = 4 Then
+        If oldv < 4 And (newv = 4 Or newv = 5) Then
             ' The easy way to map old building Ids to new ones.
             Dim upgradeFile As String = My.Application.Info.DirectoryPath + RelBasePath + "/UpgradeBuildings.dat"
             Dim upgradeHeader As String = "Buildings data v3 -> v4"
@@ -1545,7 +1556,7 @@ Public Class FRMEditor
     End Sub
     Public Function UpgradeUnitId(ByVal oldv As Integer, ByVal newv As Integer, ByVal UnitId As String) As String
         Dim returnId As String = UnitId
-        If oldv < 4 And newv = 4 Then
+        If oldv < 4 And (newv = 4 Or newv = 5) Then
             ' The easy way to map old unit Ids to new ones.
             Dim upgradeFile As String = My.Application.Info.DirectoryPath + RelBasePath + "/UpgradeUnits.dat"
             Dim upgradeHeader As String = "Units data v3 -> v4"
@@ -1555,6 +1566,26 @@ Public Class FRMEditor
                 Dim source As New IniConfigSource(reader)
                 Dim config As IConfig = source.Configs.Item(upgradeHeader)
                 Dim newId As String = config.GetString(UnitId, "")
+                If newId <> "" Then
+                    returnId = newId
+                End If
+                reader.Close()
+            End If
+        End If
+        Return returnId
+    End Function
+    Public Function UpgradeTerrainId(ByVal oldv As Integer, ByVal newv As Integer, ByVal TerrainId As String) As String
+        Dim returnId As String = TerrainId
+        If oldv < 5 And newv = 5 Then
+            ' The easy way to map old terrain Ids to new ones.
+            Dim upgradeFile As String = My.Application.Info.DirectoryPath + RelBasePath + "/UpgradeTerrain.dat"
+            Dim upgradeHeader As String = "Terrain data v4 -> v5"
+            Dim upgradeData As String = My.Computer.FileSystem.ReadAllText(upgradeFile)
+            If upgradeData.Contains(upgradeHeader) Then
+                Dim reader As IO.StringReader = New IO.StringReader(upgradeData)
+                Dim source As New IniConfigSource(reader)
+                Dim config As IConfig = source.Configs.Item(upgradeHeader)
+                Dim newId As String = config.GetString(TerrainId, "")
                 If newId <> "" Then
                     returnId = newId
                 End If
@@ -2000,26 +2031,18 @@ Public Class FRMEditor
         End If
     End Sub
 
-    Function ToAnsi(ByVal index As Integer) As String
-        If index > 213 Then
-            Return "INVALID"
-        End If
-        Return ANSI(index)
-    End Function
     Private Sub CMDExportAS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDExportAS.Click
-        'TODO: This will have to do for now.
-
-        Dim ExportASTileData As String = ToAnsi(MapSizeX) + ToAnsi(MapSizeY)
+        Dim ExportASTileData As String = Ascii(MapSizeX) + Ascii(MapSizeY)
         Dim count As Integer = 0
 
         For y As Integer = 0 To MapSizeY - 1
             For x As Integer = 0 To MapSizeX - 1
-                Dim idx As Integer = -((4350 - (Integer.Parse(MapTiles(count).TileId))) / 2)
+                Dim idx As Integer = Integer.Parse(MapTiles(count).TileId)
                 If idx < 0 Then
                     idx = 0
                 End If
 
-                Dim chr As String = ToAnsi(idx)
+                Dim chr As String = Ascii(idx)
 
                 ExportASTileData += chr
 
@@ -2027,10 +2050,21 @@ Public Class FRMEditor
             Next x
         Next y
 
-        Dim Tab2 As String = vbTab + vbTab
         Dim output As String = vbTab + "this.data = {" + vbNewLine
-        output += Tab2 + "tiles : ""0AAAAAAAA AAAAAAAAAAAAAAA    AAAAAAAAAAAAAAAAA 1A A"".split("""",10000)," + vbNewLine
-        output += Tab2 + "map_new : """ + ExportASTileData + """.split("""",10000)" + vbNewLine
+        output += vbTab + vbTab + "tiles : ""0"
+        '0AAAAAAAA AAAAAAAAAAAAAAA    AAAAAAAAAAAAAAAAA 1A A"
+        Dim tiles As List(Of Tile) = (From t In SelTiles Order By Integer.Parse(t.TileId) Where t.HasData).ToList()
+        For Each t As Tile In tiles
+            If t.IsMinerals Then
+                output += "1"
+            ElseIf Not t.IsPassable Then
+                output += "A"
+            Else
+                output += " "
+            End If
+        Next
+        output += """.split("""",10000)," + vbNewLine
+        output += vbTab + vbTab + "map_new : """ + ExportASTileData + """.split("""",10000)" + vbNewLine
         output += vbTab + "};"
         FRMExportAS.TXTOutput.Text = output
 
@@ -2047,7 +2081,7 @@ Public Class FRMEditor
                     ReDim Preserve MapTiles(count)
                     MapTiles(count) = New Tile(x, y)
 
-                    Dim idx As Integer = Array.IndexOf(ANSI, ImportASTileData.ToCharArray()(count).ToString)
+                    Dim idx As Integer = Array.IndexOf(Ascii, ImportASTileData.ToCharArray()(count).ToString)
                     If idx <= 0 Then
                         MapTiles(count).TileId = -1
                     Else
