@@ -64,6 +64,8 @@ Terrain46 = {46|True|False|Tile Data/Tiles/Tile46.png}
 Terrain47 = {48|False|False|Tile Data/Tiles/Tile48.png}
 Terrain48 = {49|True|False|Tile Data/Tiles/Tile49.png}
 Terrain49 = {50|False|False|Tile Data/Tiles/Tile50.png}
+Terrain50 = {51|False|False|Tile Data/Tiles/Tile51.png}
+Terrain51 = {52|False|False|Tile Data/Tiles/Tile52.png}
 
 [DEFINE BUILDINGS]
 ; Building Definition Format:
