@@ -134,27 +134,26 @@ Partial Class FRMEditor
         '
         Me.StatusBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
         Me.StatusBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LBLCursorLoc, Me.LBLAboutVersion})
-        Me.StatusBar.Location = New System.Drawing.Point(0, 428)
+        Me.StatusBar.Location = New System.Drawing.Point(0, 430)
         Me.StatusBar.Name = "StatusBar"
         Me.StatusBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.StatusBar.Size = New System.Drawing.Size(764, 24)
+        Me.StatusBar.Size = New System.Drawing.Size(764, 22)
         Me.StatusBar.TabIndex = 8
         Me.StatusBar.Text = "StatusStrip1"
         '
         'LBLCursorLoc
         '
-        Me.LBLCursorLoc.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
         Me.LBLCursorLoc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.LBLCursorLoc.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.LBLCursorLoc.ImageTransparentColor = System.Drawing.Color.Transparent
         Me.LBLCursorLoc.Name = "LBLCursorLoc"
-        Me.LBLCursorLoc.Size = New System.Drawing.Size(22, 19)
+        Me.LBLCursorLoc.Size = New System.Drawing.Size(18, 17)
         Me.LBLCursorLoc.Text = "[ ]"
         '
         'LBLAboutVersion
         '
         Me.LBLAboutVersion.Name = "LBLAboutVersion"
-        Me.LBLAboutVersion.Size = New System.Drawing.Size(727, 19)
+        Me.LBLAboutVersion.Size = New System.Drawing.Size(700, 17)
         Me.LBLAboutVersion.Spring = True
         Me.LBLAboutVersion.Text = "<Version> by Josh"
         Me.LBLAboutVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight

@@ -260,7 +260,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"$(ProjectDir)InsertIcons.exe" "$(TargetPath)" "$(ProjectDir)CAMMFile.ico"</PostBuildEvent>
+    <PostBuildEvent>copy /Y /B "$(TargetPath)" "$(TargetPath).tmp"
+"$(ProjectDir)InsertIcons.exe" "$(TargetPath).tmp" "$(ProjectDir)CAMMFile.ico"
+move /Y "$(TargetPath).tmp" "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
