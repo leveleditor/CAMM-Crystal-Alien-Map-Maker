@@ -2,10 +2,7 @@
 Imports Nini.Config
 Public Class FRMTileData
 
-    Dim TileDataFile As String = FRMEditor.TileDataFile
-    Dim RelativeBasePath As String = FRMEditor.RelBasePath
     Dim ANSI As String = ""
-    Public Const TilesDatVersion As Integer = 4
 
     Private Sub FRMTileData_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown, Me.Load
         Dim reader As New IniReader(TileDataFile) With {.IgnoreComments = True, .AcceptCommentAfterKey = False}
@@ -185,7 +182,7 @@ Public Class FRMTileData
 
     Private Sub Entry_Terrain_TXTImageUrl_MouseEnter(ByVal sender As Entry_Terrain, ByVal e As System.EventArgs)
         Try
-            PICPreview.Image = Image.FromFile(My.Application.Info.DirectoryPath + RelativeBasePath + "/../" + sender.ImageUrl)
+            PICPreview.Image = Image.FromFile(My.Application.Info.DirectoryPath + DataPath + "/../" + sender.ImageUrl)
         Catch ex As Exception
             PICPreview.Image = Nothing
         End Try
@@ -234,7 +231,7 @@ Public Class FRMTileData
 
     Private Sub Entry_Building_TXTImageUrl_MouseEnter(ByVal sender As Entry_Object, ByVal e As System.EventArgs)
         Try
-            PICPreview.Image = Image.FromFile(My.Application.Info.DirectoryPath + RelativeBasePath + "/../" + sender.ImageUrl)
+            PICPreview.Image = Image.FromFile(My.Application.Info.DirectoryPath + DataPath + "/../" + sender.ImageUrl)
         Catch ex As Exception
             PICPreview.Image = Nothing
         End Try
@@ -283,7 +280,7 @@ Public Class FRMTileData
 
     Private Sub Entry_Unit_TXTImageUrl_MouseEnter(ByVal sender As Entry_Object, ByVal e As System.EventArgs)
         Try
-            PICPreview.Image = Image.FromFile(My.Application.Info.DirectoryPath + RelativeBasePath + "/../" + sender.ImageUrl)
+            PICPreview.Image = Image.FromFile(My.Application.Info.DirectoryPath + DataPath + "/../" + sender.ImageUrl)
         Catch ex As Exception
             PICPreview.Image = Nothing
         End Try

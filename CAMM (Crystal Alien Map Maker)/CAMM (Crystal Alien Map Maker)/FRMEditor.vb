@@ -12,9 +12,7 @@ Public Class FRMEditor
     Public MapSizeY As Integer = 10
     Public MapTitle As String = ""
     Public LevelTeam As Integer = 0
-    Public Const LevelCashPlayerDefault = 2000
     Public LevelCashPlayer As Integer = LevelCashPlayerDefault
-    Public Const LevelCashEnemyDefault = 20000
     Public LevelCashEnemy As Integer = LevelCashEnemyDefault
     Public Class LevelFlags
         Public Const isTrainingDefault As Boolean = False
@@ -34,14 +32,9 @@ Public Class FRMEditor
     Dim FormTitle As String = ""
     Dim IsMapFinal As Boolean = False
 
-    Public TileSizeX As Integer = 96
-    Public TileSizeY As Integer = 48
     Private IsLoaded As Boolean = False
     Private IsMouseOnMap As Boolean = False
     Public IsDrawing As Boolean = False
-    Public PenTileHover As Pen = New Pen(Pens.DarkOrange.Brush, 2)
-    Public PenTileErase As Pen = New Pen(Pens.Red.Brush, 2)
-    Public PenGrid As Pen = Pens.Black
     Private MouseX As Integer
     Private MouseY As Integer
     Private MouseXNoSnap As Integer
@@ -53,8 +46,6 @@ Public Class FRMEditor
     Public DrawGrid As Boolean = True
     Public DrawBuildingDebugPos As Boolean = False
     Private IsMouseOnSelections As Boolean = False
-    Public PenSelectionHover As Pen = New Pen(Pens.DarkOrange.Brush, 2)
-    Public PenSelected As Pen = New Pen(Pens.LimeGreen.Brush, 3)
     Dim SelX_Tiles As Integer
     Dim SelY_Tiles As Integer
     Dim SelX_Buildings As Integer
@@ -62,28 +53,19 @@ Public Class FRMEditor
     Dim SelX_Units As Integer
     Dim SelY_Units As Integer
 
-    Dim CustomToolStripRenderer As ToolStripProfessionalRenderer = New ToolStripProfessionalRenderer(New CustomColorTable())
-
-#If DEBUG Then
-    Public RelBasePath As String = "/../../Tile Data"
-#Else
-    Public RelBasePath As String = "/Tile Data"
-#End If
-    Dim FullBasePath As String = My.Application.Info.DirectoryPath & RelBasePath
-    Public TileDataFile As String = FullBasePath & "/Tiles.dat"
-    Public Const vFormat As Integer = 5
+    ReadOnly CustomToolStripRenderer As ToolStripProfessionalRenderer = New ToolStripProfessionalRenderer(New CustomColorTable())
 
     'Button graphics.
-    Dim ButtonNeutral As Image = Image.FromFile(FullBasePath & "/Other Data/ButtonNeutralUnderlay.png")
-    Dim ButtonAstro As Image = Image.FromFile(FullBasePath & "/Other Data/ButtonAstroUnderlay.png")
-    Dim ButtonAlien As Image = Image.FromFile(FullBasePath & "/Other Data/ButtonAlienUnderlay.png")
-    Dim ButtonOverlay As Image = Image.FromFile(FullBasePath & "/Other Data/ButtonOverlay.png")
+    ReadOnly ButtonNeutral As Image = Image.FromFile(FullBasePath & "/Other Data/ButtonNeutralUnderlay.png")
+    ReadOnly ButtonAstro As Image = Image.FromFile(FullBasePath & "/Other Data/ButtonAstroUnderlay.png")
+    ReadOnly ButtonAlien As Image = Image.FromFile(FullBasePath & "/Other Data/ButtonAlienUnderlay.png")
+    ReadOnly ButtonOverlay As Image = Image.FromFile(FullBasePath & "/Other Data/ButtonOverlay.png")
 
     'Building baseplate graphics.
-    Dim BaseplateAstroWide As Image = Image.FromFile(FullBasePath & "/Other Data/AstroBaseplateAlphaWide.png")
-    Dim BaseplateAlienWide As Image = Image.FromFile(FullBasePath & "/Other Data/AlienBaseplateAlphaWide.png")
-    Dim BaseplateAstroSmall As Image = Image.FromFile(FullBasePath & "/Other Data/AstroBaseplateAlphaSmall.png")
-    Dim BaseplateAlienSmall As Image = Image.FromFile(FullBasePath & "/Other Data/AlienBaseplateAlphaSmall.png")
+    ReadOnly BaseplateAstroWide As Image = Image.FromFile(FullBasePath & "/Other Data/AstroBaseplateAlphaWide.png")
+    ReadOnly BaseplateAlienWide As Image = Image.FromFile(FullBasePath & "/Other Data/AlienBaseplateAlphaWide.png")
+    ReadOnly BaseplateAstroSmall As Image = Image.FromFile(FullBasePath & "/Other Data/AstroBaseplateAlphaSmall.png")
+    ReadOnly BaseplateAlienSmall As Image = Image.FromFile(FullBasePath & "/Other Data/AlienBaseplateAlphaSmall.png")
 
     'INI Variables.
     Dim INIGetFileName As String = ""
@@ -115,13 +97,7 @@ Public Class FRMEditor
         FormTitle = Me.Text
 
         'Setting version information.
-        Dim prefix As String = ""
-#If DEBUG Then
-        prefix = "[Debug] "
-#Else
-        prefix = "[Stable] "
-#End If
-        LBLAboutVersion.Text = prefix + "v" + My.Application.Info.Version.Major.ToString + "." + My.Application.Info.Version.Minor.ToString
+        LBLAboutVersion.Text = BuildType + " v" + My.Application.Info.Version.Major.ToString + "." + My.Application.Info.Version.Minor.ToString
         If My.Application.Info.Version.Revision > 0 Then
             LBLAboutVersion.Text += "." + My.Application.Info.Version.Build.ToString + "." + My.Application.Info.Version.Revision.ToString
         ElseIf My.Application.Info.Version.Build > 0 And My.Application.Info.Version.Revision <= 0 Then
@@ -139,7 +115,6 @@ Public Class FRMEditor
             MenuItem.Text = MenuItem.Text.ToUpper()
         Next
 
-        Dim TilesDatVersion As Integer = FRMTileData.TilesDatVersion
         'Loading Tiles.dat data file.
         If My.Computer.FileSystem.FileExists(TileDataFile) = False Then
             MsgBox("The 'Tiles.dat' file is missing!" + vbNewLine + "Please make sure you have all required files before using CAMM.", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly)
@@ -189,7 +164,7 @@ Public Class FRMEditor
                     Dim IsMinerals As Boolean = CBool(KeyArray(2))
                     Dim ImageUrl As String = KeyArray(3)
 
-                    Dim FullImageURL As String = My.Application.Info.DirectoryPath + RelBasePath + "/../" + ImageUrl
+                    Dim FullImageURL As String = My.Application.Info.DirectoryPath + DataPath + "/../" + ImageUrl
                     Dim TheImage As Image = Image.FromFile(FullImageURL)
 
                     ReDim Preserve SelTiles(Y1)
@@ -216,7 +191,7 @@ Public Class FRMEditor
                     Dim Damage As Single = CSng(KeyArray(5))
                     Dim OffsetY As Integer = CInt(KeyArray(6))
                     Dim ImageUrl As String = KeyArray(7)
-                    Dim FullImageURL As String = My.Application.Info.DirectoryPath + RelBasePath + "/../" + ImageUrl
+                    Dim FullImageURL As String = My.Application.Info.DirectoryPath + DataPath + "/../" + ImageUrl
 
                     Dim Test As Bitmap = Bitmap.FromFile(FullImageURL)
                     Dim flag As New Bitmap(TileSizeX, TileSizeY)
@@ -253,7 +228,7 @@ Public Class FRMEditor
                     Dim Damage As Single = CSng(KeyArray(5))
                     Dim OffsetY As Integer = CInt(KeyArray(6))
                     Dim ImageUrl As String = KeyArray(7)
-                    Dim FullImageURL As String = My.Application.Info.DirectoryPath + RelBasePath + "/../" + ImageUrl
+                    Dim FullImageURL As String = My.Application.Info.DirectoryPath + DataPath + "/../" + ImageUrl
 
                     Dim Test As Bitmap = Bitmap.FromFile(FullImageURL)
                     Dim W As Integer = TileSizeX
@@ -433,7 +408,7 @@ Public Class FRMEditor
         TXTWidth.Text = MapSizeX
         TXTHeight.Text = MapSizeY
 
-        Background = Image.FromFile(My.Application.Info.DirectoryPath + RelBasePath + "/Other Data/Background.png")
+        Background = Image.FromFile(My.Application.Info.DirectoryPath + DataPath + "/Other Data/Background.png")
 
         InitTiles()
 
@@ -1190,13 +1165,13 @@ Public Class FRMEditor
     Private Sub CMDOpen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDOpen.Click
         'Me.OpenMap.Reset()
         'Me.OpenMap.DefaultExt = "CAMM Map Files|*.map"
-        'Me.OpenMap.FileName = My.Application.Info.DirectoryPath + RelBasePath + "/_Save Data/Map1.camm"
+        'Me.OpenMap.FileName = My.Application.Info.DirectoryPath + DataPath + "/_Save Data/Map1.camm"
         Me.OpenMap.FileName = "Map1.camm"
         'Me.OpenMap.Filter = "CAMM Map Files|*.map|All Files|*.*"
         Me.OpenMap.FilterIndex = 1
         Me.OpenMap.RestoreDirectory = False
         Me.OpenMap.Title = "Select Map File To Open..."
-        Me.OpenMap.InitialDirectory = My.Application.Info.DirectoryPath + RelBasePath + "/_Save Data/"
+        Me.OpenMap.InitialDirectory = My.Application.Info.DirectoryPath + DataPath + "/_Save Data/"
 
         If Me.OpenMap.ShowDialog = DialogResult.OK Then
             BeginLoadMap(Me.OpenMap.FileName)
@@ -1209,11 +1184,11 @@ Public Class FRMEditor
             LoadMapv0(source, config)
         Else
             Dim v As Integer = config.GetInt("vFormat", -1)
-            If v > vFormat Then
+            If v > MapFormat Then
                 MsgBox("This map file was created with a newer version of CAMM and cannot be opened.")
             ElseIf v = 1 Then
                 LoadMapv1(source, config)
-            ElseIf v = 2 Or v = 3 Or v = 4 Or v = vFormat Then
+            ElseIf v = 2 Or v = 3 Or v = 4 Or v = MapFormat Then
                 LoadMapv2v3v4v5(source, config, v)
             End If
         End If
@@ -1234,7 +1209,7 @@ Public Class FRMEditor
             Dim TempTileType As String = TempArray(2)
 
             ' Upgrade old terrain Ids
-            TempTileID = UpgradeTerrainId(0, vFormat, TempTileID)
+            TempTileID = UpgradeTerrainId(0, MapFormat, TempTileID)
 
             MapTiles(i).TileId = TempTileID
             'Tiles(i).Tile_Type = TempTileType
@@ -1271,7 +1246,7 @@ Public Class FRMEditor
                     Dim PosY As Integer = KeyArray(2)
 
                     ' Upgrade old terrain Ids
-                    TerrainID = UpgradeTerrainId(1, vFormat, TerrainID)
+                    TerrainID = UpgradeTerrainId(1, MapFormat, TerrainID)
 
                     MapTiles(i).TileId = TerrainID
                     MapTiles(i).Position = New Point(PosX * TileSizeX, PosY * TileSizeY)
@@ -1307,7 +1282,7 @@ Public Class FRMEditor
                     MapBuildings(i).ObjectID = ObjectID
 
                     ' Upgrade old object Ids
-                    UpgradeObjectId(1, vFormat, i)
+                    UpgradeObjectId(1, MapFormat, i)
 
                     MapBuildings(i).Team = Team
                     MapBuildings(i).Angle = Angle
@@ -1325,7 +1300,7 @@ Public Class FRMEditor
                         End If
                     Next
                     'TODO: Temp fix for a bug that I'm too lazy to fix.
-                    UpgradeBuildingLocation(1, vFormat, i, PosX * TileSizeX)
+                    UpgradeBuildingLocation(1, MapFormat, i, PosX * TileSizeX)
                     SetDrawPos(0, i, PosX * TileSizeX)
                 End If
             Next
@@ -1349,7 +1324,7 @@ Public Class FRMEditor
         LevelCashEnemy = config.GetInt("CashEnemy", LevelCashEnemyDefault)
         LevelFlags.isTraining = config.GetBoolean("isTraining", LevelFlags.isTrainingDefault)
         LevelFlags.isConflict = config.GetBoolean("isConflict", LevelFlags.isConflictDefault)
-        LevelFlags.isSpecialLevel = config.GetBoolean("isSpecialLevel", LevelFlags.isLastSpecialLevelDefault)
+        LevelFlags.isSpecialLevel = config.GetBoolean("isSpecialLevel", LevelFlags.isSpecialLevelDefault)
         LevelFlags.isLastSpecialLevel = config.GetBoolean("isLastSpecialLevel", LevelFlags.isLastSpecialLevelDefault)
         LevelFlags.isBonusLevel = config.GetBoolean("isBonusLevel", LevelFlags.isBonusLevelDefault)
         IsMapFinal = config.GetBoolean("Final", False)
@@ -1365,7 +1340,7 @@ Public Class FRMEditor
                 Dim PosY As Integer = KeyArray(2)
 
                 ' Upgrade old terrain Ids
-                TerrainID = UpgradeTerrainId(v, vFormat, TerrainID)
+                TerrainID = UpgradeTerrainId(v, MapFormat, TerrainID)
 
                 MapTiles(i).TileId = TerrainID
 
@@ -1399,7 +1374,7 @@ Public Class FRMEditor
                 MapBuildings(i).ObjectID = ObjectID
 
                 ' Upgrade old object Ids
-                UpgradeObjectId(v, vFormat, i)
+                UpgradeObjectId(v, MapFormat, i)
 
                 MapBuildings(i).Team = Team
                 MapBuildings(i).Angle = Angle
@@ -1417,7 +1392,7 @@ Public Class FRMEditor
                 If v = 4 Then
                     SetDrawPos(0, i, PosX * TileSizeX)
                 Else
-                    UpgradeBuildingLocation(v, vFormat, i, PosX * TileSizeX)
+                    UpgradeBuildingLocation(v, MapFormat, i, PosX * TileSizeX)
                     SetDrawPos(0, i, PosX * TileSizeX)
                 End If
             End If
@@ -1459,7 +1434,7 @@ Public Class FRMEditor
                 End If
 
                 ' Upgrade old unit Ids
-                UnitId = UpgradeUnitId(v, vFormat, UnitId)
+                UnitId = UpgradeUnitId(v, MapFormat, UnitId)
 
                 Dim temp As Unit = New Unit(Position, Nothing, UnitId, Team, Angle, Damage)
                 For j As Integer = 0 To SelUnits.Length - 1
@@ -1539,7 +1514,7 @@ Public Class FRMEditor
     Public Sub UpgradeObjectId(ByVal oldv As Integer, ByVal newv As Integer, ByVal i As Integer)
         If oldv < 4 And (newv = 4 Or newv = 5) Then
             ' The easy way to map old building Ids to new ones.
-            Dim upgradeFile As String = My.Application.Info.DirectoryPath + RelBasePath + "/UpgradeBuildings.dat"
+            Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeBuildings.dat"
             Dim upgradeHeader As String = "Buildings data v3 -> v4"
             Dim upgradeData As String = My.Computer.FileSystem.ReadAllText(upgradeFile)
             If upgradeData.Contains(upgradeHeader) Then
@@ -1558,7 +1533,7 @@ Public Class FRMEditor
         Dim returnId As String = UnitId
         If oldv < 4 And (newv = 4 Or newv = 5) Then
             ' The easy way to map old unit Ids to new ones.
-            Dim upgradeFile As String = My.Application.Info.DirectoryPath + RelBasePath + "/UpgradeUnits.dat"
+            Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeUnits.dat"
             Dim upgradeHeader As String = "Units data v3 -> v4"
             Dim upgradeData As String = My.Computer.FileSystem.ReadAllText(upgradeFile)
             If upgradeData.Contains(upgradeHeader) Then
@@ -1578,7 +1553,7 @@ Public Class FRMEditor
         Dim returnId As String = TerrainId
         If oldv < 5 And newv = 5 Then
             ' The easy way to map old terrain Ids to new ones.
-            Dim upgradeFile As String = My.Application.Info.DirectoryPath + RelBasePath + "/UpgradeTerrain.dat"
+            Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeTerrain.dat"
             Dim upgradeHeader As String = "Terrain data v4 -> v5"
             Dim upgradeData As String = My.Computer.FileSystem.ReadAllText(upgradeFile)
             If upgradeData.Contains(upgradeHeader) Then
@@ -1608,7 +1583,7 @@ Public Class FRMEditor
         Me.SaveMap.FilterIndex = 1
         Me.SaveMap.RestoreDirectory = False
         Me.SaveMap.Title = "Select Where To Save Map File..."
-        Me.SaveMap.InitialDirectory = My.Application.Info.DirectoryPath + RelBasePath + "/Tile Data/_Save Data/"
+        Me.SaveMap.InitialDirectory = My.Application.Info.DirectoryPath + DataPath + "/Tile Data/_Save Data/"
 
         If Me.SaveMap.ShowDialog = DialogResult.OK Then
             SaveFile(SaveMap.FileName)
@@ -1630,7 +1605,7 @@ Public Class FRMEditor
 
         SaveFileData += _
             "[CAMM]" + vbNewLine + _
-            "vFormat = " + vFormat.ToString + vbNewLine + _
+            "vFormat = " + MapFormat.ToString + vbNewLine + _
             vbNewLine
 
         SaveFileData += _

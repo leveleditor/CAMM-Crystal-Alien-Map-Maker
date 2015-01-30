@@ -1,0 +1,33 @@
+﻿Module Constants
+
+#If DEBUG Then
+    Public Const DataPath As String = "/../../Tile Data"
+#Else
+    Public Const DataPath As String = "/Tile Data"
+#End If
+
+    Public ReadOnly FullBasePath As String = My.Application.Info.DirectoryPath & DataPath
+    Public ReadOnly TileDataFile As String = FullBasePath & "/Tiles.dat"
+
+    Public Const TilesDatVersion As Integer = 4
+    Public Const MapFormat As Integer = 5
+
+    Public Const LevelCashPlayerDefault = 2000
+    Public Const LevelCashEnemyDefault = 20000
+
+    Public Const TileSizeX As Integer = 96
+    Public Const TileSizeY As Integer = 48
+
+    Public ReadOnly PenTileHover As Pen = New Pen(Pens.DarkOrange.Brush, 2)
+    Public ReadOnly PenTileErase As Pen = New Pen(Pens.Red.Brush, 2)
+    Public ReadOnly PenGrid As Pen = Pens.Black
+    Public ReadOnly PenSelectionHover As Pen = New Pen(Pens.DarkOrange.Brush, 2)
+    Public ReadOnly PenSelected As Pen = New Pen(Pens.LimeGreen.Brush, 3)
+
+#If DEBUG Then
+    Public Const BuildType As String = "[Debug]"
+#Else
+    Public Const BuildType As String = "[Stable]"
+#End If
+
+End Module
