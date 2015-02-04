@@ -26,11 +26,7 @@ Partial Class FRMTileData
         Me.CMDSave = New System.Windows.Forms.Button
         Me.CMDClose = New System.Windows.Forms.Button
         Me.LBLSaved = New System.Windows.Forms.Label
-        Me.LBLVar1 = New System.Windows.Forms.Label
-        Me.LBLVar3 = New System.Windows.Forms.Label
         Me.LBLVar4 = New System.Windows.Forms.Label
-        Me.TXTVar1 = New System.Windows.Forms.TextBox
-        Me.TXTVar3 = New System.Windows.Forms.TextBox
         Me.TXTVar4 = New System.Windows.Forms.TextBox
         Me.TXTVar5 = New System.Windows.Forms.TextBox
         Me.LBLVar5 = New System.Windows.Forms.Label
@@ -85,57 +81,19 @@ Partial Class FRMTileData
         Me.LBLSaved.Text = "Data Saved!"
         Me.LBLSaved.Visible = False
         '
-        'LBLVar1
-        '
-        Me.LBLVar1.AutoSize = True
-        Me.LBLVar1.Location = New System.Drawing.Point(12, 9)
-        Me.LBLVar1.Name = "LBLVar1"
-        Me.LBLVar1.Size = New System.Drawing.Size(77, 13)
-        Me.LBLVar1.TabIndex = 1
-        Me.LBLVar1.Text = "Get File Name:"
-        '
-        'LBLVar3
-        '
-        Me.LBLVar3.AutoSize = True
-        Me.LBLVar3.Location = New System.Drawing.Point(18, 37)
-        Me.LBLVar3.Name = "LBLVar3"
-        Me.LBLVar3.Size = New System.Drawing.Size(71, 13)
-        Me.LBLVar3.TabIndex = 5
-        Me.LBLVar3.Text = "INI Comment:"
-        '
         'LBLVar4
         '
         Me.LBLVar4.AutoSize = True
-        Me.LBLVar4.Location = New System.Drawing.Point(160, 9)
+        Me.LBLVar4.Location = New System.Drawing.Point(156, 9)
         Me.LBLVar4.Name = "LBLVar4"
         Me.LBLVar4.Size = New System.Drawing.Size(79, 13)
         Me.LBLVar4.TabIndex = 7
         Me.LBLVar4.Text = "Array Modifiers:"
         '
-        'TXTVar1
-        '
-        Me.TXTVar1.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTVar1.Location = New System.Drawing.Point(95, 5)
-        Me.TXTVar1.Name = "TXTVar1"
-        Me.TXTVar1.ReadOnly = True
-        Me.TXTVar1.Size = New System.Drawing.Size(55, 22)
-        Me.TXTVar1.TabIndex = 2
-        Me.TXTVar1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TXTVar3
-        '
-        Me.TXTVar3.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTVar3.Location = New System.Drawing.Point(95, 33)
-        Me.TXTVar3.Name = "TXTVar3"
-        Me.TXTVar3.ReadOnly = True
-        Me.TXTVar3.Size = New System.Drawing.Size(55, 22)
-        Me.TXTVar3.TabIndex = 6
-        Me.TXTVar3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'TXTVar4
         '
         Me.TXTVar4.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTVar4.Location = New System.Drawing.Point(245, 5)
+        Me.TXTVar4.Location = New System.Drawing.Point(241, 5)
         Me.TXTVar4.Name = "TXTVar4"
         Me.TXTVar4.ReadOnly = True
         Me.TXTVar4.Size = New System.Drawing.Size(55, 22)
@@ -145,7 +103,7 @@ Partial Class FRMTileData
         'TXTVar5
         '
         Me.TXTVar5.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTVar5.Location = New System.Drawing.Point(245, 33)
+        Me.TXTVar5.Location = New System.Drawing.Point(391, 5)
         Me.TXTVar5.Name = "TXTVar5"
         Me.TXTVar5.ReadOnly = True
         Me.TXTVar5.Size = New System.Drawing.Size(55, 22)
@@ -155,7 +113,7 @@ Partial Class FRMTileData
         'LBLVar5
         '
         Me.LBLVar5.AutoSize = True
-        Me.LBLVar5.Location = New System.Drawing.Point(156, 37)
+        Me.LBLVar5.Location = New System.Drawing.Point(302, 9)
         Me.LBLVar5.Name = "LBLVar5"
         Me.LBLVar5.Size = New System.Drawing.Size(83, 13)
         Me.LBLVar5.TabIndex = 9
@@ -174,10 +132,11 @@ Partial Class FRMTileData
         Me.EntrySections.Controls.Add(Me.TabTerrain)
         Me.EntrySections.Controls.Add(Me.TabBuildings)
         Me.EntrySections.Controls.Add(Me.TabUnits)
-        Me.EntrySections.Location = New System.Drawing.Point(12, 61)
+        Me.EntrySections.Location = New System.Drawing.Point(9, 30)
+        Me.EntrySections.Margin = New System.Windows.Forms.Padding(0)
         Me.EntrySections.Name = "EntrySections"
         Me.EntrySections.SelectedIndex = 0
-        Me.EntrySections.Size = New System.Drawing.Size(740, 350)
+        Me.EntrySections.Size = New System.Drawing.Size(746, 384)
         Me.EntrySections.TabIndex = 11
         '
         'TabTerrain
@@ -189,7 +148,7 @@ Partial Class FRMTileData
         Me.TabTerrain.Location = New System.Drawing.Point(4, 22)
         Me.TabTerrain.Margin = New System.Windows.Forms.Padding(0)
         Me.TabTerrain.Name = "TabTerrain"
-        Me.TabTerrain.Size = New System.Drawing.Size(732, 324)
+        Me.TabTerrain.Size = New System.Drawing.Size(738, 358)
         Me.TabTerrain.TabIndex = 0
         Me.TabTerrain.Text = "Edit Terrain"
         Me.TabTerrain.UseVisualStyleBackColor = True
@@ -214,7 +173,7 @@ Partial Class FRMTileData
         Me.TabBuildings.Location = New System.Drawing.Point(4, 22)
         Me.TabBuildings.Margin = New System.Windows.Forms.Padding(0)
         Me.TabBuildings.Name = "TabBuildings"
-        Me.TabBuildings.Size = New System.Drawing.Size(732, 324)
+        Me.TabBuildings.Size = New System.Drawing.Size(738, 358)
         Me.TabBuildings.TabIndex = 1
         Me.TabBuildings.Text = "Edit Buildings"
         Me.TabBuildings.UseVisualStyleBackColor = True
@@ -239,7 +198,7 @@ Partial Class FRMTileData
         Me.TabUnits.Location = New System.Drawing.Point(4, 22)
         Me.TabUnits.Margin = New System.Windows.Forms.Padding(0)
         Me.TabUnits.Name = "TabUnits"
-        Me.TabUnits.Size = New System.Drawing.Size(732, 324)
+        Me.TabUnits.Size = New System.Drawing.Size(738, 358)
         Me.TabUnits.TabIndex = 2
         Me.TabUnits.Text = "Edit Units"
         Me.TabUnits.UseVisualStyleBackColor = True
@@ -270,7 +229,7 @@ Partial Class FRMTileData
         'TXTVar6
         '
         Me.TXTVar6.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTVar6.Location = New System.Drawing.Point(393, 5)
+        Me.TXTVar6.Location = New System.Drawing.Point(95, 5)
         Me.TXTVar6.Name = "TXTVar6"
         Me.TXTVar6.ReadOnly = True
         Me.TXTVar6.Size = New System.Drawing.Size(55, 22)
@@ -280,7 +239,7 @@ Partial Class FRMTileData
         'LBLVar6
         '
         Me.LBLVar6.AutoSize = True
-        Me.LBLVar6.Location = New System.Drawing.Point(306, 9)
+        Me.LBLVar6.Location = New System.Drawing.Point(8, 9)
         Me.LBLVar6.Name = "LBLVar6"
         Me.LBLVar6.Size = New System.Drawing.Size(81, 13)
         Me.LBLVar6.TabIndex = 9
@@ -299,11 +258,7 @@ Partial Class FRMTileData
         Me.Controls.Add(Me.LBLVar5)
         Me.Controls.Add(Me.TXTVar5)
         Me.Controls.Add(Me.TXTVar4)
-        Me.Controls.Add(Me.TXTVar3)
-        Me.Controls.Add(Me.TXTVar1)
         Me.Controls.Add(Me.LBLVar4)
-        Me.Controls.Add(Me.LBLVar3)
-        Me.Controls.Add(Me.LBLVar1)
         Me.Controls.Add(Me.LBLSaved)
         Me.Controls.Add(Me.CMDClose)
         Me.Controls.Add(Me.CMDSave)
@@ -327,11 +282,7 @@ Partial Class FRMTileData
     Friend WithEvents CMDSave As System.Windows.Forms.Button
     Friend WithEvents CMDClose As System.Windows.Forms.Button
     Friend WithEvents LBLSaved As System.Windows.Forms.Label
-    Friend WithEvents LBLVar1 As System.Windows.Forms.Label
-    Friend WithEvents LBLVar3 As System.Windows.Forms.Label
     Friend WithEvents LBLVar4 As System.Windows.Forms.Label
-    Friend WithEvents TXTVar1 As System.Windows.Forms.TextBox
-    Friend WithEvents TXTVar3 As System.Windows.Forms.TextBox
     Friend WithEvents TXTVar4 As System.Windows.Forms.TextBox
     Friend WithEvents TXTVar5 As System.Windows.Forms.TextBox
     Friend WithEvents LBLVar5 As System.Windows.Forms.Label

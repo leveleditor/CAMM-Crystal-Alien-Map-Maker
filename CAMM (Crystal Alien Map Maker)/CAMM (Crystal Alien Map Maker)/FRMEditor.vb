@@ -68,8 +68,6 @@ Public Class FRMEditor
     ReadOnly BaseplateAlienSmall As Image = Image.FromFile(FullBasePath & "/Other Data/AlienBaseplateAlphaSmall.png")
 
     'INI Variables.
-    Dim INIGetFileName As String = ""
-    Dim INIComment As String = ""
     Dim INIArray As String = ""
     Dim INISeparator As Char
 
@@ -144,15 +142,12 @@ Public Class FRMEditor
             MsgBox("The 'Tiles.dat' file was created with a newer version of CAMM and cannot be used!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
             Me.Close()
         ElseIf vFormat = TilesDatVersion Then
-            config = source.Configs.Item("SPECIAL CHARACTERS LIST")
-            INIGetFileName = config.GetString("Get File Name")
-            INIComment = config.GetString("INI Comment")
             INIArray = config.GetString("Array Modifiers")
             INISeparator = Char.Parse(config.GetString("Array Separator"))
 
-            config = source.Configs.Item("ANSI LOOKUP")
-            Dim ANSISeparator As String() = {config.GetString("Ansi Separator")}
-            Ascii = config.Get("Ansi Array").Trim(INIArray.ToCharArray).Trim(ANSISeparator(0).ToCharArray).Split(ANSISeparator, StringSplitOptions.None)
+            config = source.Configs.Item("ASCII LOOKUP")
+            Dim AsciiSeparator As String() = {config.GetString("Ascii Separator")}
+            Ascii = config.Get("Ascii Array").Trim(INIArray.ToCharArray).Trim(AsciiSeparator(0).ToCharArray).Split(AsciiSeparator, StringSplitOptions.None)
 
             config = source.Configs.Item("DEFINE TERRAIN")
             For i As Integer = 0 To config.GetKeys().Length - 1
@@ -170,9 +165,6 @@ Public Class FRMEditor
                     ReDim Preserve SelTiles(Y1)
                     SelTiles(Y1) = New Tile(0, Y1 * TileSizeY, TheImage, TerrainID, IsPassable, IsMinerals)
 
-                    If SelTiles(Y1).TileId = INIGetFileName Then
-                        SelTiles(Y1).TileId = My.Computer.FileSystem.GetDirectoryInfo(FullImageURL).Name.Replace(My.Computer.FileSystem.GetDirectoryInfo(FullImageURL).Extension, "")
-                    End If
                     Y1 += 1
 
                 End If
@@ -208,9 +200,7 @@ Public Class FRMEditor
                     SelBuildings(Y2) = New c_Object(0, Y2 * TileSizeY, TheImage, ObjectID, Team, Angle, Damage, Width, Height)
                     SelBuildings(Y2).FullImage = Image.FromFile(FullImageURL)
                     SelBuildings(Y2).HasData = True
-                    If SelBuildings(Y2).ObjectID = INIGetFileName Then
-                        SelBuildings(Y2).ObjectID = My.Computer.FileSystem.GetDirectoryInfo(FullImageURL).Name.Replace(My.Computer.FileSystem.GetDirectoryInfo(FullImageURL).Extension, "")
-                    End If
+
                     Y2 += 1
                 End If
             Next
@@ -260,9 +250,7 @@ Public Class FRMEditor
                     SelUnits(Y3) = New c_Object(0, Y3 * TileSizeY, TheImage, ObjectID, Team, Angle, Damage, Width, Height)
                     SelUnits(Y3).FullImage = Image.FromFile(FullImageURL)
                     SelUnits(Y3).HasData = True
-                    If SelUnits(Y3).ObjectID = INIGetFileName Then
-                        SelUnits(Y3).ObjectID = My.Computer.FileSystem.GetDirectoryInfo(FullImageURL).Name.Replace(My.Computer.FileSystem.GetDirectoryInfo(FullImageURL).Extension, "")
-                    End If
+
                     Y3 += 1
                 End If
             Next

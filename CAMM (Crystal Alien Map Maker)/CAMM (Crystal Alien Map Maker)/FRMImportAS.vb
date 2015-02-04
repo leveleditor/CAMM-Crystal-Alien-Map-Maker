@@ -1,11 +1,11 @@
 ﻿Public Class FRMImportAS
 
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
-        'MsgBox("""" + Ansi(45) + """") '45 should be an "N" according to the tiler.php...
-        'MsgBox("""" + Ansi("+").ToString + """") '"+" should be 10
-        'MsgBox("""" + Ansi("?").ToString + """") '"?" should be 30
-        'MsgBox("""" + Ansi(" ").ToString + """") '" " should be 0
-        'MsgBox("""" + Ansi("ÿ").ToString + """") '"ÿ" should be 214
+        'MsgBox("""" + Ascii(45) + """") '45 should be an "N" according to the tiler.php...
+        'MsgBox("""" + Ascii("+").ToString + """") '"+" should be 10
+        'MsgBox("""" + Ascii("?").ToString + """") '"?" should be 30
+        'MsgBox("""" + Ascii(" ").ToString + """") '" " should be 0
+        'MsgBox("""" + Ascii("ÿ").ToString + """") '"ÿ" should be 214
 
         Dim line As String = ""
         For i As Integer = 0 To TXTPaste.Lines.Length - 1
@@ -24,8 +24,8 @@
         line = line.Trim(New Char() {Char.Parse("""")})
 
         FRMEditor.ImportASTileData = line.Remove(0, 2)
-        FRMEditor.MapSizeX = Ansi(line(0))
-        FRMEditor.MapSizeY = Ansi(line(1))
+        FRMEditor.MapSizeX = Ascii(line(0))
+        FRMEditor.MapSizeY = Ascii(line(1))
         FRMEditor.NewMap()
         FRMEditor.MapTitle = CBOPickMap.SelectedItem.ToString().Trim()
 
@@ -107,16 +107,16 @@
         End If
     End Sub
 
-    Function Ansi(ByVal index As Integer) As String
+    Function Ascii(ByVal index As Integer) As String
         If index > 213 Then
             Return "INVALID"
         End If
         Return FRMEditor.Ascii(index)
     End Function
-    Function Ansi(ByVal character As Char) As Integer
+    Function Ascii(ByVal character As Char) As Integer
         Return Array.IndexOf(FRMEditor.Ascii, character.ToString)
     End Function
-    Function Ansi(ByVal character As String) As Integer
+    Function Ascii(ByVal character As String) As Integer
         Return Array.IndexOf(FRMEditor.Ascii, character)
     End Function
 

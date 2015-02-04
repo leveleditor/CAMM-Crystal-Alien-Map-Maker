@@ -2,7 +2,7 @@
 Imports Nini.Config
 Public Class FRMTileData
 
-    Dim ANSI As String = ""
+    Dim Ascii As String = ""
 
     Private Sub FRMTileData_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown, Me.Load
         Dim reader As New IniReader(TileDataFile) With {.IgnoreComments = True, .AcceptCommentAfterKey = False}
@@ -12,15 +12,12 @@ Public Class FRMTileData
             MsgBox("This 'Tiles.dat' file is invalid or outdated and cannot be used!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly)
             Me.Close()
         ElseIf config.GetInt("vFormat", -1) = TilesDatVersion Then
-            config = source.Configs.Item("SPECIAL CHARACTERS LIST")
-            TXTVar1.Text = config.GetString("Get File Name")
-            TXTVar3.Text = config.GetString("INI Comment")
             TXTVar4.Text = config.GetString("Array Modifiers")
             TXTVar5.Text = config.GetString("Array Separator")
 
-            config = source.Configs.Item("ANSI LOOKUP")
-            TXTVar6.Text = config.GetString("Ansi Separator")
-            ANSI = config.Get("Ansi Array")
+            config = source.Configs.Item("ASCII LOOKUP")
+            TXTVar6.Text = config.GetString("Ascii Separator")
+            Ascii = config.Get("Ascii Array")
 
             Me.PNLTerrain.Controls.Clear()
             Me.PNLBuildings.Controls.Clear()
@@ -147,7 +144,7 @@ Public Class FRMTileData
 
     Private Sub Entry_Terrain_CMDNew_Clicked(ByVal sender As Entry_Terrain, ByVal e As System.EventArgs)
         PNLTerrain.SuspendLayout()
-        Dim NewTerrainEntry As Entry_Terrain = New Entry_Terrain() With {.TerrainID = TXTVar1.Text, .Location = New Point(PNLTerrain.AutoScrollPosition.X + 3, PNLTerrain.AutoScrollPosition.Y + 3)}
+        Dim NewTerrainEntry As Entry_Terrain = New Entry_Terrain() With {.Location = New Point(PNLTerrain.AutoScrollPosition.X + 3, PNLTerrain.AutoScrollPosition.Y + 3)}
         AddHandler NewTerrainEntry.CMDNew_Clicked, AddressOf Entry_Terrain_CMDNew_Clicked
         AddHandler NewTerrainEntry.CMDRemove_Clicked, AddressOf Entry_Terrain_CMDRemove_Clicked
         AddHandler NewTerrainEntry.CMDBrowse_Clicked, AddressOf Entry_Terrain_CMDBrowse_Clicked
@@ -196,7 +193,7 @@ Public Class FRMTileData
 
     Private Sub Entry_Building_CMDNew_Clicked(ByVal sender As Entry_Object, ByVal e As System.EventArgs)
         PNLBuildings.SuspendLayout()
-        Dim NewObjectEntry As Entry_Object = New Entry_Object(TXTVar1.Text, 1, 1, 0, 0, 0, 0, "") With {.Location = New Point(PNLBuildings.AutoScrollPosition.X + 3, PNLBuildings.AutoScrollPosition.Y + 3)}
+        Dim NewObjectEntry As Entry_Object = New Entry_Object(-1, 1, 1, 0, 0, 0, 0, "") With {.Location = New Point(PNLBuildings.AutoScrollPosition.X + 3, PNLBuildings.AutoScrollPosition.Y + 3)}
         AddHandler NewObjectEntry.CMDNew_Clicked, AddressOf Entry_Building_CMDNew_Clicked
         AddHandler NewObjectEntry.CMDRemove_Clicked, AddressOf Entry_Building_CMDRemove_Clicked
         AddHandler NewObjectEntry.CMDBrowse_Clicked, AddressOf Entry_Building_CMDBrowse_Clicked
@@ -245,7 +242,7 @@ Public Class FRMTileData
 
     Private Sub Entry_Unit_CMDNew_Clicked(ByVal sender As Entry_Object, ByVal e As System.EventArgs)
         PNLUnits.SuspendLayout()
-        Dim NewObjectEntry As Entry_Object = New Entry_Object(TXTVar1.Text, 1, 1, 0, 0, 0, 0, "") With {.Location = New Point(PNLUnits.AutoScrollPosition.X + 3, PNLUnits.AutoScrollPosition.Y + 3)}
+        Dim NewObjectEntry As Entry_Object = New Entry_Object(-1, 1, 1, 0, 0, 0, 0, "") With {.Location = New Point(PNLUnits.AutoScrollPosition.X + 3, PNLUnits.AutoScrollPosition.Y + 3)}
         AddHandler NewObjectEntry.CMDNew_Clicked, AddressOf Entry_Unit_CMDNew_Clicked
         AddHandler NewObjectEntry.CMDRemove_Clicked, AddressOf Entry_Unit_CMDRemove_Clicked
         AddHandler NewObjectEntry.CMDBrowse_Clicked, AddressOf Entry_Unit_CMDBrowse_Clicked
@@ -302,20 +299,16 @@ Public Class FRMTileData
 
         SaveFileData += _
             "[CAMM]" + vbNewLine + _
-            "vFormat = " + TilesDatVersion.ToString + vbNewLine + vbNewLine
-
-        SaveFileData += _
-            "[SPECIAL CHARACTERS LIST]" + vbNewLine + _
-            "Get File Name = """ + TXTVar1.Text + """" + vbNewLine + _
-            "INI Comment = """ + TXTVar3.Text + """" + vbNewLine + _
+            "vFormat = " + TilesDatVersion.ToString + vbNewLine + _
+            vbNewLine + _
             "Array Modifiers = """ + TXTVar4.Text + """" + vbNewLine + _
             "Array Separator = """ + TXTVar5.Text + """" + vbNewLine + _
             vbNewLine
 
         SaveFileData += _
-            "[ANSI LOOKUP]" + vbNewLine + _
-            "Ansi Separator = """ + TXTVar6.Text + """" + vbNewLine + _
-            "Ansi Array = " + ANSI + vbNewLine + _
+            "[ASCII LOOKUP]" + vbNewLine + _
+            "Ascii Separator = """ + TXTVar6.Text + """" + vbNewLine + _
+            "Ascii Array = " + Ascii + vbNewLine + _
             vbNewLine
 
         SaveFileData += "[DEFINE TERRAIN]" + vbNewLine + _
