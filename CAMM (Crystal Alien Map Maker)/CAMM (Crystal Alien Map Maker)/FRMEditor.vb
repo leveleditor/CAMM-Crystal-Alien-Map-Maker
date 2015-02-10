@@ -146,8 +146,8 @@ Public Class FRMEditor
             INISeparator = Char.Parse(config.GetString("Array Separator"))
 
             config = source.Configs.Item("ASCII LOOKUP")
-            Dim AsciiSeparator As String() = {config.GetString("Ascii Separator")}
-            Ascii = config.Get("Ascii Array").Trim(INIArray.ToCharArray).Trim(AsciiSeparator(0).ToCharArray).Split(AsciiSeparator, StringSplitOptions.None)
+            Dim AsciiSeparator As String = config.GetString("Ascii Separator")
+            Ascii = config.Get("Ascii Array").Trim(INIArray.ToCharArray).Trim(AsciiSeparator.ToCharArray()).Split(New String() {AsciiSeparator}, StringSplitOptions.None)
 
             config = source.Configs.Item("DEFINE TERRAIN")
             For i As Integer = 0 To config.GetKeys().Length - 1
@@ -413,20 +413,6 @@ Public Class FRMEditor
                 TilesCounted += 1
             Next x
         Next y
-    End Sub
-
-    ' Round the point to the nearest grid location.
-    Private Sub PointToGrid(ByRef X As Integer, ByRef Y As Integer)
-        Dim ix As Integer = (X - TileSizeX / 2) / TileSizeX
-        Dim iy As Integer = (Y - TileSizeY / 2) / TileSizeY
-        X = ix * TileSizeX
-        Y = iy * TileSizeY
-    End Sub
-    Private Sub PointToGrid(ByRef PT As Point)
-        Dim ix As Integer = (PT.X - TileSizeX / 2) / TileSizeX
-        Dim iy As Integer = (PT.Y - TileSizeY / 2) / TileSizeY
-        PT.X = ix * TileSizeX
-        PT.Y = iy * TileSizeY
     End Sub
 
     Function GetTileAt(ByVal xMouse As Integer, ByVal yMouse As Integer) As Tile
@@ -1487,16 +1473,13 @@ Public Class FRMEditor
             ' Warning: Buildings that were actually out of bounds in old maps may end up off screen.
             MapBuildings(i).Location = MapBuildings(i).DrawPos
 
-            Dim x As Integer = MapBuildings(i).Location.X
-            Dim y As Integer = MapBuildings(i).Location.Y
+            Dim fixedLocation As Point = New Point(MapBuildings(i).Location.X + 1, MapBuildings(i).Location.Y + 1)
 
-            x += (MapBuildings(i).FullImage.Width - (MapBuildings(i).ObjWidth * TileSizeX)) / 2
-            y += (MapBuildings(i).FullImage.Height - (MapBuildings(i).ObjHeight * TileSizeY)) / 2
+            fixedLocation.X += (MapBuildings(i).FullImage.Width - (MapBuildings(i).ObjWidth * TileSizeX)) / 2
+            fixedLocation.Y += (MapBuildings(i).FullImage.Height - (MapBuildings(i).ObjHeight * TileSizeY)) / 2
 
-            x += 1
-            y += 1
-            PointToGrid(x, y)
-            MapBuildings(i).Location = New Point(x, y)
+            PointToGrid(fixedLocation)
+            MapBuildings(i).Location = fixedLocation
         End If
     End Sub
     Public Sub UpgradeObjectId(ByVal oldv As Integer, ByVal newv As Integer, ByVal i As Integer)

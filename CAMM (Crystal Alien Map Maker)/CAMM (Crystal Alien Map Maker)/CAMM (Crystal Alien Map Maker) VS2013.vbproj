@@ -148,6 +148,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Tile.vb" />
+    <Compile Include="Utils.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FRMExportAS.resx">
