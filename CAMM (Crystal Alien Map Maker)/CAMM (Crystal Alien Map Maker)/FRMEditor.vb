@@ -1183,7 +1183,7 @@ Public Class FRMEditor
             Dim TempTileType As String = TempArray(2)
 
             ' Upgrade old terrain Ids
-            TempTileID = UpgradeTerrainId(0, MapFormat, TempTileID)
+            UpgradeTerrainId(0, MapFormat, TempTileID)
 
             MapTiles(i).TileId = TempTileID
             'Tiles(i).Tile_Type = TempTileType
@@ -1220,7 +1220,7 @@ Public Class FRMEditor
                     Dim PosY As Integer = KeyArray(2)
 
                     ' Upgrade old terrain Ids
-                    TerrainID = UpgradeTerrainId(1, MapFormat, TerrainID)
+                    UpgradeTerrainId(1, MapFormat, TerrainID)
 
                     MapTiles(i).TileId = TerrainID
                     MapTiles(i).Position = New Point(PosX * TileSizeX, PosY * TileSizeY)
@@ -1253,10 +1253,10 @@ Public Class FRMEditor
 
                     MapBuildings.Add(New c_Object(New Point(PosX * TileSizeX, PosY * TileSizeY)))
 
-                    MapBuildings(i).ObjectID = ObjectID
+                    ' Upgrade old building Ids
+                    UpgradeBuildingId(1, MapFormat, ObjectID)
 
-                    ' Upgrade old object Ids
-                    UpgradeObjectId(1, MapFormat, i)
+                    MapBuildings(i).ObjectID = ObjectID
 
                     MapBuildings(i).Team = Team
                     MapBuildings(i).Angle = Angle
@@ -1314,7 +1314,7 @@ Public Class FRMEditor
                 Dim PosY As Integer = KeyArray(2)
 
                 ' Upgrade old terrain Ids
-                TerrainID = UpgradeTerrainId(v, MapFormat, TerrainID)
+                UpgradeTerrainId(v, MapFormat, TerrainID)
 
                 MapTiles(i).TileId = TerrainID
 
@@ -1345,10 +1345,10 @@ Public Class FRMEditor
 
                 MapBuildings.Add(New c_Object(New Point(PosX * TileSizeX, PosY * TileSizeY)))
 
-                MapBuildings(i).ObjectID = ObjectID
+                ' Upgrade old building Ids
+                UpgradeBuildingId(v, MapFormat, ObjectID)
 
-                ' Upgrade old object Ids
-                UpgradeObjectId(v, MapFormat, i)
+                MapBuildings(i).ObjectID = ObjectID
 
                 MapBuildings(i).Team = Team
                 MapBuildings(i).Angle = Angle
@@ -1408,7 +1408,7 @@ Public Class FRMEditor
                 End If
 
                 ' Upgrade old unit Ids
-                UnitId = UpgradeUnitId(v, MapFormat, UnitId)
+                UpgradeUnitId(v, MapFormat, UnitId)
 
                 Dim temp As Unit = New Unit(Position, Nothing, UnitId, Team, Angle, Damage)
                 For j As Integer = 0 To SelUnits.Length - 1
@@ -1482,64 +1482,6 @@ Public Class FRMEditor
             MapBuildings(i).Location = fixedLocation
         End If
     End Sub
-    Public Sub UpgradeObjectId(ByVal oldv As Integer, ByVal newv As Integer, ByVal i As Integer)
-        If oldv < 4 And (newv = 4 Or newv = 5) Then
-            ' The easy way to map old building Ids to new ones.
-            Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeBuildings.dat"
-            Dim upgradeHeader As String = "Buildings data v3 -> v4"
-            Dim upgradeData As String = My.Computer.FileSystem.ReadAllText(upgradeFile)
-            If upgradeData.Contains(upgradeHeader) Then
-                Dim reader As IO.StringReader = New IO.StringReader(upgradeData)
-                Dim source As New IniConfigSource(reader)
-                Dim config As IConfig = source.Configs.Item(upgradeHeader)
-                Dim newId As String = config.GetString(MapBuildings(i).ObjectID, "")
-                If newId <> "" Then
-                    MapBuildings(i).ObjectID = newId
-                End If
-                reader.Close()
-            End If
-        End If
-    End Sub
-    Public Function UpgradeUnitId(ByVal oldv As Integer, ByVal newv As Integer, ByVal UnitId As String) As String
-        Dim returnId As String = UnitId
-        If oldv < 4 And (newv = 4 Or newv = 5) Then
-            ' The easy way to map old unit Ids to new ones.
-            Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeUnits.dat"
-            Dim upgradeHeader As String = "Units data v3 -> v4"
-            Dim upgradeData As String = My.Computer.FileSystem.ReadAllText(upgradeFile)
-            If upgradeData.Contains(upgradeHeader) Then
-                Dim reader As IO.StringReader = New IO.StringReader(upgradeData)
-                Dim source As New IniConfigSource(reader)
-                Dim config As IConfig = source.Configs.Item(upgradeHeader)
-                Dim newId As String = config.GetString(UnitId, "")
-                If newId <> "" Then
-                    returnId = newId
-                End If
-                reader.Close()
-            End If
-        End If
-        Return returnId
-    End Function
-    Public Function UpgradeTerrainId(ByVal oldv As Integer, ByVal newv As Integer, ByVal TerrainId As String) As String
-        Dim returnId As String = TerrainId
-        If oldv < 5 And newv = 5 Then
-            ' The easy way to map old terrain Ids to new ones.
-            Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeTerrain.dat"
-            Dim upgradeHeader As String = "Terrain data v4 -> v5"
-            Dim upgradeData As String = My.Computer.FileSystem.ReadAllText(upgradeFile)
-            If upgradeData.Contains(upgradeHeader) Then
-                Dim reader As IO.StringReader = New IO.StringReader(upgradeData)
-                Dim source As New IniConfigSource(reader)
-                Dim config As IConfig = source.Configs.Item(upgradeHeader)
-                Dim newId As String = config.GetString(TerrainId, "")
-                If newId <> "" Then
-                    returnId = newId
-                End If
-                reader.Close()
-            End If
-        End If
-        Return returnId
-    End Function
 
     Private Sub CMDSaveMap_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDSaveAs.Click
         Me.SaveMap.Reset()
