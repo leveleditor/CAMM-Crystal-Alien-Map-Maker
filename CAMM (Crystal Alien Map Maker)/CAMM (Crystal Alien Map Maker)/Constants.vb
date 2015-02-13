@@ -1,4 +1,4 @@
-﻿Module Constants
+﻿Public Module Constants
 
 #If DEBUG Then
     Public Const BuildType As String = "[Debug]"
@@ -25,5 +25,18 @@
     Public ReadOnly PenGrid As Pen = Pens.Black
     Public ReadOnly PenSelectionHover As Pen = New Pen(Pens.DarkOrange.Brush, 2)
     Public ReadOnly PenSelected As Pen = New Pen(Pens.LimeGreen.Brush, 3)
+
+    Public Enum EditMode
+        Tiles = 0
+        Buildings = 1
+        Units = 2
+        Shroud = 3
+    End Enum
+
+    Public Enum ToolMode
+        Brush = 0
+        SmartBrush = 1
+        Eraser = 2
+    End Enum
 
 End Module

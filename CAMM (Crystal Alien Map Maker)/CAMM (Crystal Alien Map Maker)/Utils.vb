@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports Nini.Config
 
-Module Utils
+Public Module Utils
     ''' <summary>
     ''' Rounds the specified coordinates to the nearest grid location.
     ''' </summary>

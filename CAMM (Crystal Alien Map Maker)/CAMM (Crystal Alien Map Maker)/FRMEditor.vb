@@ -40,8 +40,8 @@ Public Class FRMEditor
     Private MouseXNoSnap As Integer
     Private MouseYNoSnap As Integer
     Dim Background As Image
-    Public EditMode As Integer = 0 '0 = Tiles, 1 = Buildings, 2 = Units, 3 = Shroud
-    Public ToolMode As Integer = 0 '0 = Brush, 1 = Smart Brush, 2 = Eraser
+    Public ActiveEditMode As EditMode = EditMode.Tiles
+    Public ActiveToolMode As ToolMode = ToolMode.Brush
 
     Public DrawGrid As Boolean = True
     Public DrawBuildingDebugPos As Boolean = False
@@ -440,7 +440,7 @@ Public Class FRMEditor
         If IsMouseInBounds() Then
             For i As Integer = 0 To MapTiles.Length - 1
                 If MapTiles(i).Position = New Point(xMouse, yMouse) Then
-                    If ActiveTile.TileId = -1 Or ToolMode = 2 Or My.Computer.Keyboard.CtrlKeyDown Then
+                    If ActiveTile.TileId = -1 Or ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                         MapTiles(i) = New Tile(xMouse, yMouse)
                     Else
                         MapTiles(i) = New Tile(xMouse, yMouse, PICActive.Image, ActiveTile.TileId)
@@ -499,7 +499,7 @@ Public Class FRMEditor
                     Exit For
                 End If
             Next
-            If Not found And ActiveBuilding.ObjectID <> "" And ToolMode <> 2 And Not My.Computer.Keyboard.CtrlKeyDown Then
+            If Not found And ActiveBuilding.ObjectID <> "" And ActiveToolMode <> ToolMode.Eraser And Not My.Computer.Keyboard.CtrlKeyDown Then
                 Dim temp As c_Object = New c_Object(xMouse, yMouse, ActiveBuilding.Image, ActiveBuilding.ObjectID, ActiveBuilding.Team, ActiveBuilding.Angle, ActiveBuilding.Damage, ActiveBuilding.ObjWidth, ActiveBuilding.ObjHeight)
                 temp.FullImage = ActiveBuilding.FullImage
                 temp.HasData = True
@@ -573,15 +573,14 @@ Public Class FRMEditor
                 MouseXNoSnap = e.X
                 MouseYNoSnap = e.Y
 
-                'Edit Modes: 0 = Tiles, 1 = Buildings, 2 = Units, 3 = Shroud
-                If EditMode = 0 Then
-                    If ToolMode = 1 Then
+                If ActiveEditMode = EditMode.Tiles Then
+                    If ActiveToolMode = ToolMode.SmartBrush Then
                         SetTileSmart(MouseX, MouseY)
                     Else
                         SetTile(MouseX, MouseY)
                     End If
-                ElseIf EditMode = 1 Then
-                    If ToolMode = 2 Or My.Computer.Keyboard.CtrlKeyDown Then
+                ElseIf ActiveEditMode = EditMode.Buildings Then
+                    If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                         Dim temp As List(Of c_Object) = MapBuildings.ToList()
                         For i As Integer = 0 To MapBuildings.Count() - 1
                             If MapBuildings(i).Location = New Point(MouseX, MouseY) Then
@@ -592,8 +591,8 @@ Public Class FRMEditor
                     Else
                         SetBuilding(MouseX, MouseY)
                     End If
-                ElseIf EditMode = 2 Then
-                    If ToolMode = 2 Or My.Computer.Keyboard.CtrlKeyDown Then
+                ElseIf ActiveEditMode = EditMode.Units Then
+                    If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                         Dim temp As List(Of Unit) = MapUnits.ToList()
                         For i As Integer = 0 To MapUnits.Count() - 1
                             If MapUnits(i).X >= MouseX And _
@@ -607,7 +606,7 @@ Public Class FRMEditor
                     Else
                         SetUnit(MouseXNoSnap, MouseYNoSnap)
                     End If
-                ElseIf EditMode = 3 Then
+                ElseIf ActiveEditMode = EditMode.Shroud Then
                     'For later.
                 End If
 
@@ -631,15 +630,14 @@ Public Class FRMEditor
         MouseYNoSnap = e.Y
 
         If IsDrawing Then
-            'Edit Modes: 0 = Tiles, 1 = Buildings, 2 = Units, 3 = Shroud
-            If EditMode = 0 Then
-                If ToolMode = 1 Then
+            If ActiveEditMode = EditMode.Tiles Then
+                If ActiveToolMode = ToolMode.SmartBrush Then
                     SetTileSmart(MouseX, MouseY)
                 Else
                     SetTile(MouseX, MouseY)
                 End If
-            ElseIf EditMode = 1 Then
-                If ToolMode = 2 Or My.Computer.Keyboard.CtrlKeyDown Then
+            ElseIf ActiveEditMode = EditMode.Buildings Then
+                If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                     Dim temp As List(Of c_Object) = MapBuildings.ToList()
                     For i As Integer = 0 To MapBuildings.Count() - 1
                         If MapBuildings(i).Location = New Point(MouseX, MouseY) Then
@@ -650,8 +648,8 @@ Public Class FRMEditor
                 Else
                     SetBuilding(MouseX, MouseY)
                 End If
-            ElseIf EditMode = 2 Then
-                If ToolMode = 2 Or My.Computer.Keyboard.CtrlKeyDown Then
+            ElseIf ActiveEditMode = EditMode.Units Then
+                If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                     Dim temp As List(Of Unit) = MapUnits.ToList()
                     For i As Integer = 0 To MapUnits.Count() - 1
                         If MapUnits(i).X >= MouseX And _
@@ -666,7 +664,7 @@ Public Class FRMEditor
                     'No click & drag for units, just imagine the spam...
                     'SetUnit(MouseXNoSnap, MouseYNoSnap)
                 End If
-            ElseIf EditMode = 3 Then
+            ElseIf ActiveEditMode = EditMode.Shroud Then
                 'For later, maybe.
             End If
         End If
@@ -794,14 +792,14 @@ Public Class FRMEditor
 
             ' Draw the rectangle cursor / selector thingy.
             If IsMouseInBounds() Then
-                If ToolMode = 2 Or My.Computer.Keyboard.CtrlKeyDown Then
+                If activeToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                     g.DrawRectangle(PenTileErase, MouseX - (PenTileHover.Width / 2), MouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
                 Else
                     g.DrawRectangle(PenTileHover, MouseX - (PenTileHover.Width / 2), MouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
                 End If
-                If EditMode = 0 Then
+                If activeEditMode = EditMode.Tiles Then
                     'g.DrawImage(ActiveTile.Image, MouseX, MouseY)
-                ElseIf EditMode = 1 And ActiveBuilding.ObjectID <> "" Then
+                ElseIf activeEditMode = EditMode.Buildings And ActiveBuilding.ObjectID <> "" Then
                     'OffY2 = TileSizeY
 
                     'g.DrawImage(ActiveBuilding.FullImage, _
@@ -811,8 +809,8 @@ Public Class FRMEditor
                     '     ActiveBuilding.FullImage.Height)
 
                     'g.DrawImage(ActiveBuilding.FullImage, MouseX, MouseY, ActiveBuilding.FullImage.Width, ActiveBuilding.FullImage.Height)
-                ElseIf EditMode = 2 And ActiveUnit.UnitId <> "" Then
-                    If IsMouseOnMap And Not IsDrawing And ToolMode <> 2 Then
+                ElseIf activeEditMode = EditMode.Units And ActiveUnit.UnitId <> "" Then
+                    If IsMouseOnMap And Not IsDrawing And activeToolMode <> ToolMode.Eraser Then
                         g.DrawImage(ActiveUnit.FullImage, _
                             MouseXNoSnap - CInt(ActiveUnit.FullImage.Width / 2), _
                             MouseYNoSnap - CInt(ActiveUnit.FullImage.Height / 2), _
@@ -864,7 +862,7 @@ Public Class FRMEditor
             Next x
 
             'Draw Rectangle around selected Tile.
-            If EditMode = 0 And ActiveTile.TileId <> -1 And ToolMode <> 2 Then
+            If activeEditMode = EditMode.Tiles And ActiveTile.TileId <> -1 And activeToolMode <> ToolMode.Eraser Then
                 e.Graphics.DrawRectangle(PenSelected, SelX_Tiles + (PenSelected.Width / 2) + 1, SelY_Tiles + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
             End If
 
@@ -954,7 +952,7 @@ Public Class FRMEditor
             Next x
 
             'Draw Rectangle around selected Buildings.
-            If EditMode = 1 And ActiveBuilding.ObjectID <> "" And ToolMode <> 2 Then
+            If activeEditMode = EditMode.Buildings And ActiveBuilding.ObjectID <> "" And activeToolMode <> ToolMode.Eraser Then
                 e.Graphics.DrawRectangle(PenSelected, SelX_Buildings + (PenSelected.Width / 2) + 1, SelY_Buildings + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
             End If
 
@@ -1046,7 +1044,7 @@ Public Class FRMEditor
             Next x
 
             'Draw Rectangle around selected Units.
-            If EditMode = 2 And ActiveUnit.UnitId <> "" And ToolMode <> 2 Then
+            If activeEditMode = EditMode.Units And ActiveUnit.UnitId <> "" And activeToolMode <> ToolMode.Eraser Then
                 e.Graphics.DrawRectangle(PenSelected, SelX_Units + (PenSelected.Width / 2) + 1, SelY_Units + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
             End If
 
@@ -1611,12 +1609,11 @@ Public Class FRMEditor
     End Function
 
     Private Sub PICActive_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles PICActive.Paint
-        If ToolMode = 2 Then
+        If activeToolMode = ToolMode.Eraser Then
             e.Graphics.Clear(PICActive.BackColor)
         Else
-            '0 = Tiles, 1 = Buildings, 2 = Units, 3 = Shroud
-            If EditMode = 1 Then
-                If ActiveBuilding.HasData And ActiveBuilding.ObjectID <> "" And ToolMode <> 2 Then
+            If ActiveEditMode = EditMode.Buildings Then
+                If ActiveBuilding.HasData And ActiveBuilding.ObjectID <> "" And ActiveToolMode <> ToolMode.Eraser Then
                     e.Graphics.Clear(PICActive.BackColor)
                     If ActiveBuilding.Team = 0 Then
                         e.Graphics.DrawImage(ButtonAstro, New Point(0, 0))
@@ -1632,8 +1629,8 @@ Public Class FRMEditor
                     e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
                     e.Graphics.DrawImage(ButtonOverlay, New Point(0, 0))
                 End If
-            ElseIf EditMode = 2 Then
-                If ActiveUnit.HasData And ActiveUnit.UnitId <> "" And ToolMode <> 2 Then
+            ElseIf ActiveEditMode = EditMode.Units Then
+                If ActiveUnit.HasData And ActiveUnit.UnitId <> "" And ActiveToolMode <> ToolMode.Eraser Then
                     e.Graphics.Clear(PICActive.BackColor)
                     If ActiveUnit.Team = 0 Then
                         e.Graphics.DrawImage(ButtonAstro, New Point(0, 0))
@@ -1709,18 +1706,17 @@ Public Class FRMEditor
     End Sub
 
     Private Sub CMDTest_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDTest.Click
-        '0 = Tiles, 1 = Buildings, 2 = Units, 3 = Shroud
-        If EditMode = 0 Then
+        If ActiveEditMode = EditMode.Tiles Then
             MsgBox("SelTiles Length: " + SelTiles.Length.ToString + vbNewLine + "And -1: " + (SelTiles.Length - 1).ToString)
-        ElseIf EditMode = 1 Then
+        ElseIf ActiveEditMode = EditMode.Buildings Then
             MsgBox("SelBuildings Length: " + SelBuildings.Length.ToString + vbNewLine + "And -1: " + (SelBuildings.Length - 1).ToString)
-        ElseIf EditMode = 2 Then
+        ElseIf ActiveEditMode = EditMode.Units Then
             MsgBox("SelUnits Length: " + SelUnits.Length.ToString + vbNewLine + "And -1: " + (SelUnits.Length - 1).ToString)
         End If
     End Sub
 
     Private Sub CMDEditTiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDEditTiles.Click
-        EditMode = 0
+        activeEditMode = EditMode.Tiles
         LBLSelected.Text = "Selected Tile:"
         PICActive.Image = ActiveTile.Image
         CMDEditTiles.Enabled = False
@@ -1734,7 +1730,7 @@ Public Class FRMEditor
     End Sub
 
     Private Sub CMDEditBuildings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDEditBuildings.Click
-        EditMode = 1
+        activeEditMode = EditMode.Buildings
         LBLSelected.Text = "Selected Building:"
         PICActive.Image = ActiveBuilding.Image
         CMDEditTiles.Enabled = True
@@ -1748,7 +1744,7 @@ Public Class FRMEditor
     End Sub
 
     Private Sub CMDEditUnits_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDEditUnits.Click
-        EditMode = 2
+        activeEditMode = EditMode.Units
         LBLSelected.Text = "Selected Unit:"
         PICActive.Image = ActiveUnit.Image
         CMDEditTiles.Enabled = True
@@ -1762,11 +1758,11 @@ Public Class FRMEditor
     End Sub
 
     Private Sub CMDEditShroud_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDEditShroud.Click
-        EditMode = 3
+        activeEditMode = EditMode.Shroud
     End Sub
 
     Private Sub CMDToolBrush_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDToolBrush.Click
-        ToolMode = 0
+        ActiveToolMode = ToolMode.Brush
 
         CMDToolBrush.Enabled = False
         'CMDToolSmartBrush.Enabled = True
@@ -1781,7 +1777,7 @@ Public Class FRMEditor
     End Sub
 
     Private Sub CMDToolSmartBrush_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDToolSmartBrush.Click
-        ToolMode = 1
+        activeToolMode = ToolMode.SmartBrush
 
         PICActive.Image = Nothing
         ActiveTile = New Tile(0, 0)
@@ -1793,17 +1789,17 @@ Public Class FRMEditor
     End Sub
 
     Private Sub CMDToolErase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDToolErase.Click
-        ToolMode = 2
+        ActiveToolMode = ToolMode.Eraser
 
         'PICActive.Image = Nothing
-        'If EditMode = 0 Then
+        'If activeEditMode = EditMode.Tiles Then
         '    'ToolMode = 0
         '    ActiveTile = New Tile(0, 0)
-        'ElseIf EditMode = 1 Then
+        'ElseIf activeEditMode = EditMode.Buildings Then
         '    ActiveBuilding = New c_Object(0, 0)
-        'ElseIf EditMode = 2 Then
+        'ElseIf activeEditMode = EditMode.Units Then
         '    ActiveUnit = New Unit(0, 0)
-        'ElseIf EditMode = 3 Then
+        'ElseIf activeEditMode = EditMode.Shroud Then
         '    'For later.
         'End If
 
