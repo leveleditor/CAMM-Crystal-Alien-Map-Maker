@@ -6,7 +6,7 @@
         TextBox1.Minimum = Integer.MinValue
         TextBox2.Minimum = Integer.MinValue
 
-        CBOTeams.SelectedIndex = FRMEditor.LevelTeam
+        CBOTeams.SelectedIndex = CInt(FRMEditor.LevelTeam)
         TextBox2.Value = FRMEditor.LevelCashPlayer
         TextBox1.Value = FRMEditor.LevelCashEnemy
         CheckBox1.Checked = FRMEditor.LevelFlags.isTraining
@@ -17,7 +17,7 @@
     End Sub
 
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
-        FRMEditor.LevelTeam = CBOTeams.SelectedIndex
+        FRMEditor.LevelTeam = CType(CBOTeams.SelectedIndex, Team)
         FRMEditor.LevelCashPlayer = Integer.Parse(TextBox2.Text)
         FRMEditor.LevelCashEnemy = Integer.Parse(TextBox1.Text)
         FRMEditor.LevelFlags.isTraining = CheckBox1.Checked

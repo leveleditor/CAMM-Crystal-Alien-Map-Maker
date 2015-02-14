@@ -39,4 +39,10 @@
         Eraser = 2
     End Enum
 
+    Public Enum Team
+        Neutral = -1
+        Astros = 0
+        Aliens = 1
+    End Enum
+
 End Module

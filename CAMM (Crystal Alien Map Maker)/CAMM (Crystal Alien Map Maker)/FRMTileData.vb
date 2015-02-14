@@ -49,7 +49,7 @@ Public Class FRMTileData
                     Dim ObjectID As String = KeyArray(0)
                     Dim Width As Integer = CInt(KeyArray(1))
                     Dim Height As Integer = CInt(KeyArray(2))
-                    Dim Team As Integer = CInt(KeyArray(3))
+                    Dim Team As Team = CType(Integer.Parse(KeyArray(3)), Team)
                     Dim Angle As Single = CSng(KeyArray(4))
                     Dim Damage As Single = CSng(KeyArray(5))
                     Dim OffsetY As Integer = CInt(KeyArray(6))
@@ -72,7 +72,7 @@ Public Class FRMTileData
                     Dim ObjectID As String = KeyArray(0)
                     Dim Width As Integer = CInt(KeyArray(1))
                     Dim Height As Integer = CInt(KeyArray(2))
-                    Dim Team As Integer = CInt(KeyArray(3))
+                    Dim Team As Team = CType(Integer.Parse(KeyArray(3)), Team)
                     Dim Angle As Single = CSng(KeyArray(4))
                     Dim Damage As Single = CSng(KeyArray(5))
                     Dim OffsetY As Integer = CInt(KeyArray(6))
@@ -329,7 +329,7 @@ Public Class FRMTileData
         Dim BuildingNumber As Integer = 0
         For i As Integer = 0 To PNLBuildings.Controls.Count - 1
             Dim Temp As Entry_Object = PNLBuildings.Controls(i)
-            SaveFileData += "Building" + BuildingNumber.ToString + " = {" + Temp.ObjectID + "|" + Temp.ObjWidth.ToString + "|" + Temp.ObjHeight.ToString + "|" + Temp.Team.ToString + "|" + Temp.Angle.ToString + "|" + Temp.Damage.ToString + "|" + Temp.OffSetY.ToString + "|" + Temp.ImageUrl + "}" + vbNewLine
+            SaveFileData += "Building" + BuildingNumber.ToString + " = {" + Temp.ObjectID + "|" + Temp.ObjWidth.ToString + "|" + Temp.ObjHeight.ToString + "|" + CInt(Temp.Team).ToString + "|" + Temp.Angle.ToString + "|" + Temp.Damage.ToString + "|" + Temp.OffSetY.ToString + "|" + Temp.ImageUrl + "}" + vbNewLine
             BuildingNumber += 1
         Next
 
@@ -340,7 +340,7 @@ Public Class FRMTileData
         Dim UnitNumber As Integer = 0
         For i As Integer = 0 To PNLUnits.Controls.Count - 1
             Dim Temp As Entry_Object = PNLUnits.Controls(i)
-            SaveFileData += "Unit" + UnitNumber.ToString + " = {" + Temp.ObjectID + "|" + Temp.ObjWidth.ToString + "|" + Temp.ObjHeight.ToString + "|" + Temp.Team.ToString + "|" + Temp.Angle.ToString + "|" + Temp.Damage.ToString + "|" + Temp.OffSetY.ToString + "|" + Temp.ImageUrl + "}" + vbNewLine
+            SaveFileData += "Unit" + UnitNumber.ToString + " = {" + Temp.ObjectID + "|" + Temp.ObjWidth.ToString + "|" + Temp.ObjHeight.ToString + "|" + CInt(Temp.Team).ToString + "|" + Temp.Angle.ToString + "|" + Temp.Damage.ToString + "|" + Temp.OffSetY.ToString + "|" + Temp.ImageUrl + "}" + vbNewLine
             UnitNumber += 1
         Next
 

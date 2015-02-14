@@ -5,7 +5,7 @@
         Me.Position = Position
         Me._Image = Nothing
         Me.UnitId = ""
-        Me.Team = 0
+        Me.Team = Team.Astros
         Me.Angle = 0.0
         Me.Damage = 0.0
     End Sub
@@ -13,7 +13,7 @@
         Me.Position = New Point(X, Y)
         Me._Image = Nothing
         Me.UnitId = ""
-        Me.Team = 0
+        Me.Team = Team.Astros
         Me.Angle = 0.0
         Me.Damage = 0.0
     End Sub
@@ -21,7 +21,7 @@
         Me.Position = Position
         Me.Image = Image
         Me.UnitId = ""
-        Me.Team = 0
+        Me.Team = Team.Astros
         Me.Angle = 0.0
         Me.Damage = 0.0
     End Sub
@@ -29,7 +29,7 @@
         Me.Position = New Point(X, Y)
         Me.Image = Image
         Me.UnitId = ""
-        Me.Team = 0
+        Me.Team = Team.Astros
         Me.Angle = 0.0
         Me.Damage = 0.0
     End Sub
@@ -37,7 +37,7 @@
         Me.Position = Position
         Me.Image = Image
         Me.UnitId = ObjectID
-        Me.Team = 0
+        Me.Team = Team.Astros
         Me.Angle = 0.0
         Me.Damage = 0.0
     End Sub
@@ -45,11 +45,11 @@
         Me.Position = New Point(X, Y)
         Me.Image = Image
         Me.UnitId = ObjectID
-        Me.Team = 0
+        Me.Team = Team.Astros
         Me.Angle = 0.0
         Me.Damage = 0.0
     End Sub
-    Public Sub New(ByVal Position As Point, ByVal Image As Image, ByVal ObjectID As String, ByVal Team As Integer)
+    Public Sub New(ByVal Position As Point, ByVal Image As Image, ByVal ObjectID As String, ByVal Team As Team)
         Me.Position = Position
         Me.Image = Image
         Me.UnitId = ObjectID
@@ -57,7 +57,7 @@
         Me.Angle = 0.0
         Me.Damage = 0.0
     End Sub
-    Public Sub New(ByVal X As Integer, ByVal Y As Integer, ByVal Image As Image, ByVal ObjectID As String, ByVal Team As Integer)
+    Public Sub New(ByVal X As Integer, ByVal Y As Integer, ByVal Image As Image, ByVal ObjectID As String, ByVal Team As Team)
         Me.Position = New Point(X, Y)
         Me.Image = Image
         Me.UnitId = ObjectID
@@ -65,7 +65,7 @@
         Me.Angle = 0.0
         Me.Damage = 0.0
     End Sub
-    Public Sub New(ByVal Position As Point, ByVal Image As Image, ByVal ObjectID As String, ByVal Team As Integer, ByVal Angle As Single, ByVal Damage As Single)
+    Public Sub New(ByVal Position As Point, ByVal Image As Image, ByVal ObjectID As String, ByVal Team As Team, ByVal Angle As Single, ByVal Damage As Single)
         Me.Position = Position
         Me.Image = Image
         Me.UnitId = ObjectID
@@ -73,7 +73,7 @@
         Me.Angle = Angle
         Me.Damage = Damage
     End Sub
-    Public Sub New(ByVal X As Integer, ByVal Y As Integer, ByVal Image As Image, ByVal ObjectID As String, ByVal Team As Integer, ByVal Angle As Single, ByVal Damage As Single)
+    Public Sub New(ByVal X As Integer, ByVal Y As Integer, ByVal Image As Image, ByVal ObjectID As String, ByVal Team As Team, ByVal Angle As Single, ByVal Damage As Single)
         Me.Position = New Point(X, Y)
         Me.Image = Image
         Me.UnitId = ObjectID
@@ -177,12 +177,12 @@
         End Set
     End Property
 
-    Private i_Team As Integer
-    Public Property Team() As Integer
+    Private i_Team As Team
+    Public Property Team() As Team
         Get
             Return i_Team
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As Team)
             i_Team = value
         End Set
     End Property

@@ -33,12 +33,12 @@
         End Set
     End Property
 
-    Public Property Team() As Integer
+    Public Property Team() As Team
         Get
-            Return CBOTeam.SelectedIndex
+            Return CType(CBOTeam.SelectedIndex, Team)
         End Get
-        Set(ByVal value As Integer)
-            CBOTeam.SelectedIndex = value
+        Set(ByVal value As Team)
+            CBOTeam.SelectedIndex = CInt(value)
         End Set
     End Property
 
@@ -103,7 +103,7 @@
         Me.CBOTeam.SelectedIndex = 0
         TXTOffsetY.Text = "0"
     End Sub
-    Public Sub New(ByVal ObjectID As String, ByVal Width As Integer, ByVal Height As Integer, ByVal Team As Integer, ByVal Angle As Single, ByVal Damage As Single, ByVal OffsetY As Integer, ByVal ImageUrl As String)
+    Public Sub New(ByVal ObjectID As String, ByVal Width As Integer, ByVal Height As Integer, ByVal Team As Team, ByVal Angle As Single, ByVal Damage As Single, ByVal OffsetY As Integer, ByVal ImageUrl As String)
         InitializeComponent()
         Me.CBOTeam.SelectedIndex = 0
         Me.ObjectID = ObjectID

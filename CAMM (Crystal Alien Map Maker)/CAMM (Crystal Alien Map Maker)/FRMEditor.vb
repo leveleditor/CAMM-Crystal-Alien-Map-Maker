@@ -11,7 +11,7 @@ Public Class FRMEditor
     Public MapSizeX As Integer = 10
     Public MapSizeY As Integer = 10
     Public MapTitle As String = ""
-    Public LevelTeam As Integer = 0
+    Public LevelTeam As Team = Team.Astros
     Public LevelCashPlayer As Integer = LevelCashPlayerDefault
     Public LevelCashEnemy As Integer = LevelCashEnemyDefault
     Public Class LevelFlags
@@ -178,7 +178,7 @@ Public Class FRMEditor
                     Dim ObjectID As String = KeyArray(0)
                     Dim Width As Integer = CInt(KeyArray(1))
                     Dim Height As Integer = CInt(KeyArray(2))
-                    Dim Team As Integer = CInt(KeyArray(3))
+                    Dim Team As Team = CType(Integer.Parse(KeyArray(3)), Team)
                     Dim Angle As Single = CSng(KeyArray(4))
                     Dim Damage As Single = CSng(KeyArray(5))
                     Dim OffsetY As Integer = CInt(KeyArray(6))
@@ -213,7 +213,7 @@ Public Class FRMEditor
                     Dim ObjectID As String = KeyArray(0)
                     Dim Width As Integer = CInt(KeyArray(1))
                     Dim Height As Integer = CInt(KeyArray(2))
-                    Dim Team As Integer = CInt(KeyArray(3))
+                    Dim Team As Team = CType(Integer.Parse(KeyArray(3)), Team)
                     Dim Angle As Single = CSng(KeyArray(4))
                     Dim Damage As Single = CSng(KeyArray(5))
                     Dim OffsetY As Integer = CInt(KeyArray(6))
@@ -720,13 +720,13 @@ Public Class FRMEditor
             For i As Integer = 0 To MapBuildings.Count() - 1
                 If MapBuildings(i).HasData Then
                     Dim teamBaseplate As Image = Nothing
-                    If MapBuildings(i).Team = 0 And MapBuildings(i).ObjWidth = 1 Then
+                    If MapBuildings(i).Team = Team.Astros And MapBuildings(i).ObjWidth = 1 Then
                         teamBaseplate = BaseplateAstroSmall
-                    ElseIf MapBuildings(i).Team = 1 And MapBuildings(i).ObjWidth = 1 Then
+                    ElseIf MapBuildings(i).Team = Team.Aliens And MapBuildings(i).ObjWidth = 1 Then
                         teamBaseplate = BaseplateAlienSmall
-                    ElseIf MapBuildings(i).Team = 0 Then
+                    ElseIf MapBuildings(i).Team = Team.Astros Then
                         teamBaseplate = BaseplateAstroWide
-                    ElseIf MapBuildings(i).Team = 1 Then
+                    ElseIf MapBuildings(i).Team = Team.Aliens Then
                         teamBaseplate = BaseplateAlienWide
                     End If
                     If teamBaseplate IsNot Nothing Then
@@ -931,9 +931,9 @@ Public Class FRMEditor
             ' Draw the object selections.
             For i As Integer = 0 To SelBuildings.Length - 1
                 If SelBuildings(i).HasData Then
-                    If SelBuildings(i).Team = 0 Then
+                    If SelBuildings(i).Team = Team.Astros Then
                         e.Graphics.DrawImage(ButtonAstro, SelBuildings(i).Location.X, SelBuildings(i).Location.Y, ButtonAstro.Width, ButtonAstro.Height)
-                    ElseIf SelBuildings(i).Team = 1 Then
+                    ElseIf SelBuildings(i).Team = Team.Aliens Then
                         e.Graphics.DrawImage(ButtonAlien, SelBuildings(i).Location.X, SelBuildings(i).Location.Y, ButtonAlien.Width, ButtonAlien.Height)
                     Else
                         e.Graphics.DrawImage(ButtonNeutral, SelBuildings(i).Location.X, SelBuildings(i).Location.Y, ButtonNeutral.Width, ButtonNeutral.Height)
@@ -1023,9 +1023,9 @@ Public Class FRMEditor
             ' Draw the object selections.
             For i As Integer = 0 To SelUnits.Length - 1
                 If SelUnits(i).HasData Then
-                    If SelUnits(i).Team = 0 Then
+                    If SelUnits(i).Team = Team.Astros Then
                         e.Graphics.DrawImage(ButtonAstro, SelUnits(i).Location)
-                    ElseIf SelUnits(i).Team = 1 Then
+                    ElseIf SelUnits(i).Team = Team.Aliens Then
                         e.Graphics.DrawImage(ButtonAlien, SelUnits(i).Location)
                     Else
                         e.Graphics.DrawImage(ButtonNeutral, SelUnits(i).Location.X, SelUnits(i).Location.Y, ButtonNeutral.Width, ButtonNeutral.Height)
@@ -1203,7 +1203,7 @@ Public Class FRMEditor
         MapTitle = config.GetString("Title")
         MapSizeX = config.GetInt("W")
         MapSizeY = config.GetInt("H")
-        LevelTeam = config.GetInt("Team")
+        LevelTeam = CType(config.GetInt("Team"), Team)
 
         InitMap()
 
@@ -1242,9 +1242,9 @@ Public Class FRMEditor
                     Dim PosX As Integer = KeyArray(1)
                     Dim PosY As Integer = KeyArray(2)
                     Dim IsFriend As Boolean = KeyArray(3)
-                    Dim Team As Integer = 0
+                    Dim Team As Team = Team.Astros
                     If IsFriend Then
-                        Team = 1
+                        Team = Team.Aliens
                     End If
                     Dim Angle As Single = KeyArray(4)
                     Dim Damage As Single = KeyArray(5)
@@ -1291,7 +1291,7 @@ Public Class FRMEditor
         MapTitle = config.GetString("Title")
         MapSizeX = config.GetInt("W")
         MapSizeY = config.GetInt("H")
-        LevelTeam = config.GetInt("Team")
+        LevelTeam = CType(config.GetInt("Team"), Team)
         LevelCashPlayer = config.GetInt("CashPlayer", LevelCashPlayerDefault)
         LevelCashEnemy = config.GetInt("CashEnemy", LevelCashEnemyDefault)
         LevelFlags.isTraining = config.GetBoolean("isTraining", LevelFlags.isTrainingDefault)
@@ -1334,9 +1334,9 @@ Public Class FRMEditor
                 Dim PosX As Integer = KeyArray(1)
                 Dim PosY As Integer = KeyArray(2)
                 Dim IsFriend As Boolean = KeyArray(3)
-                Dim Team As Integer = 0
+                Dim Team As Team = Team.Astros
                 If IsFriend Then
-                    Team = 1
+                    Team = Team.Aliens
                 End If
                 Dim Angle As Single = KeyArray(4)
                 Dim Damage As Single = KeyArray(5)
@@ -1378,9 +1378,9 @@ Public Class FRMEditor
                 Dim PosX As Integer = KeyArray(1)
                 Dim PosY As Integer = KeyArray(2)
                 Dim IsFriend As Boolean = KeyArray(3)
-                Dim Team As Integer = 0
+                Dim Team As Team = Team.Astros
                 If IsFriend Then
-                    Team = 1
+                    Team = Team.Aliens
                 End If
                 Dim Angle As Single = KeyArray(4)
                 Dim Damage As Single = KeyArray(5)
@@ -1524,7 +1524,7 @@ Public Class FRMEditor
             "Title = " + MapTitle + vbNewLine + _
             "W = " + MapSizeX.ToString + vbNewLine + _
             "H = " + MapSizeY.ToString + vbNewLine + _
-            "Team = " + LevelTeam.ToString + vbNewLine + _
+            "Team = " + CInt(LevelTeam).ToString + vbNewLine + _
             "CashPlayer = " + LevelCashPlayer.ToString + vbNewLine + _
             "CashEnemy = " + LevelCashEnemy.ToString + vbNewLine + _
             "isTraining = " + LevelFlags.isTraining.ToString + vbNewLine + _
@@ -1550,7 +1550,7 @@ Public Class FRMEditor
         Dim BuildingNumber As Integer = 0
         For i As Integer = 0 To MapBuildings.Count() - 1
             If MapBuildings(i).HasData Then
-                SaveFileData += "Building" + BuildingNumber.ToString + " = {" + MapBuildings(i).ObjectID + "|" + (MapBuildings(i).Location.X / TileSizeX).ToString + "|" + (MapBuildings(i).Location.Y / TileSizeY).ToString + "|" + MapBuildings(i).Team.ToString + "|" + MapBuildings(i).Angle.ToString + "|" + MapBuildings(i).Damage.ToString + "}" + vbNewLine
+                SaveFileData += "Building" + BuildingNumber.ToString + " = {" + MapBuildings(i).ObjectID + "|" + (MapBuildings(i).Location.X / TileSizeX).ToString + "|" + (MapBuildings(i).Location.Y / TileSizeY).ToString + "|" + CInt(MapBuildings(i).Team).ToString + "|" + MapBuildings(i).Angle.ToString + "|" + MapBuildings(i).Damage.ToString + "}" + vbNewLine
                 BuildingNumber += 1
             End If
         Next
@@ -1561,7 +1561,7 @@ Public Class FRMEditor
         Dim UnitNumber As Integer = 0
         For i As Integer = 0 To MapUnits.Count() - 1
             If MapUnits(i).HasData Then
-                SaveFileData += "Unit" + UnitNumber.ToString + " = {" + MapUnits(i).UnitId + "|" + MapUnits(i).X.ToString + "|" + MapUnits(i).Y.ToString + "|" + MapUnits(i).Team.ToString + "|" + MapUnits(i).Angle.ToString + "|" + MapUnits(i).Damage.ToString + "}" + vbNewLine
+                SaveFileData += "Unit" + UnitNumber.ToString + " = {" + MapUnits(i).UnitId + "|" + MapUnits(i).X.ToString + "|" + MapUnits(i).Y.ToString + "|" + CInt(MapUnits(i).Team).ToString + "|" + MapUnits(i).Angle.ToString + "|" + MapUnits(i).Damage.ToString + "}" + vbNewLine
                 UnitNumber += 1
             End If
         Next
@@ -1615,9 +1615,9 @@ Public Class FRMEditor
             If ActiveEditMode = EditMode.Buildings Then
                 If ActiveBuilding.HasData And ActiveBuilding.ObjectID <> "" And ActiveToolMode <> ToolMode.Eraser Then
                     e.Graphics.Clear(PICActive.BackColor)
-                    If ActiveBuilding.Team = 0 Then
+                    If ActiveBuilding.Team = Team.Astros Then
                         e.Graphics.DrawImage(ButtonAstro, New Point(0, 0))
-                    ElseIf ActiveBuilding.Team = 1 Then
+                    ElseIf ActiveBuilding.Team = Team.Aliens Then
                         e.Graphics.DrawImage(ButtonAlien, New Point(0, 0))
                     Else
                         e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
@@ -1632,9 +1632,9 @@ Public Class FRMEditor
             ElseIf ActiveEditMode = EditMode.Units Then
                 If ActiveUnit.HasData And ActiveUnit.UnitId <> "" And ActiveToolMode <> ToolMode.Eraser Then
                     e.Graphics.Clear(PICActive.BackColor)
-                    If ActiveUnit.Team = 0 Then
+                    If ActiveUnit.Team = Team.Astros Then
                         e.Graphics.DrawImage(ButtonAstro, New Point(0, 0))
-                    ElseIf ActiveUnit.Team = 1 Then
+                    ElseIf ActiveUnit.Team = Team.Aliens Then
                         e.Graphics.DrawImage(ButtonAlien, New Point(0, 0))
                     Else
                         e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
