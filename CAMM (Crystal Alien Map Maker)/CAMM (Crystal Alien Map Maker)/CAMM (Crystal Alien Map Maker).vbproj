@@ -71,7 +71,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="Nini">
-      <HintPath>..\..\DLL Assets\Nini.dll</HintPath>
+      <HintPath>lib\Nini.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
