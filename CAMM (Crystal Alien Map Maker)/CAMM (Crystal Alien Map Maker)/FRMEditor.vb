@@ -199,7 +199,6 @@ Public Class FRMEditor
                     ReDim Preserve SelBuildings(Y2)
                     SelBuildings(Y2) = New Building(0, Y2 * TileSizeY, TheImage, ObjectID, Team, Angle, Damage, Width, Height)
                     SelBuildings(Y2).FullImage = Image.FromFile(FullImageURL)
-                    SelBuildings(Y2).HasData = True
 
                     Y2 += 1
                 End If
@@ -249,7 +248,6 @@ Public Class FRMEditor
                     ReDim Preserve SelUnits(Y3)
                     SelUnits(Y3) = New Building(0, Y3 * TileSizeY, TheImage, ObjectID, Team, Angle, Damage, Width, Height)
                     SelUnits(Y3).FullImage = Image.FromFile(FullImageURL)
-                    SelUnits(Y3).HasData = True
 
                     Y3 += 1
                 End If
@@ -428,7 +426,7 @@ Public Class FRMEditor
     Function GetBuildingAt(ByVal xMouse As Integer, ByVal yMouse As Integer) As Building
         Dim ReturnBuilding As Building = Nothing
         For i As Integer = 0 To MapBuildings.Count() - 1
-            If MapBuildings(i).Location = New Point(xMouse, yMouse) And MapBuildings(i).ObjectID <> "" Then
+            If MapBuildings(i).Location = New Point(xMouse, yMouse) And MapBuildings(i).BuildingId <> "" Then
                 ReturnBuilding = MapBuildings(i)
                 Exit For
             End If
@@ -488,9 +486,8 @@ Public Class FRMEditor
                 If MapBuildings(i).Location = New Point(xMouse, yMouse) Then
                     found = True
 
-                    Dim temp As Building = New Building(xMouse, yMouse, ActiveBuilding.Image, ActiveBuilding.ObjectID, ActiveBuilding.Team, ActiveBuilding.Angle, ActiveBuilding.Damage, ActiveBuilding.ObjWidth, ActiveBuilding.ObjHeight)
+                    Dim temp As Building = New Building(xMouse, yMouse, ActiveBuilding.Image, ActiveBuilding.BuildingId, ActiveBuilding.Team, ActiveBuilding.Angle, ActiveBuilding.Damage, ActiveBuilding.BuildingW, ActiveBuilding.BuildingH)
                     temp.FullImage = ActiveBuilding.FullImage
-                    temp.HasData = True
 
                     MapBuildings(i) = temp
 
@@ -499,10 +496,9 @@ Public Class FRMEditor
                     Exit For
                 End If
             Next
-            If Not found And ActiveBuilding.ObjectID <> "" And ActiveToolMode <> ToolMode.Eraser And Not My.Computer.Keyboard.CtrlKeyDown Then
-                Dim temp As Building = New Building(xMouse, yMouse, ActiveBuilding.Image, ActiveBuilding.ObjectID, ActiveBuilding.Team, ActiveBuilding.Angle, ActiveBuilding.Damage, ActiveBuilding.ObjWidth, ActiveBuilding.ObjHeight)
+            If Not found And ActiveBuilding.BuildingId <> "" And ActiveToolMode <> ToolMode.Eraser And Not My.Computer.Keyboard.CtrlKeyDown Then
+                Dim temp As Building = New Building(xMouse, yMouse, ActiveBuilding.Image, ActiveBuilding.BuildingId, ActiveBuilding.Team, ActiveBuilding.Angle, ActiveBuilding.Damage, ActiveBuilding.BuildingW, ActiveBuilding.BuildingH)
                 temp.FullImage = ActiveBuilding.FullImage
-                temp.HasData = True
                 MapBuildings.Add(temp)
 
                 SetDrawPos(0, MapBuildings.IndexOf(temp), xMouse)
@@ -550,8 +546,8 @@ Public Class FRMEditor
             Dim x As Integer = MapBuildings(i).DrawPos.X
             Dim y As Integer = MapBuildings(i).DrawPos.Y
 
-            x -= (MapBuildings(i).FullImage.Width - (MapBuildings(i).ObjWidth * TileSizeX)) / 2
-            y -= (MapBuildings(i).FullImage.Height - (MapBuildings(i).ObjHeight * TileSizeY)) / 2
+            x -= (MapBuildings(i).FullImage.Width - (MapBuildings(i).BuildingW * TileSizeX)) / 2
+            y -= (MapBuildings(i).FullImage.Height - (MapBuildings(i).BuildingH * TileSizeY)) / 2
 
             MapBuildings(i).DrawPos = New Point(x, y)
         End If
@@ -678,7 +674,7 @@ Public Class FRMEditor
                     LBLCursorLoc.Text = "null [" + ((MouseX / TileSizeX) + 1).ToString + ", " + ((MouseY / TileSizeY) + 1).ToString + "]"
                 End If
                 If GetBuildingAt(MouseX, MouseY) IsNot Nothing Then
-                    LBLCursorLoc.Text = GetBuildingAt(MouseX, MouseY).ObjectID + " : " + LBLCursorLoc.Text
+                    LBLCursorLoc.Text = GetBuildingAt(MouseX, MouseY).BuildingId + " : " + LBLCursorLoc.Text
                 End If
             Else
                 LBLCursorLoc.Text = "[" + ((MouseX / TileSizeX) + 1).ToString + ", " + ((MouseY / TileSizeY) + 1).ToString + "]"
@@ -720,9 +716,9 @@ Public Class FRMEditor
             For i As Integer = 0 To MapBuildings.Count() - 1
                 If MapBuildings(i).HasData Then
                     Dim teamBaseplate As Image = Nothing
-                    If MapBuildings(i).Team = Team.Astros And MapBuildings(i).ObjWidth = 1 Then
+                    If MapBuildings(i).Team = Team.Astros And MapBuildings(i).BuildingW = 1 Then
                         teamBaseplate = BaseplateAstroSmall
-                    ElseIf MapBuildings(i).Team = Team.Aliens And MapBuildings(i).ObjWidth = 1 Then
+                    ElseIf MapBuildings(i).Team = Team.Aliens And MapBuildings(i).BuildingW = 1 Then
                         teamBaseplate = BaseplateAlienSmall
                     ElseIf MapBuildings(i).Team = Team.Astros Then
                         teamBaseplate = BaseplateAstroWide
@@ -731,14 +727,14 @@ Public Class FRMEditor
                     End If
                     If teamBaseplate IsNot Nothing Then
                         Dim location As Point = MapBuildings(i).Location
-                        If MapBuildings(i).ObjWidth > 1 Then
-                            location.X += (MapBuildings(i).ObjWidth * TileSizeX) / 2
+                        If MapBuildings(i).BuildingW > 1 Then
+                            location.X += (MapBuildings(i).BuildingW * TileSizeX) / 2
                             location.X -= TileSizeX
                         Else
                             location.X -= TileSizeX / 2
                         End If
-                        If MapBuildings(i).ObjHeight > 1 Then
-                            location.Y += (MapBuildings(i).ObjHeight * TileSizeY) - TileSizeY
+                        If MapBuildings(i).BuildingH > 1 Then
+                            location.Y += (MapBuildings(i).BuildingH * TileSizeY) - TileSizeY
                         End If
                         location.Y -= TileSizeY + 10
 
@@ -799,7 +795,7 @@ Public Class FRMEditor
                 End If
                 If activeEditMode = EditMode.Tiles Then
                     'g.DrawImage(ActiveTile.Image, MouseX, MouseY)
-                ElseIf activeEditMode = EditMode.Buildings And ActiveBuilding.ObjectID <> "" Then
+                ElseIf activeEditMode = EditMode.Buildings And ActiveBuilding.BuildingId <> "" Then
                     'OffY2 = TileSizeY
 
                     'g.DrawImage(ActiveBuilding.FullImage, _
@@ -952,7 +948,7 @@ Public Class FRMEditor
             Next x
 
             'Draw Rectangle around selected Buildings.
-            If activeEditMode = EditMode.Buildings And ActiveBuilding.ObjectID <> "" And activeToolMode <> ToolMode.Eraser Then
+            If activeEditMode = EditMode.Buildings And ActiveBuilding.BuildingId <> "" And activeToolMode <> ToolMode.Eraser Then
                 e.Graphics.DrawRectangle(PenSelected, SelX_Buildings + (PenSelected.Width / 2) + 1, SelY_Buildings + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
             End If
 
@@ -1002,10 +998,10 @@ Public Class FRMEditor
                     PICActive.Image = SelBuildings(i).Image
                     ActiveBuilding.Image = SelBuildings(i).Image
                     ActiveBuilding.FullImage = SelBuildings(i).FullImage
-                    ActiveBuilding.ObjectID = SelBuildings(i).ObjectID
+                    ActiveBuilding.BuildingId = SelBuildings(i).BuildingId
                     ActiveBuilding.Team = SelBuildings(i).Team
-                    ActiveBuilding.ObjWidth = SelBuildings(i).ObjWidth
-                    ActiveBuilding.ObjHeight = SelBuildings(i).ObjHeight
+                    ActiveBuilding.BuildingW = SelBuildings(i).BuildingW
+                    ActiveBuilding.BuildingH = SelBuildings(i).BuildingH
                 End If
             Next
 
@@ -1094,7 +1090,7 @@ Public Class FRMEditor
                     PICActive.Image = SelUnits(i).Image
                     ActiveUnit.Image = SelUnits(i).Image
                     ActiveUnit.FullImage = SelUnits(i).FullImage
-                    ActiveUnit.UnitId = SelUnits(i).ObjectID
+                    ActiveUnit.UnitId = SelUnits(i).BuildingId
                     ActiveUnit.Team = SelUnits(i).Team
                 End If
             Next
@@ -1249,25 +1245,25 @@ Public Class FRMEditor
                     Dim Angle As Single = KeyArray(4)
                     Dim Damage As Single = KeyArray(5)
 
-                    MapBuildings.Add(New Building(New Point(PosX * TileSizeX, PosY * TileSizeY)))
+                    MapBuildings.Add(New Building(PosX * TileSizeX, PosY * TileSizeY))
 
                     ' Upgrade old building Ids
                     UpgradeBuildingId(1, MapFormat, ObjectID)
 
-                    MapBuildings(i).ObjectID = ObjectID
+                    MapBuildings(i).BuildingId = ObjectID
 
                     MapBuildings(i).Team = Team
                     MapBuildings(i).Angle = Angle
                     MapBuildings(i).Damage = Damage
                     For j As Integer = 0 To SelBuildings.Length - 1
-                        If MapBuildings(i).ObjectID = SelBuildings(j).ObjectID Then
+                        If MapBuildings(i).BuildingId = SelBuildings(j).BuildingId Then
                             MapBuildings(i).Image = SelBuildings(j).Image
                             MapBuildings(i).FullImage = SelBuildings(j).FullImage
                             'Note to self:
                             'I wasted half a day trying to figure out what was going wrong,
                             'only to discover I forgot these 2 extremely obvious missing lines:
-                            MapBuildings(i).ObjWidth = SelBuildings(j).ObjWidth
-                            MapBuildings(i).ObjHeight = SelBuildings(j).ObjHeight
+                            MapBuildings(i).BuildingW = SelBuildings(j).BuildingW
+                            MapBuildings(i).BuildingH = SelBuildings(j).BuildingH
                             Exit For
                         End If
                     Next
@@ -1341,22 +1337,22 @@ Public Class FRMEditor
                 Dim Angle As Single = KeyArray(4)
                 Dim Damage As Single = KeyArray(5)
 
-                MapBuildings.Add(New Building(New Point(PosX * TileSizeX, PosY * TileSizeY)))
+                MapBuildings.Add(New Building(PosX * TileSizeX, PosY * TileSizeY))
 
                 ' Upgrade old building Ids
                 UpgradeBuildingId(v, MapFormat, ObjectID)
 
-                MapBuildings(i).ObjectID = ObjectID
+                MapBuildings(i).BuildingId = ObjectID
 
                 MapBuildings(i).Team = Team
                 MapBuildings(i).Angle = Angle
                 MapBuildings(i).Damage = Damage
                 For j As Integer = 0 To SelBuildings.Length - 1
-                    If MapBuildings(i).ObjectID = SelBuildings(j).ObjectID Then
+                    If MapBuildings(i).BuildingId = SelBuildings(j).BuildingId Then
                         MapBuildings(i).Image = SelBuildings(j).Image
                         MapBuildings(i).FullImage = SelBuildings(j).FullImage
-                        MapBuildings(i).ObjWidth = SelBuildings(j).ObjWidth
-                        MapBuildings(i).ObjHeight = SelBuildings(j).ObjHeight
+                        MapBuildings(i).BuildingW = SelBuildings(j).BuildingW
+                        MapBuildings(i).BuildingH = SelBuildings(j).BuildingH
                         Exit For
                     End If
                 Next
@@ -1411,7 +1407,7 @@ Public Class FRMEditor
 
                 Dim temp As Unit = New Unit(unitX, unitY, Nothing, UnitId, Team, Angle, Damage)
                 For j As Integer = 0 To SelUnits.Length - 1
-                    If temp.UnitId = SelUnits(j).ObjectID Then
+                    If temp.UnitId = SelUnits(j).BuildingId Then
                         temp.Image = SelUnits(j).Image
                         temp.FullImage = SelUnits(j).FullImage
                         Exit For
@@ -1439,23 +1435,23 @@ Public Class FRMEditor
 
             MapBuildings(i).DrawPos = MapBuildings(i).Location
 
-            If MapBuildings(i).ObjWidth Mod 2 Then
+            If MapBuildings(i).BuildingW Mod 2 Then
                 MapBuildings(i).DrawPos = New Point(MapBuildings(i).DrawPos.X + (TileSizeX / 2), MapBuildings(i).DrawPos.Y)
             End If
-            If MapBuildings(i).ObjHeight <> 2 Then
+            If MapBuildings(i).BuildingH <> 2 Then
                 MapBuildings(i).DrawPos = New Point(MapBuildings(i).DrawPos.X, MapBuildings(i).DrawPos.Y - TileSizeY)
             End If
 
-            Dim TopLeftX As Single = Math.Floor((xpos / TileSizeX) - MapBuildings(i).ObjWidth / 2) + 1
-            Dim TopLeftY As Single = Math.Floor((xpos / TileSizeX) - MapBuildings(i).ObjHeight + 3)
-            Dim DockX As Single = (TopLeftX + ((MapBuildings(i).ObjWidth / 2) - 1)) + 1 * TileSizeX
-            Dim DockY As Single = (TopLeftY + (MapBuildings(i).ObjHeight - 1)) + 1 * TileSizeX
+            Dim TopLeftX As Single = Math.Floor((xpos / TileSizeX) - MapBuildings(i).BuildingW / 2) + 1
+            Dim TopLeftY As Single = Math.Floor((xpos / TileSizeX) - MapBuildings(i).BuildingH + 3)
+            Dim DockX As Single = (TopLeftX + ((MapBuildings(i).BuildingW / 2) - 1)) + 1 * TileSizeX
+            Dim DockY As Single = (TopLeftY + (MapBuildings(i).BuildingH - 1)) + 1 * TileSizeX
             DockX = Math.Ceiling(DockX / TileSizeX) - 2
             DockY = Math.Ceiling(DockY / TileSizeY) - 3
 
             MapBuildings(i).DrawPos = New Point(MapBuildings(i).DrawPos.X - DockX, MapBuildings(i).DrawPos.Y - DockY)
 
-            If MapBuildings(i).ObjHeight = 2 Then
+            If MapBuildings(i).BuildingH = 2 Then
                 MapBuildings(i).DrawPos = New Point(MapBuildings(i).DrawPos.X, MapBuildings(i).DrawPos.Y - TileSizeY)
             End If
 
@@ -1474,8 +1470,8 @@ Public Class FRMEditor
 
             Dim fixedLocation As Point = New Point(MapBuildings(i).Location.X + 1, MapBuildings(i).Location.Y + 1)
 
-            fixedLocation.X += (MapBuildings(i).FullImage.Width - (MapBuildings(i).ObjWidth * TileSizeX)) / 2
-            fixedLocation.Y += (MapBuildings(i).FullImage.Height - (MapBuildings(i).ObjHeight * TileSizeY)) / 2
+            fixedLocation.X += (MapBuildings(i).FullImage.Width - (MapBuildings(i).BuildingW * TileSizeX)) / 2
+            fixedLocation.Y += (MapBuildings(i).FullImage.Height - (MapBuildings(i).BuildingH * TileSizeY)) / 2
 
             PointToGrid(fixedLocation)
             MapBuildings(i).Location = fixedLocation
@@ -1551,7 +1547,7 @@ Public Class FRMEditor
         Dim BuildingNumber As Integer = 0
         For i As Integer = 0 To MapBuildings.Count() - 1
             If MapBuildings(i).HasData Then
-                SaveFileData += "Building" + BuildingNumber.ToString + " = {" + MapBuildings(i).ObjectID + "|" + (MapBuildings(i).Location.X / TileSizeX).ToString + "|" + (MapBuildings(i).Location.Y / TileSizeY).ToString + "|" + CInt(MapBuildings(i).Team).ToString + "|" + MapBuildings(i).Angle.ToString + "|" + MapBuildings(i).Damage.ToString + "}" + vbNewLine
+                SaveFileData += "Building" + BuildingNumber.ToString + " = {" + MapBuildings(i).BuildingId + "|" + (MapBuildings(i).Location.X / TileSizeX).ToString + "|" + (MapBuildings(i).Location.Y / TileSizeY).ToString + "|" + CInt(MapBuildings(i).Team).ToString + "|" + MapBuildings(i).Angle.ToString + "|" + MapBuildings(i).Damage.ToString + "}" + vbNewLine
                 BuildingNumber += 1
             End If
         Next
@@ -1614,7 +1610,7 @@ Public Class FRMEditor
             e.Graphics.Clear(PICActive.BackColor)
         Else
             If ActiveEditMode = EditMode.Buildings Then
-                If ActiveBuilding.HasData And ActiveBuilding.ObjectID <> "" And ActiveToolMode <> ToolMode.Eraser Then
+                If ActiveBuilding.HasData And ActiveBuilding.BuildingId <> "" And ActiveToolMode <> ToolMode.Eraser Then
                     e.Graphics.Clear(PICActive.BackColor)
                     If ActiveBuilding.Team = Team.Astros Then
                         e.Graphics.DrawImage(ButtonAstro, New Point(0, 0))
