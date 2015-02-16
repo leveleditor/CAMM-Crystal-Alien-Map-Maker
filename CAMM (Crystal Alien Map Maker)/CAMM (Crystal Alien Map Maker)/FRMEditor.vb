@@ -76,17 +76,17 @@ Public Class FRMEditor
 
     'Arrays and Tile stuff.
     Dim MapTiles() As Tile = {} 'Map Tiles.
-    Dim MapBuildings As List(Of c_Object) = New List(Of c_Object) 'Map Buildings.
+    Dim MapBuildings As List(Of Building) = New List(Of Building) 'Map Buildings.
     Dim MapUnits As List(Of Unit) = New List(Of Unit) 'Map Units.
 
     Dim TempTiles() As Tile = {} 'Temp array for resizing the map.
 
     Dim SelTiles() As Tile = {} 'Tile Selections.
-    Dim SelBuildings() As c_Object = {} 'Unit, Building, and Item Selections.
-    Dim SelUnits() As c_Object = {} 'Unit Selections.
+    Dim SelBuildings() As Building = {} 'Unit, Building, and Item Selections.
+    Dim SelUnits() As Building = {} 'Unit Selections.
 
     Dim ActiveTile As Tile 'The currently active tile selection.
-    Dim ActiveBuilding As c_Object 'The currently active object selection.
+    Dim ActiveBuilding As Building 'The currently active object selection.
     Dim ActiveUnit As Unit 'The currently active unit selection.
 #End Region
 
@@ -197,7 +197,7 @@ Public Class FRMEditor
                     'TheImage = TheImage.GetThumbnailImage(TileSizeX, TileSizeY, Nothing, System.IntPtr.Zero)
 
                     ReDim Preserve SelBuildings(Y2)
-                    SelBuildings(Y2) = New c_Object(0, Y2 * TileSizeY, TheImage, ObjectID, Team, Angle, Damage, Width, Height)
+                    SelBuildings(Y2) = New Building(0, Y2 * TileSizeY, TheImage, ObjectID, Team, Angle, Damage, Width, Height)
                     SelBuildings(Y2).FullImage = Image.FromFile(FullImageURL)
                     SelBuildings(Y2).HasData = True
 
@@ -247,7 +247,7 @@ Public Class FRMEditor
                     'TheImage = TheImage.GetThumbnailImage(TileSizeX, TileSizeY, Nothing, System.IntPtr.Zero)
 
                     ReDim Preserve SelUnits(Y3)
-                    SelUnits(Y3) = New c_Object(0, Y3 * TileSizeY, TheImage, ObjectID, Team, Angle, Damage, Width, Height)
+                    SelUnits(Y3) = New Building(0, Y3 * TileSizeY, TheImage, ObjectID, Team, Angle, Damage, Width, Height)
                     SelUnits(Y3).FullImage = Image.FromFile(FullImageURL)
                     SelUnits(Y3).HasData = True
 
@@ -270,7 +270,7 @@ Public Class FRMEditor
 
         'Setting default blank values.
         ActiveTile = New Tile(0, 0)
-        ActiveBuilding = New c_Object(0, 0)
+        ActiveBuilding = New Building(0, 0)
         ActiveUnit = New Unit(0, 0)
         PICActive.Image = Nothing
 
@@ -425,8 +425,8 @@ Public Class FRMEditor
         Next
         Return ReturnTile
     End Function
-    Function GetBuildingAt(ByVal xMouse As Integer, ByVal yMouse As Integer) As c_Object
-        Dim ReturnBuilding As c_Object = Nothing
+    Function GetBuildingAt(ByVal xMouse As Integer, ByVal yMouse As Integer) As Building
+        Dim ReturnBuilding As Building = Nothing
         For i As Integer = 0 To MapBuildings.Count() - 1
             If MapBuildings(i).Location = New Point(xMouse, yMouse) And MapBuildings(i).ObjectID <> "" Then
                 ReturnBuilding = MapBuildings(i)
@@ -488,7 +488,7 @@ Public Class FRMEditor
                 If MapBuildings(i).Location = New Point(xMouse, yMouse) Then
                     found = True
 
-                    Dim temp As c_Object = New c_Object(xMouse, yMouse, ActiveBuilding.Image, ActiveBuilding.ObjectID, ActiveBuilding.Team, ActiveBuilding.Angle, ActiveBuilding.Damage, ActiveBuilding.ObjWidth, ActiveBuilding.ObjHeight)
+                    Dim temp As Building = New Building(xMouse, yMouse, ActiveBuilding.Image, ActiveBuilding.ObjectID, ActiveBuilding.Team, ActiveBuilding.Angle, ActiveBuilding.Damage, ActiveBuilding.ObjWidth, ActiveBuilding.ObjHeight)
                     temp.FullImage = ActiveBuilding.FullImage
                     temp.HasData = True
 
@@ -500,7 +500,7 @@ Public Class FRMEditor
                 End If
             Next
             If Not found And ActiveBuilding.ObjectID <> "" And ActiveToolMode <> ToolMode.Eraser And Not My.Computer.Keyboard.CtrlKeyDown Then
-                Dim temp As c_Object = New c_Object(xMouse, yMouse, ActiveBuilding.Image, ActiveBuilding.ObjectID, ActiveBuilding.Team, ActiveBuilding.Angle, ActiveBuilding.Damage, ActiveBuilding.ObjWidth, ActiveBuilding.ObjHeight)
+                Dim temp As Building = New Building(xMouse, yMouse, ActiveBuilding.Image, ActiveBuilding.ObjectID, ActiveBuilding.Team, ActiveBuilding.Angle, ActiveBuilding.Damage, ActiveBuilding.ObjWidth, ActiveBuilding.ObjHeight)
                 temp.FullImage = ActiveBuilding.FullImage
                 temp.HasData = True
                 MapBuildings.Add(temp)
@@ -581,7 +581,7 @@ Public Class FRMEditor
                     End If
                 ElseIf ActiveEditMode = EditMode.Buildings Then
                     If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                        Dim temp As List(Of c_Object) = MapBuildings.ToList()
+                        Dim temp As List(Of Building) = MapBuildings.ToList()
                         For i As Integer = 0 To MapBuildings.Count() - 1
                             If MapBuildings(i).Location = New Point(MouseX, MouseY) Then
                                 temp.Remove(MapBuildings(i))
@@ -638,7 +638,7 @@ Public Class FRMEditor
                 End If
             ElseIf ActiveEditMode = EditMode.Buildings Then
                 If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                    Dim temp As List(Of c_Object) = MapBuildings.ToList()
+                    Dim temp As List(Of Building) = MapBuildings.ToList()
                     For i As Integer = 0 To MapBuildings.Count() - 1
                         If MapBuildings(i).Location = New Point(MouseX, MouseY) Then
                             temp.Remove(MapBuildings(i))
@@ -1120,7 +1120,7 @@ Public Class FRMEditor
     Public Sub NewMap()
         'Setting default blank values.
         ActiveTile = New Tile(0, 0)
-        ActiveBuilding = New c_Object(0, 0)
+        ActiveBuilding = New Building(0, 0)
         ActiveUnit = New Unit(0, 0)
         PICActive.Image = Nothing
         PICTiles.Invalidate()
@@ -1249,7 +1249,7 @@ Public Class FRMEditor
                     Dim Angle As Single = KeyArray(4)
                     Dim Damage As Single = KeyArray(5)
 
-                    MapBuildings.Add(New c_Object(New Point(PosX * TileSizeX, PosY * TileSizeY)))
+                    MapBuildings.Add(New Building(New Point(PosX * TileSizeX, PosY * TileSizeY)))
 
                     ' Upgrade old building Ids
                     UpgradeBuildingId(1, MapFormat, ObjectID)
@@ -1341,7 +1341,7 @@ Public Class FRMEditor
                 Dim Angle As Single = KeyArray(4)
                 Dim Damage As Single = KeyArray(5)
 
-                MapBuildings.Add(New c_Object(New Point(PosX * TileSizeX, PosY * TileSizeY)))
+                MapBuildings.Add(New Building(New Point(PosX * TileSizeX, PosY * TileSizeY)))
 
                 ' Upgrade old building Ids
                 UpgradeBuildingId(v, MapFormat, ObjectID)

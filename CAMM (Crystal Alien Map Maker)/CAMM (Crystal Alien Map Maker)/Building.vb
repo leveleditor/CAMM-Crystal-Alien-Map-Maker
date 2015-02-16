@@ -1,4 +1,4 @@
-﻿Public Class c_Object
+﻿Public Class Building
     Public HasData As Boolean = False
 
     Public Sub New(ByVal Location As Point)

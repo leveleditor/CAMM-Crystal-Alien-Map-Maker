@@ -105,7 +105,7 @@
     <Compile Include="FRMExportAS.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="c_Object.vb" />
+    <Compile Include="Building.vb" />
     <Compile Include="Entry_Object.Designer.vb">
       <DependentUpon>Entry_Object.vb</DependentUpon>
     </Compile>
