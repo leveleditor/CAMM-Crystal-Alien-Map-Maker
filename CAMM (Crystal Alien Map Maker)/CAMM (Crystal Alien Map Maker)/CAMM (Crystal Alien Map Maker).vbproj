@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Building.vb" />
     <Compile Include="Constants.vb" />
     <Compile Include="CustomColorTable.vb" />
     <Compile Include="FRMMapProperties.Designer.vb">
@@ -100,7 +101,6 @@
     <Compile Include="FRMExportAS.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="c_Object.vb" />
     <Compile Include="Entry_Object.Designer.vb">
       <DependentUpon>Entry_Object.vb</DependentUpon>
     </Compile>

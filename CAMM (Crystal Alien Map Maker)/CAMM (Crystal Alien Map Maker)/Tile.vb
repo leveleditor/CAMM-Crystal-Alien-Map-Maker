@@ -55,12 +55,44 @@
         End Set
     End Property
 
-    Public Property Image As Image
+    Private _image As Image
+    Public Property Image() As Image
+        Get
+            Return _image
+        End Get
+        Set(ByVal value As Image)
+            _image = value
+        End Set
+    End Property
 
-    Public Property TileId As String = -1
+    Private _tileId As String = -1
+    Public Property TileId() As String
+        Get
+            Return _tileId
+        End Get
+        Set(ByVal value As String)
+            _tileId = value
+        End Set
+    End Property
 
-    Public Property IsPassable As Boolean = False
+    Private _isPassable As Boolean = False
+    Public Property IsPassable() As Boolean
+        Get
+            Return _isPassable
+        End Get
+        Set(ByVal value As Boolean)
+            _isPassable = value
+        End Set
+    End Property
 
-    Public Property IsMinerals As Boolean = False
+    Private _isMinerals As Boolean = False
+    Public Property IsMinerals() As Boolean
+        Get
+            Return _isMinerals
+        End Get
+        Set(ByVal value As Boolean)
+            _isMinerals = value
+        End Set
+    End Property
 
 End Class
