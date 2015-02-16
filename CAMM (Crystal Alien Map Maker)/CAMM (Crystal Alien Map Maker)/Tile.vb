@@ -11,11 +11,11 @@
         Me.New(x, y)
         Me.Image = image
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image, ByVal tileId As String)
+    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image, ByVal tileId As Integer)
         Me.New(x, y, image)
         Me.TileId = tileId
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image, ByVal tileId As String, ByVal isPassable As Boolean, ByVal isMinerals As Boolean)
+    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image, ByVal tileId As Integer, ByVal isPassable As Boolean, ByVal isMinerals As Boolean)
         Me.New(x, y, image, tileId)
         Me.IsPassable = isPassable
         Me.IsMinerals = isMinerals
@@ -65,17 +65,17 @@
         End Set
     End Property
 
-    Private _tileId As String = -1
-    Public Property TileId() As String
+    Private _tileId As Integer
+    Public Property TileId() As Integer
         Get
             Return _tileId
         End Get
-        Set(ByVal value As String)
+        Set(ByVal value As Integer)
             _tileId = value
         End Set
     End Property
 
-    Private _isPassable As Boolean = False
+    Private _isPassable As Boolean
     Public Property IsPassable() As Boolean
         Get
             Return _isPassable
@@ -85,7 +85,7 @@
         End Set
     End Property
 
-    Private _isMinerals As Boolean = False
+    Private _isMinerals As Boolean
     Public Property IsMinerals() As Boolean
         Get
             Return _isMinerals

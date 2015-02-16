@@ -456,7 +456,7 @@ Public Class FRMEditor
             For i As Integer = 0 To MapTiles.Length - 1
                 If MapTiles(i).Position = New Point(xMouse, yMouse) Then
                     If ActiveTile.TileId = -2 Then
-                        Dim FinalID As String = -1
+                        Dim finalId As Integer = -1
 
                         'This would take a while to finish...
                         If MapTiles(i).TileId = -1 And _
@@ -464,11 +464,11 @@ Public Class FRMEditor
                         MapTiles(i - 1).TileId = -1 And _
                         MapTiles(i - MapSizeX).TileId = -1 And _
                         MapTiles(i + MapSizeX).TileId = -1 Then
-                            FinalID = "4366"
+                            finalId = 8
                         End If
 
                         For j As Integer = 0 To SelTiles.Length - 1
-                            If FinalID = SelTiles(j).TileId Then
+                            If finalId = SelTiles(j).TileId Then
                                 MapTiles(i) = New Tile(xMouse, yMouse, SelTiles(j).Image, SelTiles(j).TileId)
                                 Exit For
                             End If
@@ -673,7 +673,7 @@ Public Class FRMEditor
         If IsMouseInBounds() Then
             If Debug = True Then
                 If GetTileAt(MouseX, MouseY) IsNot Nothing Then
-                    LBLCursorLoc.Text = GetTileAt(MouseX, MouseY).TileId + " [" + ((MouseX / TileSizeX) + 1).ToString + ", " + ((MouseY / TileSizeY) + 1).ToString + "]"
+                    LBLCursorLoc.Text = GetTileAt(MouseX, MouseY).TileId.ToString + " [" + ((MouseX / TileSizeX) + 1).ToString + ", " + ((MouseY / TileSizeY) + 1).ToString + "]"
                 Else
                     LBLCursorLoc.Text = "null [" + ((MouseX / TileSizeX) + 1).ToString + ", " + ((MouseY / TileSizeY) + 1).ToString + "]"
                 End If
@@ -1176,7 +1176,7 @@ Public Class FRMEditor
         For i As Integer = 0 To MapTiles.Length - 1
             Dim TempName As String = "Tile_1_" + (i + 1).ToString
             Dim TempArray As String() = config.Get(TempName).Trim("()".ToCharArray).Split(New Char() {Char.Parse(":")}, StringSplitOptions.None)
-            Dim TempTileID As String = TempArray(0)
+            Dim TempTileID As Integer = Integer.Parse(TempArray(0))
             'There is no need of getting the 'Team' info since it should have always been set as 'Neutral' and it's useless now.
             Dim TempTileType As String = TempArray(2)
 
@@ -1213,7 +1213,7 @@ Public Class FRMEditor
             For i As Integer = 0 To TerrainCount
                 If config.GetKeys(i) <> "-1" Then
                     Dim KeyArray As String() = config.Get(config.GetKeys(i)).Trim("{}".ToCharArray).Split(New Char() {Char.Parse("|")}, StringSplitOptions.None)
-                    Dim TerrainID As String = KeyArray(0)
+                    Dim TerrainID As Integer = Integer.Parse(KeyArray(0))
                     Dim PosX As Integer = KeyArray(1)
                     Dim PosY As Integer = KeyArray(2)
 
@@ -1307,7 +1307,7 @@ Public Class FRMEditor
         For i As Integer = 0 To config.GetKeys().Length - 1
             If config.GetKeys(i) <> "-1" Then
                 Dim KeyArray As String() = config.Get(config.GetKeys(i)).Trim("{}".ToCharArray).Split(New Char() {Char.Parse("|")}, StringSplitOptions.None)
-                Dim TerrainID As String = KeyArray(0)
+                Dim TerrainID As Integer = Integer.Parse(KeyArray(0))
                 Dim PosX As Integer = KeyArray(1)
                 Dim PosY As Integer = KeyArray(2)
 
@@ -1540,7 +1540,7 @@ Public Class FRMEditor
         Dim TerrainNumber As Integer = 0
         For i As Integer = 0 To MapTiles.Length - 1
             If MapTiles(i).HasData Then
-                SaveFileData += "Terrain" + TerrainNumber.ToString + " = {" + MapTiles(i).TileId + "|" + (MapTiles(i).X / TileSizeX).ToString + "|" + (MapTiles(i).Y / TileSizeY).ToString + "}" + vbNewLine
+                SaveFileData += "Terrain" + TerrainNumber.ToString + " = {" + MapTiles(i).TileId.ToString + "|" + (MapTiles(i).X / TileSizeX).ToString + "|" + (MapTiles(i).Y / TileSizeY).ToString + "}" + vbNewLine
                 TerrainNumber += 1
             End If
         Next
@@ -1922,7 +1922,7 @@ Public Class FRMEditor
 
         For y As Integer = 0 To MapSizeY - 1
             For x As Integer = 0 To MapSizeX - 1
-                Dim idx As Integer = Integer.Parse(MapTiles(count).TileId)
+                Dim idx As Integer = MapTiles(count).TileId
                 If idx < 0 Then
                     idx = 0
                 End If
@@ -1938,7 +1938,7 @@ Public Class FRMEditor
         Dim output As String = vbTab + "this.data = {" + vbNewLine
         output += vbTab + vbTab + "tiles : ""0"
         '0AAAAAAAA AAAAAAAAAAAAAAA    AAAAAAAAAAAAAAAAA 1A A"
-        Dim tiles As List(Of Tile) = (From t In SelTiles Order By Integer.Parse(t.TileId) Where t.HasData).ToList()
+        Dim tiles As List(Of Tile) = (From t In SelTiles Order By t.TileId Where t.HasData).ToList()
         For Each t As Tile In tiles
             If t.IsMinerals Then
                 output += "1"
@@ -1970,7 +1970,7 @@ Public Class FRMEditor
                     If idx <= 0 Then
                         MapTiles(count).TileId = -1
                     Else
-                        MapTiles(count).TileId = (4350 + 2 * idx).ToString
+                        MapTiles(count).TileId = idx ' Old calculation: (4350 + 2 * idx)
                     End If
 
                     For j As Integer = 0 To SelTiles.Length - 1

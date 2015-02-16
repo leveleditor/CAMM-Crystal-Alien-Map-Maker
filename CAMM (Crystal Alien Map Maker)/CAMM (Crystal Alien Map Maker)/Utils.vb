@@ -68,7 +68,7 @@ Public Module Utils
         End If
     End Sub
 
-    Public Sub UpgradeTerrainId(ByVal fromVersion As Integer, ByVal toVersion As Integer, ByRef terrainId As String)
+    Public Sub UpgradeTerrainId(ByVal fromVersion As Integer, ByVal toVersion As Integer, ByRef terrainId As Integer)
         If fromVersion < 5 And toVersion = 5 Then
             ' The easy way to map old terrain Ids to new ones.
             Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeTerrain.dat"
@@ -79,12 +79,12 @@ Public Module Utils
                 Dim reader As StringReader = New StringReader(upgradeData)
                 Dim source As New IniConfigSource(reader)
                 Dim config As IConfig = source.Configs.Item(upgradeHeader)
-                Dim newId As String = config.GetString(terrainId, "")
+                Dim newId As String = config.GetString(terrainId.ToString, "")
 
                 reader.Close()
 
                 If Not String.IsNullOrEmpty(newId) Then
-                    terrainId = newId
+                    terrainId = Integer.Parse(newId)
                 End If
             End If
         End If
