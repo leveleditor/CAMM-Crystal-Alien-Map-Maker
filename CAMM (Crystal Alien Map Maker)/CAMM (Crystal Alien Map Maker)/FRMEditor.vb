@@ -1385,30 +1385,31 @@ Public Class FRMEditor
                 Dim Angle As Single = KeyArray(4)
                 Dim Damage As Single = KeyArray(5)
 
-                Dim Position As Point
+                Dim unitX, unitY As Integer
                 If v = 2 Then
-                    Dim x As Integer = PosX * TileSizeX
-                    Position = New Point(x, PosY * TileSizeY)
+                    unitX = PosX * TileSizeX
+                    unitY = PosY * TileSizeY
 
-                    Position = New Point(Position.X + (TileSizeX / 2), Position.Y)
-                    Position = New Point(Position.X, Position.Y)
+                    unitX += (TileSizeX / 2)
 
-                    Dim TopLeftX As Single = Math.Floor((x / TileSizeX) - 1 / 2) + 1
-                    Dim TopLeftY As Single = Math.Floor((x / TileSizeX) - 1 + 3)
-                    Dim DockX As Single = (TopLeftX + ((1 / 2) - 1)) + 1 * TileSizeX
-                    Dim DockY As Single = (TopLeftY + (1 - 1)) + 1 * TileSizeX
-                    DockX = Math.Ceiling(DockX / TileSizeX)
-                    DockY = Math.Ceiling(DockY / TileSizeY)
+                    Dim topLeftX As Single = Math.Floor((unitX / TileSizeX) - 1 / 2) + 1
+                    Dim topLeftY As Single = Math.Floor((unitX / TileSizeX) - 1 + 3)
+                    Dim dockX As Single = (topLeftX + ((1 / 2) - 1)) + 1 * TileSizeX
+                    Dim dockY As Single = (topLeftY + (1 - 1)) + 1 * TileSizeX
+                    dockX = Math.Ceiling(dockX / TileSizeX)
+                    dockY = Math.Ceiling(dockY / TileSizeY)
 
-                    Position = New Point(Position.X - DockX, Position.Y - DockY + TileSizeY)
+                    unitX -= dockX
+                    unitY -= dockY + TileSizeY
                 Else
-                    Position = New Point(PosX, PosY)
+                    unitX = PosX
+                    unitY = PosY
                 End If
 
                 ' Upgrade old unit Ids
                 UpgradeUnitId(v, MapFormat, UnitId)
 
-                Dim temp As Unit = New Unit(Position, Nothing, UnitId, Team, Angle, Damage)
+                Dim temp As Unit = New Unit(unitX, unitY, Nothing, UnitId, Team, Angle, Damage)
                 For j As Integer = 0 To SelUnits.Length - 1
                     If temp.UnitId = SelUnits(j).ObjectID Then
                         temp.Image = SelUnits(j).Image
