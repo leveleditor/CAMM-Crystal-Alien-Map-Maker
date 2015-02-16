@@ -136,12 +136,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
-    <Compile Include="FRMLoading.Designer.vb">
-      <DependentUpon>FRMLoading.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FRMLoading.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Tile.vb" />
     <Compile Include="Utils.vb" />
   </ItemGroup>
@@ -166,9 +160,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FRMTileData.resx">
       <DependentUpon>FRMTileData.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FRMLoading.resx">
-      <DependentUpon>FRMLoading.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
