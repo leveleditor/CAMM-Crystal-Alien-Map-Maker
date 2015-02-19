@@ -14,9 +14,6 @@
     Public Const TilesDatVersion As Integer = 5
     Public Const MapFormat As Integer = 5
 
-    Public Const LevelCashPlayerDefault = 2000
-    Public Const LevelCashEnemyDefault = 20000
-
     Public Const TileSizeX As Integer = 96
     Public Const TileSizeY As Integer = 48
 

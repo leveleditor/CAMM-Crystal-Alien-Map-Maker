@@ -6,25 +6,25 @@
         TextBox1.Minimum = Integer.MinValue
         TextBox2.Minimum = Integer.MinValue
 
-        CBOTeams.SelectedIndex = CInt(FRMEditor.LevelTeam)
-        TextBox2.Value = FRMEditor.LevelCashPlayer
-        TextBox1.Value = FRMEditor.LevelCashEnemy
-        CheckBox1.Checked = FRMEditor.LevelFlags.isTraining
-        RadioButton1.Checked = FRMEditor.LevelFlags.isConflict
-        RadioButton2.Checked = FRMEditor.LevelFlags.isSpecialLevel
-        RadioButton3.Checked = FRMEditor.LevelFlags.isLastSpecialLevel
-        RadioButton4.Checked = FRMEditor.LevelFlags.isBonusLevel
+        CBOTeams.SelectedIndex = CInt(FRMEditor.ActiveLevel.Team)
+        TextBox2.Value = FRMEditor.ActiveLevel.CashPlayer
+        TextBox1.Value = FRMEditor.ActiveLevel.CashEnemy
+        CheckBox1.Checked = FRMEditor.ActiveLevel.isTraining
+        RadioButton1.Checked = FRMEditor.ActiveLevel.isConflict
+        RadioButton2.Checked = FRMEditor.ActiveLevel.isSpecialLevel
+        RadioButton3.Checked = FRMEditor.ActiveLevel.isLastSpecialLevel
+        RadioButton4.Checked = FRMEditor.ActiveLevel.isBonusLevel
     End Sub
 
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
-        FRMEditor.LevelTeam = CType(CBOTeams.SelectedIndex, Team)
-        FRMEditor.LevelCashPlayer = Integer.Parse(TextBox2.Text)
-        FRMEditor.LevelCashEnemy = Integer.Parse(TextBox1.Text)
-        FRMEditor.LevelFlags.isTraining = CheckBox1.Checked
-        FRMEditor.LevelFlags.isConflict = RadioButton1.Checked
-        FRMEditor.LevelFlags.isSpecialLevel = RadioButton2.Checked
-        FRMEditor.LevelFlags.isLastSpecialLevel = RadioButton3.Checked
-        FRMEditor.LevelFlags.isBonusLevel = RadioButton4.Checked
+        FRMEditor.ActiveLevel.Team = CType(CBOTeams.SelectedIndex, Team)
+        FRMEditor.ActiveLevel.CashPlayer = Integer.Parse(TextBox2.Text)
+        FRMEditor.ActiveLevel.CashEnemy = Integer.Parse(TextBox1.Text)
+        FRMEditor.ActiveLevel.isTraining = CheckBox1.Checked
+        FRMEditor.ActiveLevel.isConflict = RadioButton1.Checked
+        FRMEditor.ActiveLevel.isSpecialLevel = RadioButton2.Checked
+        FRMEditor.ActiveLevel.isLastSpecialLevel = RadioButton3.Checked
+        FRMEditor.ActiveLevel.isBonusLevel = RadioButton4.Checked
 
         Me.DialogResult = Windows.Forms.DialogResult.OK
         Me.Close()

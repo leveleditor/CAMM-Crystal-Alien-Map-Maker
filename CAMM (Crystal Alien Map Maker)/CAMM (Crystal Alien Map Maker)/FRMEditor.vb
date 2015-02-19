@@ -7,30 +7,61 @@ Imports Nini.Ini
 Public Class FRMEditor
 
 #Region "Declarations"
-    'Map / Level Properties
-    Public MapSizeX As Integer = 10
-    Public MapSizeY As Integer = 10
-    Public MapTitle As String = ""
-    Public LevelTeam As Team = Team.Astros
-    Public LevelCashPlayer As Integer = LevelCashPlayerDefault
-    Public LevelCashEnemy As Integer = LevelCashEnemyDefault
-    Public Class LevelFlags
-        Public Const isTrainingDefault As Boolean = False
-        Public Const isConflictDefault As Boolean = False
-        Public Const isSpecialLevelDefault As Boolean = False
-        Public Const isLastSpecialLevelDefault As Boolean = False
-        Public Const isBonusLevelDefault As Boolean = True
-
-        Public Shared isTraining As Boolean = isTrainingDefault
-        Public Shared isConflict As Boolean = isConflictDefault
-        Public Shared isSpecialLevel As Boolean = isSpecialLevelDefault
-        Public Shared isLastSpecialLevel As Boolean = isBonusLevelDefault
-        Public Shared isBonusLevel As Boolean = isBonusLevelDefault
-    End Class
     Dim IsMapOpen As Boolean = False
     Dim OpenMapFile As String = ""
     Dim FormTitle As String = ""
-    Dim IsMapFinal As Boolean = False
+
+    Private _activeLevelNum As Integer = 0
+    Private Property ActiveLevelNum As Integer
+        Get
+            Return _activeLevelNum
+        End Get
+        Set(value As Integer)
+            _activeLevelNum = value
+        End Set
+    End Property
+    Private _levels As List(Of Level) = New List(Of Level)
+    Public Property Levels As List(Of Level)
+        Get
+            Return _levels
+        End Get
+        Set(value As List(Of Level))
+            _levels = value
+        End Set
+    End Property
+    Public Property ActiveLevel As Level
+        Get
+            Return Levels(ActiveLevelNum)
+        End Get
+        Set(ByVal value As Level)
+            Levels(ActiveLevelNum) = value
+        End Set
+    End Property
+    Public Property ActiveMap As Map
+        Get
+            Return ActiveLevel.Map
+        End Get
+        Set(ByVal value As Map)
+            ActiveLevel.Map = value
+        End Set
+    End Property
+
+    Public Property MapSizeX As Object
+        Get
+            Return ActiveMap.MapSizeX
+        End Get
+        Set(value As Object)
+            ActiveMap.MapSizeX = value
+        End Set
+    End Property
+    Public Property MapSizeY As Object
+        Get
+            Return ActiveMap.MapSizeY
+        End Get
+        Set(value As Object)
+            ActiveMap.MapSizeY = value
+        End Set
+    End Property
 
     Private IsLoaded As Boolean = False
     Private IsMouseOnMap As Boolean = False
@@ -272,8 +303,8 @@ Public Class FRMEditor
         ActiveUnit = New Unit(0, 0)
         PICActive.Image = Nothing
 
-        'Initialize map.
-        InitMap()
+        'Start a new map.
+        NewMap()
 
         If My.Application.CommandLineArgs.Count > 0 Then
             BeginLoadMap(My.Application.CommandLineArgs(0))
@@ -788,14 +819,14 @@ Public Class FRMEditor
 
             ' Draw the rectangle cursor / selector thingy.
             If IsMouseInBounds() Then
-                If activeToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
+                If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                     g.DrawRectangle(PenTileErase, MouseX - (PenTileHover.Width / 2), MouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
                 Else
                     g.DrawRectangle(PenTileHover, MouseX - (PenTileHover.Width / 2), MouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
                 End If
-                If activeEditMode = EditMode.Tiles Then
+                If ActiveEditMode = EditMode.Tiles Then
                     'g.DrawImage(ActiveTile.Image, MouseX, MouseY)
-                ElseIf activeEditMode = EditMode.Buildings And ActiveBuilding.BuildingId <> "" Then
+                ElseIf ActiveEditMode = EditMode.Buildings And ActiveBuilding.BuildingId <> "" Then
                     'OffY2 = TileSizeY
 
                     'g.DrawImage(ActiveBuilding.FullImage, _
@@ -805,8 +836,8 @@ Public Class FRMEditor
                     '     ActiveBuilding.FullImage.Height)
 
                     'g.DrawImage(ActiveBuilding.FullImage, MouseX, MouseY, ActiveBuilding.FullImage.Width, ActiveBuilding.FullImage.Height)
-                ElseIf activeEditMode = EditMode.Units And ActiveUnit.UnitId <> "" Then
-                    If IsMouseOnMap And Not IsDrawing And activeToolMode <> ToolMode.Eraser Then
+                ElseIf ActiveEditMode = EditMode.Units And ActiveUnit.UnitId <> "" Then
+                    If IsMouseOnMap And Not IsDrawing And ActiveToolMode <> ToolMode.Eraser Then
                         g.DrawImage(ActiveUnit.FullImage, _
                             MouseXNoSnap - CInt(ActiveUnit.FullImage.Width / 2), _
                             MouseYNoSnap - CInt(ActiveUnit.FullImage.Height / 2), _
@@ -858,7 +889,7 @@ Public Class FRMEditor
             Next x
 
             'Draw Rectangle around selected Tile.
-            If activeEditMode = EditMode.Tiles And ActiveTile.TileId <> -1 And activeToolMode <> ToolMode.Eraser Then
+            If ActiveEditMode = EditMode.Tiles And ActiveTile.TileId <> -1 And ActiveToolMode <> ToolMode.Eraser Then
                 e.Graphics.DrawRectangle(PenSelected, SelX_Tiles + (PenSelected.Width / 2) + 1, SelY_Tiles + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
             End If
 
@@ -948,7 +979,7 @@ Public Class FRMEditor
             Next x
 
             'Draw Rectangle around selected Buildings.
-            If activeEditMode = EditMode.Buildings And ActiveBuilding.BuildingId <> "" And activeToolMode <> ToolMode.Eraser Then
+            If ActiveEditMode = EditMode.Buildings And ActiveBuilding.BuildingId <> "" And ActiveToolMode <> ToolMode.Eraser Then
                 e.Graphics.DrawRectangle(PenSelected, SelX_Buildings + (PenSelected.Width / 2) + 1, SelY_Buildings + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
             End If
 
@@ -1040,7 +1071,7 @@ Public Class FRMEditor
             Next x
 
             'Draw Rectangle around selected Units.
-            If activeEditMode = EditMode.Units And ActiveUnit.UnitId <> "" And activeToolMode <> ToolMode.Eraser Then
+            If ActiveEditMode = EditMode.Units And ActiveUnit.UnitId <> "" And ActiveToolMode <> ToolMode.Eraser Then
                 e.Graphics.DrawRectangle(PenSelected, SelX_Units + (PenSelected.Width / 2) + 1, SelY_Units + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
             End If
 
@@ -1105,7 +1136,7 @@ Public Class FRMEditor
 
     Private Sub CMDNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDNew.Click
         'TODO: Code for File > New.
-        IsMapFinal = False
+        'IsMapFinal = False
         IsMapOpen = False
         'Just going to clear the map for now...
         If MsgBox("Are you sure you want to make a new map?" + vbNewLine + vbNewLine + "Any currently unsaved changes will be lost.", MsgBoxStyle.YesNoCancel) = MsgBoxResult.Yes Then
@@ -1123,8 +1154,10 @@ Public Class FRMEditor
         PICBuildings.Invalidate()
         PICUnits.Invalidate()
 
-        MapTitle = "New Map"
-        Me.Text = (Me.FormTitle & " - " & MapTitle)
+        Dim newLevel As Level = New Level()
+        Levels.Add(newLevel)
+        newLevel.Map.MapTitle = "New Map"
+        Me.Text = (Me.FormTitle & " - " & newLevel.Map.MapTitle)
 
         'Initialize the map again.
         InitMap()
@@ -1166,7 +1199,7 @@ Public Class FRMEditor
         config = source.Configs.Item("Map Size")
         MapSizeX = config.GetInt("W")
         MapSizeY = config.GetInt("H")
-        MapTitle = "Converted Map"
+        ActiveMap.MapTitle = "Converted Map"
         InitMap()
         config = source.Configs.Item("Tile Data")
         For i As Integer = 0 To MapTiles.Length - 1
@@ -1191,15 +1224,15 @@ Public Class FRMEditor
 
         IsMapOpen = True
         OpenMapFile = OpenMap.FileName
-        Me.Text = (Me.FormTitle & " - " & MapTitle & " - " & My.Computer.FileSystem.GetFileInfo(Me.OpenMap.FileName).Name)
+        Me.Text = (Me.FormTitle & " - " & ActiveMap.MapTitle & " - " & My.Computer.FileSystem.GetFileInfo(Me.OpenMap.FileName).Name)
         PICMap.Invalidate()
     End Sub
     Public Sub LoadMapv1(ByVal source As IniConfigSource, ByVal config As IConfig)
         config = source.Configs.Item("Level")
-        MapTitle = config.GetString("Title")
+        ActiveMap.MapTitle = config.GetString("Title")
         MapSizeX = config.GetInt("W")
         MapSizeY = config.GetInt("H")
-        LevelTeam = CType(config.GetInt("Team"), Team)
+        ActiveLevel.Team = CType(config.GetInt("Team"), Team)
 
         InitMap()
 
@@ -1279,23 +1312,23 @@ Public Class FRMEditor
 
         IsMapOpen = True
         OpenMapFile = OpenMap.FileName
-        Me.Text = (Me.FormTitle & " - " & MapTitle & " - " & My.Computer.FileSystem.GetFileInfo(Me.OpenMap.FileName).Name)
+        Me.Text = (Me.FormTitle & " - " & ActiveMap.MapTitle & " - " & My.Computer.FileSystem.GetFileInfo(Me.OpenMap.FileName).Name)
         PICMap.Invalidate()
     End Sub
     Public Sub LoadMapv2v3v4v5(ByVal source As IniConfigSource, ByVal config As IConfig, ByVal v As Integer)
         config = source.Configs.Item("Level")
-        MapTitle = config.GetString("Title")
+        ActiveMap.MapTitle = config.GetString("Title")
         MapSizeX = config.GetInt("W")
         MapSizeY = config.GetInt("H")
-        LevelTeam = CType(config.GetInt("Team"), Team)
-        LevelCashPlayer = config.GetInt("CashPlayer", LevelCashPlayerDefault)
-        LevelCashEnemy = config.GetInt("CashEnemy", LevelCashEnemyDefault)
-        LevelFlags.isTraining = config.GetBoolean("isTraining", LevelFlags.isTrainingDefault)
-        LevelFlags.isConflict = config.GetBoolean("isConflict", LevelFlags.isConflictDefault)
-        LevelFlags.isSpecialLevel = config.GetBoolean("isSpecialLevel", LevelFlags.isSpecialLevelDefault)
-        LevelFlags.isLastSpecialLevel = config.GetBoolean("isLastSpecialLevel", LevelFlags.isLastSpecialLevelDefault)
-        LevelFlags.isBonusLevel = config.GetBoolean("isBonusLevel", LevelFlags.isBonusLevelDefault)
-        IsMapFinal = config.GetBoolean("Final", False)
+        ActiveLevel.Team = CType(config.GetInt("Team"), Team)
+        ActiveLevel.CashPlayer = config.GetInt("CashPlayer", Level.CashPlayerDefault)
+        ActiveLevel.CashEnemy = config.GetInt("CashEnemy", Level.CashEnemyDefault)
+        ActiveLevel.IsTraining = config.GetBoolean("isTraining", Level.IsTrainingDefault)
+        ActiveLevel.IsConflict = config.GetBoolean("isConflict", Level.IsConflictDefault)
+        ActiveLevel.IsSpecialLevel = config.GetBoolean("isSpecialLevel", Level.IsSpecialLevelDefault)
+        ActiveLevel.IsLastSpecialLevel = config.GetBoolean("isLastSpecialLevel", Level.IsLastSpecialLevelDefault)
+        ActiveLevel.IsBonusLevel = config.GetBoolean("isBonusLevel", Level.IsBonusLevelDefault)
+        ActiveMap.IsMapFinal = config.GetBoolean("Final", False)
 
         InitMap()
 
@@ -1426,7 +1459,7 @@ Public Class FRMEditor
 
         IsMapOpen = True
         OpenMapFile = OpenMap.FileName
-        Me.Text = (Me.FormTitle & " - " & MapTitle & " - " & My.Computer.FileSystem.GetFileInfo(Me.OpenMap.FileName).Name)
+        Me.Text = (Me.FormTitle & " - " & ActiveMap.MapTitle & " - " & My.Computer.FileSystem.GetFileInfo(Me.OpenMap.FileName).Name)
         PICMap.Invalidate()
     End Sub
     Public Sub UpgradeBuildingLocation(ByVal oldv As Integer, ByVal newv As Integer, ByVal i As Integer, ByVal xpos As Integer)
@@ -1482,8 +1515,8 @@ Public Class FRMEditor
         Me.SaveMap.Reset()
         'Me.SaveMap.DefaultExt = "CAMM Map Files|*.camm"
         'Me.SaveMap.FileName = (My.Application.Info.DirectoryPath & "/../../Tile Data/_Save Data/Map1.map")
-        If MapTitle <> "" Then
-            Me.SaveMap.FileName = MapTitle
+        If ActiveMap.MapTitle <> "" Then
+            Me.SaveMap.FileName = ActiveMap.MapTitle
         Else
             Me.SaveMap.FileName = "Map1.camm"
         End If
@@ -1499,7 +1532,7 @@ Public Class FRMEditor
     End Sub
     Private Sub CMDSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDSave.Click
         If IsMapOpen Then
-            If IsMapFinal Then
+            If ActiveMap.IsMapFinal Then
                 MsgBox("This map has been marked as ""Final"" and cannot be saved." + vbNewLine + "You may save an editable copy using File > SaveAs.")
             Else
                 SaveFile(OpenMapFile)
@@ -1518,17 +1551,17 @@ Public Class FRMEditor
 
         SaveFileData += _
             "[Level]" + vbNewLine + _
-            "Title = " + MapTitle + vbNewLine + _
+            "Title = " + ActiveMap.MapTitle + vbNewLine + _
             "W = " + MapSizeX.ToString + vbNewLine + _
             "H = " + MapSizeY.ToString + vbNewLine + _
-            "Team = " + CInt(LevelTeam).ToString + vbNewLine + _
-            "CashPlayer = " + LevelCashPlayer.ToString + vbNewLine + _
-            "CashEnemy = " + LevelCashEnemy.ToString + vbNewLine + _
-            "isTraining = " + LevelFlags.isTraining.ToString + vbNewLine + _
-            "isConflict = " + LevelFlags.isConflict.ToString + vbNewLine + _
-            "isSpecialLevel = " + LevelFlags.isSpecialLevel.ToString + vbNewLine + _
-            "isLastSpecialLevel = " + LevelFlags.isLastSpecialLevel.ToString + vbNewLine + _
-            "isBonusLevel = " + LevelFlags.isBonusLevel.ToString + vbNewLine + _
+            "Team = " + CInt(ActiveLevel.Team).ToString + vbNewLine + _
+            "CashPlayer = " + ActiveLevel.CashPlayer.ToString + vbNewLine + _
+            "CashEnemy = " + ActiveLevel.CashEnemy.ToString + vbNewLine + _
+            "isTraining = " + ActiveLevel.IsTraining.ToString + vbNewLine + _
+            "isConflict = " + ActiveLevel.IsConflict.ToString + vbNewLine + _
+            "isSpecialLevel = " + ActiveLevel.IsSpecialLevel.ToString + vbNewLine + _
+            "isLastSpecialLevel = " + ActiveLevel.IsLastSpecialLevel.ToString + vbNewLine + _
+            "isBonusLevel = " + ActiveLevel.IsBonusLevel.ToString + vbNewLine + _
             vbNewLine + _
             "[Terrain]" + vbNewLine + _
             "; Terrain Format: {str_ID|i_posX|i_posY}" + vbNewLine
@@ -1574,9 +1607,9 @@ Public Class FRMEditor
             MsgBox("Unable to save map file, the file is set to read-only." + vbNewLine + "Please try saving using File > SaveAs.")
         Else
             My.Computer.FileSystem.WriteAllText(FileName, FormulateSaveData(), False)
-            Me.Text = (Me.FormTitle & " - " & MapTitle & " - " & My.Computer.FileSystem.GetFileInfo(FileName).Name)
+            Me.Text = (Me.FormTitle & " - " & ActiveMap.MapTitle & " - " & My.Computer.FileSystem.GetFileInfo(FileName).Name)
             IsMapOpen = True
-            IsMapFinal = False
+            ActiveMap.IsMapFinal = False
             OpenMapFile = FileName
             MsgBox("Map file saved successfully.")
         End If
@@ -1981,7 +2014,7 @@ Public Class FRMEditor
             Next y
 
             IsMapOpen = False
-            Me.Text = (Me.FormTitle & " - " & MapTitle & " - ActionScript Imported")
+            Me.Text = (Me.FormTitle & " - " & ActiveMap.MapTitle & " - ActionScript Imported")
             PICMap.Invalidate()
         End If
     End Sub

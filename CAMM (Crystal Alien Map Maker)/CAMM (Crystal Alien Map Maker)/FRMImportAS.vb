@@ -27,7 +27,7 @@
         FRMEditor.MapSizeX = Ascii(line(0))
         FRMEditor.MapSizeY = Ascii(line(1))
         FRMEditor.NewMap()
-        FRMEditor.MapTitle = CBOPickMap.SelectedItem.ToString().Trim()
+        FRMEditor.ActiveMap.MapTitle = CBOPickMap.SelectedItem.ToString().Trim()
 
         Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()

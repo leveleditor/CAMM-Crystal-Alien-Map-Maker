@@ -94,6 +94,8 @@
     <Compile Include="FRMMapProperties.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Level.vb" />
+    <Compile Include="Map.vb" />
     <Compile Include="Unit.vb" />
     <Compile Include="FRMExportAS.Designer.vb">
       <DependentUpon>FRMExportAS.vb</DependentUpon>
