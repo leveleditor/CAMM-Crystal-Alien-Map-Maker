@@ -37,6 +37,24 @@
         End Get
     End Property
 
+    Public Property X() As Integer
+        Get
+            Return Location.X
+        End Get
+        Set(ByVal value As Integer)
+            _location.X = value
+        End Set
+    End Property
+
+    Public Property Y() As Integer
+        Get
+            Return Location.Y
+        End Get
+        Set(ByVal value As Integer)
+            _location.Y = value
+        End Set
+    End Property
+
     Private _location As Point
     Public Property Location() As Point
         Get
@@ -47,14 +65,20 @@
         End Set
     End Property
 
-    Private _drawPos As Point
-    Public Property DrawPos() As Point
+    Public ReadOnly Property DrawPos() As Point
         Get
-            Return _drawPos
+            If Me.FullImage IsNot Nothing Then
+                Dim dx As Integer = Me.Location.X
+                Dim dy As Integer = Me.Location.Y
+
+                dx -= (Me.FullImage.Width - (Me.BuildingW * TileSizeX)) / 2
+                dy -= (Me.FullImage.Height - (Me.BuildingH * TileSizeY)) / 2
+
+                Return New Point(dx, dy)
+            Else
+                Return Me.Location
+            End If
         End Get
-        Set(ByVal value As Point)
-            _drawPos = value
-        End Set
     End Property
 
     Private _image As Image

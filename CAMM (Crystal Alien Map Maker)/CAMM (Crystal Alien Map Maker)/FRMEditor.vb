@@ -522,8 +522,6 @@ Public Class FRMEditor
 
                     MapBuildings(i) = temp
 
-                    SetDrawPos(0, i, xMouse)
-
                     Exit For
                 End If
             Next
@@ -531,8 +529,6 @@ Public Class FRMEditor
                 Dim temp As Building = New Building(xMouse, yMouse, ActiveBuilding.Image, ActiveBuilding.BuildingId, ActiveBuilding.Team, ActiveBuilding.Angle, ActiveBuilding.Damage, ActiveBuilding.BuildingW, ActiveBuilding.BuildingH)
                 temp.FullImage = ActiveBuilding.FullImage
                 MapBuildings.Add(temp)
-
-                SetDrawPos(0, MapBuildings.IndexOf(temp), xMouse)
             End If
 
             ' Reorder the list based on the Y locations of the buidings.
@@ -567,20 +563,6 @@ Public Class FRMEditor
                 ' beneath units closer to the bottom of the map.
                 MapUnits = (From u In MapUnits Order By u.Position.Y, u.Position.X).ToList()
             End If
-        End If
-    End Sub
-
-    Public Sub SetDrawPos(ByVal Type As Integer, ByVal i As Integer, ByVal xMouse As Integer)
-        If Type = 0 Then
-            MapBuildings(i).DrawPos = MapBuildings(i).Location
-
-            Dim x As Integer = MapBuildings(i).DrawPos.X
-            Dim y As Integer = MapBuildings(i).DrawPos.Y
-
-            x -= (MapBuildings(i).FullImage.Width - (MapBuildings(i).BuildingW * TileSizeX)) / 2
-            y -= (MapBuildings(i).FullImage.Height - (MapBuildings(i).BuildingH * TileSizeY)) / 2
-
-            MapBuildings(i).DrawPos = New Point(x, y)
         End If
     End Sub
 
@@ -1154,10 +1136,17 @@ Public Class FRMEditor
         PICBuildings.Invalidate()
         PICUnits.Invalidate()
 
-        Dim newLevel As Level = New Level()
-        Levels.Add(newLevel)
-        newLevel.Map.MapTitle = "New Map"
-        Me.Text = (Me.FormTitle & " - " & newLevel.Map.MapTitle)
+        ' TODO: This is completely temporary... upgrade it to properly use the new map system.
+        If Levels.Count <= 0 Then
+            Dim newLevel As Level = New Level()
+            Levels.Add(newLevel)
+            ActiveLevelNum = Levels.IndexOf(newLevel)
+            newLevel.Map.MapTitle = "New Map"
+            Me.Text = (Me.FormTitle & " - " & newLevel.Map.MapTitle)
+        Else
+            ActiveMap.MapTitle = "New Map"
+            Me.Text = (Me.FormTitle & " - " & ActiveLevel.Map.MapTitle)
+        End If
 
         'Initialize the map again.
         InitMap()
@@ -1300,9 +1289,8 @@ Public Class FRMEditor
                             Exit For
                         End If
                     Next
-                    'TODO: Temp fix for a bug that I'm too lazy to fix.
+
                     UpgradeBuildingLocation(1, MapFormat, i, PosX * TileSizeX)
-                    SetDrawPos(0, i, PosX * TileSizeX)
                 End If
             Next
         End If
@@ -1389,12 +1377,9 @@ Public Class FRMEditor
                         Exit For
                     End If
                 Next
-                'TODO: Temp fix for a bug that I'm too lazy to fix.
-                If v = 4 Then
-                    SetDrawPos(0, i, PosX * TileSizeX)
-                Else
+
+                If v < 4 Then
                     UpgradeBuildingLocation(v, MapFormat, i, PosX * TileSizeX)
-                    SetDrawPos(0, i, PosX * TileSizeX)
                 End If
             End If
         Next
@@ -1448,8 +1433,7 @@ Public Class FRMEditor
                 Next
                 MapUnits.Add(temp)
 
-                'TODO: Temp fix for a bug that I'm too lazy to fix.
-                'TODO: Verify if this is fixed.
+                'TODO: Temp fix for a bug that I'm too lazy to fix. (Verify if this is fixed!)
                 'SetDrawPos(1, i, PosX * TileSizeX)
             End If
         Next
@@ -1465,14 +1449,13 @@ Public Class FRMEditor
     Public Sub UpgradeBuildingLocation(ByVal oldv As Integer, ByVal newv As Integer, ByVal i As Integer, ByVal xpos As Integer)
         If oldv < 4 And (newv = 4 Or newv = 5) Then
             ' <<< Start old SetDrawPos code >>>
-
-            MapBuildings(i).DrawPos = MapBuildings(i).Location
+            Dim tempDrawPos As Point = MapBuildings(i).Location
 
             If MapBuildings(i).BuildingW Mod 2 Then
-                MapBuildings(i).DrawPos = New Point(MapBuildings(i).DrawPos.X + (TileSizeX / 2), MapBuildings(i).DrawPos.Y)
+                tempDrawPos = New Point(tempDrawPos.X + (TileSizeX / 2), tempDrawPos.Y)
             End If
             If MapBuildings(i).BuildingH <> 2 Then
-                MapBuildings(i).DrawPos = New Point(MapBuildings(i).DrawPos.X, MapBuildings(i).DrawPos.Y - TileSizeY)
+                tempDrawPos = New Point(tempDrawPos.X, tempDrawPos.Y - TileSizeY)
             End If
 
             Dim TopLeftX As Single = Math.Floor((xpos / TileSizeX) - MapBuildings(i).BuildingW / 2) + 1
@@ -1482,24 +1465,24 @@ Public Class FRMEditor
             DockX = Math.Ceiling(DockX / TileSizeX) - 2
             DockY = Math.Ceiling(DockY / TileSizeY) - 3
 
-            MapBuildings(i).DrawPos = New Point(MapBuildings(i).DrawPos.X - DockX, MapBuildings(i).DrawPos.Y - DockY)
+            tempDrawPos = New Point(tempDrawPos.X - DockX, tempDrawPos.Y - DockY)
 
             If MapBuildings(i).BuildingH = 2 Then
-                MapBuildings(i).DrawPos = New Point(MapBuildings(i).DrawPos.X, MapBuildings(i).DrawPos.Y - TileSizeY)
+                tempDrawPos = New Point(tempDrawPos.X, tempDrawPos.Y - TileSizeY)
             End If
 
             ' There was also some related code in RenderMapToGraphics
             Dim OffY As Integer = TileSizeY
 
-            MapBuildings(i).DrawPos = New Point( _
-                 MapBuildings(i).DrawPos.X - CInt(MapBuildings(i).FullImage.Width / 2), _
-                 MapBuildings(i).DrawPos.Y - CInt(MapBuildings(i).FullImage.Height / 2) + OffY)
+            tempDrawPos = New Point( _
+                 tempDrawPos.X - CInt(MapBuildings(i).FullImage.Width / 2), _
+                 tempDrawPos.Y - CInt(MapBuildings(i).FullImage.Height / 2) + OffY)
 
             ' <<< End old SetDrawPos code >>>
 
             ' New SetDrawPos code, but reversed!
             ' Warning: Buildings that were actually out of bounds in old maps may end up off screen.
-            MapBuildings(i).Location = MapBuildings(i).DrawPos
+            MapBuildings(i).Location = tempDrawPos
 
             Dim fixedLocation As Point = New Point(MapBuildings(i).Location.X + 1, MapBuildings(i).Location.Y + 1)
 
@@ -1639,7 +1622,7 @@ Public Class FRMEditor
     End Function
 
     Private Sub PICActive_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles PICActive.Paint
-        If activeToolMode = ToolMode.Eraser Then
+        If ActiveToolMode = ToolMode.Eraser Then
             e.Graphics.Clear(PICActive.BackColor)
         Else
             If ActiveEditMode = EditMode.Buildings Then
@@ -1746,7 +1729,7 @@ Public Class FRMEditor
     End Sub
 
     Private Sub CMDEditTiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDEditTiles.Click
-        activeEditMode = EditMode.Tiles
+        ActiveEditMode = EditMode.Tiles
         LBLSelected.Text = "Selected Tile:"
         PICActive.Image = ActiveTile.Image
         CMDEditTiles.Enabled = False
@@ -1760,7 +1743,7 @@ Public Class FRMEditor
     End Sub
 
     Private Sub CMDEditBuildings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDEditBuildings.Click
-        activeEditMode = EditMode.Buildings
+        ActiveEditMode = EditMode.Buildings
         LBLSelected.Text = "Selected Building:"
         PICActive.Image = ActiveBuilding.Image
         CMDEditTiles.Enabled = True
@@ -1774,7 +1757,7 @@ Public Class FRMEditor
     End Sub
 
     Private Sub CMDEditUnits_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDEditUnits.Click
-        activeEditMode = EditMode.Units
+        ActiveEditMode = EditMode.Units
         LBLSelected.Text = "Selected Unit:"
         PICActive.Image = ActiveUnit.Image
         CMDEditTiles.Enabled = True
@@ -1788,7 +1771,7 @@ Public Class FRMEditor
     End Sub
 
     Private Sub CMDEditShroud_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDEditShroud.Click
-        activeEditMode = EditMode.Shroud
+        ActiveEditMode = EditMode.Shroud
     End Sub
 
     Private Sub CMDToolBrush_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDToolBrush.Click
@@ -1807,7 +1790,7 @@ Public Class FRMEditor
     End Sub
 
     Private Sub CMDToolSmartBrush_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDToolSmartBrush.Click
-        activeToolMode = ToolMode.SmartBrush
+        ActiveToolMode = ToolMode.SmartBrush
 
         PICActive.Image = Nothing
         ActiveTile = New Tile(0, 0)
