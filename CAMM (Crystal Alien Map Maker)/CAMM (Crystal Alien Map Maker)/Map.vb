@@ -3,6 +3,7 @@
     Public Sub New()
         MapSizeX = 10
         MapSizeY = 10
+        FileName = ""
         MapTitle = ""
         IsMapFinal = False
 
@@ -15,6 +16,7 @@
 
     Public MapSizeX As Integer
     Public MapSizeY As Integer
+    Public FileName As String
     Public MapTitle As String
     Public IsMapFinal As Boolean
 

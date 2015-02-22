@@ -79,7 +79,6 @@ Partial Class FRMEditor
         Me.LBLx = New System.Windows.Forms.Label
         Me.LBLWxH = New System.Windows.Forms.Label
         Me.CHKGrid = New System.Windows.Forms.CheckBox
-        Me.CMDTest = New System.Windows.Forms.Button
         Me.ToolsBox = New System.Windows.Forms.GroupBox
         Me.CMDToolSmartBrush = New System.Windows.Forms.Button
         Me.CMDToolBrush = New System.Windows.Forms.Button
@@ -88,6 +87,7 @@ Partial Class FRMEditor
         Me.PNLUnits = New System.Windows.Forms.Panel
         Me.PICUnits = New System.Windows.Forms.PictureBox
         Me.SavePNG = New System.Windows.Forms.SaveFileDialog
+        Me.CBOLevel = New System.Windows.Forms.ComboBox
         CType(Me.PICMap, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PICActive, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusBar.SuspendLayout()
@@ -153,7 +153,7 @@ Partial Class FRMEditor
         'LBLAboutVersion
         '
         Me.LBLAboutVersion.Name = "LBLAboutVersion"
-        Me.LBLAboutVersion.Size = New System.Drawing.Size(700, 17)
+        Me.LBLAboutVersion.Size = New System.Drawing.Size(731, 17)
         Me.LBLAboutVersion.Spring = True
         Me.LBLAboutVersion.Text = "<Version> by Josh"
         Me.LBLAboutVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -577,19 +577,6 @@ Partial Class FRMEditor
         Me.CHKGrid.Text = "Show Grid"
         Me.CHKGrid.UseVisualStyleBackColor = True
         '
-        'CMDTest
-        '
-        Me.CMDTest.AutoSize = True
-        Me.CMDTest.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.CMDTest.Location = New System.Drawing.Point(680, 68)
-        Me.CMDTest.Margin = New System.Windows.Forms.Padding(0)
-        Me.CMDTest.Name = "CMDTest"
-        Me.CMDTest.Size = New System.Drawing.Size(75, 23)
-        Me.CMDTest.TabIndex = 13
-        Me.CMDTest.Text = "Test Button!"
-        Me.CMDTest.UseVisualStyleBackColor = True
-        Me.CMDTest.Visible = False
-        '
         'ToolsBox
         '
         Me.ToolsBox.Controls.Add(Me.CMDToolSmartBrush)
@@ -674,15 +661,24 @@ Partial Class FRMEditor
         Me.SavePNG.Filter = "PNG Images|*png"
         Me.SavePNG.Title = "Export PNG Image..."
         '
+        'CBOLevel
+        '
+        Me.CBOLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.CBOLevel.FormattingEnabled = True
+        Me.CBOLevel.Location = New System.Drawing.Point(9, 93)
+        Me.CBOLevel.Name = "CBOLevel"
+        Me.CBOLevel.Size = New System.Drawing.Size(96, 21)
+        Me.CBOLevel.TabIndex = 17
+        '
         'FRMEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(764, 452)
+        Me.Controls.Add(Me.CBOLevel)
         Me.Controls.Add(Me.PNLUnits)
         Me.Controls.Add(Me.CMDEditUnits)
         Me.Controls.Add(Me.ToolsBox)
-        Me.Controls.Add(Me.CMDTest)
         Me.Controls.Add(Me.CHKGrid)
         Me.Controls.Add(Me.LBLWxH)
         Me.Controls.Add(Me.LBLx)
@@ -757,7 +753,6 @@ Partial Class FRMEditor
     Friend WithEvents CHKGrid As System.Windows.Forms.CheckBox
     Friend WithEvents MNUDev As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CMDTileDataEditor As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents CMDTest As System.Windows.Forms.Button
     Friend WithEvents ToolsBox As System.Windows.Forms.GroupBox
     Friend WithEvents CMDToolBrush As System.Windows.Forms.Button
     Friend WithEvents IntroTimer As System.Windows.Forms.Timer
@@ -788,4 +783,5 @@ Partial Class FRMEditor
     Friend WithEvents Separator7 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents Separator8 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents Separator3 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents CBOLevel As System.Windows.Forms.ComboBox
 End Class

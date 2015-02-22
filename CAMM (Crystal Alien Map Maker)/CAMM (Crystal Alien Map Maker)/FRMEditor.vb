@@ -8,26 +8,22 @@ Public Class FRMEditor
 
 #Region "Declarations"
     Dim IsMapOpen As Boolean = False
-    Dim OpenMapFile As String = ""
-    Dim FormTitle As String = ""
+    Private BaseFormTitle As String
 
-    Private _activeLevelNum As Integer = 0
     Private Property ActiveLevelNum As Integer
         Get
-            Return _activeLevelNum
+            Return CBOLevel.SelectedIndex
         End Get
         Set(value As Integer)
-            _activeLevelNum = value
+            CBOLevel.SelectedIndex = value
+            UpdateFormTitle()
         End Set
     End Property
-    Private _levels As List(Of Level) = New List(Of Level)
-    Public Property Levels As List(Of Level)
+    Private ReadOnly _levels As List(Of Level) = New List(Of Level)
+    Public ReadOnly Property Levels As List(Of Level)
         Get
             Return _levels
         End Get
-        Set(value As List(Of Level))
-            _levels = value
-        End Set
     End Property
     Public Property ActiveLevel As Level
         Get
@@ -46,19 +42,19 @@ Public Class FRMEditor
         End Set
     End Property
 
-    Public Property MapSizeX As Object
+    Public Property MapSizeX As Integer
         Get
             Return ActiveMap.MapSizeX
         End Get
-        Set(value As Object)
+        Set(value As Integer)
             ActiveMap.MapSizeX = value
         End Set
     End Property
-    Public Property MapSizeY As Object
+    Public Property MapSizeY As Integer
         Get
             Return ActiveMap.MapSizeY
         End Get
-        Set(value As Object)
+        Set(value As Integer)
             ActiveMap.MapSizeY = value
         End Set
     End Property
@@ -122,8 +118,7 @@ Public Class FRMEditor
 #End Region
 
     Private Sub FRMEditor_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'Setting initial information.
-        FormTitle = Me.Text
+        BaseFormTitle = Me.Text
 
         'Setting version information.
         LBLAboutVersion.Text = BuildType + " v" + My.Application.Info.Version.Major.ToString + "." + My.Application.Info.Version.Minor.ToString
@@ -1128,25 +1123,21 @@ Public Class FRMEditor
 
     Public Sub NewMap()
         'Setting default blank values.
-        ActiveTile = New Tile(0, 0)
-        ActiveBuilding = New Building(0, 0)
-        ActiveUnit = New Unit(0, 0)
-        PICActive.Image = Nothing
-        PICTiles.Invalidate()
-        PICBuildings.Invalidate()
-        PICUnits.Invalidate()
+        'ActiveTile = New Tile(0, 0)
+        'ActiveBuilding = New Building(0, 0)
+        'ActiveUnit = New Unit(0, 0)
+        'PICActive.Image = Nothing
+        'PICTiles.Invalidate()
+        'PICBuildings.Invalidate()
+        'PICUnits.Invalidate()
 
-        ' TODO: This is completely temporary... upgrade it to properly use the new map system.
-        If Levels.Count <= 0 Then
-            Dim newLevel As Level = New Level()
-            Levels.Add(newLevel)
-            ActiveLevelNum = Levels.IndexOf(newLevel)
-            newLevel.Map.MapTitle = "New Map"
-            Me.Text = (Me.FormTitle & " - " & newLevel.Map.MapTitle)
-        Else
-            ActiveMap.MapTitle = "New Map"
-            Me.Text = (Me.FormTitle & " - " & ActiveLevel.Map.MapTitle)
-        End If
+        Dim newLevel As Level = New Level()
+        newLevel.Map.MapTitle = "New Map"
+        Levels.Add(newLevel)
+        UpdateLevelsList()
+        'CBOLevel.Items.Add("Map " + Levels.Count.ToString() + " [" + newLevel.Map.MapTitle + "]")
+        ActiveLevelNum = Levels.IndexOf(newLevel)
+        UpdateFormTitle()
 
         'Initialize the map again.
         InitMap()
@@ -1182,14 +1173,16 @@ Public Class FRMEditor
                 LoadMapv2v3v4v5(source, config, v)
             End If
         End If
+        UpdateLevelsList()
     End Sub
     Public Sub LoadMapv0(ByVal source As IniConfigSource, ByVal config As IConfig)
-        InitTiles()
+        'InitTiles()
+        NewMap()
         config = source.Configs.Item("Map Size")
         MapSizeX = config.GetInt("W")
         MapSizeY = config.GetInt("H")
         ActiveMap.MapTitle = "Converted Map"
-        InitMap()
+        'InitMap()
         config = source.Configs.Item("Tile Data")
         For i As Integer = 0 To MapTiles.Length - 1
             Dim TempName As String = "Tile_1_" + (i + 1).ToString
@@ -1212,18 +1205,19 @@ Public Class FRMEditor
         Next
 
         IsMapOpen = True
-        OpenMapFile = OpenMap.FileName
-        Me.Text = (Me.FormTitle & " - " & ActiveMap.MapTitle & " - " & My.Computer.FileSystem.GetFileInfo(Me.OpenMap.FileName).Name)
+        ActiveMap.FileName = OpenMap.FileName
+        UpdateFormTitle()
         PICMap.Invalidate()
     End Sub
     Public Sub LoadMapv1(ByVal source As IniConfigSource, ByVal config As IConfig)
+        NewMap()
         config = source.Configs.Item("Level")
         ActiveMap.MapTitle = config.GetString("Title")
         MapSizeX = config.GetInt("W")
         MapSizeY = config.GetInt("H")
         ActiveLevel.Team = CType(config.GetInt("Team"), Team)
 
-        InitMap()
+        'InitMap()
 
         config = source.Configs.Item("Terrain")
         Dim TerrainCount As Integer = config.GetKeys().Length - 1
@@ -1299,11 +1293,12 @@ Public Class FRMEditor
         ResizeMap(MapSizeX, MapSizeY)
 
         IsMapOpen = True
-        OpenMapFile = OpenMap.FileName
-        Me.Text = (Me.FormTitle & " - " & ActiveMap.MapTitle & " - " & My.Computer.FileSystem.GetFileInfo(Me.OpenMap.FileName).Name)
+        ActiveMap.FileName = OpenMap.FileName
+        UpdateFormTitle()
         PICMap.Invalidate()
     End Sub
     Public Sub LoadMapv2v3v4v5(ByVal source As IniConfigSource, ByVal config As IConfig, ByVal v As Integer)
+        NewMap()
         config = source.Configs.Item("Level")
         ActiveMap.MapTitle = config.GetString("Title")
         MapSizeX = config.GetInt("W")
@@ -1318,7 +1313,7 @@ Public Class FRMEditor
         ActiveLevel.IsBonusLevel = config.GetBoolean("isBonusLevel", Level.IsBonusLevelDefault)
         ActiveMap.IsMapFinal = config.GetBoolean("Final", False)
 
-        InitMap()
+        'InitMap()
 
         config = source.Configs.Item("Terrain")
         For i As Integer = 0 To config.GetKeys().Length - 1
@@ -1442,8 +1437,8 @@ Public Class FRMEditor
         ResizeMap(MapSizeX, MapSizeY)
 
         IsMapOpen = True
-        OpenMapFile = OpenMap.FileName
-        Me.Text = (Me.FormTitle & " - " & ActiveMap.MapTitle & " - " & My.Computer.FileSystem.GetFileInfo(Me.OpenMap.FileName).Name)
+        ActiveMap.FileName = OpenMap.FileName
+        UpdateFormTitle()
         PICMap.Invalidate()
     End Sub
     Public Sub UpgradeBuildingLocation(ByVal oldv As Integer, ByVal newv As Integer, ByVal i As Integer, ByVal xpos As Integer)
@@ -1518,7 +1513,7 @@ Public Class FRMEditor
             If ActiveMap.IsMapFinal Then
                 MsgBox("This map has been marked as ""Final"" and cannot be saved." + vbNewLine + "You may save an editable copy using File > SaveAs.")
             Else
-                SaveFile(OpenMapFile)
+                SaveFile(ActiveMap.FileName)
             End If
         Else
             CMDSaveMap_Click(sender, e)
@@ -1590,10 +1585,10 @@ Public Class FRMEditor
             MsgBox("Unable to save map file, the file is set to read-only." + vbNewLine + "Please try saving using File > SaveAs.")
         Else
             My.Computer.FileSystem.WriteAllText(FileName, FormulateSaveData(), False)
-            Me.Text = (Me.FormTitle & " - " & ActiveMap.MapTitle & " - " & My.Computer.FileSystem.GetFileInfo(FileName).Name)
             IsMapOpen = True
             ActiveMap.IsMapFinal = False
-            OpenMapFile = FileName
+            ActiveMap.FileName = FileName
+            UpdateFormTitle()
             MsgBox("Map file saved successfully.")
         End If
         PICMap.Invalidate()
@@ -1716,16 +1711,6 @@ Public Class FRMEditor
         CMDExportAS.Visible = True
         Separator3.Visible = True
         MNUCHKDebugBuildingPos.Visible = True
-    End Sub
-
-    Private Sub CMDTest_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDTest.Click
-        If ActiveEditMode = EditMode.Tiles Then
-            MsgBox("SelTiles Length: " + SelTiles.Length.ToString + vbNewLine + "And -1: " + (SelTiles.Length - 1).ToString)
-        ElseIf ActiveEditMode = EditMode.Buildings Then
-            MsgBox("SelBuildings Length: " + SelBuildings.Length.ToString + vbNewLine + "And -1: " + (SelBuildings.Length - 1).ToString)
-        ElseIf ActiveEditMode = EditMode.Units Then
-            MsgBox("SelUnits Length: " + SelUnits.Length.ToString + vbNewLine + "And -1: " + (SelUnits.Length - 1).ToString)
-        End If
     End Sub
 
     Private Sub CMDEditTiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDEditTiles.Click
@@ -1997,7 +1982,8 @@ Public Class FRMEditor
             Next y
 
             IsMapOpen = False
-            Me.Text = (Me.FormTitle & " - " & ActiveMap.MapTitle & " - ActionScript Imported")
+            ActiveMap.MapTitle = "Imported ActionScript"
+            UpdateFormTitle()
             PICMap.Invalidate()
         End If
     End Sub
@@ -2006,5 +1992,46 @@ Public Class FRMEditor
 
     Private Sub CMDMapProperties_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDMapProperties.Click
         FRMMapProperties.ShowDialog(Me)
+    End Sub
+
+    Private Sub CBOLevel_DropDown(sender As Object, e As EventArgs) Handles CBOLevel.DropDown
+        'Dim temp As Integer = ActiveLevelNum
+        'CBOLevel.Items.Clear()
+        'For i As Integer = 1 To _levels.Count
+        '    CBOLevel.Items.Add("Map " + i.ToString())
+        'Next
+        'ActiveLevelNum = temp
+        UpdateLevelsList()
+    End Sub
+
+    Private Sub CBOLevel_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBOLevel.SelectedIndexChanged
+        'ActiveLevelNum = CBOLevel.SelectedIndex
+        UpdateFormTitle()
+    End Sub
+
+    Private Sub UpdateLevelsList()
+        If CBOLevel.Items.Count > 0 Then
+            For i As Integer = 0 To CBOLevel.Items.Count - 1
+                CBOLevel.Items(i) = (i + 1).ToString() + ") " + Levels(i).Map.MapTitle
+            Next
+        End If
+        If Levels.Count > CBOLevel.Items.Count Then
+            For i As Integer = CBOLevel.Items.Count To Levels.Count - 1
+                CBOLevel.Items.Add((i + 1).ToString() + ") " + Levels(i).Map.MapTitle)
+            Next
+        End If
+    End Sub
+
+    Private Sub UpdateFormTitle()
+        Dim title As String = BaseFormTitle
+        If Levels.Count > 0 Then
+            title += " - " + ActiveMap.MapTitle
+            If Not String.IsNullOrEmpty(ActiveMap.FileName) Then
+                title += " - " + My.Computer.FileSystem.GetFileInfo(ActiveMap.FileName).Name
+            Else
+                title += " - (Unsaved)"
+            End If
+        End If
+        Me.Text = title
     End Sub
 End Class
