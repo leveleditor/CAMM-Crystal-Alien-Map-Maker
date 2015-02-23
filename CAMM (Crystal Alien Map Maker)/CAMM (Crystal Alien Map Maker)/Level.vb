@@ -34,4 +34,33 @@
     Public Const IsLastSpecialLevelDefault As Boolean = False
     Public Const IsBonusLevelDefault As Boolean = True
 
+    Public Function GetSaveData() As String
+        Dim saveFileData As String = ""
+
+        saveFileData += _
+            "[CAMM]" + vbNewLine + _
+            "vFormat = " + MapFormat.ToString + vbNewLine + _
+            vbNewLine
+
+        saveFileData += _
+            "[Level]" + vbNewLine + _
+            "Title = " + Map.MapTitle + vbNewLine + _
+            "W = " + Map.MapSizeX.ToString + vbNewLine + _
+            "H = " + Map.MapSizeY.ToString + vbNewLine + _
+            "Team = " + CInt(Team).ToString + vbNewLine + _
+            "CashPlayer = " + CashPlayer.ToString + vbNewLine + _
+            "CashEnemy = " + CashEnemy.ToString + vbNewLine + _
+            "isTraining = " + IsTraining.ToString + vbNewLine + _
+            "isConflict = " + IsConflict.ToString + vbNewLine + _
+            "isSpecialLevel = " + IsSpecialLevel.ToString + vbNewLine + _
+            "isLastSpecialLevel = " + IsLastSpecialLevel.ToString + vbNewLine + _
+            "isBonusLevel = " + IsBonusLevel.ToString + vbNewLine + _
+            vbNewLine + _
+            Map.GetSaveData()
+
+        saveFileData += vbNewLine + "; -= Map Created Using CAMM Crystal Alien Map Maker =-"
+
+        Return saveFileData
+    End Function
+
 End Class

@@ -24,9 +24,8 @@
         line = line.Trim(New Char() {Char.Parse("""")})
 
         FRMEditor.ImportASTileData = line.Remove(0, 2)
-        FRMEditor.MapSizeX = Ascii(line(0))
-        FRMEditor.MapSizeY = Ascii(line(1))
         FRMEditor.NewMap()
+        FRMEditor.ActiveMap.SetSize(Ascii(line(0)), Ascii(line(1)))
         FRMEditor.ActiveMap.MapTitle = CBOPickMap.SelectedItem.ToString().Trim()
 
         Me.DialogResult = System.Windows.Forms.DialogResult.OK

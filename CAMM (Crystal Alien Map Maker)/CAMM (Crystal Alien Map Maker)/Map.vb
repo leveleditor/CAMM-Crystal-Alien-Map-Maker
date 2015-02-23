@@ -14,50 +14,63 @@
         MapUnits = New List(Of Unit)
     End Sub
 
-    Public MapSizeX As Integer
-    Public MapSizeY As Integer
+    Private _mapSizeX As Integer
+    Public Property MapSizeX As Integer
+        Get
+            Return _mapSizeX
+        End Get
+        Private Set(value As Integer)
+            _mapSizeX = value
+        End Set
+    End Property
+    Private _mapSizeY As Integer
+    Public Property MapSizeY As Integer
+        Get
+            Return _mapSizeY
+        End Get
+        Private Set(value As Integer)
+            _mapSizeY = value
+        End Set
+    End Property
+
     Public FileName As String
     Public MapTitle As String
     Public IsMapFinal As Boolean
 
-    Dim MapTiles As Tile()
-    Dim MapBuildings As List(Of Building)
-    Dim MapUnits As List(Of Unit)
+    Public MapTiles As Tile()
+    Public MapBuildings As List(Of Building)
+    Public MapUnits As List(Of Unit)
     'Temporary array for resizing the map.
     Private TempTiles As Tile()
 
     Public Sub SetSize(ByVal width As Integer, ByVal height As Integer)
-        If (width <> MapSizeX And height <> MapSizeY) Then
-            ReDim TempTiles(MapSizeX * MapSizeY)
-            TempTiles = MapTiles
+        ' TODO: The map shouldn't resize if it's already at the specified size, but due to a tempfix for bug "unplacable grid spaces after loading a map" it has to be able to set the map to it's own size...
+        'If (width <> MapSizeX And height <> MapSizeY) Then
+        ReDim TempTiles(MapSizeX * MapSizeY)
+        TempTiles = MapTiles
 
-            MapSizeX = width
-            MapSizeY = height
-            'TXTWidth.Text = MapSizeX
-            'TXTHeight.Text = MapSizeY
-            'PICMap.Size = New Size((MapSizeX * TileSizeX) + 1, (MapSizeY * TileSizeY) + 1)
+        MapSizeX = width
+        MapSizeY = height
 
-            InitTiles()
+        InitTiles()
 
-            For i As Integer = 0 To MapTiles.Length - 1
-                For j As Integer = 0 To TempTiles.Length - 1
-                    If MapTiles(i).Position = TempTiles(j).Position Then
-                        MapTiles(i) = TempTiles(j)
-                        Exit For
-                    End If
-                Next
-            Next
-            Dim tempUnits As List(Of Unit) = MapUnits.ToList()
-            For i As Integer = 0 To MapUnits.Count() - 1
-                Dim pos As Point = MapUnits(i).Position
-                If pos.X < 0 Or pos.Y < 0 Or pos.X > (MapSizeX * TileSizeX) - 1 Or pos.Y > (MapSizeY * TileSizeY) - 1 Then
-                    tempUnits.Remove(MapUnits(i))
+        For i As Integer = 0 To MapTiles.Length - 1
+            For j As Integer = 0 To TempTiles.Length - 1
+                If MapTiles(i).Position = TempTiles(j).Position Then
+                    MapTiles(i) = TempTiles(j)
+                    Exit For
                 End If
             Next
-            MapUnits = tempUnits
-
-            'PICMap.Invalidate()
-        End If
+        Next
+        Dim tempUnits As List(Of Unit) = MapUnits.ToList()
+        For i As Integer = 0 To MapUnits.Count() - 1
+            Dim pos As Point = MapUnits(i).Position
+            If pos.X < 0 Or pos.Y < 0 Or pos.X > (MapSizeX * TileSizeX) - 1 Or pos.Y > (MapSizeY * TileSizeY) - 1 Then
+                tempUnits.Remove(MapUnits(i))
+            End If
+        Next
+        MapUnits = tempUnits
+        'End If
     End Sub
 
     Public Sub ClearMap()
@@ -66,13 +79,6 @@
         Next
         MapBuildings.Clear()
         MapUnits.Clear()
-    End Sub
-
-    Public Sub InitMap()
-        'Clean the map.
-        ClearMap()
-
-        InitTiles()
     End Sub
 
     Public Sub InitTiles()
@@ -111,7 +117,7 @@
         If IsMouseInBounds(mouseX, mouseY) Then
             For i As Integer = 0 To MapTiles.Length - 1
                 If MapTiles(i).Position.X = mouseX And MapTiles(i).Position.Y = mouseY Then
-                    MapTiles(i) = tile
+                    MapTiles(i) = New Tile(mouseX, mouseY, tile.Image, tile.TileId, tile.IsPassable, tile.IsMinerals)
                 End If
             Next
         End If
@@ -154,15 +160,16 @@
                 If MapBuildings(i).Location.X = mouseX And MapBuildings(i).Location.Y = mouseY Then
                     found = True
 
-                    building.Location = New Point(mouseX, mouseY)
-                    MapBuildings(i) = building
+                    MapBuildings(i) = New Building(mouseX, mouseY, building.Image, building.BuildingId, building.Team, building.Angle, building.Damage, building.BuildingW, building.BuildingH)
+                    MapBuildings(i).FullImage = building.FullImage
 
                     Exit For
                 End If
             Next
             If Not found Then
-                building.Location = New Point(mouseX, mouseY)
-                MapBuildings.Add(building)
+                Dim newBuilding As Building = New Building(mouseX, mouseY, building.Image, building.BuildingId, building.Team, building.Angle, building.Damage, building.BuildingW, building.BuildingH)
+                newBuilding.FullImage = building.FullImage
+                MapBuildings.Add(newBuilding)
             End If
 
             ' Reorder the list based on the Y locations of the buidings.
@@ -183,8 +190,9 @@
                 End If
             Next
             If Not found Then
-                unit.Position = New Point(mouseX, mouseY)
-                MapUnits.Add(unit)
+                Dim newUnit As Unit = New Unit(mouseX, mouseY, unit.Image, unit.UnitId, unit.Team, unit.Angle, unit.Damage)
+                newUnit.FullImage = unit.FullImage
+                MapUnits.Add(newUnit)
 
                 ' Reorder the list based on the Y locations of the units.
                 ' This ensures that units closer to the top of the map render
@@ -210,4 +218,116 @@
         End If
     End Function
 
+    Public Sub Eraser(ByVal mouseX As Integer, ByVal mouseY As Integer, ByVal mode As EditMode)
+        Select Case mode
+            Case EditMode.Tiles
+                SetTile(mouseX, mouseY, New Tile(mouseX, mouseY))
+            Case EditMode.Buildings
+                Dim temp As List(Of Building) = MapBuildings.ToList()
+                For i As Integer = 0 To MapBuildings.Count() - 1
+                    If MapBuildings(i).Location = New Point(mouseX, mouseY) Then
+                        temp.Remove(MapBuildings(i))
+                    End If
+                Next
+                MapBuildings = temp
+            Case EditMode.Units
+                Dim temp As List(Of Unit) = MapUnits.ToList()
+                For i As Integer = 0 To MapUnits.Count() - 1
+                    If MapUnits(i).X >= mouseX And _
+                       MapUnits(i).Y >= mouseY And _
+                       MapUnits(i).X <= mouseX + TileSizeX And _
+                       MapUnits(i).Y <= mouseY + TileSizeY Then
+                        temp.Remove(MapUnits(i))
+                    End If
+                Next
+                MapUnits = temp
+        End Select
+    End Sub
+
+    Public Sub UpgradeBuildingLocation(ByVal oldv As Integer, ByVal newv As Integer, ByVal i As Integer, ByVal xpos As Integer)
+        If oldv < 4 And (newv = 4 Or newv = 5) Then
+            ' <<< Start old SetDrawPos code >>>
+            Dim tempDrawPos As Point = MapBuildings(i).Location
+
+            If MapBuildings(i).BuildingW Mod 2 Then
+                tempDrawPos = New Point(tempDrawPos.X + (TileSizeX / 2), tempDrawPos.Y)
+            End If
+            If MapBuildings(i).BuildingH <> 2 Then
+                tempDrawPos = New Point(tempDrawPos.X, tempDrawPos.Y - TileSizeY)
+            End If
+
+            Dim topLeftX As Single = Math.Floor((xpos / TileSizeX) - MapBuildings(i).BuildingW / 2) + 1
+            Dim topLeftY As Single = Math.Floor((xpos / TileSizeX) - MapBuildings(i).BuildingH + 3)
+            Dim dockX As Single = (topLeftX + ((MapBuildings(i).BuildingW / 2) - 1)) + 1 * TileSizeX
+            Dim dockY As Single = (topLeftY + (MapBuildings(i).BuildingH - 1)) + 1 * TileSizeX
+            dockX = Math.Ceiling(dockX / TileSizeX) - 2
+            dockY = Math.Ceiling(dockY / TileSizeY) - 3
+
+            tempDrawPos = New Point(tempDrawPos.X - dockX, tempDrawPos.Y - dockY)
+
+            If MapBuildings(i).BuildingH = 2 Then
+                tempDrawPos = New Point(tempDrawPos.X, tempDrawPos.Y - TileSizeY)
+            End If
+
+            ' There was also some related code in RenderMapToGraphics
+            Dim OffY As Integer = TileSizeY
+
+            tempDrawPos = New Point( _
+                tempDrawPos.X - CInt(MapBuildings(i).FullImage.Width / 2), _
+                tempDrawPos.Y - CInt(MapBuildings(i).FullImage.Height / 2) + OffY)
+
+            ' <<< End old SetDrawPos code >>>
+
+            ' New SetDrawPos code, but reversed!
+            ' Warning: Buildings that were actually out of bounds in old maps may end up off screen.
+            MapBuildings(i).Location = tempDrawPos
+
+            Dim fixedLocation As Point = New Point(MapBuildings(i).Location.X + 1, MapBuildings(i).Location.Y + 1)
+
+            fixedLocation.X += (MapBuildings(i).FullImage.Width - (MapBuildings(i).BuildingW * TileSizeX)) / 2
+            fixedLocation.Y += (MapBuildings(i).FullImage.Height - (MapBuildings(i).BuildingH * TileSizeY)) / 2
+
+            PointToGrid(fixedLocation)
+            MapBuildings(i).Location = fixedLocation
+        End If
+    End Sub
+
+    Public Function GetSaveData() As String
+        Dim saveFileData As String = ""
+
+        saveFileData += "[Terrain]" + vbNewLine + _
+            "; Terrain Format: {str_ID|i_posX|i_posY}" + vbNewLine
+
+        Dim terrainNumber As Integer = 0
+        For i As Integer = 0 To MapTiles.Length - 1
+            If MapTiles(i).HasData Then
+                saveFileData += "Terrain" + terrainNumber.ToString + " = {" + MapTiles(i).TileId.ToString + "|" + (MapTiles(i).X / TileSizeX).ToString + "|" + (MapTiles(i).Y / TileSizeY).ToString + "}" + vbNewLine
+                terrainNumber += 1
+            End If
+        Next
+
+        saveFileData += vbNewLine + "[Buildings]" + vbNewLine + _
+                        "; Building Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}" + vbNewLine
+
+        Dim buildingNumber As Integer = 0
+        For i As Integer = 0 To MapBuildings.Count() - 1
+            If MapBuildings(i).HasData Then
+                saveFileData += "Building" + buildingNumber.ToString + " = {" + MapBuildings(i).BuildingId + "|" + (MapBuildings(i).Location.X / TileSizeX).ToString + "|" + (MapBuildings(i).Location.Y / TileSizeY).ToString + "|" + CInt(MapBuildings(i).Team).ToString + "|" + MapBuildings(i).Angle.ToString + "|" + MapBuildings(i).Damage.ToString + "}" + vbNewLine
+                buildingNumber += 1
+            End If
+        Next
+
+        saveFileData += vbNewLine + "[Units]" + vbNewLine + _
+                        "; Unit Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}" + vbNewLine
+
+        Dim unitNumber As Integer = 0
+        For i As Integer = 0 To MapUnits.Count() - 1
+            If MapUnits(i).HasData Then
+                saveFileData += "Unit" + unitNumber.ToString + " = {" + MapUnits(i).UnitId + "|" + MapUnits(i).X.ToString + "|" + MapUnits(i).Y.ToString + "|" + CInt(MapUnits(i).Team).ToString + "|" + MapUnits(i).Angle.ToString + "|" + MapUnits(i).Damage.ToString + "}" + vbNewLine
+                unitNumber += 1
+            End If
+        Next
+
+        Return saveFileData
+    End Function
 End Class
