@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Assets.vb" />
     <Compile Include="Building.vb" />
     <Compile Include="Constants.vb" />
     <Compile Include="CustomColorTable.vb" />

@@ -59,7 +59,6 @@ Public Class FRMEditor
     Private MouseY As Integer
     Private MouseXNoSnap As Integer
     Private MouseYNoSnap As Integer
-    Dim Background As Image = Image.FromFile(FullBasePath + "/Other Data/Background.png")
 
     Public ActiveEditMode As EditMode = EditMode.Tiles
     Public ActiveToolMode As ToolMode = ToolMode.Brush
@@ -75,18 +74,6 @@ Public Class FRMEditor
     Dim SelY_Units As Integer
 
     ReadOnly CustomToolStripRenderer As ToolStripProfessionalRenderer = New ToolStripProfessionalRenderer(New CustomColorTable())
-
-    'Button graphics.
-    ReadOnly ButtonNeutral As Image = Image.FromFile(FullBasePath & "/Other Data/ButtonNeutralUnderlay.png")
-    ReadOnly ButtonAstro As Image = Image.FromFile(FullBasePath & "/Other Data/ButtonAstroUnderlay.png")
-    ReadOnly ButtonAlien As Image = Image.FromFile(FullBasePath & "/Other Data/ButtonAlienUnderlay.png")
-    ReadOnly ButtonOverlay As Image = Image.FromFile(FullBasePath & "/Other Data/ButtonOverlay.png")
-
-    'Building baseplate graphics.
-    ReadOnly BaseplateAstroWide As Image = Image.FromFile(FullBasePath & "/Other Data/AstroBaseplateAlphaWide.png")
-    ReadOnly BaseplateAlienWide As Image = Image.FromFile(FullBasePath & "/Other Data/AlienBaseplateAlphaWide.png")
-    ReadOnly BaseplateAstroSmall As Image = Image.FromFile(FullBasePath & "/Other Data/AstroBaseplateAlphaSmall.png")
-    ReadOnly BaseplateAlienSmall As Image = Image.FromFile(FullBasePath & "/Other Data/AlienBaseplateAlphaSmall.png")
 
     'INI Variables.
     Dim INIArray As String = ""
@@ -121,7 +108,11 @@ Public Class FRMEditor
 #End Region
 
     Private Sub FRMEditor_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        'Storing default form title.
         BaseFormTitle = Me.Text
+
+        'Loading assets.
+        LoadAssets()
 
         'Setting version information.
         LBLAboutVersion.Text = BuildType + " v" + My.Application.Info.Version.Major.ToString + "." + My.Application.Info.Version.Minor.ToString
