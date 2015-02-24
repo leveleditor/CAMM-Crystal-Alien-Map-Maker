@@ -1,8 +1,8 @@
 ﻿Public Class Map
 
     Public Sub New()
-        MapSizeX = 10
-        MapSizeY = 10
+        SizeX = 10
+        SizeY = 10
         FileName = ""
         MapTitle = ""
         IsMapFinal = False
@@ -14,24 +14,8 @@
         MapUnits = New List(Of Unit)
     End Sub
 
-    Private _mapSizeX As Integer
-    Public Property MapSizeX As Integer
-        Get
-            Return _mapSizeX
-        End Get
-        Private Set(value As Integer)
-            _mapSizeX = value
-        End Set
-    End Property
-    Private _mapSizeY As Integer
-    Public Property MapSizeY As Integer
-        Get
-            Return _mapSizeY
-        End Get
-        Private Set(value As Integer)
-            _mapSizeY = value
-        End Set
-    End Property
+    Public SizeX As Integer
+    Public SizeY As Integer
 
     Public FileName As String
     Public MapTitle As String
@@ -46,11 +30,11 @@
     Public Sub SetSize(ByVal width As Integer, ByVal height As Integer)
         ' TODO: The map shouldn't resize if it's already at the specified size, but due to a tempfix for bug "unplacable grid spaces after loading a map" it has to be able to set the map to it's own size...
         'If (width <> MapSizeX And height <> MapSizeY) Then
-        ReDim TempTiles(MapSizeX * MapSizeY)
+        ReDim TempTiles(SizeX * SizeY)
         TempTiles = MapTiles
 
-        MapSizeX = width
-        MapSizeY = height
+        SizeX = width
+        SizeY = height
 
         InitTiles()
 
@@ -65,7 +49,7 @@
         Dim tempUnits As List(Of Unit) = MapUnits.ToList()
         For i As Integer = 0 To MapUnits.Count() - 1
             Dim pos As Point = MapUnits(i).Position
-            If pos.X < 0 Or pos.Y < 0 Or pos.X > (MapSizeX * TileSizeX) - 1 Or pos.Y > (MapSizeY * TileSizeY) - 1 Then
+            If pos.X < 0 Or pos.Y < 0 Or pos.X > (SizeX * TileSizeX) - 1 Or pos.Y > (SizeY * TileSizeY) - 1 Then
                 tempUnits.Remove(MapUnits(i))
             End If
         Next
@@ -83,8 +67,8 @@
 
     Public Sub InitTiles()
         Dim tilesCounted As Integer = 0
-        For y As Integer = 0 To (MapSizeY - 1) * TileSizeY Step TileSizeY
-            For x As Integer = 0 To (MapSizeX - 1) * TileSizeX Step TileSizeX
+        For y As Integer = 0 To (SizeY - 1) * TileSizeY Step TileSizeY
+            For x As Integer = 0 To (SizeX - 1) * TileSizeX Step TileSizeX
                 ReDim Preserve MapTiles(tilesCounted)
                 MapTiles(tilesCounted) = New Tile(x, y)
                 tilesCounted += 1
@@ -207,9 +191,9 @@
             Return False
         ElseIf mouseY < 0 Then
             Return False
-        ElseIf mouseX > (MapSizeX * TileSizeX) - 1 Then
+        ElseIf mouseX > (SizeX * TileSizeX) - 1 Then
             Return False
-        ElseIf mouseY > (MapSizeY * TileSizeY) - 1 Then
+        ElseIf mouseY > (SizeY * TileSizeY) - 1 Then
             Return False
             'ElseIf IsMouseOnMap = False Then
             '    Return False

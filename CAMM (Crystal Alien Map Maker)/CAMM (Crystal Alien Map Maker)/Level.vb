@@ -45,8 +45,8 @@
         saveFileData += _
             "[Level]" + vbNewLine + _
             "Title = " + Map.MapTitle + vbNewLine + _
-            "W = " + Map.MapSizeX.ToString + vbNewLine + _
-            "H = " + Map.MapSizeY.ToString + vbNewLine + _
+            "W = " + Map.SizeX.ToString + vbNewLine + _
+            "H = " + Map.SizeY.ToString + vbNewLine + _
             "Team = " + CInt(Team).ToString + vbNewLine + _
             "CashPlayer = " + CashPlayer.ToString + vbNewLine + _
             "CashEnemy = " + CashEnemy.ToString + vbNewLine + _

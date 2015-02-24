@@ -41,17 +41,6 @@ Public Class FRMEditor
         End Set
     End Property
 
-    Private ReadOnly Property MapSizeX As Integer
-        Get
-            Return ActiveMap.MapSizeX
-        End Get
-    End Property
-    Private ReadOnly Property MapSizeY As Integer
-        Get
-            Return ActiveMap.MapSizeY
-        End Get
-    End Property
-
     Private IsLoaded As Boolean = False
     Private IsMouseOnMap As Boolean = False
     Public IsDrawing As Boolean = False
@@ -371,9 +360,9 @@ Public Class FRMEditor
     Private Sub ResizeMap(ByVal width As Integer, ByVal height As Integer)
         ActiveMap.SetSize(width, height)
 
-        TXTWidth.Text = ActiveMap.MapSizeX
-        TXTHeight.Text = ActiveMap.MapSizeY
-        PICMap.Size = New Size((ActiveMap.MapSizeX * TileSizeX) + 1, (ActiveMap.MapSizeY * TileSizeY) + 1)
+        TXTWidth.Text = ActiveMap.SizeX
+        TXTHeight.Text = ActiveMap.SizeY
+        PICMap.Size = New Size((ActiveMap.SizeX * TileSizeX) + 1, (ActiveMap.SizeY * TileSizeY) + 1)
 
         PICMap.Invalidate()
     End Sub
@@ -930,9 +919,9 @@ Public Class FRMEditor
         ActiveLevelNum = Levels.IndexOf(newLevel)
         UpdateFormTitle()
 
-        PICMap.Size = New Size((ActiveMap.MapSizeX * TileSizeX) + 1, (ActiveMap.MapSizeY * TileSizeY) + 1)
-        TXTWidth.Text = ActiveMap.MapSizeX
-        TXTHeight.Text = ActiveMap.MapSizeY
+        PICMap.Size = New Size((ActiveMap.SizeX * TileSizeX) + 1, (ActiveMap.SizeY * TileSizeY) + 1)
+        TXTWidth.Text = ActiveMap.SizeX
+        TXTHeight.Text = ActiveMap.SizeY
     End Sub
 
     Private Sub CMDOpen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDOpen.Click
@@ -1080,7 +1069,7 @@ Public Class FRMEditor
         End If
 
         'TODO: Temp fix for bug unplacable grid spaces after loading a map.
-        ResizeMap(MapSizeX, MapSizeY)
+        ResizeMap(ActiveMap.SizeX, ActiveMap.SizeY)
 
         IsMapOpen = True
         ActiveMap.FileName = OpenMap.FileName
@@ -1223,7 +1212,7 @@ Public Class FRMEditor
         Next
 
         'TODO: Temp fix for bug unplacable grid spaces after loading a map.
-        ResizeMap(MapSizeX, MapSizeY)
+        ResizeMap(ActiveMap.SizeX, ActiveMap.SizeY)
 
         IsMapOpen = True
         ActiveMap.FileName = OpenMap.FileName
@@ -1289,9 +1278,9 @@ Public Class FRMEditor
             Return False
         ElseIf MouseY < 0 Then
             Return False
-        ElseIf MouseX > (MapSizeX * TileSizeX) - 1 Then
+        ElseIf MouseX > (ActiveMap.SizeX * TileSizeX) - 1 Then
             Return False
-        ElseIf MouseY > (MapSizeY * TileSizeY) - 1 Then
+        ElseIf MouseY > (ActiveMap.SizeY * TileSizeY) - 1 Then
             Return False
         ElseIf IsMouseOnMap = False Then
             Return False
@@ -1357,10 +1346,10 @@ Public Class FRMEditor
             TXTHeight.Text = "30"
         ElseIf CInt(TXTWidth.Text) = 0 Then
             MsgBox("If a 2-Dimensional object has a width of 0, does it really exist?" + vbNewLine + "Width cannot be 0.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            TXTWidth.Text = MapSizeX
+            TXTWidth.Text = ActiveMap.SizeX
         ElseIf CInt(TXTHeight.Text) = 0 Then
             MsgBox("If a 2-Dimensional object has a height of 0, does it really exist?" + vbNewLine + "Height cannot be 0.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            TXTHeight.Text = MapSizeY
+            TXTHeight.Text = ActiveMap.SizeY
         ElseIf CInt(TXTWidth.Text) < 10 Then
             MsgBox("Width cannot be less than 10." + vbNewLine + "Gameplay reasons.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
             TXTWidth.Text = "10"
@@ -1587,8 +1576,8 @@ Public Class FRMEditor
 
     Private Sub CMDExportPNG_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDExportPNG.Click
         If SavePNG.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            Dim W As Integer = (MapSizeX * TileSizeX) + 1
-            Dim H As Integer = (MapSizeY * TileSizeY) + 1
+            Dim W As Integer = (ActiveMap.SizeX * TileSizeX) + 1
+            Dim H As Integer = (ActiveMap.SizeY * TileSizeY) + 1
             Dim img As Image = New Bitmap(W, H, Imaging.PixelFormat.Format24bppRgb)
             Dim g As Graphics = Graphics.FromImage(img)
             RenderMapToGraphics(g)
@@ -1598,10 +1587,10 @@ Public Class FRMEditor
     End Sub
 
     Private Sub CMDExportAS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDExportAS.Click
-        Dim ExportASTileData As String = Ascii(MapSizeX) + Ascii(MapSizeY)
+        Dim ExportASTileData As String = Ascii(ActiveMap.SizeX) + Ascii(ActiveMap.SizeY)
 
-        For y As Integer = 0 To MapSizeY - 1
-            For x As Integer = 0 To MapSizeX - 1
+        For y As Integer = 0 To ActiveMap.SizeY - 1
+            For x As Integer = 0 To ActiveMap.SizeX - 1
                 Dim idx As Integer = ActiveMap.GetTileAt(x * TileSizeX, y * TileSizeY).TileId
                 If idx < 0 Then
                     idx = 0
@@ -1639,8 +1628,8 @@ Public Class FRMEditor
         If FRMImportAS.ShowDialog(Me) = Windows.Forms.DialogResult.OK And ImportASTileData <> "" Then
             'TODO: This will have to do for now.
             Dim count As Integer = 0
-            For y As Integer = 0 To (MapSizeY - 1) * TileSizeY Step TileSizeY
-                For x As Integer = 0 To (MapSizeX - 1) * TileSizeX Step TileSizeX
+            For y As Integer = 0 To (ActiveMap.SizeY - 1) * TileSizeY Step TileSizeY
+                For x As Integer = 0 To (ActiveMap.SizeX - 1) * TileSizeX Step TileSizeX
                     'ReDim Preserve MapTiles(count)
                     'MapTiles(count) = New Tile(x, y)
 
