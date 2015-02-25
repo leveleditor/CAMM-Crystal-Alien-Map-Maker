@@ -1,6 +1,10 @@
-﻿Public Class Map
+﻿Imports Nini.Config
 
-    Public Sub New()
+Public Class Map
+
+    Public Sub New(ByVal parent As Level)
+        Level = parent
+
         SizeX = 10
         SizeY = 10
         FileName = ""
@@ -14,16 +18,43 @@
         MapUnits = New List(Of Unit)
     End Sub
 
-    Public SizeX As Integer
-    Public SizeY As Integer
+    Private _level As Level
+    Public Property Level As Level
+        Get
+            Return _level
+        End Get
+        Private Set(value As Level)
+            _level = value
+        End Set
+    End Property
+
+    Private _sizeX As Integer
+    Public Property SizeX As Integer
+        Get
+            Return _sizeX
+        End Get
+        Private Set(value As Integer)
+            _sizeX = value
+        End Set
+    End Property
+
+    Private _sizeY As Integer
+    Public Property SizeY As Integer
+        Get
+            Return _sizeY
+        End Get
+        Private Set(value As Integer)
+            _sizeY = value
+        End Set
+    End Property
 
     Public FileName As String
     Public MapTitle As String
     Public IsMapFinal As Boolean
 
-    Public MapTiles As Tile()
-    Public MapBuildings As List(Of Building)
-    Public MapUnits As List(Of Unit)
+    Private MapTiles As Tile()
+    Private MapBuildings As List(Of Building)
+    Private MapUnits As List(Of Unit)
     'Temporary array for resizing the map.
     Private TempTiles As Tile()
 
@@ -276,6 +307,103 @@
         End If
     End Sub
 
+    Public Sub Draw(ByRef g As Graphics, ByVal drawGrid As Boolean, Optional ByVal debugBuildingPos As Boolean = False)
+        g.Clear(Color.FromKnownColor(KnownColor.Control))
+
+        ' Draw the background
+        Dim bgX As Integer = 0
+        Dim bgY As Integer = 0
+        Do Until bgX >= SizeX * TileSizeX
+            Do Until bgY >= SizeY * TileSizeY
+                g.DrawImage(Background, bgX, bgY)
+                bgY += Background.Height
+            Loop
+            bgY = 0
+            bgX += Background.Width
+        Loop
+
+        ' Draw any existing tiles.
+        For i As Integer = 0 To MapTiles.Length - 1
+            If MapTiles(i).HasData Then
+                g.DrawImage(MapTiles(i).Image, MapTiles(i).Position)
+            End If
+        Next
+
+        ' Draw building baseplates.
+        For i As Integer = 0 To MapBuildings.Count() - 1
+            If MapBuildings(i).HasData Then
+                Dim teamBaseplate As Image = Nothing
+                If MapBuildings(i).Team = Team.Astros And MapBuildings(i).BuildingW = 1 Then
+                    teamBaseplate = BaseplateAstroSmall
+                ElseIf MapBuildings(i).Team = Team.Aliens And MapBuildings(i).BuildingW = 1 Then
+                    teamBaseplate = BaseplateAlienSmall
+                ElseIf MapBuildings(i).Team = Team.Astros Then
+                    teamBaseplate = BaseplateAstroWide
+                ElseIf MapBuildings(i).Team = Team.Aliens Then
+                    teamBaseplate = BaseplateAlienWide
+                End If
+                If teamBaseplate IsNot Nothing Then
+                    Dim location As Point = MapBuildings(i).Location
+                    If MapBuildings(i).BuildingW > 1 Then
+                        location.X += (MapBuildings(i).BuildingW * TileSizeX) / 2
+                        location.X -= TileSizeX
+                    Else
+                        location.X -= TileSizeX / 2
+                    End If
+                    If MapBuildings(i).BuildingH > 1 Then
+                        location.Y += (MapBuildings(i).BuildingH * TileSizeY) - TileSizeY
+                    End If
+                    location.Y -= TileSizeY + 10
+
+                    g.DrawImage(teamBaseplate, _
+                             location.X, _
+                             location.Y, _
+                             teamBaseplate.Width, _
+                             teamBaseplate.Height)
+                End If
+            End If
+        Next
+
+        ' Draw any existing buildings.
+        For i As Integer = 0 To MapBuildings.Count() - 1
+            If MapBuildings(i).HasData Then
+
+                g.DrawImage(MapBuildings(i).FullImage, _
+                     MapBuildings(i).DrawPos.X, _
+                     MapBuildings(i).DrawPos.Y, _
+                     MapBuildings(i).FullImage.Width, _
+                     MapBuildings(i).FullImage.Height)
+
+                If debugBuildingPos Then
+                    g.DrawRectangle(Pens.Lime, MapBuildings(i).Location.X - 1, MapBuildings(i).Location.Y - 1, 2, 2)
+                    g.DrawRectangle(Pens.Blue, MapBuildings(i).DrawPos.X - 2, MapBuildings(i).DrawPos.Y - 2, 4, 4)
+                End If
+            End If
+        Next
+
+        ' Draw any existing units.
+        For i As Integer = 0 To MapUnits.Count() - 1
+            If MapUnits(i).HasData Then
+
+                g.DrawImage(MapUnits(i).FullImage, _
+                     MapUnits(i).Position.X - CInt(MapUnits(i).FullImage.Width / 2), _
+                     MapUnits(i).Position.Y - CInt(MapUnits(i).FullImage.Height / 2), _
+                     MapUnits(i).FullImage.Width, _
+                     MapUnits(i).FullImage.Height)
+            End If
+        Next
+
+        If drawGrid Then
+            ' Draw the grid.
+            For x As Integer = 0 To SizeX * TileSizeX Step TileSizeX
+                For y As Integer = 0 To SizeY * TileSizeY Step TileSizeY
+                    g.DrawLine(PenGrid, x, y, x + 0.5F, y + TileSizeY)
+                    g.DrawLine(PenGrid, x, y, x + TileSizeX, y + 0.5F)
+                Next y
+            Next x
+        End If
+    End Sub
+
     Public Function GetSaveData() As String
         Dim saveFileData As String = ""
 
@@ -314,4 +442,245 @@
 
         Return saveFileData
     End Function
+
+    Public Sub LoadMapv0(ByVal source As IniConfigSource)
+        Dim config As IniConfig
+
+        config = source.Configs.Item("Map Size")
+        SetSize(config.GetInt("W"), config.GetInt("H"))
+
+        MapTitle = "Converted Map"
+
+        config = source.Configs.Item("Tile Data")
+        For i As Integer = 0 To MapTiles.Length - 1
+            Dim tempName As String = "Tile_1_" + (i + 1).ToString
+            Dim tempArray As String() = config.Get(tempName).Trim("()".ToCharArray).Split(New Char() {Char.Parse(":")}, StringSplitOptions.None)
+            Dim tempTileId As Integer = Integer.Parse(tempArray(0))
+
+            'There is no need of getting the 'Team' info since it should have always been set as 'Neutral' and it's useless now.
+
+            ' Upgrade old terrain Ids
+            UpgradeTerrainId(0, MapFormat, tempTileId)
+
+            MapTiles(i).TileId = tempTileId
+
+            For j As Integer = 0 To FRMEditor.SelTiles.Length - 1
+                If MapTiles(i).TileId = FRMEditor.SelTiles(j).TileId Then
+                    MapTiles(i).Image = FRMEditor.SelTiles(j).Image
+                    Exit For
+                End If
+            Next
+        Next
+    End Sub
+
+    Public Sub LoadMapv1(ByVal source As IniConfigSource)
+        Dim config As IniConfig
+
+        config = source.Configs.Item("Level")
+        MapTitle = config.GetString("Title")
+        SetSize(config.GetInt("W"), config.GetInt("H"))
+        Level.Team = CType(config.GetInt("Team"), Team)
+
+        config = source.Configs.Item("Terrain")
+        Dim terrainCount As Integer = config.GetKeys().Length - 1
+        If terrainCount > 0 Then
+            For i As Integer = 0 To terrainCount
+                If config.GetKeys(i) <> "-1" Then
+                    Dim keyArray As String() = config.Get(config.GetKeys(i)).Trim("{}".ToCharArray).Split(New Char() {Char.Parse("|")}, StringSplitOptions.None)
+                    Dim terrainId As Integer = Integer.Parse(keyArray(0))
+                    Dim posX As Integer = keyArray(1)
+                    Dim posY As Integer = keyArray(2)
+
+                    ' Upgrade old terrain Ids
+                    UpgradeTerrainId(1, MapFormat, terrainId)
+
+                    MapTiles(i).TileId = terrainId
+                    MapTiles(i).Position = New Point(posX * TileSizeX, posY * TileSizeY)
+                    For j As Integer = 0 To FRMEditor.SelTiles.Length - 1
+                        If MapTiles(i).TileId = FRMEditor.SelTiles(j).TileId Then
+                            MapTiles(i).Image = FRMEditor.SelTiles(j).Image
+                            Exit For
+                        End If
+                    Next
+                End If
+            Next
+        End If
+
+        config = source.Configs.Item("Objects")
+        Dim objectCount As Integer = config.GetKeys().Length - 1
+        If objectCount > 0 Then
+            For i As Integer = 0 To objectCount
+                If config.GetKeys(i) <> "-1" Then
+                    Dim keyArray As String() = config.Get(config.GetKeys(i)).Trim("{}".ToCharArray).Split(New Char() {Char.Parse("|")}, StringSplitOptions.None)
+                    Dim buildingId As String = keyArray(0)
+                    Dim posX As Integer = keyArray(1)
+                    Dim posY As Integer = keyArray(2)
+                    Dim isFriend As Boolean = keyArray(3)
+                    Dim team As Team = team.Astros
+                    If isFriend Then
+                        team = team.Aliens
+                    End If
+                    Dim angle As Single = keyArray(4)
+                    Dim damage As Single = keyArray(5)
+
+                    MapBuildings.Add(New Building(posX * TileSizeX, posY * TileSizeY))
+
+                    ' Upgrade old building Ids
+                    UpgradeBuildingId(1, MapFormat, buildingId)
+
+                    MapBuildings(i).BuildingId = buildingId
+
+                    MapBuildings(i).Team = team
+                    MapBuildings(i).Angle = angle
+                    MapBuildings(i).Damage = damage
+                    For j As Integer = 0 To FRMEditor.SelBuildings.Length - 1
+                        If MapBuildings(i).BuildingId = FRMEditor.SelBuildings(j).BuildingId Then
+                            MapBuildings(i).Image = FRMEditor.SelBuildings(j).Image
+                            MapBuildings(i).FullImage = FRMEditor.SelBuildings(j).FullImage
+                            'Note to self:
+                            'I wasted half a day trying to figure out what was going wrong,
+                            'only to discover I forgot these 2 extremely obvious missing lines:
+                            MapBuildings(i).BuildingW = FRMEditor.SelBuildings(j).BuildingW
+                            MapBuildings(i).BuildingH = FRMEditor.SelBuildings(j).BuildingH
+                            Exit For
+                        End If
+                    Next
+
+                    UpgradeBuildingLocation(1, MapFormat, i, posX * TileSizeX)
+                End If
+            Next
+        End If
+    End Sub
+
+    Public Sub LoadMap(ByVal source As IniConfigSource, ByVal v As Integer)
+        Dim config As IniConfig
+
+        config = source.Configs.Item("Level")
+        MapTitle = config.GetString("Title")
+        SetSize(config.GetInt("W"), config.GetInt("H"))
+        Level.Team = CType(config.GetInt("Team"), Team)
+        Level.CashPlayer = config.GetInt("CashPlayer", Level.CashPlayerDefault)
+        Level.CashEnemy = config.GetInt("CashEnemy", Level.CashEnemyDefault)
+        Level.IsTraining = config.GetBoolean("isTraining", Level.IsTrainingDefault)
+        Level.IsConflict = config.GetBoolean("isConflict", Level.IsConflictDefault)
+        Level.IsSpecialLevel = config.GetBoolean("isSpecialLevel", Level.IsSpecialLevelDefault)
+        Level.IsLastSpecialLevel = config.GetBoolean("isLastSpecialLevel", Level.IsLastSpecialLevelDefault)
+        Level.IsBonusLevel = config.GetBoolean("isBonusLevel", Level.IsBonusLevelDefault)
+        IsMapFinal = config.GetBoolean("Final", False)
+
+        config = source.Configs.Item("Terrain")
+        For i As Integer = 0 To config.GetKeys().Length - 1
+            If config.GetKeys(i) <> "-1" Then
+                Dim keyArray As String() = config.Get(config.GetKeys(i)).Trim("{}".ToCharArray).Split(New Char() {Char.Parse("|")}, StringSplitOptions.None)
+                Dim terrainId As Integer = Integer.Parse(keyArray(0))
+                Dim posX As Integer = keyArray(1)
+                Dim posY As Integer = keyArray(2)
+
+                ' Upgrade old terrain Ids
+                UpgradeTerrainId(v, MapFormat, terrainId)
+
+                MapTiles(i).TileId = terrainId
+
+                MapTiles(i).Position = New Point(posX * TileSizeX, posY * TileSizeY)
+                For j As Integer = 0 To FRMEditor.SelTiles.Length - 1
+                    If MapTiles(i).TileId = FRMEditor.SelTiles(j).TileId Then
+                        MapTiles(i).Image = FRMEditor.SelTiles(j).Image
+                        Exit For
+                    End If
+                Next
+            End If
+        Next
+
+        config = source.Configs.Item("Buildings")
+        For i As Integer = 0 To config.GetKeys().Length - 1
+            If config.GetKeys(i) <> "-1" Then
+                Dim keyArray As String() = config.Get(config.GetKeys(i)).Trim("{}".ToCharArray).Split(New Char() {Char.Parse("|")}, StringSplitOptions.None)
+                Dim objectId As String = keyArray(0)
+                Dim posX As Integer = keyArray(1)
+                Dim posY As Integer = keyArray(2)
+                Dim isFriend As Boolean = keyArray(3)
+                Dim team As Team = team.Astros
+                If isFriend Then
+                    team = team.Aliens
+                End If
+                Dim angle As Single = keyArray(4)
+                Dim damage As Single = keyArray(5)
+
+                MapBuildings.Add(New Building(posX * TileSizeX, posY * TileSizeY))
+
+                ' Upgrade old building Ids
+                UpgradeBuildingId(v, MapFormat, objectId)
+
+                MapBuildings(i).BuildingId = objectId
+
+                MapBuildings(i).Team = team
+                MapBuildings(i).Angle = angle
+                MapBuildings(i).Damage = damage
+                For j As Integer = 0 To FRMEditor.SelBuildings.Length - 1
+                    If MapBuildings(i).BuildingId = FRMEditor.SelBuildings(j).BuildingId Then
+                        MapBuildings(i).Image = FRMEditor.SelBuildings(j).Image
+                        MapBuildings(i).FullImage = FRMEditor.SelBuildings(j).FullImage
+                        MapBuildings(i).BuildingW = FRMEditor.SelBuildings(j).BuildingW
+                        MapBuildings(i).BuildingH = FRMEditor.SelBuildings(j).BuildingH
+                        Exit For
+                    End If
+                Next
+
+                If v < 4 Then
+                    UpgradeBuildingLocation(v, MapFormat, i, posX * TileSizeX)
+                End If
+            End If
+        Next
+
+        config = source.Configs.Item("Units")
+        For i As Integer = 0 To config.GetKeys().Length - 1
+            If config.GetKeys(i) <> "-1" Then
+                Dim keyArray As String() = config.Get(config.GetKeys(i)).Trim("{}".ToCharArray).Split(New Char() {Char.Parse("|")}, StringSplitOptions.None)
+                Dim unitId As String = keyArray(0)
+                Dim posX As Integer = keyArray(1)
+                Dim posY As Integer = keyArray(2)
+                Dim isFriend As Boolean = keyArray(3)
+                Dim team As Team = team.Astros
+                If isFriend Then
+                    team = team.Aliens
+                End If
+                Dim angle As Single = keyArray(4)
+                Dim damage As Single = keyArray(5)
+
+                Dim unitX, unitY As Integer
+                If v = 2 Then
+                    unitX = posX * TileSizeX
+                    unitY = posY * TileSizeY
+
+                    unitX += (TileSizeX / 2)
+
+                    Dim topLeftX As Single = Math.Floor((unitX / TileSizeX) - 1 / 2) + 1
+                    Dim topLeftY As Single = Math.Floor((unitX / TileSizeX) - 1 + 3)
+                    Dim dockX As Single = (topLeftX + ((1 / 2) - 1)) + 1 * TileSizeX
+                    Dim dockY As Single = (topLeftY + (1 - 1)) + 1 * TileSizeX
+                    dockX = Math.Ceiling(dockX / TileSizeX)
+                    dockY = Math.Ceiling(dockY / TileSizeY)
+
+                    unitX -= dockX
+                    unitY -= dockY + TileSizeY
+                Else
+                    unitX = posX
+                    unitY = posY
+                End If
+
+                ' Upgrade old unit Ids
+                UpgradeUnitId(v, MapFormat, unitId)
+
+                Dim temp As Unit = New Unit(unitX, unitY, Nothing, unitId, team, angle, damage)
+                For j As Integer = 0 To FRMEditor.SelUnits.Length - 1
+                    If temp.UnitId = FRMEditor.SelUnits(j).BuildingId Then
+                        temp.Image = FRMEditor.SelUnits(j).Image
+                        temp.FullImage = FRMEditor.SelUnits(j).FullImage
+                        Exit For
+                    End If
+                Next
+                MapUnits.Add(temp)
+            End If
+        Next
+    End Sub
 End Class

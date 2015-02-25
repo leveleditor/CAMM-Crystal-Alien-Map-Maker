@@ -1,7 +1,7 @@
 ﻿Public Class Level
 
     Public Sub New()
-        Map = New Map()
+        Map = New Map(Me)
 
         Team = Team.Astros
         CashPlayer = CashPlayerDefault
