@@ -2,31 +2,26 @@
 
     Public Sub New(ByVal x As Integer, ByVal y As Integer)
         Me.Location = New Point(x, y)
-        Me.SmallImage = Nothing
         Me.BuildingId = ""
         Me.Team = Team.Astros
         Me.Angle = 0.0
         Me.Damage = 0.0
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image)
+    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal buildingId As String)
         Me.New(x, y)
-        Me.SmallImage = image
-    End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image, ByVal buildingId As String)
-        Me.New(x, y, image)
         Me.BuildingId = buildingId
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image, ByVal buildingId As String, ByVal team As Team)
-        Me.New(x, y, image, buildingId)
+    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal buildingId As String, ByVal team As Team)
+        Me.New(x, y, buildingId)
         Me.Team = team
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image, ByVal buildingId As String, ByVal team As Team, ByVal angle As Single, ByVal damage As Single)
-        Me.New(x, y, image, buildingId, team)
+    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal buildingId As String, ByVal team As Team, ByVal angle As Single, ByVal damage As Single)
+        Me.New(x, y, buildingId, team)
         Me.Angle = angle
         Me.Damage = damage
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image, ByVal buildingId As String, ByVal team As Team, ByVal angle As Single, ByVal damage As Single, ByVal width As Integer, ByVal height As Integer)
-        Me.New(x, y, image, buildingId, team, angle, damage)
+    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal buildingId As String, ByVal team As Team, ByVal angle As Single, ByVal damage As Single, ByVal width As Integer, ByVal height As Integer)
+        Me.New(x, y, buildingId, team, angle, damage)
         Me.BuildingW = width
         Me.BuildingH = height
     End Sub
@@ -81,24 +76,24 @@
         End Get
     End Property
 
-    Private _smallImage As Image
-    Public Property SmallImage() As Image
+    Public ReadOnly Property SmallImage() As Image
         Get
-            Return _smallImage
+            If Not String.IsNullOrEmpty(BuildingId) Then
+                Return BuildingSmallImageLookup(BuildingId)
+            Else
+                Return Nothing
+            End If
         End Get
-        Set(ByVal value As Image)
-            _smallImage = value
-        End Set
     End Property
 
-    Private _fullImage As Image
-    Public Property FullImage() As Image
+    Public ReadOnly Property FullImage() As Image
         Get
-            Return _fullImage
+            If Not String.IsNullOrEmpty(BuildingId) Then
+                Return BuildingFullImageLookup(BuildingId)
+            Else
+                Return Nothing
+            End If
         End Get
-        Set(ByVal value As Image)
-            _fullImage = value
-        End Set
     End Property
 
     Private _buildingId As String

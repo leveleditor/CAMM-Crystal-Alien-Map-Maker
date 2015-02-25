@@ -132,7 +132,7 @@ Public Class Map
         If IsMouseInBounds(mouseX, mouseY) Then
             For i As Integer = 0 To MapTiles.Length - 1
                 If MapTiles(i).Position.X = mouseX And MapTiles(i).Position.Y = mouseY Then
-                    MapTiles(i) = New Tile(mouseX, mouseY, tile.Image, tile.TileId, tile.IsPassable, tile.IsMinerals)
+                    MapTiles(i) = New Tile(mouseX, mouseY, tile.TileId, tile.IsPassable, tile.IsMinerals)
                 End If
             Next
         End If
@@ -175,15 +175,13 @@ Public Class Map
                 If MapBuildings(i).Location.X = mouseX And MapBuildings(i).Location.Y = mouseY Then
                     found = True
 
-                    MapBuildings(i) = New Building(mouseX, mouseY, building.SmallImage, building.BuildingId, building.Team, building.Angle, building.Damage, building.BuildingW, building.BuildingH)
-                    MapBuildings(i).FullImage = building.FullImage
+                    MapBuildings(i) = New Building(mouseX, mouseY, building.BuildingId, building.Team, building.Angle, building.Damage, building.BuildingW, building.BuildingH)
 
                     Exit For
                 End If
             Next
             If Not found Then
-                Dim newBuilding As Building = New Building(mouseX, mouseY, building.SmallImage, building.BuildingId, building.Team, building.Angle, building.Damage, building.BuildingW, building.BuildingH)
-                newBuilding.FullImage = building.FullImage
+                Dim newBuilding As Building = New Building(mouseX, mouseY, building.BuildingId, building.Team, building.Angle, building.Damage, building.BuildingW, building.BuildingH)
                 MapBuildings.Add(newBuilding)
             End If
 
@@ -205,8 +203,7 @@ Public Class Map
                 End If
             Next
             If Not found Then
-                Dim newUnit As Unit = New Unit(mouseX, mouseY, unit.SmallImage, unit.UnitId, unit.Team, unit.Angle, unit.Damage)
-                newUnit.FullImage = unit.FullImage
+                Dim newUnit As Unit = New Unit(mouseX, mouseY, unit.UnitId, unit.Team, unit.Angle, unit.Damage)
                 MapUnits.Add(newUnit)
 
                 ' Reorder the list based on the Y locations of the units.
@@ -463,13 +460,6 @@ Public Class Map
             UpgradeTerrainId(0, MapFormat, tempTileId)
 
             MapTiles(i).TileId = tempTileId
-
-            For j As Integer = 0 To FRMEditor.SelTiles.Length - 1
-                If MapTiles(i).TileId = FRMEditor.SelTiles(j).TileId Then
-                    MapTiles(i).Image = FRMEditor.SelTiles(j).Image
-                    Exit For
-                End If
-            Next
         Next
     End Sub
 
@@ -496,12 +486,6 @@ Public Class Map
 
                     MapTiles(i).TileId = terrainId
                     MapTiles(i).Position = New Point(posX * TileSizeX, posY * TileSizeY)
-                    For j As Integer = 0 To FRMEditor.SelTiles.Length - 1
-                        If MapTiles(i).TileId = FRMEditor.SelTiles(j).TileId Then
-                            MapTiles(i).Image = FRMEditor.SelTiles(j).Image
-                            Exit For
-                        End If
-                    Next
                 End If
             Next
         End If
@@ -535,8 +519,6 @@ Public Class Map
                     MapBuildings(i).Damage = damage
                     For j As Integer = 0 To FRMEditor.SelBuildings.Length - 1
                         If MapBuildings(i).BuildingId = FRMEditor.SelBuildings(j).BuildingId Then
-                            MapBuildings(i).SmallImage = FRMEditor.SelBuildings(j).SmallImage
-                            MapBuildings(i).FullImage = FRMEditor.SelBuildings(j).FullImage
                             'Note to self:
                             'I wasted half a day trying to figure out what was going wrong,
                             'only to discover I forgot these 2 extremely obvious missing lines:
@@ -582,12 +564,6 @@ Public Class Map
                 MapTiles(i).TileId = terrainId
 
                 MapTiles(i).Position = New Point(posX * TileSizeX, posY * TileSizeY)
-                For j As Integer = 0 To FRMEditor.SelTiles.Length - 1
-                    If MapTiles(i).TileId = FRMEditor.SelTiles(j).TileId Then
-                        MapTiles(i).Image = FRMEditor.SelTiles(j).Image
-                        Exit For
-                    End If
-                Next
             End If
         Next
 
@@ -618,8 +594,6 @@ Public Class Map
                 MapBuildings(i).Damage = damage
                 For j As Integer = 0 To FRMEditor.SelBuildings.Length - 1
                     If MapBuildings(i).BuildingId = FRMEditor.SelBuildings(j).BuildingId Then
-                        MapBuildings(i).SmallImage = FRMEditor.SelBuildings(j).SmallImage
-                        MapBuildings(i).FullImage = FRMEditor.SelBuildings(j).FullImage
                         MapBuildings(i).BuildingW = FRMEditor.SelBuildings(j).BuildingW
                         MapBuildings(i).BuildingH = FRMEditor.SelBuildings(j).BuildingH
                         Exit For
@@ -671,14 +645,7 @@ Public Class Map
                 ' Upgrade old unit Ids
                 UpgradeUnitId(v, MapFormat, unitId)
 
-                Dim temp As Unit = New Unit(unitX, unitY, Nothing, unitId, team, angle, damage)
-                For j As Integer = 0 To FRMEditor.SelUnits.Length - 1
-                    If temp.UnitId = FRMEditor.SelUnits(j).BuildingId Then
-                        temp.SmallImage = FRMEditor.SelUnits(j).SmallImage
-                        temp.FullImage = FRMEditor.SelUnits(j).FullImage
-                        Exit For
-                    End If
-                Next
+                Dim temp As Unit = New Unit(unitX, unitY, unitId, team, angle, damage)
                 MapUnits.Add(temp)
             End If
         Next

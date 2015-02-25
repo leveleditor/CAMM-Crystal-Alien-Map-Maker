@@ -10,6 +10,12 @@
         BaseplateAlienWide = Image.FromFile(FullBasePath + "/Other Data/AlienBaseplateAlphaWide.png")
         BaseplateAstroSmall = Image.FromFile(FullBasePath + "/Other Data/AstroBaseplateAlphaSmall.png")
         BaseplateAlienSmall = Image.FromFile(FullBasePath + "/Other Data/AlienBaseplateAlphaSmall.png")
+
+        TileImageLookup = New Dictionary(Of Integer, Image)()
+        BuildingSmallImageLookup = New Dictionary(Of String, Image)()
+        BuildingFullImageLookup = New Dictionary(Of String, Image)()
+        UnitSmallImageLookup = New Dictionary(Of String, Image)()
+        UnitFullImageLookup = New Dictionary(Of String, Image)()
     End Sub
 
     'Terrain background image.
@@ -26,5 +32,20 @@
     Public BaseplateAlienWide As Image
     Public BaseplateAstroSmall As Image
     Public BaseplateAlienSmall As Image
+
+    'Lookup for Tile Image graphics.
+    Public TileImageLookup As Dictionary(Of Integer, Image)
+
+    'Lookup for Building SmallImage graphics.
+    Public BuildingSmallImageLookup As Dictionary(Of String, Image)
+
+    'Lookup for Building FullImage graphics.
+    Public BuildingFullImageLookup As Dictionary(Of String, Image)
+
+    'Lookup for Unit SmallImage graphics.
+    Public UnitSmallImageLookup As Dictionary(Of String, Image)
+
+    'Lookup for Unit FullImage graphics.
+    Public UnitFullImageLookup As Dictionary(Of String, Image)
 
 End Module

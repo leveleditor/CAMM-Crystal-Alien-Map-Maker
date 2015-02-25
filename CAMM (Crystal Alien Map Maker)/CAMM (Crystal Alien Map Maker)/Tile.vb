@@ -2,21 +2,16 @@
 
     Public Sub New(ByVal x As Integer, ByVal y As Integer)
         Me.Position = New Point(x, y)
-        Me.Image = Nothing
         Me.TileId = -1
         Me.IsPassable = False
         Me.IsMinerals = False
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image)
+    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal tileId As Integer)
         Me.New(x, y)
-        Me.Image = image
-    End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image, ByVal tileId As Integer)
-        Me.New(x, y, image)
         Me.TileId = tileId
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image, ByVal tileId As Integer, ByVal isPassable As Boolean, ByVal isMinerals As Boolean)
-        Me.New(x, y, image, tileId)
+    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal tileId As Integer, ByVal isPassable As Boolean, ByVal isMinerals As Boolean)
+        Me.New(x, y, tileId)
         Me.IsPassable = isPassable
         Me.IsMinerals = isMinerals
     End Sub
@@ -55,14 +50,14 @@
         End Set
     End Property
 
-    Private _image As Image
-    Public Property Image() As Image
+    Public ReadOnly Property Image() As Image
         Get
-            Return _image
+            If TileId <> -1 Then
+                Return TileImageLookup(TileId)
+            Else
+                Return Nothing
+            End If
         End Get
-        Set(ByVal value As Image)
-            _image = value
-        End Set
     End Property
 
     Private _tileId As Integer

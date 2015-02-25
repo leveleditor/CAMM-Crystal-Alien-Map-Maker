@@ -2,26 +2,21 @@
 
     Public Sub New(ByVal x As Integer, ByVal y As Integer)
         Me.Position = New Point(x, y)
-        Me.SmallImage = Nothing
         Me.UnitId = ""
         Me.Team = Team.Astros
         Me.Angle = 0.0
         Me.Damage = 0.0
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image)
+    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal unitId As String)
         Me.New(x, y)
-        Me.SmallImage = image
-    End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image, ByVal unitId As String)
-        Me.New(x, y, image)
         Me.UnitId = unitId
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image, ByVal unitId As String, ByVal team As Team)
-        Me.New(x, y, image, unitId)
+    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal unitId As String, ByVal team As Team)
+        Me.New(x, y, unitId)
         Me.Team = team
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image, ByVal unitId As String, ByVal team As Team, ByVal angle As Single, ByVal damage As Single)
-        Me.New(x, y, image, unitId, team)
+    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal unitId As String, ByVal team As Team, ByVal angle As Single, ByVal damage As Single)
+        Me.New(x, y, unitId, team)
         Me.Angle = angle
         Me.Damage = damage
     End Sub
@@ -60,24 +55,24 @@
         End Set
     End Property
 
-    Private _smallImage As Image
-    Public Property SmallImage() As Image
+    Public ReadOnly Property SmallImage() As Image
         Get
-            Return _smallImage
+            If Not String.IsNullOrEmpty(UnitId) Then
+                Return UnitSmallImageLookup(UnitId)
+            Else
+                Return Nothing
+            End If
         End Get
-        Set(ByVal value As Image)
-            _smallImage = value
-        End Set
     End Property
 
-    Private _fullImage As Image
-    Public Property FullImage() As Image
+    Public ReadOnly Property FullImage() As Image
         Get
-            Return _fullImage
+            If Not String.IsNullOrEmpty(UnitId) Then
+                Return UnitFullImageLookup(UnitId)
+            Else
+                Return Nothing
+            End If
         End Get
-        Set(ByVal value As Image)
-            _fullImage = value
-        End Set
     End Property
 
     Private _unitId As String

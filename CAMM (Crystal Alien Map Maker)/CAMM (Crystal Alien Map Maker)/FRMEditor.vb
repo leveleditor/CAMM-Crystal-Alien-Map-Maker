@@ -73,7 +73,7 @@ Public Class FRMEditor
 
     Public Shared SelTiles() As Tile = {} 'Tile Selections.
     Public Shared SelBuildings() As Building = {} 'Unit, Building, and Item Selections.
-    Public Shared SelUnits() As Building = {} 'Unit Selections.
+    Public Shared SelUnits() As Unit = {} 'Unit Selections.
 
     Dim ActiveTile As Tile 'The currently active tile selection.
     Dim ActiveBuilding As Building 'The currently active object selection.
@@ -155,8 +155,10 @@ Public Class FRMEditor
                     Dim FullImageURL As String = My.Application.Info.DirectoryPath + DataPath + "/../" + ImageUrl
                     Dim TheImage As Image = Image.FromFile(FullImageURL)
 
+                    TileImageLookup.Add(TerrainID, TheImage)
+
                     ReDim Preserve SelTiles(Y1)
-                    SelTiles(Y1) = New Tile(0, Y1 * TileSizeY, TheImage, TerrainID, IsPassable, IsMinerals)
+                    SelTiles(Y1) = New Tile(0, Y1 * TileSizeY, TerrainID, IsPassable, IsMinerals)
 
                     Y1 += 1
 
@@ -168,7 +170,7 @@ Public Class FRMEditor
                 Dim KeyName As String = "Building" + i.ToString
                 If config.Get(KeyName, "-1") <> "-1" Then
                     Dim KeyArray As String() = config.Get(KeyName).Trim(INIArray.ToCharArray).Split(New Char() {INISeparator}, StringSplitOptions.None)
-                    Dim ObjectID As String = KeyArray(0)
+                    Dim BuildingId As String = KeyArray(0)
                     Dim Width As Integer = CInt(KeyArray(1))
                     Dim Height As Integer = CInt(KeyArray(2))
                     Dim Team As Team = CType(Integer.Parse(KeyArray(3)), Team)
@@ -189,9 +191,11 @@ Public Class FRMEditor
                     Dim TheImage As Image = flag
                     'TheImage = TheImage.GetThumbnailImage(TileSizeX, TileSizeY, Nothing, System.IntPtr.Zero)
 
+                    BuildingSmallImageLookup.Add(BuildingId, TheImage)
+                    BuildingFullImageLookup.Add(BuildingId, Image.FromFile(FullImageURL))
+
                     ReDim Preserve SelBuildings(Y2)
-                    SelBuildings(Y2) = New Building(0, Y2 * TileSizeY, TheImage, ObjectID, Team, Angle, Damage, Width, Height)
-                    SelBuildings(Y2).FullImage = Image.FromFile(FullImageURL)
+                    SelBuildings(Y2) = New Building(0, Y2 * TileSizeY, BuildingId, Team, Angle, Damage, Width, Height)
 
                     Y2 += 1
                 End If
@@ -202,9 +206,9 @@ Public Class FRMEditor
                 Dim KeyName As String = "Unit" + i.ToString
                 If config.Get(KeyName, "-1") <> "-1" Then
                     Dim KeyArray As String() = config.Get(KeyName).Trim(INIArray.ToCharArray).Split(New Char() {INISeparator}, StringSplitOptions.None)
-                    Dim ObjectID As String = KeyArray(0)
-                    Dim Width As Integer = CInt(KeyArray(1))
-                    Dim Height As Integer = CInt(KeyArray(2))
+                    Dim UnitId As String = KeyArray(0)
+                    'Dim Width As Integer = CInt(KeyArray(1))
+                    'Dim Height As Integer = CInt(KeyArray(2))
                     Dim Team As Team = CType(Integer.Parse(KeyArray(3)), Team)
                     Dim Angle As Single = CSng(KeyArray(4))
                     Dim Damage As Single = CSng(KeyArray(5))
@@ -238,9 +242,11 @@ Public Class FRMEditor
                     Dim TheImage As Image = flag
                     'TheImage = TheImage.GetThumbnailImage(TileSizeX, TileSizeY, Nothing, System.IntPtr.Zero)
 
+                    UnitSmallImageLookup.Add(UnitId, TheImage)
+                    UnitFullImageLookup.Add(UnitId, Image.FromFile(FullImageURL))
+
                     ReDim Preserve SelUnits(Y3)
-                    SelUnits(Y3) = New Building(0, Y3 * TileSizeY, TheImage, ObjectID, Team, Angle, Damage, Width, Height)
-                    SelUnits(Y3).FullImage = Image.FromFile(FullImageURL)
+                    SelUnits(Y3) = New Unit(0, Y3 * TileSizeY, UnitId, Team, Angle, Damage)
 
                     Y3 += 1
                 End If
@@ -584,7 +590,6 @@ Public Class FRMEditor
             For i As Integer = 0 To SelTiles.Length - 1
                 If SelTiles(i).Position = New Point(MouseX, MouseY) Then
                     PICActive.Image = SelTiles(i).Image
-                    ActiveTile.Image = SelTiles(i).Image
                     ActiveTile.TileId = SelTiles(i).TileId
                 End If
             Next
@@ -673,8 +678,6 @@ Public Class FRMEditor
             For i As Integer = 0 To SelBuildings.Length - 1
                 If SelBuildings(i).Location = New Point(MouseX, MouseY) Then
                     PICActive.Image = SelBuildings(i).SmallImage
-                    ActiveBuilding.SmallImage = SelBuildings(i).SmallImage
-                    ActiveBuilding.FullImage = SelBuildings(i).FullImage
                     ActiveBuilding.BuildingId = SelBuildings(i).BuildingId
                     ActiveBuilding.Team = SelBuildings(i).Team
                     ActiveBuilding.BuildingW = SelBuildings(i).BuildingW
@@ -697,13 +700,13 @@ Public Class FRMEditor
             For i As Integer = 0 To SelUnits.Length - 1
                 If SelUnits(i).HasData Then
                     If SelUnits(i).Team = Team.Astros Then
-                        e.Graphics.DrawImage(ButtonAstro, SelUnits(i).Location)
+                        e.Graphics.DrawImage(ButtonAstro, SelUnits(i).Position)
                     ElseIf SelUnits(i).Team = Team.Aliens Then
-                        e.Graphics.DrawImage(ButtonAlien, SelUnits(i).Location)
+                        e.Graphics.DrawImage(ButtonAlien, SelUnits(i).Position)
                     Else
-                        e.Graphics.DrawImage(ButtonNeutral, SelUnits(i).Location.X, SelUnits(i).Location.Y, ButtonNeutral.Width, ButtonNeutral.Height)
+                        e.Graphics.DrawImage(ButtonNeutral, SelUnits(i).Position.X, SelUnits(i).Position.Y, ButtonNeutral.Width, ButtonNeutral.Height)
                     End If
-                    e.Graphics.DrawImage(SelUnits(i).SmallImage, SelUnits(i).Location)
+                    e.Graphics.DrawImage(SelUnits(i).SmallImage, SelUnits(i).Position)
                     'e.Graphics.DrawImage(ButtonOverlay, SelUnits(i).Location)
                 End If
             Next
@@ -763,11 +766,9 @@ Public Class FRMEditor
             SelY_Units = MouseY
 
             For i As Integer = 0 To SelUnits.Length - 1
-                If SelUnits(i).Location = New Point(MouseX, MouseY) Then
+                If SelUnits(i).Position = New Point(MouseX, MouseY) Then
                     PICActive.Image = SelUnits(i).SmallImage
-                    ActiveUnit.SmallImage = SelUnits(i).SmallImage
-                    ActiveUnit.FullImage = SelUnits(i).FullImage
-                    ActiveUnit.UnitId = SelUnits(i).BuildingId
+                    ActiveUnit.UnitId = SelUnits(i).UnitId
                     ActiveUnit.Team = SelUnits(i).Team
                 End If
             Next
@@ -1290,8 +1291,7 @@ Public Class FRMEditor
 
                     For j As Integer = 0 To SelTiles.Length - 1
                         If tileId = SelTiles(j).TileId Then
-                            ActiveMap.SetTile(x, y, New Tile(x, y, SelTiles(j).Image, tileId))
-                            'MapTiles(count).Image = SelTiles(j).Image
+                            ActiveMap.SetTile(x, y, New Tile(x, y, tileId))
                             Exit For
                         End If
                     Next
