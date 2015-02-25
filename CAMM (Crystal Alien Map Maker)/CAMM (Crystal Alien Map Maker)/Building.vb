@@ -2,7 +2,7 @@
 
     Public Sub New(ByVal x As Integer, ByVal y As Integer)
         Me.Location = New Point(x, y)
-        Me.Image = Nothing
+        Me.SmallImage = Nothing
         Me.BuildingId = ""
         Me.Team = Team.Astros
         Me.Angle = 0.0
@@ -10,7 +10,7 @@
     End Sub
     Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image)
         Me.New(x, y)
-        Me.Image = image
+        Me.SmallImage = image
     End Sub
     Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal image As Image, ByVal buildingId As String)
         Me.New(x, y, image)
@@ -33,7 +33,7 @@
 
     Public ReadOnly Property HasData() As Boolean
         Get
-            Return Image IsNot Nothing
+            Return SmallImage IsNot Nothing
         End Get
     End Property
 
@@ -81,13 +81,13 @@
         End Get
     End Property
 
-    Private _image As Image
-    Public Property Image() As Image
+    Private _smallImage As Image
+    Public Property SmallImage() As Image
         Get
-            Return _image
+            Return _smallImage
         End Get
         Set(ByVal value As Image)
-            _image = value
+            _smallImage = value
         End Set
     End Property
 

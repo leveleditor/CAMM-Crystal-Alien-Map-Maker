@@ -611,7 +611,7 @@ Public Class FRMEditor
                     Else
                         e.Graphics.DrawImage(ButtonNeutral, SelBuildings(i).Location.X, SelBuildings(i).Location.Y, ButtonNeutral.Width, ButtonNeutral.Height)
                     End If
-                    e.Graphics.DrawImage(SelBuildings(i).Image, SelBuildings(i).Location)
+                    e.Graphics.DrawImage(SelBuildings(i).SmallImage, SelBuildings(i).Location)
                     e.Graphics.DrawImage(ButtonOverlay, SelBuildings(i).Location)
                 End If
             Next
@@ -672,8 +672,8 @@ Public Class FRMEditor
 
             For i As Integer = 0 To SelBuildings.Length - 1
                 If SelBuildings(i).Location = New Point(MouseX, MouseY) Then
-                    PICActive.Image = SelBuildings(i).Image
-                    ActiveBuilding.Image = SelBuildings(i).Image
+                    PICActive.Image = SelBuildings(i).SmallImage
+                    ActiveBuilding.SmallImage = SelBuildings(i).SmallImage
                     ActiveBuilding.FullImage = SelBuildings(i).FullImage
                     ActiveBuilding.BuildingId = SelBuildings(i).BuildingId
                     ActiveBuilding.Team = SelBuildings(i).Team
@@ -703,7 +703,7 @@ Public Class FRMEditor
                     Else
                         e.Graphics.DrawImage(ButtonNeutral, SelUnits(i).Location.X, SelUnits(i).Location.Y, ButtonNeutral.Width, ButtonNeutral.Height)
                     End If
-                    e.Graphics.DrawImage(SelUnits(i).Image, SelUnits(i).Location)
+                    e.Graphics.DrawImage(SelUnits(i).SmallImage, SelUnits(i).Location)
                     'e.Graphics.DrawImage(ButtonOverlay, SelUnits(i).Location)
                 End If
             Next
@@ -764,8 +764,8 @@ Public Class FRMEditor
 
             For i As Integer = 0 To SelUnits.Length - 1
                 If SelUnits(i).Location = New Point(MouseX, MouseY) Then
-                    PICActive.Image = SelUnits(i).Image
-                    ActiveUnit.Image = SelUnits(i).Image
+                    PICActive.Image = SelUnits(i).SmallImage
+                    ActiveUnit.Image = SelUnits(i).SmallImage
                     ActiveUnit.FullImage = SelUnits(i).FullImage
                     ActiveUnit.UnitId = SelUnits(i).BuildingId
                     ActiveUnit.Team = SelUnits(i).Team
@@ -952,7 +952,7 @@ Public Class FRMEditor
                     Else
                         e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
                     End If
-                    e.Graphics.DrawImage(ActiveBuilding.Image, New Point(0, 0))
+                    e.Graphics.DrawImage(ActiveBuilding.SmallImage, New Point(0, 0))
                     e.Graphics.DrawImage(ButtonOverlay, New Point(0, 0))
                 Else
                     e.Graphics.Clear(PICActive.BackColor)
@@ -1052,7 +1052,7 @@ Public Class FRMEditor
     Private Sub CMDEditBuildings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDEditBuildings.Click
         ActiveEditMode = EditMode.Buildings
         LBLSelected.Text = "Selected Building:"
-        PICActive.Image = ActiveBuilding.Image
+        PICActive.Image = ActiveBuilding.SmallImage
         CMDEditTiles.Enabled = True
         CMDEditBuildings.Enabled = False
         CMDEditUnits.Enabled = True

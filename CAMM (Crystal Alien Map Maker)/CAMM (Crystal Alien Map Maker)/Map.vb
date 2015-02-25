@@ -175,14 +175,14 @@ Public Class Map
                 If MapBuildings(i).Location.X = mouseX And MapBuildings(i).Location.Y = mouseY Then
                     found = True
 
-                    MapBuildings(i) = New Building(mouseX, mouseY, building.Image, building.BuildingId, building.Team, building.Angle, building.Damage, building.BuildingW, building.BuildingH)
+                    MapBuildings(i) = New Building(mouseX, mouseY, building.SmallImage, building.BuildingId, building.Team, building.Angle, building.Damage, building.BuildingW, building.BuildingH)
                     MapBuildings(i).FullImage = building.FullImage
 
                     Exit For
                 End If
             Next
             If Not found Then
-                Dim newBuilding As Building = New Building(mouseX, mouseY, building.Image, building.BuildingId, building.Team, building.Angle, building.Damage, building.BuildingW, building.BuildingH)
+                Dim newBuilding As Building = New Building(mouseX, mouseY, building.SmallImage, building.BuildingId, building.Team, building.Angle, building.Damage, building.BuildingW, building.BuildingH)
                 newBuilding.FullImage = building.FullImage
                 MapBuildings.Add(newBuilding)
             End If
@@ -535,7 +535,7 @@ Public Class Map
                     MapBuildings(i).Damage = damage
                     For j As Integer = 0 To FRMEditor.SelBuildings.Length - 1
                         If MapBuildings(i).BuildingId = FRMEditor.SelBuildings(j).BuildingId Then
-                            MapBuildings(i).Image = FRMEditor.SelBuildings(j).Image
+                            MapBuildings(i).SmallImage = FRMEditor.SelBuildings(j).SmallImage
                             MapBuildings(i).FullImage = FRMEditor.SelBuildings(j).FullImage
                             'Note to self:
                             'I wasted half a day trying to figure out what was going wrong,
@@ -618,7 +618,7 @@ Public Class Map
                 MapBuildings(i).Damage = damage
                 For j As Integer = 0 To FRMEditor.SelBuildings.Length - 1
                     If MapBuildings(i).BuildingId = FRMEditor.SelBuildings(j).BuildingId Then
-                        MapBuildings(i).Image = FRMEditor.SelBuildings(j).Image
+                        MapBuildings(i).SmallImage = FRMEditor.SelBuildings(j).SmallImage
                         MapBuildings(i).FullImage = FRMEditor.SelBuildings(j).FullImage
                         MapBuildings(i).BuildingW = FRMEditor.SelBuildings(j).BuildingW
                         MapBuildings(i).BuildingH = FRMEditor.SelBuildings(j).BuildingH
@@ -674,7 +674,7 @@ Public Class Map
                 Dim temp As Unit = New Unit(unitX, unitY, Nothing, unitId, team, angle, damage)
                 For j As Integer = 0 To FRMEditor.SelUnits.Length - 1
                     If temp.UnitId = FRMEditor.SelUnits(j).BuildingId Then
-                        temp.Image = FRMEditor.SelUnits(j).Image
+                        temp.Image = FRMEditor.SelUnits(j).SmallImage
                         temp.FullImage = FRMEditor.SelUnits(j).FullImage
                         Exit For
                     End If
