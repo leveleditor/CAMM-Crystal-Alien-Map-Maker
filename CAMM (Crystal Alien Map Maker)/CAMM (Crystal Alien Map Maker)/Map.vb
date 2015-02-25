@@ -205,7 +205,7 @@ Public Class Map
                 End If
             Next
             If Not found Then
-                Dim newUnit As Unit = New Unit(mouseX, mouseY, unit.Image, unit.UnitId, unit.Team, unit.Angle, unit.Damage)
+                Dim newUnit As Unit = New Unit(mouseX, mouseY, unit.SmallImage, unit.UnitId, unit.Team, unit.Angle, unit.Damage)
                 newUnit.FullImage = unit.FullImage
                 MapUnits.Add(newUnit)
 
@@ -674,7 +674,7 @@ Public Class Map
                 Dim temp As Unit = New Unit(unitX, unitY, Nothing, unitId, team, angle, damage)
                 For j As Integer = 0 To FRMEditor.SelUnits.Length - 1
                     If temp.UnitId = FRMEditor.SelUnits(j).BuildingId Then
-                        temp.Image = FRMEditor.SelUnits(j).SmallImage
+                        temp.SmallImage = FRMEditor.SelUnits(j).SmallImage
                         temp.FullImage = FRMEditor.SelUnits(j).FullImage
                         Exit For
                     End If

@@ -765,7 +765,7 @@ Public Class FRMEditor
             For i As Integer = 0 To SelUnits.Length - 1
                 If SelUnits(i).Location = New Point(MouseX, MouseY) Then
                     PICActive.Image = SelUnits(i).SmallImage
-                    ActiveUnit.Image = SelUnits(i).SmallImage
+                    ActiveUnit.SmallImage = SelUnits(i).SmallImage
                     ActiveUnit.FullImage = SelUnits(i).FullImage
                     ActiveUnit.UnitId = SelUnits(i).BuildingId
                     ActiveUnit.Team = SelUnits(i).Team
@@ -969,7 +969,7 @@ Public Class FRMEditor
                     Else
                         e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
                     End If
-                    e.Graphics.DrawImage(ActiveUnit.Image, New Point(0, 0))
+                    e.Graphics.DrawImage(ActiveUnit.SmallImage, New Point(0, 0))
                     'e.Graphics.DrawImage(ButtonOverlay, New Point(0, 0))
                 Else
                     e.Graphics.Clear(PICActive.BackColor)
@@ -1066,7 +1066,7 @@ Public Class FRMEditor
     Private Sub CMDEditUnits_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDEditUnits.Click
         ActiveEditMode = EditMode.Units
         LBLSelected.Text = "Selected Unit:"
-        PICActive.Image = ActiveUnit.Image
+        PICActive.Image = ActiveUnit.SmallImage
         CMDEditTiles.Enabled = True
         CMDEditBuildings.Enabled = True
         CMDEditUnits.Enabled = False
