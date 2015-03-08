@@ -2,9 +2,7 @@
 
 Public Class Map
 
-    Public Sub New(ByVal parent As Level)
-        Level = parent
-
+    Public Sub New()
         SizeX = 10
         SizeY = 10
         FileName = ""
@@ -16,17 +14,17 @@ Public Class Map
         InitTiles()
         MapBuildings = New List(Of Building)
         MapUnits = New List(Of Unit)
-    End Sub
 
-    Private _level As Level
-    Public Property Level As Level
-        Get
-            Return _level
-        End Get
-        Private Set(value As Level)
-            _level = value
-        End Set
-    End Property
+        Faction = Team.Astros
+        CashPlayer = CashPlayerDefault
+        CashEnemy = CashEnemyDefault
+
+        IsTraining = IsTrainingDefault
+        IsConflict = IsConflictDefault
+        IsSpecialLevel = IsSpecialLevelDefault
+        IsLastSpecialLevel = IsLastSpecialLevelDefault
+        IsBonusLevel = IsBonusLevelDefault
+    End Sub
 
     Private _sizeX As Integer
     Public Property SizeX As Integer
@@ -57,6 +55,16 @@ Public Class Map
     Private MapUnits As List(Of Unit)
     'Temporary array for resizing the map.
     Private TempTiles As Tile()
+
+    Public Faction As Team
+    Public CashPlayer As Integer
+    Public CashEnemy As Integer
+
+    Public IsTraining As Boolean
+    Public IsConflict As Boolean
+    Public IsSpecialLevel As Boolean
+    Public IsLastSpecialLevel As Boolean
+    Public IsBonusLevel As Boolean
 
     Public Sub SetSize(ByVal width As Integer, ByVal height As Integer)
         ' TODO: The map shouldn't resize if it's already at the specified size, but due to a tempfix for bug "unplacable grid spaces after loading a map" it has to be able to set the map to it's own size...
@@ -404,6 +412,26 @@ Public Class Map
     Public Function GetSaveData() As String
         Dim saveFileData As String = ""
 
+        saveFileData += _
+            "[CAMM]" + vbNewLine + _
+            "vFormat = " + MapFormat.ToString + vbNewLine + _
+            vbNewLine
+
+        saveFileData += _
+            "[Level]" + vbNewLine + _
+            "Title = " + MapTitle + vbNewLine + _
+            "W = " + SizeX.ToString + vbNewLine + _
+            "H = " + SizeY.ToString + vbNewLine + _
+            "Team = " + CInt(Faction).ToString + vbNewLine + _
+            "CashPlayer = " + CashPlayer.ToString + vbNewLine + _
+            "CashEnemy = " + CashEnemy.ToString + vbNewLine + _
+            "isTraining = " + IsTraining.ToString + vbNewLine + _
+            "isConflict = " + IsConflict.ToString + vbNewLine + _
+            "isSpecialLevel = " + IsSpecialLevel.ToString + vbNewLine + _
+            "isLastSpecialLevel = " + IsLastSpecialLevel.ToString + vbNewLine + _
+            "isBonusLevel = " + IsBonusLevel.ToString + vbNewLine + _
+            vbNewLine
+
         saveFileData += "[Terrain]" + vbNewLine + _
             "; Terrain Format: {str_ID|i_posX|i_posY}" + vbNewLine
 
@@ -437,6 +465,8 @@ Public Class Map
             End If
         Next
 
+        saveFileData += vbNewLine + "; -= Map Created Using CAMM Crystal Alien Map Maker =-"
+
         Return saveFileData
     End Function
 
@@ -469,7 +499,7 @@ Public Class Map
         config = source.Configs.Item("Level")
         MapTitle = config.GetString("Title")
         SetSize(config.GetInt("W"), config.GetInt("H"))
-        Level.Team = CType(config.GetInt("Team"), Team)
+        Faction = CType(config.GetInt("Team"), Team)
 
         config = source.Configs.Item("Terrain")
         Dim terrainCount As Integer = config.GetKeys().Length - 1
@@ -540,14 +570,14 @@ Public Class Map
         config = source.Configs.Item("Level")
         MapTitle = config.GetString("Title")
         SetSize(config.GetInt("W"), config.GetInt("H"))
-        Level.Team = CType(config.GetInt("Team"), Team)
-        Level.CashPlayer = config.GetInt("CashPlayer", Level.CashPlayerDefault)
-        Level.CashEnemy = config.GetInt("CashEnemy", Level.CashEnemyDefault)
-        Level.IsTraining = config.GetBoolean("isTraining", Level.IsTrainingDefault)
-        Level.IsConflict = config.GetBoolean("isConflict", Level.IsConflictDefault)
-        Level.IsSpecialLevel = config.GetBoolean("isSpecialLevel", Level.IsSpecialLevelDefault)
-        Level.IsLastSpecialLevel = config.GetBoolean("isLastSpecialLevel", Level.IsLastSpecialLevelDefault)
-        Level.IsBonusLevel = config.GetBoolean("isBonusLevel", Level.IsBonusLevelDefault)
+        Faction = CType(config.GetInt("Team"), Team)
+        CashPlayer = config.GetInt("CashPlayer", CashPlayerDefault)
+        CashEnemy = config.GetInt("CashEnemy", CashEnemyDefault)
+        IsTraining = config.GetBoolean("isTraining", IsTrainingDefault)
+        IsConflict = config.GetBoolean("isConflict", IsConflictDefault)
+        IsSpecialLevel = config.GetBoolean("isSpecialLevel", IsSpecialLevelDefault)
+        IsLastSpecialLevel = config.GetBoolean("isLastSpecialLevel", IsLastSpecialLevelDefault)
+        IsBonusLevel = config.GetBoolean("isBonusLevel", IsBonusLevelDefault)
         IsMapFinal = config.GetBoolean("Final", False)
 
         config = source.Configs.Item("Terrain")

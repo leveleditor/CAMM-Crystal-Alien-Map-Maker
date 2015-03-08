@@ -17,6 +17,14 @@
     Public Const TileSizeX As Integer = 96
     Public Const TileSizeY As Integer = 48
 
+    Public Const CashPlayerDefault = 2000
+    Public Const CashEnemyDefault = 20000
+    Public Const IsTrainingDefault As Boolean = False
+    Public Const IsConflictDefault As Boolean = False
+    Public Const IsSpecialLevelDefault As Boolean = False
+    Public Const IsLastSpecialLevelDefault As Boolean = False
+    Public Const IsBonusLevelDefault As Boolean = True
+
     Public ReadOnly PenTileHover As Pen = New Pen(Pens.DarkOrange.Brush, 2)
     Public ReadOnly PenTileErase As Pen = New Pen(Pens.Red.Brush, 2)
     Public ReadOnly PenGrid As Pen = Pens.Black

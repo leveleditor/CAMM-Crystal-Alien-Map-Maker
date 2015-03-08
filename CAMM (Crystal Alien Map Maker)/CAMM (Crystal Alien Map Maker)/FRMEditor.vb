@@ -10,7 +10,7 @@ Public Class FRMEditor
     Dim IsMapOpen As Boolean = False
     Private BaseFormTitle As String
 
-    Private Property ActiveLevelNum As Integer
+    Private Property ActiveMapNum As Integer
         Get
             Return CBOLevel.SelectedIndex
         End Get
@@ -18,26 +18,18 @@ Public Class FRMEditor
             CBOLevel.SelectedIndex = value
         End Set
     End Property
-    Private ReadOnly _levels As List(Of Level) = New List(Of Level)
-    Public ReadOnly Property Levels As List(Of Level)
+    Private ReadOnly _maps As List(Of Map) = New List(Of Map)
+    Public ReadOnly Property Maps As List(Of Map)
         Get
-            Return _levels
+            Return _maps
         End Get
-    End Property
-    Public Property ActiveLevel As Level
-        Get
-            Return Levels(ActiveLevelNum)
-        End Get
-        Set(ByVal value As Level)
-            Levels(ActiveLevelNum) = value
-        End Set
     End Property
     Public Property ActiveMap As Map
         Get
-            Return ActiveLevel.Map
+            Return Maps(ActiveMapNum)
         End Get
         Set(ByVal value As Map)
-            ActiveLevel.Map = value
+            Maps(ActiveMapNum) = value
         End Set
     End Property
 
@@ -801,12 +793,12 @@ Public Class FRMEditor
         'PICBuildings.Invalidate()
         'PICUnits.Invalidate()
 
-        Dim newLevel As Level = New Level()
-        newLevel.Map.MapTitle = "New Map"
-        Levels.Add(newLevel)
+        Dim newMap As Map = New Map()
+        newMap.MapTitle = "New Map"
+        Maps.Add(newMap)
         UpdateLevelsList()
         'CBOLevel.Items.Add("Map " + Levels.Count.ToString() + " [" + newLevel.Map.MapTitle + "]")
-        ActiveLevelNum = Levels.IndexOf(newLevel)
+        ActiveMapNum = Maps.IndexOf(newMap)
         UpdateFormTitle()
 
         PICMap.Size = New Size((ActiveMap.SizeX * TileSizeX) + 1, (ActiveMap.SizeY * TileSizeY) + 1)
@@ -907,7 +899,7 @@ Public Class FRMEditor
         If FileExists And IsReadOnly Then
             MsgBox("Unable to save map file, the file is set to read-only." + vbNewLine + "Please try saving using File > SaveAs.")
         Else
-            My.Computer.FileSystem.WriteAllText(FileName, ActiveLevel.GetSaveData(), False)
+            My.Computer.FileSystem.WriteAllText(FileName, ActiveMap.GetSaveData(), False)
             IsMapOpen = True
             ActiveMap.IsMapFinal = False
             ActiveMap.FileName = FileName
@@ -1332,19 +1324,19 @@ Public Class FRMEditor
     Private Sub UpdateLevelsList()
         If CBOLevel.Items.Count > 0 Then
             For i As Integer = 0 To CBOLevel.Items.Count - 1
-                CBOLevel.Items(i) = (i + 1).ToString() + ") " + Levels(i).Map.MapTitle
+                CBOLevel.Items(i) = (i + 1).ToString() + ") " + Maps(i).MapTitle
             Next
         End If
-        If Levels.Count > CBOLevel.Items.Count Then
-            For i As Integer = CBOLevel.Items.Count To Levels.Count - 1
-                CBOLevel.Items.Add((i + 1).ToString() + ") " + Levels(i).Map.MapTitle)
+        If Maps.Count > CBOLevel.Items.Count Then
+            For i As Integer = CBOLevel.Items.Count To Maps.Count - 1
+                CBOLevel.Items.Add((i + 1).ToString() + ") " + Maps(i).MapTitle)
             Next
         End If
     End Sub
 
     Private Sub UpdateFormTitle()
         Dim title As String = BaseFormTitle
-        If Levels.Count > 0 Then
+        If Maps.Count > 0 Then
             title += " - " + ActiveMap.MapTitle
             If Not String.IsNullOrEmpty(ActiveMap.FileName) Then
                 title += " - " + My.Computer.FileSystem.GetFileInfo(ActiveMap.FileName).Name
