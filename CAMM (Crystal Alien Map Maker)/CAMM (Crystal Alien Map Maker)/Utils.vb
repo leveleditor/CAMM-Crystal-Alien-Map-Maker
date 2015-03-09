@@ -89,4 +89,49 @@ Public Module Utils
             End If
         End If
     End Sub
+
+    Public Sub UpgradeBuildingLocation(ByVal fromVersion As Integer, ByVal toVersion As Integer, ByVal buildingW As Integer, ByVal buildingH As Integer, ByVal fullImageWidth As Integer, ByVal fullImageHeight As Integer, ByRef buildingLocation As Point)
+        If fromVersion < 4 And (toVersion = 4 Or toVersion = 5) Then
+            ' <<< Start old SetDrawPos code >>>
+            Dim tempDrawPos As Point = buildingLocation
+
+            If buildingW Mod 2 Then
+                tempDrawPos = New Point(tempDrawPos.X + (TileSizeX / 2), tempDrawPos.Y)
+            End If
+            If buildingH <> 2 Then
+                tempDrawPos = New Point(tempDrawPos.X, tempDrawPos.Y - TileSizeY)
+            End If
+
+            Dim topLeftX As Single = Math.Floor((buildingLocation.X / TileSizeX) - buildingW / 2) + 1
+            Dim topLeftY As Single = Math.Floor((buildingLocation.X / TileSizeX) - buildingH + 3)
+            Dim dockX As Single = (topLeftX + ((buildingW / 2) - 1)) + 1 * TileSizeX
+            Dim dockY As Single = (topLeftY + (buildingH - 1)) + 1 * TileSizeX
+            dockX = Math.Ceiling(dockX / TileSizeX) - 2
+            dockY = Math.Ceiling(dockY / TileSizeY) - 3
+
+            tempDrawPos = New Point(tempDrawPos.X - dockX, tempDrawPos.Y - dockY)
+
+            If buildingH = 2 Then
+                tempDrawPos = New Point(tempDrawPos.X, tempDrawPos.Y - TileSizeY)
+            End If
+
+            ' There was also some related code in RenderMapToGraphics
+            tempDrawPos = New Point( _
+                tempDrawPos.X - CInt(fullImageWidth / 2), _
+                tempDrawPos.Y - CInt(fullImageHeight / 2) + TileSizeY)
+
+            ' <<< End old SetDrawPos code >>>
+
+            ' New SetDrawPos code, but reversed!
+            ' Warning: Buildings that were actually out of bounds in old maps may end up off screen.
+
+            Dim fixedLocation As Point = New Point(tempDrawPos.X + 1, tempDrawPos.Y + 1)
+
+            fixedLocation.X += (fullImageWidth - (buildingW * TileSizeX)) / 2
+            fixedLocation.Y += (fullImageHeight - (buildingH * TileSizeY)) / 2
+
+            PointToGrid(fixedLocation)
+            buildingLocation = fixedLocation
+        End If
+    End Sub
 End Module

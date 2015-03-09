@@ -264,54 +264,6 @@ Public Class Map
         End Select
     End Sub
 
-    Public Sub UpgradeBuildingLocation(ByVal oldv As Integer, ByVal newv As Integer, ByVal i As Integer, ByVal xpos As Integer)
-        If oldv < 4 And (newv = 4 Or newv = 5) Then
-            ' <<< Start old SetDrawPos code >>>
-            Dim tempDrawPos As Point = MapBuildings(i).Location
-
-            If MapBuildings(i).BuildingW Mod 2 Then
-                tempDrawPos = New Point(tempDrawPos.X + (TileSizeX / 2), tempDrawPos.Y)
-            End If
-            If MapBuildings(i).BuildingH <> 2 Then
-                tempDrawPos = New Point(tempDrawPos.X, tempDrawPos.Y - TileSizeY)
-            End If
-
-            Dim topLeftX As Single = Math.Floor((xpos / TileSizeX) - MapBuildings(i).BuildingW / 2) + 1
-            Dim topLeftY As Single = Math.Floor((xpos / TileSizeX) - MapBuildings(i).BuildingH + 3)
-            Dim dockX As Single = (topLeftX + ((MapBuildings(i).BuildingW / 2) - 1)) + 1 * TileSizeX
-            Dim dockY As Single = (topLeftY + (MapBuildings(i).BuildingH - 1)) + 1 * TileSizeX
-            dockX = Math.Ceiling(dockX / TileSizeX) - 2
-            dockY = Math.Ceiling(dockY / TileSizeY) - 3
-
-            tempDrawPos = New Point(tempDrawPos.X - dockX, tempDrawPos.Y - dockY)
-
-            If MapBuildings(i).BuildingH = 2 Then
-                tempDrawPos = New Point(tempDrawPos.X, tempDrawPos.Y - TileSizeY)
-            End If
-
-            ' There was also some related code in RenderMapToGraphics
-            Dim OffY As Integer = TileSizeY
-
-            tempDrawPos = New Point( _
-                tempDrawPos.X - CInt(MapBuildings(i).FullImage.Width / 2), _
-                tempDrawPos.Y - CInt(MapBuildings(i).FullImage.Height / 2) + OffY)
-
-            ' <<< End old SetDrawPos code >>>
-
-            ' New SetDrawPos code, but reversed!
-            ' Warning: Buildings that were actually out of bounds in old maps may end up off screen.
-            MapBuildings(i).Location = tempDrawPos
-
-            Dim fixedLocation As Point = New Point(MapBuildings(i).Location.X + 1, MapBuildings(i).Location.Y + 1)
-
-            fixedLocation.X += (MapBuildings(i).FullImage.Width - (MapBuildings(i).BuildingW * TileSizeX)) / 2
-            fixedLocation.Y += (MapBuildings(i).FullImage.Height - (MapBuildings(i).BuildingH * TileSizeY)) / 2
-
-            PointToGrid(fixedLocation)
-            MapBuildings(i).Location = fixedLocation
-        End If
-    End Sub
-
     Public Sub Draw(ByRef g As Graphics, ByVal drawGrid As Boolean, Optional ByVal debugBuildingPos As Boolean = False)
         g.Clear(Color.FromKnownColor(KnownColor.Control))
 
@@ -537,28 +489,30 @@ Public Class Map
                     Dim angle As Single = keyArray(4)
                     Dim damage As Single = keyArray(5)
 
-                    MapBuildings.Add(New Building(posX * TileSizeX, posY * TileSizeY))
+                    Dim building As Building = New Building(posX * TileSizeX, posY * TileSizeY)
 
                     ' Upgrade old building Ids
                     UpgradeBuildingId(1, MapFormat, buildingId)
 
-                    MapBuildings(i).BuildingId = buildingId
+                    building.BuildingId = buildingId
 
-                    MapBuildings(i).Team = team
-                    MapBuildings(i).Angle = angle
-                    MapBuildings(i).Damage = damage
+                    building.Team = team
+                    building.Angle = angle
+                    building.Damage = damage
                     For j As Integer = 0 To FRMEditor.SelBuildings.Length - 1
-                        If MapBuildings(i).BuildingId = FRMEditor.SelBuildings(j).BuildingId Then
+                        If building.BuildingId = FRMEditor.SelBuildings(j).BuildingId Then
                             'Note to self:
                             'I wasted half a day trying to figure out what was going wrong,
                             'only to discover I forgot these 2 extremely obvious missing lines:
-                            MapBuildings(i).BuildingW = FRMEditor.SelBuildings(j).BuildingW
-                            MapBuildings(i).BuildingH = FRMEditor.SelBuildings(j).BuildingH
+                            building.BuildingW = FRMEditor.SelBuildings(j).BuildingW
+                            building.BuildingH = FRMEditor.SelBuildings(j).BuildingH
                             Exit For
                         End If
                     Next
 
-                    UpgradeBuildingLocation(1, MapFormat, i, posX * TileSizeX)
+                    UpgradeBuildingLocation(1, MapFormat, building.BuildingW, building.BuildingH, building.FullImage.Width, building.FullImage.Height, building.Location)
+
+                    MapBuildings.Add(building)
                 End If
             Next
         End If
@@ -612,27 +566,29 @@ Public Class Map
                 Dim angle As Single = keyArray(4)
                 Dim damage As Single = keyArray(5)
 
-                MapBuildings.Add(New Building(posX * TileSizeX, posY * TileSizeY))
+                Dim building As Building = New Building(posX * TileSizeX, posY * TileSizeY)
 
                 ' Upgrade old building Ids
                 UpgradeBuildingId(v, MapFormat, objectId)
 
-                MapBuildings(i).BuildingId = objectId
+                building.BuildingId = objectId
 
-                MapBuildings(i).Team = team
-                MapBuildings(i).Angle = angle
-                MapBuildings(i).Damage = damage
+                building.Team = team
+                building.Angle = angle
+                building.Damage = damage
                 For j As Integer = 0 To FRMEditor.SelBuildings.Length - 1
-                    If MapBuildings(i).BuildingId = FRMEditor.SelBuildings(j).BuildingId Then
-                        MapBuildings(i).BuildingW = FRMEditor.SelBuildings(j).BuildingW
-                        MapBuildings(i).BuildingH = FRMEditor.SelBuildings(j).BuildingH
+                    If building.BuildingId = FRMEditor.SelBuildings(j).BuildingId Then
+                        building.BuildingW = FRMEditor.SelBuildings(j).BuildingW
+                        building.BuildingH = FRMEditor.SelBuildings(j).BuildingH
                         Exit For
                     End If
                 Next
 
                 If v < 4 Then
-                    UpgradeBuildingLocation(v, MapFormat, i, posX * TileSizeX)
+                    UpgradeBuildingLocation(v, MapFormat, building.BuildingW, building.BuildingH, building.FullImage.Width, building.FullImage.Height, building.Location)
                 End If
+
+                MapBuildings.Add(building)
             End If
         Next
 
