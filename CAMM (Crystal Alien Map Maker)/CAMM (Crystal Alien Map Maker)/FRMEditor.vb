@@ -12,10 +12,10 @@ Public Class FRMEditor
 
     Private Property ActiveMapNum As Integer
         Get
-            Return CBOLevel.SelectedIndex
+            Return MapTabs.SelectedIndex
         End Get
         Set(value As Integer)
-            CBOLevel.SelectedIndex = value
+            MapTabs.SelectedIndex = value
         End Set
     End Property
     Private ReadOnly _maps As List(Of Map) = New List(Of Map)
@@ -1305,31 +1305,26 @@ Public Class FRMEditor
         FRMMapProperties.ShowDialog(Me)
     End Sub
 
-    Private Sub CBOLevel_DropDown(sender As Object, e As EventArgs) Handles CBOLevel.DropDown
-        'Dim temp As Integer = ActiveLevelNum
-        'CBOLevel.Items.Clear()
-        'For i As Integer = 1 To _levels.Count
-        '    CBOLevel.Items.Add("Map " + i.ToString())
-        'Next
-        'ActiveLevelNum = temp
-        UpdateLevelsList()
-    End Sub
-
-    Private Sub CBOLevel_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBOLevel.SelectedIndexChanged
+    Private Sub TabMaps_SelectedIndexChanged(sender As Object, e As EventArgs) Handles MapTabs.SelectedIndexChanged
         'ActiveLevelNum = CBOLevel.SelectedIndex
         UpdateFormTitle()
         PICMap.Invalidate()
     End Sub
 
     Private Sub UpdateLevelsList()
-        If CBOLevel.Items.Count > 0 Then
-            For i As Integer = 0 To CBOLevel.Items.Count - 1
-                CBOLevel.Items(i) = (i + 1).ToString() + ") " + Maps(i).MapTitle
+        If MapTabs.TabPages.Count > 0 Then
+            For i As Integer = 0 To MapTabs.TabPages.Count - 1
+                Dim tabText As String = (i + 1).ToString() + ") " + Maps(i).MapTitle
+                MapTabs.TabPages(i).Text = tabText
+                'MapTabs.TabPages(i).ToolTipText = tabText
             Next
         End If
-        If Maps.Count > CBOLevel.Items.Count Then
-            For i As Integer = CBOLevel.Items.Count To Maps.Count - 1
-                CBOLevel.Items.Add((i + 1).ToString() + ") " + Maps(i).MapTitle)
+        If Maps.Count > MapTabs.TabPages.Count Then
+            For i As Integer = MapTabs.TabPages.Count To Maps.Count - 1
+                Dim tabText As String = (i + 1).ToString() + ") " + Maps(i).MapTitle
+                Dim newTab = New TabPage(tabText)
+                'newTab.ToolTipText = tabText
+                MapTabs.TabPages.Add(newTab)
             Next
         End If
     End Sub
@@ -1346,4 +1341,5 @@ Public Class FRMEditor
         End If
         Me.Text = title
     End Sub
+
 End Class

@@ -23,6 +23,10 @@ Partial Class FRMEditor
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
+        Dim LBLx As System.Windows.Forms.Label
+        Dim LBLTools As System.Windows.Forms.Label
+        Dim LBLWidth As System.Windows.Forms.Label
+        Dim LBLHeight As System.Windows.Forms.Label
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FRMEditor))
         Me.PICMap = New System.Windows.Forms.PictureBox
         Me.PICActive = New System.Windows.Forms.PictureBox
@@ -76,10 +80,7 @@ Partial Class FRMEditor
         Me.CMDSize = New System.Windows.Forms.Button
         Me.SaveMap = New System.Windows.Forms.SaveFileDialog
         Me.OpenMap = New System.Windows.Forms.OpenFileDialog
-        Me.LBLx = New System.Windows.Forms.Label
-        Me.LBLWxH = New System.Windows.Forms.Label
         Me.CHKGrid = New System.Windows.Forms.CheckBox
-        Me.ToolsBox = New System.Windows.Forms.GroupBox
         Me.CMDToolSmartBrush = New System.Windows.Forms.Button
         Me.CMDToolBrush = New System.Windows.Forms.Button
         Me.IntroTimer = New System.Windows.Forms.Timer(Me.components)
@@ -87,7 +88,11 @@ Partial Class FRMEditor
         Me.PNLUnits = New System.Windows.Forms.Panel
         Me.PICUnits = New System.Windows.Forms.PictureBox
         Me.SavePNG = New System.Windows.Forms.SaveFileDialog
-        Me.CBOLevel = New System.Windows.Forms.ComboBox
+        Me.MapTabs = New System.Windows.Forms.TabControl
+        LBLx = New System.Windows.Forms.Label
+        LBLTools = New System.Windows.Forms.Label
+        LBLWidth = New System.Windows.Forms.Label
+        LBLHeight = New System.Windows.Forms.Label
         CType(Me.PICMap, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PICActive, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.StatusBar.SuspendLayout()
@@ -97,10 +102,48 @@ Partial Class FRMEditor
         Me.MNUMain.SuspendLayout()
         Me.PNLBuildings.SuspendLayout()
         CType(Me.PICBuildings, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ToolsBox.SuspendLayout()
         Me.PNLUnits.SuspendLayout()
         CType(Me.PICUnits, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'LBLx
+        '
+        LBLx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        LBLx.AutoSize = True
+        LBLx.Location = New System.Drawing.Point(597, 48)
+        LBLx.Name = "LBLx"
+        LBLx.Size = New System.Drawing.Size(12, 13)
+        LBLx.TabIndex = 10
+        LBLx.Text = "x"
+        '
+        'LBLTools
+        '
+        LBLTools.AutoSize = True
+        LBLTools.Location = New System.Drawing.Point(108, 74)
+        LBLTools.Name = "LBLTools"
+        LBLTools.Size = New System.Drawing.Size(36, 13)
+        LBLTools.TabIndex = 17
+        LBLTools.Text = "Tools:"
+        '
+        'LBLWidth
+        '
+        LBLWidth.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        LBLWidth.Location = New System.Drawing.Point(547, 31)
+        LBLWidth.Name = "LBLWidth"
+        LBLWidth.Size = New System.Drawing.Size(42, 13)
+        LBLWidth.TabIndex = 18
+        LBLWidth.Text = "Width"
+        LBLWidth.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        '
+        'LBLHeight
+        '
+        LBLHeight.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        LBLHeight.Location = New System.Drawing.Point(610, 31)
+        LBLHeight.Name = "LBLHeight"
+        LBLHeight.Size = New System.Drawing.Size(42, 13)
+        LBLHeight.TabIndex = 19
+        LBLHeight.Text = "Height"
+        LBLHeight.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'PICMap
         '
@@ -137,7 +180,7 @@ Partial Class FRMEditor
         Me.StatusBar.Location = New System.Drawing.Point(0, 430)
         Me.StatusBar.Name = "StatusBar"
         Me.StatusBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.StatusBar.Size = New System.Drawing.Size(764, 22)
+        Me.StatusBar.Size = New System.Drawing.Size(766, 22)
         Me.StatusBar.TabIndex = 8
         Me.StatusBar.Text = "StatusStrip1"
         '
@@ -153,7 +196,7 @@ Partial Class FRMEditor
         'LBLAboutVersion
         '
         Me.LBLAboutVersion.Name = "LBLAboutVersion"
-        Me.LBLAboutVersion.Size = New System.Drawing.Size(731, 17)
+        Me.LBLAboutVersion.Size = New System.Drawing.Size(733, 17)
         Me.LBLAboutVersion.Spring = True
         Me.LBLAboutVersion.Text = "<Version> by Josh"
         Me.LBLAboutVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -162,8 +205,8 @@ Partial Class FRMEditor
         '
         Me.CMDToolErase.AutoSize = True
         Me.CMDToolErase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.CMDToolErase.Location = New System.Drawing.Point(50, 16)
-        Me.CMDToolErase.Margin = New System.Windows.Forms.Padding(0)
+        Me.CMDToolErase.Location = New System.Drawing.Point(191, 69)
+        Me.CMDToolErase.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.CMDToolErase.Name = "CMDToolErase"
         Me.CMDToolErase.Size = New System.Drawing.Size(47, 23)
         Me.CMDToolErase.TabIndex = 5
@@ -177,7 +220,7 @@ Partial Class FRMEditor
         Me.PNLMap.AutoScroll = True
         Me.PNLMap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PNLMap.Controls.Add(Me.PICMap)
-        Me.PNLMap.Location = New System.Drawing.Point(132, 117)
+        Me.PNLMap.Location = New System.Drawing.Point(134, 117)
         Me.PNLMap.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
         Me.PNLMap.Name = "PNLMap"
         Me.PNLMap.Size = New System.Drawing.Size(623, 308)
@@ -212,7 +255,7 @@ Partial Class FRMEditor
         Me.MNUMain.Name = "MNUMain"
         Me.MNUMain.Padding = New System.Windows.Forms.Padding(0)
         Me.MNUMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.MNUMain.Size = New System.Drawing.Size(764, 24)
+        Me.MNUMain.Size = New System.Drawing.Size(766, 24)
         Me.MNUMain.TabIndex = 0
         Me.MNUMain.Text = "MenuStrip1"
         '
@@ -437,7 +480,7 @@ Partial Class FRMEditor
         'CMDEditBuildings
         '
         Me.CMDEditBuildings.AutoSize = True
-        Me.CMDEditBuildings.Location = New System.Drawing.Point(108, 67)
+        Me.CMDEditBuildings.Location = New System.Drawing.Point(191, 43)
         Me.CMDEditBuildings.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.CMDEditBuildings.Name = "CMDEditBuildings"
         Me.CMDEditBuildings.Size = New System.Drawing.Size(80, 23)
@@ -461,7 +504,7 @@ Partial Class FRMEditor
         '
         Me.CMDEditShroud.AutoSize = True
         Me.CMDEditShroud.Enabled = False
-        Me.CMDEditShroud.Location = New System.Drawing.Point(675, 45)
+        Me.CMDEditShroud.Location = New System.Drawing.Point(357, 43)
         Me.CMDEditShroud.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.CMDEditShroud.Name = "CMDEditShroud"
         Me.CMDEditShroud.Size = New System.Drawing.Size(80, 23)
@@ -496,24 +539,24 @@ Partial Class FRMEditor
         'TXTHeight
         '
         Me.TXTHeight.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TXTHeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TXTHeight.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTHeight.Location = New System.Drawing.Point(615, 93)
-        Me.TXTHeight.Margin = New System.Windows.Forms.Padding(0)
+        Me.TXTHeight.Location = New System.Drawing.Point(612, 45)
         Me.TXTHeight.MaxLength = 3
         Me.TXTHeight.Name = "TXTHeight"
-        Me.TXTHeight.Size = New System.Drawing.Size(40, 20)
+        Me.TXTHeight.Size = New System.Drawing.Size(42, 20)
         Me.TXTHeight.TabIndex = 2
         Me.TXTHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TXTWidth
         '
         Me.TXTWidth.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TXTWidth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TXTWidth.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTWidth.Location = New System.Drawing.Point(563, 93)
-        Me.TXTWidth.Margin = New System.Windows.Forms.Padding(0)
+        Me.TXTWidth.Location = New System.Drawing.Point(549, 45)
         Me.TXTWidth.MaxLength = 3
         Me.TXTWidth.Name = "TXTWidth"
-        Me.TXTWidth.Size = New System.Drawing.Size(40, 20)
+        Me.TXTWidth.Size = New System.Drawing.Size(42, 20)
         Me.TXTWidth.TabIndex = 1
         Me.TXTWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -521,7 +564,7 @@ Partial Class FRMEditor
         '
         Me.CMDSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CMDSize.AutoSize = True
-        Me.CMDSize.Location = New System.Drawing.Point(655, 91)
+        Me.CMDSize.Location = New System.Drawing.Point(657, 43)
         Me.CMDSize.Margin = New System.Windows.Forms.Padding(0)
         Me.CMDSize.Name = "CMDSize"
         Me.CMDSize.Size = New System.Drawing.Size(100, 23)
@@ -543,58 +586,25 @@ Partial Class FRMEditor
         Me.OpenMap.Filter = "CAMM Map Files|*.camm;*.map|All Files|*.*"
         Me.OpenMap.Title = "Select a map file to open..."
         '
-        'LBLx
-        '
-        Me.LBLx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LBLx.AutoSize = True
-        Me.LBLx.Location = New System.Drawing.Point(603, 96)
-        Me.LBLx.Margin = New System.Windows.Forms.Padding(0)
-        Me.LBLx.Name = "LBLx"
-        Me.LBLx.Size = New System.Drawing.Size(12, 13)
-        Me.LBLx.TabIndex = 10
-        Me.LBLx.Text = "x"
-        '
-        'LBLWxH
-        '
-        Me.LBLWxH.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LBLWxH.AutoSize = True
-        Me.LBLWxH.Location = New System.Drawing.Point(566, 80)
-        Me.LBLWxH.Name = "LBLWxH"
-        Me.LBLWxH.Size = New System.Drawing.Size(89, 13)
-        Me.LBLWxH.TabIndex = 11
-        Me.LBLWxH.Text = "Width   x   Height"
-        '
         'CHKGrid
         '
         Me.CHKGrid.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.CHKGrid.AutoSize = True
         Me.CHKGrid.Checked = True
         Me.CHKGrid.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.CHKGrid.Location = New System.Drawing.Point(485, 95)
+        Me.CHKGrid.Location = New System.Drawing.Point(468, 47)
         Me.CHKGrid.Name = "CHKGrid"
         Me.CHKGrid.Size = New System.Drawing.Size(75, 17)
         Me.CHKGrid.TabIndex = 12
         Me.CHKGrid.Text = "Show Grid"
         Me.CHKGrid.UseVisualStyleBackColor = True
         '
-        'ToolsBox
-        '
-        Me.ToolsBox.Controls.Add(Me.CMDToolSmartBrush)
-        Me.ToolsBox.Controls.Add(Me.CMDToolBrush)
-        Me.ToolsBox.Controls.Add(Me.CMDToolErase)
-        Me.ToolsBox.Location = New System.Drawing.Point(191, 30)
-        Me.ToolsBox.Name = "ToolsBox"
-        Me.ToolsBox.Size = New System.Drawing.Size(183, 84)
-        Me.ToolsBox.TabIndex = 14
-        Me.ToolsBox.TabStop = False
-        Me.ToolsBox.Text = "Tools:"
-        '
         'CMDToolSmartBrush
         '
         Me.CMDToolSmartBrush.AutoSize = True
         Me.CMDToolSmartBrush.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.CMDToolSmartBrush.Enabled = False
-        Me.CMDToolSmartBrush.Location = New System.Drawing.Point(6, 39)
+        Me.CMDToolSmartBrush.Location = New System.Drawing.Point(241, 69)
         Me.CMDToolSmartBrush.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.CMDToolSmartBrush.Name = "CMDToolSmartBrush"
         Me.CMDToolSmartBrush.Size = New System.Drawing.Size(74, 23)
@@ -608,7 +618,7 @@ Partial Class FRMEditor
         Me.CMDToolBrush.AutoSize = True
         Me.CMDToolBrush.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.CMDToolBrush.Enabled = False
-        Me.CMDToolBrush.Location = New System.Drawing.Point(6, 16)
+        Me.CMDToolBrush.Location = New System.Drawing.Point(144, 69)
         Me.CMDToolBrush.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.CMDToolBrush.Name = "CMDToolBrush"
         Me.CMDToolBrush.Size = New System.Drawing.Size(44, 23)
@@ -623,7 +633,7 @@ Partial Class FRMEditor
         'CMDEditUnits
         '
         Me.CMDEditUnits.AutoSize = True
-        Me.CMDEditUnits.Location = New System.Drawing.Point(108, 91)
+        Me.CMDEditUnits.Location = New System.Drawing.Point(274, 43)
         Me.CMDEditUnits.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.CMDEditUnits.Name = "CMDEditUnits"
         Me.CMDEditUnits.Size = New System.Drawing.Size(80, 23)
@@ -661,27 +671,33 @@ Partial Class FRMEditor
         Me.SavePNG.Filter = "PNG Images|*png"
         Me.SavePNG.Title = "Export PNG Image..."
         '
-        'CBOLevel
+        'MapTabs
         '
-        Me.CBOLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.CBOLevel.FormattingEnabled = True
-        Me.CBOLevel.Location = New System.Drawing.Point(9, 93)
-        Me.CBOLevel.Name = "CBOLevel"
-        Me.CBOLevel.Size = New System.Drawing.Size(96, 21)
-        Me.CBOLevel.TabIndex = 17
+        Me.MapTabs.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.MapTabs.Location = New System.Drawing.Point(132, 95)
+        Me.MapTabs.Name = "MapTabs"
+        Me.MapTabs.SelectedIndex = 0
+        Me.MapTabs.ShowToolTips = True
+        Me.MapTabs.Size = New System.Drawing.Size(629, 333)
+        Me.MapTabs.TabIndex = 20
         '
         'FRMEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(764, 452)
-        Me.Controls.Add(Me.CBOLevel)
+        Me.ClientSize = New System.Drawing.Size(766, 452)
+        Me.Controls.Add(LBLHeight)
+        Me.Controls.Add(LBLWidth)
+        Me.Controls.Add(LBLTools)
+        Me.Controls.Add(Me.CMDToolSmartBrush)
         Me.Controls.Add(Me.PNLUnits)
+        Me.Controls.Add(Me.CMDToolBrush)
+        Me.Controls.Add(Me.CMDToolErase)
         Me.Controls.Add(Me.CMDEditUnits)
-        Me.Controls.Add(Me.ToolsBox)
         Me.Controls.Add(Me.CHKGrid)
-        Me.Controls.Add(Me.LBLWxH)
-        Me.Controls.Add(Me.LBLx)
+        Me.Controls.Add(LBLx)
         Me.Controls.Add(Me.TXTHeight)
         Me.Controls.Add(Me.TXTWidth)
         Me.Controls.Add(Me.CMDSize)
@@ -695,6 +711,7 @@ Partial Class FRMEditor
         Me.Controls.Add(Me.LBLSelected)
         Me.Controls.Add(Me.PICActive)
         Me.Controls.Add(Me.PNLBuildings)
+        Me.Controls.Add(Me.MapTabs)
         Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MNUMain
@@ -712,8 +729,6 @@ Partial Class FRMEditor
         Me.MNUMain.PerformLayout()
         Me.PNLBuildings.ResumeLayout(False)
         CType(Me.PICBuildings, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ToolsBox.ResumeLayout(False)
-        Me.ToolsBox.PerformLayout()
         Me.PNLUnits.ResumeLayout(False)
         CType(Me.PICUnits, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -748,12 +763,9 @@ Partial Class FRMEditor
     Friend WithEvents CMDSize As System.Windows.Forms.Button
     Friend WithEvents SaveMap As System.Windows.Forms.SaveFileDialog
     Friend WithEvents OpenMap As System.Windows.Forms.OpenFileDialog
-    Friend WithEvents LBLx As System.Windows.Forms.Label
-    Friend WithEvents LBLWxH As System.Windows.Forms.Label
     Friend WithEvents CHKGrid As System.Windows.Forms.CheckBox
     Friend WithEvents MNUDev As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CMDTileDataEditor As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolsBox As System.Windows.Forms.GroupBox
     Friend WithEvents CMDToolBrush As System.Windows.Forms.Button
     Friend WithEvents IntroTimer As System.Windows.Forms.Timer
     Friend WithEvents CMDToolSmartBrush As System.Windows.Forms.Button
@@ -783,5 +795,5 @@ Partial Class FRMEditor
     Friend WithEvents Separator7 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents Separator8 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents Separator3 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents CBOLevel As System.Windows.Forms.ComboBox
+    Friend WithEvents MapTabs As System.Windows.Forms.TabControl
 End Class
