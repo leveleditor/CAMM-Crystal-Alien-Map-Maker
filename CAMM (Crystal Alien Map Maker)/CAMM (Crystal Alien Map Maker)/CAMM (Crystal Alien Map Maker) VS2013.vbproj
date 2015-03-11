@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Assets.vb" />
+    <Compile Include="Config.vb" />
     <Compile Include="Constants.vb" />
     <Compile Include="CustomColorTable.vb" />
     <Compile Include="FRMMapProperties.Designer.vb">

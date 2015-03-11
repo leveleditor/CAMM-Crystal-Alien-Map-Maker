@@ -25,7 +25,7 @@
 
         FRMEditor.ImportASTileData = line.Remove(0, 2)
         FRMEditor.NewMap()
-        FRMEditor.ActiveMap.SetSize(Ascii(line(0)), Ascii(line(1)))
+        FRMEditor.ActiveMap.SetSize(AsciiLookup.IndexOf(line(0)), AsciiLookup.IndexOf(line(1)))
         FRMEditor.ActiveMap.MapTitle = CBOPickMap.SelectedItem.ToString().Trim()
 
         Me.DialogResult = System.Windows.Forms.DialogResult.OK
@@ -105,18 +105,4 @@
             OK_Button.Enabled = False
         End If
     End Sub
-
-    Function Ascii(ByVal index As Integer) As String
-        If index > 213 Then
-            Return "INVALID"
-        End If
-        Return FRMEditor.Ascii(index)
-    End Function
-    Function Ascii(ByVal character As Char) As Integer
-        Return Array.IndexOf(FRMEditor.Ascii, character.ToString)
-    End Function
-    Function Ascii(ByVal character As String) As Integer
-        Return Array.IndexOf(FRMEditor.Ascii, character)
-    End Function
-
 End Class

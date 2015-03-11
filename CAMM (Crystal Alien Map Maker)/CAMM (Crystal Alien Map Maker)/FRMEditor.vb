@@ -60,9 +60,6 @@ Public Class FRMEditor
     Dim INIArray As String = ""
     Dim INISeparator As Char
 
-    'ASCII Lookup Array
-    Public Shared Ascii As String() = {}
-
     Public Shared SelTiles() As Tile = {} 'Tile Selections.
     Public Shared SelBuildings() As Building = {} 'Unit, Building, and Item Selections.
     Public Shared SelUnits() As Unit = {} 'Unit Selections.
@@ -130,9 +127,15 @@ Public Class FRMEditor
             INIArray = config.GetString("Array Modifiers")
             INISeparator = Char.Parse(config.GetString("Array Separator"))
 
+            'TODO: Placed here temporarily.
+            LoadConfig()
+
             config = source.Configs.Item("ASCII LOOKUP")
             Dim AsciiSeparator As String = config.GetString("Ascii Separator")
-            Ascii = config.Get("Ascii Array").Trim(INIArray.ToCharArray).Trim(AsciiSeparator.ToCharArray()).Split(New String() {AsciiSeparator}, StringSplitOptions.None)
+            Dim Ascii As String() = config.Get("Ascii Array").Trim(INIArray.ToCharArray).Trim(AsciiSeparator.ToCharArray()).Split(New String() {AsciiSeparator}, StringSplitOptions.None)
+            For Each str As String In Ascii
+                AsciiLookup.Add(Char.Parse(str))
+            Next
 
             config = source.Configs.Item("DEFINE TERRAIN")
             For i As Integer = 0 To config.GetKeys().Length - 1
@@ -1229,7 +1232,7 @@ Public Class FRMEditor
     End Sub
 
     Private Sub CMDExportAS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDExportAS.Click
-        Dim ExportASTileData As String = Ascii(ActiveMap.SizeX) + Ascii(ActiveMap.SizeY)
+        Dim ExportASTileData As String = AsciiLookup(ActiveMap.SizeX) + AsciiLookup(ActiveMap.SizeY)
 
         For y As Integer = 0 To ActiveMap.SizeY - 1
             For x As Integer = 0 To ActiveMap.SizeX - 1
@@ -1238,7 +1241,7 @@ Public Class FRMEditor
                     idx = 0
                 End If
 
-                Dim chr As String = Ascii(idx)
+                Dim chr As String = AsciiLookup(idx)
 
                 ExportASTileData += chr
             Next x
@@ -1275,7 +1278,7 @@ Public Class FRMEditor
                     'ReDim Preserve MapTiles(count)
                     'MapTiles(count) = New Tile(x, y)
 
-                    Dim idx As Integer = Array.IndexOf(Ascii, ImportASTileData.ToCharArray()(count).ToString)
+                    Dim idx As Integer = AsciiLookup.IndexOf(ImportASTileData.ToCharArray()(count).ToString())
                     Dim tileId As Integer = -1
                     If idx > 0 Then
                         tileId = idx ' Old calculation: (4350 + 2 * idx)
