@@ -796,7 +796,7 @@ Public Class FRMEditor
         Dim newMap As Map = New Map()
         newMap.MapTitle = "New Map"
         Maps.Add(newMap)
-        UpdateLevelsList()
+        UpdateMapTabs()
         'CBOLevel.Items.Add("Map " + Levels.Count.ToString() + " [" + newLevel.Map.MapTitle + "]")
         ActiveMapNum = Maps.IndexOf(newMap)
         UpdateFormTitle()
@@ -857,7 +857,7 @@ Public Class FRMEditor
         ActiveMap.FileName = OpenMap.FileName
 
         UpdateFormTitle()
-        UpdateLevelsList()
+        UpdateMapTabs()
 
         PICMap.Invalidate()
     End Sub
@@ -1294,6 +1294,7 @@ Public Class FRMEditor
 
             IsMapOpen = False
             ActiveMap.MapTitle += " (Imported ActionScript)"
+            UpdateMapTabs()
             UpdateFormTitle()
             PICMap.Invalidate()
         End If
@@ -1311,7 +1312,7 @@ Public Class FRMEditor
         PICMap.Invalidate()
     End Sub
 
-    Private Sub UpdateLevelsList()
+    Private Sub UpdateMapTabs()
         If MapTabs.TabPages.Count > 0 Then
             For i As Integer = 0 To MapTabs.TabPages.Count - 1
                 Dim tabText As String = (i + 1).ToString() + ") " + Maps(i).MapTitle
