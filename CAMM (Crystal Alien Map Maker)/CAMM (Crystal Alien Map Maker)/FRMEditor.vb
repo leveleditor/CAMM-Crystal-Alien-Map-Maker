@@ -56,10 +56,6 @@ Public Class FRMEditor
 
     ReadOnly CustomToolStripRenderer As ToolStripProfessionalRenderer = New ToolStripProfessionalRenderer(New CustomColorTable())
 
-    'INI Variables.
-    Dim INIArray As String = ""
-    Dim INISeparator As Char
-
     Public Shared SelTiles() As Tile = {} 'Tile Selections.
     Public Shared SelBuildings() As Building = {} 'Unit, Building, and Item Selections.
     Public Shared SelUnits() As Unit = {} 'Unit Selections.
@@ -124,8 +120,6 @@ Public Class FRMEditor
             MsgBox("The 'Tiles.dat' file was created with a newer version of CAMM and cannot be used!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
             Me.Close()
         ElseIf vFormat = TilesDatVersion Then
-            INIArray = config.GetString("Array Modifiers")
-            INISeparator = Char.Parse(config.GetString("Array Separator"))
 
             'TODO: Placed here temporarily.
             LoadConfig()

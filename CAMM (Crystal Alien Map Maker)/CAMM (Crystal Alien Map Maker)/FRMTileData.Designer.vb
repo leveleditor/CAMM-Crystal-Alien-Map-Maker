@@ -26,10 +26,6 @@ Partial Class FRMTileData
         Me.CMDSave = New System.Windows.Forms.Button
         Me.CMDClose = New System.Windows.Forms.Button
         Me.LBLSaved = New System.Windows.Forms.Label
-        Me.LBLVar4 = New System.Windows.Forms.Label
-        Me.TXTVar4 = New System.Windows.Forms.TextBox
-        Me.TXTVar5 = New System.Windows.Forms.TextBox
-        Me.LBLVar5 = New System.Windows.Forms.Label
         Me.OpenImage = New System.Windows.Forms.OpenFileDialog
         Me.EntrySections = New System.Windows.Forms.TabControl
         Me.TabTerrain = New System.Windows.Forms.TabPage
@@ -80,44 +76,6 @@ Partial Class FRMTileData
         Me.LBLSaved.TabIndex = 12
         Me.LBLSaved.Text = "Data Saved!"
         Me.LBLSaved.Visible = False
-        '
-        'LBLVar4
-        '
-        Me.LBLVar4.AutoSize = True
-        Me.LBLVar4.Location = New System.Drawing.Point(156, 9)
-        Me.LBLVar4.Name = "LBLVar4"
-        Me.LBLVar4.Size = New System.Drawing.Size(79, 13)
-        Me.LBLVar4.TabIndex = 7
-        Me.LBLVar4.Text = "Array Modifiers:"
-        '
-        'TXTVar4
-        '
-        Me.TXTVar4.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTVar4.Location = New System.Drawing.Point(241, 5)
-        Me.TXTVar4.Name = "TXTVar4"
-        Me.TXTVar4.ReadOnly = True
-        Me.TXTVar4.Size = New System.Drawing.Size(55, 22)
-        Me.TXTVar4.TabIndex = 8
-        Me.TXTVar4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'TXTVar5
-        '
-        Me.TXTVar5.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTVar5.Location = New System.Drawing.Point(391, 5)
-        Me.TXTVar5.Name = "TXTVar5"
-        Me.TXTVar5.ReadOnly = True
-        Me.TXTVar5.Size = New System.Drawing.Size(55, 22)
-        Me.TXTVar5.TabIndex = 10
-        Me.TXTVar5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'LBLVar5
-        '
-        Me.LBLVar5.AutoSize = True
-        Me.LBLVar5.Location = New System.Drawing.Point(302, 9)
-        Me.LBLVar5.Name = "LBLVar5"
-        Me.LBLVar5.Size = New System.Drawing.Size(83, 13)
-        Me.LBLVar5.TabIndex = 9
-        Me.LBLVar5.Text = "Array Separator:"
         '
         'OpenImage
         '
@@ -255,10 +213,6 @@ Partial Class FRMTileData
         Me.Controls.Add(Me.EntrySections)
         Me.Controls.Add(Me.LBLVar6)
         Me.Controls.Add(Me.TXTVar6)
-        Me.Controls.Add(Me.LBLVar5)
-        Me.Controls.Add(Me.TXTVar5)
-        Me.Controls.Add(Me.TXTVar4)
-        Me.Controls.Add(Me.LBLVar4)
         Me.Controls.Add(Me.LBLSaved)
         Me.Controls.Add(Me.CMDClose)
         Me.Controls.Add(Me.CMDSave)
@@ -282,10 +236,6 @@ Partial Class FRMTileData
     Friend WithEvents CMDSave As System.Windows.Forms.Button
     Friend WithEvents CMDClose As System.Windows.Forms.Button
     Friend WithEvents LBLSaved As System.Windows.Forms.Label
-    Friend WithEvents LBLVar4 As System.Windows.Forms.Label
-    Friend WithEvents TXTVar4 As System.Windows.Forms.TextBox
-    Friend WithEvents TXTVar5 As System.Windows.Forms.TextBox
-    Friend WithEvents LBLVar5 As System.Windows.Forms.Label
     Friend WithEvents OpenImage As System.Windows.Forms.OpenFileDialog
     Friend WithEvents EntrySections As System.Windows.Forms.TabControl
     Friend WithEvents TabTerrain As System.Windows.Forms.TabPage

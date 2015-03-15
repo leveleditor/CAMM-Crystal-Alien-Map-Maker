@@ -12,9 +12,6 @@ Public Class FRMTileData
             MsgBox("This 'Tiles.dat' file is invalid or outdated and cannot be used!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly)
             Me.Close()
         ElseIf config.GetInt("vFormat", -1) = TilesDatVersion Then
-            TXTVar4.Text = config.GetString("Array Modifiers")
-            TXTVar5.Text = config.GetString("Array Separator")
-
             config = source.Configs.Item("ASCII LOOKUP")
             TXTVar6.Text = config.GetString("Ascii Separator")
             Ascii = config.Get("Ascii Array")
@@ -26,7 +23,7 @@ Public Class FRMTileData
             config = source.Configs.Item("DEFINE TERRAIN")
             For i As Integer = 0 To config.GetKeys().Length - 1
                 If config.GetKeys(i) <> "-1" Then
-                    Dim KeyArray As String() = config.Get(config.GetKeys(i)).Trim(TXTVar4.Text.ToCharArray).Split(New Char() {Char.Parse(TXTVar5.Text)}, StringSplitOptions.None)
+                    Dim KeyArray As String() = config.Get(config.GetKeys(i)).Trim(INIArray.ToCharArray()).Split(INISeparator.ToCharArray(), StringSplitOptions.None)
                     Dim TerrainID As String = KeyArray(0)
                     Dim IsPassable As Boolean = CBool(KeyArray(1))
                     Dim IsMinerals As Boolean = CBool(KeyArray(2))
@@ -45,7 +42,7 @@ Public Class FRMTileData
             config = source.Configs.Item("DEFINE BUILDINGS")
             For i As Integer = 0 To config.GetKeys().Length - 1
                 If config.GetKeys(i) <> "-1" Then
-                    Dim KeyArray As String() = config.Get(config.GetKeys(i)).Trim(TXTVar4.Text.ToCharArray).Split(New Char() {Char.Parse(TXTVar5.Text)}, StringSplitOptions.None)
+                    Dim KeyArray As String() = config.Get(config.GetKeys(i)).Trim(INIArray.ToCharArray).Split(INISeparator.ToCharArray(), StringSplitOptions.None)
                     Dim ObjectID As String = KeyArray(0)
                     Dim Width As Integer = CInt(KeyArray(1))
                     Dim Height As Integer = CInt(KeyArray(2))
@@ -68,7 +65,7 @@ Public Class FRMTileData
             config = source.Configs.Item("DEFINE UNITS")
             For i As Integer = 0 To config.GetKeys().Length - 1
                 If config.GetKeys(i) <> "-1" Then
-                    Dim KeyArray As String() = config.Get(config.GetKeys(i)).Trim(TXTVar4.Text.ToCharArray).Split(New Char() {Char.Parse(TXTVar5.Text)}, StringSplitOptions.None)
+                    Dim KeyArray As String() = config.Get(config.GetKeys(i)).Trim(INIArray.ToCharArray()).Split(INISeparator.ToCharArray(), StringSplitOptions.None)
                     Dim ObjectID As String = KeyArray(0)
                     Dim Width As Integer = CInt(KeyArray(1))
                     Dim Height As Integer = CInt(KeyArray(2))
@@ -300,9 +297,6 @@ Public Class FRMTileData
         SaveFileData += _
             "[CAMM]" + vbNewLine + _
             "vFormat = " + TilesDatVersion.ToString + vbNewLine + _
-            vbNewLine + _
-            "Array Modifiers = """ + TXTVar4.Text + """" + vbNewLine + _
-            "Array Separator = """ + TXTVar5.Text + """" + vbNewLine + _
             vbNewLine
 
         SaveFileData += _
@@ -344,7 +338,7 @@ Public Class FRMTileData
             UnitNumber += 1
         Next
 
-        SaveFileData += vbNewLine + "; -= CAMM Crystal Alien Map Maker (c) 2014 Leveleditor6680 // Josh =-"
+        SaveFileData += vbNewLine + "; -= CAMM Crystal Alien Map Maker (c) 2015 Leveleditor6680 // Josh =-"
 
         My.Computer.FileSystem.WriteAllText(TileDataFile, SaveFileData, False, System.Text.Encoding.UTF8)
 
