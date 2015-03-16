@@ -499,13 +499,13 @@ Public Class Map
                     building.Team = team
                     building.Angle = angle
                     building.Damage = damage
-                    For j As Integer = 0 To FRMEditor.SelBuildings.Length - 1
-                        If building.BuildingId = FRMEditor.SelBuildings(j).BuildingId Then
+                    For j As Integer = 0 To BuildingDefs.Length - 1
+                        If building.BuildingId = BuildingDefs(j).BuildingId Then
                             'Note to self:
                             'I wasted half a day trying to figure out what was going wrong,
                             'only to discover I forgot these 2 extremely obvious missing lines:
-                            building.BuildingW = FRMEditor.SelBuildings(j).BuildingW
-                            building.BuildingH = FRMEditor.SelBuildings(j).BuildingH
+                            building.BuildingW = BuildingDefs(j).BuildingW
+                            building.BuildingH = BuildingDefs(j).BuildingH
                             Exit For
                         End If
                     Next
@@ -576,10 +576,10 @@ Public Class Map
                 building.Team = team
                 building.Angle = angle
                 building.Damage = damage
-                For j As Integer = 0 To FRMEditor.SelBuildings.Length - 1
-                    If building.BuildingId = FRMEditor.SelBuildings(j).BuildingId Then
-                        building.BuildingW = FRMEditor.SelBuildings(j).BuildingW
-                        building.BuildingH = FRMEditor.SelBuildings(j).BuildingH
+                For j As Integer = 0 To BuildingDefs.Length - 1
+                    If building.BuildingId = BuildingDefs(j).BuildingId Then
+                        building.BuildingW = BuildingDefs(j).BuildingW
+                        building.BuildingH = BuildingDefs(j).BuildingH
                         Exit For
                     End If
                 Next

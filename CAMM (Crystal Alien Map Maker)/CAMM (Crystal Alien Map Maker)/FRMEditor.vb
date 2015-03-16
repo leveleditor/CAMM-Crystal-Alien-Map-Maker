@@ -56,10 +56,6 @@ Public Class FRMEditor
 
     ReadOnly CustomToolStripRenderer As ToolStripProfessionalRenderer = New ToolStripProfessionalRenderer(New CustomColorTable())
 
-    Public Shared SelTiles() As Tile = {} 'Tile Selections.
-    Public Shared SelBuildings() As Building = {} 'Unit, Building, and Item Selections.
-    Public Shared SelUnits() As Unit = {} 'Unit Selections.
-
     Dim ActiveTile As Tile 'The currently active tile selection.
     Dim ActiveBuilding As Building 'The currently active object selection.
     Dim ActiveUnit As Unit 'The currently active unit selection.
@@ -99,9 +95,6 @@ Public Class FRMEditor
 
         CheckFileAssociations()
 
-        Dim Y1 As Integer = 0
-        Dim Y2 As Integer = 0
-        Dim Y3 As Integer = 0
         Dim reader As New IniReader(TileDataFile) With {.IgnoreComments = True, .AcceptCommentAfterKey = False}
         Dim source As New IniConfigSource(New IniDocument(reader))
         Dim config As IConfig = source.Configs.Item("CAMM")
@@ -120,138 +113,19 @@ Public Class FRMEditor
             MsgBox("The 'Tiles.dat' file was created with a newer version of CAMM and cannot be used!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
             Me.Close()
         ElseIf vFormat = TilesDatVersion Then
-
-            'TODO: Placed here temporarily.
-            LoadConfig()
-
-            config = source.Configs.Item("ASCII LOOKUP")
-            Dim AsciiSeparator As String = config.GetString("Ascii Separator")
-            Dim Ascii As String() = config.Get("Ascii Array").Trim(INIArray.ToCharArray).Trim(AsciiSeparator.ToCharArray()).Split(New String() {AsciiSeparator}, StringSplitOptions.None)
-            For Each str As String In Ascii
-                AsciiLookup.Add(Char.Parse(str))
-            Next
-
-            config = source.Configs.Item("DEFINE TERRAIN")
-            For i As Integer = 0 To config.GetKeys().Length - 1
-                Dim KeyName As String = "Terrain" + i.ToString
-                If config.Get(KeyName, "-1") <> "-1" Then
-                    Dim KeyArray As String() = config.Get(KeyName).Trim(INIArray.ToCharArray).Split(New Char() {INISeparator}, StringSplitOptions.None)
-                    Dim TerrainID As String = KeyArray(0)
-                    Dim IsPassable As Boolean = CBool(KeyArray(1))
-                    Dim IsMinerals As Boolean = CBool(KeyArray(2))
-                    Dim ImageUrl As String = KeyArray(3)
-
-                    Dim FullImageURL As String = My.Application.Info.DirectoryPath + DataPath + "/../" + ImageUrl
-                    Dim TheImage As Image = Image.FromFile(FullImageURL)
-
-                    TileImageLookup.Add(TerrainID, TheImage)
-
-                    ReDim Preserve SelTiles(Y1)
-                    SelTiles(Y1) = New Tile(0, Y1 * TileSizeY, TerrainID, IsPassable, IsMinerals)
-
-                    Y1 += 1
-
-                End If
-            Next
-
-            config = source.Configs.Item("DEFINE BUILDINGS")
-            For i As Integer = 0 To config.GetKeys().Length - 1
-                Dim KeyName As String = "Building" + i.ToString
-                If config.Get(KeyName, "-1") <> "-1" Then
-                    Dim KeyArray As String() = config.Get(KeyName).Trim(INIArray.ToCharArray).Split(New Char() {INISeparator}, StringSplitOptions.None)
-                    Dim BuildingId As String = KeyArray(0)
-                    Dim Width As Integer = CInt(KeyArray(1))
-                    Dim Height As Integer = CInt(KeyArray(2))
-                    Dim Team As Team = CType(Integer.Parse(KeyArray(3)), Team)
-                    Dim Angle As Single = CSng(KeyArray(4))
-                    Dim Damage As Single = CSng(KeyArray(5))
-                    Dim OffsetY As Integer = CInt(KeyArray(6))
-                    Dim ImageUrl As String = KeyArray(7)
-                    Dim FullImageURL As String = My.Application.Info.DirectoryPath + DataPath + "/../" + ImageUrl
-
-                    Dim Test As Bitmap = Bitmap.FromFile(FullImageURL)
-                    Dim flag As New Bitmap(TileSizeX, TileSizeY)
-                    Dim BitX, BitY As Integer
-                    For BitX = 0 To flag.Width - 1
-                        For BitY = 0 To flag.Height - 1
-                            flag.SetPixel(BitX, BitY, Test.GetPixel(BitX + ((Test.Width / 2) - (TileSizeX / 2)), BitY + ((Test.Height / 2) - TileSizeY) + OffsetY))
-                        Next
-                    Next
-                    Dim TheImage As Image = flag
-                    'TheImage = TheImage.GetThumbnailImage(TileSizeX, TileSizeY, Nothing, System.IntPtr.Zero)
-
-                    BuildingSmallImageLookup.Add(BuildingId, TheImage)
-                    BuildingFullImageLookup.Add(BuildingId, Image.FromFile(FullImageURL))
-
-                    ReDim Preserve SelBuildings(Y2)
-                    SelBuildings(Y2) = New Building(0, Y2 * TileSizeY, BuildingId, Team, Angle, Damage, Width, Height)
-
-                    Y2 += 1
-                End If
-            Next
-
-            config = source.Configs.Item("DEFINE UNITS")
-            For i As Integer = 0 To config.GetKeys().Length - 1
-                Dim KeyName As String = "Unit" + i.ToString
-                If config.Get(KeyName, "-1") <> "-1" Then
-                    Dim KeyArray As String() = config.Get(KeyName).Trim(INIArray.ToCharArray).Split(New Char() {INISeparator}, StringSplitOptions.None)
-                    Dim UnitId As String = KeyArray(0)
-                    'Dim Width As Integer = CInt(KeyArray(1))
-                    'Dim Height As Integer = CInt(KeyArray(2))
-                    Dim Team As Team = CType(Integer.Parse(KeyArray(3)), Team)
-                    Dim Angle As Single = CSng(KeyArray(4))
-                    Dim Damage As Single = CSng(KeyArray(5))
-                    Dim OffsetY As Integer = CInt(KeyArray(6))
-                    Dim ImageUrl As String = KeyArray(7)
-                    Dim FullImageURL As String = My.Application.Info.DirectoryPath + DataPath + "/../" + ImageUrl
-
-                    Dim Test As Bitmap = Bitmap.FromFile(FullImageURL)
-                    Dim W As Integer = TileSizeX
-                    Dim H As Integer = TileSizeY
-                    If Test.Size.Width < TileSizeX Then
-                        W = Test.Size.Width
-                    End If
-                    If Test.Size.Height < TileSizeY Then
-                        H = Test.Size.Height
-                    End If
-
-                    Dim flag As New Bitmap(W, H)
-                    Dim BitX, BitY As Integer
-                    For BitX = 0 To flag.Width - 1
-                        For BitY = 0 To flag.Height - 1
-                            Dim Pixel As Color = Color.Transparent
-                            Try
-                                Pixel = Test.GetPixel(BitX + ((Test.Width / 2) - (W / 2)), BitY + ((Test.Height / 2) - TileSizeY) + OffsetY)
-                            Catch ex As Exception
-
-                            End Try
-                            flag.SetPixel(BitX, BitY, Pixel)
-                        Next
-                    Next
-                    Dim TheImage As Image = flag
-                    'TheImage = TheImage.GetThumbnailImage(TileSizeX, TileSizeY, Nothing, System.IntPtr.Zero)
-
-                    UnitSmallImageLookup.Add(UnitId, TheImage)
-                    UnitFullImageLookup.Add(UnitId, Image.FromFile(FullImageURL))
-
-                    ReDim Preserve SelUnits(Y3)
-                    SelUnits(Y3) = New Unit(0, Y3 * TileSizeY, UnitId, Team, Angle, Damage)
-
-                    Y3 += 1
-                End If
-            Next
+            LoadConfig(source)
         End If
 
         'Dynamically setting PICTiles size.
-        PICTiles.Size = New Size(TileSizeX + 1, (Y1 * TileSizeY) + 1)
+        PICTiles.Size = New Size(TileSizeX + 1, (TileDefs.Length * TileSizeY) + 1)
         PICTiles.Invalidate()
 
         'Dynamically setting PICBuildings size.
-        PICBuildings.Size = New Size(TileSizeX + 1, (Y2 * TileSizeY) + 1)
+        PICBuildings.Size = New Size(TileSizeX + 1, (BuildingDefs.Length * TileSizeY) + 1)
         PICBuildings.Invalidate()
 
         'Dynamically setting PICUnits size.
-        PICUnits.Size = New Size(TileSizeX + 1, (Y3 * TileSizeY) + 1)
+        PICUnits.Size = New Size(TileSizeX + 1, (UnitDefs.Length * TileSizeY) + 1)
         PICUnits.Invalidate()
 
         'Setting default blank values.
@@ -515,9 +389,9 @@ Public Class FRMEditor
         If IsLoaded Then
             e.Graphics.Clear(PICTiles.BackColor)
 
-            For i As Integer = 0 To SelTiles.Length - 1
-                If SelTiles(i).HasData Then
-                    e.Graphics.DrawImage(SelTiles(i).Image, SelTiles(i).Position)
+            For i As Integer = 0 To TileDefs.Length - 1
+                If TileDefs(i).HasData Then
+                    e.Graphics.DrawImage(TileDefs(i).Image, TileDefs(i).Position)
                 End If
             Next
 
@@ -576,10 +450,10 @@ Public Class FRMEditor
             SelX_Tiles = MouseX
             SelY_Tiles = MouseY
 
-            For i As Integer = 0 To SelTiles.Length - 1
-                If SelTiles(i).Position = New Point(MouseX, MouseY) Then
-                    PICActive.Image = SelTiles(i).Image
-                    ActiveTile.TileId = SelTiles(i).TileId
+            For i As Integer = 0 To TileDefs.Length - 1
+                If TileDefs(i).Position = New Point(MouseX, MouseY) Then
+                    PICActive.Image = TileDefs(i).Image
+                    ActiveTile.TileId = TileDefs(i).TileId
                 End If
             Next
 
@@ -596,17 +470,17 @@ Public Class FRMEditor
             'e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
 
             ' Draw the object selections.
-            For i As Integer = 0 To SelBuildings.Length - 1
-                If SelBuildings(i).HasData Then
-                    If SelBuildings(i).Team = Team.Astros Then
-                        e.Graphics.DrawImage(ButtonAstro, SelBuildings(i).Location.X, SelBuildings(i).Location.Y, ButtonAstro.Width, ButtonAstro.Height)
-                    ElseIf SelBuildings(i).Team = Team.Aliens Then
-                        e.Graphics.DrawImage(ButtonAlien, SelBuildings(i).Location.X, SelBuildings(i).Location.Y, ButtonAlien.Width, ButtonAlien.Height)
+            For i As Integer = 0 To BuildingDefs.Length - 1
+                If BuildingDefs(i).HasData Then
+                    If BuildingDefs(i).Team = Team.Astros Then
+                        e.Graphics.DrawImage(ButtonAstro, BuildingDefs(i).Location.X, BuildingDefs(i).Location.Y, ButtonAstro.Width, ButtonAstro.Height)
+                    ElseIf BuildingDefs(i).Team = Team.Aliens Then
+                        e.Graphics.DrawImage(ButtonAlien, BuildingDefs(i).Location.X, BuildingDefs(i).Location.Y, ButtonAlien.Width, ButtonAlien.Height)
                     Else
-                        e.Graphics.DrawImage(ButtonNeutral, SelBuildings(i).Location.X, SelBuildings(i).Location.Y, ButtonNeutral.Width, ButtonNeutral.Height)
+                        e.Graphics.DrawImage(ButtonNeutral, BuildingDefs(i).Location.X, BuildingDefs(i).Location.Y, ButtonNeutral.Width, ButtonNeutral.Height)
                     End If
-                    e.Graphics.DrawImage(SelBuildings(i).SmallImage, SelBuildings(i).Location)
-                    e.Graphics.DrawImage(ButtonOverlay, SelBuildings(i).Location)
+                    e.Graphics.DrawImage(BuildingDefs(i).SmallImage, BuildingDefs(i).Location)
+                    e.Graphics.DrawImage(ButtonOverlay, BuildingDefs(i).Location)
                 End If
             Next
 
@@ -664,13 +538,13 @@ Public Class FRMEditor
             SelX_Buildings = MouseX
             SelY_Buildings = MouseY
 
-            For i As Integer = 0 To SelBuildings.Length - 1
-                If SelBuildings(i).Location = New Point(MouseX, MouseY) Then
-                    PICActive.Image = SelBuildings(i).SmallImage
-                    ActiveBuilding.BuildingId = SelBuildings(i).BuildingId
-                    ActiveBuilding.Team = SelBuildings(i).Team
-                    ActiveBuilding.BuildingW = SelBuildings(i).BuildingW
-                    ActiveBuilding.BuildingH = SelBuildings(i).BuildingH
+            For i As Integer = 0 To BuildingDefs.Length - 1
+                If BuildingDefs(i).Location = New Point(MouseX, MouseY) Then
+                    PICActive.Image = BuildingDefs(i).SmallImage
+                    ActiveBuilding.BuildingId = BuildingDefs(i).BuildingId
+                    ActiveBuilding.Team = BuildingDefs(i).Team
+                    ActiveBuilding.BuildingW = BuildingDefs(i).BuildingW
+                    ActiveBuilding.BuildingH = BuildingDefs(i).BuildingH
                 End If
             Next
 
@@ -686,16 +560,16 @@ Public Class FRMEditor
             e.Graphics.Clear(PICUnits.BackColor)
 
             ' Draw the object selections.
-            For i As Integer = 0 To SelUnits.Length - 1
-                If SelUnits(i).HasData Then
-                    If SelUnits(i).Team = Team.Astros Then
-                        e.Graphics.DrawImage(ButtonAstro, SelUnits(i).Position)
-                    ElseIf SelUnits(i).Team = Team.Aliens Then
-                        e.Graphics.DrawImage(ButtonAlien, SelUnits(i).Position)
+            For i As Integer = 0 To UnitDefs.Length - 1
+                If UnitDefs(i).HasData Then
+                    If UnitDefs(i).Team = Team.Astros Then
+                        e.Graphics.DrawImage(ButtonAstro, UnitDefs(i).Position)
+                    ElseIf UnitDefs(i).Team = Team.Aliens Then
+                        e.Graphics.DrawImage(ButtonAlien, UnitDefs(i).Position)
                     Else
-                        e.Graphics.DrawImage(ButtonNeutral, SelUnits(i).Position.X, SelUnits(i).Position.Y, ButtonNeutral.Width, ButtonNeutral.Height)
+                        e.Graphics.DrawImage(ButtonNeutral, UnitDefs(i).Position.X, UnitDefs(i).Position.Y, ButtonNeutral.Width, ButtonNeutral.Height)
                     End If
-                    e.Graphics.DrawImage(SelUnits(i).SmallImage, SelUnits(i).Position)
+                    e.Graphics.DrawImage(UnitDefs(i).SmallImage, UnitDefs(i).Position)
                     'e.Graphics.DrawImage(ButtonOverlay, SelUnits(i).Location)
                 End If
             Next
@@ -754,11 +628,11 @@ Public Class FRMEditor
             SelX_Units = MouseX
             SelY_Units = MouseY
 
-            For i As Integer = 0 To SelUnits.Length - 1
-                If SelUnits(i).Position = New Point(MouseX, MouseY) Then
-                    PICActive.Image = SelUnits(i).SmallImage
-                    ActiveUnit.UnitId = SelUnits(i).UnitId
-                    ActiveUnit.Team = SelUnits(i).Team
+            For i As Integer = 0 To UnitDefs.Length - 1
+                If UnitDefs(i).Position = New Point(MouseX, MouseY) Then
+                    PICActive.Image = UnitDefs(i).SmallImage
+                    ActiveUnit.UnitId = UnitDefs(i).UnitId
+                    ActiveUnit.Team = UnitDefs(i).Team
                 End If
             Next
 
@@ -1244,7 +1118,7 @@ Public Class FRMEditor
         Dim output As String = vbTab + "this.data = {" + vbNewLine
         output += vbTab + vbTab + "tiles : ""0"
         '0AAAAAAAA AAAAAAAAAAAAAAA    AAAAAAAAAAAAAAAAA 1A A"
-        Dim tiles As List(Of Tile) = (From t In SelTiles Order By t.TileId Where t.HasData).ToList()
+        Dim tiles As List(Of Tile) = (From t In TileDefs Order By t.TileId Where t.HasData).ToList()
         For Each t As Tile In tiles
             If t.IsMinerals Then
                 output += "1"
@@ -1278,8 +1152,8 @@ Public Class FRMEditor
                         tileId = idx ' Old calculation: (4350 + 2 * idx)
                     End If
 
-                    For j As Integer = 0 To SelTiles.Length - 1
-                        If tileId = SelTiles(j).TileId Then
+                    For j As Integer = 0 To TileDefs.Length - 1
+                        If tileId = TileDefs(j).TileId Then
                             ActiveMap.SetTile(x, y, New Tile(x, y, tileId))
                             Exit For
                         End If
