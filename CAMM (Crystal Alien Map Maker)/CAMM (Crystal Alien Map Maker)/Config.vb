@@ -13,7 +13,7 @@ Public Module Config
 
         config = source.Configs.Item("ASCII LOOKUP")
         Dim asciiSeparator As String = config.GetString("Ascii Separator")
-        Dim ascii As String() = config.Get("Ascii Array").Trim(INIArray.ToCharArray).Trim(asciiSeparator.ToCharArray()).Split(New String() {asciiSeparator}, StringSplitOptions.None)
+        Dim ascii As String() = config.Get("Ascii Array").Trim(IniArray.ToCharArray).Trim(asciiSeparator.ToCharArray()).Split(New String() {asciiSeparator}, StringSplitOptions.None)
         For Each str As String In ascii
             AsciiLookup.Add(Char.Parse(str))
         Next
@@ -22,7 +22,7 @@ Public Module Config
         For i As Integer = 0 To config.GetKeys().Length - 1
             Dim keyName As String = "Terrain" + i.ToString
             If config.Get(keyName, "-1") <> "-1" Then
-                Dim keyArray As String() = config.Get(keyName).Trim(INIArray.ToCharArray).Split(New Char() {INISeparator}, StringSplitOptions.None)
+                Dim keyArray As String() = config.Get(keyName).Trim(IniArray.ToCharArray).Split(New Char() {IniSeparator}, StringSplitOptions.None)
                 Dim tileId As String = keyArray(0)
                 Dim isPassable As Boolean = CBool(keyArray(1))
                 Dim isMinerals As Boolean = CBool(keyArray(2))
@@ -42,7 +42,7 @@ Public Module Config
         For i As Integer = 0 To config.GetKeys().Length - 1
             Dim keyName As String = "Building" + i.ToString
             If config.Get(keyName, "-1") <> "-1" Then
-                Dim keyArray As String() = config.Get(keyName).Trim(INIArray.ToCharArray).Split(New Char() {INISeparator}, StringSplitOptions.None)
+                Dim keyArray As String() = config.Get(keyName).Trim(IniArray.ToCharArray).Split(New Char() {IniSeparator}, StringSplitOptions.None)
                 Dim buildingId As String = keyArray(0)
                 Dim width As Integer = CInt(keyArray(1))
                 Dim height As Integer = CInt(keyArray(2))
@@ -76,7 +76,7 @@ Public Module Config
         For i As Integer = 0 To config.GetKeys().Length - 1
             Dim keyName As String = "Unit" + i.ToString
             If config.Get(keyName, "-1") <> "-1" Then
-                Dim keyArray As String() = config.Get(keyName).Trim(INIArray.ToCharArray).Split(New Char() {INISeparator}, StringSplitOptions.None)
+                Dim keyArray As String() = config.Get(keyName).Trim(IniArray.ToCharArray).Split(New Char() {IniSeparator}, StringSplitOptions.None)
                 Dim unitId As String = keyArray(0)
                 'Dim Width As Integer = CInt(KeyArray(1))
                 'Dim Height As Integer = CInt(KeyArray(2))

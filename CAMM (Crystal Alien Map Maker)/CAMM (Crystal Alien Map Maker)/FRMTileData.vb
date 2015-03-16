@@ -23,7 +23,7 @@ Public Class FRMTileData
             config = source.Configs.Item("DEFINE TERRAIN")
             For i As Integer = 0 To config.GetKeys().Length - 1
                 If config.GetKeys(i) <> "-1" Then
-                    Dim KeyArray As String() = config.Get(config.GetKeys(i)).Trim(INIArray.ToCharArray()).Split(INISeparator.ToCharArray(), StringSplitOptions.None)
+                    Dim KeyArray As String() = config.Get(config.GetKeys(i)).Trim(IniArray.ToCharArray()).Split(IniSeparator.ToCharArray(), StringSplitOptions.None)
                     Dim TerrainID As String = KeyArray(0)
                     Dim IsPassable As Boolean = CBool(KeyArray(1))
                     Dim IsMinerals As Boolean = CBool(KeyArray(2))
@@ -42,7 +42,7 @@ Public Class FRMTileData
             config = source.Configs.Item("DEFINE BUILDINGS")
             For i As Integer = 0 To config.GetKeys().Length - 1
                 If config.GetKeys(i) <> "-1" Then
-                    Dim KeyArray As String() = config.Get(config.GetKeys(i)).Trim(INIArray.ToCharArray).Split(INISeparator.ToCharArray(), StringSplitOptions.None)
+                    Dim KeyArray As String() = config.Get(config.GetKeys(i)).Trim(IniArray.ToCharArray).Split(IniSeparator.ToCharArray(), StringSplitOptions.None)
                     Dim ObjectID As String = KeyArray(0)
                     Dim Width As Integer = CInt(KeyArray(1))
                     Dim Height As Integer = CInt(KeyArray(2))
@@ -65,7 +65,7 @@ Public Class FRMTileData
             config = source.Configs.Item("DEFINE UNITS")
             For i As Integer = 0 To config.GetKeys().Length - 1
                 If config.GetKeys(i) <> "-1" Then
-                    Dim KeyArray As String() = config.Get(config.GetKeys(i)).Trim(INIArray.ToCharArray()).Split(INISeparator.ToCharArray(), StringSplitOptions.None)
+                    Dim KeyArray As String() = config.Get(config.GetKeys(i)).Trim(IniArray.ToCharArray()).Split(IniSeparator.ToCharArray(), StringSplitOptions.None)
                     Dim ObjectID As String = KeyArray(0)
                     Dim Width As Integer = CInt(KeyArray(1))
                     Dim Height As Integer = CInt(KeyArray(2))

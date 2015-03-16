@@ -14,8 +14,8 @@
     Public Const TilesDatVersion As Integer = 5
     Public Const MapFormat As Integer = 5
 
-    Public Const INIArray As String = "{}"
-    Public Const INISeparator As String = "|"
+    Public Const IniArray As String = "{}"
+    Public Const IniSeparator As String = "|"
 
     Public Const TileSizeX As Integer = 96
     Public Const TileSizeY As Integer = 48

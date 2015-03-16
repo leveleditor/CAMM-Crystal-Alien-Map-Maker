@@ -6,7 +6,6 @@ Imports Nini.Config
 Imports Nini.Ini
 Public Class FRMEditor
 
-#Region "Declarations"
     Dim IsMapOpen As Boolean = False
     Private BaseFormTitle As String
 
@@ -56,10 +55,9 @@ Public Class FRMEditor
 
     ReadOnly CustomToolStripRenderer As ToolStripProfessionalRenderer = New ToolStripProfessionalRenderer(New CustomColorTable())
 
-    Dim ActiveTile As Tile 'The currently active tile selection.
-    Dim ActiveBuilding As Building 'The currently active object selection.
-    Dim ActiveUnit As Unit 'The currently active unit selection.
-#End Region
+    Private ActiveTile As Tile 'The currently active tile selection.
+    Private ActiveBuilding As Building 'The currently active object selection.
+    Private ActiveUnit As Unit 'The currently active unit selection.
 
     Private Sub FRMEditor_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'Storing default form title.
