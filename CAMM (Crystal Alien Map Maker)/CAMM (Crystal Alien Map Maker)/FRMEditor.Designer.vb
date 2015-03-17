@@ -89,6 +89,8 @@ Partial Class FRMEditor
         Me.PICUnits = New System.Windows.Forms.PictureBox
         Me.SavePNG = New System.Windows.Forms.SaveFileDialog
         Me.MapTabs = New System.Windows.Forms.TabControl
+        Me.CTXMapTabs = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.CMDClose = New System.Windows.Forms.ToolStripMenuItem
         LBLx = New System.Windows.Forms.Label
         LBLTools = New System.Windows.Forms.Label
         LBLWidth = New System.Windows.Forms.Label
@@ -104,6 +106,7 @@ Partial Class FRMEditor
         CType(Me.PICBuildings, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PNLUnits.SuspendLayout()
         CType(Me.PICUnits, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.CTXMapTabs.SuspendLayout()
         Me.SuspendLayout()
         '
         'LBLx
@@ -250,6 +253,7 @@ Partial Class FRMEditor
         '
         'MNUMain
         '
+        Me.MNUMain.AutoSize = False
         Me.MNUMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MNUFile, Me.Separator5, Me.MNUEdit, Me.Separator6, Me.MNUView, Me.Separator7, Me.MNUHelp, Me.Separator8, Me.MNUDev, Me.Separator3})
         Me.MNUMain.Location = New System.Drawing.Point(0, 0)
         Me.MNUMain.Name = "MNUMain"
@@ -676,12 +680,28 @@ Partial Class FRMEditor
         Me.MapTabs.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.MapTabs.ContextMenuStrip = Me.CTXMapTabs
         Me.MapTabs.Location = New System.Drawing.Point(132, 95)
         Me.MapTabs.Name = "MapTabs"
         Me.MapTabs.SelectedIndex = 0
         Me.MapTabs.ShowToolTips = True
         Me.MapTabs.Size = New System.Drawing.Size(629, 333)
         Me.MapTabs.TabIndex = 20
+        '
+        'CTXMapTabs
+        '
+        Me.CTXMapTabs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CMDClose})
+        Me.CTXMapTabs.Name = "ContextMenuStrip1"
+        Me.CTXMapTabs.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+        Me.CTXMapTabs.ShowCheckMargin = True
+        Me.CTXMapTabs.ShowImageMargin = False
+        Me.CTXMapTabs.Size = New System.Drawing.Size(104, 26)
+        '
+        'CMDClose
+        '
+        Me.CMDClose.Name = "CMDClose"
+        Me.CMDClose.Size = New System.Drawing.Size(103, 22)
+        Me.CMDClose.Text = "Close"
         '
         'FRMEditor
         '
@@ -731,6 +751,7 @@ Partial Class FRMEditor
         CType(Me.PICBuildings, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PNLUnits.ResumeLayout(False)
         CType(Me.PICUnits, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.CTXMapTabs.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -796,4 +817,6 @@ Partial Class FRMEditor
     Friend WithEvents Separator8 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents Separator3 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents MapTabs As System.Windows.Forms.TabControl
+    Friend WithEvents CTXMapTabs As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents CMDClose As System.Windows.Forms.ToolStripMenuItem
 End Class

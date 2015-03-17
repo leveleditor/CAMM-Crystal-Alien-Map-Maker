@@ -78,6 +78,7 @@ Public Class FRMEditor
         'Setting ToolStrip renderers
         MNUMain.Renderer = CustomToolStripRenderer
         StatusBar.Renderer = CustomToolStripRenderer
+        CTXMapTabs.Renderer = CustomToolStripRenderer
 
         For Each MenuItem As ToolStripMenuItem In MNUMain.Items.OfType(Of ToolStripMenuItem)()
             'Dim dropDown As ToolStripDropDownMenu = MenuItem.DropDown
@@ -1175,13 +1176,18 @@ Public Class FRMEditor
         FRMMapProperties.ShowDialog(Me)
     End Sub
 
-    Private Sub TabMaps_SelectedIndexChanged(sender As Object, e As EventArgs) Handles MapTabs.SelectedIndexChanged
+    Private Sub MapTabs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles MapTabs.SelectedIndexChanged
         'ActiveLevelNum = CBOLevel.SelectedIndex
         UpdateFormTitle()
         PICMap.Invalidate()
     End Sub
 
     Private Sub UpdateMapTabs()
+        If Maps.Count < MapTabs.TabPages.Count Then
+            Do
+                MapTabs.TabPages.RemoveAt(MapTabs.TabPages.Count - 1)
+            Loop Until Maps.Count = MapTabs.TabPages.Count
+        End If
         If MapTabs.TabPages.Count > 0 Then
             For i As Integer = 0 To MapTabs.TabPages.Count - 1
                 Dim tabText As String = (i + 1).ToString() + ") " + Maps(i).MapTitle
@@ -1212,4 +1218,36 @@ Public Class FRMEditor
         Me.Text = title
     End Sub
 
+    Private Sub CMDClose_Click(sender As Object, e As EventArgs) Handles CMDClose.Click
+        Dim menuLocation As Point = MapTabs.PointToClient(CTXMapTabs.Location)
+
+        For i As Integer = 0 To Maps.Count - 1
+            Dim rect As Rectangle = MapTabs.GetTabRect(i)
+            If rect.Contains(menuLocation) Then
+                If MapTabs.TabPages.Count = 1 Then
+                    NewMap()
+                End If
+                Maps.RemoveAt(i)
+                UpdateMapTabs()
+                If i - 1 >= 0 Then
+                    MapTabs.SelectedIndex = i - 1
+                End If
+                Exit For
+            End If
+        Next
+    End Sub
+
+    Private Sub CTXMapTabs_Opened(sender As Object, e As EventArgs) Handles CTXMapTabs.Opened
+        Dim menuLocation As Point = MapTabs.PointToClient(CTXMapTabs.Location)
+
+        For i As Integer = 0 To Maps.Count - 1
+            Dim rect As Rectangle = MapTabs.GetTabRect(i)
+            If rect.Contains(menuLocation) Then
+                If i >= 0 Then
+                    MapTabs.SelectedIndex = i
+                End If
+                Exit For
+            End If
+        Next
+    End Sub
 End Class
