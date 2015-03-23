@@ -659,7 +659,7 @@ Public Class FRMEditor
         'PICUnits.Invalidate()
 
         Dim newMap As Map = New Map()
-        newMap.MapTitle = "New Map"
+        newMap.MapTitle = "New Map " + newMap.MapId.ToString()
         Maps.Add(newMap)
         UpdateMapTabs()
         'CBOLevel.Items.Add("Map " + Levels.Count.ToString() + " [" + newLevel.Map.MapTitle + "]")

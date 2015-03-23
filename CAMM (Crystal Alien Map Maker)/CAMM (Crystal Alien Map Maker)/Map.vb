@@ -4,6 +4,9 @@ Imports Nini.Config
 Public Class Map
 
     Public Sub New()
+        MapIdPool += 1
+        MapId = MapIdPool
+
         SizeX = 10
         SizeY = 10
         FilePath = ""
@@ -27,6 +30,9 @@ Public Class Map
         IsLastSpecialLevel = IsLastSpecialLevelDefault
         IsBonusLevel = IsBonusLevelDefault
     End Sub
+
+    Private Shared MapIdPool As Integer
+    Public MapId As Integer
 
     Private _sizeX As Integer
     Public Property SizeX As Integer
