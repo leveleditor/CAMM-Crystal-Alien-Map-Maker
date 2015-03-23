@@ -1,10 +1,12 @@
-﻿Imports Nini.Config
+﻿Imports System.IO
+Imports Nini.Config
 
 Public Class Map
 
     Public Sub New()
         SizeX = 10
         SizeY = 10
+        FilePath = ""
         FileName = ""
         MapTitle = ""
         IsMapFinal = False
@@ -31,7 +33,7 @@ Public Class Map
         Get
             Return _sizeX
         End Get
-        Private Set(value As Integer)
+        Private Set(ByVal value As Integer)
             _sizeX = value
         End Set
     End Property
@@ -41,12 +43,34 @@ Public Class Map
         Get
             Return _sizeY
         End Get
-        Private Set(value As Integer)
+        Private Set(ByVal value As Integer)
             _sizeY = value
         End Set
     End Property
 
-    Public FileName As String
+    Private _fileName As String
+    Public Property FileName As String
+        Get
+            Return _fileName
+        End Get
+        Private Set(value As String)
+            _fileName = value
+        End Set
+    End Property
+
+    Private _filePath As String
+    Public Property FilePath As String
+        Get
+            Return _filePath
+        End Get
+        Set(ByVal value As String)
+            _filePath = value
+            If Not String.IsNullOrEmpty(_filePath) Then
+                FileName = My.Computer.FileSystem.GetFileInfo(_filePath).Name
+            End If
+        End Set
+    End Property
+
     Public MapTitle As String
     Public IsMapFinal As Boolean
 

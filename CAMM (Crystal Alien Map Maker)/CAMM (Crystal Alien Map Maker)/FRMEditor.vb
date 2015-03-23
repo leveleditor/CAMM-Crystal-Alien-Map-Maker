@@ -644,13 +644,8 @@ Public Class FRMEditor
 #Region "File Operations"
 
     Private Sub CMDNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDNew.Click
-        'TODO: Code for File > New.
-        'IsMapFinal = False
         IsMapOpen = False
-        'Just going to clear the map for now...
-        If MsgBox("Are you sure you want to make a new map?" + vbNewLine + vbNewLine + "Any currently unsaved changes will be lost.", MsgBoxStyle.YesNoCancel) = MsgBoxResult.Yes Then
-            NewMap()
-        End If
+        NewMap()
     End Sub
 
     Public Sub NewMap()
@@ -724,7 +719,7 @@ Public Class FRMEditor
     Private Sub EndLoadMap()
         IsMapOpen = True
 
-        ActiveMap.FileName = OpenMap.FileName
+        ActiveMap.FilePath = OpenMap.FileName
 
         UpdateFormTitle()
         UpdateMapTabs()
@@ -732,7 +727,7 @@ Public Class FRMEditor
         PICMap.Invalidate()
     End Sub
 
-    Private Sub CMDSaveMap_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDSaveAs.Click
+    Private Sub CMDSaveAs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDSaveAs.Click
         Me.SaveMap.Reset()
         'Me.SaveMap.DefaultExt = "CAMM Map Files|*.camm"
         'Me.SaveMap.FileName = (My.Application.Info.DirectoryPath & "/../../Tile Data/_Save Data/Map1.map")
@@ -756,27 +751,31 @@ Public Class FRMEditor
             If ActiveMap.IsMapFinal Then
                 MsgBox("This map has been marked as ""Final"" and cannot be saved." + vbNewLine + "You may save an editable copy using File > SaveAs.")
             Else
-                SaveFile(ActiveMap.FileName)
+                SaveFile(ActiveMap.FilePath)
             End If
         Else
-            CMDSaveMap_Click(sender, e)
+            CMDSaveAs_Click(sender, e)
         End If
     End Sub
 
-    Private Sub SaveFile(ByVal FileName As String)
-        Dim FileExists As Boolean = My.Computer.FileSystem.FileExists(FileName)
-        Dim IsReadOnly As Boolean = My.Computer.FileSystem.GetFileInfo(FileName).IsReadOnly
-        If FileExists And IsReadOnly Then
+    Private Sub SaveFile(ByVal fileName As String)
+        Dim fileExists As Boolean = My.Computer.FileSystem.FileExists(fileName)
+        Dim isReadOnly As Boolean = False
+        If fileExists Then
+            isReadOnly = My.Computer.FileSystem.GetFileInfo(fileName).IsReadOnly
+        End If
+
+        If isReadOnly Then
             MsgBox("Unable to save map file, the file is set to read-only." + vbNewLine + "Please try saving using File > SaveAs.")
         Else
-            My.Computer.FileSystem.WriteAllText(FileName, ActiveMap.GetSaveData(), False)
+            My.Computer.FileSystem.WriteAllText(fileName, ActiveMap.GetSaveData(), False)
             IsMapOpen = True
             ActiveMap.IsMapFinal = False
-            ActiveMap.FileName = FileName
+            ActiveMap.FilePath = fileName
+            UpdateMapTabs()
             UpdateFormTitle()
-            MsgBox("Map file saved successfully.")
+            PICMap.Invalidate()
         End If
-        PICMap.Invalidate()
     End Sub
 
 #End Region
@@ -1192,16 +1191,28 @@ Public Class FRMEditor
         End If
         If MapTabs.TabPages.Count > 0 Then
             For i As Integer = 0 To MapTabs.TabPages.Count - 1
-                Dim tabText As String = (i + 1).ToString() + ") " + Maps(i).MapTitle
+                Dim tabText As String = Maps(i).FileName
+                If String.IsNullOrEmpty(tabText) Then
+                    tabText = Maps(i).MapTitle
+                End If
                 MapTabs.TabPages(i).Text = tabText
-                'MapTabs.TabPages(i).ToolTipText = tabText
+                MapTabs.TabPages(i).ToolTipText = Maps(i).MapTitle
+                If Not String.IsNullOrEmpty(Maps(i).FilePath) Then
+                    MapTabs.TabPages(i).ToolTipText += vbNewLine + Maps(i).FilePath
+                End If
             Next
         End If
         If Maps.Count > MapTabs.TabPages.Count Then
             For i As Integer = MapTabs.TabPages.Count To Maps.Count - 1
-                Dim tabText As String = (i + 1).ToString() + ") " + Maps(i).MapTitle
+                Dim tabText As String = Maps(i).FileName
+                If String.IsNullOrEmpty(tabText) Then
+                    tabText = Maps(i).MapTitle
+                End If
                 Dim newTab = New TabPage(tabText)
-                'newTab.ToolTipText = tabText
+                newTab.ToolTipText = Maps(i).MapTitle
+                If Not String.IsNullOrEmpty(Maps(i).FilePath) Then
+                    newTab.ToolTipText += vbNewLine + Maps(i).FilePath
+                End If
                 MapTabs.TabPages.Add(newTab)
             Next
         End If
@@ -1211,8 +1222,8 @@ Public Class FRMEditor
         Dim title As String = BaseFormTitle
         If Maps.Count > 0 Then
             title += " - " + ActiveMap.MapTitle
-            If Not String.IsNullOrEmpty(ActiveMap.FileName) Then
-                title += " - " + My.Computer.FileSystem.GetFileInfo(ActiveMap.FileName).Name
+            If Not String.IsNullOrEmpty(ActiveMap.FilePath) Then
+                title += " - " + My.Computer.FileSystem.GetFileInfo(ActiveMap.FilePath).Name
             Else
                 title += " - (Unsaved)"
             End If
