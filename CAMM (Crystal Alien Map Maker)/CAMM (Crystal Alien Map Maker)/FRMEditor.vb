@@ -1174,6 +1174,8 @@ Public Class FRMEditor
 
     Private Sub CMDMapProperties_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDMapProperties.Click
         FRMMapProperties.ShowDialog(Me)
+        UpdateMapTabs()
+        UpdateFormTitle()
     End Sub
 
     Private Sub MapTabs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles MapTabs.SelectedIndexChanged
