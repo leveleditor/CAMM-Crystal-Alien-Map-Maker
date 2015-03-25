@@ -649,20 +649,9 @@ Public Class FRMEditor
     End Sub
 
     Public Sub NewMap()
-        'Setting default blank values.
-        'ActiveTile = New Tile(0, 0)
-        'ActiveBuilding = New Building(0, 0)
-        'ActiveUnit = New Unit(0, 0)
-        'PICActive.Image = Nothing
-        'PICTiles.Invalidate()
-        'PICBuildings.Invalidate()
-        'PICUnits.Invalidate()
-
         Dim newMap As Map = New Map()
-        newMap.MapTitle = "New Map " + newMap.MapId.ToString()
         Maps.Add(newMap)
         UpdateMapTabs()
-        'CBOLevel.Items.Add("Map " + Levels.Count.ToString() + " [" + newLevel.Map.MapTitle + "]")
         ActiveMapNum = Maps.IndexOf(newMap)
         UpdateFormTitle()
 

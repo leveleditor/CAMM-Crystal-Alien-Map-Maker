@@ -11,7 +11,7 @@ Public Class Map
         SizeY = 10
         FilePath = ""
         FileName = ""
-        MapTitle = ""
+        MapTitle = "New Map " + MapId.ToString()
         IsMapFinal = False
 
         MapTiles = New Tile() {}
