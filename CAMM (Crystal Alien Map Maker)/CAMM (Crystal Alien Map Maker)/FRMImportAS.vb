@@ -1,6 +1,6 @@
-﻿Public Class FRMImportAS
+﻿Public Class FrmImportAS
 
-    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
+    Private Sub btnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOk.Click
         'MsgBox("""" + Ascii(45) + """") '45 should be an "N" according to the tiler.php...
         'MsgBox("""" + Ascii("+").ToString + """") '"+" should be 10
         'MsgBox("""" + Ascii("?").ToString + """") '"?" should be 30
@@ -8,14 +8,14 @@
         'MsgBox("""" + Ascii("ÿ").ToString + """") '"ÿ" should be 214
 
         Dim line As String = ""
-        For i As Integer = 0 To TXTPaste.Lines.Length - 1
-            If TXTPaste.Lines(i).StartsWith(CBOPickMap.SelectedItem.ToString) Then
-                line = TXTPaste.Lines(i).Trim()
+        For i As Integer = 0 To txtPaste.Lines.Length - 1
+            If txtPaste.Lines(i).StartsWith(cboPickMap.SelectedItem.ToString) Then
+                line = txtPaste.Lines(i).Trim()
                 Exit For
             End If
         Next
 
-        line = line.Replace(CBOPickMap.SelectedItem.ToString, "")
+        line = line.Replace(cboPickMap.SelectedItem.ToString, "")
         line = line.Replace(".split("""",10000)", "")
         line = line.Trim()
         line = line.Trim(New Char() {Char.Parse(",")})
@@ -23,27 +23,27 @@
         line = line.Trim()
         line = line.Trim(New Char() {Char.Parse("""")})
 
-        FRMEditor.ImportASTileData = line.Remove(0, 2)
-        FRMEditor.NewMap()
-        FRMEditor.ActiveMap.SetSize(AsciiLookup.IndexOf(line(0)), AsciiLookup.IndexOf(line(1)))
-        FRMEditor.ActiveMap.MapTitle = CBOPickMap.SelectedItem.ToString().Trim()
+        FrmEditor.ImportAsTileData = line.Remove(0, 2)
+        FrmEditor.NewMap()
+        FrmEditor.ActiveMap.SetSize(AsciiLookup.IndexOf(line(0)), AsciiLookup.IndexOf(line(1)))
+        FrmEditor.ActiveMap.MapTitle = cboPickMap.SelectedItem.ToString().Trim()
 
         Me.DialogResult = System.Windows.Forms.DialogResult.OK
         Me.Close()
     End Sub
 
-    Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        TXTPaste.Text = ""
+    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+        txtPaste.Text = ""
         Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
-    Sub GetMapNames()
-        CBOPickMap.Items.Clear()
-        CBOPickMap.Items.Add("Please select...")
-        CBOPickMap.SelectedIndex = 0
+    Private Sub GetMapNames()
+        cboPickMap.Items.Clear()
+        cboPickMap.Items.Add("Please select...")
+        cboPickMap.SelectedIndex = 0
 
-        Dim lines As String() = TXTPaste.Lines
+        Dim lines As String() = txtPaste.Lines
 
         For i As Integer = 0 To lines.Length - 1
             If lines(i) = "this.data = {" Then
@@ -61,48 +61,48 @@
                         Exit For
                     End If
                 Next
-                CBOPickMap.Items.Add(name)
+                cboPickMap.Items.Add(name)
             End If
         Next
 
-        If CBOPickMap.Items.Count > 1 Then
-            CBOPickMap.Enabled = True
+        If cboPickMap.Items.Count > 1 Then
+            cboPickMap.Enabled = True
         Else
-            CBOPickMap.Enabled = False
-            OK_Button.Enabled = False
-            CBOPickMap.SelectedIndex = 0
+            cboPickMap.Enabled = False
+            btnOk.Enabled = False
+            cboPickMap.SelectedIndex = 0
         End If
     End Sub
 
-    Sub TrimText()
-        Dim text As String = TXTPaste.Text
+    Private Sub TrimText()
+        Dim text As String = txtPaste.Text
         text = text.Trim()
         'text = text.Trim(New Char() {Char.Parse(" "), Char.Parse(vbTab), Char.Parse(vbLf), Char.Parse(vbCr)})
         text = text.Replace(vbTab, "")
-        TXTPaste.Text = text
+        txtPaste.Text = text
     End Sub
 
-    Private Sub TXTPaste_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles TXTPaste.KeyDown
+    Private Sub txtPaste_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPaste.KeyDown
         If e.KeyCode = Keys.A And My.Computer.Keyboard.CtrlKeyDown Then
-            TXTPaste.SelectAll()
+            txtPaste.SelectAll()
         End If
     End Sub
 
-    Private Sub TXTPaste_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TXTPaste.TextChanged
+    Private Sub txtPaste_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPaste.TextChanged
         TrimText()
         GetMapNames()
     End Sub
 
-    Private Sub FRMImportAS_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown, Me.Load
-        CBOPickMap.SelectedIndex = 0
+    Private Sub FrmImportAS_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown, Me.Load
+        cboPickMap.SelectedIndex = 0
         'MsgBox(CBOPickMap.Items.Count.ToString)
     End Sub
 
-    Private Sub CBOPickMap_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CBOPickMap.SelectedIndexChanged
-        If CBOPickMap.SelectedIndex > 0 Then
-            OK_Button.Enabled = True
+    Private Sub cboPickMap_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboPickMap.SelectedIndexChanged
+        If cboPickMap.SelectedIndex > 0 Then
+            btnOk.Enabled = True
         Else
-            OK_Button.Enabled = False
+            btnOk.Enabled = False
         End If
     End Sub
 End Class

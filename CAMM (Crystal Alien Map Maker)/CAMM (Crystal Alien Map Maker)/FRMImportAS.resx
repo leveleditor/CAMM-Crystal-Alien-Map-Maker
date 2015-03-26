@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="TXTExample.Text" xml:space="preserve">
+  <data name="txtExample.Text" xml:space="preserve">
     <value>this.data = {
 tiles : "0AAAAAAAA AAAAAAAAAAAAAAA    AAAAAAAAAAAAAAAAA 1A A".split("",10000),
 map1 : "++-1/-$$$$$.,0.#PPPPO%+,/,&amp;PPPP%*+*+,&amp;PP)/-$$.-'PP%+'  ('PP)0.     )&amp;%,/   )&amp;%,/**   %,/+**+   %+***+*".split("",10000)

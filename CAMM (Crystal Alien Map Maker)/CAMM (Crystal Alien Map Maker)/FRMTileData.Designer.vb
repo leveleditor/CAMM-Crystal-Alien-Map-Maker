@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FRMTileData
+Partial Class FrmTileData
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,229 +22,230 @@ Partial Class FRMTileData
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FRMTileData))
-        Me.CMDSave = New System.Windows.Forms.Button
-        Me.CMDClose = New System.Windows.Forms.Button
-        Me.LBLSaved = New System.Windows.Forms.Label
-        Me.OpenImage = New System.Windows.Forms.OpenFileDialog
-        Me.EntrySections = New System.Windows.Forms.TabControl
-        Me.TabTerrain = New System.Windows.Forms.TabPage
-        Me.PNLTerrain = New System.Windows.Forms.Panel
-        Me.TabBuildings = New System.Windows.Forms.TabPage
-        Me.PNLBuildings = New System.Windows.Forms.Panel
-        Me.TabUnits = New System.Windows.Forms.TabPage
-        Me.PNLUnits = New System.Windows.Forms.Panel
-        Me.PICPreview = New System.Windows.Forms.PictureBox
-        Me.TXTVar6 = New System.Windows.Forms.TextBox
-        Me.LBLVar6 = New System.Windows.Forms.Label
-        Me.EntrySections.SuspendLayout()
-        Me.TabTerrain.SuspendLayout()
-        Me.TabBuildings.SuspendLayout()
-        Me.TabUnits.SuspendLayout()
-        CType(Me.PICPreview, System.ComponentModel.ISupportInitialize).BeginInit()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTileData))
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnClose = New System.Windows.Forms.Button()
+        Me.lblSaved = New System.Windows.Forms.Label()
+        Me.openImage = New System.Windows.Forms.OpenFileDialog()
+        Me.editTabs = New System.Windows.Forms.TabControl()
+        Me.tabTerrain = New System.Windows.Forms.TabPage()
+        Me.pnlTerrain = New System.Windows.Forms.Panel()
+        Me.tabBuildings = New System.Windows.Forms.TabPage()
+        Me.pnlBuildings = New System.Windows.Forms.Panel()
+        Me.tabUnits = New System.Windows.Forms.TabPage()
+        Me.pnlUnits = New System.Windows.Forms.Panel()
+        Me.picPreview = New System.Windows.Forms.PictureBox()
+        Me.txtAsciiSeparator = New System.Windows.Forms.TextBox()
+        Me.lblAsciiSeparator = New System.Windows.Forms.Label()
+        Me.editTabs.SuspendLayout()
+        Me.tabTerrain.SuspendLayout()
+        Me.tabBuildings.SuspendLayout()
+        Me.tabUnits.SuspendLayout()
+        CType(Me.picPreview, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'CMDSave
+        'btnSave
         '
-        Me.CMDSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CMDSave.Location = New System.Drawing.Point(596, 417)
-        Me.CMDSave.Name = "CMDSave"
-        Me.CMDSave.Size = New System.Drawing.Size(75, 23)
-        Me.CMDSave.TabIndex = 13
-        Me.CMDSave.Text = "Save"
-        Me.CMDSave.UseVisualStyleBackColor = True
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSave.Location = New System.Drawing.Point(596, 417)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.TabIndex = 13
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
-        'CMDClose
+        'btnClose
         '
-        Me.CMDClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.CMDClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.CMDClose.Location = New System.Drawing.Point(677, 417)
-        Me.CMDClose.Name = "CMDClose"
-        Me.CMDClose.Size = New System.Drawing.Size(75, 23)
-        Me.CMDClose.TabIndex = 0
-        Me.CMDClose.Text = "Close"
-        Me.CMDClose.UseVisualStyleBackColor = True
+        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnClose.Location = New System.Drawing.Point(677, 417)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(75, 23)
+        Me.btnClose.TabIndex = 0
+        Me.btnClose.Text = "Close"
+        Me.btnClose.UseVisualStyleBackColor = True
         '
-        'LBLSaved
+        'lblSaved
         '
-        Me.LBLSaved.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.LBLSaved.AutoSize = True
-        Me.LBLSaved.ForeColor = System.Drawing.Color.DarkGreen
-        Me.LBLSaved.Location = New System.Drawing.Point(523, 422)
-        Me.LBLSaved.Name = "LBLSaved"
-        Me.LBLSaved.Size = New System.Drawing.Size(67, 13)
-        Me.LBLSaved.TabIndex = 12
-        Me.LBLSaved.Text = "Data Saved!"
-        Me.LBLSaved.Visible = False
+        Me.lblSaved.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblSaved.AutoSize = True
+        Me.lblSaved.ForeColor = System.Drawing.Color.DarkGreen
+        Me.lblSaved.Location = New System.Drawing.Point(523, 422)
+        Me.lblSaved.Name = "lblSaved"
+        Me.lblSaved.Size = New System.Drawing.Size(67, 13)
+        Me.lblSaved.TabIndex = 12
+        Me.lblSaved.Text = "Data Saved!"
+        Me.lblSaved.Visible = False
         '
-        'OpenImage
+        'openImage
         '
-        Me.OpenImage.Filter = "Image Files|*.png;*.bmp;*.jpg"
-        Me.OpenImage.Title = "Select An Image File..."
+        Me.openImage.Filter = "Image Files|*.png;*.bmp;*.jpg"
+        Me.openImage.Title = "Select An Image File..."
         '
-        'EntrySections
+        'editTabs
         '
-        Me.EntrySections.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.EntrySections.Controls.Add(Me.TabTerrain)
-        Me.EntrySections.Controls.Add(Me.TabBuildings)
-        Me.EntrySections.Controls.Add(Me.TabUnits)
-        Me.EntrySections.Location = New System.Drawing.Point(9, 30)
-        Me.EntrySections.Margin = New System.Windows.Forms.Padding(0)
-        Me.EntrySections.Name = "EntrySections"
-        Me.EntrySections.SelectedIndex = 0
-        Me.EntrySections.Size = New System.Drawing.Size(746, 384)
-        Me.EntrySections.TabIndex = 11
+        Me.editTabs.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.editTabs.Controls.Add(Me.tabTerrain)
+        Me.editTabs.Controls.Add(Me.tabBuildings)
+        Me.editTabs.Controls.Add(Me.tabUnits)
+        Me.editTabs.Location = New System.Drawing.Point(9, 30)
+        Me.editTabs.Margin = New System.Windows.Forms.Padding(0)
+        Me.editTabs.Name = "editTabs"
+        Me.editTabs.SelectedIndex = 0
+        Me.editTabs.Size = New System.Drawing.Size(746, 384)
+        Me.editTabs.TabIndex = 11
         '
-        'TabTerrain
+        'tabTerrain
         '
-        Me.TabTerrain.AutoScroll = True
-        Me.TabTerrain.BackColor = System.Drawing.Color.Silver
-        Me.TabTerrain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TabTerrain.Controls.Add(Me.PNLTerrain)
-        Me.TabTerrain.Location = New System.Drawing.Point(4, 22)
-        Me.TabTerrain.Margin = New System.Windows.Forms.Padding(0)
-        Me.TabTerrain.Name = "TabTerrain"
-        Me.TabTerrain.Size = New System.Drawing.Size(738, 358)
-        Me.TabTerrain.TabIndex = 0
-        Me.TabTerrain.Text = "Edit Terrain"
-        Me.TabTerrain.UseVisualStyleBackColor = True
+        Me.tabTerrain.AutoScroll = True
+        Me.tabTerrain.BackColor = System.Drawing.Color.Silver
+        Me.tabTerrain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tabTerrain.Controls.Add(Me.pnlTerrain)
+        Me.tabTerrain.Location = New System.Drawing.Point(4, 22)
+        Me.tabTerrain.Margin = New System.Windows.Forms.Padding(0)
+        Me.tabTerrain.Name = "tabTerrain"
+        Me.tabTerrain.Size = New System.Drawing.Size(738, 358)
+        Me.tabTerrain.TabIndex = 0
+        Me.tabTerrain.Text = "Edit Terrain"
+        Me.tabTerrain.UseVisualStyleBackColor = True
         '
-        'PNLTerrain
+        'pnlTerrain
         '
-        Me.PNLTerrain.AutoSize = True
-        Me.PNLTerrain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.PNLTerrain.Location = New System.Drawing.Point(0, 0)
-        Me.PNLTerrain.Margin = New System.Windows.Forms.Padding(0)
-        Me.PNLTerrain.Name = "PNLTerrain"
-        Me.PNLTerrain.Padding = New System.Windows.Forms.Padding(3)
-        Me.PNLTerrain.Size = New System.Drawing.Size(6, 6)
-        Me.PNLTerrain.TabIndex = 0
+        Me.pnlTerrain.AutoSize = True
+        Me.pnlTerrain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.pnlTerrain.Location = New System.Drawing.Point(0, 0)
+        Me.pnlTerrain.Margin = New System.Windows.Forms.Padding(0)
+        Me.pnlTerrain.Name = "pnlTerrain"
+        Me.pnlTerrain.Padding = New System.Windows.Forms.Padding(3)
+        Me.pnlTerrain.Size = New System.Drawing.Size(6, 6)
+        Me.pnlTerrain.TabIndex = 0
         '
-        'TabBuildings
+        'tabBuildings
         '
-        Me.TabBuildings.AutoScroll = True
-        Me.TabBuildings.BackColor = System.Drawing.Color.Silver
-        Me.TabBuildings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TabBuildings.Controls.Add(Me.PNLBuildings)
-        Me.TabBuildings.Location = New System.Drawing.Point(4, 22)
-        Me.TabBuildings.Margin = New System.Windows.Forms.Padding(0)
-        Me.TabBuildings.Name = "TabBuildings"
-        Me.TabBuildings.Size = New System.Drawing.Size(738, 358)
-        Me.TabBuildings.TabIndex = 1
-        Me.TabBuildings.Text = "Edit Buildings"
-        Me.TabBuildings.UseVisualStyleBackColor = True
+        Me.tabBuildings.AutoScroll = True
+        Me.tabBuildings.BackColor = System.Drawing.Color.Silver
+        Me.tabBuildings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tabBuildings.Controls.Add(Me.pnlBuildings)
+        Me.tabBuildings.Location = New System.Drawing.Point(4, 22)
+        Me.tabBuildings.Margin = New System.Windows.Forms.Padding(0)
+        Me.tabBuildings.Name = "tabBuildings"
+        Me.tabBuildings.Size = New System.Drawing.Size(738, 358)
+        Me.tabBuildings.TabIndex = 1
+        Me.tabBuildings.Text = "Edit Buildings"
+        Me.tabBuildings.UseVisualStyleBackColor = True
         '
-        'PNLBuildings
+        'pnlBuildings
         '
-        Me.PNLBuildings.AutoSize = True
-        Me.PNLBuildings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.PNLBuildings.Location = New System.Drawing.Point(0, 0)
-        Me.PNLBuildings.Margin = New System.Windows.Forms.Padding(0)
-        Me.PNLBuildings.Name = "PNLBuildings"
-        Me.PNLBuildings.Padding = New System.Windows.Forms.Padding(3)
-        Me.PNLBuildings.Size = New System.Drawing.Size(6, 6)
-        Me.PNLBuildings.TabIndex = 1
+        Me.pnlBuildings.AutoSize = True
+        Me.pnlBuildings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.pnlBuildings.Location = New System.Drawing.Point(0, 0)
+        Me.pnlBuildings.Margin = New System.Windows.Forms.Padding(0)
+        Me.pnlBuildings.Name = "pnlBuildings"
+        Me.pnlBuildings.Padding = New System.Windows.Forms.Padding(3)
+        Me.pnlBuildings.Size = New System.Drawing.Size(6, 6)
+        Me.pnlBuildings.TabIndex = 1
         '
-        'TabUnits
+        'tabUnits
         '
-        Me.TabUnits.AutoScroll = True
-        Me.TabUnits.BackColor = System.Drawing.Color.Silver
-        Me.TabUnits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TabUnits.Controls.Add(Me.PNLUnits)
-        Me.TabUnits.Location = New System.Drawing.Point(4, 22)
-        Me.TabUnits.Margin = New System.Windows.Forms.Padding(0)
-        Me.TabUnits.Name = "TabUnits"
-        Me.TabUnits.Size = New System.Drawing.Size(738, 358)
-        Me.TabUnits.TabIndex = 2
-        Me.TabUnits.Text = "Edit Units"
-        Me.TabUnits.UseVisualStyleBackColor = True
+        Me.tabUnits.AutoScroll = True
+        Me.tabUnits.BackColor = System.Drawing.Color.Silver
+        Me.tabUnits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tabUnits.Controls.Add(Me.pnlUnits)
+        Me.tabUnits.Location = New System.Drawing.Point(4, 22)
+        Me.tabUnits.Margin = New System.Windows.Forms.Padding(0)
+        Me.tabUnits.Name = "tabUnits"
+        Me.tabUnits.Size = New System.Drawing.Size(738, 358)
+        Me.tabUnits.TabIndex = 2
+        Me.tabUnits.Text = "Edit Units"
+        Me.tabUnits.UseVisualStyleBackColor = True
         '
-        'PNLUnits
+        'pnlUnits
         '
-        Me.PNLUnits.AutoSize = True
-        Me.PNLUnits.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.PNLUnits.Location = New System.Drawing.Point(0, 0)
-        Me.PNLUnits.Margin = New System.Windows.Forms.Padding(0)
-        Me.PNLUnits.Name = "PNLUnits"
-        Me.PNLUnits.Padding = New System.Windows.Forms.Padding(3)
-        Me.PNLUnits.Size = New System.Drawing.Size(6, 6)
-        Me.PNLUnits.TabIndex = 2
+        Me.pnlUnits.AutoSize = True
+        Me.pnlUnits.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.pnlUnits.Location = New System.Drawing.Point(0, 0)
+        Me.pnlUnits.Margin = New System.Windows.Forms.Padding(0)
+        Me.pnlUnits.Name = "pnlUnits"
+        Me.pnlUnits.Padding = New System.Windows.Forms.Padding(3)
+        Me.pnlUnits.Size = New System.Drawing.Size(6, 6)
+        Me.pnlUnits.TabIndex = 2
         '
-        'PICPreview
+        'picPreview
         '
-        Me.PICPreview.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.PICPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PICPreview.Location = New System.Drawing.Point(0, 404)
-        Me.PICPreview.Name = "PICPreview"
-        Me.PICPreview.Size = New System.Drawing.Size(96, 48)
-        Me.PICPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.PICPreview.TabIndex = 14
-        Me.PICPreview.TabStop = False
-        Me.PICPreview.Visible = False
+        Me.picPreview.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.picPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.picPreview.Location = New System.Drawing.Point(0, 404)
+        Me.picPreview.Name = "picPreview"
+        Me.picPreview.Size = New System.Drawing.Size(96, 48)
+        Me.picPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.picPreview.TabIndex = 14
+        Me.picPreview.TabStop = False
+        Me.picPreview.Visible = False
         '
-        'TXTVar6
+        'txtAsciiSeparator
         '
-        Me.TXTVar6.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTVar6.Location = New System.Drawing.Point(95, 5)
-        Me.TXTVar6.Name = "TXTVar6"
-        Me.TXTVar6.ReadOnly = True
-        Me.TXTVar6.Size = New System.Drawing.Size(55, 22)
-        Me.TXTVar6.TabIndex = 10
-        Me.TXTVar6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtAsciiSeparator.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtAsciiSeparator.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAsciiSeparator.Location = New System.Drawing.Point(95, 5)
+        Me.txtAsciiSeparator.Name = "txtAsciiSeparator"
+        Me.txtAsciiSeparator.ReadOnly = True
+        Me.txtAsciiSeparator.Size = New System.Drawing.Size(55, 22)
+        Me.txtAsciiSeparator.TabIndex = 10
+        Me.txtAsciiSeparator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'LBLVar6
+        'lblAsciiSeparator
         '
-        Me.LBLVar6.AutoSize = True
-        Me.LBLVar6.Location = New System.Drawing.Point(8, 9)
-        Me.LBLVar6.Name = "LBLVar6"
-        Me.LBLVar6.Size = New System.Drawing.Size(81, 13)
-        Me.LBLVar6.TabIndex = 9
-        Me.LBLVar6.Text = "Ascii Separator:"
+        Me.lblAsciiSeparator.AutoSize = True
+        Me.lblAsciiSeparator.Location = New System.Drawing.Point(8, 9)
+        Me.lblAsciiSeparator.Name = "lblAsciiSeparator"
+        Me.lblAsciiSeparator.Size = New System.Drawing.Size(81, 13)
+        Me.lblAsciiSeparator.TabIndex = 9
+        Me.lblAsciiSeparator.Text = "Ascii Separator:"
         '
-        'FRMTileData
+        'FrmTileData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.CancelButton = Me.CMDClose
+        Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(764, 452)
-        Me.Controls.Add(Me.PICPreview)
-        Me.Controls.Add(Me.EntrySections)
-        Me.Controls.Add(Me.LBLVar6)
-        Me.Controls.Add(Me.TXTVar6)
-        Me.Controls.Add(Me.LBLSaved)
-        Me.Controls.Add(Me.CMDClose)
-        Me.Controls.Add(Me.CMDSave)
+        Me.Controls.Add(Me.picPreview)
+        Me.Controls.Add(Me.editTabs)
+        Me.Controls.Add(Me.lblAsciiSeparator)
+        Me.Controls.Add(Me.txtAsciiSeparator)
+        Me.Controls.Add(Me.lblSaved)
+        Me.Controls.Add(Me.btnClose)
+        Me.Controls.Add(Me.btnSave)
         Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Name = "FRMTileData"
+        Me.Name = "FrmTileData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Tile Data Editor [Tiles.dat]"
-        Me.EntrySections.ResumeLayout(False)
-        Me.TabTerrain.ResumeLayout(False)
-        Me.TabTerrain.PerformLayout()
-        Me.TabBuildings.ResumeLayout(False)
-        Me.TabBuildings.PerformLayout()
-        Me.TabUnits.ResumeLayout(False)
-        Me.TabUnits.PerformLayout()
-        CType(Me.PICPreview, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.editTabs.ResumeLayout(False)
+        Me.tabTerrain.ResumeLayout(False)
+        Me.tabTerrain.PerformLayout()
+        Me.tabBuildings.ResumeLayout(False)
+        Me.tabBuildings.PerformLayout()
+        Me.tabUnits.ResumeLayout(False)
+        Me.tabUnits.PerformLayout()
+        CType(Me.picPreview, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents CMDSave As System.Windows.Forms.Button
-    Friend WithEvents CMDClose As System.Windows.Forms.Button
-    Friend WithEvents LBLSaved As System.Windows.Forms.Label
-    Friend WithEvents OpenImage As System.Windows.Forms.OpenFileDialog
-    Friend WithEvents EntrySections As System.Windows.Forms.TabControl
-    Friend WithEvents TabTerrain As System.Windows.Forms.TabPage
-    Friend WithEvents TabBuildings As System.Windows.Forms.TabPage
-    Friend WithEvents PNLTerrain As System.Windows.Forms.Panel
-    Friend WithEvents PNLBuildings As System.Windows.Forms.Panel
-    Friend WithEvents PICPreview As System.Windows.Forms.PictureBox
-    Friend WithEvents TabUnits As System.Windows.Forms.TabPage
-    Friend WithEvents PNLUnits As System.Windows.Forms.Panel
-    Friend WithEvents TXTVar6 As System.Windows.Forms.TextBox
-    Friend WithEvents LBLVar6 As System.Windows.Forms.Label
+    Friend WithEvents btnSave As System.Windows.Forms.Button
+    Friend WithEvents btnClose As System.Windows.Forms.Button
+    Friend WithEvents lblSaved As System.Windows.Forms.Label
+    Friend WithEvents openImage As System.Windows.Forms.OpenFileDialog
+    Friend WithEvents editTabs As System.Windows.Forms.TabControl
+    Friend WithEvents tabTerrain As System.Windows.Forms.TabPage
+    Friend WithEvents tabBuildings As System.Windows.Forms.TabPage
+    Friend WithEvents pnlTerrain As System.Windows.Forms.Panel
+    Friend WithEvents pnlBuildings As System.Windows.Forms.Panel
+    Friend WithEvents picPreview As System.Windows.Forms.PictureBox
+    Friend WithEvents tabUnits As System.Windows.Forms.TabPage
+    Friend WithEvents pnlUnits As System.Windows.Forms.Panel
+    Friend WithEvents txtAsciiSeparator As System.Windows.Forms.TextBox
+    Friend WithEvents lblAsciiSeparator As System.Windows.Forms.Label
 End Class

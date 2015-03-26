@@ -94,49 +94,49 @@
     <Compile Include="Config.vb" />
     <Compile Include="Constants.vb" />
     <Compile Include="CustomColorTable.vb" />
-    <Compile Include="FRMMapProperties.Designer.vb">
-      <DependentUpon>FRMMapProperties.vb</DependentUpon>
+    <Compile Include="FrmMapProperties.Designer.vb">
+      <DependentUpon>FrmMapProperties.vb</DependentUpon>
     </Compile>
-    <Compile Include="FRMMapProperties.vb">
+    <Compile Include="FrmMapProperties.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Map.vb" />
     <Compile Include="Unit.vb" />
-    <Compile Include="FRMExportAS.Designer.vb">
-      <DependentUpon>FRMExportAS.vb</DependentUpon>
+    <Compile Include="FrmExportAS.Designer.vb">
+      <DependentUpon>FrmExportAS.vb</DependentUpon>
     </Compile>
-    <Compile Include="FRMExportAS.vb">
+    <Compile Include="FrmExportAS.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Building.vb" />
-    <Compile Include="Entry_Object.Designer.vb">
-      <DependentUpon>Entry_Object.vb</DependentUpon>
+    <Compile Include="ObjectEntry.Designer.vb">
+      <DependentUpon>ObjectEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="Entry_Object.vb">
+    <Compile Include="ObjectEntry.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Entry_Terrain.Designer.vb">
-      <DependentUpon>Entry_Terrain.vb</DependentUpon>
+    <Compile Include="TileEntry.Designer.vb">
+      <DependentUpon>TileEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="Entry_Terrain.vb">
+    <Compile Include="TileEntry.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="FRMEditor.Designer.vb">
-      <DependentUpon>FRMEditor.vb</DependentUpon>
+    <Compile Include="FrmEditor.Designer.vb">
+      <DependentUpon>FrmEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="FRMEditor.vb">
+    <Compile Include="FrmEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FRMImportAS.Designer.vb">
-      <DependentUpon>FRMImportAS.vb</DependentUpon>
+    <Compile Include="FrmImportAS.Designer.vb">
+      <DependentUpon>FrmImportAS.vb</DependentUpon>
     </Compile>
-    <Compile Include="FRMImportAS.vb">
+    <Compile Include="FrmImportAS.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FRMTileData.Designer.vb">
-      <DependentUpon>FRMTileData.vb</DependentUpon>
+    <Compile Include="FrmTileData.Designer.vb">
+      <DependentUpon>FrmTileData.vb</DependentUpon>
     </Compile>
-    <Compile Include="FRMTileData.vb">
+    <Compile Include="FrmTileData.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -148,26 +148,26 @@
     <Compile Include="Utils.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FRMExportAS.resx">
-      <DependentUpon>FRMExportAS.vb</DependentUpon>
+    <EmbeddedResource Include="FrmExportAS.resx">
+      <DependentUpon>FrmExportAS.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Entry_Object.resx">
-      <DependentUpon>Entry_Object.vb</DependentUpon>
+    <EmbeddedResource Include="ObjectEntry.resx">
+      <DependentUpon>ObjectEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Entry_Terrain.resx">
-      <DependentUpon>Entry_Terrain.vb</DependentUpon>
+    <EmbeddedResource Include="TileEntry.resx">
+      <DependentUpon>TileEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FRMEditor.resx">
-      <DependentUpon>FRMEditor.vb</DependentUpon>
+    <EmbeddedResource Include="FrmEditor.resx">
+      <DependentUpon>FrmEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FRMImportAS.resx">
-      <DependentUpon>FRMImportAS.vb</DependentUpon>
+    <EmbeddedResource Include="FrmImportAS.resx">
+      <DependentUpon>FrmImportAS.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FRMMapProperties.resx">
-      <DependentUpon>FRMMapProperties.vb</DependentUpon>
+    <EmbeddedResource Include="FrmMapProperties.resx">
+      <DependentUpon>FrmMapProperties.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FRMTileData.resx">
-      <DependentUpon>FRMTileData.vb</DependentUpon>
+    <EmbeddedResource Include="FrmTileData.resx">
+      <DependentUpon>FrmTileData.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

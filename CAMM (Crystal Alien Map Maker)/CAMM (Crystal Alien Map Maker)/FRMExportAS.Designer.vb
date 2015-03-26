@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FRMExportAS
+Partial Class FrmExportAS
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,79 +22,79 @@ Partial Class FRMExportAS
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FRMExportAS))
-        Me.OK_Button = New System.Windows.Forms.Button
-        Me.LBLOutput = New System.Windows.Forms.Label
-        Me.TXTOutput = New System.Windows.Forms.TextBox
-        Me.CMDCopy = New System.Windows.Forms.Button
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmExportAS))
+        Me.btnOk = New System.Windows.Forms.Button()
+        Me.lblOutput = New System.Windows.Forms.Label()
+        Me.txtOutput = New System.Windows.Forms.TextBox()
+        Me.btnCopy = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'OK_Button
+        'btnOk
         '
-        Me.OK_Button.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.OK_Button.Location = New System.Drawing.Point(435, 156)
-        Me.OK_Button.Name = "OK_Button"
-        Me.OK_Button.Size = New System.Drawing.Size(67, 23)
-        Me.OK_Button.TabIndex = 3
-        Me.OK_Button.Text = "OK"
+        Me.btnOk.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnOk.Location = New System.Drawing.Point(435, 156)
+        Me.btnOk.Name = "btnOk"
+        Me.btnOk.Size = New System.Drawing.Size(67, 23)
+        Me.btnOk.TabIndex = 3
+        Me.btnOk.Text = "OK"
         '
-        'LBLOutput
+        'lblOutput
         '
-        Me.LBLOutput.AutoSize = True
-        Me.LBLOutput.Location = New System.Drawing.Point(12, 9)
-        Me.LBLOutput.Name = "LBLOutput"
-        Me.LBLOutput.Size = New System.Drawing.Size(197, 13)
-        Me.LBLOutput.TabIndex = 0
-        Me.LBLOutput.Text = "Here is your exported ActionScript code:"
+        Me.lblOutput.AutoSize = True
+        Me.lblOutput.Location = New System.Drawing.Point(12, 9)
+        Me.lblOutput.Name = "lblOutput"
+        Me.lblOutput.Size = New System.Drawing.Size(197, 13)
+        Me.lblOutput.TabIndex = 0
+        Me.lblOutput.Text = "Here is your exported ActionScript code:"
         '
-        'TXTOutput
+        'txtOutput
         '
-        Me.TXTOutput.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TXTOutput.Font = New System.Drawing.Font("Courier New", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TXTOutput.Location = New System.Drawing.Point(12, 25)
-        Me.TXTOutput.Multiline = True
-        Me.TXTOutput.Name = "TXTOutput"
-        Me.TXTOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.TXTOutput.Size = New System.Drawing.Size(490, 125)
-        Me.TXTOutput.TabIndex = 1
-        Me.TXTOutput.WordWrap = False
+        Me.txtOutput.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtOutput.Font = New System.Drawing.Font("Courier New", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtOutput.Location = New System.Drawing.Point(12, 25)
+        Me.txtOutput.Multiline = True
+        Me.txtOutput.Name = "txtOutput"
+        Me.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both
+        Me.txtOutput.Size = New System.Drawing.Size(490, 125)
+        Me.txtOutput.TabIndex = 1
+        Me.txtOutput.WordWrap = False
         '
-        'CMDCopy
+        'btnCopy
         '
-        Me.CMDCopy.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.CMDCopy.AutoSize = True
-        Me.CMDCopy.Location = New System.Drawing.Point(12, 156)
-        Me.CMDCopy.Name = "CMDCopy"
-        Me.CMDCopy.Size = New System.Drawing.Size(99, 23)
-        Me.CMDCopy.TabIndex = 2
-        Me.CMDCopy.Text = "&Copy to clipboard"
-        Me.CMDCopy.UseVisualStyleBackColor = True
+        Me.btnCopy.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnCopy.AutoSize = True
+        Me.btnCopy.Location = New System.Drawing.Point(12, 156)
+        Me.btnCopy.Name = "btnCopy"
+        Me.btnCopy.Size = New System.Drawing.Size(99, 23)
+        Me.btnCopy.TabIndex = 2
+        Me.btnCopy.Text = "&Copy to clipboard"
+        Me.btnCopy.UseVisualStyleBackColor = True
         '
-        'FRMExportAS
+        'FrmExportAS
         '
-        Me.AcceptButton = Me.OK_Button
+        Me.AcceptButton = Me.btnOk
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(514, 191)
-        Me.Controls.Add(Me.CMDCopy)
-        Me.Controls.Add(Me.OK_Button)
-        Me.Controls.Add(Me.TXTOutput)
-        Me.Controls.Add(Me.LBLOutput)
+        Me.Controls.Add(Me.btnCopy)
+        Me.Controls.Add(Me.btnOk)
+        Me.Controls.Add(Me.txtOutput)
+        Me.Controls.Add(Me.lblOutput)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "FRMExportAS"
+        Me.Name = "FrmExportAS"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Export ActionScript Code"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents OK_Button As System.Windows.Forms.Button
-    Friend WithEvents LBLOutput As System.Windows.Forms.Label
-    Friend WithEvents CMDCopy As System.Windows.Forms.Button
-    Public WithEvents TXTOutput As System.Windows.Forms.TextBox
+    Friend WithEvents btnOk As System.Windows.Forms.Button
+    Friend WithEvents lblOutput As System.Windows.Forms.Label
+    Friend WithEvents btnCopy As System.Windows.Forms.Button
+    Public WithEvents txtOutput As System.Windows.Forms.TextBox
 
 End Class

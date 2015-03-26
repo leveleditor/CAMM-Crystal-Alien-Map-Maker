@@ -4,17 +4,17 @@
 
 Imports Nini.Config
 Imports Nini.Ini
-Public Class FRMEditor
+Public Class FrmEditor
 
-    Dim IsMapOpen As Boolean = False
-    Private BaseFormTitle As String
+    Dim isMapOpen As Boolean = False
+    Private baseFormTitle As String
 
     Private Property ActiveMapNum As Integer
         Get
-            Return MapTabs.SelectedIndex
+            Return mapTabs.SelectedIndex
         End Get
         Set(value As Integer)
-            MapTabs.SelectedIndex = value
+            mapTabs.SelectedIndex = value
         End Set
     End Property
     Private ReadOnly _maps As List(Of Map) = New List(Of Map)
@@ -32,36 +32,36 @@ Public Class FRMEditor
         End Set
     End Property
 
-    Private IsLoaded As Boolean = False
-    Private IsMouseOnMap As Boolean = False
+    Private isLoaded As Boolean = False
+    Private isMouseOnMap As Boolean = False
     Public IsDrawing As Boolean = False
-    Private MouseX As Integer
-    Private MouseY As Integer
-    Private MouseXNoSnap As Integer
-    Private MouseYNoSnap As Integer
+    Private mouseX As Integer
+    Private mouseY As Integer
+    Private mouseXNoSnap As Integer
+    Private mouseYNoSnap As Integer
 
     Public ActiveEditMode As EditMode = EditMode.Tiles
     Public ActiveToolMode As ToolMode = ToolMode.Brush
 
     Public DrawGrid As Boolean = True
     Public DrawBuildingDebugPos As Boolean = False
-    Private IsMouseOnSelections As Boolean = False
-    Dim SelX_Tiles As Integer
-    Dim SelY_Tiles As Integer
-    Dim SelX_Buildings As Integer
-    Dim SelY_Buildings As Integer
-    Dim SelX_Units As Integer
-    Dim SelY_Units As Integer
+    Private isMouseOnSelections As Boolean = False
+    Dim selXTiles As Integer
+    Dim selYTiles As Integer
+    Dim selXBuildings As Integer
+    Dim selYBuildings As Integer
+    Dim selXUnits As Integer
+    Dim selYUnits As Integer
 
-    ReadOnly CustomToolStripRenderer As ToolStripProfessionalRenderer = New ToolStripProfessionalRenderer(New CustomColorTable())
+    ReadOnly customToolStripRenderer As ToolStripProfessionalRenderer = New ToolStripProfessionalRenderer(New CustomColorTable())
 
-    Private ActiveTile As Tile 'The currently active tile selection.
-    Private ActiveBuilding As Building 'The currently active object selection.
-    Private ActiveUnit As Unit 'The currently active unit selection.
+    Private activeTile As Tile 'The currently active tile selection.
+    Private activeBuilding As Building 'The currently active object selection.
+    Private activeUnit As Unit 'The currently active unit selection.
 
     Private Sub FRMEditor_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'Storing default form title.
-        BaseFormTitle = Me.Text
+        baseFormTitle = Me.Text
 
         'Loading assets.
         LoadAssets()
@@ -76,14 +76,14 @@ Public Class FRMEditor
         LBLAboutVersion.Text += " by Leveleditor6680 // Josh"
 
         'Setting ToolStrip renderers
-        MNUMain.Renderer = CustomToolStripRenderer
-        StatusBar.Renderer = CustomToolStripRenderer
-        CTXMapTabs.Renderer = CustomToolStripRenderer
+        mnuMain.Renderer = customToolStripRenderer
+        staInfoBar.Renderer = customToolStripRenderer
+        ctxMapTabs.Renderer = customToolStripRenderer
 
-        For Each MenuItem As ToolStripMenuItem In MNUMain.Items.OfType(Of ToolStripMenuItem)()
+        For Each menuItem As ToolStripMenuItem In mnuMain.Items.OfType(Of ToolStripMenuItem)()
             'Dim dropDown As ToolStripDropDownMenu = MenuItem.DropDown
             'dropDown.ShowImageMargin = False
-            MenuItem.Text = MenuItem.Text.ToUpper()
+            menuItem.Text = menuItem.Text.ToUpper()
         Next
 
         'Loading Tiles.dat data file.
@@ -115,23 +115,23 @@ Public Class FRMEditor
             LoadConfig(source)
         End If
 
-        'Dynamically setting PICTiles size.
-        PICTiles.Size = New Size(TileSizeX + 1, (TileDefs.Length * TileSizeY) + 1)
-        PICTiles.Invalidate()
+        'Dynamically setting picTiles size.
+        picTiles.Size = New Size(TileSizeX + 1, (TileDefs.Length * TileSizeY) + 1)
+        picTiles.Invalidate()
 
-        'Dynamically setting PICBuildings size.
-        PICBuildings.Size = New Size(TileSizeX + 1, (BuildingDefs.Length * TileSizeY) + 1)
-        PICBuildings.Invalidate()
+        'Dynamically setting picBuildings size.
+        picBuildings.Size = New Size(TileSizeX + 1, (BuildingDefs.Length * TileSizeY) + 1)
+        picBuildings.Invalidate()
 
-        'Dynamically setting PICUnits size.
-        PICUnits.Size = New Size(TileSizeX + 1, (UnitDefs.Length * TileSizeY) + 1)
-        PICUnits.Invalidate()
+        'Dynamically setting picUnits size.
+        picUnits.Size = New Size(TileSizeX + 1, (UnitDefs.Length * TileSizeY) + 1)
+        picUnits.Invalidate()
 
         'Setting default blank values.
-        ActiveTile = New Tile(0, 0)
-        ActiveBuilding = New Building(0, 0)
-        ActiveUnit = New Unit(0, 0)
-        PICActive.Image = Nothing
+        activeTile = New Tile(0, 0)
+        activeBuilding = New Building(0, 0)
+        activeUnit = New Unit(0, 0)
+        picActive.Image = Nothing
 
         'Start a new map.
         NewMap()
@@ -140,8 +140,8 @@ Public Class FRMEditor
             BeginLoadMap(My.Application.CommandLineArgs(0))
         End If
 
-        IsLoaded = True
-        IntroTimer.Start()
+        isLoaded = True
+        tmrIntro.Start()
     End Sub
 
     Private Sub FRMEditor_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
@@ -152,56 +152,56 @@ Public Class FRMEditor
 
 #Region "Intro Effects"
     'TODO: Need to clean up this mess...
-    Dim FadeAlpha As Integer = 350
-    Dim FadeRate As Integer = 2
-    Dim FadePen As Pen = Pens.Black
-    Dim FadeBrush As SolidBrush = Brushes.Black
-    Dim IntroFont As Font = New Font(FontFamily.GenericMonospace, 20, FontStyle.Bold, GraphicsUnit.Pixel)
-    Dim IntroFont2 As Font = New Font(Drawing.FontFamily.GenericMonospace, 25, FontStyle.Bold, GraphicsUnit.Pixel)
-    Dim IntroBrush As SolidBrush = New SolidBrush(Color.FromArgb(255, 0, 255, 0))
-    Dim IntroBrush2 As SolidBrush = Brushes.DarkGreen
-    Dim IntroFontH As Integer = IntroFont.GetHeight
-    Dim IntroFontH2 As Integer = IntroFont2.GetHeight
-    Dim IntroX, IntroY, sIntro1_width, sIntro2_width, sIntro3_width As Integer
+    Dim fadeAlpha As Integer = 350
+    Dim fadeRate As Integer = 2
+    Dim fadePen As Pen = Pens.Black
+    Dim fadeBrush As SolidBrush = Brushes.Black
+    Dim introFont As Font = New Font(FontFamily.GenericMonospace, 20, FontStyle.Bold, GraphicsUnit.Pixel)
+    Dim introFont2 As Font = New Font(Drawing.FontFamily.GenericMonospace, 25, FontStyle.Bold, GraphicsUnit.Pixel)
+    Dim introBrush As SolidBrush = New SolidBrush(Color.FromArgb(255, 0, 255, 0))
+    Dim introBrush2 As SolidBrush = Brushes.DarkGreen
+    Dim introFontH As Integer = introFont.GetHeight
+    Dim introFontH2 As Integer = introFont2.GetHeight
+    Dim introX, introY, sIntro1Width, sIntro2Width, sIntro3Width As Integer
     Dim sIntro1 As String = "Welcome to CAMM!"
     Dim sIntro2 As String = "Crystal Alien Map Maker"
     Dim sIntro3 As String = "By Leveleditor6680 // Josh"
     Sub DrawIntro(ByRef g As Graphics)
-        sIntro1_width = g.MeasureString(sIntro1, IntroFont).Width
-        sIntro2_width = g.MeasureString(sIntro2, IntroFont2).Width
-        sIntro3_width = g.MeasureString(sIntro3, IntroFont).Width
-        IntroX = -(PICMap.Location.X) + PNLMap.Width / 2
-        IntroY = -(PICMap.Location.Y) + PNLMap.Height / 3
+        sIntro1Width = g.MeasureString(sIntro1, introFont).Width
+        sIntro2Width = g.MeasureString(sIntro2, introFont2).Width
+        sIntro3Width = g.MeasureString(sIntro3, introFont).Width
+        introX = -(picMap.Location.X) + pnlMap.Width / 2
+        introY = -(picMap.Location.Y) + pnlMap.Height / 3
 
-        g.DrawRectangle(FadePen, PICMap.Bounds)
-        g.FillRectangle(FadeBrush, 0, -PICMap.Location.Y, PICMap.Width, PICMap.Height)
+        g.DrawRectangle(fadePen, picMap.Bounds)
+        g.FillRectangle(fadeBrush, 0, -picMap.Location.Y, PICMap.Width, PICMap.Height)
 
-        g.DrawString(sIntro1, IntroFont, IntroBrush2, IntroX - sIntro1_width / 2 + 2, IntroY + 2)
-        g.DrawString(sIntro2, IntroFont2, IntroBrush2, IntroX - sIntro2_width / 2 + 2, IntroY + IntroFontH + 2)
-        g.DrawString(sIntro3, IntroFont, IntroBrush2, IntroX - sIntro3_width / 2 + 2, IntroY + IntroFontH2 * 2 + 2)
+        g.DrawString(sIntro1, introFont, introBrush2, introX - sIntro1Width / 2 + 2, introY + 2)
+        g.DrawString(sIntro2, introFont2, introBrush2, introX - sIntro2Width / 2 + 2, introY + introFontH + 2)
+        g.DrawString(sIntro3, introFont, introBrush2, introX - sIntro3Width / 2 + 2, introY + introFontH2 * 2 + 2)
 
-        g.DrawString(sIntro1, IntroFont, IntroBrush, IntroX - sIntro1_width / 2, IntroY)
-        g.DrawString(sIntro2, IntroFont2, IntroBrush, IntroX - sIntro2_width / 2, IntroY + IntroFontH)
-        g.DrawString(sIntro3, IntroFont, IntroBrush, IntroX - sIntro3_width / 2, IntroY + IntroFontH2 * 2)
+        g.DrawString(sIntro1, introFont, introBrush, introX - sIntro1Width / 2, introY)
+        g.DrawString(sIntro2, introFont2, introBrush, introX - sIntro2Width / 2, introY + introFontH)
+        g.DrawString(sIntro3, introFont, introBrush, introX - sIntro3Width / 2, introY + introFontH2 * 2)
     End Sub
-    Private Sub IntroTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles IntroTimer.Tick
-        If FadeAlpha >= 0 And FadeAlpha <= 255 Then
-            FadePen = New Pen(Color.FromArgb(FadeAlpha, 0, 0, 0))
-            FadeBrush = New SolidBrush(Color.FromArgb(FadeAlpha, 0, 0, 0))
+    Private Sub tmrIntro_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrIntro.Tick
+        If fadeAlpha >= 0 And fadeAlpha <= 255 Then
+            fadePen = New Pen(Color.FromArgb(fadeAlpha, 0, 0, 0))
+            fadeBrush = New SolidBrush(Color.FromArgb(fadeAlpha, 0, 0, 0))
         End If
 
-        If FadeAlpha <= 100 And FadeAlpha >= -155 Then
-            IntroBrush = New SolidBrush(Color.FromArgb(FadeAlpha + 155, 0, 255, 0))
-            IntroBrush2 = New SolidBrush(Color.FromArgb(FadeAlpha + 155, Color.DarkGreen.R, Color.DarkGreen.G, Color.DarkGreen.B))
+        If fadeAlpha <= 100 And fadeAlpha >= -155 Then
+            introBrush = New SolidBrush(Color.FromArgb(fadeAlpha + 155, 0, 255, 0))
+            introBrush2 = New SolidBrush(Color.FromArgb(fadeAlpha + 155, Color.DarkGreen.R, Color.DarkGreen.G, Color.DarkGreen.B))
         End If
 
-        If FadeAlpha <= -155 Then
-            IntroTimer.Stop()
+        If fadeAlpha <= -155 Then
+            tmrIntro.Stop()
         Else
-            FadeAlpha -= FadeRate
+            fadeAlpha -= fadeRate
         End If
 
-        PICMap.Invalidate()
+        picMap.Invalidate()
     End Sub
 #End Region
 
@@ -210,90 +210,90 @@ Public Class FRMEditor
     Private Sub ResizeMap(ByVal width As Integer, ByVal height As Integer)
         ActiveMap.SetSize(width, height)
 
-        TXTWidth.Text = ActiveMap.SizeX
-        TXTHeight.Text = ActiveMap.SizeY
-        PICMap.Size = New Size((ActiveMap.SizeX * TileSizeX) + 1, (ActiveMap.SizeY * TileSizeY) + 1)
+        txtWidth.Text = ActiveMap.SizeX
+        txtHeight.Text = ActiveMap.SizeY
+        picMap.Size = New Size((ActiveMap.SizeX * TileSizeX) + 1, (ActiveMap.SizeY * TileSizeY) + 1)
 
-        PICMap.Invalidate()
+        picMap.Invalidate()
     End Sub
 
 #End Region
 
-#Region "PICMap Events"
+#Region "picMap Events"
 
-    Private Sub PICMap_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PICMap.MouseDown
+    Private Sub picMap_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picMap.MouseDown
         If e.Button = Windows.Forms.MouseButtons.Left Then
             If IsDrawing = False Then
                 IsDrawing = True
 
                 ' Start drawing.
-                MouseX = e.X
-                MouseY = e.Y
-                PointToGrid(MouseX, MouseY)
-                MouseXNoSnap = e.X
-                MouseYNoSnap = e.Y
+                mouseX = e.X
+                mouseY = e.Y
+                PointToGrid(mouseX, mouseY)
+                mouseXNoSnap = e.X
+                mouseYNoSnap = e.Y
 
                 If ActiveEditMode = EditMode.Tiles Then
-                    If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Or ActiveTile.TileId = -1 Then
-                        ActiveMap.Eraser(MouseX, MouseY, ActiveEditMode)
+                    If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Or activeTile.TileId = -1 Then
+                        ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
                     ElseIf ActiveToolMode = ToolMode.SmartBrush Then
-                        ActiveMap.SetTileSmart(MouseX, MouseY)
+                        ActiveMap.SetTileSmart(mouseX, mouseY)
                     Else
-                        ActiveMap.SetTile(MouseX, MouseY, ActiveTile)
+                        ActiveMap.SetTile(mouseX, mouseY, activeTile)
                     End If
                 ElseIf ActiveEditMode = EditMode.Buildings Then
                     If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                        ActiveMap.Eraser(MouseX, MouseY, ActiveEditMode)
+                        ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
                     Else
-                        ActiveMap.SetBuilding(MouseX, MouseY, ActiveBuilding)
+                        ActiveMap.SetBuilding(mouseX, mouseY, activeBuilding)
                     End If
                 ElseIf ActiveEditMode = EditMode.Units Then
                     If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                        ActiveMap.Eraser(MouseX, MouseY, ActiveEditMode)
+                        ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
                     Else
-                        ActiveMap.SetUnit(MouseXNoSnap, MouseYNoSnap, ActiveUnit)
+                        ActiveMap.SetUnit(mouseXNoSnap, mouseYNoSnap, activeUnit)
                     End If
                 ElseIf ActiveEditMode = EditMode.Shroud Then
                     'For later.
                 End If
 
-                PICMap.Invalidate()
+                picMap.Invalidate()
             End If
         End If
     End Sub
 
-    Private Sub PICMap_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PICMap.MouseUp
+    Private Sub picMap_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picMap.MouseUp
         If IsDrawing Then
             IsDrawing = False
         End If
     End Sub
 
-    Private Sub PICMap_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PICMap.MouseMove
-        IsMouseOnMap = True
-        MouseX = e.X
-        MouseY = e.Y
-        PointToGrid(MouseX, MouseY)
-        MouseXNoSnap = e.X
-        MouseYNoSnap = e.Y
+    Private Sub picMap_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picMap.MouseMove
+        isMouseOnMap = True
+        mouseX = e.X
+        mouseY = e.Y
+        PointToGrid(mouseX, mouseY)
+        mouseXNoSnap = e.X
+        mouseYNoSnap = e.Y
 
         If IsDrawing Then
             If ActiveEditMode = EditMode.Tiles Then
-                If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Or ActiveTile.TileId = -1 Then
-                    ActiveMap.Eraser(MouseX, MouseY, ActiveEditMode)
+                If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Or activeTile.TileId = -1 Then
+                    ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
                 ElseIf ActiveToolMode = ToolMode.SmartBrush Then
-                    ActiveMap.SetTileSmart(MouseX, MouseY)
+                    ActiveMap.SetTileSmart(mouseX, mouseY)
                 Else
-                    ActiveMap.SetTile(MouseX, MouseY, ActiveTile)
+                    ActiveMap.SetTile(mouseX, mouseY, activeTile)
                 End If
             ElseIf ActiveEditMode = EditMode.Buildings Then
                 If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                    ActiveMap.Eraser(MouseX, MouseY, ActiveEditMode)
+                    ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
                 Else
-                    ActiveMap.SetBuilding(MouseX, MouseY, ActiveBuilding)
+                    ActiveMap.SetBuilding(mouseX, mouseY, activeBuilding)
                 End If
             ElseIf ActiveEditMode = EditMode.Units Then
                 If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                    ActiveMap.Eraser(MouseX, MouseY, ActiveEditMode)
+                    ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
                 Else
                     'No click & drag for units, just imagine the spam...
                     'SetUnit(MouseXNoSnap, MouseYNoSnap)
@@ -303,28 +303,28 @@ Public Class FRMEditor
             End If
         End If
 
-        Dim Debug As Boolean = True
+        Dim debug As Boolean = True
         If IsMouseInBounds() Then
-            If Debug = True Then
-                If ActiveMap.GetTileAt(MouseX, MouseY) IsNot Nothing Then
-                    LBLCursorLoc.Text = ActiveMap.GetTileAt(MouseX, MouseY).TileId.ToString + " [" + ((MouseX / TileSizeX) + 1).ToString + ", " + ((MouseY / TileSizeY) + 1).ToString + "]"
+            If debug = True Then
+                If ActiveMap.GetTileAt(mouseX, mouseY) IsNot Nothing Then
+                    LBLCursorLoc.Text = ActiveMap.GetTileAt(mouseX, mouseY).TileId.ToString + " [" + ((mouseX / TileSizeX) + 1).ToString + ", " + ((mouseY / TileSizeY) + 1).ToString + "]"
                 Else
-                    LBLCursorLoc.Text = "null [" + ((MouseX / TileSizeX) + 1).ToString + ", " + ((MouseY / TileSizeY) + 1).ToString + "]"
+                    LBLCursorLoc.Text = "null [" + ((mouseX / TileSizeX) + 1).ToString + ", " + ((mouseY / TileSizeY) + 1).ToString + "]"
                 End If
-                If ActiveMap.GetBuildingAt(MouseX, MouseY) IsNot Nothing Then
-                    LBLCursorLoc.Text = ActiveMap.GetBuildingAt(MouseX, MouseY).BuildingId + " : " + LBLCursorLoc.Text
+                If ActiveMap.GetBuildingAt(mouseX, mouseY) IsNot Nothing Then
+                    LBLCursorLoc.Text = ActiveMap.GetBuildingAt(mouseX, mouseY).BuildingId + " : " + LBLCursorLoc.Text
                 End If
             Else
-                LBLCursorLoc.Text = "[" + ((MouseX / TileSizeX) + 1).ToString + ", " + ((MouseY / TileSizeY) + 1).ToString + "]"
+                LBLCursorLoc.Text = "[" + ((mouseX / TileSizeX) + 1).ToString + ", " + ((mouseY / TileSizeY) + 1).ToString + "]"
             End If
         End If
 
         ' Redraw.
-        PICMap.Invalidate()
+        picMap.Invalidate()
     End Sub
 
-    Private Sub PICMap_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles PICMap.Paint
-        If IsLoaded Then
+    Private Sub picMap_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles picMap.Paint
+        If isLoaded Then
             Dim g As Graphics = e.Graphics
 
             ActiveMap.Draw(g, DrawGrid, DrawBuildingDebugPos)
@@ -332,13 +332,13 @@ Public Class FRMEditor
             ' Draw the rectangle cursor / selector thingy.
             If IsMouseInBounds() Then
                 If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                    g.DrawRectangle(PenTileErase, MouseX - (PenTileHover.Width / 2), MouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
+                    g.DrawRectangle(PenTileErase, mouseX - (PenTileHover.Width / 2), mouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
                 Else
-                    g.DrawRectangle(PenTileHover, MouseX - (PenTileHover.Width / 2), MouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
+                    g.DrawRectangle(PenTileHover, mouseX - (PenTileHover.Width / 2), mouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
                 End If
                 If ActiveEditMode = EditMode.Tiles Then
                     'g.DrawImage(ActiveTile.Image, MouseX, MouseY)
-                ElseIf ActiveEditMode = EditMode.Buildings And ActiveBuilding.BuildingId <> "" Then
+                ElseIf ActiveEditMode = EditMode.Buildings And activeBuilding.BuildingId <> "" Then
                     'OffY2 = TileSizeY
 
                     'g.DrawImage(ActiveBuilding.FullImage, _
@@ -348,45 +348,45 @@ Public Class FRMEditor
                     '     ActiveBuilding.FullImage.Height)
 
                     'g.DrawImage(ActiveBuilding.FullImage, MouseX, MouseY, ActiveBuilding.FullImage.Width, ActiveBuilding.FullImage.Height)
-                ElseIf ActiveEditMode = EditMode.Units And ActiveUnit.UnitId <> "" Then
-                    If IsMouseOnMap And Not IsDrawing And ActiveToolMode <> ToolMode.Eraser Then
-                        g.DrawImage(ActiveUnit.FullImage, _
-                            MouseXNoSnap - CInt(ActiveUnit.FullImage.Width / 2), _
-                            MouseYNoSnap - CInt(ActiveUnit.FullImage.Height / 2), _
-                            ActiveUnit.FullImage.Width, _
-                            ActiveUnit.FullImage.Height)
+                ElseIf ActiveEditMode = EditMode.Units And activeUnit.UnitId <> "" Then
+                    If isMouseOnMap And Not IsDrawing And ActiveToolMode <> ToolMode.Eraser Then
+                        g.DrawImage(activeUnit.FullImage, _
+                            mouseXNoSnap - CInt(activeUnit.FullImage.Width / 2), _
+                            mouseYNoSnap - CInt(activeUnit.FullImage.Height / 2), _
+                            activeUnit.FullImage.Width, _
+                            activeUnit.FullImage.Height)
                     End If
                     'g.DrawImage(ActiveUnit.FullImage, MouseXNoSnap, MouseYNoSnap, ActiveUnit.FullImage.Width, ActiveUnit.FullImage.Height)
                 End If
             End If
 
             'Draw intro animation.
-            If IntroTimer.Enabled Then
+            If tmrIntro.Enabled Then
                 DrawIntro(g)
             End If
         End If
     End Sub
 
-    Private Sub PICMap_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles PICMap.MouseEnter
-        IsMouseOnMap = True
-        PNLMap.Focus()
+    Private Sub picMap_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles picMap.MouseEnter
+        isMouseOnMap = True
+        pnlMap.Focus()
         'Windows.Forms.Cursor.Hide()
     End Sub
 
-    Private Sub PICMap_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles PICMap.MouseLeave
-        IsMouseOnMap = False
+    Private Sub picMap_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles picMap.MouseLeave
+        isMouseOnMap = False
         Windows.Forms.Cursor.Show()
         LBLCursorLoc.Text = "[ ]"
-        PICMap.Invalidate()
+        picMap.Invalidate()
     End Sub
 
 #End Region
 
-#Region "PICTiles Events"
+#Region "picTiles Events"
 
-    Private Sub PICTiles_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles PICTiles.Paint
-        If IsLoaded Then
-            e.Graphics.Clear(PICTiles.BackColor)
+    Private Sub picTiles_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles picTiles.Paint
+        If isLoaded Then
+            e.Graphics.Clear(picTiles.BackColor)
 
             For i As Integer = 0 To TileDefs.Length - 1
                 If TileDefs(i).HasData Then
@@ -395,77 +395,77 @@ Public Class FRMEditor
             Next
 
             ' Draw the grid.
-            For x As Integer = 0 To PICTiles.ClientSize.Width Step TileSizeX
-                For y As Integer = 0 To PICTiles.ClientSize.Height Step TileSizeY
+            For x As Integer = 0 To picTiles.ClientSize.Width Step TileSizeX
+                For y As Integer = 0 To picTiles.ClientSize.Height Step TileSizeY
                     e.Graphics.DrawLine(PenGrid, x, y, x + 0.5F, y + TileSizeY)
                     e.Graphics.DrawLine(PenGrid, x, y, x + TileSizeX, y + 0.5F)
                 Next y
             Next x
 
             'Draw Rectangle around selected Tile.
-            If ActiveEditMode = EditMode.Tiles And ActiveTile.TileId <> -1 And ActiveToolMode <> ToolMode.Eraser Then
-                e.Graphics.DrawRectangle(PenSelected, SelX_Tiles + (PenSelected.Width / 2) + 1, SelY_Tiles + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
+            If ActiveEditMode = EditMode.Tiles And activeTile.TileId <> -1 And ActiveToolMode <> ToolMode.Eraser Then
+                e.Graphics.DrawRectangle(PenSelected, selXTiles + (PenSelected.Width / 2) + 1, selYTiles + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
             End If
 
             ' Draw the rectangle cursor / selector thingy.
-            If IsMouseOnSelections Then
-                e.Graphics.DrawRectangle(PenSelectionHover, MouseX + (PenSelectionHover.Width / 2) + 1, MouseY + (PenSelectionHover.Width / 2) + 1, TileSizeX - PenSelectionHover.Width - 1, TileSizeY - PenSelectionHover.Width - 1)
+            If isMouseOnSelections Then
+                e.Graphics.DrawRectangle(PenSelectionHover, mouseX + (PenSelectionHover.Width / 2) + 1, mouseY + (PenSelectionHover.Width / 2) + 1, TileSizeX - PenSelectionHover.Width - 1, TileSizeY - PenSelectionHover.Width - 1)
             End If
 
         End If
     End Sub
 
-    Private Sub PICTiles_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles PICTiles.MouseEnter
-        IsMouseOnSelections = True
-        IsMouseOnMap = False
-        PNLTiles.Focus()
+    Private Sub picTiles_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles picTiles.MouseEnter
+        isMouseOnSelections = True
+        isMouseOnMap = False
+        pnlTiles.Focus()
     End Sub
 
-    Private Sub PICTiles_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles PICTiles.MouseLeave
-        IsMouseOnSelections = False
+    Private Sub picTiles_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles picTiles.MouseLeave
+        isMouseOnSelections = False
         LBLCursorLoc.Text = "[ ]"
-        PICTiles.Invalidate()
+        picTiles.Invalidate()
     End Sub
 
-    Private Sub PICTiles_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PICTiles.MouseMove
-        IsMouseOnSelections = True
-        MouseX = e.X
-        MouseY = e.Y
-        PointToGrid(MouseX, MouseY)
-        MouseXNoSnap = e.X
-        MouseYNoSnap = e.Y
+    Private Sub picTiles_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picTiles.MouseMove
+        isMouseOnSelections = True
+        mouseX = e.X
+        mouseY = e.Y
+        PointToGrid(mouseX, mouseY)
+        mouseXNoSnap = e.X
+        mouseYNoSnap = e.Y
 
         ' Redraw.
-        PICTiles.Invalidate()
+        picTiles.Invalidate()
     End Sub
 
-    Private Sub PICTiles_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PICTiles.MouseDown
+    Private Sub picTiles_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picTiles.MouseDown
         If e.Button = Windows.Forms.MouseButtons.Left Then
-            MouseX = e.X
-            MouseY = e.Y
-            PointToGrid(MouseX, MouseY)
-            MouseXNoSnap = e.X
-            MouseYNoSnap = e.Y
-            SelX_Tiles = MouseX
-            SelY_Tiles = MouseY
+            mouseX = e.X
+            mouseY = e.Y
+            PointToGrid(mouseX, mouseY)
+            mouseXNoSnap = e.X
+            mouseYNoSnap = e.Y
+            selXTiles = mouseX
+            selYTiles = mouseY
 
             For i As Integer = 0 To TileDefs.Length - 1
-                If TileDefs(i).Position = New Point(MouseX, MouseY) Then
-                    PICActive.Image = TileDefs(i).Image
-                    ActiveTile.TileId = TileDefs(i).TileId
+                If TileDefs(i).Position = New Point(mouseX, mouseY) Then
+                    picActive.Image = TileDefs(i).Image
+                    activeTile.TileId = TileDefs(i).TileId
                 End If
             Next
 
-            PICTiles.Invalidate()
+            picTiles.Invalidate()
         End If
     End Sub
 
 #End Region
-#Region "PICBuildings Events"
+#Region "picBuildings Events"
 
-    Private Sub PICBuildings_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles PICBuildings.Paint
-        If IsLoaded Then
-            e.Graphics.Clear(PICBuildings.BackColor)
+    Private Sub picBuildings_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles picBuildings.Paint
+        If isLoaded Then
+            e.Graphics.Clear(picBuildings.BackColor)
             'e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
 
             ' Draw the object selections.
@@ -484,79 +484,79 @@ Public Class FRMEditor
             Next
 
             ' Draw the grid.
-            For x As Integer = 0 To PICBuildings.ClientSize.Width Step TileSizeX
-                For y As Integer = 0 To PICBuildings.ClientSize.Height Step TileSizeY
+            For x As Integer = 0 To picBuildings.ClientSize.Width Step TileSizeX
+                For y As Integer = 0 To picBuildings.ClientSize.Height Step TileSizeY
                     e.Graphics.DrawLine(PenGrid, x, y, x + 0.5F, y + TileSizeY)
                     e.Graphics.DrawLine(PenGrid, x, y, x + TileSizeX, y + 0.5F)
                 Next y
             Next x
 
             'Draw Rectangle around selected Buildings.
-            If ActiveEditMode = EditMode.Buildings And ActiveBuilding.BuildingId <> "" And ActiveToolMode <> ToolMode.Eraser Then
-                e.Graphics.DrawRectangle(PenSelected, SelX_Buildings + (PenSelected.Width / 2) + 1, SelY_Buildings + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
+            If ActiveEditMode = EditMode.Buildings And activeBuilding.BuildingId <> "" And ActiveToolMode <> ToolMode.Eraser Then
+                e.Graphics.DrawRectangle(PenSelected, selXBuildings + (PenSelected.Width / 2) + 1, selYBuildings + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
             End If
 
             ' Draw the rectangle cursor / selector thingy.
-            If IsMouseOnSelections Then
-                e.Graphics.DrawRectangle(PenSelectionHover, MouseX + (PenSelectionHover.Width / 2) + 1, MouseY + (PenSelectionHover.Width / 2) + 1, TileSizeX - PenSelectionHover.Width - 1, TileSizeY - PenSelectionHover.Width - 1)
+            If isMouseOnSelections Then
+                e.Graphics.DrawRectangle(PenSelectionHover, mouseX + (PenSelectionHover.Width / 2) + 1, mouseY + (PenSelectionHover.Width / 2) + 1, TileSizeX - PenSelectionHover.Width - 1, TileSizeY - PenSelectionHover.Width - 1)
             End If
         End If
     End Sub
 
-    Private Sub PICBuildings_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles PICBuildings.MouseEnter
-        IsMouseOnSelections = True
-        IsMouseOnMap = False
-        PNLBuildings.Focus()
+    Private Sub picBuildings_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles picBuildings.MouseEnter
+        isMouseOnSelections = True
+        isMouseOnMap = False
+        pnlBuildings.Focus()
     End Sub
 
-    Private Sub PICBuildings_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles PICBuildings.MouseLeave
-        IsMouseOnSelections = False
+    Private Sub picBuildings_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles picBuildings.MouseLeave
+        isMouseOnSelections = False
         LBLCursorLoc.Text = "[ ]"
-        PICBuildings.Invalidate()
+        picBuildings.Invalidate()
     End Sub
 
-    Private Sub PICBuildings_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PICBuildings.MouseMove
-        IsMouseOnSelections = True
-        MouseX = e.X
-        MouseY = e.Y
-        PointToGrid(MouseX, MouseY)
-        MouseXNoSnap = e.X
-        MouseYNoSnap = e.Y
+    Private Sub picBuildings_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picBuildings.MouseMove
+        isMouseOnSelections = True
+        mouseX = e.X
+        mouseY = e.Y
+        PointToGrid(mouseX, mouseY)
+        mouseXNoSnap = e.X
+        mouseYNoSnap = e.Y
 
         ' Redraw.
-        PICBuildings.Invalidate()
+        picBuildings.Invalidate()
     End Sub
 
-    Private Sub PICBuildings_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PICBuildings.MouseDown
+    Private Sub picBuildings_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picBuildings.MouseDown
         If e.Button = Windows.Forms.MouseButtons.Left Then
-            MouseX = e.X
-            MouseY = e.Y
-            PointToGrid(MouseX, MouseY)
-            MouseXNoSnap = e.X
-            MouseYNoSnap = e.Y
-            SelX_Buildings = MouseX
-            SelY_Buildings = MouseY
+            mouseX = e.X
+            mouseY = e.Y
+            PointToGrid(mouseX, mouseY)
+            mouseXNoSnap = e.X
+            mouseYNoSnap = e.Y
+            selXBuildings = mouseX
+            selYBuildings = mouseY
 
             For i As Integer = 0 To BuildingDefs.Length - 1
-                If BuildingDefs(i).Location = New Point(MouseX, MouseY) Then
-                    PICActive.Image = BuildingDefs(i).SmallImage
-                    ActiveBuilding.BuildingId = BuildingDefs(i).BuildingId
-                    ActiveBuilding.Team = BuildingDefs(i).Team
-                    ActiveBuilding.BuildingW = BuildingDefs(i).BuildingW
-                    ActiveBuilding.BuildingH = BuildingDefs(i).BuildingH
+                If BuildingDefs(i).Location = New Point(mouseX, mouseY) Then
+                    picActive.Image = BuildingDefs(i).SmallImage
+                    activeBuilding.BuildingId = BuildingDefs(i).BuildingId
+                    activeBuilding.Team = BuildingDefs(i).Team
+                    activeBuilding.BuildingW = BuildingDefs(i).BuildingW
+                    activeBuilding.BuildingH = BuildingDefs(i).BuildingH
                 End If
             Next
 
-            PICBuildings.Invalidate()
+            picBuildings.Invalidate()
         End If
     End Sub
 
 #End Region
-#Region "PICUnits Events"
+#Region "picUnits Events"
 
-    Private Sub PICUnits_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles PICUnits.Paint
-        If IsLoaded Then
-            e.Graphics.Clear(PICUnits.BackColor)
+    Private Sub picUnits_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles PICUnits.Paint
+        If isLoaded Then
+            e.Graphics.Clear(picUnits.BackColor)
 
             ' Draw the object selections.
             For i As Integer = 0 To UnitDefs.Length - 1
@@ -574,68 +574,68 @@ Public Class FRMEditor
             Next
 
             ' Draw the grid.
-            For x As Integer = 0 To PICUnits.ClientSize.Width Step TileSizeX
-                For y As Integer = 0 To PICUnits.ClientSize.Height Step TileSizeY
+            For x As Integer = 0 To picUnits.ClientSize.Width Step TileSizeX
+                For y As Integer = 0 To picUnits.ClientSize.Height Step TileSizeY
                     e.Graphics.DrawLine(PenGrid, x, y, x + 0.5F, y + TileSizeY)
                     e.Graphics.DrawLine(PenGrid, x, y, x + TileSizeX, y + 0.5F)
                 Next y
             Next x
 
             'Draw Rectangle around selected Units.
-            If ActiveEditMode = EditMode.Units And ActiveUnit.UnitId <> "" And ActiveToolMode <> ToolMode.Eraser Then
-                e.Graphics.DrawRectangle(PenSelected, SelX_Units + (PenSelected.Width / 2) + 1, SelY_Units + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
+            If ActiveEditMode = EditMode.Units And activeUnit.UnitId <> "" And ActiveToolMode <> ToolMode.Eraser Then
+                e.Graphics.DrawRectangle(PenSelected, selXUnits + (PenSelected.Width / 2) + 1, selYUnits + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
             End If
 
             ' Draw the rectangle cursor / selector thingy.
-            If IsMouseOnSelections Then
-                e.Graphics.DrawRectangle(PenSelectionHover, MouseX + (PenSelectionHover.Width / 2) + 1, MouseY + (PenSelectionHover.Width / 2) + 1, TileSizeX - PenSelectionHover.Width - 1, TileSizeY - PenSelectionHover.Width - 1)
+            If isMouseOnSelections Then
+                e.Graphics.DrawRectangle(PenSelectionHover, mouseX + (PenSelectionHover.Width / 2) + 1, mouseY + (PenSelectionHover.Width / 2) + 1, TileSizeX - PenSelectionHover.Width - 1, TileSizeY - PenSelectionHover.Width - 1)
             End If
         End If
     End Sub
 
-    Private Sub PICUnits_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles PICUnits.MouseEnter
-        IsMouseOnSelections = True
-        IsMouseOnMap = False
-        PNLUnits.Focus()
+    Private Sub picUnits_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles PICUnits.MouseEnter
+        isMouseOnSelections = True
+        isMouseOnMap = False
+        pnlUnits.Focus()
     End Sub
 
-    Private Sub PICUnits_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles PICUnits.MouseLeave
-        IsMouseOnSelections = False
+    Private Sub picUnits_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles PICUnits.MouseLeave
+        isMouseOnSelections = False
         LBLCursorLoc.Text = "[ ]"
-        PICUnits.Invalidate()
+        picUnits.Invalidate()
     End Sub
 
-    Private Sub PICUnits_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PICUnits.MouseMove
-        IsMouseOnSelections = True
-        MouseX = e.X
-        MouseY = e.Y
-        PointToGrid(MouseX, MouseY)
-        MouseXNoSnap = e.X
-        MouseYNoSnap = e.Y
+    Private Sub picUnits_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PICUnits.MouseMove
+        isMouseOnSelections = True
+        mouseX = e.X
+        mouseY = e.Y
+        PointToGrid(mouseX, mouseY)
+        mouseXNoSnap = e.X
+        mouseYNoSnap = e.Y
 
         ' Redraw.
-        PICUnits.Invalidate()
+        picUnits.Invalidate()
     End Sub
 
-    Private Sub PICUnits_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PICUnits.MouseDown
+    Private Sub picUnits_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PICUnits.MouseDown
         If e.Button = Windows.Forms.MouseButtons.Left Then
-            MouseX = e.X
-            MouseY = e.Y
-            PointToGrid(MouseX, MouseY)
-            MouseXNoSnap = e.X
-            MouseYNoSnap = e.Y
-            SelX_Units = MouseX
-            SelY_Units = MouseY
+            mouseX = e.X
+            mouseY = e.Y
+            PointToGrid(mouseX, mouseY)
+            mouseXNoSnap = e.X
+            mouseYNoSnap = e.Y
+            selXUnits = mouseX
+            selYUnits = mouseY
 
             For i As Integer = 0 To UnitDefs.Length - 1
-                If UnitDefs(i).Position = New Point(MouseX, MouseY) Then
-                    PICActive.Image = UnitDefs(i).SmallImage
-                    ActiveUnit.UnitId = UnitDefs(i).UnitId
-                    ActiveUnit.Team = UnitDefs(i).Team
+                If UnitDefs(i).Position = New Point(mouseX, mouseY) Then
+                    picActive.Image = UnitDefs(i).SmallImage
+                    activeUnit.UnitId = UnitDefs(i).UnitId
+                    activeUnit.Team = UnitDefs(i).Team
                 End If
             Next
 
-            PICUnits.Invalidate()
+            picUnits.Invalidate()
         End If
     End Sub
 
@@ -643,8 +643,8 @@ Public Class FRMEditor
 
 #Region "File Operations"
 
-    Private Sub CMDNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDNew.Click
-        IsMapOpen = False
+    Private Sub btnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click
+        isMapOpen = False
         NewMap()
     End Sub
 
@@ -655,28 +655,28 @@ Public Class FRMEditor
         ActiveMapNum = Maps.IndexOf(newMap)
         UpdateFormTitle()
 
-        PICMap.Size = New Size((ActiveMap.SizeX * TileSizeX) + 1, (ActiveMap.SizeY * TileSizeY) + 1)
-        TXTWidth.Text = ActiveMap.SizeX
-        TXTHeight.Text = ActiveMap.SizeY
+        picMap.Size = New Size((ActiveMap.SizeX * TileSizeX) + 1, (ActiveMap.SizeY * TileSizeY) + 1)
+        txtWidth.Text = ActiveMap.SizeX
+        txtHeight.Text = ActiveMap.SizeY
     End Sub
 
-    Private Sub CMDOpen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDOpen.Click
+    Private Sub btnOpen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOpen.Click
         'Me.OpenMap.Reset()
         'Me.OpenMap.DefaultExt = "CAMM Map Files|*.map"
         'Me.OpenMap.FileName = My.Application.Info.DirectoryPath + DataPath + "/_Save Data/Map1.camm"
-        Me.OpenMap.FileName = "Map1.camm"
+        Me.openMap.FileName = "Map1.camm"
         'Me.OpenMap.Filter = "CAMM Map Files|*.map|All Files|*.*"
-        Me.OpenMap.FilterIndex = 1
-        Me.OpenMap.RestoreDirectory = False
-        Me.OpenMap.Title = "Select Map File To Open..."
-        Me.OpenMap.InitialDirectory = My.Application.Info.DirectoryPath + DataPath + "/_Save Data/"
+        Me.openMap.FilterIndex = 1
+        Me.openMap.RestoreDirectory = False
+        Me.openMap.Title = "Select Map File To Open..."
+        Me.openMap.InitialDirectory = My.Application.Info.DirectoryPath + DataPath + "/_Save Data/"
 
-        If Me.OpenMap.ShowDialog = DialogResult.OK Then
-            BeginLoadMap(Me.OpenMap.FileName)
+        If Me.openMap.ShowDialog = DialogResult.OK Then
+            BeginLoadMap(Me.openMap.FileName)
         End If
     End Sub
-    Public Sub BeginLoadMap(ByVal FileName As String)
-        Dim source As New IniConfigSource(FileName)
+    Public Sub BeginLoadMap(ByVal fileName As String)
+        Dim source As New IniConfigSource(fileName)
         Dim config As IConfig = source.Configs.Item("CAMM")
         If config Is Nothing Then
             NewMap()
@@ -706,44 +706,44 @@ Public Class FRMEditor
         End If
     End Sub
     Private Sub EndLoadMap()
-        IsMapOpen = True
+        isMapOpen = True
 
-        ActiveMap.FilePath = OpenMap.FileName
+        ActiveMap.FilePath = openMap.FileName
 
         UpdateFormTitle()
         UpdateMapTabs()
 
-        PICMap.Invalidate()
+        picMap.Invalidate()
     End Sub
 
-    Private Sub CMDSaveAs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDSaveAs.Click
-        Me.SaveMap.Reset()
+    Private Sub btnSaveAs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveAs.Click
+        Me.saveMap.Reset()
         'Me.SaveMap.DefaultExt = "CAMM Map Files|*.camm"
         'Me.SaveMap.FileName = (My.Application.Info.DirectoryPath & "/../../Tile Data/_Save Data/Map1.map")
         If ActiveMap.MapTitle <> "" Then
-            Me.SaveMap.FileName = ActiveMap.MapTitle
+            Me.saveMap.FileName = ActiveMap.MapTitle
         Else
-            Me.SaveMap.FileName = "Map1.camm"
+            Me.saveMap.FileName = "Map1.camm"
         End If
-        Me.SaveMap.Filter = "CAMM Map Files|*.camm|All Files|*.*"
-        Me.SaveMap.FilterIndex = 1
-        Me.SaveMap.RestoreDirectory = False
-        Me.SaveMap.Title = "Select Where To Save Map File..."
-        Me.SaveMap.InitialDirectory = My.Application.Info.DirectoryPath + DataPath + "/Tile Data/_Save Data/"
+        Me.saveMap.Filter = "CAMM Map Files|*.camm|All Files|*.*"
+        Me.saveMap.FilterIndex = 1
+        Me.saveMap.RestoreDirectory = False
+        Me.saveMap.Title = "Select Where To Save Map File..."
+        Me.saveMap.InitialDirectory = My.Application.Info.DirectoryPath + DataPath + "/Tile Data/_Save Data/"
 
-        If Me.SaveMap.ShowDialog = DialogResult.OK Then
-            SaveFile(SaveMap.FileName)
+        If Me.saveMap.ShowDialog = DialogResult.OK Then
+            SaveFile(saveMap.FileName)
         End If
     End Sub
-    Private Sub CMDSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDSave.Click
-        If IsMapOpen Then
+    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        If isMapOpen Then
             If ActiveMap.IsMapFinal Then
                 MsgBox("This map has been marked as ""Final"" and cannot be saved." + vbNewLine + "You may save an editable copy using File > SaveAs.")
             Else
                 SaveFile(ActiveMap.FilePath)
             End If
         Else
-            CMDSaveAs_Click(sender, e)
+            btnSaveAs_Click(sender, e)
         End If
     End Sub
 
@@ -758,12 +758,12 @@ Public Class FRMEditor
             MsgBox("Unable to save map file, the file is set to read-only." + vbNewLine + "Please try saving using File > SaveAs.")
         Else
             My.Computer.FileSystem.WriteAllText(fileName, ActiveMap.GetSaveData(), False)
-            IsMapOpen = True
+            isMapOpen = True
             ActiveMap.IsMapFinal = False
             ActiveMap.FilePath = fileName
             UpdateMapTabs()
             UpdateFormTitle()
-            PICMap.Invalidate()
+            picMap.Invalidate()
         End If
     End Sub
 
@@ -774,56 +774,56 @@ Public Class FRMEditor
     End Sub
 
     Private Function IsMouseInBounds()
-        If MouseX < 0 Then
+        If mouseX < 0 Then
             Return False
-        ElseIf MouseY < 0 Then
+        ElseIf mouseY < 0 Then
             Return False
-        ElseIf MouseX > (ActiveMap.SizeX * TileSizeX) - 1 Then
+        ElseIf mouseX > (ActiveMap.SizeX * TileSizeX) - 1 Then
             Return False
-        ElseIf MouseY > (ActiveMap.SizeY * TileSizeY) - 1 Then
+        ElseIf mouseY > (ActiveMap.SizeY * TileSizeY) - 1 Then
             Return False
-        ElseIf IsMouseOnMap = False Then
+        ElseIf isMouseOnMap = False Then
             Return False
         Else
             Return True
         End If
     End Function
 
-    Private Sub PICActive_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles PICActive.Paint
+    Private Sub picActive_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles picActive.Paint
         If ActiveToolMode = ToolMode.Eraser Then
-            e.Graphics.Clear(PICActive.BackColor)
+            e.Graphics.Clear(picActive.BackColor)
         Else
             If ActiveEditMode = EditMode.Buildings Then
-                If ActiveBuilding.HasData And ActiveBuilding.BuildingId <> "" And ActiveToolMode <> ToolMode.Eraser Then
-                    e.Graphics.Clear(PICActive.BackColor)
-                    If ActiveBuilding.Team = Team.Astros Then
+                If activeBuilding.HasData And activeBuilding.BuildingId <> "" And ActiveToolMode <> ToolMode.Eraser Then
+                    e.Graphics.Clear(picActive.BackColor)
+                    If activeBuilding.Team = Team.Astros Then
                         e.Graphics.DrawImage(ButtonAstro, New Point(0, 0))
-                    ElseIf ActiveBuilding.Team = Team.Aliens Then
+                    ElseIf activeBuilding.Team = Team.Aliens Then
                         e.Graphics.DrawImage(ButtonAlien, New Point(0, 0))
                     Else
                         e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
                     End If
-                    e.Graphics.DrawImage(ActiveBuilding.SmallImage, New Point(0, 0))
+                    e.Graphics.DrawImage(activeBuilding.SmallImage, New Point(0, 0))
                     e.Graphics.DrawImage(ButtonOverlay, New Point(0, 0))
                 Else
-                    e.Graphics.Clear(PICActive.BackColor)
+                    e.Graphics.Clear(picActive.BackColor)
                     e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
                     e.Graphics.DrawImage(ButtonOverlay, New Point(0, 0))
                 End If
             ElseIf ActiveEditMode = EditMode.Units Then
-                If ActiveUnit.HasData And ActiveUnit.UnitId <> "" And ActiveToolMode <> ToolMode.Eraser Then
-                    e.Graphics.Clear(PICActive.BackColor)
-                    If ActiveUnit.Team = Team.Astros Then
+                If activeUnit.HasData And activeUnit.UnitId <> "" And ActiveToolMode <> ToolMode.Eraser Then
+                    e.Graphics.Clear(picActive.BackColor)
+                    If activeUnit.Team = Team.Astros Then
                         e.Graphics.DrawImage(ButtonAstro, New Point(0, 0))
-                    ElseIf ActiveUnit.Team = Team.Aliens Then
+                    ElseIf activeUnit.Team = Team.Aliens Then
                         e.Graphics.DrawImage(ButtonAlien, New Point(0, 0))
                     Else
                         e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
                     End If
-                    e.Graphics.DrawImage(ActiveUnit.SmallImage, New Point(0, 0))
+                    e.Graphics.DrawImage(activeUnit.SmallImage, New Point(0, 0))
                     'e.Graphics.DrawImage(ButtonOverlay, New Point(0, 0))
                 Else
-                    e.Graphics.Clear(PICActive.BackColor)
+                    e.Graphics.Clear(picActive.BackColor)
                     e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
                     'e.Graphics.DrawImage(ButtonOverlay, New Point(0, 0))
                 End If
@@ -833,136 +833,136 @@ Public Class FRMEditor
 
 #Region "Menu & UI Events"
 
-    Private Sub CMDExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDExit.Click
+    Private Sub btnExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
         Me.Close()
     End Sub
 
-    Private Sub CMDSize_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDSize.Click
-        If CInt(TXTWidth.Text) > 30 Then
+    Private Sub btnSize_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSize.Click
+        If CInt(txtWidth.Text) > 30 Then
             MsgBox("Width cannot be greater than 30." + vbNewLine + "At least for now.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            TXTWidth.Text = "30"
-        ElseIf CInt(TXTHeight.Text) > 30 Then
+            txtWidth.Text = "30"
+        ElseIf CInt(txtHeight.Text) > 30 Then
             MsgBox("Height cannot be greater than 30." + vbNewLine + "At least for now.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            TXTHeight.Text = "30"
-        ElseIf CInt(TXTWidth.Text) = 0 Then
+            txtHeight.Text = "30"
+        ElseIf CInt(txtWidth.Text) = 0 Then
             MsgBox("If a 2-Dimensional object has a width of 0, does it really exist?" + vbNewLine + "Width cannot be 0.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            TXTWidth.Text = ActiveMap.SizeX
-        ElseIf CInt(TXTHeight.Text) = 0 Then
+            txtWidth.Text = ActiveMap.SizeX
+        ElseIf CInt(txtHeight.Text) = 0 Then
             MsgBox("If a 2-Dimensional object has a height of 0, does it really exist?" + vbNewLine + "Height cannot be 0.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            TXTHeight.Text = ActiveMap.SizeY
-        ElseIf CInt(TXTWidth.Text) < 10 Then
+            txtHeight.Text = ActiveMap.SizeY
+        ElseIf CInt(txtWidth.Text) < 10 Then
             MsgBox("Width cannot be less than 10." + vbNewLine + "Gameplay reasons.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            TXTWidth.Text = "10"
-        ElseIf CInt(TXTHeight.Text) < 10 Then
+            txtWidth.Text = "10"
+        ElseIf CInt(txtHeight.Text) < 10 Then
             MsgBox("Height cannot be less than 10." + vbNewLine + "Gameplay reasons.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            TXTHeight.Text = "10"
+            txtHeight.Text = "10"
         Else
-            ResizeMap(TXTWidth.Text, TXTHeight.Text)
+            ResizeMap(txtWidth.Text, txtHeight.Text)
         End If
     End Sub
 
-    Private Sub CHKGrid_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CHKGrid.CheckedChanged, MNUCHKGrid.CheckedChanged
+    Private Sub chkGrid_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkGrid.CheckedChanged, mnuchkGrid.CheckedChanged
         DrawGrid = sender.Checked
-        CHKGrid.Checked = DrawGrid
-        MNUCHKGrid.Checked = DrawGrid
-        PICMap.Invalidate()
+        chkGrid.Checked = DrawGrid
+        mnuchkGrid.Checked = DrawGrid
+        picMap.Invalidate()
     End Sub
 
-    Private Sub MNUCHKDebugBuildingPos_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MNUCHKDebugBuildingPos.CheckedChanged
+    Private Sub mnuchkDebugBuildingPos_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuchkDebugBuildingPos.CheckedChanged
         DrawBuildingDebugPos = sender.Checked
-        MNUCHKDebugBuildingPos.Checked = DrawBuildingDebugPos
-        PICMap.Invalidate()
+        mnuchkDebugBuildingPos.Checked = DrawBuildingDebugPos
+        picMap.Invalidate()
     End Sub
 
-    Private Sub CMDTileDataEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDTileDataEditor.Click
-        FRMTileData.ShowDialog(Me)
+    Private Sub btnTileDataEditor_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTileDataEditor.Click
+        FrmTileData.ShowDialog(Me)
     End Sub
 
-    Private Sub CMDDeveloper_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDDeveloper.Click
-        MNUDev.Visible = True
-        MNUImport.Visible = True
-        CMDExportAS.Visible = True
-        Separator3.Visible = True
-        MNUCHKDebugBuildingPos.Visible = True
+    Private Sub btnDeveloper_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeveloper.Click
+        mnuDev.Visible = True
+        mnuImport.Visible = True
+        btnExportAS.Visible = True
+        separator3.Visible = True
+        mnuchkDebugBuildingPos.Visible = True
     End Sub
 
-    Private Sub CMDEditTiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDEditTiles.Click
+    Private Sub btnEditTiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditTiles.Click
         ActiveEditMode = EditMode.Tiles
         LBLSelected.Text = "Selected Tile:"
-        PICActive.Image = ActiveTile.Image
-        CMDEditTiles.Enabled = False
-        CMDEditBuildings.Enabled = True
-        CMDEditUnits.Enabled = True
-        PNLTiles.Show()
-        PNLBuildings.Hide()
-        PNLUnits.Hide()
-        PNLMap.Height = PNLTiles.Height
-        PNLMap.Location = New Point(PNLMap.Location.X, PNLTiles.Location.Y)
+        picActive.Image = activeTile.Image
+        btnEditTiles.Enabled = False
+        btnEditBuildings.Enabled = True
+        btnEditUnits.Enabled = True
+        pnlTiles.Show()
+        pnlBuildings.Hide()
+        pnlUnits.Hide()
+        pnlMap.Height = PNLTiles.Height
+        pnlMap.Location = New Point(PNLMap.Location.X, PNLTiles.Location.Y)
     End Sub
 
-    Private Sub CMDEditBuildings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDEditBuildings.Click
+    Private Sub btnEditBuildings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditBuildings.Click
         ActiveEditMode = EditMode.Buildings
         LBLSelected.Text = "Selected Building:"
-        PICActive.Image = ActiveBuilding.SmallImage
-        CMDEditTiles.Enabled = True
-        CMDEditBuildings.Enabled = False
-        CMDEditUnits.Enabled = True
-        PNLTiles.Hide()
-        PNLBuildings.Show()
-        PNLUnits.Hide()
-        PNLMap.Height = PNLBuildings.Height
-        PNLMap.Location = New Point(PNLMap.Location.X, PNLBuildings.Location.Y)
+        picActive.Image = activeBuilding.SmallImage
+        btnEditTiles.Enabled = True
+        btnEditBuildings.Enabled = False
+        btnEditUnits.Enabled = True
+        pnlTiles.Hide()
+        pnlBuildings.Show()
+        pnlUnits.Hide()
+        pnlMap.Height = PNLBuildings.Height
+        pnlMap.Location = New Point(PNLMap.Location.X, PNLBuildings.Location.Y)
     End Sub
 
-    Private Sub CMDEditUnits_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDEditUnits.Click
+    Private Sub btnEditUnits_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditUnits.Click
         ActiveEditMode = EditMode.Units
         LBLSelected.Text = "Selected Unit:"
-        PICActive.Image = ActiveUnit.SmallImage
-        CMDEditTiles.Enabled = True
-        CMDEditBuildings.Enabled = True
-        CMDEditUnits.Enabled = False
-        PNLTiles.Hide()
-        PNLBuildings.Hide()
-        PNLUnits.Show()
-        PNLMap.Height = PNLUnits.Height
-        PNLMap.Location = New Point(PNLMap.Location.X, PNLUnits.Location.Y)
+        picActive.Image = activeUnit.SmallImage
+        btnEditTiles.Enabled = True
+        btnEditBuildings.Enabled = True
+        btnEditUnits.Enabled = False
+        pnlTiles.Hide()
+        pnlBuildings.Hide()
+        pnlUnits.Show()
+        pnlMap.Height = PNLUnits.Height
+        pnlMap.Location = New Point(PNLMap.Location.X, PNLUnits.Location.Y)
     End Sub
 
-    Private Sub CMDEditShroud_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDEditShroud.Click
+    Private Sub btnEditShroud_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditShroud.Click
         ActiveEditMode = EditMode.Shroud
     End Sub
 
-    Private Sub CMDToolBrush_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDToolBrush.Click
+    Private Sub btnToolBrush_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnToolBrush.Click
         ActiveToolMode = ToolMode.Brush
 
-        CMDToolBrush.Enabled = False
-        'CMDToolSmartBrush.Enabled = True
-        CMDToolErase.Enabled = True
-        'PICTiles.Show()
-        'PICBuildings.Show()
-        'PICUnits.Show()
-        PICTiles.Invalidate()
-        PICBuildings.Invalidate()
-        PICUnits.Invalidate()
-        PICActive.Invalidate()
+        btnToolBrush.Enabled = False
+        'btnToolSmartBrush.Enabled = True
+        btnToolErase.Enabled = True
+        'picTiles.Show()
+        'picBuildings.Show()
+        'picUnits.Show()
+        picTiles.Invalidate()
+        picBuildings.Invalidate()
+        picUnits.Invalidate()
+        picActive.Invalidate()
     End Sub
 
-    Private Sub CMDToolSmartBrush_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDToolSmartBrush.Click
+    Private Sub btnToolSmartBrush_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnToolSmartBrush.Click
         ActiveToolMode = ToolMode.SmartBrush
 
-        PICActive.Image = Nothing
-        ActiveTile = New Tile(0, 0)
-        ActiveTile.TileId = -2
+        picActive.Image = Nothing
+        activeTile = New Tile(0, 0)
+        activeTile.TileId = -2
 
-        CMDToolBrush.Enabled = True
-        CMDToolSmartBrush.Enabled = False
-        CMDToolErase.Enabled = True
+        btnToolBrush.Enabled = True
+        btnToolSmartBrush.Enabled = False
+        btnToolErase.Enabled = True
     End Sub
 
-    Private Sub CMDToolErase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDToolErase.Click
+    Private Sub btnToolErase_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnToolErase.Click
         ActiveToolMode = ToolMode.Eraser
 
-        'PICActive.Image = Nothing
+        'picActive.Image = Nothing
         'If activeEditMode = EditMode.Tiles Then
         '    'ToolMode = 0
         '    ActiveTile = New Tile(0, 0)
@@ -974,21 +974,21 @@ Public Class FRMEditor
         '    'For later.
         'End If
 
-        CMDToolBrush.Enabled = True
-        'CMDToolSmartBrush.Enabled = True
-        CMDToolErase.Enabled = False
-        'PICTiles.Hide()
-        'PICBuildings.Hide()
-        'PICUnits.Hide()
-        PICTiles.Invalidate()
-        PICBuildings.Invalidate()
-        PICUnits.Invalidate()
-        PICActive.Invalidate()
+        btnToolBrush.Enabled = True
+        'btnToolSmartBrush.Enabled = True
+        btnToolErase.Enabled = False
+        'picTiles.Hide()
+        'picBuildings.Hide()
+        'picUnits.Hide()
+        picTiles.Invalidate()
+        picBuildings.Invalidate()
+        picUnits.Invalidate()
+        picActive.Invalidate()
     End Sub
 
-    Private Sub CHKAssociateFileTypeCAMM_CheckStateChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CHKAssociateFileTypeCAMM.CheckStateChanged
-        If IsLoaded Then
-            If CHKAssociateFileTypeCAMM.CheckState = CheckState.Checked Then
+    Private Sub chkAssociateFileTypeCAMM_CheckStateChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkAssociateFileTypeCAMM.CheckStateChanged
+        If isLoaded Then
+            If chkAssociateFileTypeCAMM.CheckState = CheckState.Checked Then
 
                 Try
                     My.Computer.Registry.ClassesRoot.CreateSubKey(".camm").SetValue("", "CAMM", Microsoft.Win32.RegistryValueKind.String)
@@ -1011,7 +1011,7 @@ Public Class FRMEditor
                     MsgBox(ex.Message + vbNewLine + vbNewLine + ex.StackTrace)
                 End Try
 
-            ElseIf CHKAssociateFileTypeCAMM.CheckState = CheckState.Unchecked Then
+            ElseIf chkAssociateFileTypeCAMM.CheckState = CheckState.Unchecked Then
 
                 Try
                     If My.Computer.Registry.ClassesRoot.GetSubKeyNames().Contains(".camm") Then
@@ -1034,7 +1034,7 @@ Public Class FRMEditor
         End If
     End Sub
 
-    Private Sub CHKAssociateFileTypeMap_CheckStateChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles CHKAssociateFileTypeMap.CheckStateChanged
+    Private Sub chkAssociateFileTypeMap_CheckStateChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkAssociateFileTypeMap.CheckStateChanged
         ' TODO: Associate .map files, though it may not be such a good idea.
     End Sub
 
@@ -1045,25 +1045,25 @@ Public Class FRMEditor
         Try
             If My.Computer.Registry.ClassesRoot.GetSubKeyNames().Contains(".camm") And My.Computer.Registry.ClassesRoot.GetSubKeyNames().Contains("CAMM") Then
                 If My.Computer.Registry.ClassesRoot.OpenSubKey(".camm", False).GetValue("", "-1") <> "CAMM" Or My.Computer.Registry.ClassesRoot.OpenSubKey("CAMM", False).GetValue("", "-1") <> "CAMM Map File" Then
-                    CHKAssociateFileTypeCAMM.CheckState = CheckState.Indeterminate
+                    chkAssociateFileTypeCAMM.CheckState = CheckState.Indeterminate
                 Else
-                    CHKAssociateFileTypeCAMM.CheckState = CheckState.Checked
+                    chkAssociateFileTypeCAMM.CheckState = CheckState.Checked
                 End If
             Else
-                CHKAssociateFileTypeCAMM.CheckState = CheckState.Unchecked
+                chkAssociateFileTypeCAMM.CheckState = CheckState.Unchecked
             End If
             My.Computer.Registry.ClassesRoot.OpenSubKey(".camm", True)
             My.Computer.Registry.ClassesRoot.OpenSubKey("CAMM", True)
         Catch ex As UnauthorizedAccessException
             ' No access to read or write the registry...
-            CHKAssociateFileTypeCAMM.Enabled = False
-            CHKAssociateFileTypeCAMM.ToolTipText = "You must run CAMM as an Administrator to change this."
-            'CHKAssociateFileTypeMap.Enabled = False
+            chkAssociateFileTypeCAMM.Enabled = False
+            chkAssociateFileTypeCAMM.ToolTipText = "You must run CAMM as an Administrator to change this."
+            'chkAssociateFileTypeMap.Enabled = False
         Catch ex As Security.SecurityException
             ' No access to read or write the registry...
-            CHKAssociateFileTypeCAMM.Enabled = False
-            CHKAssociateFileTypeCAMM.ToolTipText = "You must run CAMM as an Administrator to change this."
-            'CHKAssociateFileTypeMap.Enabled = False
+            chkAssociateFileTypeCAMM.Enabled = False
+            chkAssociateFileTypeCAMM.ToolTipText = "You must run CAMM as an Administrator to change this."
+            'chkAssociateFileTypeMap.Enabled = False
         Catch ex As Exception
             ' I'm sure there's any number of other things that could happen here,
             ' we are dealing with a core system feature after all.
@@ -1074,20 +1074,20 @@ Public Class FRMEditor
 
 #Region "Export & Import"
 
-    Private Sub CMDExportPNG_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDExportPNG.Click
-        If SavePNG.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
-            Dim W As Integer = (ActiveMap.SizeX * TileSizeX) + 1
-            Dim H As Integer = (ActiveMap.SizeY * TileSizeY) + 1
-            Dim img As Image = New Bitmap(W, H, Imaging.PixelFormat.Format24bppRgb)
+    Private Sub btnExportPNG_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExportPNG.Click
+        If savePng.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+            Dim w As Integer = (ActiveMap.SizeX * TileSizeX) + 1
+            Dim h As Integer = (ActiveMap.SizeY * TileSizeY) + 1
+            Dim img As Image = New Bitmap(w, h, Imaging.PixelFormat.Format24bppRgb)
             Dim g As Graphics = Graphics.FromImage(img)
             ActiveMap.Draw(g, DrawGrid, False)
             g.Dispose()
-            img.Save(SavePNG.FileName, Imaging.ImageFormat.Png)
+            img.Save(savePng.FileName, Imaging.ImageFormat.Png)
         End If
     End Sub
 
-    Private Sub CMDExportAS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDExportAS.Click
-        Dim ExportASTileData As String = AsciiLookup(ActiveMap.SizeX) + AsciiLookup(ActiveMap.SizeY)
+    Private Sub btnExportAS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExportAS.Click
+        Dim exportAsTileData As String = AsciiLookup(ActiveMap.SizeX) + AsciiLookup(ActiveMap.SizeY)
 
         For y As Integer = 0 To ActiveMap.SizeY - 1
             For x As Integer = 0 To ActiveMap.SizeX - 1
@@ -1098,7 +1098,7 @@ Public Class FRMEditor
 
                 Dim chr As String = AsciiLookup(idx)
 
-                ExportASTileData += chr
+                exportAsTileData += chr
             Next x
         Next y
 
@@ -1116,16 +1116,16 @@ Public Class FRMEditor
             End If
         Next
         output += """.split("""",10000)," + vbNewLine
-        output += vbTab + vbTab + "map_new : """ + ExportASTileData + """.split("""",10000)" + vbNewLine
+        output += vbTab + vbTab + "map_new : """ + exportAsTileData + """.split("""",10000)" + vbNewLine
         output += vbTab + "};"
-        FRMExportAS.TXTOutput.Text = output
+        FrmExportAS.txtOutput.Text = output
 
-        FRMExportAS.ShowDialog(Me)
+        FrmExportAS.ShowDialog(Me)
     End Sub
 
-    Public ImportASTileData As String = ""
-    Private Sub CMDImportAS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDImportAS.Click
-        If FRMImportAS.ShowDialog(Me) = Windows.Forms.DialogResult.OK And ImportASTileData <> "" Then
+    Public ImportAsTileData As String = ""
+    Private Sub btnImportAS_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImportAS.Click
+        If FrmImportAS.ShowDialog(Me) = Windows.Forms.DialogResult.OK And ImportAsTileData <> "" Then
             'TODO: This will have to do for now.
             Dim count As Integer = 0
             For y As Integer = 0 To (ActiveMap.SizeY - 1) * TileSizeY Step TileSizeY
@@ -1133,7 +1133,7 @@ Public Class FRMEditor
                     'ReDim Preserve MapTiles(count)
                     'MapTiles(count) = New Tile(x, y)
 
-                    Dim idx As Integer = AsciiLookup.IndexOf(ImportASTileData.ToCharArray()(count).ToString())
+                    Dim idx As Integer = AsciiLookup.IndexOf(ImportAsTileData.ToCharArray()(count).ToString())
                     Dim tileId As Integer = -1
                     If idx > 0 Then
                         tileId = idx ' Old calculation: (4350 + 2 * idx)
@@ -1150,49 +1150,49 @@ Public Class FRMEditor
                 Next x
             Next y
 
-            IsMapOpen = False
+            isMapOpen = False
             ActiveMap.MapTitle += " (Imported ActionScript)"
             UpdateMapTabs()
             UpdateFormTitle()
-            PICMap.Invalidate()
+            picMap.Invalidate()
         End If
     End Sub
 
 #End Region
 
-    Private Sub CMDMapProperties_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CMDMapProperties.Click
-        FRMMapProperties.ShowDialog(Me)
+    Private Sub btnMapProperties_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnMapProperties.Click
+        FrmMapProperties.ShowDialog(Me)
         UpdateMapTabs()
         UpdateFormTitle()
     End Sub
 
-    Private Sub MapTabs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles MapTabs.SelectedIndexChanged
+    Private Sub mapTabs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles mapTabs.SelectedIndexChanged
         'ActiveLevelNum = CBOLevel.SelectedIndex
         UpdateFormTitle()
-        PICMap.Invalidate()
+        picMap.Invalidate()
     End Sub
 
     Private Sub UpdateMapTabs()
-        If Maps.Count < MapTabs.TabPages.Count Then
+        If Maps.Count < mapTabs.TabPages.Count Then
             Do
-                MapTabs.TabPages.RemoveAt(MapTabs.TabPages.Count - 1)
-            Loop Until Maps.Count = MapTabs.TabPages.Count
+                mapTabs.TabPages.RemoveAt(mapTabs.TabPages.Count - 1)
+            Loop Until Maps.Count = mapTabs.TabPages.Count
         End If
-        If MapTabs.TabPages.Count > 0 Then
-            For i As Integer = 0 To MapTabs.TabPages.Count - 1
+        If mapTabs.TabPages.Count > 0 Then
+            For i As Integer = 0 To mapTabs.TabPages.Count - 1
                 Dim tabText As String = Maps(i).FileName
                 If String.IsNullOrEmpty(tabText) Then
                     tabText = Maps(i).MapTitle
                 End If
-                MapTabs.TabPages(i).Text = tabText
-                MapTabs.TabPages(i).ToolTipText = Maps(i).MapTitle
+                mapTabs.TabPages(i).Text = tabText
+                mapTabs.TabPages(i).ToolTipText = Maps(i).MapTitle
                 If Not String.IsNullOrEmpty(Maps(i).FilePath) Then
-                    MapTabs.TabPages(i).ToolTipText += vbNewLine + Maps(i).FilePath
+                    mapTabs.TabPages(i).ToolTipText += vbNewLine + Maps(i).FilePath
                 End If
             Next
         End If
-        If Maps.Count > MapTabs.TabPages.Count Then
-            For i As Integer = MapTabs.TabPages.Count To Maps.Count - 1
+        If Maps.Count > mapTabs.TabPages.Count Then
+            For i As Integer = mapTabs.TabPages.Count To Maps.Count - 1
                 Dim tabText As String = Maps(i).FileName
                 If String.IsNullOrEmpty(tabText) Then
                     tabText = Maps(i).MapTitle
@@ -1202,13 +1202,13 @@ Public Class FRMEditor
                 If Not String.IsNullOrEmpty(Maps(i).FilePath) Then
                     newTab.ToolTipText += vbNewLine + Maps(i).FilePath
                 End If
-                MapTabs.TabPages.Add(newTab)
+                mapTabs.TabPages.Add(newTab)
             Next
         End If
     End Sub
 
     Private Sub UpdateFormTitle()
-        Dim title As String = BaseFormTitle
+        Dim title As String = baseFormTitle
         If Maps.Count > 0 Then
             title += " - " + ActiveMap.MapTitle
             If Not String.IsNullOrEmpty(ActiveMap.FilePath) Then
@@ -1220,33 +1220,33 @@ Public Class FRMEditor
         Me.Text = title
     End Sub
 
-    Private Sub CMDClose_Click(sender As Object, e As EventArgs) Handles CMDClose.Click
-        Dim menuLocation As Point = MapTabs.PointToClient(CTXMapTabs.Location)
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Dim menuLocation As Point = mapTabs.PointToClient(ctxMapTabs.Location)
 
         For i As Integer = 0 To Maps.Count - 1
-            Dim rect As Rectangle = MapTabs.GetTabRect(i)
+            Dim rect As Rectangle = mapTabs.GetTabRect(i)
             If rect.Contains(menuLocation) Then
-                If MapTabs.TabPages.Count = 1 Then
+                If mapTabs.TabPages.Count = 1 Then
                     NewMap()
                 End If
                 Maps.RemoveAt(i)
                 UpdateMapTabs()
                 If i - 1 >= 0 Then
-                    MapTabs.SelectedIndex = i - 1
+                    mapTabs.SelectedIndex = i - 1
                 End If
                 Exit For
             End If
         Next
     End Sub
 
-    Private Sub CTXMapTabs_Opened(sender As Object, e As EventArgs) Handles CTXMapTabs.Opened
-        Dim menuLocation As Point = MapTabs.PointToClient(CTXMapTabs.Location)
+    Private Sub ctxMapTabs_Opened(sender As Object, e As EventArgs) Handles CTXMapTabs.Opened
+        Dim menuLocation As Point = mapTabs.PointToClient(ctxMapTabs.Location)
 
         For i As Integer = 0 To Maps.Count - 1
-            Dim rect As Rectangle = MapTabs.GetTabRect(i)
+            Dim rect As Rectangle = mapTabs.GetTabRect(i)
             If rect.Contains(menuLocation) Then
                 If i >= 0 Then
-                    MapTabs.SelectedIndex = i
+                    mapTabs.SelectedIndex = i
                 End If
                 Exit For
             End If
