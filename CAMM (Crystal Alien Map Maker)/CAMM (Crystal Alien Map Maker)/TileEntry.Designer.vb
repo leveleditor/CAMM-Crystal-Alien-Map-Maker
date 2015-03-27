@@ -167,7 +167,7 @@ Partial Class TileEntry
         Me.lblImageUrl.TabIndex = 4
         Me.lblImageUrl.Text = "Image:"
         '
-        'Entry_Terrain
+        'TileEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font

@@ -23,23 +23,23 @@ Partial Class FrmMapProperties
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMapProperties))
-        Me.lblTeam = New System.Windows.Forms.Label()
-        Me.lblStartCashPlayer = New System.Windows.Forms.Label()
-        Me.lblStartCashEnemy = New System.Windows.Forms.Label()
-        Me.lblLevelFlags = New System.Windows.Forms.Label()
-        Me.lblMapTitle = New System.Windows.Forms.Label()
-        Me.txtStartCashPlayer = New System.Windows.Forms.NumericUpDown()
-        Me.cboTeam = New System.Windows.Forms.ComboBox()
-        Me.txtStartCashEnemy = New System.Windows.Forms.NumericUpDown()
-        Me.chkIsTraining = New System.Windows.Forms.CheckBox()
-        Me.rbtIsConflict = New System.Windows.Forms.RadioButton()
-        Me.rbtIsSpecialLevel = New System.Windows.Forms.RadioButton()
-        Me.rbtIsLastSpecialLevel = New System.Windows.Forms.RadioButton()
-        Me.rbtIsBonusLevel = New System.Windows.Forms.RadioButton()
-        Me.tblButtons = New System.Windows.Forms.TableLayoutPanel()
-        Me.btnOk = New System.Windows.Forms.Button()
-        Me.btnCancel = New System.Windows.Forms.Button()
-        Me.txtMapTitle = New System.Windows.Forms.TextBox()
+        Me.lblTeam = New System.Windows.Forms.Label
+        Me.lblStartCashPlayer = New System.Windows.Forms.Label
+        Me.lblStartCashEnemy = New System.Windows.Forms.Label
+        Me.lblLevelFlags = New System.Windows.Forms.Label
+        Me.lblMapTitle = New System.Windows.Forms.Label
+        Me.txtStartCashPlayer = New System.Windows.Forms.NumericUpDown
+        Me.cboTeam = New System.Windows.Forms.ComboBox
+        Me.txtStartCashEnemy = New System.Windows.Forms.NumericUpDown
+        Me.chkIsTraining = New System.Windows.Forms.CheckBox
+        Me.rbtIsConflict = New System.Windows.Forms.RadioButton
+        Me.rbtIsSpecialLevel = New System.Windows.Forms.RadioButton
+        Me.rbtIsLastSpecialLevel = New System.Windows.Forms.RadioButton
+        Me.rbtIsBonusLevel = New System.Windows.Forms.RadioButton
+        Me.tblButtons = New System.Windows.Forms.TableLayoutPanel
+        Me.btnOk = New System.Windows.Forms.Button
+        Me.btnCancel = New System.Windows.Forms.Button
+        Me.txtMapTitle = New System.Windows.Forms.TextBox
         CType(Me.txtStartCashPlayer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtStartCashEnemy, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tblButtons.SuspendLayout()
@@ -211,7 +211,7 @@ Partial Class FrmMapProperties
         'txtMapTitle
         '
         Me.txtMapTitle.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtMapTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtMapTitle.Location = New System.Drawing.Point(126, 12)
         Me.txtMapTitle.Name = "txtMapTitle"

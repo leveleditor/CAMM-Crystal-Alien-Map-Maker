@@ -90,11 +90,11 @@
         RaiseEvent BtnBrowseClicked(Me, e)
     End Sub
 
-    Private Sub txtImageUrl_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles TXTImageUrl.MouseEnter
+    Private Sub txtImageUrl_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtImageUrl.MouseEnter
         RaiseEvent TxtImageUrlMouseEntered(Me, e)
     End Sub
 
-    Private Sub txtImageUrl_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles TXTImageUrl.MouseLeave
+    Private Sub txtImageUrl_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtImageUrl.MouseLeave
         RaiseEvent TxtImageUrlMouseLeft(Me, e)
     End Sub
 
@@ -113,7 +113,7 @@
         Me.Angle = angle
         Me.Damage = damage
         Me.OffSetY = offsetY
-        Me.ImageUrl = ImageUrl
+        Me.ImageUrl = imageUrl
     End Sub
 
 End Class

@@ -67,13 +67,13 @@ Public Class FrmEditor
         LoadAssets()
 
         'Setting version information.
-        LBLAboutVersion.Text = BuildType + " v" + My.Application.Info.Version.Major.ToString + "." + My.Application.Info.Version.Minor.ToString
+        lblAboutVersion.Text = BuildType + " v" + My.Application.Info.Version.Major.ToString + "." + My.Application.Info.Version.Minor.ToString
         If My.Application.Info.Version.Revision > 0 Then
-            LBLAboutVersion.Text += "." + My.Application.Info.Version.Build.ToString + "." + My.Application.Info.Version.Revision.ToString
+            lblAboutVersion.Text += "." + My.Application.Info.Version.Build.ToString + "." + My.Application.Info.Version.Revision.ToString
         ElseIf My.Application.Info.Version.Build > 0 And My.Application.Info.Version.Revision <= 0 Then
-            LBLAboutVersion.Text += "." + My.Application.Info.Version.Build.ToString
+            lblAboutVersion.Text += "." + My.Application.Info.Version.Build.ToString
         End If
-        LBLAboutVersion.Text += " by Leveleditor6680 // Josh"
+        lblAboutVersion.Text += " by Leveleditor6680 // Josh"
 
         'Setting ToolStrip renderers
         mnuMain.Renderer = customToolStripRenderer
@@ -174,7 +174,7 @@ Public Class FrmEditor
         introY = -(picMap.Location.Y) + pnlMap.Height / 3
 
         g.DrawRectangle(fadePen, picMap.Bounds)
-        g.FillRectangle(fadeBrush, 0, -picMap.Location.Y, PICMap.Width, PICMap.Height)
+        g.FillRectangle(fadeBrush, 0, -picMap.Location.Y, picMap.Width, picMap.Height)
 
         g.DrawString(sIntro1, introFont, introBrush2, introX - sIntro1Width / 2 + 2, introY + 2)
         g.DrawString(sIntro2, introFont2, introBrush2, introX - sIntro2Width / 2 + 2, introY + introFontH + 2)
@@ -307,15 +307,15 @@ Public Class FrmEditor
         If IsMouseInBounds() Then
             If debug = True Then
                 If ActiveMap.GetTileAt(mouseX, mouseY) IsNot Nothing Then
-                    LBLCursorLoc.Text = ActiveMap.GetTileAt(mouseX, mouseY).TileId.ToString + " [" + ((mouseX / TileSizeX) + 1).ToString + ", " + ((mouseY / TileSizeY) + 1).ToString + "]"
+                    lblCursorLoc.Text = ActiveMap.GetTileAt(mouseX, mouseY).TileId.ToString + " [" + ((mouseX / TileSizeX) + 1).ToString + ", " + ((mouseY / TileSizeY) + 1).ToString + "]"
                 Else
-                    LBLCursorLoc.Text = "null [" + ((mouseX / TileSizeX) + 1).ToString + ", " + ((mouseY / TileSizeY) + 1).ToString + "]"
+                    lblCursorLoc.Text = "null [" + ((mouseX / TileSizeX) + 1).ToString + ", " + ((mouseY / TileSizeY) + 1).ToString + "]"
                 End If
                 If ActiveMap.GetBuildingAt(mouseX, mouseY) IsNot Nothing Then
-                    LBLCursorLoc.Text = ActiveMap.GetBuildingAt(mouseX, mouseY).BuildingId + " : " + LBLCursorLoc.Text
+                    lblCursorLoc.Text = ActiveMap.GetBuildingAt(mouseX, mouseY).BuildingId + " : " + lblCursorLoc.Text
                 End If
             Else
-                LBLCursorLoc.Text = "[" + ((mouseX / TileSizeX) + 1).ToString + ", " + ((mouseY / TileSizeY) + 1).ToString + "]"
+                lblCursorLoc.Text = "[" + ((mouseX / TileSizeX) + 1).ToString + ", " + ((mouseY / TileSizeY) + 1).ToString + "]"
             End If
         End If
 
@@ -376,7 +376,7 @@ Public Class FrmEditor
     Private Sub picMap_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles picMap.MouseLeave
         isMouseOnMap = False
         Windows.Forms.Cursor.Show()
-        LBLCursorLoc.Text = "[ ]"
+        lblCursorLoc.Text = "[ ]"
         picMap.Invalidate()
     End Sub
 
@@ -423,7 +423,7 @@ Public Class FrmEditor
 
     Private Sub picTiles_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles picTiles.MouseLeave
         isMouseOnSelections = False
-        LBLCursorLoc.Text = "[ ]"
+        lblCursorLoc.Text = "[ ]"
         picTiles.Invalidate()
     End Sub
 
@@ -511,7 +511,7 @@ Public Class FrmEditor
 
     Private Sub picBuildings_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles picBuildings.MouseLeave
         isMouseOnSelections = False
-        LBLCursorLoc.Text = "[ ]"
+        lblCursorLoc.Text = "[ ]"
         picBuildings.Invalidate()
     End Sub
 
@@ -554,7 +554,7 @@ Public Class FrmEditor
 #End Region
 #Region "picUnits Events"
 
-    Private Sub picUnits_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles PICUnits.Paint
+    Private Sub picUnits_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles picUnits.Paint
         If isLoaded Then
             e.Graphics.Clear(picUnits.BackColor)
 
@@ -593,19 +593,19 @@ Public Class FrmEditor
         End If
     End Sub
 
-    Private Sub picUnits_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles PICUnits.MouseEnter
+    Private Sub picUnits_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles picUnits.MouseEnter
         isMouseOnSelections = True
         isMouseOnMap = False
         pnlUnits.Focus()
     End Sub
 
-    Private Sub picUnits_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles PICUnits.MouseLeave
+    Private Sub picUnits_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles picUnits.MouseLeave
         isMouseOnSelections = False
-        LBLCursorLoc.Text = "[ ]"
+        lblCursorLoc.Text = "[ ]"
         picUnits.Invalidate()
     End Sub
 
-    Private Sub picUnits_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PICUnits.MouseMove
+    Private Sub picUnits_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picUnits.MouseMove
         isMouseOnSelections = True
         mouseX = e.X
         mouseY = e.Y
@@ -617,7 +617,7 @@ Public Class FrmEditor
         picUnits.Invalidate()
     End Sub
 
-    Private Sub picUnits_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles PICUnits.MouseDown
+    Private Sub picUnits_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles picUnits.MouseDown
         If e.Button = Windows.Forms.MouseButtons.Left Then
             mouseX = e.X
             mouseY = e.Y
@@ -888,7 +888,7 @@ Public Class FrmEditor
 
     Private Sub btnEditTiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditTiles.Click
         ActiveEditMode = EditMode.Tiles
-        LBLSelected.Text = "Selected Tile:"
+        lblSelected.Text = "Selected Tile:"
         picActive.Image = activeTile.Image
         btnEditTiles.Enabled = False
         btnEditBuildings.Enabled = True
@@ -896,13 +896,13 @@ Public Class FrmEditor
         pnlTiles.Show()
         pnlBuildings.Hide()
         pnlUnits.Hide()
-        pnlMap.Height = PNLTiles.Height
-        pnlMap.Location = New Point(PNLMap.Location.X, PNLTiles.Location.Y)
+        pnlMap.Height = pnlTiles.Height
+        pnlMap.Location = New Point(pnlMap.Location.X, pnlTiles.Location.Y)
     End Sub
 
     Private Sub btnEditBuildings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditBuildings.Click
         ActiveEditMode = EditMode.Buildings
-        LBLSelected.Text = "Selected Building:"
+        lblSelected.Text = "Selected Building:"
         picActive.Image = activeBuilding.SmallImage
         btnEditTiles.Enabled = True
         btnEditBuildings.Enabled = False
@@ -910,13 +910,13 @@ Public Class FrmEditor
         pnlTiles.Hide()
         pnlBuildings.Show()
         pnlUnits.Hide()
-        pnlMap.Height = PNLBuildings.Height
-        pnlMap.Location = New Point(PNLMap.Location.X, PNLBuildings.Location.Y)
+        pnlMap.Height = pnlBuildings.Height
+        pnlMap.Location = New Point(pnlMap.Location.X, pnlBuildings.Location.Y)
     End Sub
 
     Private Sub btnEditUnits_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditUnits.Click
         ActiveEditMode = EditMode.Units
-        LBLSelected.Text = "Selected Unit:"
+        lblSelected.Text = "Selected Unit:"
         picActive.Image = activeUnit.SmallImage
         btnEditTiles.Enabled = True
         btnEditBuildings.Enabled = True
@@ -924,8 +924,8 @@ Public Class FrmEditor
         pnlTiles.Hide()
         pnlBuildings.Hide()
         pnlUnits.Show()
-        pnlMap.Height = PNLUnits.Height
-        pnlMap.Location = New Point(PNLMap.Location.X, PNLUnits.Location.Y)
+        pnlMap.Height = pnlUnits.Height
+        pnlMap.Location = New Point(pnlMap.Location.X, pnlUnits.Location.Y)
     End Sub
 
     Private Sub btnEditShroud_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEditShroud.Click
@@ -1239,7 +1239,7 @@ Public Class FrmEditor
         Next
     End Sub
 
-    Private Sub ctxMapTabs_Opened(sender As Object, e As EventArgs) Handles CTXMapTabs.Opened
+    Private Sub ctxMapTabs_Opened(sender As Object, e As EventArgs) Handles ctxMapTabs.Opened
         Dim menuLocation As Point = mapTabs.PointToClient(ctxMapTabs.Location)
 
         For i As Integer = 0 To Maps.Count - 1
