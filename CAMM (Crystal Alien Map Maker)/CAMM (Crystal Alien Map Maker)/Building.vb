@@ -96,64 +96,16 @@
         End Get
     End Property
 
-    Private _buildingId As String
-    Public Property BuildingId() As String
-        Get
-            Return _buildingId
-        End Get
-        Set(ByVal value As String)
-            _buildingId = value
-        End Set
-    End Property
+    Public Property BuildingId As String
 
-    Private _team As Team
-    Public Property Team() As Team
-        Get
-            Return _team
-        End Get
-        Set(ByVal value As Team)
-            _team = value
-        End Set
-    End Property
+    Public Property Team As Team
 
-    Private _angle As Single
-    Public Property Angle() As Single
-        Get
-            Return _angle
-        End Get
-        Set(ByVal value As Single)
-            _angle = value
-        End Set
-    End Property
+    Public Property Angle As Single
 
-    Private _damage As Single
-    Public Property Damage() As Single
-        Get
-            Return _damage
-        End Get
-        Set(ByVal value As Single)
-            _damage = value
-        End Set
-    End Property
+    Public Property Damage As Single
 
-    Private _buildingW As Integer
-    Public Property BuildingW() As Integer
-        Get
-            Return _buildingW
-        End Get
-        Set(ByVal value As Integer)
-            _buildingW = value
-        End Set
-    End Property
+    Public Property BuildingW As Integer
 
-    Private _buildingH As Integer
-    Public Property BuildingH() As Integer
-        Get
-            Return _buildingH
-        End Get
-        Set(ByVal value As Integer)
-            _buildingH = value
-        End Set
-    End Property
+    Public Property BuildingH As Integer
 
 End Class

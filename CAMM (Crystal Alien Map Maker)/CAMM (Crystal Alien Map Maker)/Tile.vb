@@ -60,34 +60,10 @@
         End Get
     End Property
 
-    Private _tileId As Integer
-    Public Property TileId() As Integer
-        Get
-            Return _tileId
-        End Get
-        Set(ByVal value As Integer)
-            _tileId = value
-        End Set
-    End Property
+    Public Property TileId As Integer
 
-    Private _isPassable As Boolean
-    Public Property IsPassable() As Boolean
-        Get
-            Return _isPassable
-        End Get
-        Set(ByVal value As Boolean)
-            _isPassable = value
-        End Set
-    End Property
+    Public Property IsPassable As Boolean
 
-    Private _isMinerals As Boolean
-    Public Property IsMinerals() As Boolean
-        Get
-            Return _isMinerals
-        End Get
-        Set(ByVal value As Boolean)
-            _isMinerals = value
-        End Set
-    End Property
+    Public Property IsMinerals As Boolean
 
 End Class

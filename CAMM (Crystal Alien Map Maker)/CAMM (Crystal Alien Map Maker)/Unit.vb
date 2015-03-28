@@ -75,44 +75,12 @@
         End Get
     End Property
 
-    Private _unitId As String
-    Public Property UnitId() As String
-        Get
-            Return _unitId
-        End Get
-        Set(ByVal value As String)
-            _unitId = value
-        End Set
-    End Property
+    Public Property UnitId As String
 
-    Private _team As Team
-    Public Property Team() As Team
-        Get
-            Return _team
-        End Get
-        Set(ByVal value As Team)
-            _team = value
-        End Set
-    End Property
+    Public Property Team As Team
 
-    Private _angle As Single
-    Public Property Angle() As Single
-        Get
-            Return _angle
-        End Get
-        Set(ByVal value As Single)
-            _angle = value
-        End Set
-    End Property
+    Public Property Angle As Single
 
-    Private _damage As Single
-    Public Property Damage() As Single
-        Get
-            Return _damage
-        End Get
-        Set(ByVal value As Single)
-            _damage = value
-        End Set
-    End Property
+    Public Property Damage As Single
 
 End Class
