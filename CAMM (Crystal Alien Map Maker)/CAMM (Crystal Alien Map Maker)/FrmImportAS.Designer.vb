@@ -23,15 +23,15 @@ Partial Class FrmImportAS
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmImportAS))
-        Me.tblButtons = New System.Windows.Forms.TableLayoutPanel
-        Me.btnOk = New System.Windows.Forms.Button
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.lblExample = New System.Windows.Forms.Label
-        Me.txtExample = New System.Windows.Forms.TextBox
-        Me.lblPaste = New System.Windows.Forms.Label
-        Me.txtPaste = New System.Windows.Forms.TextBox
-        Me.lblPickMap = New System.Windows.Forms.Label
-        Me.cboPickMap = New System.Windows.Forms.ComboBox
+        Me.tblButtons = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnOk = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.lblExample = New System.Windows.Forms.Label()
+        Me.txtExample = New System.Windows.Forms.TextBox()
+        Me.lblPaste = New System.Windows.Forms.Label()
+        Me.txtPaste = New System.Windows.Forms.TextBox()
+        Me.lblPickMap = New System.Windows.Forms.Label()
+        Me.cboPickMap = New System.Windows.Forms.ComboBox()
         Me.tblButtons.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -82,7 +82,7 @@ Partial Class FrmImportAS
         'txtExample
         '
         Me.txtExample.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtExample.Font = New System.Drawing.Font("Courier New", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtExample.Location = New System.Drawing.Point(12, 27)
         Me.txtExample.Multiline = True
@@ -106,8 +106,8 @@ Partial Class FrmImportAS
         'txtPaste
         '
         Me.txtPaste.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPaste.Font = New System.Drawing.Font("Courier New", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPaste.Location = New System.Drawing.Point(12, 132)
         Me.txtPaste.Multiline = True

@@ -23,10 +23,10 @@ Partial Class FrmExportAS
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmExportAS))
-        Me.btnOk = New System.Windows.Forms.Button
-        Me.lblOutput = New System.Windows.Forms.Label
-        Me.txtOutput = New System.Windows.Forms.TextBox
-        Me.btnCopy = New System.Windows.Forms.Button
+        Me.btnOk = New System.Windows.Forms.Button()
+        Me.lblOutput = New System.Windows.Forms.Label()
+        Me.txtOutput = New System.Windows.Forms.TextBox()
+        Me.btnCopy = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnOk
@@ -50,8 +50,8 @@ Partial Class FrmExportAS
         'txtOutput
         '
         Me.txtOutput.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtOutput.Font = New System.Drawing.Font("Courier New", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtOutput.Location = New System.Drawing.Point(12, 25)
         Me.txtOutput.Multiline = True
@@ -95,6 +95,6 @@ Partial Class FrmExportAS
     Friend WithEvents btnOk As System.Windows.Forms.Button
     Friend WithEvents lblOutput As System.Windows.Forms.Label
     Friend WithEvents btnCopy As System.Windows.Forms.Button
-    Public WithEvents txtOutput As System.Windows.Forms.TextBox
+    Friend WithEvents txtOutput As System.Windows.Forms.TextBox
 
 End Class

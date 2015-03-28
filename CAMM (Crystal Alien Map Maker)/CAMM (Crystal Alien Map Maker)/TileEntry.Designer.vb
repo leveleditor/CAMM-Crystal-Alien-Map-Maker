@@ -22,17 +22,17 @@ Partial Class TileEntry
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lblTerrainID = New System.Windows.Forms.Label
-        Me.txtTerrainID = New System.Windows.Forms.TextBox
-        Me.chkIsPassable = New System.Windows.Forms.CheckBox
-        Me.pnlContainer = New System.Windows.Forms.Panel
-        Me.txtImageUrl = New System.Windows.Forms.TextBox
-        Me.btnBrowse = New System.Windows.Forms.Button
-        Me.tblControls = New System.Windows.Forms.TableLayoutPanel
-        Me.btnNew = New System.Windows.Forms.Button
-        Me.btnRemove = New System.Windows.Forms.Button
-        Me.chkIsMinerals = New System.Windows.Forms.CheckBox
-        Me.lblImageUrl = New System.Windows.Forms.Label
+        Me.lblTerrainID = New System.Windows.Forms.Label()
+        Me.txtTerrainID = New System.Windows.Forms.TextBox()
+        Me.chkIsPassable = New System.Windows.Forms.CheckBox()
+        Me.pnlContainer = New System.Windows.Forms.Panel()
+        Me.txtImageUrl = New System.Windows.Forms.TextBox()
+        Me.btnBrowse = New System.Windows.Forms.Button()
+        Me.tblControls = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnNew = New System.Windows.Forms.Button()
+        Me.btnRemove = New System.Windows.Forms.Button()
+        Me.chkIsMinerals = New System.Windows.Forms.CheckBox()
+        Me.lblImageUrl = New System.Windows.Forms.Label()
         Me.pnlContainer.SuspendLayout()
         Me.tblControls.SuspendLayout()
         Me.SuspendLayout()
@@ -106,16 +106,16 @@ Partial Class TileEntry
         Me.tblControls.AutoSize = True
         Me.tblControls.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.tblControls.ColumnCount = 3
-        Me.tblControls.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle)
-        Me.tblControls.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle)
-        Me.tblControls.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle)
+        Me.tblControls.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tblControls.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.tblControls.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
         Me.tblControls.Controls.Add(Me.btnNew, 0, 0)
         Me.tblControls.Controls.Add(Me.btnRemove, 1, 0)
         Me.tblControls.Dock = System.Windows.Forms.DockStyle.Right
         Me.tblControls.Location = New System.Drawing.Point(572, 0)
         Me.tblControls.Name = "tblControls"
         Me.tblControls.RowCount = 1
-        Me.tblControls.RowStyles.Add(New System.Windows.Forms.RowStyle)
+        Me.tblControls.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.tblControls.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28.0!))
         Me.tblControls.Size = New System.Drawing.Size(135, 28)
         Me.tblControls.TabIndex = 5

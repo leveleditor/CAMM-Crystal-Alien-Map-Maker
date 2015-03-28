@@ -22,79 +22,75 @@ Partial Class FrmEditor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim lblx As System.Windows.Forms.Label
-        Dim lblTools As System.Windows.Forms.Label
-        Dim lblWidth As System.Windows.Forms.Label
-        Dim lblHeight As System.Windows.Forms.Label
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmEditor))
-        Me.picMap = New System.Windows.Forms.PictureBox
-        Me.picActive = New System.Windows.Forms.PictureBox
-        Me.lblSelected = New System.Windows.Forms.Label
-        Me.staInfoBar = New System.Windows.Forms.StatusStrip
-        Me.lblCursorLoc = New System.Windows.Forms.ToolStripStatusLabel
-        Me.lblAboutVersion = New System.Windows.Forms.ToolStripStatusLabel
-        Me.btnToolErase = New System.Windows.Forms.Button
-        Me.pnlMap = New System.Windows.Forms.Panel
-        Me.pnlTiles = New System.Windows.Forms.Panel
-        Me.picTiles = New System.Windows.Forms.PictureBox
-        Me.mnuMain = New System.Windows.Forms.MenuStrip
-        Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnNew = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnOpen = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnSave = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnSaveAs = New System.Windows.Forms.ToolStripMenuItem
-        Me.separator1 = New System.Windows.Forms.ToolStripSeparator
-        Me.mnuImport = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnImportAS = New System.Windows.Forms.ToolStripMenuItem
-        Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnExportPNG = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnExportAS = New System.Windows.Forms.ToolStripMenuItem
-        Me.separator2 = New System.Windows.Forms.ToolStripSeparator
-        Me.btnExit = New System.Windows.Forms.ToolStripMenuItem
-        Me.separator5 = New System.Windows.Forms.ToolStripSeparator
-        Me.mnuEdit = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnMapProperties = New System.Windows.Forms.ToolStripMenuItem
-        Me.separator6 = New System.Windows.Forms.ToolStripSeparator
-        Me.mnuView = New System.Windows.Forms.ToolStripMenuItem
-        Me.mnuchkGrid = New System.Windows.Forms.ToolStripMenuItem
-        Me.mnuchkDebugBuildingPos = New System.Windows.Forms.ToolStripMenuItem
-        Me.separator7 = New System.Windows.Forms.ToolStripSeparator
-        Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnAbout = New System.Windows.Forms.ToolStripMenuItem
-        Me.separator4 = New System.Windows.Forms.ToolStripSeparator
-        Me.chkAssociateFileTypeCAMM = New System.Windows.Forms.ToolStripMenuItem
-        Me.chkAssociateFileTypeMap = New System.Windows.Forms.ToolStripMenuItem
-        Me.separator8 = New System.Windows.Forms.ToolStripSeparator
-        Me.mnuDev = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnTileDataEditor = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnDeveloper = New System.Windows.Forms.ToolStripMenuItem
-        Me.separator3 = New System.Windows.Forms.ToolStripSeparator
-        Me.btnEditBuildings = New System.Windows.Forms.Button
-        Me.btnEditTiles = New System.Windows.Forms.Button
-        Me.btnEditShroud = New System.Windows.Forms.Button
-        Me.pnlBuildings = New System.Windows.Forms.Panel
-        Me.picBuildings = New System.Windows.Forms.PictureBox
-        Me.txtHeight = New System.Windows.Forms.TextBox
-        Me.txtWidth = New System.Windows.Forms.TextBox
-        Me.btnSize = New System.Windows.Forms.Button
-        Me.saveMap = New System.Windows.Forms.SaveFileDialog
-        Me.openMap = New System.Windows.Forms.OpenFileDialog
-        Me.chkGrid = New System.Windows.Forms.CheckBox
-        Me.btnToolSmartBrush = New System.Windows.Forms.Button
-        Me.btnToolBrush = New System.Windows.Forms.Button
+        Me.lblx = New System.Windows.Forms.Label()
+        Me.lblTools = New System.Windows.Forms.Label()
+        Me.lblWidth = New System.Windows.Forms.Label()
+        Me.lblHeight = New System.Windows.Forms.Label()
+        Me.picMap = New System.Windows.Forms.PictureBox()
+        Me.picActive = New System.Windows.Forms.PictureBox()
+        Me.lblSelected = New System.Windows.Forms.Label()
+        Me.staInfoBar = New System.Windows.Forms.StatusStrip()
+        Me.lblCursorLoc = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.lblAboutVersion = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.btnToolErase = New System.Windows.Forms.Button()
+        Me.pnlMap = New System.Windows.Forms.Panel()
+        Me.pnlTiles = New System.Windows.Forms.Panel()
+        Me.picTiles = New System.Windows.Forms.PictureBox()
+        Me.mnuMain = New System.Windows.Forms.MenuStrip()
+        Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnNew = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnOpen = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnSave = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnSaveAs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.separator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuImport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnImportAS = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuExport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnExportPNG = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnExportAS = New System.Windows.Forms.ToolStripMenuItem()
+        Me.separator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnExit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.separator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuEdit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnMapProperties = New System.Windows.Forms.ToolStripMenuItem()
+        Me.separator6 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuView = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuchkGrid = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuchkDebugBuildingPos = New System.Windows.Forms.ToolStripMenuItem()
+        Me.separator7 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnAbout = New System.Windows.Forms.ToolStripMenuItem()
+        Me.separator4 = New System.Windows.Forms.ToolStripSeparator()
+        Me.chkAssociateFileTypeCAMM = New System.Windows.Forms.ToolStripMenuItem()
+        Me.chkAssociateFileTypeMap = New System.Windows.Forms.ToolStripMenuItem()
+        Me.separator8 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuDev = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnTileDataEditor = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnDeveloper = New System.Windows.Forms.ToolStripMenuItem()
+        Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnEditBuildings = New System.Windows.Forms.Button()
+        Me.btnEditTiles = New System.Windows.Forms.Button()
+        Me.btnEditShroud = New System.Windows.Forms.Button()
+        Me.pnlBuildings = New System.Windows.Forms.Panel()
+        Me.picBuildings = New System.Windows.Forms.PictureBox()
+        Me.txtHeight = New System.Windows.Forms.TextBox()
+        Me.txtWidth = New System.Windows.Forms.TextBox()
+        Me.btnSize = New System.Windows.Forms.Button()
+        Me.saveMap = New System.Windows.Forms.SaveFileDialog()
+        Me.openMap = New System.Windows.Forms.OpenFileDialog()
+        Me.chkGrid = New System.Windows.Forms.CheckBox()
+        Me.btnToolSmartBrush = New System.Windows.Forms.Button()
+        Me.btnToolBrush = New System.Windows.Forms.Button()
         Me.tmrIntro = New System.Windows.Forms.Timer(Me.components)
-        Me.btnEditUnits = New System.Windows.Forms.Button
-        Me.pnlUnits = New System.Windows.Forms.Panel
-        Me.picUnits = New System.Windows.Forms.PictureBox
-        Me.savePng = New System.Windows.Forms.SaveFileDialog
-        Me.mapTabs = New System.Windows.Forms.TabControl
+        Me.btnEditUnits = New System.Windows.Forms.Button()
+        Me.pnlUnits = New System.Windows.Forms.Panel()
+        Me.picUnits = New System.Windows.Forms.PictureBox()
+        Me.savePng = New System.Windows.Forms.SaveFileDialog()
+        Me.mapTabs = New System.Windows.Forms.TabControl()
         Me.ctxMapTabs = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.btnClose = New System.Windows.Forms.ToolStripMenuItem
-        lblx = New System.Windows.Forms.Label
-        lblTools = New System.Windows.Forms.Label
-        lblWidth = New System.Windows.Forms.Label
-        lblHeight = New System.Windows.Forms.Label
+        Me.btnClose = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.picMap, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picActive, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.staInfoBar.SuspendLayout()
@@ -111,42 +107,42 @@ Partial Class FrmEditor
         '
         'lblx
         '
-        lblx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        lblx.AutoSize = True
-        lblx.Location = New System.Drawing.Point(597, 48)
-        lblx.Name = "lblx"
-        lblx.Size = New System.Drawing.Size(12, 13)
-        lblx.TabIndex = 10
-        lblx.Text = "x"
+        Me.lblx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblx.AutoSize = True
+        Me.lblx.Location = New System.Drawing.Point(597, 48)
+        Me.lblx.Name = "lblx"
+        Me.lblx.Size = New System.Drawing.Size(12, 13)
+        Me.lblx.TabIndex = 10
+        Me.lblx.Text = "x"
         '
         'lblTools
         '
-        lblTools.AutoSize = True
-        lblTools.Location = New System.Drawing.Point(108, 74)
-        lblTools.Name = "lblTools"
-        lblTools.Size = New System.Drawing.Size(36, 13)
-        lblTools.TabIndex = 17
-        lblTools.Text = "Tools:"
+        Me.lblTools.AutoSize = True
+        Me.lblTools.Location = New System.Drawing.Point(108, 74)
+        Me.lblTools.Name = "lblTools"
+        Me.lblTools.Size = New System.Drawing.Size(36, 13)
+        Me.lblTools.TabIndex = 17
+        Me.lblTools.Text = "Tools:"
         '
         'lblWidth
         '
-        lblWidth.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        lblWidth.Location = New System.Drawing.Point(547, 31)
-        lblWidth.Name = "lblWidth"
-        lblWidth.Size = New System.Drawing.Size(42, 13)
-        lblWidth.TabIndex = 18
-        lblWidth.Text = "Width"
-        lblWidth.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.lblWidth.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblWidth.Location = New System.Drawing.Point(547, 31)
+        Me.lblWidth.Name = "lblWidth"
+        Me.lblWidth.Size = New System.Drawing.Size(42, 13)
+        Me.lblWidth.TabIndex = 18
+        Me.lblWidth.Text = "Width"
+        Me.lblWidth.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'lblHeight
         '
-        lblHeight.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        lblHeight.Location = New System.Drawing.Point(610, 31)
-        lblHeight.Name = "lblHeight"
-        lblHeight.Size = New System.Drawing.Size(42, 13)
-        lblHeight.TabIndex = 19
-        lblHeight.Text = "Height"
-        lblHeight.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.lblHeight.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblHeight.Location = New System.Drawing.Point(610, 31)
+        Me.lblHeight.Name = "lblHeight"
+        Me.lblHeight.Size = New System.Drawing.Size(42, 13)
+        Me.lblHeight.TabIndex = 19
+        Me.lblHeight.Text = "Height"
+        Me.lblHeight.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
         'picMap
         '
@@ -218,8 +214,8 @@ Partial Class FrmEditor
         'pnlMap
         '
         Me.pnlMap.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pnlMap.AutoScroll = True
         Me.pnlMap.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlMap.Controls.Add(Me.picMap)
@@ -232,7 +228,7 @@ Partial Class FrmEditor
         'pnlTiles
         '
         Me.pnlTiles.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pnlTiles.AutoScroll = True
         Me.pnlTiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlTiles.Controls.Add(Me.picTiles)
@@ -469,7 +465,7 @@ Partial Class FrmEditor
         Me.btnDeveloper.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.btnDeveloper.Name = "btnDeveloper"
         Me.btnDeveloper.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
-                    Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
+            Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
         Me.btnDeveloper.Size = New System.Drawing.Size(250, 22)
         Me.btnDeveloper.Text = "Activate Dev Mode"
         Me.btnDeveloper.Visible = False
@@ -520,7 +516,7 @@ Partial Class FrmEditor
         'pnlBuildings
         '
         Me.pnlBuildings.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pnlBuildings.AutoScroll = True
         Me.pnlBuildings.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlBuildings.Controls.Add(Me.picBuildings)
@@ -648,7 +644,7 @@ Partial Class FrmEditor
         'pnlUnits
         '
         Me.pnlUnits.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.pnlUnits.AutoScroll = True
         Me.pnlUnits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlUnits.Controls.Add(Me.picUnits)
@@ -678,8 +674,8 @@ Partial Class FrmEditor
         'mapTabs
         '
         Me.mapTabs.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.mapTabs.ContextMenuStrip = Me.ctxMapTabs
         Me.mapTabs.Location = New System.Drawing.Point(132, 95)
         Me.mapTabs.Name = "mapTabs"
@@ -708,16 +704,16 @@ Partial Class FrmEditor
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(766, 452)
-        Me.Controls.Add(lblHeight)
-        Me.Controls.Add(lblWidth)
-        Me.Controls.Add(lblTools)
+        Me.Controls.Add(Me.lblHeight)
+        Me.Controls.Add(Me.lblWidth)
+        Me.Controls.Add(Me.lblTools)
         Me.Controls.Add(Me.btnToolSmartBrush)
         Me.Controls.Add(Me.pnlUnits)
         Me.Controls.Add(Me.btnToolBrush)
         Me.Controls.Add(Me.btnToolErase)
         Me.Controls.Add(Me.btnEditUnits)
         Me.Controls.Add(Me.chkGrid)
-        Me.Controls.Add(lblx)
+        Me.Controls.Add(Me.lblx)
         Me.Controls.Add(Me.txtHeight)
         Me.Controls.Add(Me.txtWidth)
         Me.Controls.Add(Me.btnSize)
@@ -756,6 +752,10 @@ Partial Class FrmEditor
         Me.PerformLayout()
 
     End Sub
+    Friend WithEvents lblx As System.Windows.Forms.Label
+    Friend WithEvents lblTools As System.Windows.Forms.Label
+    Friend WithEvents lblWidth As System.Windows.Forms.Label
+    Friend WithEvents lblHeight As System.Windows.Forms.Label
     Friend WithEvents picMap As System.Windows.Forms.PictureBox
     Friend WithEvents picActive As System.Windows.Forms.PictureBox
     Friend WithEvents lblSelected As System.Windows.Forms.Label

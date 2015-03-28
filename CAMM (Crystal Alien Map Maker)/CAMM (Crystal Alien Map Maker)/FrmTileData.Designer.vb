@@ -23,20 +23,20 @@ Partial Class FrmTileData
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTileData))
-        Me.btnSave = New System.Windows.Forms.Button
-        Me.btnClose = New System.Windows.Forms.Button
-        Me.lblSaved = New System.Windows.Forms.Label
-        Me.openImage = New System.Windows.Forms.OpenFileDialog
-        Me.editTabs = New System.Windows.Forms.TabControl
-        Me.tabTerrain = New System.Windows.Forms.TabPage
-        Me.pnlTerrain = New System.Windows.Forms.Panel
-        Me.tabBuildings = New System.Windows.Forms.TabPage
-        Me.pnlBuildings = New System.Windows.Forms.Panel
-        Me.tabUnits = New System.Windows.Forms.TabPage
-        Me.pnlUnits = New System.Windows.Forms.Panel
-        Me.picPreview = New System.Windows.Forms.PictureBox
-        Me.txtAsciiSeparator = New System.Windows.Forms.TextBox
-        Me.lblAsciiSeparator = New System.Windows.Forms.Label
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnClose = New System.Windows.Forms.Button()
+        Me.lblSaved = New System.Windows.Forms.Label()
+        Me.openImage = New System.Windows.Forms.OpenFileDialog()
+        Me.editTabs = New System.Windows.Forms.TabControl()
+        Me.tabTerrain = New System.Windows.Forms.TabPage()
+        Me.pnlTerrain = New System.Windows.Forms.Panel()
+        Me.tabBuildings = New System.Windows.Forms.TabPage()
+        Me.pnlBuildings = New System.Windows.Forms.Panel()
+        Me.tabUnits = New System.Windows.Forms.TabPage()
+        Me.pnlUnits = New System.Windows.Forms.Panel()
+        Me.picPreview = New System.Windows.Forms.PictureBox()
+        Me.txtAsciiSeparator = New System.Windows.Forms.TextBox()
+        Me.lblAsciiSeparator = New System.Windows.Forms.Label()
         Me.editTabs.SuspendLayout()
         Me.tabTerrain.SuspendLayout()
         Me.tabBuildings.SuspendLayout()
@@ -85,8 +85,8 @@ Partial Class FrmTileData
         'editTabs
         '
         Me.editTabs.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.editTabs.Controls.Add(Me.tabTerrain)
         Me.editTabs.Controls.Add(Me.tabBuildings)
         Me.editTabs.Controls.Add(Me.tabUnits)
