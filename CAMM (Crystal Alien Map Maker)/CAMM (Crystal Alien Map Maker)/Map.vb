@@ -38,7 +38,7 @@ Public Class Map
         Get
             Return _sizeX
         End Get
-        Private Set(ByVal value As Integer)
+        Private Set(value As Integer)
             _sizeX = value
         End Set
     End Property
@@ -48,7 +48,7 @@ Public Class Map
         Get
             Return _sizeY
         End Get
-        Private Set(ByVal value As Integer)
+        Private Set(value As Integer)
             _sizeY = value
         End Set
     End Property
@@ -68,7 +68,7 @@ Public Class Map
         Get
             Return _filePath
         End Get
-        Set(ByVal value As String)
+        Set(value As String)
             _filePath = value
             If Not String.IsNullOrEmpty(_filePath) Then
                 FileName = My.Computer.FileSystem.GetFileInfo(_filePath).Name
@@ -95,7 +95,7 @@ Public Class Map
     Public IsLastSpecialLevel As Boolean
     Public IsBonusLevel As Boolean
 
-    Public Sub SetSize(ByVal width As Integer, ByVal height As Integer)
+    Public Sub SetSize(width As Integer, height As Integer)
         ' TODO: The map shouldn't resize if it's already at the specified size, but due to a tempfix for bug "unplacable grid spaces after loading a map" it has to be able to set the map to it's own size...
         'If (width <> MapSizeX And height <> MapSizeY) Then
         ReDim tempTiles(SizeX * SizeY)
@@ -144,7 +144,7 @@ Public Class Map
         Next y
     End Sub
 
-    Public Function GetTileAt(ByVal mouseX As Integer, ByVal mouseY As Integer) As Tile
+    Public Function GetTileAt(mouseX As Integer, mouseY As Integer) As Tile
         Dim returnTile As Tile = Nothing
         For i As Integer = 0 To mapTiles.Length - 1
             If mapTiles(i).Position = New Point(mouseX, mouseY) Then
@@ -154,7 +154,7 @@ Public Class Map
         Next
         Return returnTile
     End Function
-    Public Function GetBuildingAt(ByVal mouseX As Integer, ByVal mouseY As Integer) As Building
+    Public Function GetBuildingAt(mouseX As Integer, mouseY As Integer) As Building
         Dim returnBuilding As Building = Nothing
         For i As Integer = 0 To mapBuildings.Count() - 1
             If mapBuildings(i).Location = New Point(mouseX, mouseY) And mapBuildings(i).BuildingId <> "" Then
@@ -165,7 +165,7 @@ Public Class Map
         Return returnBuilding
     End Function
 
-    Public Sub SetTile(ByVal mouseX As Integer, ByVal mouseY As Integer, ByVal tile As Tile)
+    Public Sub SetTile(mouseX As Integer, mouseY As Integer, tile As Tile)
         If IsMouseInBounds(mouseX, mouseY) Then
             For i As Integer = 0 To mapTiles.Length - 1
                 If mapTiles(i).Position.X = mouseX And mapTiles(i).Position.Y = mouseY Then
@@ -175,7 +175,7 @@ Public Class Map
         End If
     End Sub
 
-    Public Sub SetTileSmart(ByVal mouseX As Integer, ByVal mouseY As Integer)
+    Public Sub SetTileSmart(mouseX As Integer, mouseY As Integer)
         Throw New NotImplementedException("The Smart Tile Brush feature is not yet implemented. Feel free to implement it yourself and submit a pull request on GitHub!")
 
         'If IsMouseInBounds(mouseX, mouseY) Then
@@ -205,7 +205,7 @@ Public Class Map
         'End If
     End Sub
 
-    Public Sub SetBuilding(ByVal mouseX As Integer, ByVal mouseY As Integer, ByVal building As Building)
+    Public Sub SetBuilding(mouseX As Integer, mouseY As Integer, building As Building)
         If IsMouseInBounds(mouseX, mouseY) Then
             Dim found As Boolean = False
             For i As Integer = 0 To mapBuildings.Count() - 1
@@ -229,7 +229,7 @@ Public Class Map
         End If
     End Sub
 
-    Public Sub SetUnit(ByVal mouseX As Integer, ByVal mouseY As Integer, ByVal unit As Unit)
+    Public Sub SetUnit(mouseX As Integer, mouseY As Integer, unit As Unit)
         If IsMouseInBounds(mouseX, mouseY) Then
             Dim found As Boolean = False
             For i As Integer = 0 To mapUnits.Count() - 1
@@ -251,7 +251,7 @@ Public Class Map
         End If
     End Sub
 
-    Public Function IsMouseInBounds(ByVal mouseX As Integer, ByVal mouseY As Integer)
+    Public Function IsMouseInBounds(mouseX As Integer, mouseY As Integer)
         If mouseX < 0 Then
             Return False
         ElseIf mouseY < 0 Then
@@ -267,7 +267,7 @@ Public Class Map
         End If
     End Function
 
-    Public Sub Eraser(ByVal mouseX As Integer, ByVal mouseY As Integer, ByVal mode As EditMode)
+    Public Sub Eraser(mouseX As Integer, mouseY As Integer, mode As EditMode)
         Select Case mode
             Case EditMode.Tiles
                 SetTile(mouseX, mouseY, New Tile(mouseX, mouseY))
@@ -293,7 +293,7 @@ Public Class Map
         End Select
     End Sub
 
-    Public Sub Draw(ByRef g As Graphics, ByVal drawGrid As Boolean, Optional ByVal debugBuildingPos As Boolean = False)
+    Public Sub Draw(ByRef g As Graphics, drawGrid As Boolean, Optional ByVal debugBuildingPos As Boolean = False)
         g.Clear(Color.FromKnownColor(KnownColor.Control))
 
         ' Draw the background
@@ -451,7 +451,7 @@ Public Class Map
         Return saveFileData
     End Function
 
-    Public Sub LoadMapv0(ByVal source As IniConfigSource)
+    Public Sub LoadMapv0(source As IniConfigSource)
         Dim config As IniConfig
 
         config = source.Configs.Item("Map Size")
@@ -474,7 +474,7 @@ Public Class Map
         Next
     End Sub
 
-    Public Sub LoadMapv1(ByVal source As IniConfigSource)
+    Public Sub LoadMapv1(source As IniConfigSource)
         Dim config As IniConfig
 
         config = source.Configs.Item("Level")
@@ -547,7 +547,7 @@ Public Class Map
         End If
     End Sub
 
-    Public Sub LoadMap(ByVal source As IniConfigSource, ByVal v As Integer)
+    Public Sub LoadMap(source As IniConfigSource, v As Integer)
         Dim config As IniConfig
 
         config = source.Configs.Item("Level")

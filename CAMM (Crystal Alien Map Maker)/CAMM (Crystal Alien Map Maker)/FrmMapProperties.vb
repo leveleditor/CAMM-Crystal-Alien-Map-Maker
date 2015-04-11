@@ -1,6 +1,6 @@
 ﻿Public Class FrmMapProperties
 
-    Private Sub FrmMapProperties_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
+    Private Sub FrmMapProperties_Shown(sender As Object, e As System.EventArgs) Handles Me.Shown
         txtStartCashEnemy.Maximum = Integer.MaxValue
         txtStartCashPlayer.Maximum = Integer.MaxValue
         txtStartCashEnemy.Minimum = Integer.MinValue
@@ -17,7 +17,7 @@
         rbtIsBonusLevel.Checked = FrmEditor.ActiveMap.IsBonusLevel
     End Sub
 
-    Private Sub btnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOk.Click
+    Private Sub btnOk_Click(sender As System.Object, e As System.EventArgs) Handles btnOk.Click
         FrmEditor.ActiveMap.MapTitle = txtMapTitle.Text
         FrmEditor.ActiveMap.Faction = CType(cboTeam.SelectedIndex, Team)
         FrmEditor.ActiveMap.CashPlayer = Integer.Parse(txtStartCashPlayer.Text)

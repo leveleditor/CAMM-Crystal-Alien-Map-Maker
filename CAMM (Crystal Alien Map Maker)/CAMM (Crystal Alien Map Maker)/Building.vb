@@ -1,66 +1,66 @@
 ﻿Public Class Building
 
-    Public Sub New(ByVal x As Integer, ByVal y As Integer)
+    Public Sub New(x As Integer, y As Integer)
         Me.Location = New Point(x, y)
         Me.BuildingId = ""
         Me.Team = Team.Astros
         Me.Angle = 0.0
         Me.Damage = 0.0
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal buildingId As String)
+    Public Sub New(x As Integer, y As Integer, buildingId As String)
         Me.New(x, y)
         Me.BuildingId = buildingId
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal buildingId As String, ByVal team As Team)
+    Public Sub New(x As Integer, y As Integer, buildingId As String, team As Team)
         Me.New(x, y, buildingId)
         Me.Team = team
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal buildingId As String, ByVal team As Team, ByVal angle As Single, ByVal damage As Single)
+    Public Sub New(x As Integer, y As Integer, buildingId As String, team As Team, angle As Single, damage As Single)
         Me.New(x, y, buildingId, team)
         Me.Angle = angle
         Me.Damage = damage
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal buildingId As String, ByVal team As Team, ByVal angle As Single, ByVal damage As Single, ByVal width As Integer, ByVal height As Integer)
+    Public Sub New(x As Integer, y As Integer, buildingId As String, team As Team, angle As Single, damage As Single, width As Integer, height As Integer)
         Me.New(x, y, buildingId, team, angle, damage)
         Me.BuildingW = width
         Me.BuildingH = height
     End Sub
 
-    Public ReadOnly Property HasData() As Boolean
+    Public ReadOnly Property HasData As Boolean
         Get
             Return SmallImage IsNot Nothing
         End Get
     End Property
 
-    Public Property X() As Integer
+    Public Property X As Integer
         Get
             Return Location.X
         End Get
-        Set(ByVal value As Integer)
+        Set(value As Integer)
             _location.X = value
         End Set
     End Property
 
-    Public Property Y() As Integer
+    Public Property Y As Integer
         Get
             Return Location.Y
         End Get
-        Set(ByVal value As Integer)
+        Set(value As Integer)
             _location.Y = value
         End Set
     End Property
 
     Private _location As Point
-    Public Property Location() As Point
+    Public Property Location As Point
         Get
             Return _location
         End Get
-        Set(ByVal value As Point)
+        Set(value As Point)
             _location = value
         End Set
     End Property
 
-    Public ReadOnly Property DrawPos() As Point
+    Public ReadOnly Property DrawPos As Point
         Get
             If Me.FullImage IsNot Nothing Then
                 Dim dx As Integer = Me.Location.X
@@ -76,7 +76,7 @@
         End Get
     End Property
 
-    Public ReadOnly Property SmallImage() As Image
+    Public ReadOnly Property SmallImage As Image
         Get
             If Not String.IsNullOrEmpty(BuildingId) Then
                 Return BuildingSmallImageLookup(BuildingId)
@@ -86,7 +86,7 @@
         End Get
     End Property
 
-    Public ReadOnly Property FullImage() As Image
+    Public ReadOnly Property FullImage As Image
         Get
             If Not String.IsNullOrEmpty(BuildingId) Then
                 Return BuildingFullImageLookup(BuildingId)

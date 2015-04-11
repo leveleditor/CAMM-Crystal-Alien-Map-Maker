@@ -1,6 +1,6 @@
 ﻿Public Class FrmImportAS
 
-    Private Sub btnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOk.Click
+    Private Sub btnOk_Click(sender As System.Object, e As System.EventArgs) Handles btnOk.Click
         'MsgBox("""" + Ascii(45) + """") '45 should be an "N" according to the tiler.php...
         'MsgBox("""" + Ascii("+").ToString + """") '"+" should be 10
         'MsgBox("""" + Ascii("?").ToString + """") '"?" should be 30
@@ -32,7 +32,7 @@
         Me.Close()
     End Sub
 
-    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
+    Private Sub btnCancel_Click(sender As System.Object, e As System.EventArgs) Handles btnCancel.Click
         txtPaste.Text = ""
         Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
@@ -82,23 +82,23 @@
         txtPaste.Text = text
     End Sub
 
-    Private Sub txtPaste_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtPaste.KeyDown
+    Private Sub txtPaste_KeyDown(sender As Object, e As System.Windows.Forms.KeyEventArgs) Handles txtPaste.KeyDown
         If e.KeyCode = Keys.A And My.Computer.Keyboard.CtrlKeyDown Then
             txtPaste.SelectAll()
         End If
     End Sub
 
-    Private Sub txtPaste_TextChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPaste.TextChanged
+    Private Sub txtPaste_TextChanged(sender As Object, e As System.EventArgs) Handles txtPaste.TextChanged
         TrimText()
         GetMapNames()
     End Sub
 
-    Private Sub FrmImportAS_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown, Me.Load
+    Private Sub FrmImportAS_Shown(sender As Object, e As System.EventArgs) Handles Me.Shown, Me.Load
         cboPickMap.SelectedIndex = 0
         'MsgBox(CBOPickMap.Items.Count.ToString)
     End Sub
 
-    Private Sub cboPickMap_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboPickMap.SelectedIndexChanged
+    Private Sub cboPickMap_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles cboPickMap.SelectedIndexChanged
         If cboPickMap.SelectedIndex > 0 Then
             btnOk.Enabled = True
         Else

@@ -2,7 +2,7 @@
 
 Public Module Config
 
-    Public Sub LoadConfig(ByVal source As IniConfigSource)
+    Public Sub LoadConfig(source As IniConfigSource)
         AsciiLookup = New List(Of Char)()
 
         TileDefs = New Tile() {}

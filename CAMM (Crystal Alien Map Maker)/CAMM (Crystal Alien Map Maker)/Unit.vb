@@ -1,61 +1,61 @@
 ﻿Public Class Unit
 
-    Public Sub New(ByVal x As Integer, ByVal y As Integer)
+    Public Sub New(x As Integer, y As Integer)
         Me.Position = New Point(x, y)
         Me.UnitId = ""
         Me.Team = Team.Astros
         Me.Angle = 0.0
         Me.Damage = 0.0
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal unitId As String)
+    Public Sub New(x As Integer, y As Integer, unitId As String)
         Me.New(x, y)
         Me.UnitId = unitId
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal unitId As String, ByVal team As Team)
+    Public Sub New(x As Integer, y As Integer, unitId As String, team As Team)
         Me.New(x, y, unitId)
         Me.Team = team
     End Sub
-    Public Sub New(ByVal x As Integer, ByVal y As Integer, ByVal unitId As String, ByVal team As Team, ByVal angle As Single, ByVal damage As Single)
+    Public Sub New(x As Integer, y As Integer, unitId As String, team As Team, angle As Single, damage As Single)
         Me.New(x, y, unitId, team)
         Me.Angle = angle
         Me.Damage = damage
     End Sub
 
-    Public ReadOnly Property HasData() As Boolean
+    Public ReadOnly Property HasData As Boolean
         Get
             Return SmallImage IsNot Nothing
         End Get
     End Property
 
-    Public Property X() As Integer
+    Public Property X As Integer
         Get
             Return Position.X
         End Get
-        Set(ByVal value As Integer)
+        Set(value As Integer)
             _position.X = value
         End Set
     End Property
 
-    Public Property Y() As Integer
+    Public Property Y As Integer
         Get
             Return Position.Y
         End Get
-        Set(ByVal value As Integer)
+        Set(value As Integer)
             _position.Y = value
         End Set
     End Property
 
     Private _position As Point
-    Public Property Position() As Point
+    Public Property Position As Point
         Get
             Return _position
         End Get
-        Set(ByVal value As Point)
+        Set(value As Point)
             _position = value
         End Set
     End Property
 
-    Public ReadOnly Property SmallImage() As Image
+    Public ReadOnly Property SmallImage As Image
         Get
             If Not String.IsNullOrEmpty(UnitId) Then
                 Return UnitSmallImageLookup(UnitId)
@@ -65,7 +65,7 @@
         End Get
     End Property
 
-    Public ReadOnly Property FullImage() As Image
+    Public ReadOnly Property FullImage As Image
         Get
             If Not String.IsNullOrEmpty(UnitId) Then
                 Return UnitFullImageLookup(UnitId)

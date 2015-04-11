@@ -24,7 +24,7 @@ Public Module Utils
         PointToGrid(point.X, point.Y)
     End Sub
 
-    Public Sub UpgradeBuildingId(ByVal fromVersion As Integer, ByVal toVersion As Integer, ByRef objectId As String)
+    Public Sub UpgradeBuildingId(fromVersion As Integer, toVersion As Integer, ByRef objectId As String)
         If fromVersion < 4 And (toVersion = 4 Or toVersion = 5) Then
             ' The easy way to map old building Ids to new ones.
             Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeBuildings.dat"
@@ -46,7 +46,7 @@ Public Module Utils
         End If
     End Sub
 
-    Public Sub UpgradeUnitId(ByVal fromVersion As Integer, ByVal toVersion As Integer, ByRef unitId As String)
+    Public Sub UpgradeUnitId(fromVersion As Integer, toVersion As Integer, ByRef unitId As String)
         If fromVersion < 4 And (toVersion = 4 Or toVersion = 5) Then
             ' The easy way to map old unit Ids to new ones.
             Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeUnits.dat"
@@ -68,7 +68,7 @@ Public Module Utils
         End If
     End Sub
 
-    Public Sub UpgradeTerrainId(ByVal fromVersion As Integer, ByVal toVersion As Integer, ByRef terrainId As Integer)
+    Public Sub UpgradeTerrainId(fromVersion As Integer, toVersion As Integer, ByRef terrainId As Integer)
         If fromVersion < 5 And toVersion = 5 Then
             ' The easy way to map old terrain Ids to new ones.
             Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeTerrain.dat"
@@ -90,7 +90,7 @@ Public Module Utils
         End If
     End Sub
 
-    Public Sub UpgradeBuildingLocation(ByVal fromVersion As Integer, ByVal toVersion As Integer, ByVal buildingW As Integer, ByVal buildingH As Integer, ByVal fullImageWidth As Integer, ByVal fullImageHeight As Integer, ByRef buildingLocation As Point)
+    Public Sub UpgradeBuildingLocation(fromVersion As Integer, toVersion As Integer, buildingW As Integer, buildingH As Integer, fullImageWidth As Integer, fullImageHeight As Integer, ByRef buildingLocation As Point)
         If fromVersion < 4 And (toVersion = 4 Or toVersion = 5) Then
             ' <<< Start old SetDrawPos code >>>
             Dim tempDrawPos As Point = buildingLocation
