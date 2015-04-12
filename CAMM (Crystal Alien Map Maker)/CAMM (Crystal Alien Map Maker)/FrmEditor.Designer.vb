@@ -91,6 +91,8 @@ Partial Class FrmEditor
         Me.mapTabs = New System.Windows.Forms.TabControl()
         Me.ctxMapTabs = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.btnClose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnCloseAllLeft = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnCloseAllRight = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.picMap, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picActive, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.staInfoBar.SuspendLayout()
@@ -686,18 +688,30 @@ Partial Class FrmEditor
         '
         'ctxMapTabs
         '
-        Me.ctxMapTabs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnClose})
+        Me.ctxMapTabs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnClose, Me.btnCloseAllLeft, Me.btnCloseAllRight})
         Me.ctxMapTabs.Name = "ContextMenuStrip1"
         Me.ctxMapTabs.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.ctxMapTabs.ShowCheckMargin = True
         Me.ctxMapTabs.ShowImageMargin = False
-        Me.ctxMapTabs.Size = New System.Drawing.Size(104, 26)
+        Me.ctxMapTabs.Size = New System.Drawing.Size(184, 92)
         '
         'btnClose
         '
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(103, 22)
+        Me.btnClose.Size = New System.Drawing.Size(183, 22)
         Me.btnClose.Text = "Close"
+        '
+        'btnCloseAllLeft
+        '
+        Me.btnCloseAllLeft.Name = "btnCloseAllLeft"
+        Me.btnCloseAllLeft.Size = New System.Drawing.Size(183, 22)
+        Me.btnCloseAllLeft.Text = "Close all to the Left"
+        '
+        'btnCloseAllRight
+        '
+        Me.btnCloseAllRight.Name = "btnCloseAllRight"
+        Me.btnCloseAllRight.Size = New System.Drawing.Size(183, 22)
+        Me.btnCloseAllRight.Text = "Close all to the Right"
         '
         'FrmEditor
         '
@@ -819,4 +833,6 @@ Partial Class FrmEditor
     Friend WithEvents mapTabs As System.Windows.Forms.TabControl
     Friend WithEvents ctxMapTabs As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents btnClose As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnCloseAllLeft As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnCloseAllRight As System.Windows.Forms.ToolStripMenuItem
 End Class

@@ -1239,6 +1239,42 @@ Public Class FrmEditor
         Next
     End Sub
 
+    Private Sub btnCloseAllLeft_Click(sender As Object, e As EventArgs) Handles btnCloseAllLeft.Click
+        Dim menuLocation As Point = mapTabs.PointToClient(ctxMapTabs.Location)
+
+        If Maps.Count > 1 Then
+            For i As Integer = 0 To Maps.Count - 1
+                Dim rect As Rectangle = mapTabs.GetTabRect(i)
+                If rect.Contains(menuLocation) Then
+                    If i > 0 Then
+                        Maps.RemoveRange(0, i)
+                        UpdateMapTabs()
+                        mapTabs.SelectedIndex = 0
+                    End If
+                    Exit For
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub btnCloseAllRight_Click(sender As Object, e As EventArgs) Handles btnCloseAllRight.Click
+        Dim menuLocation As Point = mapTabs.PointToClient(ctxMapTabs.Location)
+
+        If Maps.Count > 1 Then
+            For i As Integer = 0 To Maps.Count - 1
+                Dim rect As Rectangle = mapTabs.GetTabRect(i)
+                If rect.Contains(menuLocation) Then
+                    If i < Maps.Count Then
+                        Maps.RemoveRange(i + 1, (Maps.Count - 1) - (i + 1) + 1)
+                        UpdateMapTabs()
+                        mapTabs.SelectedIndex = Maps.Count - 1
+                    End If
+                    Exit For
+                End If
+            Next
+        End If
+    End Sub
+
     Private Sub ctxMapTabs_Opened(sender As Object, e As EventArgs) Handles ctxMapTabs.Opened
         Dim menuLocation As Point = mapTabs.PointToClient(ctxMapTabs.Location)
 
