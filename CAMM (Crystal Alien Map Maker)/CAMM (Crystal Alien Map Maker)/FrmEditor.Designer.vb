@@ -93,6 +93,7 @@ Partial Class FrmEditor
         Me.btnClose = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnCloseAllLeft = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnCloseAllRight = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnCloseAllExceptThis = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.picMap, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picActive, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.staInfoBar.SuspendLayout()
@@ -688,30 +689,36 @@ Partial Class FrmEditor
         '
         'ctxMapTabs
         '
-        Me.ctxMapTabs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnClose, Me.btnCloseAllLeft, Me.btnCloseAllRight})
+        Me.ctxMapTabs.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnClose, Me.btnCloseAllExceptThis, Me.btnCloseAllLeft, Me.btnCloseAllRight})
         Me.ctxMapTabs.Name = "ContextMenuStrip1"
         Me.ctxMapTabs.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.ctxMapTabs.ShowCheckMargin = True
         Me.ctxMapTabs.ShowImageMargin = False
-        Me.ctxMapTabs.Size = New System.Drawing.Size(184, 92)
+        Me.ctxMapTabs.Size = New System.Drawing.Size(186, 114)
         '
         'btnClose
         '
         Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(183, 22)
+        Me.btnClose.Size = New System.Drawing.Size(185, 22)
         Me.btnClose.Text = "Close"
         '
         'btnCloseAllLeft
         '
         Me.btnCloseAllLeft.Name = "btnCloseAllLeft"
-        Me.btnCloseAllLeft.Size = New System.Drawing.Size(183, 22)
-        Me.btnCloseAllLeft.Text = "Close all to the Left"
+        Me.btnCloseAllLeft.Size = New System.Drawing.Size(185, 22)
+        Me.btnCloseAllLeft.Text = "Close All to the Left"
         '
         'btnCloseAllRight
         '
         Me.btnCloseAllRight.Name = "btnCloseAllRight"
-        Me.btnCloseAllRight.Size = New System.Drawing.Size(183, 22)
-        Me.btnCloseAllRight.Text = "Close all to the Right"
+        Me.btnCloseAllRight.Size = New System.Drawing.Size(185, 22)
+        Me.btnCloseAllRight.Text = "Close All to the Right"
+        '
+        'btnCloseAllExceptThis
+        '
+        Me.btnCloseAllExceptThis.Name = "btnCloseAllExceptThis"
+        Me.btnCloseAllExceptThis.Size = New System.Drawing.Size(185, 22)
+        Me.btnCloseAllExceptThis.Text = "Close All Except This"
         '
         'FrmEditor
         '
@@ -835,4 +842,5 @@ Partial Class FrmEditor
     Friend WithEvents btnClose As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnCloseAllLeft As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnCloseAllRight As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnCloseAllExceptThis As System.Windows.Forms.ToolStripMenuItem
 End Class

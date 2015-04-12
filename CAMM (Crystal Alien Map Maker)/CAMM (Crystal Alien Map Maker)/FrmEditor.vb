@@ -1275,6 +1275,14 @@ Public Class FrmEditor
         End If
     End Sub
 
+    Private Sub btnCloseAllExceptThis_Click(sender As Object, e As EventArgs) Handles btnCloseAllExceptThis.Click
+        Dim exceptMap As Map = ActiveMap
+        Maps.Clear()
+        Maps.Add(exceptMap)
+        UpdateMapTabs()
+        mapTabs.SelectedIndex = 0
+    End Sub
+
     Private Sub ctxMapTabs_Opened(sender As Object, e As EventArgs) Handles ctxMapTabs.Opened
         Dim menuLocation As Point = mapTabs.PointToClient(ctxMapTabs.Location)
 
