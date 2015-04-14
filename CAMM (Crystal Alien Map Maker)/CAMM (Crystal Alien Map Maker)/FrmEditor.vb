@@ -6,7 +6,6 @@ Imports Nini.Config
 Imports Nini.Ini
 Public Class FrmEditor
 
-    Dim isMapOpen As Boolean = False
     Private baseFormTitle As String
 
     Private Property ActiveMapNum As Integer
@@ -644,7 +643,6 @@ Public Class FrmEditor
 #Region "File Operations"
 
     Private Sub btnNew_Click(sender As System.Object, e As System.EventArgs) Handles btnNew.Click
-        isMapOpen = False
         NewMap()
     End Sub
 
@@ -706,8 +704,6 @@ Public Class FrmEditor
         End If
     End Sub
     Private Sub EndLoadMap()
-        isMapOpen = True
-
         ActiveMap.FilePath = openMap.FileName
 
         UpdateFormTitle()
@@ -736,7 +732,7 @@ Public Class FrmEditor
         End If
     End Sub
     Private Sub btnSave_Click(sender As System.Object, e As System.EventArgs) Handles btnSave.Click
-        If isMapOpen Then
+        If Not String.IsNullOrEmpty(ActiveMap.FilePath) Then
             If ActiveMap.IsMapFinal Then
                 MsgBox("This map has been marked as ""Final"" and cannot be saved." + vbNewLine + "You may save an editable copy using File > SaveAs.")
             Else
@@ -758,7 +754,6 @@ Public Class FrmEditor
             MsgBox("Unable to save map file, the file is set to read-only." + vbNewLine + "Please try saving using File > SaveAs.")
         Else
             My.Computer.FileSystem.WriteAllText(fileName, ActiveMap.GetSaveData(), False)
-            isMapOpen = True
             ActiveMap.IsMapFinal = False
             ActiveMap.FilePath = fileName
             UpdateMapTabs()
@@ -1150,7 +1145,6 @@ Public Class FrmEditor
                 Next x
             Next y
 
-            isMapOpen = False
             ActiveMap.MapTitle += " (Imported ActionScript)"
             UpdateMapTabs()
             UpdateFormTitle()

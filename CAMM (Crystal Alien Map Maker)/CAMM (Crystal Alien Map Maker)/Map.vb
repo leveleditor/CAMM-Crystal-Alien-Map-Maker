@@ -9,7 +9,7 @@ Public Class Map
         SizeX = 10
         SizeY = 10
         FilePath = ""
-        FileName = ""
+        _fileName = ""
         MapTitle = "New Map " + MapId.ToString()
         IsMapFinal = False
 
@@ -54,13 +54,10 @@ Public Class Map
     End Property
 
     Private _fileName As String
-    Public Property FileName As String
+    Public ReadOnly Property FileName As String
         Get
             Return _fileName
         End Get
-        Private Set(value As String)
-            _fileName = value
-        End Set
     End Property
 
     Private _filePath As String
@@ -71,7 +68,7 @@ Public Class Map
         Set(value As String)
             _filePath = value
             If Not String.IsNullOrEmpty(_filePath) Then
-                FileName = My.Computer.FileSystem.GetFileInfo(_filePath).Name
+                _fileName = My.Computer.FileSystem.GetFileInfo(_filePath).Name
             End If
         End Set
     End Property
