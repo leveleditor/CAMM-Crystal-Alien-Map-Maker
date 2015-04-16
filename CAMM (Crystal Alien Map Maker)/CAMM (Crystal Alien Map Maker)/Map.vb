@@ -6,10 +6,10 @@ Public Class Map
         mapIdPool += 1
         MapId = mapIdPool
 
-        SizeX = 10
-        SizeY = 10
-        FilePath = ""
+        _sizeX = 10
+        _sizeY = 10
         _fileName = ""
+        _filePath = ""
         MapTitle = "New Map " + MapId.ToString()
         IsMapFinal = False
 
@@ -34,23 +34,17 @@ Public Class Map
     Public ReadOnly MapId As Integer
 
     Private _sizeX As Integer
-    Public Property SizeX As Integer
+    Public ReadOnly Property SizeX As Integer
         Get
             Return _sizeX
         End Get
-        Private Set(value As Integer)
-            _sizeX = value
-        End Set
     End Property
 
     Private _sizeY As Integer
-    Public Property SizeY As Integer
+    Public ReadOnly Property SizeY As Integer
         Get
             Return _sizeY
         End Get
-        Private Set(value As Integer)
-            _sizeY = value
-        End Set
     End Property
 
     Private _fileName As String
@@ -69,6 +63,8 @@ Public Class Map
             _filePath = value
             If Not String.IsNullOrEmpty(_filePath) Then
                 _fileName = My.Computer.FileSystem.GetFileInfo(_filePath).Name
+            Else
+                _fileName = ""
             End If
         End Set
     End Property
@@ -98,8 +94,8 @@ Public Class Map
         ReDim tempTiles(SizeX * SizeY)
         tempTiles = mapTiles
 
-        SizeX = width
-        SizeY = height
+        _sizeX = width
+        _sizeY = height
 
         InitTiles()
 
