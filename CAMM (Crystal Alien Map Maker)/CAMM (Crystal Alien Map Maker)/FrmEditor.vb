@@ -1269,17 +1269,18 @@ Public Class FrmEditor
         mapTabs.SelectedIndex = 0
     End Sub
 
-    Private Sub ctxMapTabs_Opened(sender As Object, e As EventArgs) Handles ctxMapTabs.Opened
-        Dim menuLocation As Point = mapTabs.PointToClient(ctxMapTabs.Location)
-
-        For i As Integer = 0 To Maps.Count - 1
-            Dim rect As Rectangle = mapTabs.GetTabRect(i)
-            If rect.Contains(menuLocation) Then
-                If i >= 0 Then
-                    mapTabs.SelectedIndex = i
+    Private Sub mapTabs_MouseDown(sender As Object, e As MouseEventArgs) Handles mapTabs.MouseDown
+        If e.Button = MouseButtons.Right Then
+            For i As Integer = 0 To Maps.Count - 1
+                Dim rect As Rectangle = mapTabs.GetTabRect(i)
+                If rect.Contains(e.Location) Then
+                    If i >= 0 Then
+                        mapTabs.SelectedIndex = i
+                    End If
+                    Exit For
                 End If
-                Exit For
-            End If
-        Next
+            Next
+        End If
     End Sub
+
 End Class
