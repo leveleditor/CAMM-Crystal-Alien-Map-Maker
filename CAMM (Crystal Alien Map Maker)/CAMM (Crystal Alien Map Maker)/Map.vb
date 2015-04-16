@@ -31,7 +31,7 @@ Public Class Map
     End Sub
 
     Private Shared mapIdPool As Integer
-    Public MapId As Integer
+    Public ReadOnly MapId As Integer
 
     Private _sizeX As Integer
     Public Property SizeX As Integer
@@ -130,7 +130,7 @@ Public Class Map
         mapUnits.Clear()
     End Sub
 
-    Public Sub InitTiles()
+    Private Sub InitTiles()
         Dim tilesCounted As Integer = 0
         For y As Integer = 0 To (SizeY - 1) * TileSizeY Step TileSizeY
             For x As Integer = 0 To (SizeX - 1) * TileSizeX Step TileSizeX
@@ -257,8 +257,6 @@ Public Class Map
             Return False
         ElseIf mouseY > (SizeY * TileSizeY) - 1 Then
             Return False
-            'ElseIf IsMouseOnMap = False Then
-            '    Return False
         Else
             Return True
         End If

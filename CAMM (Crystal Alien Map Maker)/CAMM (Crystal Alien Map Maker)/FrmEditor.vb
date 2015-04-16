@@ -769,18 +769,10 @@ Public Class FrmEditor
     End Sub
 
     Private Function IsMouseInBounds()
-        If mouseX < 0 Then
-            Return False
-        ElseIf mouseY < 0 Then
-            Return False
-        ElseIf mouseX > (ActiveMap.SizeX * TileSizeX) - 1 Then
-            Return False
-        ElseIf mouseY > (ActiveMap.SizeY * TileSizeY) - 1 Then
-            Return False
-        ElseIf isMouseOnMap = False Then
-            Return False
+        If isMouseOnMap Then
+            Return ActiveMap.IsMouseInBounds(mouseX, mouseY)
         Else
-            Return True
+            Return False
         End If
     End Function
 
