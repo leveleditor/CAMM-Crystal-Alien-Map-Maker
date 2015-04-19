@@ -2,6 +2,9 @@
 '  CAMM (Crystal Alien Map Maker) program created by Josh (aka. leveleditor / Leveleditor6680) '
 '-============================================================================================-'
 
+Imports System.Drawing.Imaging
+Imports System.Security
+Imports Microsoft.Win32
 Imports Nini.Config
 Imports Nini.Ini
 Public Class FrmEditor
@@ -58,7 +61,7 @@ Public Class FrmEditor
     Private activeBuilding As Building 'The currently active object selection.
     Private activeUnit As Unit 'The currently active unit selection.
 
-    Private Sub FRMEditor_Load(sender As Object, e As System.EventArgs) Handles Me.Load
+    Private Sub FRMEditor_Load(sender As Object, e As EventArgs) Handles Me.Load
         'Storing default form title.
         baseFormTitle = Me.Text
 
@@ -143,7 +146,7 @@ Public Class FrmEditor
         tmrIntro.Start()
     End Sub
 
-    Private Sub FRMEditor_FormClosing(sender As Object, e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub FRMEditor_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If MsgBox("There may be unsaved changes." + vbNewLine + "Are you sure you want to exit?", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then
             e.Cancel = True
         End If
@@ -156,7 +159,7 @@ Public Class FrmEditor
     Dim fadePen As Pen = Pens.Black
     Dim fadeBrush As SolidBrush = Brushes.Black
     Dim introFont As Font = New Font(FontFamily.GenericMonospace, 20, FontStyle.Bold, GraphicsUnit.Pixel)
-    Dim introFont2 As Font = New Font(Drawing.FontFamily.GenericMonospace, 25, FontStyle.Bold, GraphicsUnit.Pixel)
+    Dim introFont2 As Font = New Font(FontFamily.GenericMonospace, 25, FontStyle.Bold, GraphicsUnit.Pixel)
     Dim introBrush As SolidBrush = New SolidBrush(Color.FromArgb(255, 0, 255, 0))
     Dim introBrush2 As SolidBrush = Brushes.DarkGreen
     Dim introFontH As Integer = introFont.GetHeight
@@ -183,7 +186,7 @@ Public Class FrmEditor
         g.DrawString(sIntro2, introFont2, introBrush, introX - sIntro2Width / 2, introY + introFontH)
         g.DrawString(sIntro3, introFont, introBrush, introX - sIntro3Width / 2, introY + introFontH2 * 2)
     End Sub
-    Private Sub tmrIntro_Tick(sender As System.Object, e As System.EventArgs) Handles tmrIntro.Tick
+    Private Sub tmrIntro_Tick(sender As Object, e As EventArgs) Handles tmrIntro.Tick
         If fadeAlpha >= 0 And fadeAlpha <= 255 Then
             fadePen = New Pen(Color.FromArgb(fadeAlpha, 0, 0, 0))
             fadeBrush = New SolidBrush(Color.FromArgb(fadeAlpha, 0, 0, 0))
@@ -220,8 +223,8 @@ Public Class FrmEditor
 
 #Region "picMap Events"
 
-    Private Sub picMap_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles picMap.MouseDown
-        If e.Button = Windows.Forms.MouseButtons.Left Then
+    Private Sub picMap_MouseDown(sender As Object, e As MouseEventArgs) Handles picMap.MouseDown
+        If e.Button = MouseButtons.Left Then
             If IsDrawing = False Then
                 IsDrawing = True
 
@@ -261,13 +264,13 @@ Public Class FrmEditor
         End If
     End Sub
 
-    Private Sub picMap_MouseUp(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles picMap.MouseUp
+    Private Sub picMap_MouseUp(sender As Object, e As MouseEventArgs) Handles picMap.MouseUp
         If IsDrawing Then
             IsDrawing = False
         End If
     End Sub
 
-    Private Sub picMap_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles picMap.MouseMove
+    Private Sub picMap_MouseMove(sender As Object, e As MouseEventArgs) Handles picMap.MouseMove
         isMouseOnMap = True
         mouseX = e.X
         mouseY = e.Y
@@ -322,7 +325,7 @@ Public Class FrmEditor
         picMap.Invalidate()
     End Sub
 
-    Private Sub picMap_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles picMap.Paint
+    Private Sub picMap_Paint(sender As Object, e As PaintEventArgs) Handles picMap.Paint
         If isLoaded Then
             Dim g As Graphics = e.Graphics
 
@@ -366,15 +369,15 @@ Public Class FrmEditor
         End If
     End Sub
 
-    Private Sub picMap_MouseEnter(sender As Object, e As System.EventArgs) Handles picMap.MouseEnter
+    Private Sub picMap_MouseEnter(sender As Object, e As EventArgs) Handles picMap.MouseEnter
         isMouseOnMap = True
         pnlMap.Focus()
         'Windows.Forms.Cursor.Hide()
     End Sub
 
-    Private Sub picMap_MouseLeave(sender As Object, e As System.EventArgs) Handles picMap.MouseLeave
+    Private Sub picMap_MouseLeave(sender As Object, e As EventArgs) Handles picMap.MouseLeave
         isMouseOnMap = False
-        Windows.Forms.Cursor.Show()
+        Cursor.Show()
         lblCursorLoc.Text = "[ ]"
         picMap.Invalidate()
     End Sub
@@ -383,7 +386,7 @@ Public Class FrmEditor
 
 #Region "picTiles Events"
 
-    Private Sub picTiles_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles picTiles.Paint
+    Private Sub picTiles_Paint(sender As Object, e As PaintEventArgs) Handles picTiles.Paint
         If isLoaded Then
             e.Graphics.Clear(picTiles.BackColor)
 
@@ -414,19 +417,19 @@ Public Class FrmEditor
         End If
     End Sub
 
-    Private Sub picTiles_MouseEnter(sender As Object, e As System.EventArgs) Handles picTiles.MouseEnter
+    Private Sub picTiles_MouseEnter(sender As Object, e As EventArgs) Handles picTiles.MouseEnter
         isMouseOnSelections = True
         isMouseOnMap = False
         pnlTiles.Focus()
     End Sub
 
-    Private Sub picTiles_MouseLeave(sender As Object, e As System.EventArgs) Handles picTiles.MouseLeave
+    Private Sub picTiles_MouseLeave(sender As Object, e As EventArgs) Handles picTiles.MouseLeave
         isMouseOnSelections = False
         lblCursorLoc.Text = "[ ]"
         picTiles.Invalidate()
     End Sub
 
-    Private Sub picTiles_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles picTiles.MouseMove
+    Private Sub picTiles_MouseMove(sender As Object, e As MouseEventArgs) Handles picTiles.MouseMove
         isMouseOnSelections = True
         mouseX = e.X
         mouseY = e.Y
@@ -438,8 +441,8 @@ Public Class FrmEditor
         picTiles.Invalidate()
     End Sub
 
-    Private Sub picTiles_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles picTiles.MouseDown
-        If e.Button = Windows.Forms.MouseButtons.Left Then
+    Private Sub picTiles_MouseDown(sender As Object, e As MouseEventArgs) Handles picTiles.MouseDown
+        If e.Button = MouseButtons.Left Then
             mouseX = e.X
             mouseY = e.Y
             PointToGrid(mouseX, mouseY)
@@ -462,7 +465,7 @@ Public Class FrmEditor
 #End Region
 #Region "picBuildings Events"
 
-    Private Sub picBuildings_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles picBuildings.Paint
+    Private Sub picBuildings_Paint(sender As Object, e As PaintEventArgs) Handles picBuildings.Paint
         If isLoaded Then
             e.Graphics.Clear(picBuildings.BackColor)
             'e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
@@ -502,19 +505,19 @@ Public Class FrmEditor
         End If
     End Sub
 
-    Private Sub picBuildings_MouseEnter(sender As Object, e As System.EventArgs) Handles picBuildings.MouseEnter
+    Private Sub picBuildings_MouseEnter(sender As Object, e As EventArgs) Handles picBuildings.MouseEnter
         isMouseOnSelections = True
         isMouseOnMap = False
         pnlBuildings.Focus()
     End Sub
 
-    Private Sub picBuildings_MouseLeave(sender As Object, e As System.EventArgs) Handles picBuildings.MouseLeave
+    Private Sub picBuildings_MouseLeave(sender As Object, e As EventArgs) Handles picBuildings.MouseLeave
         isMouseOnSelections = False
         lblCursorLoc.Text = "[ ]"
         picBuildings.Invalidate()
     End Sub
 
-    Private Sub picBuildings_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles picBuildings.MouseMove
+    Private Sub picBuildings_MouseMove(sender As Object, e As MouseEventArgs) Handles picBuildings.MouseMove
         isMouseOnSelections = True
         mouseX = e.X
         mouseY = e.Y
@@ -526,8 +529,8 @@ Public Class FrmEditor
         picBuildings.Invalidate()
     End Sub
 
-    Private Sub picBuildings_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles picBuildings.MouseDown
-        If e.Button = Windows.Forms.MouseButtons.Left Then
+    Private Sub picBuildings_MouseDown(sender As Object, e As MouseEventArgs) Handles picBuildings.MouseDown
+        If e.Button = MouseButtons.Left Then
             mouseX = e.X
             mouseY = e.Y
             PointToGrid(mouseX, mouseY)
@@ -553,7 +556,7 @@ Public Class FrmEditor
 #End Region
 #Region "picUnits Events"
 
-    Private Sub picUnits_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles picUnits.Paint
+    Private Sub picUnits_Paint(sender As Object, e As PaintEventArgs) Handles picUnits.Paint
         If isLoaded Then
             e.Graphics.Clear(picUnits.BackColor)
 
@@ -592,19 +595,19 @@ Public Class FrmEditor
         End If
     End Sub
 
-    Private Sub picUnits_MouseEnter(sender As Object, e As System.EventArgs) Handles picUnits.MouseEnter
+    Private Sub picUnits_MouseEnter(sender As Object, e As EventArgs) Handles picUnits.MouseEnter
         isMouseOnSelections = True
         isMouseOnMap = False
         pnlUnits.Focus()
     End Sub
 
-    Private Sub picUnits_MouseLeave(sender As Object, e As System.EventArgs) Handles picUnits.MouseLeave
+    Private Sub picUnits_MouseLeave(sender As Object, e As EventArgs) Handles picUnits.MouseLeave
         isMouseOnSelections = False
         lblCursorLoc.Text = "[ ]"
         picUnits.Invalidate()
     End Sub
 
-    Private Sub picUnits_MouseMove(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles picUnits.MouseMove
+    Private Sub picUnits_MouseMove(sender As Object, e As MouseEventArgs) Handles picUnits.MouseMove
         isMouseOnSelections = True
         mouseX = e.X
         mouseY = e.Y
@@ -616,8 +619,8 @@ Public Class FrmEditor
         picUnits.Invalidate()
     End Sub
 
-    Private Sub picUnits_MouseDown(sender As Object, e As System.Windows.Forms.MouseEventArgs) Handles picUnits.MouseDown
-        If e.Button = Windows.Forms.MouseButtons.Left Then
+    Private Sub picUnits_MouseDown(sender As Object, e As MouseEventArgs) Handles picUnits.MouseDown
+        If e.Button = MouseButtons.Left Then
             mouseX = e.X
             mouseY = e.Y
             PointToGrid(mouseX, mouseY)
@@ -642,7 +645,7 @@ Public Class FrmEditor
 
 #Region "File Operations"
 
-    Private Sub btnNew_Click(sender As System.Object, e As System.EventArgs) Handles btnNew.Click
+    Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
         NewMap()
     End Sub
 
@@ -658,7 +661,7 @@ Public Class FrmEditor
         txtHeight.Text = ActiveMap.SizeY
     End Sub
 
-    Private Sub btnOpen_Click(sender As System.Object, e As System.EventArgs) Handles btnOpen.Click
+    Private Sub btnOpen_Click(sender As Object, e As EventArgs) Handles btnOpen.Click
         'Me.OpenMap.Reset()
         'Me.OpenMap.DefaultExt = "CAMM Map Files|*.map"
         'Me.OpenMap.FileName = My.Application.Info.DirectoryPath + DataPath + "/_Save Data/Map1.camm"
@@ -712,7 +715,7 @@ Public Class FrmEditor
         picMap.Invalidate()
     End Sub
 
-    Private Sub btnSaveAs_Click(sender As System.Object, e As System.EventArgs) Handles btnSaveAs.Click
+    Private Sub btnSaveAs_Click(sender As Object, e As EventArgs) Handles btnSaveAs.Click
         Me.saveMap.Reset()
         'Me.SaveMap.DefaultExt = "CAMM Map Files|*.camm"
         'Me.SaveMap.FileName = (My.Application.Info.DirectoryPath & "/../../Tile Data/_Save Data/Map1.map")
@@ -731,7 +734,7 @@ Public Class FrmEditor
             SaveFile(saveMap.FileName)
         End If
     End Sub
-    Private Sub btnSave_Click(sender As System.Object, e As System.EventArgs) Handles btnSave.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If Not String.IsNullOrEmpty(ActiveMap.FilePath) Then
             If ActiveMap.IsMapFinal Then
                 MsgBox("This map has been marked as ""Final"" and cannot be saved." + vbNewLine + "You may save an editable copy using File > SaveAs.")
@@ -764,7 +767,7 @@ Public Class FrmEditor
 
 #End Region
 
-    Private Sub FRMEditor_LostFocus(sender As Object, e As System.EventArgs) Handles Me.LostFocus
+    Private Sub FRMEditor_LostFocus(sender As Object, e As EventArgs) Handles Me.LostFocus
         IsDrawing = False
     End Sub
 
@@ -776,7 +779,7 @@ Public Class FrmEditor
         End If
     End Function
 
-    Private Sub picActive_Paint(sender As Object, e As System.Windows.Forms.PaintEventArgs) Handles picActive.Paint
+    Private Sub picActive_Paint(sender As Object, e As PaintEventArgs) Handles picActive.Paint
         If ActiveToolMode = ToolMode.Eraser Then
             e.Graphics.Clear(picActive.BackColor)
         Else
@@ -820,11 +823,11 @@ Public Class FrmEditor
 
 #Region "Menu & UI Events"
 
-    Private Sub btnExit_Click(sender As System.Object, e As System.EventArgs) Handles btnExit.Click
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         Me.Close()
     End Sub
 
-    Private Sub btnSize_Click(sender As System.Object, e As System.EventArgs) Handles btnSize.Click
+    Private Sub btnSize_Click(sender As Object, e As EventArgs) Handles btnSize.Click
         If CInt(txtWidth.Text) > 30 Then
             MsgBox("Width cannot be greater than 30." + vbNewLine + "At least for now.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
             txtWidth.Text = "30"
@@ -848,24 +851,24 @@ Public Class FrmEditor
         End If
     End Sub
 
-    Private Sub chkGrid_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles chkGrid.CheckedChanged, mnuchkGrid.CheckedChanged
+    Private Sub chkGrid_CheckedChanged(sender As Object, e As EventArgs) Handles chkGrid.CheckedChanged, mnuchkGrid.CheckedChanged
         DrawGrid = sender.Checked
         chkGrid.Checked = DrawGrid
         mnuchkGrid.Checked = DrawGrid
         picMap.Invalidate()
     End Sub
 
-    Private Sub mnuchkDebugBuildingPos_CheckedChanged(sender As System.Object, e As System.EventArgs) Handles mnuchkDebugBuildingPos.CheckedChanged
+    Private Sub mnuchkDebugBuildingPos_CheckedChanged(sender As Object, e As EventArgs) Handles mnuchkDebugBuildingPos.CheckedChanged
         DrawBuildingDebugPos = sender.Checked
         mnuchkDebugBuildingPos.Checked = DrawBuildingDebugPos
         picMap.Invalidate()
     End Sub
 
-    Private Sub btnTileDataEditor_Click(sender As System.Object, e As System.EventArgs) Handles btnTileDataEditor.Click
+    Private Sub btnTileDataEditor_Click(sender As Object, e As EventArgs) Handles btnTileDataEditor.Click
         FrmTileData.ShowDialog(Me)
     End Sub
 
-    Private Sub btnDeveloper_Click(sender As System.Object, e As System.EventArgs) Handles btnDeveloper.Click
+    Private Sub btnDeveloper_Click(sender As Object, e As EventArgs) Handles btnDeveloper.Click
         mnuDev.Visible = True
         mnuImport.Visible = True
         btnExportAS.Visible = True
@@ -873,7 +876,7 @@ Public Class FrmEditor
         mnuchkDebugBuildingPos.Visible = True
     End Sub
 
-    Private Sub btnEditTiles_Click(sender As System.Object, e As System.EventArgs) Handles btnEditTiles.Click
+    Private Sub btnEditTiles_Click(sender As Object, e As EventArgs) Handles btnEditTiles.Click
         ActiveEditMode = EditMode.Tiles
         lblSelected.Text = "Selected Tile:"
         picActive.Image = activeTile.Image
@@ -887,7 +890,7 @@ Public Class FrmEditor
         pnlMap.Location = New Point(pnlMap.Location.X, pnlTiles.Location.Y)
     End Sub
 
-    Private Sub btnEditBuildings_Click(sender As System.Object, e As System.EventArgs) Handles btnEditBuildings.Click
+    Private Sub btnEditBuildings_Click(sender As Object, e As EventArgs) Handles btnEditBuildings.Click
         ActiveEditMode = EditMode.Buildings
         lblSelected.Text = "Selected Building:"
         picActive.Image = activeBuilding.SmallImage
@@ -901,7 +904,7 @@ Public Class FrmEditor
         pnlMap.Location = New Point(pnlMap.Location.X, pnlBuildings.Location.Y)
     End Sub
 
-    Private Sub btnEditUnits_Click(sender As System.Object, e As System.EventArgs) Handles btnEditUnits.Click
+    Private Sub btnEditUnits_Click(sender As Object, e As EventArgs) Handles btnEditUnits.Click
         ActiveEditMode = EditMode.Units
         lblSelected.Text = "Selected Unit:"
         picActive.Image = activeUnit.SmallImage
@@ -915,11 +918,11 @@ Public Class FrmEditor
         pnlMap.Location = New Point(pnlMap.Location.X, pnlUnits.Location.Y)
     End Sub
 
-    Private Sub btnEditShroud_Click(sender As System.Object, e As System.EventArgs) Handles btnEditShroud.Click
+    Private Sub btnEditShroud_Click(sender As Object, e As EventArgs) Handles btnEditShroud.Click
         ActiveEditMode = EditMode.Shroud
     End Sub
 
-    Private Sub btnToolBrush_Click(sender As System.Object, e As System.EventArgs) Handles btnToolBrush.Click
+    Private Sub btnToolBrush_Click(sender As Object, e As EventArgs) Handles btnToolBrush.Click
         ActiveToolMode = ToolMode.Brush
 
         btnToolBrush.Enabled = False
@@ -934,7 +937,7 @@ Public Class FrmEditor
         picActive.Invalidate()
     End Sub
 
-    Private Sub btnToolSmartBrush_Click(sender As System.Object, e As System.EventArgs) Handles btnToolSmartBrush.Click
+    Private Sub btnToolSmartBrush_Click(sender As Object, e As EventArgs) Handles btnToolSmartBrush.Click
         ActiveToolMode = ToolMode.SmartBrush
 
         picActive.Image = Nothing
@@ -946,7 +949,7 @@ Public Class FrmEditor
         btnToolErase.Enabled = True
     End Sub
 
-    Private Sub btnToolErase_Click(sender As System.Object, e As System.EventArgs) Handles btnToolErase.Click
+    Private Sub btnToolErase_Click(sender As Object, e As EventArgs) Handles btnToolErase.Click
         ActiveToolMode = ToolMode.Eraser
 
         'picActive.Image = Nothing
@@ -973,23 +976,23 @@ Public Class FrmEditor
         picActive.Invalidate()
     End Sub
 
-    Private Sub chkAssociateFileTypeCAMM_CheckStateChanged(sender As Object, e As System.EventArgs) Handles chkAssociateFileTypeCAMM.CheckStateChanged
+    Private Sub chkAssociateFileTypeCAMM_CheckStateChanged(sender As Object, e As EventArgs) Handles chkAssociateFileTypeCAMM.CheckStateChanged
         If isLoaded Then
             If chkAssociateFileTypeCAMM.CheckState = CheckState.Checked Then
 
                 Try
-                    My.Computer.Registry.ClassesRoot.CreateSubKey(".camm").SetValue("", "CAMM", Microsoft.Win32.RegistryValueKind.String)
-                    My.Computer.Registry.ClassesRoot.CreateSubKey(".camm").SetValue("Content Type", "text/plain", Microsoft.Win32.RegistryValueKind.String)
-                    My.Computer.Registry.ClassesRoot.CreateSubKey(".camm").SetValue("PerceivedType", "document", Microsoft.Win32.RegistryValueKind.String)
-                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("", "CAMM Map File", Microsoft.Win32.RegistryValueKind.String)
-                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("AlwaysShowExt", "", Microsoft.Win32.RegistryValueKind.String)
-                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("BrowserFlags", 8, Microsoft.Win32.RegistryValueKind.DWord)
-                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("EditFlags", 302144, Microsoft.Win32.RegistryValueKind.DWord)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey(".camm").SetValue("", "CAMM", RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey(".camm").SetValue("Content Type", "text/plain", RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey(".camm").SetValue("PerceivedType", "document", RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("", "CAMM Map File", RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("AlwaysShowExt", "", RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("BrowserFlags", 8, RegistryValueKind.DWord)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("EditFlags", 302144, RegistryValueKind.DWord)
                     ' Thanks to ETXAlienRobot201 for making the .camm file icon.
-                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\DefaultIcon").SetValue("", """" + Application.ExecutablePath + """" + ",1", Microsoft.Win32.RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\DefaultIcon").SetValue("", """" + Application.ExecutablePath + """" + ",1", RegistryValueKind.String)
                     My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\shell").SetValue("", "open")
                     My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\shell\open").SetValue("", "&Edit with CAMM")
-                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\shell\open\command").SetValue("", Application.ExecutablePath + " ""%l"" ", Microsoft.Win32.RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\shell\open\command").SetValue("", Application.ExecutablePath + " ""%l"" ", RegistryValueKind.String)
                 Catch ex As UnauthorizedAccessException
                     ' No access to register the .camm file extension, just ignore this.
                 Catch ex As Exception
@@ -1021,7 +1024,7 @@ Public Class FrmEditor
         End If
     End Sub
 
-    Private Sub chkAssociateFileTypeMap_CheckStateChanged(sender As Object, e As System.EventArgs) Handles chkAssociateFileTypeMap.CheckStateChanged
+    Private Sub chkAssociateFileTypeMap_CheckStateChanged(sender As Object, e As EventArgs) Handles chkAssociateFileTypeMap.CheckStateChanged
         ' TODO: Associate .map files, though it may not be such a good idea.
     End Sub
 
@@ -1046,7 +1049,7 @@ Public Class FrmEditor
             chkAssociateFileTypeCAMM.Enabled = False
             chkAssociateFileTypeCAMM.ToolTipText = "You must run CAMM as an Administrator to change this."
             'chkAssociateFileTypeMap.Enabled = False
-        Catch ex As Security.SecurityException
+        Catch ex As SecurityException
             ' No access to read or write the registry...
             chkAssociateFileTypeCAMM.Enabled = False
             chkAssociateFileTypeCAMM.ToolTipText = "You must run CAMM as an Administrator to change this."
@@ -1061,19 +1064,19 @@ Public Class FrmEditor
 
 #Region "Export & Import"
 
-    Private Sub btnExportPNG_Click(sender As System.Object, e As System.EventArgs) Handles btnExportPNG.Click
-        If savePng.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+    Private Sub btnExportPNG_Click(sender As Object, e As EventArgs) Handles btnExportPNG.Click
+        If savePng.ShowDialog(Me) = DialogResult.OK Then
             Dim w As Integer = (ActiveMap.SizeX * TileSizeX) + 1
             Dim h As Integer = (ActiveMap.SizeY * TileSizeY) + 1
-            Dim img As Image = New Bitmap(w, h, Imaging.PixelFormat.Format24bppRgb)
+            Dim img As Image = New Bitmap(w, h, PixelFormat.Format24bppRgb)
             Dim g As Graphics = Graphics.FromImage(img)
             ActiveMap.Draw(g, DrawGrid, False)
             g.Dispose()
-            img.Save(savePng.FileName, Imaging.ImageFormat.Png)
+            img.Save(savePng.FileName, ImageFormat.Png)
         End If
     End Sub
 
-    Private Sub btnExportAS_Click(sender As System.Object, e As System.EventArgs) Handles btnExportAS.Click
+    Private Sub btnExportAS_Click(sender As Object, e As EventArgs) Handles btnExportAS.Click
         Dim exportAsTileData As String = AsciiLookup(ActiveMap.SizeX) + AsciiLookup(ActiveMap.SizeY)
 
         For y As Integer = 0 To ActiveMap.SizeY - 1
@@ -1111,8 +1114,8 @@ Public Class FrmEditor
     End Sub
 
     Public ImportAsTileData As String = ""
-    Private Sub btnImportAS_Click(sender As System.Object, e As System.EventArgs) Handles btnImportAS.Click
-        If FrmImportAS.ShowDialog(Me) = Windows.Forms.DialogResult.OK And ImportAsTileData <> "" Then
+    Private Sub btnImportAS_Click(sender As Object, e As EventArgs) Handles btnImportAS.Click
+        If FrmImportAS.ShowDialog(Me) = DialogResult.OK And ImportAsTileData <> "" Then
             'TODO: This will have to do for now.
             Dim count As Integer = 0
             For y As Integer = 0 To (ActiveMap.SizeY - 1) * TileSizeY Step TileSizeY
@@ -1146,7 +1149,7 @@ Public Class FrmEditor
 
 #End Region
 
-    Private Sub btnMapProperties_Click(sender As System.Object, e As System.EventArgs) Handles btnMapProperties.Click
+    Private Sub btnMapProperties_Click(sender As Object, e As EventArgs) Handles btnMapProperties.Click
         FrmMapProperties.ShowDialog(Me)
         UpdateMapTabs()
         UpdateFormTitle()

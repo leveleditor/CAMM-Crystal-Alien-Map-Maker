@@ -1,10 +1,11 @@
-﻿Imports Nini.Ini
+﻿Imports System.Text
+Imports Nini.Ini
 Imports Nini.Config
 Public Class FrmTileData
 
     Dim ascii As String = ""
 
-    Private Sub FrmTileData_Shown(sender As Object, e As System.EventArgs) Handles Me.Shown
+    Private Sub FrmTileData_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         Dim reader As New IniReader(TileDataFile) With {.IgnoreComments = True, .AcceptCommentAfterKey = False}
         Dim source As New IniConfigSource(New IniDocument(reader))
         Dim config As IConfig = source.Configs.Item("CAMM")
@@ -139,7 +140,7 @@ Public Class FrmTileData
         tabUnits.PerformLayout()
     End Sub
 
-    Private Sub tileEntry_btnNew_Clicked(sender As TileEntry, e As System.EventArgs)
+    Private Sub tileEntry_btnNew_Clicked(sender As TileEntry, e As EventArgs)
         pnlTerrain.SuspendLayout()
         Dim newTileEntry As TileEntry = New TileEntry() With {.Location = New Point(pnlTerrain.AutoScrollPosition.X + 3, pnlTerrain.AutoScrollPosition.Y + 3)}
         AddHandler newTileEntry.BtnNewClicked, AddressOf tileEntry_btnNew_Clicked
@@ -151,14 +152,14 @@ Public Class FrmTileData
         ReorderTerrainEntries()
     End Sub
 
-    Private Sub tileEntry_btnRemove_Clicked(sender As TileEntry, e As System.EventArgs)
+    Private Sub tileEntry_btnRemove_Clicked(sender As TileEntry, e As EventArgs)
         pnlTerrain.SuspendLayout()
         pnlTerrain.Controls.Remove(sender)
         sender.Dispose()
         ReorderTerrainEntries()
     End Sub
 
-    Private Sub tileEntry_btnBrowse_Clicked(sender As TileEntry, e As System.EventArgs)
+    Private Sub tileEntry_btnBrowse_Clicked(sender As TileEntry, e As EventArgs)
         If My.Computer.FileSystem.FileExists(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl) Then
             openImage.InitialDirectory = New Uri(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl).ToString.Replace(My.Computer.FileSystem.GetFileInfo(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl).Name, "")
             openImage.FileName = My.Computer.FileSystem.GetFileInfo(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl).Name
@@ -166,7 +167,7 @@ Public Class FrmTileData
             openImage.InitialDirectory = New Uri(My.Application.Info.DirectoryPath + "/../../Tile Data/Terrain").ToString
             openImage.FileName = ""
         End If
-        If openImage.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        If openImage.ShowDialog(Me) = DialogResult.OK Then
             Dim test1 As Uri = New Uri(My.Application.Info.DirectoryPath + "/../../")
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
@@ -174,7 +175,7 @@ Public Class FrmTileData
         End If
     End Sub
 
-    Private Sub tileEntry_txtImageUrl_MouseEnter(sender As TileEntry, e As System.EventArgs)
+    Private Sub tileEntry_txtImageUrl_MouseEnter(sender As TileEntry, e As EventArgs)
         Try
             picPreview.Image = Image.FromFile(My.Application.Info.DirectoryPath + DataPath + "/../" + sender.ImageUrl)
         Catch ex As Exception
@@ -183,12 +184,12 @@ Public Class FrmTileData
         picPreview.Show()
     End Sub
 
-    Private Sub tileEntry_txtImageUrl_MouseLeave(sender As TileEntry, e As System.EventArgs)
+    Private Sub tileEntry_txtImageUrl_MouseLeave(sender As TileEntry, e As EventArgs)
         picPreview.Image = Nothing
         picPreview.Hide()
     End Sub
 
-    Private Sub buildingEntry_btnNew_Clicked(sender As ObjectEntry, e As System.EventArgs)
+    Private Sub buildingEntry_btnNew_Clicked(sender As ObjectEntry, e As EventArgs)
         pnlBuildings.SuspendLayout()
         Dim newObjectEntry As ObjectEntry = New ObjectEntry(-1, 1, 1, 0, 0, 0, 0, "") With {.Location = New Point(pnlBuildings.AutoScrollPosition.X + 3, pnlBuildings.AutoScrollPosition.Y + 3)}
         AddHandler newObjectEntry.BtnNewClicked, AddressOf buildingEntry_btnNew_Clicked
@@ -200,14 +201,14 @@ Public Class FrmTileData
         ReorderBuildingEntries()
     End Sub
 
-    Private Sub buildingEntry_btnRemove_Clicked(sender As ObjectEntry, e As System.EventArgs)
+    Private Sub buildingEntry_btnRemove_Clicked(sender As ObjectEntry, e As EventArgs)
         pnlBuildings.SuspendLayout()
         pnlBuildings.Controls.Remove(sender)
         sender.Dispose()
         ReorderBuildingEntries()
     End Sub
 
-    Private Sub buildingEntry_btnBrowse_Clicked(sender As ObjectEntry, e As System.EventArgs)
+    Private Sub buildingEntry_btnBrowse_Clicked(sender As ObjectEntry, e As EventArgs)
         If My.Computer.FileSystem.FileExists(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl) Then
             openImage.InitialDirectory = New Uri(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl).ToString.Replace(My.Computer.FileSystem.GetFileInfo(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl).Name, "")
             openImage.FileName = My.Computer.FileSystem.GetFileInfo(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl).Name
@@ -215,7 +216,7 @@ Public Class FrmTileData
             openImage.InitialDirectory = New Uri(My.Application.Info.DirectoryPath + "/../../Tile Data/Buildings").ToString
             openImage.FileName = ""
         End If
-        If openImage.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        If openImage.ShowDialog(Me) = DialogResult.OK Then
             Dim test1 As Uri = New Uri(My.Application.Info.DirectoryPath + "/../../")
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
@@ -223,7 +224,7 @@ Public Class FrmTileData
         End If
     End Sub
 
-    Private Sub buildingEntry_txtImageUrl_MouseEnter(sender As ObjectEntry, e As System.EventArgs)
+    Private Sub buildingEntry_txtImageUrl_MouseEnter(sender As ObjectEntry, e As EventArgs)
         Try
             picPreview.Image = Image.FromFile(My.Application.Info.DirectoryPath + DataPath + "/../" + sender.ImageUrl)
         Catch ex As Exception
@@ -232,12 +233,12 @@ Public Class FrmTileData
         picPreview.Show()
     End Sub
 
-    Private Sub buildingEntry_txtImageUrl_MouseLeave(sender As ObjectEntry, e As System.EventArgs)
+    Private Sub buildingEntry_txtImageUrl_MouseLeave(sender As ObjectEntry, e As EventArgs)
         picPreview.Image = Nothing
         picPreview.Hide()
     End Sub
 
-    Private Sub unitEntry_btnNew_Clicked(sender As ObjectEntry, e As System.EventArgs)
+    Private Sub unitEntry_btnNew_Clicked(sender As ObjectEntry, e As EventArgs)
         pnlUnits.SuspendLayout()
         Dim newObjectEntry As ObjectEntry = New ObjectEntry(-1, 1, 1, 0, 0, 0, 0, "") With {.Location = New Point(pnlUnits.AutoScrollPosition.X + 3, pnlUnits.AutoScrollPosition.Y + 3)}
         AddHandler newObjectEntry.BtnNewClicked, AddressOf unitEntry_btnNew_Clicked
@@ -249,14 +250,14 @@ Public Class FrmTileData
         ReorderUnitEntries()
     End Sub
 
-    Private Sub unitEntry_btnRemove_Clicked(sender As ObjectEntry, e As System.EventArgs)
+    Private Sub unitEntry_btnRemove_Clicked(sender As ObjectEntry, e As EventArgs)
         pnlUnits.SuspendLayout()
         pnlUnits.Controls.Remove(sender)
         sender.Dispose()
         ReorderUnitEntries()
     End Sub
 
-    Private Sub unitEntry_btnBrowse_Clicked(sender As ObjectEntry, e As System.EventArgs)
+    Private Sub unitEntry_btnBrowse_Clicked(sender As ObjectEntry, e As EventArgs)
         If My.Computer.FileSystem.FileExists(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl) Then
             openImage.InitialDirectory = New Uri(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl).ToString.Replace(My.Computer.FileSystem.GetFileInfo(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl).Name, "")
             openImage.FileName = My.Computer.FileSystem.GetFileInfo(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl).Name
@@ -264,7 +265,7 @@ Public Class FrmTileData
             openImage.InitialDirectory = New Uri(My.Application.Info.DirectoryPath + "/../../Tile Data/Units").ToString
             openImage.FileName = ""
         End If
-        If openImage.ShowDialog(Me) = Windows.Forms.DialogResult.OK Then
+        If openImage.ShowDialog(Me) = DialogResult.OK Then
             Dim test1 As Uri = New Uri(My.Application.Info.DirectoryPath + "/../../")
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
@@ -272,7 +273,7 @@ Public Class FrmTileData
         End If
     End Sub
 
-    Private Sub unitEntry_txtImageUrl_MouseEnter(sender As ObjectEntry, e As System.EventArgs)
+    Private Sub unitEntry_txtImageUrl_MouseEnter(sender As ObjectEntry, e As EventArgs)
         Try
             picPreview.Image = Image.FromFile(My.Application.Info.DirectoryPath + DataPath + "/../" + sender.ImageUrl)
         Catch ex As Exception
@@ -281,16 +282,16 @@ Public Class FrmTileData
         picPreview.Show()
     End Sub
 
-    Private Sub unitEntry_txtImageUrl_MouseLeave(sender As ObjectEntry, e As System.EventArgs)
+    Private Sub unitEntry_txtImageUrl_MouseLeave(sender As ObjectEntry, e As EventArgs)
         picPreview.Image = Nothing
         picPreview.Hide()
     End Sub
 
-    Private Sub btnClose_Click(sender As System.Object, e As System.EventArgs) Handles btnClose.Click
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Me.Close()
     End Sub
 
-    Private Sub btnSave_Click(sender As System.Object, e As System.EventArgs) Handles btnSave.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
         Dim saveFileData As String = ""
 
@@ -340,7 +341,7 @@ Public Class FrmTileData
 
         saveFileData += vbNewLine + "; -= CAMM Crystal Alien Map Maker (c) 2015 Leveleditor6680 // Josh =-"
 
-        My.Computer.FileSystem.WriteAllText(TileDataFile, saveFileData, False, System.Text.Encoding.UTF8)
+        My.Computer.FileSystem.WriteAllText(TileDataFile, saveFileData, False, Encoding.UTF8)
 
         lblSaved.Show()
     End Sub

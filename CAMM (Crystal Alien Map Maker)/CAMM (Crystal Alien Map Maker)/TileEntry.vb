@@ -1,10 +1,10 @@
 ﻿Public Class TileEntry
 
-    Public Event BtnNewClicked(sender As TileEntry, e As System.EventArgs)
-    Public Event BtnRemoveClicked(sender As TileEntry, e As System.EventArgs)
-    Public Event BtnBrowseClicked(sender As TileEntry, e As System.EventArgs)
-    Public Event TxtImageUrlMouseEntered(sender As TileEntry, e As System.EventArgs)
-    Public Event TxtImageUrlMouseLeft(sender As TileEntry, e As System.EventArgs)
+    Public Event BtnNewClicked(sender As TileEntry, e As EventArgs)
+    Public Event BtnRemoveClicked(sender As TileEntry, e As EventArgs)
+    Public Event BtnBrowseClicked(sender As TileEntry, e As EventArgs)
+    Public Event TxtImageUrlMouseEntered(sender As TileEntry, e As EventArgs)
+    Public Event TxtImageUrlMouseLeft(sender As TileEntry, e As EventArgs)
 
     Public Property TerrainId As String
         Get
@@ -42,23 +42,23 @@
         End Set
     End Property
 
-    Private Sub btnNew_Click(sender As System.Object, e As System.EventArgs) Handles btnNew.Click
+    Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
         RaiseEvent BtnNewClicked(Me, e)
     End Sub
 
-    Private Sub btnRemove_Click(sender As System.Object, e As System.EventArgs) Handles btnRemove.Click
+    Private Sub btnRemove_Click(sender As Object, e As EventArgs) Handles btnRemove.Click
         RaiseEvent BtnRemoveClicked(Me, e)
     End Sub
 
-    Private Sub btnBrowse_Click(sender As System.Object, e As System.EventArgs) Handles btnBrowse.Click
+    Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
         RaiseEvent BtnBrowseClicked(Me, e)
     End Sub
 
-    Private Sub txtImageUrl_MouseEnter(sender As Object, e As System.EventArgs) Handles txtImageUrl.MouseEnter
+    Private Sub txtImageUrl_MouseEnter(sender As Object, e As EventArgs) Handles txtImageUrl.MouseEnter
         RaiseEvent TxtImageUrlMouseEntered(Me, e)
     End Sub
 
-    Private Sub txtImageUrl_MouseLeave(sender As Object, e As System.EventArgs) Handles txtImageUrl.MouseLeave
+    Private Sub txtImageUrl_MouseLeave(sender As Object, e As EventArgs) Handles txtImageUrl.MouseLeave
         RaiseEvent TxtImageUrlMouseLeft(Me, e)
     End Sub
 
