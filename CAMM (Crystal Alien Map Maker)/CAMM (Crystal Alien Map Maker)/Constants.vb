@@ -11,7 +11,7 @@
     Public ReadOnly FullBasePath As String = My.Application.Info.DirectoryPath & DataPath
     Public ReadOnly TileDataFile As String = FullBasePath & "/Tiles.dat"
 
-    Public Const TilesDatVersion As Integer = 5
+    Public Const TilesDatVersion As Integer = 6
     Public Const MapFormat As Integer = 5
 
     Public Const IniArray As String = "{}"

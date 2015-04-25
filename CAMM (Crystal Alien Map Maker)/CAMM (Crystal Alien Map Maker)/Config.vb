@@ -47,10 +47,8 @@ Public Module Config
                 Dim width As Integer = CInt(keyArray(1))
                 Dim height As Integer = CInt(keyArray(2))
                 Dim team As Team = CType(Integer.Parse(keyArray(3)), Team)
-                Dim angle As Single = CSng(keyArray(4))
-                Dim damage As Single = CSng(keyArray(5))
-                Dim offsetY As Integer = CInt(keyArray(6))
-                Dim imageUrl As String = keyArray(7)
+                Dim offsetY As Integer = CInt(keyArray(4))
+                Dim imageUrl As String = keyArray(5)
                 Dim fullImageUrl As String = My.Application.Info.DirectoryPath + DataPath + "/../" + imageUrl
 
                 Dim test As Bitmap = Bitmap.FromFile(fullImageUrl)
@@ -68,7 +66,7 @@ Public Module Config
                 BuildingFullImageLookup.Add(buildingId, Image.FromFile(fullImageUrl))
 
                 ReDim Preserve BuildingDefs(i)
-                BuildingDefs(i) = New Building(0, i * TileSizeY, buildingId, team, angle, damage, width, height)
+                BuildingDefs(i) = New Building(0, i * TileSizeY, buildingId, team, width, height)
             End If
         Next
 
@@ -78,13 +76,9 @@ Public Module Config
             If config.Get(keyName, "-1") <> "-1" Then
                 Dim keyArray As String() = config.Get(keyName).Trim(IniArray.ToCharArray).Split(New Char() {IniSeparator}, StringSplitOptions.None)
                 Dim unitId As String = keyArray(0)
-                'Dim Width As Integer = CInt(KeyArray(1))
-                'Dim Height As Integer = CInt(KeyArray(2))
-                Dim team As Team = CType(Integer.Parse(keyArray(3)), Team)
-                Dim angle As Single = CSng(keyArray(4))
-                Dim damage As Single = CSng(keyArray(5))
-                Dim offsetY As Integer = CInt(keyArray(6))
-                Dim imageUrl As String = keyArray(7)
+                Dim team As Team = CType(Integer.Parse(keyArray(1)), Team)
+                Dim offsetY As Integer = CInt(keyArray(2))
+                Dim imageUrl As String = keyArray(3)
                 Dim fullImageUrl As String = My.Application.Info.DirectoryPath + DataPath + "/../" + imageUrl
 
                 Dim test As Bitmap = Bitmap.FromFile(fullImageUrl)
@@ -117,7 +111,7 @@ Public Module Config
                 UnitFullImageLookup.Add(unitId, Image.FromFile(fullImageUrl))
 
                 ReDim Preserve UnitDefs(i)
-                UnitDefs(i) = New Unit(0, i * TileSizeY, unitId, team, angle, damage)
+                UnitDefs(i) = New Unit(0, i * TileSizeY, unitId, team)
             End If
         Next
     End Sub

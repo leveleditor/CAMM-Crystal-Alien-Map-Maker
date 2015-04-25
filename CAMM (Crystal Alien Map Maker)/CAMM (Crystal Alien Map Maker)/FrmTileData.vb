@@ -48,11 +48,9 @@ Public Class FrmTileData
                     Dim width As Integer = CInt(keyArray(1))
                     Dim height As Integer = CInt(keyArray(2))
                     Dim team As Team = CType(Integer.Parse(keyArray(3)), Team)
-                    Dim angle As Single = CSng(keyArray(4))
-                    Dim damage As Single = CSng(keyArray(5))
-                    Dim offsetY As Integer = CInt(keyArray(6))
-                    Dim imageUrl As String = keyArray(7)
-                    Dim newObjectEntry As ObjectEntry = New ObjectEntry(buildingId, width, height, team, angle, damage, offsetY, imageUrl)
+                    Dim offsetY As Integer = CInt(keyArray(4))
+                    Dim imageUrl As String = keyArray(5)
+                    Dim newObjectEntry As BuildingEntry = New BuildingEntry(buildingId, width, height, team, offsetY, imageUrl)
                     'NewObjectEntry.Location = New Point(3, (i * 31) + 3)
                     AddHandler newObjectEntry.BtnNewClicked, AddressOf buildingEntry_btnNew_Clicked
                     AddHandler newObjectEntry.BtnRemoveClicked, AddressOf buildingEntry_btnRemove_Clicked
@@ -68,14 +66,10 @@ Public Class FrmTileData
                 If config.GetKeys(i) <> "-1" Then
                     Dim keyArray As String() = config.Get(config.GetKeys(i)).Trim(IniArray.ToCharArray()).Split(IniSeparator.ToCharArray(), StringSplitOptions.None)
                     Dim unitId As String = keyArray(0)
-                    Dim width As Integer = CInt(keyArray(1))
-                    Dim height As Integer = CInt(keyArray(2))
-                    Dim team As Team = CType(Integer.Parse(keyArray(3)), Team)
-                    Dim angle As Single = CSng(keyArray(4))
-                    Dim damage As Single = CSng(keyArray(5))
-                    Dim offsetY As Integer = CInt(keyArray(6))
-                    Dim imageUrl As String = keyArray(7)
-                    Dim newObjectEntry As ObjectEntry = New ObjectEntry(unitId, width, height, team, angle, damage, offsetY, imageUrl)
+                    Dim team As Team = CType(Integer.Parse(keyArray(1)), Team)
+                    Dim offsetY As Integer = CInt(keyArray(2))
+                    Dim imageUrl As String = keyArray(3)
+                    Dim newObjectEntry As UnitEntry = New UnitEntry(unitId, team, offsetY, imageUrl)
                     'NewObjectEntry.Location = New Point(3, (i * 31) + 3)
                     AddHandler newObjectEntry.BtnNewClicked, AddressOf unitEntry_btnNew_Clicked
                     AddHandler newObjectEntry.BtnRemoveClicked, AddressOf unitEntry_btnRemove_Clicked
@@ -189,9 +183,9 @@ Public Class FrmTileData
         picPreview.Hide()
     End Sub
 
-    Private Sub buildingEntry_btnNew_Clicked(sender As ObjectEntry, e As EventArgs)
+    Private Sub buildingEntry_btnNew_Clicked(sender As BuildingEntry, e As EventArgs)
         pnlBuildings.SuspendLayout()
-        Dim newObjectEntry As ObjectEntry = New ObjectEntry(-1, 1, 1, 0, 0, 0, 0, "") With {.Location = New Point(pnlBuildings.AutoScrollPosition.X + 3, pnlBuildings.AutoScrollPosition.Y + 3)}
+        Dim newObjectEntry As BuildingEntry = New BuildingEntry("", 1, 1, Team.Astros, 0, "") With {.Location = New Point(pnlBuildings.AutoScrollPosition.X + 3, pnlBuildings.AutoScrollPosition.Y + 3)}
         AddHandler newObjectEntry.BtnNewClicked, AddressOf buildingEntry_btnNew_Clicked
         AddHandler newObjectEntry.BtnRemoveClicked, AddressOf buildingEntry_btnRemove_Clicked
         AddHandler newObjectEntry.BtnBrowseClicked, AddressOf buildingEntry_btnBrowse_Clicked
@@ -201,14 +195,14 @@ Public Class FrmTileData
         ReorderBuildingEntries()
     End Sub
 
-    Private Sub buildingEntry_btnRemove_Clicked(sender As ObjectEntry, e As EventArgs)
+    Private Sub buildingEntry_btnRemove_Clicked(sender As BuildingEntry, e As EventArgs)
         pnlBuildings.SuspendLayout()
         pnlBuildings.Controls.Remove(sender)
         sender.Dispose()
         ReorderBuildingEntries()
     End Sub
 
-    Private Sub buildingEntry_btnBrowse_Clicked(sender As ObjectEntry, e As EventArgs)
+    Private Sub buildingEntry_btnBrowse_Clicked(sender As BuildingEntry, e As EventArgs)
         If My.Computer.FileSystem.FileExists(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl) Then
             openImage.InitialDirectory = New Uri(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl).ToString.Replace(My.Computer.FileSystem.GetFileInfo(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl).Name, "")
             openImage.FileName = My.Computer.FileSystem.GetFileInfo(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl).Name
@@ -224,7 +218,7 @@ Public Class FrmTileData
         End If
     End Sub
 
-    Private Sub buildingEntry_txtImageUrl_MouseEnter(sender As ObjectEntry, e As EventArgs)
+    Private Sub buildingEntry_txtImageUrl_MouseEnter(sender As BuildingEntry, e As EventArgs)
         Try
             picPreview.Image = Image.FromFile(My.Application.Info.DirectoryPath + DataPath + "/../" + sender.ImageUrl)
         Catch ex As Exception
@@ -233,14 +227,14 @@ Public Class FrmTileData
         picPreview.Show()
     End Sub
 
-    Private Sub buildingEntry_txtImageUrl_MouseLeave(sender As ObjectEntry, e As EventArgs)
+    Private Sub buildingEntry_txtImageUrl_MouseLeave(sender As BuildingEntry, e As EventArgs)
         picPreview.Image = Nothing
         picPreview.Hide()
     End Sub
 
-    Private Sub unitEntry_btnNew_Clicked(sender As ObjectEntry, e As EventArgs)
+    Private Sub unitEntry_btnNew_Clicked(sender As UnitEntry, e As EventArgs)
         pnlUnits.SuspendLayout()
-        Dim newObjectEntry As ObjectEntry = New ObjectEntry(-1, 1, 1, 0, 0, 0, 0, "") With {.Location = New Point(pnlUnits.AutoScrollPosition.X + 3, pnlUnits.AutoScrollPosition.Y + 3)}
+        Dim newObjectEntry As UnitEntry = New UnitEntry("", Team.Astros, 0, "") With {.Location = New Point(pnlUnits.AutoScrollPosition.X + 3, pnlUnits.AutoScrollPosition.Y + 3)}
         AddHandler newObjectEntry.BtnNewClicked, AddressOf unitEntry_btnNew_Clicked
         AddHandler newObjectEntry.BtnRemoveClicked, AddressOf unitEntry_btnRemove_Clicked
         AddHandler newObjectEntry.BtnBrowseClicked, AddressOf unitEntry_btnBrowse_Clicked
@@ -250,14 +244,14 @@ Public Class FrmTileData
         ReorderUnitEntries()
     End Sub
 
-    Private Sub unitEntry_btnRemove_Clicked(sender As ObjectEntry, e As EventArgs)
+    Private Sub unitEntry_btnRemove_Clicked(sender As UnitEntry, e As EventArgs)
         pnlUnits.SuspendLayout()
         pnlUnits.Controls.Remove(sender)
         sender.Dispose()
         ReorderUnitEntries()
     End Sub
 
-    Private Sub unitEntry_btnBrowse_Clicked(sender As ObjectEntry, e As EventArgs)
+    Private Sub unitEntry_btnBrowse_Clicked(sender As UnitEntry, e As EventArgs)
         If My.Computer.FileSystem.FileExists(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl) Then
             openImage.InitialDirectory = New Uri(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl).ToString.Replace(My.Computer.FileSystem.GetFileInfo(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl).Name, "")
             openImage.FileName = My.Computer.FileSystem.GetFileInfo(My.Application.Info.DirectoryPath + "/../../" & sender.ImageUrl).Name
@@ -273,7 +267,7 @@ Public Class FrmTileData
         End If
     End Sub
 
-    Private Sub unitEntry_txtImageUrl_MouseEnter(sender As ObjectEntry, e As EventArgs)
+    Private Sub unitEntry_txtImageUrl_MouseEnter(sender As UnitEntry, e As EventArgs)
         Try
             picPreview.Image = Image.FromFile(My.Application.Info.DirectoryPath + DataPath + "/../" + sender.ImageUrl)
         Catch ex As Exception
@@ -282,7 +276,7 @@ Public Class FrmTileData
         picPreview.Show()
     End Sub
 
-    Private Sub unitEntry_txtImageUrl_MouseLeave(sender As ObjectEntry, e As EventArgs)
+    Private Sub unitEntry_txtImageUrl_MouseLeave(sender As UnitEntry, e As EventArgs)
         picPreview.Image = Nothing
         picPreview.Hide()
     End Sub
@@ -319,23 +313,23 @@ Public Class FrmTileData
 
         saveFileData += vbNewLine + "[DEFINE BUILDINGS]" + vbNewLine + _
             "; Building Definition Format:" + vbNewLine + _
-            "; {str_ID|i_Width|i_Height|i_Team|f_Angle|f_Damage|i_OffsetY|url_Image}" + vbNewLine
+            "; {str_ID|i_Width|i_Height|i_Team|i_OffsetY|url_Image}" + vbNewLine
 
         Dim buildingNumber As Integer = 0
         For i As Integer = 0 To pnlBuildings.Controls.Count - 1
-            Dim temp As ObjectEntry = pnlBuildings.Controls(i)
-            saveFileData += "Building" + buildingNumber.ToString + " = {" + temp.ObjectId + "|" + temp.ObjWidth.ToString + "|" + temp.ObjHeight.ToString + "|" + CInt(temp.Team).ToString + "|" + temp.Angle.ToString + "|" + temp.Damage.ToString + "|" + temp.OffSetY.ToString + "|" + temp.ImageUrl + "}" + vbNewLine
+            Dim temp As BuildingEntry = pnlBuildings.Controls(i)
+            saveFileData += "Building" + buildingNumber.ToString + " = {" + temp.BuildingId + "|" + temp.BuildingW.ToString + "|" + temp.BuildingH.ToString + "|" + CInt(temp.Team).ToString + "|" + temp.OffSetY.ToString + "|" + temp.ImageUrl + "}" + vbNewLine
             buildingNumber += 1
         Next
 
         saveFileData += vbNewLine + "[DEFINE UNITS]" + vbNewLine + _
             "; Unit Definition Format:" + vbNewLine + _
-            "; {str_ID|i_Width|i_Height|i_Team|f_Angle|f_Damage|i_OffsetY|url_Image}" + vbNewLine
+            "; {str_ID|i_Team|i_OffsetY|url_Image}" + vbNewLine
 
         Dim unitNumber As Integer = 0
         For i As Integer = 0 To pnlUnits.Controls.Count - 1
-            Dim temp As ObjectEntry = pnlUnits.Controls(i)
-            saveFileData += "Unit" + unitNumber.ToString + " = {" + temp.ObjectId + "|" + temp.ObjWidth.ToString + "|" + temp.ObjHeight.ToString + "|" + CInt(temp.Team).ToString + "|" + temp.Angle.ToString + "|" + temp.Damage.ToString + "|" + temp.OffSetY.ToString + "|" + temp.ImageUrl + "}" + vbNewLine
+            Dim temp As UnitEntry = pnlUnits.Controls(i)
+            saveFileData += "Unit" + unitNumber.ToString + " = {" + temp.UnitId + "|" + CInt(temp.Team).ToString + "|" + temp.OffSetY.ToString + "|" + temp.ImageUrl + "}" + vbNewLine
             unitNumber += 1
         Next
 

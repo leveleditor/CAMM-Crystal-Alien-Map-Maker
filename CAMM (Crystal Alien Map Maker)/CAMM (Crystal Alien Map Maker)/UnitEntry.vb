@@ -1,35 +1,17 @@
-﻿Public Class ObjectEntry
+﻿Public Class UnitEntry
 
-    Public Event BtnNewClicked(sender As ObjectEntry, e As EventArgs)
-    Public Event BtnRemoveClicked(sender As ObjectEntry, e As EventArgs)
-    Public Event BtnBrowseClicked(sender As ObjectEntry, e As EventArgs)
-    Public Event TxtImageUrlMouseEntered(sender As ObjectEntry, e As EventArgs)
-    Public Event TxtImageUrlMouseLeft(sender As ObjectEntry, e As EventArgs)
+    Public Event BtnNewClicked(sender As UnitEntry, e As EventArgs)
+    Public Event BtnRemoveClicked(sender As UnitEntry, e As EventArgs)
+    Public Event BtnBrowseClicked(sender As UnitEntry, e As EventArgs)
+    Public Event TxtImageUrlMouseEntered(sender As UnitEntry, e As EventArgs)
+    Public Event TxtImageUrlMouseLeft(sender As UnitEntry, e As EventArgs)
 
-    Public Property ObjectId As String
+    Public Property UnitId As String
         Get
             Return txtObjectID.Text
         End Get
         Set(value As String)
             txtObjectID.Text = value
-        End Set
-    End Property
-
-    Public Property ObjWidth As Integer
-        Get
-            Return txtWidth.Text
-        End Get
-        Set(value As Integer)
-            txtWidth.Text = value
-        End Set
-    End Property
-
-    Public Property ObjHeight As Integer
-        Get
-            Return txtHeight.Text
-        End Get
-        Set(value As Integer)
-            txtHeight.Text = value
         End Set
     End Property
 
@@ -39,24 +21,6 @@
         End Get
         Set(value As Team)
             cboTeam.SelectedIndex = CInt(value)
-        End Set
-    End Property
-
-    Public Property Angle As Single
-        Get
-            Return txtAngle.Text
-        End Get
-        Set(value As Single)
-            txtAngle.Text = value
-        End Set
-    End Property
-
-    Public Property Damage As Single
-        Get
-            Return txtDamage.Text
-        End Get
-        Set(value As Single)
-            txtDamage.Text = value
         End Set
     End Property
 
@@ -103,15 +67,11 @@
         Me.cboTeam.SelectedIndex = 0
         txtOffsetY.Text = "0"
     End Sub
-    Public Sub New(objectId As String, width As Integer, height As Integer, team As Team, angle As Single, damage As Single, offsetY As Integer, imageUrl As String)
+    Public Sub New(unitId As String, team As Team, offsetY As Integer, imageUrl As String)
         InitializeComponent()
         Me.cboTeam.SelectedIndex = 0
-        Me.ObjectId = objectId
-        Me.ObjWidth = width
-        Me.ObjHeight = height
+        Me.UnitId = unitId
         Me.Team = team
-        Me.Angle = angle
-        Me.Damage = damage
         Me.OffSetY = offsetY
         Me.ImageUrl = imageUrl
     End Sub

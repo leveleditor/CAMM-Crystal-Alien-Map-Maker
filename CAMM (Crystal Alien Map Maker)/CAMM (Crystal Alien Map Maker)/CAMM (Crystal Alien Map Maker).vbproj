@@ -124,10 +124,10 @@
     <Compile Include="FrmExportAS.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ObjectEntry.Designer.vb">
-      <DependentUpon>ObjectEntry.vb</DependentUpon>
+    <Compile Include="BuildingEntry.Designer.vb">
+      <DependentUpon>BuildingEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="ObjectEntry.vb">
+    <Compile Include="BuildingEntry.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="TileEntry.Designer.vb">
@@ -160,14 +160,20 @@
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
     <Compile Include="Tile.vb" />
+    <Compile Include="UnitEntry.Designer.vb">
+      <DependentUpon>UnitEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UnitEntry.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Utils.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="FrmExportAS.resx">
       <DependentUpon>FrmExportAS.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ObjectEntry.resx">
-      <DependentUpon>ObjectEntry.vb</DependentUpon>
+    <EmbeddedResource Include="BuildingEntry.resx">
+      <DependentUpon>BuildingEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TileEntry.resx">
       <DependentUpon>TileEntry.vb</DependentUpon>
@@ -183,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmTileData.resx">
       <DependentUpon>FrmTileData.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitEntry.resx">
+      <DependentUpon>UnitEntry.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

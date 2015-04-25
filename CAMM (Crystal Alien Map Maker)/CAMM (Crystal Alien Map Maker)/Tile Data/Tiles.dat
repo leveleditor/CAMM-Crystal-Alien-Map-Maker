@@ -1,5 +1,5 @@
 ﻿[CAMM]
-vFormat = 5
+vFormat = 6
 
 [ASCII LOOKUP]
 Ascii Separator = "]["
@@ -63,58 +63,58 @@ Terrain51 = {52|False|False|Tile Data/Tiles/Tile52.png}
 
 [DEFINE BUILDINGS]
 ; Building Definition Format:
-; {str_ID|i_Width|i_Height|i_Team|f_Angle|f_Damage|i_OffsetY|url_Image}
-Building0 = {BA_good|2|4|0|0|0|0|Tile Data/Buildings/Astros/BA_good.png}
-Building1 = {BB_good|1|2|0|0|0|0|Tile Data/Buildings/Astros/BB_good.png}
-Building2 = {BC_good|2|2|0|0|0|0|Tile Data/Buildings/Astros/BC_good.png}
-Building3 = {BD_good|1|2|0|0|0|0|Tile Data/Buildings/Astros/BD_good.png}
-Building4 = {BE_good|2|3|0|0|0|0|Tile Data/Buildings/Astros/BE_good.png}
-Building5 = {BF_good|2|3|0|0|0|0|Tile Data/Buildings/Astros/BF_good.png}
-Building6 = {BG_good|1|2|0|0|0|0|Tile Data/Buildings/Astros/BG_good.png}
-Building7 = {BH_good|1|2|0|0|0|0|Tile Data/Buildings/Astros/BH_good.png}
-Building8 = {BK_good|2|4|0|0|0|0|Tile Data/Buildings/Astros/BK_good.png}
-Building9 = {BL_good|2|3|0|0|0|0|Tile Data/Buildings/Astros/BL_good.png}
-Building10 = {BX_good|2|4|0|0|0|0|Tile Data/Buildings/Astros/BX_good.png}
-Building11 = {BJ_evil|1|2|1|0|0|0|Tile Data/Buildings/Santa/BJ_evil.png}
-Building12 = {BA_evil|2|4|1|0|0|0|Tile Data/Buildings/Aliens/BA_evil.png}
-Building13 = {BB_evil|1|2|1|0|0|0|Tile Data/Buildings/Aliens/BB_evil.png}
-Building14 = {BC_evil|2|2|1|0|0|0|Tile Data/Buildings/Aliens/BC_evil.png}
-Building15 = {BD_evil|1|2|1|0|0|0|Tile Data/Buildings/Aliens/BD_evil.png}
-Building16 = {BE_evil|2|3|1|0|0|0|Tile Data/Buildings/Aliens/BE_evil.png}
-Building17 = {BF_evil|2|3|1|0|0|20|Tile Data/Buildings/Aliens/BF_evil.png}
-Building18 = {BG_evil|1|2|1|0|0|0|Tile Data/Buildings/Aliens/BG_evil.png}
-Building19 = {BH_evil|1|2|1|0|0|0|Tile Data/Buildings/Aliens/BH_evil.png}
-Building20 = {BK_evil|2|4|1|0|0|40|Tile Data/Buildings/Aliens/BK_evil.png}
-Building21 = {BI_good|4|3|0|0|0|25|Tile Data/Buildings/Neutral/BI_good.png}
+; {str_ID|i_Width|i_Height|i_Team|i_OffsetY|url_Image}
+Building0 = {BA_good|2|4|0|0|Tile Data/Buildings/Astros/BA_good.png}
+Building1 = {BB_good|1|2|0|0|Tile Data/Buildings/Astros/BB_good.png}
+Building2 = {BC_good|2|2|0|0|Tile Data/Buildings/Astros/BC_good.png}
+Building3 = {BD_good|1|2|0|0|Tile Data/Buildings/Astros/BD_good.png}
+Building4 = {BE_good|2|3|0|0|Tile Data/Buildings/Astros/BE_good.png}
+Building5 = {BF_good|2|3|0|0|Tile Data/Buildings/Astros/BF_good.png}
+Building6 = {BG_good|1|2|0|0|Tile Data/Buildings/Astros/BG_good.png}
+Building7 = {BH_good|1|2|0|0|Tile Data/Buildings/Astros/BH_good.png}
+Building8 = {BK_good|2|4|0|0|Tile Data/Buildings/Astros/BK_good.png}
+Building9 = {BL_good|2|3|0|0|Tile Data/Buildings/Astros/BL_good.png}
+Building10 = {BX_good|2|4|0|0|Tile Data/Buildings/Astros/BX_good.png}
+Building11 = {BJ_evil|1|2|1|0|Tile Data/Buildings/Santa/BJ_evil.png}
+Building12 = {BA_evil|2|4|1|0|Tile Data/Buildings/Aliens/BA_evil.png}
+Building13 = {BB_evil|1|2|1|0|Tile Data/Buildings/Aliens/BB_evil.png}
+Building14 = {BC_evil|2|2|1|0|Tile Data/Buildings/Aliens/BC_evil.png}
+Building15 = {BD_evil|1|2|1|0|Tile Data/Buildings/Aliens/BD_evil.png}
+Building16 = {BE_evil|2|3|1|0|Tile Data/Buildings/Aliens/BE_evil.png}
+Building17 = {BF_evil|2|3|1|20|Tile Data/Buildings/Aliens/BF_evil.png}
+Building18 = {BG_evil|1|2|1|0|Tile Data/Buildings/Aliens/BG_evil.png}
+Building19 = {BH_evil|1|2|1|0|Tile Data/Buildings/Aliens/BH_evil.png}
+Building20 = {BK_evil|2|4|1|40|Tile Data/Buildings/Aliens/BK_evil.png}
+Building21 = {BI_good|4|3|0|25|Tile Data/Buildings/Neutral/BI_good.png}
 
 [DEFINE UNITS]
 ; Unit Definition Format:
-; {str_ID|i_Width|i_Height|i_Team|f_Angle|f_Damage|i_OffsetY|url_Image}
-Unit0 = {UB_evil|1|1|1|0|0|10|Tile Data/Units/Aliens/UB_evil.png}
-Unit1 = {UA_evil|1|1|1|0|0|10|Tile Data/Units/Aliens/UA_evil.png}
-Unit2 = {UQ_evil|1|1|1|0|0|10|Tile Data/Units/Aliens/UQ_evil.png}
-Unit3 = {UC_evil|1|1|1|0|0|20|Tile Data/Units/Aliens/UC_evil.png}
-Unit4 = {UD_evil|1|1|1|0|0|5|Tile Data/Units/Aliens/UD_evil.png}
-Unit5 = {UE_evil|1|1|1|0|0|20|Tile Data/Units/Aliens/UE_evil.png}
-Unit6 = {UF_evil|1|1|1|0|0|15|Tile Data/Units/Aliens/UF_evil.png}
-Unit7 = {UG_evil|1|1|1|0|0|18|Tile Data/Units/Aliens/UG_evil.png}
-Unit8 = {UH_evil|1|1|1|0|0|15|Tile Data/Units/Aliens/UH_evil.png}
-Unit9 = {UP_evil|1|1|1|0|0|20|Tile Data/Units/Aliens/UP_evil.png}
-Unit10 = {UM_evil|1|1|1|0|0|10|Tile Data/Units/Santa/UM_evil.png}
-Unit11 = {UN_evil|1|1|1|0|0|12|Tile Data/Units/Santa/UN_evil.png}
-Unit12 = {UB_good|1|1|0|0|0|10|Tile Data/Units/Astros/UB_good.png}
-Unit13 = {UA_good|1|1|0|0|0|10|Tile Data/Units/Astros/UA_good.png}
-Unit14 = {UC_good|1|1|0|0|0|15|Tile Data/Units/Astros/UC_good.png}
-Unit15 = {UF_good|1|1|0|0|0|10|Tile Data/Units/Astros/UF_good.png}
-Unit16 = {UD_good|1|1|0|0|0|10|Tile Data/Units/Astros/UD_good.png}
-Unit17 = {UE_good|1|1|0|0|0|17|Tile Data/Units/Astros/UE_good.png}
-Unit18 = {UG_good|1|1|0|0|0|20|Tile Data/Units/Astros/UG_good.png}
-Unit19 = {UH_good|1|1|0|0|0|7|Tile Data/Units/Astros/UH_good.png}
-Unit20 = {UP_good|1|1|0|0|0|20|Tile Data/Units/Astros/UP_good.png}
-Unit21 = {UR_good|1|1|0|0|0|5|Tile Data/Units/Astros/UR_good.png}
-Unit22 = {UI_evil|1|1|1|0|0|20|Tile Data/Units/Items/UI_evil.png}
-Unit23 = {UI_good|1|1|0|0|0|15|Tile Data/Units/Items/UI_good.png}
-Unit24 = {UO_evil|1|1|1|0|0|15|Tile Data/Units/Items/UO_evil_01.png}
-Unit25 = {UJ_good|1|1|0|0|0|15|Tile Data/Units/Items/UJ_good.png}
+; {str_ID|i_Team|i_OffsetY|url_Image}
+Unit0 = {UB_evil|1|10|Tile Data/Units/Aliens/UB_evil.png}
+Unit1 = {UA_evil|1|10|Tile Data/Units/Aliens/UA_evil.png}
+Unit2 = {UQ_evil|1|10|Tile Data/Units/Aliens/UQ_evil.png}
+Unit3 = {UC_evil|1|20|Tile Data/Units/Aliens/UC_evil.png}
+Unit4 = {UD_evil|1|5|Tile Data/Units/Aliens/UD_evil.png}
+Unit5 = {UE_evil|1|20|Tile Data/Units/Aliens/UE_evil.png}
+Unit6 = {UF_evil|1|15|Tile Data/Units/Aliens/UF_evil.png}
+Unit7 = {UG_evil|1|18|Tile Data/Units/Aliens/UG_evil.png}
+Unit8 = {UH_evil|1|15|Tile Data/Units/Aliens/UH_evil.png}
+Unit9 = {UP_evil|1|20|Tile Data/Units/Aliens/UP_evil.png}
+Unit10 = {UM_evil|1|10|Tile Data/Units/Santa/UM_evil.png}
+Unit11 = {UN_evil|1|12|Tile Data/Units/Santa/UN_evil.png}
+Unit12 = {UB_good|0|10|Tile Data/Units/Astros/UB_good.png}
+Unit13 = {UA_good|0|10|Tile Data/Units/Astros/UA_good.png}
+Unit14 = {UC_good|0|15|Tile Data/Units/Astros/UC_good.png}
+Unit15 = {UF_good|0|10|Tile Data/Units/Astros/UF_good.png}
+Unit16 = {UD_good|0|10|Tile Data/Units/Astros/UD_good.png}
+Unit17 = {UE_good|0|17|Tile Data/Units/Astros/UE_good.png}
+Unit18 = {UG_good|0|20|Tile Data/Units/Astros/UG_good.png}
+Unit19 = {UH_good|0|7|Tile Data/Units/Astros/UH_good.png}
+Unit20 = {UP_good|0|20|Tile Data/Units/Astros/UP_good.png}
+Unit21 = {UR_good|0|5|Tile Data/Units/Astros/UR_good.png}
+Unit22 = {UI_evil|1|20|Tile Data/Units/Items/UI_evil.png}
+Unit23 = {UI_good|0|15|Tile Data/Units/Items/UI_good.png}
+Unit24 = {UO_evil|1|15|Tile Data/Units/Items/UO_evil_01.png}
+Unit25 = {UJ_good|0|15|Tile Data/Units/Items/UJ_good.png}
 
 ; -= CAMM Crystal Alien Map Maker (c) 2015 Leveleditor6680 // Josh =-
