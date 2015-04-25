@@ -15,15 +15,15 @@
         Me.New(x, y, buildingId)
         Me.Team = team
     End Sub
-    Public Sub New(x As Integer, y As Integer, buildingId As String, team As Team, angle As Single, damage As Single)
+    Public Sub New(x As Integer, y As Integer, buildingId As String, team As Team, width As Integer, height As Integer)
         Me.New(x, y, buildingId, team)
-        Me.Angle = angle
-        Me.Damage = damage
-    End Sub
-    Public Sub New(x As Integer, y As Integer, buildingId As String, team As Team, angle As Single, damage As Single, width As Integer, height As Integer)
-        Me.New(x, y, buildingId, team, angle, damage)
         Me.BuildingW = width
         Me.BuildingH = height
+    End Sub
+    Public Sub New(x As Integer, y As Integer, buildingId As String, team As Team, width As Integer, height As Integer, angle As Single, damage As Single)
+        Me.New(x, y, buildingId, team, width, height)
+        Me.Angle = angle
+        Me.Damage = damage
     End Sub
 
     Public ReadOnly Property HasData As Boolean

@@ -205,13 +205,13 @@ Public Class Map
                 If mapBuildings(i).Location.X = mouseX And mapBuildings(i).Location.Y = mouseY Then
                     found = True
 
-                    mapBuildings(i) = New Building(mouseX, mouseY, building.BuildingId, building.Team, building.Angle, building.Damage, building.BuildingW, building.BuildingH)
+                    mapBuildings(i) = New Building(mouseX, mouseY, building.BuildingId, building.Team, building.BuildingW, building.BuildingH, building.Angle, building.Damage)
 
                     Exit For
                 End If
             Next
             If Not found Then
-                Dim newBuilding As Building = New Building(mouseX, mouseY, building.BuildingId, building.Team, building.Angle, building.Damage, building.BuildingW, building.BuildingH)
+                Dim newBuilding As Building = New Building(mouseX, mouseY, building.BuildingId, building.Team, building.BuildingW, building.BuildingH, building.Angle, building.Damage)
                 mapBuildings.Add(newBuilding)
             End If
 
