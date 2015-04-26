@@ -333,7 +333,7 @@ Public Class FrmEditor
                     If isMouseOnMap And Not IsDrawing And ActiveToolMode <> ToolMode.Eraser Then
                         g.DrawImage(activeUnit.FullImage, _
                             mouseXNoSnap - CInt(activeUnit.FullImage.Width / 2), _
-                            mouseYNoSnap - CInt(activeUnit.FullImage.Height / 2), _
+                            mouseYNoSnap - CInt(activeUnit.FullImage.Height / 2) - activeUnit.Altitude, _
                             activeUnit.FullImage.Width, _
                             activeUnit.FullImage.Height)
                     End If
@@ -613,6 +613,7 @@ Public Class FrmEditor
                     picActive.Image = UnitDefs(i).SmallImage
                     activeUnit.UnitId = UnitDefs(i).UnitId
                     activeUnit.Team = UnitDefs(i).Team
+                    activeUnit.Altitude = UnitDefs(i).Altitude
                 End If
             Next
 

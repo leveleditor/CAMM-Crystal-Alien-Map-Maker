@@ -233,7 +233,7 @@ Public Class Map
                 End If
             Next
             If Not found Then
-                Dim newUnit As Unit = New Unit(mouseX, mouseY, unit.UnitId, unit.Team, unit.Angle, unit.Damage)
+                Dim newUnit As Unit = New Unit(mouseX, mouseY, unit.UnitId, unit.Team, unit.Altitude, unit.Angle, unit.Damage)
                 mapUnits.Add(newUnit)
 
                 ' Reorder the list based on the Y locations of the units.
@@ -364,7 +364,7 @@ Public Class Map
 
                 g.DrawImage(mapUnits(i).FullImage, _
                      mapUnits(i).Position.X - CInt(mapUnits(i).FullImage.Width / 2), _
-                     mapUnits(i).Position.Y - CInt(mapUnits(i).FullImage.Height / 2), _
+                     mapUnits(i).Position.Y - CInt(mapUnits(i).FullImage.Height / 2) - mapUnits(i).Altitude, _
                      mapUnits(i).FullImage.Width, _
                      mapUnits(i).FullImage.Height)
             End If
@@ -651,7 +651,8 @@ Public Class Map
                 ' Upgrade old unit Ids
                 UpgradeUnitId(v, MapFormat, unitId)
 
-                Dim temp As Unit = New Unit(unitX, unitY, unitId, team, angle, damage)
+                Dim unitAltitude As Integer = (From u In UnitDefs Where u.UnitId = unitId Select u.Altitude).First()
+                Dim temp As Unit = New Unit(unitX, unitY, unitId, team, unitAltitude, angle, damage)
                 mapUnits.Add(temp)
             End If
         Next

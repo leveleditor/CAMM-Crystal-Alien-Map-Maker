@@ -133,8 +133,9 @@ Public Module Config
                 Dim keyArray As String() = config.Get(keyName).Trim(IniArray.ToCharArray).Split(New Char() {IniSeparator}, StringSplitOptions.None)
                 Dim unitId As String = keyArray(0)
                 Dim team As Team = CType(Integer.Parse(keyArray(1)), Team)
-                Dim offsetY As Integer = CInt(keyArray(2))
-                Dim imageUrl As String = keyArray(3)
+                Dim altitude As Integer = Integer.Parse(keyArray(2))
+                Dim offsetY As Integer = Integer.Parse(keyArray(3))
+                Dim imageUrl As String = keyArray(4)
                 Dim fullImageUrl As String = My.Application.Info.DirectoryPath + DataPath + "/" + imageUrl
 
                 Dim test As Bitmap = Bitmap.FromFile(fullImageUrl)
@@ -167,7 +168,7 @@ Public Module Config
                 UnitFullImageLookup.Add(unitId, Image.FromFile(fullImageUrl))
 
                 ReDim Preserve UnitDefs(i)
-                UnitDefs(i) = New Unit(0, i * TileSizeY, unitId, team)
+                UnitDefs(i) = New Unit(0, i * TileSizeY, unitId, team, altitude)
             End If
         Next
 

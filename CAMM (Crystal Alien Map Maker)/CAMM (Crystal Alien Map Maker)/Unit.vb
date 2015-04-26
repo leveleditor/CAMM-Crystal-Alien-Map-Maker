@@ -15,8 +15,12 @@
         Me.New(x, y, unitId)
         Me.Team = team
     End Sub
-    Public Sub New(x As Integer, y As Integer, unitId As String, team As Team, angle As Single, damage As Single)
+    Public Sub New(x As Integer, y As Integer, unitId As String, team As Team, altitude As Integer)
         Me.New(x, y, unitId, team)
+        Me.Altitude = altitude
+    End Sub
+    Public Sub New(x As Integer, y As Integer, unitId As String, team As Team, altitude As Integer, angle As Single, damage As Single)
+        Me.New(x, y, unitId, team, altitude)
         Me.Angle = angle
         Me.Damage = damage
     End Sub
@@ -82,5 +86,7 @@
     Public Property Angle As Single
 
     Public Property Damage As Single
+
+    Public Property Altitude As Integer
 
 End Class
