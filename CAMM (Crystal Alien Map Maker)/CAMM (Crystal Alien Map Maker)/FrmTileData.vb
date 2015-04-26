@@ -220,7 +220,7 @@ Public Class FrmTileData
 
     Private Sub buildingEntry_txtImageUrl_MouseEnter(sender As BuildingEntry, e As EventArgs)
         Try
-            picPreview.Image = Image.FromFile(My.Application.Info.DirectoryPath + DataPath + "/../" + sender.ImageUrl)
+            picPreview.Image = Image.FromFile(My.Application.Info.DirectoryPath + DataPath + "/" + sender.ImageUrl)
         Catch ex As Exception
             picPreview.Image = Nothing
         End Try

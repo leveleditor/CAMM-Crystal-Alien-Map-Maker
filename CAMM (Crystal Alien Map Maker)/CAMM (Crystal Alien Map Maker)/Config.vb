@@ -62,7 +62,7 @@ Public Module Config
                 Dim isMinerals As Boolean = CBool(keyArray(2))
                 Dim imageUrl As String = keyArray(3)
 
-                Dim fullImageUrl As String = My.Application.Info.DirectoryPath + DataPath + "/../" + imageUrl
+                Dim fullImageUrl As String = My.Application.Info.DirectoryPath + DataPath + "/" + imageUrl
                 Dim theImage As Image = Image.FromFile(fullImageUrl)
 
                 TileImageLookup.Add(tileId, theImage)
@@ -94,7 +94,7 @@ Public Module Config
                 Dim team As Team = CType(Integer.Parse(keyArray(3)), Team)
                 Dim offsetY As Integer = CInt(keyArray(4))
                 Dim imageUrl As String = keyArray(5)
-                Dim fullImageUrl As String = My.Application.Info.DirectoryPath + DataPath + "/../" + imageUrl
+                Dim fullImageUrl As String = My.Application.Info.DirectoryPath + DataPath + "/" + imageUrl
 
                 Dim test As Bitmap = Bitmap.FromFile(fullImageUrl)
                 Dim thumbnail As New Bitmap(TileSizeX, TileSizeY)
@@ -135,7 +135,7 @@ Public Module Config
                 Dim team As Team = CType(Integer.Parse(keyArray(1)), Team)
                 Dim offsetY As Integer = CInt(keyArray(2))
                 Dim imageUrl As String = keyArray(3)
-                Dim fullImageUrl As String = My.Application.Info.DirectoryPath + DataPath + "/../" + imageUrl
+                Dim fullImageUrl As String = My.Application.Info.DirectoryPath + DataPath + "/" + imageUrl
 
                 Dim test As Bitmap = Bitmap.FromFile(fullImageUrl)
                 Dim w As Integer = TileSizeX
