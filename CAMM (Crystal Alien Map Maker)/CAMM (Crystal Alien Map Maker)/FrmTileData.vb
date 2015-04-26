@@ -6,13 +6,13 @@ Public Class FrmTileData
     Dim ascii As String = ""
 
     Private Sub FrmTileData_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-        Dim reader As New IniReader(TileDataFile) With {.IgnoreComments = True, .AcceptCommentAfterKey = False}
+        Dim reader As New IniReader(ConfigFile) With {.IgnoreComments = True, .AcceptCommentAfterKey = False}
         Dim source As New IniConfigSource(New IniDocument(reader))
         Dim config As IConfig = source.Configs.Item("CAMM")
-        If config Is Nothing Or config.GetInt("vFormat", -1) < TilesDatVersion Then
+        If config Is Nothing Or config.GetInt("vFormat", -1) < ConfigFormat Then
             MsgBox("This 'Tiles.dat' file is invalid or outdated and cannot be used!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly)
             Me.Close()
-        ElseIf config.GetInt("vFormat", -1) = TilesDatVersion Then
+        ElseIf config.GetInt("vFormat", -1) = ConfigFormat Then
             config = source.Configs.Item("ASCII LOOKUP")
             txtAsciiSeparator.Text = config.GetString("Ascii Separator")
             ascii = config.Get("Ascii Array")
@@ -83,7 +83,7 @@ Public Class FrmTileData
             ReorderTerrainEntries()
             ReorderBuildingEntries()
             ReorderUnitEntries()
-        ElseIf config.GetInt("vFormat", -1) > TilesDatVersion Then
+        ElseIf config.GetInt("vFormat", -1) > ConfigFormat Then
             MsgBox("This 'Tiles.dat' file was created with a newer version of CAMM and cannot be used!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
             Me.Close()
         End If
@@ -291,7 +291,7 @@ Public Class FrmTileData
 
         saveFileData += _
             "[CAMM]" + vbNewLine + _
-            "vFormat = " + TilesDatVersion.ToString + vbNewLine + _
+            "vFormat = " + ConfigFormat.ToString + vbNewLine + _
             vbNewLine
 
         saveFileData += _
@@ -333,9 +333,9 @@ Public Class FrmTileData
             unitNumber += 1
         Next
 
-        saveFileData += vbNewLine + "; -= CAMM Crystal Alien Map Maker (c) 2015 Leveleditor6680 // Josh =-"
+        saveFileData += vbNewLine + "; CAMM Crystal Alien Map Maker (c) 2015 Leveleditor6680 // Josh"
 
-        My.Computer.FileSystem.WriteAllText(TileDataFile, saveFileData, False, Encoding.UTF8)
+        My.Computer.FileSystem.WriteAllText(ConfigFile, saveFileData, False, Encoding.UTF8)
 
         lblSaved.Show()
     End Sub

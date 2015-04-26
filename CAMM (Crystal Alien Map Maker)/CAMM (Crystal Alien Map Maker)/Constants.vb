@@ -8,10 +8,20 @@
     Public Const DataPath As String = "/Tile Data"
 #End If
 
-    Public ReadOnly FullBasePath As String = My.Application.Info.DirectoryPath & DataPath
-    Public ReadOnly TileDataFile As String = FullBasePath & "/Tiles.dat"
+    Public ReadOnly FullBasePath As String = My.Application.Info.DirectoryPath + DataPath
+    Public Const ConfigFileName As String = "Config.ini"
+    Public Const TerrainFileName As String = "Terrain.ini"
+    Public Const BuildingsFileName As String = "Buildings.ini"
+    Public Const UnitsFileName As String = "Units.ini"
+    Public ReadOnly ConfigFile As String = FullBasePath + "/" + ConfigFileName
+    Public ReadOnly TerrainFile As String = FullBasePath + "/" + TerrainFileName
+    Public ReadOnly BuildingsFile As String = FullBasePath + "/" + BuildingsFileName
+    Public ReadOnly UnitsFile As String = FullBasePath + "/" + UnitsFileName
 
-    Public Const TilesDatVersion As Integer = 6
+    Public Const ConfigFormat As Integer = 7
+    Public Const TerrainFormat As Integer = 7
+    Public Const BuildingsFormat As Integer = 7
+    Public Const UnitsFormat As Integer = 7
     Public Const MapFormat As Integer = 5
 
     Public Const IniArray As String = "{}"

@@ -1,24 +1,58 @@
 ﻿Imports Nini.Config
+Imports Nini.Ini
 
 Public Module Config
 
-    Public Sub LoadConfig(source As IniConfigSource)
+    Public Function LoadConfig() As Boolean
         AsciiLookup = New List(Of Char)()
 
         TileDefs = New Tile() {}
         BuildingDefs = New Building() {}
         UnitDefs = New Unit() {}
 
+        If Not CheckFileExists(ConfigFile, ConfigFileName) Then
+            Return False
+        ElseIf Not CheckFileExists(TerrainFile, TerrainFileName) Then
+            Return False
+        ElseIf Not CheckFileExists(BuildingsFile, BuildingsFileName) Then
+            Return False
+        ElseIf Not CheckFileExists(UnitsFile, UnitsFileName) Then
+            Return False
+        End If
+
+        Dim reader As IniReader
+        Dim source As IniConfigSource
         Dim config As IConfig
 
+        reader = New IniReader(ConfigFile) With {.IgnoreComments = True, .AcceptCommentAfterKey = False}
+        source = New IniConfigSource(New IniDocument(reader))
+        config = source.Configs.Item("CAMM")
+
+        If Not CheckFileFormat(ConfigFileName, ConfigFormat, config) Then
+            reader.Close()
+            Return False
+        End If
+
         config = source.Configs.Item("ASCII LOOKUP")
+
         Dim asciiSeparator As String = config.GetString("Ascii Separator")
         Dim ascii As String() = config.Get("Ascii Array").Trim(IniArray.ToCharArray).Trim(asciiSeparator.ToCharArray()).Split(New String() {asciiSeparator}, StringSplitOptions.None)
         For Each str As String In ascii
             AsciiLookup.Add(Char.Parse(str))
         Next
 
+        reader.Close()
+        reader = New IniReader(TerrainFile) With {.IgnoreComments = True}
+        source = New IniConfigSource(New IniDocument(reader))
+        config = source.Configs.Item("CAMM")
+
+        If Not CheckFileFormat(TerrainFileName, TerrainFormat, config) Then
+            reader.Close()
+            Return False
+        End If
+
         config = source.Configs.Item("DEFINE TERRAIN")
+
         For i As Integer = 0 To config.GetKeys().Length - 1
             Dim keyName As String = "Terrain" + i.ToString
             If config.Get(keyName, "-1") <> "-1" Then
@@ -38,7 +72,18 @@ Public Module Config
             End If
         Next
 
+        reader.Close()
+        reader = New IniReader(BuildingsFile) With {.IgnoreComments = True}
+        source = New IniConfigSource(New IniDocument(reader))
+        config = source.Configs.Item("CAMM")
+
+        If Not CheckFileFormat(BuildingsFileName, BuildingsFormat, config) Then
+            reader.Close()
+            Return False
+        End If
+
         config = source.Configs.Item("DEFINE BUILDINGS")
+
         For i As Integer = 0 To config.GetKeys().Length - 1
             Dim keyName As String = "Building" + i.ToString
             If config.Get(keyName, "-1") <> "-1" Then
@@ -70,7 +115,18 @@ Public Module Config
             End If
         Next
 
+        reader.Close()
+        reader = New IniReader(UnitsFile) With {.IgnoreComments = True}
+        source = New IniConfigSource(New IniDocument(reader))
+        config = source.Configs.Item("CAMM")
+
+        If Not CheckFileFormat(UnitsFileName, UnitsFormat, config) Then
+            reader.Close()
+            Return False
+        End If
+
         config = source.Configs.Item("DEFINE UNITS")
+
         For i As Integer = 0 To config.GetKeys().Length - 1
             Dim keyName As String = "Unit" + i.ToString
             If config.Get(keyName, "-1") <> "-1" Then
@@ -114,7 +170,39 @@ Public Module Config
                 UnitDefs(i) = New Unit(0, i * TileSizeY, unitId, team)
             End If
         Next
-    End Sub
+
+        reader.Close()
+
+        Return True
+    End Function
+
+    Private Function CheckFileExists(filePath As String, fileName As String) As Boolean
+        If My.Computer.FileSystem.FileExists(filePath) Then
+            Return True
+        Else
+            MsgBox("The file '" + fileName + "' is missing!" + vbNewLine + "Please make sure you have all required files before using CAMM.", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly)
+            Return False
+        End If
+    End Function
+
+    Private Function CheckFileFormat(fileName As String, currentFormat As Integer, config As IConfig) As Boolean
+        If config Is Nothing Then
+            MsgBox("The file '" + fileName + "' is invalid or outdated and cannot be used!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly)
+            Return False
+        End If
+
+        Dim format As Integer = config.GetInt("Format", -1)
+
+        If format < currentFormat Then
+            MsgBox("The file '" + fileName + "' is invalid or outdated and cannot be used!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly)
+            Return False
+        ElseIf format > currentFormat Then
+            MsgBox("The file '" + fileName + "' was created for a newer version of CAMM and cannot be used!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
+            Return False
+        Else
+            Return True
+        End If
+    End Function
 
     'ASCII Lookup Array
     Public AsciiLookup As List(Of Char)

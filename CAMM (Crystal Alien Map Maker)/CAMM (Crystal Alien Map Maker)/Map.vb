@@ -437,7 +437,7 @@ Public Class Map
             End If
         Next
 
-        saveFileData += vbNewLine + "; -= Map Created Using CAMM Crystal Alien Map Maker =-"
+        saveFileData += vbNewLine + "; Map Created Using CAMM Crystal Alien Map Maker"
 
         Return saveFileData
     End Function

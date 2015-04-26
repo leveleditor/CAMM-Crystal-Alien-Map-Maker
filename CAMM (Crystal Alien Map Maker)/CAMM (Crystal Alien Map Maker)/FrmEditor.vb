@@ -88,34 +88,13 @@ Public Class FrmEditor
             menuItem.Text = menuItem.Text.ToUpper()
         Next
 
-        'Loading Tiles.dat data file.
-        If My.Computer.FileSystem.FileExists(TileDataFile) = False Then
-            MsgBox("The 'Tiles.dat' file is missing!" + vbNewLine + "Please make sure you have all required files before using CAMM.", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly)
+        'Loading the configuration file.
+        If Not LoadConfig() Then
+            'Close if the configuration data could not be loaded.
             Me.Close()
         End If
 
         CheckFileAssociations()
-
-        Dim reader As New IniReader(TileDataFile) With {.IgnoreComments = True, .AcceptCommentAfterKey = False}
-        Dim source As New IniConfigSource(New IniDocument(reader))
-        Dim config As IConfig = source.Configs.Item("CAMM")
-        If config Is Nothing Then
-            MsgBox("The 'Tiles.dat' file is invalid or outdated and cannot be used!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly)
-            Me.Close()
-        End If
-        Dim vFormat = config.GetInt("vFormat", -1)
-        If vFormat = 1 Or vFormat = 2 Or vFormat = 3 Then
-            MsgBox("The 'Tiles.dat' file is outdated." + vbNewLine + "Please update this file before using CAMM.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            Me.Close()
-        ElseIf vFormat < TilesDatVersion Then
-            MsgBox("The 'Tiles.dat' file is invalid or outdated and cannot be used!", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly)
-            Me.Close()
-        ElseIf vFormat > TilesDatVersion Then
-            MsgBox("The 'Tiles.dat' file was created with a newer version of CAMM and cannot be used!", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            Me.Close()
-        ElseIf vFormat = TilesDatVersion Then
-            LoadConfig(source)
-        End If
 
         'Dynamically setting picTiles size.
         picTiles.Size = New Size(TileSizeX + 1, (TileDefs.Length * TileSizeY) + 1)
