@@ -643,13 +643,12 @@ Public Class FrmEditor
     Private Sub btnOpen_Click(sender As Object, e As EventArgs) Handles btnOpen.Click
         'Me.OpenMap.Reset()
         'Me.OpenMap.DefaultExt = "CAMM Map Files|*.map"
-        'Me.OpenMap.FileName = My.Application.Info.DirectoryPath + DataPath + "/_Save Data/Map1.camm"
         Me.openMap.FileName = "Map1.camm"
         'Me.OpenMap.Filter = "CAMM Map Files|*.map|All Files|*.*"
         Me.openMap.FilterIndex = 1
         Me.openMap.RestoreDirectory = False
         Me.openMap.Title = "Select Map File To Open..."
-        Me.openMap.InitialDirectory = My.Application.Info.DirectoryPath + DataPath + "/_Save Data/"
+        Me.openMap.InitialDirectory = FullBasePath + SavePath
 
         If Me.openMap.ShowDialog = DialogResult.OK Then
             BeginLoadMap(Me.openMap.FileName)
@@ -697,7 +696,6 @@ Public Class FrmEditor
     Private Sub btnSaveAs_Click(sender As Object, e As EventArgs) Handles btnSaveAs.Click
         Me.saveMap.Reset()
         'Me.SaveMap.DefaultExt = "CAMM Map Files|*.camm"
-        'Me.SaveMap.FileName = (My.Application.Info.DirectoryPath & "/../../Tile Data/_Save Data/Map1.map")
         If ActiveMap.MapTitle <> "" Then
             Me.saveMap.FileName = ActiveMap.MapTitle
         Else
@@ -707,7 +705,7 @@ Public Class FrmEditor
         Me.saveMap.FilterIndex = 1
         Me.saveMap.RestoreDirectory = False
         Me.saveMap.Title = "Select Where To Save Map File..."
-        Me.saveMap.InitialDirectory = My.Application.Info.DirectoryPath + DataPath + "/Tile Data/_Save Data/"
+        Me.saveMap.InitialDirectory = FullBasePath + SavePath
 
         If Me.saveMap.ShowDialog = DialogResult.OK Then
             SaveFile(saveMap.FileName)
