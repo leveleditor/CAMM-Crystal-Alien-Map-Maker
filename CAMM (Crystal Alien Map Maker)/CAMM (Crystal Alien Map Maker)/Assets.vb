@@ -14,8 +14,10 @@
         TileImageLookup = New Dictionary(Of Integer, Image)()
         BuildingSmallImageLookup = New Dictionary(Of String, Image)()
         BuildingFullImageLookup = New Dictionary(Of String, Image)()
+        BuildingShadowImageLookup = New Dictionary(Of String, Image)()
         UnitSmallImageLookup = New Dictionary(Of String, Image)()
         UnitFullImageLookup = New Dictionary(Of String, Image)()
+        UnitShadowImageLookup = New Dictionary(Of String, Image)()
     End Sub
 
     'Terrain background image.
@@ -42,10 +44,16 @@
     'Lookup for Building FullImage graphics.
     Public BuildingFullImageLookup As Dictionary(Of String, Image)
 
+    'Lookup for Building Shadow graphics.
+    Public BuildingShadowImageLookup As Dictionary(Of String, Image)
+
     'Lookup for Unit SmallImage graphics.
     Public UnitSmallImageLookup As Dictionary(Of String, Image)
 
     'Lookup for Unit FullImage graphics.
     Public UnitFullImageLookup As Dictionary(Of String, Image)
+
+    'Lookup for Unit Shadow graphics.
+    Public UnitShadowImageLookup As Dictionary(Of String, Image)
 
 End Module

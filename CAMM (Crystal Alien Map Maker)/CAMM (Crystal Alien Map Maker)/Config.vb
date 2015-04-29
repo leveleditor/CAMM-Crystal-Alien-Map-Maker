@@ -93,8 +93,8 @@ Public Module Config
                 Dim height As Integer = CInt(keyArray(2))
                 Dim team As Team = CType(Integer.Parse(keyArray(3)), Team)
                 Dim offsetY As Integer = CInt(keyArray(4))
-                Dim imageUrl As String = keyArray(5)
-                Dim fullImageUrl As String = My.Application.Info.DirectoryPath + DataPath + "/" + imageUrl
+                Dim fullImageUrl As String = FullBasePath + "/" + keyArray(5)
+                Dim shadowImageUrl As String = FullBasePath + "/" + keyArray(6)
 
                 Dim test As Bitmap = Bitmap.FromFile(fullImageUrl)
                 Dim thumbnail As New Bitmap(TileSizeX, TileSizeY)
@@ -109,6 +109,7 @@ Public Module Config
 
                 BuildingSmallImageLookup.Add(buildingId, thumbnail)
                 BuildingFullImageLookup.Add(buildingId, Image.FromFile(fullImageUrl))
+                BuildingShadowImageLookup.Add(buildingId, Image.FromFile(shadowImageUrl))
 
                 ReDim Preserve BuildingDefs(i)
                 BuildingDefs(i) = New Building(0, i * TileSizeY, buildingId, team, width, height)
@@ -135,8 +136,8 @@ Public Module Config
                 Dim team As Team = CType(Integer.Parse(keyArray(1)), Team)
                 Dim altitude As Integer = Integer.Parse(keyArray(2))
                 Dim offsetY As Integer = Integer.Parse(keyArray(3))
-                Dim imageUrl As String = keyArray(4)
-                Dim fullImageUrl As String = My.Application.Info.DirectoryPath + DataPath + "/" + imageUrl
+                Dim fullImageUrl As String = FullBasePath + "/" + keyArray(4)
+                Dim shadowImageUrl As String = FullBasePath + "/" + keyArray(5)
 
                 Dim test As Bitmap = Bitmap.FromFile(fullImageUrl)
                 Dim w As Integer = TileSizeX
@@ -166,6 +167,7 @@ Public Module Config
 
                 UnitSmallImageLookup.Add(unitId, thumbnail)
                 UnitFullImageLookup.Add(unitId, Image.FromFile(fullImageUrl))
+                UnitShadowImageLookup.Add(unitId, Image.FromFile(shadowImageUrl))
 
                 ReDim Preserve UnitDefs(i)
                 UnitDefs(i) = New Unit(0, i * TileSizeY, unitId, team, altitude)

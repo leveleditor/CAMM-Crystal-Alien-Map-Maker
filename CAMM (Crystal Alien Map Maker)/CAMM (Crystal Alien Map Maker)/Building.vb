@@ -96,6 +96,16 @@
         End Get
     End Property
 
+    Public ReadOnly Property ShadowImage As Image
+        Get
+            If Not String.IsNullOrEmpty(BuildingId) Then
+                Return BuildingShadowImageLookup(BuildingId)
+            Else
+                Return Nothing
+            End If
+        End Get
+    End Property
+
     Public Property BuildingId As String
 
     Public Property Team As Team

@@ -22,8 +22,8 @@
 
     Public Const ConfigFormat As Integer = 7
     Public Const TerrainFormat As Integer = 8
-    Public Const BuildingsFormat As Integer = 8
-    Public Const UnitsFormat As Integer = 8
+    Public Const BuildingsFormat As Integer = 9
+    Public Const UnitsFormat As Integer = 9
     Public Const MapFormat As Integer = 5
 
     Public Const IniArray As String = "{}"

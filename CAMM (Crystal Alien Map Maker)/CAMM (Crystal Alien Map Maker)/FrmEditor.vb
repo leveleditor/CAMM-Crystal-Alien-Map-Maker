@@ -46,6 +46,7 @@ Public Class FrmEditor
     Public ActiveToolMode As ToolMode = ToolMode.Brush
 
     Public DrawGrid As Boolean = True
+    Public DrawShadows As Boolean = True
     Public DrawBuildingDebugPos As Boolean = False
     Private isMouseOnSelections As Boolean = False
     Dim selXTiles As Integer
@@ -308,7 +309,7 @@ Public Class FrmEditor
         If isLoaded Then
             Dim g As Graphics = e.Graphics
 
-            ActiveMap.Draw(g, DrawGrid, DrawBuildingDebugPos)
+            ActiveMap.Draw(g, DrawGrid, DrawShadows, DrawBuildingDebugPos)
 
             ' Draw the rectangle cursor / selector thingy.
             If IsMouseInBounds() Then
@@ -331,6 +332,13 @@ Public Class FrmEditor
                     'g.DrawImage(ActiveBuilding.FullImage, MouseX, MouseY, ActiveBuilding.FullImage.Width, ActiveBuilding.FullImage.Height)
                 ElseIf ActiveEditMode = EditMode.Units And activeUnit.UnitId <> "" Then
                     If isMouseOnMap And Not IsDrawing And ActiveToolMode <> ToolMode.Eraser Then
+                        If DrawShadows Then
+                            g.DrawImage(activeUnit.ShadowImage, _
+                            mouseXNoSnap - CInt(activeUnit.ShadowImage.Width / 2), _
+                            mouseYNoSnap - CInt(activeUnit.ShadowImage.Height / 2), _
+                            activeUnit.ShadowImage.Width, _
+                            activeUnit.ShadowImage.Height)
+                        End If
                         g.DrawImage(activeUnit.FullImage, _
                             mouseXNoSnap - CInt(activeUnit.FullImage.Width / 2), _
                             mouseYNoSnap - CInt(activeUnit.FullImage.Height / 2) - activeUnit.Altitude, _
@@ -831,14 +839,17 @@ Public Class FrmEditor
 
     Private Sub chkGrid_CheckedChanged(sender As Object, e As EventArgs) Handles chkGrid.CheckedChanged, mnuchkGrid.CheckedChanged
         DrawGrid = sender.Checked
-        chkGrid.Checked = DrawGrid
         mnuchkGrid.Checked = DrawGrid
+        picMap.Invalidate()
+    End Sub
+
+    Private Sub mnuchkShadows_CheckedChanged(sender As Object, e As EventArgs) Handles mnuchkShadows.CheckedChanged
+        DrawShadows = sender.Checked
         picMap.Invalidate()
     End Sub
 
     Private Sub mnuchkDebugBuildingPos_CheckedChanged(sender As Object, e As EventArgs) Handles mnuchkDebugBuildingPos.CheckedChanged
         DrawBuildingDebugPos = sender.Checked
-        mnuchkDebugBuildingPos.Checked = DrawBuildingDebugPos
         picMap.Invalidate()
     End Sub
 
@@ -1048,7 +1059,7 @@ Public Class FrmEditor
             Dim h As Integer = (ActiveMap.SizeY * TileSizeY) + 1
             Dim img As Image = New Bitmap(w, h, PixelFormat.Format24bppRgb)
             Dim g As Graphics = Graphics.FromImage(img)
-            ActiveMap.Draw(g, DrawGrid, False)
+            ActiveMap.Draw(g, DrawGrid, DrawShadows, False)
             g.Dispose()
             img.Save(savePng.FileName, ImageFormat.Png)
         End If

@@ -284,7 +284,7 @@ Public Class Map
         End Select
     End Sub
 
-    Public Sub Draw(ByRef g As Graphics, drawGrid As Boolean, Optional ByVal debugBuildingPos As Boolean = False)
+    Public Sub Draw(ByRef g As Graphics, drawGrid As Boolean, drawShadows As Boolean, Optional ByVal debugBuildingPos As Boolean = False)
         g.Clear(Color.FromKnownColor(KnownColor.Control))
 
         ' Draw the background
@@ -340,6 +340,32 @@ Public Class Map
                 End If
             End If
         Next
+
+        If drawShadows Then
+            ' Draw any existing building shadows.
+            For i As Integer = 0 To mapBuildings.Count() - 1
+                If mapBuildings(i).HasData Then
+
+                    g.DrawImage(mapBuildings(i).ShadowImage, _
+                         mapBuildings(i).DrawPos.X, _
+                         mapBuildings(i).DrawPos.Y, _
+                         mapBuildings(i).FullImage.Width, _
+                         mapBuildings(i).FullImage.Height)
+                End If
+            Next
+
+            ' Draw any existing unit shadows.
+            For i As Integer = 0 To mapUnits.Count() - 1
+                If mapUnits(i).HasData Then
+
+                    g.DrawImage(mapUnits(i).ShadowImage, _
+                         mapUnits(i).Position.X - CInt(mapUnits(i).ShadowImage.Width / 2), _
+                         mapUnits(i).Position.Y - CInt(mapUnits(i).ShadowImage.Height / 2), _
+                         mapUnits(i).ShadowImage.Width, _
+                         mapUnits(i).ShadowImage.Height)
+                End If
+            Next
+        End If
 
         ' Draw any existing buildings.
         For i As Integer = 0 To mapBuildings.Count() - 1

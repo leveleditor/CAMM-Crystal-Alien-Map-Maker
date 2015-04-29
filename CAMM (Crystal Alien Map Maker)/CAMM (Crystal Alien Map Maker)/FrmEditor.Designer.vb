@@ -91,9 +91,10 @@ Partial Class FrmEditor
         Me.mapTabs = New System.Windows.Forms.TabControl()
         Me.ctxMapTabs = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.btnClose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnCloseAllExceptThis = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnCloseAllLeft = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnCloseAllRight = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnCloseAllExceptThis = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuchkShadows = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.picMap, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picActive, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.staInfoBar.SuspendLayout()
@@ -375,7 +376,7 @@ Partial Class FrmEditor
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuchkGrid, Me.mnuchkDebugBuildingPos})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuchkGrid, Me.mnuchkShadows, Me.mnuchkDebugBuildingPos})
         Me.mnuView.Name = "mnuView"
         Me.mnuView.Size = New System.Drawing.Size(44, 24)
         Me.mnuView.Text = "&View"
@@ -694,13 +695,19 @@ Partial Class FrmEditor
         Me.ctxMapTabs.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.ctxMapTabs.ShowCheckMargin = True
         Me.ctxMapTabs.ShowImageMargin = False
-        Me.ctxMapTabs.Size = New System.Drawing.Size(186, 114)
+        Me.ctxMapTabs.Size = New System.Drawing.Size(186, 92)
         '
         'btnClose
         '
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(185, 22)
         Me.btnClose.Text = "Close"
+        '
+        'btnCloseAllExceptThis
+        '
+        Me.btnCloseAllExceptThis.Name = "btnCloseAllExceptThis"
+        Me.btnCloseAllExceptThis.Size = New System.Drawing.Size(185, 22)
+        Me.btnCloseAllExceptThis.Text = "Close All Except This"
         '
         'btnCloseAllLeft
         '
@@ -714,11 +721,16 @@ Partial Class FrmEditor
         Me.btnCloseAllRight.Size = New System.Drawing.Size(185, 22)
         Me.btnCloseAllRight.Text = "Close All to the Right"
         '
-        'btnCloseAllExceptThis
+        'mnuchkShadows
         '
-        Me.btnCloseAllExceptThis.Name = "btnCloseAllExceptThis"
-        Me.btnCloseAllExceptThis.Size = New System.Drawing.Size(185, 22)
-        Me.btnCloseAllExceptThis.Text = "Close All Except This"
+        Me.mnuchkShadows.Checked = True
+        Me.mnuchkShadows.CheckOnClick = True
+        Me.mnuchkShadows.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.mnuchkShadows.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.mnuchkShadows.Name = "mnuchkShadows"
+        Me.mnuchkShadows.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
+        Me.mnuchkShadows.Size = New System.Drawing.Size(247, 22)
+        Me.mnuchkShadows.Text = "Show &Shadows"
         '
         'FrmEditor
         '
@@ -843,4 +855,5 @@ Partial Class FrmEditor
     Friend WithEvents btnCloseAllLeft As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnCloseAllRight As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnCloseAllExceptThis As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuchkShadows As System.Windows.Forms.ToolStripMenuItem
 End Class
