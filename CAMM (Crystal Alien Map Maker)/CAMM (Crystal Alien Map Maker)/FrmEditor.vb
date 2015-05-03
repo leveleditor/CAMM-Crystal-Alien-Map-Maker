@@ -6,7 +6,7 @@ Imports System.Drawing.Imaging
 Imports System.Security
 Imports Microsoft.Win32
 Imports Nini.Config
-Imports Nini.Ini
+
 Public Class FrmEditor
 
     Private baseFormTitle As String
@@ -48,6 +48,7 @@ Public Class FrmEditor
     Public DrawGrid As Boolean = True
     Public DrawShadows As Boolean = True
     Public DrawBuildingDebugPos As Boolean = False
+    Public DrawUnitDebugPos As Boolean = False
     Private isMouseOnSelections As Boolean = False
     Dim selXTiles As Integer
     Dim selYTiles As Integer
@@ -309,7 +310,7 @@ Public Class FrmEditor
         If isLoaded Then
             Dim g As Graphics = e.Graphics
 
-            ActiveMap.Draw(g, DrawGrid, DrawShadows, DrawBuildingDebugPos)
+            ActiveMap.Draw(g, DrawGrid, DrawShadows, DrawBuildingDebugPos, DrawUnitDebugPos)
 
             ' Draw the rectangle cursor / selector thingy.
             If IsMouseInBounds() Then
@@ -853,6 +854,11 @@ Public Class FrmEditor
         picMap.Invalidate()
     End Sub
 
+    Private Sub mnuchkDebugUnitPos_CheckedChanged(sender As Object, e As EventArgs) Handles mnuchkDebugUnitPos.CheckedChanged
+        DrawUnitDebugPos = sender.Checked
+        picMap.Invalidate()
+    End Sub
+
     Private Sub btnTileDataEditor_Click(sender As Object, e As EventArgs) Handles btnTileDataEditor.Click
         FrmTileData.ShowDialog(Me)
     End Sub
@@ -863,6 +869,7 @@ Public Class FrmEditor
         btnExportAS.Visible = True
         separator3.Visible = True
         mnuchkDebugBuildingPos.Visible = True
+        mnuchkDebugUnitPos.Visible = True
     End Sub
 
     Private Sub btnEditTiles_Click(sender As Object, e As EventArgs) Handles btnEditTiles.Click

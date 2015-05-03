@@ -118,7 +118,7 @@ Public Class Map
         'End If
     End Sub
 
-    Public Sub ClearMap()
+    Public Sub Clear()
         For i As Integer = 0 To mapTiles.Length - 1
             mapTiles(i) = New Tile(0, 0)
         Next
@@ -284,7 +284,7 @@ Public Class Map
         End Select
     End Sub
 
-    Public Sub Draw(ByRef g As Graphics, drawGrid As Boolean, drawShadows As Boolean, Optional ByVal debugBuildingPos As Boolean = False)
+    Public Sub Draw(ByRef g As Graphics, drawGrid As Boolean, drawShadows As Boolean, Optional debugBuildingPos As Boolean = False, Optional debugUnitPos As Boolean = False)
         g.Clear(Color.FromKnownColor(KnownColor.Control))
 
         ' Draw the background
@@ -393,6 +393,12 @@ Public Class Map
                      mapUnits(i).Position.Y - CInt(mapUnits(i).FullImage.Height / 2) - mapUnits(i).Altitude, _
                      mapUnits(i).FullImage.Width, _
                      mapUnits(i).FullImage.Height)
+
+                If debugUnitPos Then
+                    g.DrawLine(Pens.LightSkyBlue, mapUnits(i).X, mapUnits(i).Y, mapUnits(i).X, mapUnits(i).Y - mapUnits(i).Altitude)
+                    g.DrawRectangle(Pens.Lime, mapUnits(i).X - 1, mapUnits(i).Y - 1, 2, 2)
+                    g.DrawRectangle(Pens.Blue, mapUnits(i).X - 2, mapUnits(i).Y - mapUnits(i).Altitude - 2, 4, 4)
+                End If
             End If
         Next
 

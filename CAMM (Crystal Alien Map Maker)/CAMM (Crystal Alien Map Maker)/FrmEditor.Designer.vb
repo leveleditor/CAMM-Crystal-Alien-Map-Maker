@@ -58,7 +58,9 @@ Partial Class FrmEditor
         Me.separator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuView = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuchkGrid = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuchkShadows = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuchkDebugBuildingPos = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuchkDebugUnitPos = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator7 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnAbout = New System.Windows.Forms.ToolStripMenuItem()
@@ -94,7 +96,6 @@ Partial Class FrmEditor
         Me.btnCloseAllExceptThis = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnCloseAllLeft = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnCloseAllRight = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuchkShadows = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.picMap, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picActive, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.staInfoBar.SuspendLayout()
@@ -376,7 +377,7 @@ Partial Class FrmEditor
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuchkGrid, Me.mnuchkShadows, Me.mnuchkDebugBuildingPos})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuchkGrid, Me.mnuchkShadows, Me.mnuchkDebugBuildingPos, Me.mnuchkDebugUnitPos})
         Me.mnuView.Name = "mnuView"
         Me.mnuView.Size = New System.Drawing.Size(44, 24)
         Me.mnuView.Text = "&View"
@@ -392,6 +393,17 @@ Partial Class FrmEditor
         Me.mnuchkGrid.Size = New System.Drawing.Size(247, 22)
         Me.mnuchkGrid.Text = "Show &Grid"
         '
+        'mnuchkShadows
+        '
+        Me.mnuchkShadows.Checked = True
+        Me.mnuchkShadows.CheckOnClick = True
+        Me.mnuchkShadows.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.mnuchkShadows.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.mnuchkShadows.Name = "mnuchkShadows"
+        Me.mnuchkShadows.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
+        Me.mnuchkShadows.Size = New System.Drawing.Size(247, 22)
+        Me.mnuchkShadows.Text = "Show &Shadows"
+        '
         'mnuchkDebugBuildingPos
         '
         Me.mnuchkDebugBuildingPos.CheckOnClick = True
@@ -400,6 +412,15 @@ Partial Class FrmEditor
         Me.mnuchkDebugBuildingPos.Size = New System.Drawing.Size(247, 22)
         Me.mnuchkDebugBuildingPos.Text = "Debug - Show Building Positions"
         Me.mnuchkDebugBuildingPos.Visible = False
+        '
+        'mnuchkDebugUnitPos
+        '
+        Me.mnuchkDebugUnitPos.CheckOnClick = True
+        Me.mnuchkDebugUnitPos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.mnuchkDebugUnitPos.Name = "mnuchkDebugUnitPos"
+        Me.mnuchkDebugUnitPos.Size = New System.Drawing.Size(247, 22)
+        Me.mnuchkDebugUnitPos.Text = "Debug - Show Unit Positions"
+        Me.mnuchkDebugUnitPos.Visible = False
         '
         'separator7
         '
@@ -721,17 +742,6 @@ Partial Class FrmEditor
         Me.btnCloseAllRight.Size = New System.Drawing.Size(185, 22)
         Me.btnCloseAllRight.Text = "Close All to the Right"
         '
-        'mnuchkShadows
-        '
-        Me.mnuchkShadows.Checked = True
-        Me.mnuchkShadows.CheckOnClick = True
-        Me.mnuchkShadows.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.mnuchkShadows.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.mnuchkShadows.Name = "mnuchkShadows"
-        Me.mnuchkShadows.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.mnuchkShadows.Size = New System.Drawing.Size(247, 22)
-        Me.mnuchkShadows.Text = "Show &Shadows"
-        '
         'FrmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -856,4 +866,5 @@ Partial Class FrmEditor
     Friend WithEvents btnCloseAllRight As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnCloseAllExceptThis As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuchkShadows As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuchkDebugUnitPos As System.Windows.Forms.ToolStripMenuItem
 End Class
