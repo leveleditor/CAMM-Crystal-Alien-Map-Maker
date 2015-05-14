@@ -234,7 +234,9 @@ Public Class FrmEditor
                     If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                         ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
                     Else
-                        ActiveMap.SetUnit(mouseXNoSnap, mouseYNoSnap, activeUnit)
+                        If mouseYNoSnap - activeUnit.Altitude > 0 Then
+                            ActiveMap.SetUnit(mouseXNoSnap, mouseYNoSnap, activeUnit)
+                        End If
                     End If
                 ElseIf ActiveEditMode = EditMode.Shroud Then
                     'For later.
@@ -333,20 +335,24 @@ Public Class FrmEditor
                     'g.DrawImage(ActiveBuilding.FullImage, MouseX, MouseY, ActiveBuilding.FullImage.Width, ActiveBuilding.FullImage.Height)
                 ElseIf ActiveEditMode = EditMode.Units And activeUnit.UnitId <> "" Then
                     If isMouseOnMap And Not IsDrawing And ActiveToolMode <> ToolMode.Eraser Then
-                        If DrawShadows Then
-                            g.DrawImage(activeUnit.ShadowImage, _
-                            mouseXNoSnap - CInt(activeUnit.ShadowImage.Width / 2), _
-                            mouseYNoSnap - CInt(activeUnit.ShadowImage.Height / 2), _
-                            activeUnit.ShadowImage.Width, _
-                            activeUnit.ShadowImage.Height)
+                        If mouseYNoSnap - activeUnit.Altitude > 0 Then
+                            If DrawShadows Then
+                                g.DrawImage(activeUnit.ShadowImage, _
+                                mouseXNoSnap - CInt(activeUnit.ShadowImage.Width / 2), _
+                                mouseYNoSnap - CInt(activeUnit.ShadowImage.Height / 2), _
+                                activeUnit.ShadowImage.Width, _
+                                activeUnit.ShadowImage.Height)
+                            End If
+                            g.DrawImage(activeUnit.FullImage, _
+                                mouseXNoSnap - CInt(activeUnit.FullImage.Width / 2), _
+                                mouseYNoSnap - CInt(activeUnit.FullImage.Height / 2) - activeUnit.Altitude, _
+                                activeUnit.FullImage.Width, _
+                                activeUnit.FullImage.Height)
+                        Else
+                            g.DrawLine(New Pen(Color.Red, 2), mouseXNoSnap - 5, mouseYNoSnap - 5, mouseXNoSnap + 5, mouseYNoSnap + 5)
+                            g.DrawLine(New Pen(Color.Red, 2), mouseXNoSnap + 5, mouseYNoSnap - 5, mouseXNoSnap - 5, mouseYNoSnap + 5)
                         End If
-                        g.DrawImage(activeUnit.FullImage, _
-                            mouseXNoSnap - CInt(activeUnit.FullImage.Width / 2), _
-                            mouseYNoSnap - CInt(activeUnit.FullImage.Height / 2) - activeUnit.Altitude, _
-                            activeUnit.FullImage.Width, _
-                            activeUnit.FullImage.Height)
                     End If
-                    'g.DrawImage(ActiveUnit.FullImage, MouseXNoSnap, MouseYNoSnap, ActiveUnit.FullImage.Width, ActiveUnit.FullImage.Height)
                 End If
             End If
 
