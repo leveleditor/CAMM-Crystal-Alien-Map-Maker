@@ -295,13 +295,9 @@ Public Class Map
                 mapBuildings = temp
             Case EditMode.Units
                 Dim temp As List(Of Unit) = mapUnits.ToList()
-                For i As Integer = 0 To mapUnits.Count() - 1
-                    If mapUnits(i).X >= mouseX And _
-                       mapUnits(i).Y >= mouseY And _
-                       mapUnits(i).X <= mouseX + TileSizeX And _
-                       mapUnits(i).Y <= mouseY + TileSizeY Then
-                        temp.Remove(mapUnits(i))
-                    End If
+                Dim toRemove As List(Of Unit) = GetUnitsNear(mouseX, mouseY, 30)
+                For i As Integer = 0 To toRemove.Count() - 1
+                    temp.Remove(toRemove(i))
                 Next
                 mapUnits = temp
         End Select

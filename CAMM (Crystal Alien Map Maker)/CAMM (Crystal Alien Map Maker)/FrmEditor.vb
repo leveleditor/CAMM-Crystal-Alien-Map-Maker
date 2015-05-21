@@ -237,7 +237,7 @@ Public Class FrmEditor
                     If ActiveToolMode = ToolMode.Pointer Then
                         selectedUnit = closestUnit
                     ElseIf ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                        ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
+                        ActiveMap.Eraser(mouseXNoSnap, mouseYNoSnap, ActiveEditMode)
                     Else
                         If mouseYNoSnap - activeUnit.Altitude > 0 Then
                             ActiveMap.SetUnit(mouseXNoSnap, mouseYNoSnap, activeUnit)
@@ -283,7 +283,7 @@ Public Class FrmEditor
                 End If
             ElseIf ActiveEditMode = EditMode.Units Then
                 If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                    ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
+                    ActiveMap.Eraser(mouseXNoSnap, mouseYNoSnap, ActiveEditMode)
                 Else
                     'No click & drag for units, just imagine the spam...
                     'SetUnit(MouseXNoSnap, MouseYNoSnap)
@@ -373,10 +373,14 @@ Public Class FrmEditor
                 End If
             End If
 
-            If ActiveToolMode = ToolMode.Pointer Then
-                If ActiveEditMode = EditMode.Units And selectedUnit IsNot Nothing Then
-                    g.DrawEllipse(PenSelected, selectedUnit.X - 10, selectedUnit.Y - selectedUnit.Altitude - 10, 20, 20)
-                    'g.DrawString(selectedUnit.UnitId, New Font(FontFamily.GenericMonospace, 12, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.GreenYellow, selectedUnit.X + 10, selectedUnit.Y - selectedUnit.Altitude - 10)
+            If ActiveEditMode = EditMode.Units Then
+                If ActiveToolMode = ToolMode.Pointer Then
+                    If selectedUnit IsNot Nothing Then
+                        g.DrawEllipse(PenSelected, selectedUnit.X - 10, selectedUnit.Y - selectedUnit.Altitude - 10, 20, 20)
+                        'g.DrawString(selectedUnit.UnitId, New Font(FontFamily.GenericMonospace, 12, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.GreenYellow, selectedUnit.X + 10, selectedUnit.Y - selectedUnit.Altitude - 10)
+                    End If
+                ElseIf ActiveToolMode = ToolMode.Eraser Then
+                    g.DrawEllipse(PenTileErase, mouseXNoSnap - 15, mouseYNoSnap - 15, 30, 30)
                 End If
             End If
 
