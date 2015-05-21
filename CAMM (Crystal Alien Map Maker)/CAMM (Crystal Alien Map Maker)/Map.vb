@@ -157,6 +157,29 @@ Public Class Map
         Next
         Return returnBuilding
     End Function
+    Public Function GetUnitsNear(mouseX As Integer, mouseY As Integer, maxDistance As Integer) As List(Of Unit)
+        Dim returnUnits As List(Of Unit) = New List(Of Unit)
+        For i As Integer = 0 To mapUnits.Count() - 1
+            If GetRadialDistance(mouseX, mouseY, mapUnits(i).X, mapUnits(i).Y - mapUnits(i).Altitude) <= maxDistance Then
+                returnUnits.Add(mapUnits(i))
+            End If
+        Next
+        Return returnUnits
+    End Function
+    Public Function GetClosestUnit(mouseX As Integer, mouseY As Integer, maxDistance As Integer) As Unit
+        Dim closeUnits As List(Of Unit) = GetUnitsNear(mouseX, mouseY, maxDistance)
+        Dim closestUnit As Unit = Nothing
+        If closeUnits.Count > 0 Then
+            For i As Integer = 0 To closeUnits.Count - 1
+                If i = 0 Then
+                    closestUnit = closeUnits(i)
+                ElseIf GetRadialDistance(mouseX, mouseY, closeUnits(i).X, closeUnits(i).Y - closeUnits(i).Altitude) < GetRadialDistance(mouseX, mouseY, closestUnit.X, closestUnit.Y - closestUnit.Altitude) Then
+                    closestUnit = closeUnits(i)
+                End If
+            Next
+        End If
+        Return closestUnit
+    End Function
 
     Public Sub SetTile(mouseX As Integer, mouseY As Integer, tile As Tile)
         If IsMouseInBounds(mouseX, mouseY) Then

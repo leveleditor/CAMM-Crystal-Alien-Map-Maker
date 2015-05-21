@@ -96,6 +96,7 @@ Partial Class FrmEditor
         Me.btnCloseAllExceptThis = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnCloseAllLeft = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnCloseAllRight = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnToolPointer = New System.Windows.Forms.Button()
         CType(Me.picMap, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picActive, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.staInfoBar.SuspendLayout()
@@ -209,7 +210,7 @@ Partial Class FrmEditor
         '
         Me.btnToolErase.AutoSize = True
         Me.btnToolErase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnToolErase.Location = New System.Drawing.Point(191, 69)
+        Me.btnToolErase.Location = New System.Drawing.Point(250, 69)
         Me.btnToolErase.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolErase.Name = "btnToolErase"
         Me.btnToolErase.Size = New System.Drawing.Size(47, 23)
@@ -629,7 +630,7 @@ Partial Class FrmEditor
         Me.btnToolSmartBrush.AutoSize = True
         Me.btnToolSmartBrush.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnToolSmartBrush.Enabled = False
-        Me.btnToolSmartBrush.Location = New System.Drawing.Point(241, 69)
+        Me.btnToolSmartBrush.Location = New System.Drawing.Point(300, 69)
         Me.btnToolSmartBrush.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolSmartBrush.Name = "btnToolSmartBrush"
         Me.btnToolSmartBrush.Size = New System.Drawing.Size(74, 23)
@@ -643,7 +644,7 @@ Partial Class FrmEditor
         Me.btnToolBrush.AutoSize = True
         Me.btnToolBrush.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnToolBrush.Enabled = False
-        Me.btnToolBrush.Location = New System.Drawing.Point(144, 69)
+        Me.btnToolBrush.Location = New System.Drawing.Point(203, 69)
         Me.btnToolBrush.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolBrush.Name = "btnToolBrush"
         Me.btnToolBrush.Size = New System.Drawing.Size(44, 23)
@@ -742,6 +743,18 @@ Partial Class FrmEditor
         Me.btnCloseAllRight.Size = New System.Drawing.Size(185, 22)
         Me.btnCloseAllRight.Text = "Close All to the Right"
         '
+        'btnToolPointer
+        '
+        Me.btnToolPointer.AutoSize = True
+        Me.btnToolPointer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnToolPointer.Location = New System.Drawing.Point(150, 69)
+        Me.btnToolPointer.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.btnToolPointer.Name = "btnToolPointer"
+        Me.btnToolPointer.Size = New System.Drawing.Size(50, 23)
+        Me.btnToolPointer.TabIndex = 0
+        Me.btnToolPointer.Text = "Pointer"
+        Me.btnToolPointer.UseVisualStyleBackColor = True
+        '
         'FrmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -752,6 +765,7 @@ Partial Class FrmEditor
         Me.Controls.Add(Me.lblTools)
         Me.Controls.Add(Me.btnToolSmartBrush)
         Me.Controls.Add(Me.pnlUnits)
+        Me.Controls.Add(Me.btnToolPointer)
         Me.Controls.Add(Me.btnToolBrush)
         Me.Controls.Add(Me.btnToolErase)
         Me.Controls.Add(Me.btnEditUnits)
@@ -867,4 +881,5 @@ Partial Class FrmEditor
     Friend WithEvents btnCloseAllExceptThis As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuchkShadows As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuchkDebugUnitPos As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnToolPointer As System.Windows.Forms.Button
 End Class

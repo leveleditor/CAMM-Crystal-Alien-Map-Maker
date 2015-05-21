@@ -63,6 +63,9 @@ Public Class FrmEditor
     Private activeBuilding As Building 'The currently active object selection.
     Private activeUnit As Unit 'The currently active unit selection.
 
+    Private closestUnit As Unit = Nothing 'The closest unit to the cursor position.
+    Private selectedUnit As Unit = Nothing 'The currently selected unit.
+
     Private Sub FRMEditor_Load(sender As Object, e As EventArgs) Handles Me.Load
         'Storing default form title.
         baseFormTitle = Me.Text
@@ -231,7 +234,9 @@ Public Class FrmEditor
                         ActiveMap.SetBuilding(mouseX, mouseY, activeBuilding)
                     End If
                 ElseIf ActiveEditMode = EditMode.Units Then
-                    If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
+                    If ActiveToolMode = ToolMode.Pointer Then
+                        selectedUnit = closestUnit
+                    ElseIf ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                         ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
                     Else
                         If mouseYNoSnap - activeUnit.Altitude > 0 Then
@@ -304,6 +309,10 @@ Public Class FrmEditor
             End If
         End If
 
+        If ActiveToolMode = ToolMode.Pointer Then
+            closestUnit = ActiveMap.GetClosestUnit(mouseXNoSnap, mouseYNoSnap, 30)
+        End If
+
         ' Redraw.
         picMap.Invalidate()
     End Sub
@@ -316,10 +325,12 @@ Public Class FrmEditor
 
             ' Draw the rectangle cursor / selector thingy.
             If IsMouseInBounds() Then
-                If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                    g.DrawRectangle(PenTileErase, mouseX - (PenTileHover.Width / 2), mouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
-                Else
-                    g.DrawRectangle(PenTileHover, mouseX - (PenTileHover.Width / 2), mouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
+                If ActiveEditMode <> EditMode.Units Then
+                    If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
+                        g.DrawRectangle(PenTileErase, mouseX - (PenTileHover.Width / 2), mouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
+                    Else
+                        g.DrawRectangle(PenTileHover, mouseX - (PenTileHover.Width / 2), mouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
+                    End If
                 End If
                 If ActiveEditMode = EditMode.Tiles Then
                     'g.DrawImage(ActiveTile.Image, MouseX, MouseY)
@@ -334,7 +345,13 @@ Public Class FrmEditor
 
                     'g.DrawImage(ActiveBuilding.FullImage, MouseX, MouseY, ActiveBuilding.FullImage.Width, ActiveBuilding.FullImage.Height)
                 ElseIf ActiveEditMode = EditMode.Units And activeUnit.UnitId <> "" Then
-                    If isMouseOnMap And Not IsDrawing And ActiveToolMode <> ToolMode.Eraser Then
+                    If ActiveToolMode = ToolMode.Pointer Then
+                        If closestUnit IsNot Nothing Then
+                            g.DrawEllipse(PenSelectionHover, closestUnit.X - 10, closestUnit.Y - closestUnit.Altitude - 10, 20, 20)
+                            'g.DrawString(closestUnit.UnitId, New Font(FontFamily.GenericMonospace, 12, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.GreenYellow, closestUnit.X, closestUnit.Y)
+                        End If
+                    End If
+                    If isMouseOnMap And Not IsDrawing And ActiveToolMode <> ToolMode.Eraser And ActiveToolMode <> ToolMode.Pointer Then
                         If mouseYNoSnap - activeUnit.Altitude > 0 Then
                             If DrawShadows Then
                                 g.DrawImage(activeUnit.ShadowImage, _
@@ -353,6 +370,13 @@ Public Class FrmEditor
                             g.DrawLine(New Pen(Color.Red, 2), mouseXNoSnap + 5, mouseYNoSnap - 5, mouseXNoSnap - 5, mouseYNoSnap + 5)
                         End If
                     End If
+                End If
+            End If
+
+            If ActiveToolMode = ToolMode.Pointer Then
+                If ActiveEditMode = EditMode.Units And selectedUnit IsNot Nothing Then
+                    g.DrawEllipse(PenSelected, selectedUnit.X - 10, selectedUnit.Y - selectedUnit.Altitude - 10, 20, 20)
+                    'g.DrawString(selectedUnit.UnitId, New Font(FontFamily.GenericMonospace, 12, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.GreenYellow, selectedUnit.X + 10, selectedUnit.Y - selectedUnit.Altitude - 10)
                 End If
             End If
 
@@ -399,7 +423,7 @@ Public Class FrmEditor
             Next x
 
             'Draw Rectangle around selected Tile.
-            If ActiveEditMode = EditMode.Tiles And activeTile.TileId <> -1 And ActiveToolMode <> ToolMode.Eraser Then
+            If ActiveEditMode = EditMode.Tiles And activeTile.TileId <> -1 And ActiveToolMode <> ToolMode.Eraser And ActiveToolMode <> ToolMode.Pointer Then
                 e.Graphics.DrawRectangle(PenSelected, selXTiles + (PenSelected.Width / 2) + 1, selYTiles + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
             End If
 
@@ -488,7 +512,7 @@ Public Class FrmEditor
             Next x
 
             'Draw Rectangle around selected Buildings.
-            If ActiveEditMode = EditMode.Buildings And activeBuilding.BuildingId <> "" And ActiveToolMode <> ToolMode.Eraser Then
+            If ActiveEditMode = EditMode.Buildings And activeBuilding.BuildingId <> "" And ActiveToolMode <> ToolMode.Eraser And ActiveToolMode <> ToolMode.Pointer Then
                 e.Graphics.DrawRectangle(PenSelected, selXBuildings + (PenSelected.Width / 2) + 1, selYBuildings + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
             End If
 
@@ -578,7 +602,7 @@ Public Class FrmEditor
             Next x
 
             'Draw Rectangle around selected Units.
-            If ActiveEditMode = EditMode.Units And activeUnit.UnitId <> "" And ActiveToolMode <> ToolMode.Eraser Then
+            If ActiveEditMode = EditMode.Units And activeUnit.UnitId <> "" And ActiveToolMode <> ToolMode.Eraser And ActiveToolMode <> ToolMode.Pointer Then
                 e.Graphics.DrawRectangle(PenSelected, selXUnits + (PenSelected.Width / 2) + 1, selYUnits + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
             End If
 
@@ -890,6 +914,7 @@ Public Class FrmEditor
         pnlUnits.Hide()
         pnlMap.Height = pnlTiles.Height
         pnlMap.Location = New Point(pnlMap.Location.X, pnlTiles.Location.Y)
+        picMap.Invalidate()
     End Sub
 
     Private Sub btnEditBuildings_Click(sender As Object, e As EventArgs) Handles btnEditBuildings.Click
@@ -904,6 +929,7 @@ Public Class FrmEditor
         pnlUnits.Hide()
         pnlMap.Height = pnlBuildings.Height
         pnlMap.Location = New Point(pnlMap.Location.X, pnlBuildings.Location.Y)
+        picMap.Invalidate()
     End Sub
 
     Private Sub btnEditUnits_Click(sender As Object, e As EventArgs) Handles btnEditUnits.Click
@@ -918,15 +944,31 @@ Public Class FrmEditor
         pnlUnits.Show()
         pnlMap.Height = pnlUnits.Height
         pnlMap.Location = New Point(pnlMap.Location.X, pnlUnits.Location.Y)
+        picMap.Invalidate()
     End Sub
 
     Private Sub btnEditShroud_Click(sender As Object, e As EventArgs) Handles btnEditShroud.Click
         ActiveEditMode = EditMode.Shroud
     End Sub
 
+    Private Sub btnToolPointer_Click(sender As Object, e As EventArgs) Handles btnToolPointer.Click
+        ActiveToolMode = ToolMode.Pointer
+
+        btnToolPointer.Enabled = False
+        btnToolBrush.Enabled = True
+        'btnToolSmartBrush.Enabled = True
+        btnToolErase.Enabled = True
+        picTiles.Invalidate()
+        picBuildings.Invalidate()
+        picUnits.Invalidate()
+        picActive.Invalidate()
+        picMap.Invalidate()
+    End Sub
+
     Private Sub btnToolBrush_Click(sender As Object, e As EventArgs) Handles btnToolBrush.Click
         ActiveToolMode = ToolMode.Brush
 
+        btnToolPointer.Enabled = True
         btnToolBrush.Enabled = False
         'btnToolSmartBrush.Enabled = True
         btnToolErase.Enabled = True
@@ -937,6 +979,7 @@ Public Class FrmEditor
         picBuildings.Invalidate()
         picUnits.Invalidate()
         picActive.Invalidate()
+        picMap.Invalidate()
     End Sub
 
     Private Sub btnToolSmartBrush_Click(sender As Object, e As EventArgs) Handles btnToolSmartBrush.Click
@@ -946,6 +989,7 @@ Public Class FrmEditor
         activeTile = New Tile(0, 0)
         activeTile.TileId = -2
 
+        btnToolPointer.Enabled = True
         btnToolBrush.Enabled = True
         btnToolSmartBrush.Enabled = False
         btnToolErase.Enabled = True
@@ -966,6 +1010,7 @@ Public Class FrmEditor
         '    'For later.
         'End If
 
+        btnToolPointer.Enabled = True
         btnToolBrush.Enabled = True
         'btnToolSmartBrush.Enabled = True
         btnToolErase.Enabled = False
@@ -976,6 +1021,7 @@ Public Class FrmEditor
         picBuildings.Invalidate()
         picUnits.Invalidate()
         picActive.Invalidate()
+        picMap.Invalidate()
     End Sub
 
     Private Sub chkAssociateFileTypeCAMM_CheckStateChanged(sender As Object, e As EventArgs) Handles chkAssociateFileTypeCAMM.CheckStateChanged
