@@ -380,7 +380,7 @@ Public Class FrmEditor
                         'g.DrawString(selectedUnit.UnitId, New Font(FontFamily.GenericMonospace, 12, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.GreenYellow, selectedUnit.X + 10, selectedUnit.Y - selectedUnit.Altitude - 10)
                     End If
                 ElseIf ActiveToolMode = ToolMode.Eraser Then
-                    g.DrawEllipse(PenTileErase, mouseXNoSnap - 15, mouseYNoSnap - 15, 30, 30)
+                    g.DrawEllipse(PenTileErase, mouseXNoSnap - 30, mouseYNoSnap - 30, 60, 60)
                 End If
             End If
 
