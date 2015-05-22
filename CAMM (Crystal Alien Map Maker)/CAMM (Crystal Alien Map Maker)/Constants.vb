@@ -47,16 +47,17 @@
     Public ReadOnly PenSelected As Pen = New Pen(Pens.LimeGreen.Brush, 3)
 
     Public Enum EditMode
-        Tiles = 0
-        Buildings = 1
-        Units = 2
-        Shroud = 3
+        Tiles
+        Buildings
+        Units
+        Shroud
     End Enum
 
     Public Enum ToolMode
-        Brush = 0
-        SmartBrush = 1
-        Eraser = 2
+        Pointer
+        Brush
+        SmartBrush
+        Eraser
     End Enum
 
     Public Enum Team

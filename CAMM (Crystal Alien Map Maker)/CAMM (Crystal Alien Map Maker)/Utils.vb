@@ -24,6 +24,19 @@ Public Module Utils
         PointToGrid(point.X, point.Y)
     End Sub
 
+    ''' <summary>
+    ''' Returns the distance between two points.
+    ''' </summary>
+    ''' <param name="x1">First point x position</param>
+    ''' <param name="y1">First point y position</param>
+    ''' <param name="x2">Second point x position</param>
+    ''' <param name="y2">Second point y position</param>
+    ''' <returns>The distance between the two points as a Double</returns>
+    ''' <remarks>Useful for checking if the cursor is close to an object</remarks>
+    Public Function GetRadialDistance(x1 As Integer, y1 As Integer, x2 As Integer, y2 As Integer) As Double
+        Return Math.Sqrt(((x1 - x2) ^ 2) + ((y1 - y2) ^ 2))
+    End Function
+
     Public Sub UpgradeBuildingId(fromVersion As Integer, toVersion As Integer, ByRef objectId As String)
         If fromVersion < 4 And (toVersion = 4 Or toVersion = 5) Then
             ' The easy way to map old building Ids to new ones.
