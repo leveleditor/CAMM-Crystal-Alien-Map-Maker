@@ -303,6 +303,10 @@ Public Class Map
         End Select
     End Sub
 
+    Public Function DeleteUnit(unit As Unit) As Boolean
+        Return mapUnits.Remove(unit)
+    End Function
+
     Public Sub Draw(ByRef g As Graphics, drawGrid As Boolean, drawShadows As Boolean, Optional debugBuildingPos As Boolean = False, Optional debugUnitPos As Boolean = False)
         g.Clear(Color.FromKnownColor(KnownColor.Control))
 

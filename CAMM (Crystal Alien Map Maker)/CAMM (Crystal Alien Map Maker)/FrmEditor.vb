@@ -236,6 +236,9 @@ Public Class FrmEditor
                 ElseIf ActiveEditMode = EditMode.Units Then
                     If ActiveToolMode = ToolMode.Pointer Then
                         selectedUnit = closestUnit
+                        If selectedUnit IsNot Nothing Then
+                            btnDeleteSelected.Enabled = True
+                        End If
                     ElseIf ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                         ActiveMap.Eraser(mouseXNoSnap, mouseYNoSnap, ActiveEditMode)
                     Else
@@ -891,6 +894,25 @@ Public Class FrmEditor
     Private Sub mnuchkDebugUnitPos_CheckedChanged(sender As Object, e As EventArgs) Handles mnuchkDebugUnitPos.CheckedChanged
         DrawUnitDebugPos = sender.Checked
         picMap.Invalidate()
+    End Sub
+
+    Private Sub btnDeleteUnit_Click(sender As Object, e As EventArgs) Handles btnDeleteSelected.Click
+        Select Case ActiveEditMode
+            Case EditMode.Tiles
+                'TODO: Deleted selected tile(s).
+            Case EditMode.Buildings
+                'TODO: Delete selected building.
+            Case EditMode.Units
+                If selectedUnit IsNot Nothing Then
+                    btnDeleteSelected.Enabled = False
+                    ActiveMap.DeleteUnit(selectedUnit)
+                    selectedUnit = Nothing
+                    closestUnit = Nothing
+                    picMap.Invalidate()
+                End If
+            Case EditMode.Shroud
+                'TODO: Delete selected shroud??
+        End Select
     End Sub
 
     Private Sub btnTileDataEditor_Click(sender As Object, e As EventArgs) Handles btnTileDataEditor.Click

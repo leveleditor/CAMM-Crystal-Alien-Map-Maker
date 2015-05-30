@@ -54,6 +54,8 @@ Partial Class FrmEditor
         Me.btnExit = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuEdit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnDeleteSelected = New System.Windows.Forms.ToolStripMenuItem()
+        Me.separator9 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnMapProperties = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuView = New System.Windows.Forms.ToolStripMenuItem()
@@ -358,10 +360,23 @@ Partial Class FrmEditor
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnMapProperties})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnDeleteSelected, Me.separator9, Me.btnMapProperties})
         Me.mnuEdit.Name = "mnuEdit"
         Me.mnuEdit.Size = New System.Drawing.Size(39, 24)
         Me.mnuEdit.Text = "&Edit"
+        '
+        'btnDeleteSelected
+        '
+        Me.btnDeleteSelected.Enabled = False
+        Me.btnDeleteSelected.Name = "btnDeleteSelected"
+        Me.btnDeleteSelected.ShortcutKeys = System.Windows.Forms.Keys.Delete
+        Me.btnDeleteSelected.Size = New System.Drawing.Size(208, 22)
+        Me.btnDeleteSelected.Text = "Delete Selected"
+        '
+        'separator9
+        '
+        Me.separator9.Name = "separator9"
+        Me.separator9.Size = New System.Drawing.Size(205, 6)
         '
         'btnMapProperties
         '
@@ -882,4 +897,6 @@ Partial Class FrmEditor
     Friend WithEvents mnuchkShadows As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuchkDebugUnitPos As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnToolPointer As System.Windows.Forms.Button
+    Friend WithEvents btnDeleteSelected As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents separator9 As System.Windows.Forms.ToolStripSeparator
 End Class
