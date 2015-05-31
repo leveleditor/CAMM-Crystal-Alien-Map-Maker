@@ -14,7 +14,7 @@
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <OptionInfer>On</OptionInfer>
-    <ApplicationIcon>Crystal.ico</ApplicationIcon>
+    <ApplicationIcon>icons\Crystal.ico</ApplicationIcon>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
     <SignManifests>false</SignManifests>
     <TargetZone>LocalIntranet</TargetZone>
@@ -246,8 +246,8 @@
     <None Include="Tile Data\_Save Data\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CAMMFile.ico" />
-    <Content Include="Crystal.ico" />
+    <Content Include="icons\CAMMFile.ico" />
+    <Content Include="icons\Crystal.ico" />
     <Content Include="lib\*">
     </Content>
     <Content Include="Tile Data\Buttons\*" />
@@ -301,7 +301,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y /B "$(TargetPath)" "$(TargetPath).tmp"
-"$(ProjectDir)InsertIcons.exe" "$(TargetPath).tmp" "$(ProjectDir)CAMMFile.ico"
+"$(ProjectDir)InsertIcons.exe" "$(TargetPath).tmp" "$(ProjectDir)\icons"
 move /Y "$(TargetPath).tmp" "$(TargetPath)"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
