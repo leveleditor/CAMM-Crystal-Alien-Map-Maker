@@ -929,52 +929,19 @@ Public Class FrmEditor
     End Sub
 
     Private Sub btnEditTiles_Click(sender As Object, e As EventArgs) Handles btnEditTiles.Click
-        ActiveEditMode = EditMode.Tiles
-        lblSelected.Text = "Selected Tile:"
-        picActive.Image = activeTile.Image
-        btnEditTiles.Enabled = False
-        btnEditBuildings.Enabled = True
-        btnEditUnits.Enabled = True
-        pnlTiles.Show()
-        pnlBuildings.Hide()
-        pnlUnits.Hide()
-        pnlMap.Height = pnlTiles.Height
-        pnlMap.Location = New Point(pnlMap.Location.X, pnlTiles.Location.Y)
-        picMap.Invalidate()
+        SwitchEditMode(EditMode.Tiles)
     End Sub
 
     Private Sub btnEditBuildings_Click(sender As Object, e As EventArgs) Handles btnEditBuildings.Click
-        ActiveEditMode = EditMode.Buildings
-        lblSelected.Text = "Selected Building:"
-        picActive.Image = activeBuilding.SmallImage
-        btnEditTiles.Enabled = True
-        btnEditBuildings.Enabled = False
-        btnEditUnits.Enabled = True
-        pnlTiles.Hide()
-        pnlBuildings.Show()
-        pnlUnits.Hide()
-        pnlMap.Height = pnlBuildings.Height
-        pnlMap.Location = New Point(pnlMap.Location.X, pnlBuildings.Location.Y)
-        picMap.Invalidate()
+        SwitchEditMode(EditMode.Buildings)
     End Sub
 
     Private Sub btnEditUnits_Click(sender As Object, e As EventArgs) Handles btnEditUnits.Click
-        ActiveEditMode = EditMode.Units
-        lblSelected.Text = "Selected Unit:"
-        picActive.Image = activeUnit.SmallImage
-        btnEditTiles.Enabled = True
-        btnEditBuildings.Enabled = True
-        btnEditUnits.Enabled = False
-        pnlTiles.Hide()
-        pnlBuildings.Hide()
-        pnlUnits.Show()
-        pnlMap.Height = pnlUnits.Height
-        pnlMap.Location = New Point(pnlMap.Location.X, pnlUnits.Location.Y)
-        picMap.Invalidate()
+        SwitchEditMode(EditMode.Units)
     End Sub
 
     Private Sub btnEditShroud_Click(sender As Object, e As EventArgs) Handles btnEditShroud.Click
-        ActiveEditMode = EditMode.Shroud
+        SwitchEditMode(EditMode.Shroud)
     End Sub
 
     Private Sub btnToolPointer_Click(sender As Object, e As EventArgs) Handles btnToolPointer.Click
@@ -1301,6 +1268,51 @@ Public Class FrmEditor
                 End If
             Next
         End If
+    End Sub
+
+    Public Sub SwitchEditMode(mode As EditMode)
+        ' Update currently active edit mode.
+        ActiveEditMode = mode
+
+        ' Enable all edit mode buttons.
+        btnEditTiles.Enabled = True
+        btnEditBuildings.Enabled = True
+        btnEditUnits.Enabled = True
+        'btnEditShroud.Enabled = True
+
+        ' Hide all edit mode panels.
+        pnlTiles.Hide()
+        pnlBuildings.Hide()
+        pnlUnits.Hide()
+
+        ' Change label text to currently active edit mode.
+        ' Change selected object preview to selected object of active edit mode.
+        ' Disable button of currently active edit mode.
+        ' Show the relevant edit mode panel.
+        Select Case mode
+            Case EditMode.Tiles
+                lblSelected.Text = "Selected Tile:"
+                picActive.Image = activeTile.Image
+                btnEditTiles.Enabled = False
+                pnlTiles.Show()
+            Case EditMode.Buildings
+                lblSelected.Text = "Selected Building:"
+                picActive.Image = activeBuilding.SmallImage
+                btnEditBuildings.Enabled = False
+                pnlBuildings.Show()
+            Case EditMode.Units
+                lblSelected.Text = "Selected Unit:"
+                picActive.Image = activeUnit.SmallImage
+                btnEditUnits.Enabled = False
+                pnlUnits.Show()
+            Case EditMode.Shroud
+                lblSelected.Text = "Shroud:"
+                picActive.Image = Nothing
+                btnEditShroud.Enabled = False
+        End Select
+
+        ' Redraw the map.
+        picMap.Invalidate()
     End Sub
 
     Public Sub SwitchToolMode(mode As ToolMode)
