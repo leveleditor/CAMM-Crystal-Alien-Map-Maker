@@ -353,10 +353,10 @@ Public Class FrmEditor
                             g.DrawEllipse(PenSelectionHover, closestUnit.X - 10, closestUnit.Y - closestUnit.Altitude - 10, 20, 20)
                             'g.DrawString(closestUnit.UnitId, New Font(FontFamily.GenericMonospace, 12, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.GreenYellow, closestUnit.X, closestUnit.Y)
                         End If
-                    ElseIf ActiveToolMode = ToolMode.Eraser Then
+                    ElseIf ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                         g.DrawEllipse(PenTileErase, mouseXNoSnap - 30, mouseYNoSnap - 30, 60, 60)
                     End If
-                    If isMouseOnMap And Not IsDrawing And ActiveToolMode <> ToolMode.Eraser And ActiveToolMode <> ToolMode.Pointer Then
+                    If isMouseOnMap And Not IsDrawing And ActiveToolMode <> ToolMode.Eraser And Not My.Computer.Keyboard.CtrlKeyDown And ActiveToolMode <> ToolMode.Pointer Then
                         If mouseYNoSnap - activeUnit.Altitude > 0 Then
                             If DrawShadows Then
                                 g.DrawImage(activeUnit.ShadowImage, _
