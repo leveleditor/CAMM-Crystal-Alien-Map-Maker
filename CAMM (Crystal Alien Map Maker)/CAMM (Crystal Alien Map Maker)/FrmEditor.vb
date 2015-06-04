@@ -978,76 +978,19 @@ Public Class FrmEditor
     End Sub
 
     Private Sub btnToolPointer_Click(sender As Object, e As EventArgs) Handles btnToolPointer.Click
-        ActiveToolMode = ToolMode.Pointer
-
-        btnToolPointer.Enabled = False
-        btnToolBrush.Enabled = True
-        'btnToolSmartBrush.Enabled = True
-        btnToolErase.Enabled = True
-        picTiles.Invalidate()
-        picBuildings.Invalidate()
-        picUnits.Invalidate()
-        picActive.Invalidate()
-        picMap.Invalidate()
+        SwitchToolMode(ToolMode.Pointer)
     End Sub
 
     Private Sub btnToolBrush_Click(sender As Object, e As EventArgs) Handles btnToolBrush.Click
-        ActiveToolMode = ToolMode.Brush
-
-        btnToolPointer.Enabled = True
-        btnToolBrush.Enabled = False
-        'btnToolSmartBrush.Enabled = True
-        btnToolErase.Enabled = True
-        'picTiles.Show()
-        'picBuildings.Show()
-        'picUnits.Show()
-        picTiles.Invalidate()
-        picBuildings.Invalidate()
-        picUnits.Invalidate()
-        picActive.Invalidate()
-        picMap.Invalidate()
+        SwitchToolMode(ToolMode.Brush)
     End Sub
 
     Private Sub btnToolSmartBrush_Click(sender As Object, e As EventArgs) Handles btnToolSmartBrush.Click
-        ActiveToolMode = ToolMode.SmartBrush
-
-        picActive.Image = Nothing
-        activeTile = New Tile(0, 0)
-        activeTile.TileId = -2
-
-        btnToolPointer.Enabled = True
-        btnToolBrush.Enabled = True
-        btnToolSmartBrush.Enabled = False
-        btnToolErase.Enabled = True
+        SwitchToolMode(ToolMode.SmartBrush)
     End Sub
 
     Private Sub btnToolErase_Click(sender As Object, e As EventArgs) Handles btnToolErase.Click
-        ActiveToolMode = ToolMode.Eraser
-
-        'picActive.Image = Nothing
-        'If activeEditMode = EditMode.Tiles Then
-        '    'ToolMode = 0
-        '    ActiveTile = New Tile(0, 0)
-        'ElseIf activeEditMode = EditMode.Buildings Then
-        '    ActiveBuilding = New c_Object(0, 0)
-        'ElseIf activeEditMode = EditMode.Units Then
-        '    ActiveUnit = New Unit(0, 0)
-        'ElseIf activeEditMode = EditMode.Shroud Then
-        '    'For later.
-        'End If
-
-        btnToolPointer.Enabled = True
-        btnToolBrush.Enabled = True
-        'btnToolSmartBrush.Enabled = True
-        btnToolErase.Enabled = False
-        'picTiles.Hide()
-        'picBuildings.Hide()
-        'picUnits.Hide()
-        picTiles.Invalidate()
-        picBuildings.Invalidate()
-        picUnits.Invalidate()
-        picActive.Invalidate()
-        picMap.Invalidate()
+        SwitchToolMode(ToolMode.Eraser)
     End Sub
 
     Private Sub chkAssociateFileTypeCAMM_CheckStateChanged(sender As Object, e As EventArgs) Handles chkAssociateFileTypeCAMM.CheckStateChanged
@@ -1358,6 +1301,36 @@ Public Class FrmEditor
                 End If
             Next
         End If
+    End Sub
+
+    Public Sub SwitchToolMode(mode As ToolMode)
+        ' Update currently active tool mode.
+        ActiveToolMode = mode
+
+        ' Enable all buttons.
+        btnToolPointer.Enabled = True
+        btnToolBrush.Enabled = True
+        btnToolSmartBrush.Enabled = True
+        btnToolErase.Enabled = True
+
+        ' Disable button of currently active tool mode.
+        Select Case mode
+            Case ToolMode.Pointer
+                btnToolPointer.Enabled = False
+            Case ToolMode.Brush
+                btnToolBrush.Enabled = False
+            Case ToolMode.SmartBrush
+                btnToolSmartBrush.Enabled = False
+            Case ToolMode.Eraser
+                btnToolErase.Enabled = False
+        End Select
+
+        ' Refresh drawing surfaces.
+        picTiles.Invalidate()
+        picBuildings.Invalidate()
+        picUnits.Invalidate()
+        picActive.Invalidate()
+        picMap.Invalidate()
     End Sub
 
 End Class
