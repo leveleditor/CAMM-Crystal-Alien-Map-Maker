@@ -802,6 +802,7 @@ Partial Class FrmEditor
         Me.Controls.Add(Me.mapTabs)
         Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.KeyPreview = True
         Me.MainMenuStrip = Me.mnuMain
         Me.Name = "FrmEditor"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

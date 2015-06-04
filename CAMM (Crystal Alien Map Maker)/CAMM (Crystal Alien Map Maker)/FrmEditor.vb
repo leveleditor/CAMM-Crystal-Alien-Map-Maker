@@ -42,6 +42,9 @@ Public Class FrmEditor
     Private mouseXNoSnap As Integer
     Private mouseYNoSnap As Integer
 
+    'The last key that was pressed.
+    Private lastKeyDown As Keys = Keys.None
+
     Public ActiveEditMode As EditMode = EditMode.Tiles
     Public ActiveToolMode As ToolMode = ToolMode.Brush
 
@@ -133,6 +136,28 @@ Public Class FrmEditor
     Private Sub FRMEditor_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         If MsgBox("There may be unsaved changes." + vbNewLine + "Are you sure you want to exit?", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then
             e.Cancel = True
+        End If
+    End Sub
+
+    Private Sub FrmEditor_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        'Prevent key down event from repeating.
+        If e.KeyCode <> lastKeyDown Then
+            lastKeyDown = e.KeyCode
+
+            If e.KeyCode = Keys.ControlKey Then
+                'Redraw the map when the Ctrl key is pressed.
+                picMap.Invalidate()
+            End If
+        End If
+    End Sub
+
+    Private Sub FrmEditor_KeyUp(sender As Object, e As KeyEventArgs) Handles Me.KeyUp
+        'Allow key down event to fire again.
+        lastKeyDown = Keys.None
+
+        If e.KeyCode = Keys.ControlKey Then
+            'Redraw the map when the Ctrl key is released.
+            picMap.Invalidate()
         End If
     End Sub
 
@@ -347,7 +372,7 @@ Public Class FrmEditor
                     '     ActiveBuilding.FullImage.Height)
 
                     'g.DrawImage(ActiveBuilding.FullImage, MouseX, MouseY, ActiveBuilding.FullImage.Width, ActiveBuilding.FullImage.Height)
-                ElseIf ActiveEditMode = EditMode.Units And activeUnit.UnitId <> "" Then
+                ElseIf ActiveEditMode = EditMode.Units Then
                     If ActiveToolMode = ToolMode.Pointer Then
                         If closestUnit IsNot Nothing Then
                             g.DrawEllipse(PenSelectionHover, closestUnit.X - 10, closestUnit.Y - closestUnit.Altitude - 10, 20, 20)
@@ -356,7 +381,7 @@ Public Class FrmEditor
                     ElseIf ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                         g.DrawEllipse(PenTileErase, mouseXNoSnap - 30, mouseYNoSnap - 30, 60, 60)
                     End If
-                    If isMouseOnMap And Not IsDrawing And ActiveToolMode <> ToolMode.Eraser And Not My.Computer.Keyboard.CtrlKeyDown And ActiveToolMode <> ToolMode.Pointer Then
+                    If isMouseOnMap And Not IsDrawing And ActiveToolMode <> ToolMode.Eraser And Not My.Computer.Keyboard.CtrlKeyDown And ActiveToolMode <> ToolMode.Pointer And activeUnit.UnitId <> "" Then
                         If mouseYNoSnap - activeUnit.Altitude > 0 Then
                             If DrawShadows Then
                                 g.DrawImage(activeUnit.ShadowImage, _
