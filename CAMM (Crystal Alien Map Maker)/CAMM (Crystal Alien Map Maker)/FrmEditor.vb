@@ -1203,6 +1203,7 @@ Public Class FrmEditor
                 mapTabs.TabPages.Add(newTab)
             Next
         End If
+        picMap.Invalidate()
     End Sub
 
     Private Sub UpdateFormTitle()
