@@ -241,6 +241,8 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="Tile Data\Brushes\Rectangle\LakeFill.ini" />
+    <None Include="Tile Data\Brushes\Rectangle\MountainFill.ini" />
   </ItemGroup>
   <ItemGroup>
     <None Include="icons\CAMMFile.ico" />
