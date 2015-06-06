@@ -19,6 +19,7 @@
     Public ReadOnly TerrainFile As String = FullBasePath + "/" + TerrainFileName
     Public ReadOnly BuildingsFile As String = FullBasePath + "/" + BuildingsFileName
     Public ReadOnly UnitsFile As String = FullBasePath + "/" + UnitsFileName
+    Public ReadOnly RectangleBrushPath As String = FullBasePath + "/Brushes/Rectangle"
 
     Public Const ConfigFormat As Integer = 7
     Public Const TerrainFormat As Integer = 8
@@ -57,6 +58,7 @@
         Pointer
         Brush
         SmartBrush
+        RectangleBrush
         Eraser
     End Enum
 
