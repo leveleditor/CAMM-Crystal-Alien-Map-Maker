@@ -1074,6 +1074,32 @@ Public Class FrmEditor
         ' TODO: Associate .map files, though it may not be such a good idea.
     End Sub
 
+    Private Sub cboRectangleBrush_DrawItem(sender As Object, e As DrawItemEventArgs) Handles cboRectangleBrush.DrawItem
+        Dim g As Graphics = e.Graphics
+
+        'Get a reference to the selected item as it's proper type.
+        Dim item As RectangleBrushPreset = cboRectangleBrush.Items(e.Index)
+
+        'Make a smaller variant of the current item's font for the File Name.
+        Dim smallFont As Font = New Font(e.Font.FontFamily, e.Font.Size - 2, FontStyle.Regular)
+
+        'Make a Brush for text based on the font color of the current item.
+        Dim fontBrush As Brush = New SolidBrush(e.ForeColor)
+
+        'Draw the combo box's default background and focus rectangle.
+        e.DrawBackground()
+        e.DrawFocusRectangle()
+
+        'Draw the item's Preview Image.
+        g.DrawImage(item.Preview, e.Bounds.X, e.Bounds.Y, item.Preview.Width, item.Preview.Height)
+
+        'Draw the item's Title.
+        g.DrawString(item.Title, e.Font, fontBrush, e.Bounds.X + item.Preview.Width + smallFont.Height, e.Bounds.Y + smallFont.Height)
+
+        'Draw the item's File Name.
+        g.DrawString(item.FileName, smallFont, fontBrush, e.Bounds.X + item.Preview.Width + smallFont.Height, e.Bounds.Y + smallFont.Height + e.Font.Height)
+    End Sub
+
 #End Region
 
     Private Sub CheckFileAssociations()
