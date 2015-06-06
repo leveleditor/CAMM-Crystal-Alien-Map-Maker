@@ -99,6 +99,8 @@ Partial Class FrmEditor
         Me.btnCloseAllLeft = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnCloseAllRight = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnToolPointer = New System.Windows.Forms.Button()
+        Me.btnToolRectangleBrush = New System.Windows.Forms.Button()
+        Me.cboRectangleBrush = New System.Windows.Forms.ComboBox()
         CType(Me.picMap, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.picActive, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.staInfoBar.SuspendLayout()
@@ -120,7 +122,7 @@ Partial Class FrmEditor
         Me.lblx.Location = New System.Drawing.Point(597, 48)
         Me.lblx.Name = "lblx"
         Me.lblx.Size = New System.Drawing.Size(12, 13)
-        Me.lblx.TabIndex = 10
+        Me.lblx.TabIndex = 9
         Me.lblx.Text = "x"
         '
         'lblTools
@@ -129,7 +131,7 @@ Partial Class FrmEditor
         Me.lblTools.Location = New System.Drawing.Point(108, 74)
         Me.lblTools.Name = "lblTools"
         Me.lblTools.Size = New System.Drawing.Size(36, 13)
-        Me.lblTools.TabIndex = 17
+        Me.lblTools.TabIndex = 13
         Me.lblTools.Text = "Tools:"
         '
         'lblWidth
@@ -138,7 +140,7 @@ Partial Class FrmEditor
         Me.lblWidth.Location = New System.Drawing.Point(547, 31)
         Me.lblWidth.Name = "lblWidth"
         Me.lblWidth.Size = New System.Drawing.Size(42, 13)
-        Me.lblWidth.TabIndex = 18
+        Me.lblWidth.TabIndex = 7
         Me.lblWidth.Text = "Width"
         Me.lblWidth.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
@@ -148,7 +150,7 @@ Partial Class FrmEditor
         Me.lblHeight.Location = New System.Drawing.Point(610, 31)
         Me.lblHeight.Name = "lblHeight"
         Me.lblHeight.Size = New System.Drawing.Size(42, 13)
-        Me.lblHeight.TabIndex = 19
+        Me.lblHeight.TabIndex = 10
         Me.lblHeight.Text = "Height"
         Me.lblHeight.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
@@ -188,7 +190,7 @@ Partial Class FrmEditor
         Me.staInfoBar.Name = "staInfoBar"
         Me.staInfoBar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.staInfoBar.Size = New System.Drawing.Size(766, 22)
-        Me.staInfoBar.TabIndex = 8
+        Me.staInfoBar.TabIndex = 22
         Me.staInfoBar.Text = "StatusStrip1"
         '
         'lblCursorLoc
@@ -212,11 +214,11 @@ Partial Class FrmEditor
         '
         Me.btnToolErase.AutoSize = True
         Me.btnToolErase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnToolErase.Location = New System.Drawing.Point(250, 69)
+        Me.btnToolErase.Location = New System.Drawing.Point(349, 69)
         Me.btnToolErase.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolErase.Name = "btnToolErase"
         Me.btnToolErase.Size = New System.Drawing.Size(47, 23)
-        Me.btnToolErase.TabIndex = 5
+        Me.btnToolErase.TabIndex = 17
         Me.btnToolErase.Text = "Eraser"
         '
         'pnlMap
@@ -231,7 +233,7 @@ Partial Class FrmEditor
         Me.pnlMap.Margin = New System.Windows.Forms.Padding(3, 3, 0, 3)
         Me.pnlMap.Name = "pnlMap"
         Me.pnlMap.Size = New System.Drawing.Size(623, 308)
-        Me.pnlMap.TabIndex = 7
+        Me.pnlMap.TabIndex = 20
         '
         'pnlTiles
         '
@@ -244,7 +246,7 @@ Partial Class FrmEditor
         Me.pnlTiles.Margin = New System.Windows.Forms.Padding(0, 3, 3, 3)
         Me.pnlTiles.Name = "pnlTiles"
         Me.pnlTiles.Size = New System.Drawing.Size(121, 308)
-        Me.pnlTiles.TabIndex = 6
+        Me.pnlTiles.TabIndex = 21
         '
         'picTiles
         '
@@ -549,7 +551,7 @@ Partial Class FrmEditor
         Me.btnEditShroud.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnEditShroud.Name = "btnEditShroud"
         Me.btnEditShroud.Size = New System.Drawing.Size(80, 23)
-        Me.btnEditShroud.TabIndex = 4
+        Me.btnEditShroud.TabIndex = 5
         Me.btnEditShroud.Text = "Edit Shroud"
         Me.btnEditShroud.UseVisualStyleBackColor = True
         Me.btnEditShroud.Visible = False
@@ -565,7 +567,7 @@ Partial Class FrmEditor
         Me.pnlBuildings.Margin = New System.Windows.Forms.Padding(0, 3, 3, 3)
         Me.pnlBuildings.Name = "pnlBuildings"
         Me.pnlBuildings.Size = New System.Drawing.Size(121, 308)
-        Me.pnlBuildings.TabIndex = 9
+        Me.pnlBuildings.TabIndex = 21
         Me.pnlBuildings.Visible = False
         '
         'picBuildings
@@ -586,7 +588,7 @@ Partial Class FrmEditor
         Me.txtHeight.MaxLength = 3
         Me.txtHeight.Name = "txtHeight"
         Me.txtHeight.Size = New System.Drawing.Size(42, 20)
-        Me.txtHeight.TabIndex = 2
+        Me.txtHeight.TabIndex = 11
         Me.txtHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtWidth
@@ -598,7 +600,7 @@ Partial Class FrmEditor
         Me.txtWidth.MaxLength = 3
         Me.txtWidth.Name = "txtWidth"
         Me.txtWidth.Size = New System.Drawing.Size(42, 20)
-        Me.txtWidth.TabIndex = 1
+        Me.txtWidth.TabIndex = 8
         Me.txtWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'btnSize
@@ -609,7 +611,7 @@ Partial Class FrmEditor
         Me.btnSize.Margin = New System.Windows.Forms.Padding(0)
         Me.btnSize.Name = "btnSize"
         Me.btnSize.Size = New System.Drawing.Size(100, 23)
-        Me.btnSize.TabIndex = 0
+        Me.btnSize.TabIndex = 12
         Me.btnSize.Text = "Change Size"
         Me.btnSize.UseVisualStyleBackColor = True
         '
@@ -636,7 +638,7 @@ Partial Class FrmEditor
         Me.chkGrid.Location = New System.Drawing.Point(468, 47)
         Me.chkGrid.Name = "chkGrid"
         Me.chkGrid.Size = New System.Drawing.Size(75, 17)
-        Me.chkGrid.TabIndex = 12
+        Me.chkGrid.TabIndex = 6
         Me.chkGrid.Text = "Show Grid"
         Me.chkGrid.UseVisualStyleBackColor = True
         '
@@ -645,11 +647,11 @@ Partial Class FrmEditor
         Me.btnToolSmartBrush.AutoSize = True
         Me.btnToolSmartBrush.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnToolSmartBrush.Enabled = False
-        Me.btnToolSmartBrush.Location = New System.Drawing.Point(300, 69)
+        Me.btnToolSmartBrush.Location = New System.Drawing.Point(399, 69)
         Me.btnToolSmartBrush.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolSmartBrush.Name = "btnToolSmartBrush"
         Me.btnToolSmartBrush.Size = New System.Drawing.Size(74, 23)
-        Me.btnToolSmartBrush.TabIndex = 1
+        Me.btnToolSmartBrush.TabIndex = 18
         Me.btnToolSmartBrush.Text = "Smart Brush"
         Me.btnToolSmartBrush.UseVisualStyleBackColor = True
         Me.btnToolSmartBrush.Visible = False
@@ -663,7 +665,7 @@ Partial Class FrmEditor
         Me.btnToolBrush.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolBrush.Name = "btnToolBrush"
         Me.btnToolBrush.Size = New System.Drawing.Size(44, 23)
-        Me.btnToolBrush.TabIndex = 0
+        Me.btnToolBrush.TabIndex = 15
         Me.btnToolBrush.Text = "Brush"
         Me.btnToolBrush.UseVisualStyleBackColor = True
         '
@@ -678,7 +680,7 @@ Partial Class FrmEditor
         Me.btnEditUnits.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnEditUnits.Name = "btnEditUnits"
         Me.btnEditUnits.Size = New System.Drawing.Size(80, 23)
-        Me.btnEditUnits.TabIndex = 15
+        Me.btnEditUnits.TabIndex = 4
         Me.btnEditUnits.Text = "Edit Units"
         Me.btnEditUnits.UseVisualStyleBackColor = True
         '
@@ -693,7 +695,7 @@ Partial Class FrmEditor
         Me.pnlUnits.Margin = New System.Windows.Forms.Padding(0, 3, 3, 3)
         Me.pnlUnits.Name = "pnlUnits"
         Me.pnlUnits.Size = New System.Drawing.Size(121, 308)
-        Me.pnlUnits.TabIndex = 16
+        Me.pnlUnits.TabIndex = 21
         Me.pnlUnits.Visible = False
         '
         'picUnits
@@ -723,7 +725,7 @@ Partial Class FrmEditor
         Me.mapTabs.SelectedIndex = 0
         Me.mapTabs.ShowToolTips = True
         Me.mapTabs.Size = New System.Drawing.Size(629, 333)
-        Me.mapTabs.TabIndex = 20
+        Me.mapTabs.TabIndex = 19
         '
         'ctxMapTabs
         '
@@ -766,18 +768,41 @@ Partial Class FrmEditor
         Me.btnToolPointer.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolPointer.Name = "btnToolPointer"
         Me.btnToolPointer.Size = New System.Drawing.Size(50, 23)
-        Me.btnToolPointer.TabIndex = 0
+        Me.btnToolPointer.TabIndex = 14
         Me.btnToolPointer.Text = "Pointer"
         Me.btnToolPointer.UseVisualStyleBackColor = True
+        '
+        'btnToolRectangleBrush
+        '
+        Me.btnToolRectangleBrush.AutoSize = True
+        Me.btnToolRectangleBrush.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnToolRectangleBrush.Location = New System.Drawing.Point(250, 69)
+        Me.btnToolRectangleBrush.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.btnToolRectangleBrush.Name = "btnToolRectangleBrush"
+        Me.btnToolRectangleBrush.Size = New System.Drawing.Size(96, 23)
+        Me.btnToolRectangleBrush.TabIndex = 16
+        Me.btnToolRectangleBrush.Text = "Rectangle Brush"
+        '
+        'cboRectangleBrush
+        '
+        Me.cboRectangleBrush.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboRectangleBrush.FormattingEnabled = True
+        Me.cboRectangleBrush.Location = New System.Drawing.Point(250, 70)
+        Me.cboRectangleBrush.Name = "cboRectangleBrush"
+        Me.cboRectangleBrush.Size = New System.Drawing.Size(96, 21)
+        Me.cboRectangleBrush.TabIndex = 16
+        Me.cboRectangleBrush.Visible = False
         '
         'FrmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(766, 452)
+        Me.Controls.Add(Me.cboRectangleBrush)
         Me.Controls.Add(Me.lblHeight)
         Me.Controls.Add(Me.lblWidth)
         Me.Controls.Add(Me.lblTools)
+        Me.Controls.Add(Me.btnToolRectangleBrush)
         Me.Controls.Add(Me.btnToolSmartBrush)
         Me.Controls.Add(Me.pnlUnits)
         Me.Controls.Add(Me.btnToolPointer)
@@ -900,4 +925,6 @@ Partial Class FrmEditor
     Friend WithEvents btnToolPointer As System.Windows.Forms.Button
     Friend WithEvents btnDeleteSelected As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents separator9 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnToolRectangleBrush As System.Windows.Forms.Button
+    Friend WithEvents cboRectangleBrush As System.Windows.Forms.ComboBox
 End Class

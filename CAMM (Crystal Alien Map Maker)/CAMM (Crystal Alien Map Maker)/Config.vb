@@ -1,4 +1,5 @@
-﻿Imports Nini.Config
+﻿Imports System.IO
+Imports Nini.Config
 Imports Nini.Ini
 
 Public Module Config
@@ -9,6 +10,8 @@ Public Module Config
         TileDefs = New Tile() {}
         BuildingDefs = New Building() {}
         UnitDefs = New Unit() {}
+
+        RectangleBrushPresets = New List(Of RectangleBrushPreset)()
 
         If Not CheckFileExists(ConfigFile, ConfigFileName) Then
             Return False
@@ -174,6 +177,27 @@ Public Module Config
             End If
         Next
 
+        If My.Computer.FileSystem.DirectoryExists(RectangleBrushPath) Then
+            Dim files As FileInfo() = My.Computer.FileSystem.GetDirectoryInfo(RectangleBrushPath).GetFiles()
+            For Each file As FileInfo In files
+                reader.Close()
+                reader = New IniReader(file.FullName) With {.IgnoreComments = True}
+                source = New IniConfigSource(New IniDocument(reader))
+                config = source.Configs.Item("RectPreset")
+
+                Dim row1 As String() = config.Get("Row1").Trim(IniArray.ToCharArray).Split(New Char() {IniSeparator}, StringSplitOptions.None)
+                Dim row2 As String() = config.Get("Row2").Trim(IniArray.ToCharArray).Split(New Char() {IniSeparator}, StringSplitOptions.None)
+                Dim row3 As String() = config.Get("Row3").Trim(IniArray.ToCharArray).Split(New Char() {IniSeparator}, StringSplitOptions.None)
+
+                Dim data As Integer()() = New Integer(2)() {}
+                data(0) = New Integer() {row1(0), row2(0), row3(0)}
+                data(1) = New Integer() {row1(1), row2(1), row3(1)}
+                data(2) = New Integer() {row1(2), row2(2), row3(2)}
+
+                RectangleBrushPresets.Add(New RectangleBrushPreset(file.Name, config.GetString("Title"), data))
+            Next
+        End If
+
         reader.Close()
 
         Return True
@@ -218,5 +242,8 @@ Public Module Config
 
     'Unit Definitions.
     Public UnitDefs() As Unit
+
+    'Rectangle Brush Preset Definitions.
+    Public RectangleBrushPresets As List(Of RectangleBrushPreset)
 
 End Module

@@ -60,6 +60,10 @@ Public Class FrmEditor
     Dim selXUnits As Integer
     Dim selYUnits As Integer
 
+    'Starting point for the rectangle brush selection.
+    Private rectSelectStartX As Integer = -1
+    Private rectSelectStartY As Integer = -1
+
     ReadOnly customToolStripRenderer As ToolStripProfessionalRenderer = New ToolStripProfessionalRenderer(New CustomColorTable())
 
     Private activeTile As Tile 'The currently active tile selection.
@@ -100,6 +104,14 @@ Public Class FrmEditor
         If Not LoadConfig() Then
             'Close if the configuration data could not be loaded.
             Me.Close()
+        End If
+
+        'Fill dropdown list with Rectangle Brush Presets.
+        If RectangleBrushPresets.Count > 0 Then
+            cboRectangleBrush.Items.AddRange(RectangleBrushPresets.ToArray())
+            cboRectangleBrush.DisplayMember = "Title"
+            cboRectangleBrush.ValueMember = "FileName"
+            cboRectangleBrush.SelectedIndex = 0
         End If
 
         CheckFileAssociations()
@@ -245,10 +257,15 @@ Public Class FrmEditor
                 mouseYNoSnap = e.Y
 
                 If ActiveEditMode = EditMode.Tiles Then
-                    If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Or activeTile.TileId = -1 Then
+                    If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                         ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
+                    ElseIf ActiveToolMode = ToolMode.RectangleBrush Then
+                        rectSelectStartX = mouseX
+                        rectSelectStartY = mouseY
                     ElseIf ActiveToolMode = ToolMode.SmartBrush Then
                         ActiveMap.SetTileSmart(mouseX, mouseY)
+                    ElseIf activeTile.TileId = -1 Then
+                        ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
                     Else
                         ActiveMap.SetTile(mouseX, mouseY, activeTile)
                     End If
@@ -284,6 +301,15 @@ Public Class FrmEditor
         If IsDrawing Then
             IsDrawing = False
         End If
+
+        If ActiveEditMode = EditMode.Tiles And ActiveToolMode = ToolMode.RectangleBrush And Not My.Computer.Keyboard.CtrlKeyDown And rectSelectStartX <> -1 And rectSelectStartY <> -1 Then
+            'Fill the selected rectangle with the data from the selected brush preset.
+            ActiveMap.SetTileRectangle(rectSelectStartX, rectSelectStartY, mouseX, mouseY, cboRectangleBrush.SelectedItem)
+
+            'Reset starting point for rectangle brush selection.
+            rectSelectStartX = -1
+            rectSelectStartY = -1
+        End If
     End Sub
 
     Private Sub picMap_MouseMove(sender As Object, e As MouseEventArgs) Handles picMap.MouseMove
@@ -296,10 +322,14 @@ Public Class FrmEditor
 
         If IsDrawing Then
             If ActiveEditMode = EditMode.Tiles Then
-                If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Or activeTile.TileId = -1 Then
+                If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                     ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
                 ElseIf ActiveToolMode = ToolMode.SmartBrush Then
                     ActiveMap.SetTileSmart(mouseX, mouseY)
+                ElseIf ActiveToolMode = ToolMode.RectangleBrush Then
+                    'Placeholder
+                ElseIf activeTile.TileId = -1 Then
+                    ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
                 Else
                     ActiveMap.SetTile(mouseX, mouseY, activeTile)
                 End If
@@ -356,6 +386,9 @@ Public Class FrmEditor
                 If ActiveEditMode <> EditMode.Units Then
                     If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                         g.DrawRectangle(PenTileErase, mouseX - (PenTileHover.Width / 2), mouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
+                    ElseIf ActiveToolMode = ToolMode.RectangleBrush And rectSelectStartX <> -1 And rectSelectStartY <> -1 Then
+                        g.DrawRectangle(PenTileHover, rectSelectStartX - (PenTileHover.Width / 2), rectSelectStartY - (PenTileHover.Width / 2), mouseX - rectSelectStartX + TileSizeX + PenTileHover.Width + 1, mouseY - rectSelectStartY + TileSizeY + PenTileHover.Width + 1)
+                        g.DrawRectangle(PenTileHover, rectSelectStartX + PenTileHover.Width, rectSelectStartY + PenTileHover.Width, mouseX - rectSelectStartX + TileSizeX - PenTileHover.Width - 1, mouseY - rectSelectStartY + TileSizeY - PenTileHover.Width - 1)
                     Else
                         g.DrawRectangle(PenTileHover, mouseX - (PenTileHover.Width / 2), mouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
                     End If
@@ -977,6 +1010,10 @@ Public Class FrmEditor
         SwitchToolMode(ToolMode.Brush)
     End Sub
 
+    Private Sub btnToolRectangleBrush_Click(sender As Object, e As EventArgs) Handles btnToolRectangleBrush.Click
+        SwitchToolMode(ToolMode.RectangleBrush)
+    End Sub
+
     Private Sub btnToolSmartBrush_Click(sender As Object, e As EventArgs) Handles btnToolSmartBrush.Click
         SwitchToolMode(ToolMode.SmartBrush)
     End Sub
@@ -1337,6 +1374,19 @@ Public Class FrmEditor
                 btnEditShroud.Enabled = False
         End Select
 
+        ' Disable the Rectangle Brush tool unless we're switching into Tile edit mode.
+        If mode = EditMode.Tiles Then
+            If ActiveToolMode <> ToolMode.RectangleBrush Then
+                btnToolRectangleBrush.Enabled = True
+            End If
+        Else
+            If ActiveToolMode = ToolMode.RectangleBrush Then
+                SwitchToolMode(ToolMode.Brush)
+            Else
+                btnToolRectangleBrush.Enabled = False
+            End If
+        End If
+
         ' Redraw the map.
         picMap.Invalidate()
     End Sub
@@ -1348,10 +1398,15 @@ Public Class FrmEditor
         ' Enable all buttons.
         btnToolPointer.Enabled = True
         btnToolBrush.Enabled = True
+        btnToolRectangleBrush.Enabled = True
         btnToolSmartBrush.Enabled = True
         btnToolErase.Enabled = True
 
+        ' Hide the Rectange Brush Presets dropdown.
+        cboRectangleBrush.Hide()
+
         ' Disable button of currently active tool mode.
+        ' Do any other tool specific stuff.
         Select Case mode
             Case ToolMode.Pointer
                 btnToolPointer.Enabled = False
@@ -1359,9 +1414,19 @@ Public Class FrmEditor
                 btnToolBrush.Enabled = False
             Case ToolMode.SmartBrush
                 btnToolSmartBrush.Enabled = False
+            Case ToolMode.RectangleBrush
+                btnToolRectangleBrush.Enabled = False
+                cboRectangleBrush.Show()
+                cboRectangleBrush.BringToFront()
+                cboRectangleBrush.Focus()
             Case ToolMode.Eraser
                 btnToolErase.Enabled = False
         End Select
+
+        ' Disable the Rectangle Brush tool if we're not in Tile edit mode.
+        If ActiveEditMode <> EditMode.Tiles Then
+            btnToolRectangleBrush.Enabled = False
+        End If
 
         ' Refresh drawing surfaces.
         picTiles.Invalidate()

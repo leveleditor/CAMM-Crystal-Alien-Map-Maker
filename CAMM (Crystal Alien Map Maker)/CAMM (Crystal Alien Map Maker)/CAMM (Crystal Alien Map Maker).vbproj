@@ -157,6 +157,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Map.vb" />
+    <Compile Include="RectangleBrushPreset.vb" />
     <Compile Include="Unit.vb" />
     <Compile Include="FrmExportAS.Designer.vb">
       <DependentUpon>FrmExportAS.vb</DependentUpon>
@@ -240,30 +241,26 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
-    <None Include="Tile Data\Default Maps\*" />
-    <None Include="Tile Data\Other Data\BuildingButtonTest.xcf" />
-    <None Include="Tile Data\*" />
-    <None Include="Tile Data\_Save Data\*" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="icons\CAMMFile.ico" />
-    <Content Include="icons\Crystal.ico" />
-    <Content Include="lib\*">
-    </Content>
+    <None Include="icons\CAMMFile.ico" />
+    <None Include="icons\Crystal.ico" />
+    <Content Include="lib\*" />
+    <Content Include="Save Data\*" />
+    <Content Include="Tile Data\*" />
+    <Content Include="Tile Data\Brushes\*" />
+    <Content Include="Tile Data\Brushes\Rectangle\*" />
+    <Content Include="Tile Data\Default Maps\*" />
     <Content Include="Tile Data\Buttons\*" />
-    <Content Include="Tile Data\Buttons\Buildings\*" />
     <Content Include="Tile Data\Other Data\*" />
-    <Content Include="Tile Data\Units\Alien Commander\*" />
-    <Content Include="Tile Data\Units\Alien Sprites\*" />
-    <Content Include="Tile Data\Units\Alien Vehicles\*" />
-    <Content Include="Tile Data\Units\Astro Sprites\*" />
-    <Content Include="Tile Data\Units\Astro Vehicles\*" />
+    <Content Include="Tile Data\Units\Aliens\*" />
+    <Content Include="Tile Data\Units\Astros\*" />
+    <Content Include="Tile Data\Units\Items\*" />
     <Content Include="Tile Data\Units\Santa\*" />
     <Content Include="Tile Data\Buildings\Aliens\*" />
     <Content Include="Tile Data\Buildings\Astros\*" />
+    <Content Include="Tile Data\Buildings\Neutral\*" />
     <Content Include="Tile Data\Buildings\Santa\*" />
-    <Content Include="Tile Data\Buildings\Custom Merged\*" />
-    <Content Include="Tile Data\Minerals\*" />
     <Content Include="Tile Data\Tiles\*" />
   </ItemGroup>
   <ItemGroup>
@@ -298,6 +295,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy /Y /B "$(TargetPath)" "$(TargetPath).tmp"

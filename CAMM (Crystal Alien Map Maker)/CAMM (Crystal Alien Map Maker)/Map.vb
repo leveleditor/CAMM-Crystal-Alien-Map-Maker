@@ -221,6 +221,45 @@ Public Class Map
         'End If
     End Sub
 
+    Public Sub SetTileRectangle(startX As Integer, startY As Integer, endX As Integer, endY As Integer, rectBrushPreset As RectangleBrushPreset)
+        Dim data As Integer()() = rectBrushPreset.Data
+
+        For x As Integer = startX To endX Step TileSizeX
+            For y As Integer = startY To endY Step TileSizeY
+                Dim tileId As Integer
+                If x = startX And y = startY Then
+                    'Top Left
+                    tileId = data(0)(0)
+                ElseIf x = endX And y = startY Then
+                    'Top Right
+                    tileId = data(2)(0)
+                ElseIf x = startX And y = endY Then
+                    'Bottom Left
+                    tileId = data(0)(2)
+                ElseIf x = endX And y = endY Then
+                    'Bottom Right
+                    tileId = data(2)(2)
+                ElseIf x <> startX And x <> endX And y = startY Then
+                    'Top Middle
+                    tileId = data(1)(0)
+                ElseIf x = startX And y <> startY And y <> endY Then
+                    'Left Middle
+                    tileId = data(0)(1)
+                ElseIf x = endX And y <> startY And y <> endY Then
+                    'Right Middle
+                    tileId = data(2)(1)
+                ElseIf x <> startX And x <> endX And y = endY Then
+                    'Bottom Middle
+                    tileId = data(1)(2)
+                Else
+                    'Somewhere in the middle
+                    tileId = data(1)(1)
+                End If
+                SetTile(x, y, New Tile(x, y, tileId))
+            Next
+        Next
+    End Sub
+
     Public Sub SetBuilding(mouseX As Integer, mouseY As Integer, building As Building)
         If IsMouseInBounds(mouseX, mouseY) Then
             Dim found As Boolean = False
@@ -712,4 +751,5 @@ Public Class Map
             End If
         Next
     End Sub
+
 End Class
