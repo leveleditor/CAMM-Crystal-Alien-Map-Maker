@@ -128,7 +128,7 @@ Partial Class FrmEditor
         'lblTools
         '
         Me.lblTools.AutoSize = True
-        Me.lblTools.Location = New System.Drawing.Point(108, 74)
+        Me.lblTools.Location = New System.Drawing.Point(132, 74)
         Me.lblTools.Name = "lblTools"
         Me.lblTools.Size = New System.Drawing.Size(36, 13)
         Me.lblTools.TabIndex = 13
@@ -214,7 +214,7 @@ Partial Class FrmEditor
         '
         Me.btnToolErase.AutoSize = True
         Me.btnToolErase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnToolErase.Location = New System.Drawing.Point(349, 69)
+        Me.btnToolErase.Location = New System.Drawing.Point(373, 69)
         Me.btnToolErase.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolErase.Name = "btnToolErase"
         Me.btnToolErase.Size = New System.Drawing.Size(47, 23)
@@ -523,7 +523,7 @@ Partial Class FrmEditor
         'btnEditBuildings
         '
         Me.btnEditBuildings.AutoSize = True
-        Me.btnEditBuildings.Location = New System.Drawing.Point(191, 43)
+        Me.btnEditBuildings.Location = New System.Drawing.Point(215, 43)
         Me.btnEditBuildings.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnEditBuildings.Name = "btnEditBuildings"
         Me.btnEditBuildings.Size = New System.Drawing.Size(80, 23)
@@ -535,7 +535,7 @@ Partial Class FrmEditor
         '
         Me.btnEditTiles.AutoSize = True
         Me.btnEditTiles.Enabled = False
-        Me.btnEditTiles.Location = New System.Drawing.Point(108, 43)
+        Me.btnEditTiles.Location = New System.Drawing.Point(132, 43)
         Me.btnEditTiles.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnEditTiles.Name = "btnEditTiles"
         Me.btnEditTiles.Size = New System.Drawing.Size(80, 23)
@@ -547,7 +547,7 @@ Partial Class FrmEditor
         '
         Me.btnEditShroud.AutoSize = True
         Me.btnEditShroud.Enabled = False
-        Me.btnEditShroud.Location = New System.Drawing.Point(357, 43)
+        Me.btnEditShroud.Location = New System.Drawing.Point(381, 43)
         Me.btnEditShroud.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnEditShroud.Name = "btnEditShroud"
         Me.btnEditShroud.Size = New System.Drawing.Size(80, 23)
@@ -647,7 +647,7 @@ Partial Class FrmEditor
         Me.btnToolSmartBrush.AutoSize = True
         Me.btnToolSmartBrush.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnToolSmartBrush.Enabled = False
-        Me.btnToolSmartBrush.Location = New System.Drawing.Point(399, 69)
+        Me.btnToolSmartBrush.Location = New System.Drawing.Point(423, 69)
         Me.btnToolSmartBrush.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolSmartBrush.Name = "btnToolSmartBrush"
         Me.btnToolSmartBrush.Size = New System.Drawing.Size(74, 23)
@@ -661,7 +661,7 @@ Partial Class FrmEditor
         Me.btnToolBrush.AutoSize = True
         Me.btnToolBrush.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnToolBrush.Enabled = False
-        Me.btnToolBrush.Location = New System.Drawing.Point(203, 69)
+        Me.btnToolBrush.Location = New System.Drawing.Point(227, 69)
         Me.btnToolBrush.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolBrush.Name = "btnToolBrush"
         Me.btnToolBrush.Size = New System.Drawing.Size(44, 23)
@@ -676,7 +676,7 @@ Partial Class FrmEditor
         'btnEditUnits
         '
         Me.btnEditUnits.AutoSize = True
-        Me.btnEditUnits.Location = New System.Drawing.Point(274, 43)
+        Me.btnEditUnits.Location = New System.Drawing.Point(298, 43)
         Me.btnEditUnits.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnEditUnits.Name = "btnEditUnits"
         Me.btnEditUnits.Size = New System.Drawing.Size(80, 23)
@@ -764,7 +764,7 @@ Partial Class FrmEditor
         '
         Me.btnToolPointer.AutoSize = True
         Me.btnToolPointer.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnToolPointer.Location = New System.Drawing.Point(150, 69)
+        Me.btnToolPointer.Location = New System.Drawing.Point(174, 69)
         Me.btnToolPointer.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolPointer.Name = "btnToolPointer"
         Me.btnToolPointer.Size = New System.Drawing.Size(50, 23)
@@ -776,7 +776,7 @@ Partial Class FrmEditor
         '
         Me.btnToolRectangleBrush.AutoSize = True
         Me.btnToolRectangleBrush.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnToolRectangleBrush.Location = New System.Drawing.Point(250, 69)
+        Me.btnToolRectangleBrush.Location = New System.Drawing.Point(274, 69)
         Me.btnToolRectangleBrush.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolRectangleBrush.Name = "btnToolRectangleBrush"
         Me.btnToolRectangleBrush.Size = New System.Drawing.Size(96, 23)
@@ -785,11 +785,16 @@ Partial Class FrmEditor
         '
         'cboRectangleBrush
         '
+        Me.cboRectangleBrush.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
         Me.cboRectangleBrush.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboRectangleBrush.DropDownWidth = 256
+        Me.cboRectangleBrush.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboRectangleBrush.FormattingEnabled = True
-        Me.cboRectangleBrush.Location = New System.Drawing.Point(250, 70)
+        Me.cboRectangleBrush.IntegralHeight = False
+        Me.cboRectangleBrush.ItemHeight = 48
+        Me.cboRectangleBrush.Location = New System.Drawing.Point(9, 43)
         Me.cboRectangleBrush.Name = "cboRectangleBrush"
-        Me.cboRectangleBrush.Size = New System.Drawing.Size(96, 21)
+        Me.cboRectangleBrush.Size = New System.Drawing.Size(121, 54)
         Me.cboRectangleBrush.TabIndex = 16
         Me.cboRectangleBrush.Visible = False
         '
