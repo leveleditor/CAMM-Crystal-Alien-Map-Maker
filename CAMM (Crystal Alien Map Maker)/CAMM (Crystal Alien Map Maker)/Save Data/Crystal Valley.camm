@@ -3,6 +3,7 @@ vFormat = 5
 
 [Level]
 Title = New Map 1
+Author = Josh
 W = 10
 H = 10
 Team = 0

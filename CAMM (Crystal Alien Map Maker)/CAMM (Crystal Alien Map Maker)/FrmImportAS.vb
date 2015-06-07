@@ -26,7 +26,7 @@
         FrmEditor.ImportAsTileData = line.Remove(0, 2)
         FrmEditor.NewMap()
         FrmEditor.ActiveMap.SetSize(AsciiLookup.IndexOf(line(0)), AsciiLookup.IndexOf(line(1)))
-        FrmEditor.ActiveMap.MapTitle = cboPickMap.SelectedItem.ToString().Trim()
+        FrmEditor.ActiveMap.Title = cboPickMap.SelectedItem.ToString().Trim()
 
         Me.DialogResult = DialogResult.OK
         Me.Close()

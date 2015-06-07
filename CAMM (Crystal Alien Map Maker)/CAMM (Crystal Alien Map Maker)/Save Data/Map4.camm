@@ -2,7 +2,8 @@
 vFormat = 5
 
 [Level]
-Title = New Map
+Title = Map 4
+Author = Josh
 W = 15
 H = 10
 Team = 0
@@ -173,4 +174,4 @@ Terrain149 = {47|14|9}
 [Units]
 ; Unit Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
 
-; -= Map Created Using CAMM Crystal Alien Map Maker =-
+; Map Created Using CAMM Crystal Alien Map Maker

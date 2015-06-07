@@ -10,7 +10,8 @@ Public Class Map
         _sizeY = 10
         _fileName = ""
         _filePath = ""
-        MapTitle = "New Map " + MapId.ToString()
+        Title = "New Map " + MapId.ToString()
+        Author = ""
         IsMapFinal = False
 
         mapTiles = New Tile() {}
@@ -69,7 +70,8 @@ Public Class Map
         End Set
     End Property
 
-    Public MapTitle As String
+    Public Title As String
+    Public Author As String
     Public IsMapFinal As Boolean
 
     Private mapTiles As Tile()
@@ -485,7 +487,8 @@ Public Class Map
 
         saveFileData += _
             "[Level]" + vbNewLine + _
-            "Title = " + MapTitle + vbNewLine + _
+            "Title = " + Title + vbNewLine + _
+            "Author = " + Author + vbNewLine + _
             "W = " + SizeX.ToString + vbNewLine + _
             "H = " + SizeY.ToString + vbNewLine + _
             "Team = " + CInt(Faction).ToString + vbNewLine + _
@@ -542,7 +545,7 @@ Public Class Map
         config = source.Configs.Item("Map Size")
         SetSize(config.GetInt("W"), config.GetInt("H"))
 
-        MapTitle = "Converted Map"
+        Title = "Converted Map"
 
         config = source.Configs.Item("Tile Data")
         For i As Integer = 0 To mapTiles.Length - 1
@@ -563,7 +566,7 @@ Public Class Map
         Dim config As IniConfig
 
         config = source.Configs.Item("Level")
-        MapTitle = config.GetString("Title")
+        Title = config.GetString("Title")
         SetSize(config.GetInt("W"), config.GetInt("H"))
         Faction = CType(config.GetInt("Team"), Team)
 
@@ -636,7 +639,8 @@ Public Class Map
         Dim config As IniConfig
 
         config = source.Configs.Item("Level")
-        MapTitle = config.GetString("Title")
+        Title = config.GetString("Title")
+        Author = config.GetString("Author", "")
         SetSize(config.GetInt("W"), config.GetInt("H"))
         Faction = CType(config.GetInt("Team"), Team)
         CashPlayer = config.GetInt("CashPlayer", CashPlayerDefault)

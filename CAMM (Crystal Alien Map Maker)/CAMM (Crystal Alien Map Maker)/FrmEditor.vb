@@ -801,8 +801,8 @@ Public Class FrmEditor
     Private Sub btnSaveAs_Click(sender As Object, e As EventArgs) Handles btnSaveAs.Click
         Me.saveMap.Reset()
         'Me.SaveMap.DefaultExt = "CAMM Map Files|*.camm"
-        If ActiveMap.MapTitle <> "" Then
-            Me.saveMap.FileName = ActiveMap.MapTitle
+        If ActiveMap.Title <> "" Then
+            Me.saveMap.FileName = ActiveMap.Title
         Else
             Me.saveMap.FileName = "Map1.camm"
         End If
@@ -1212,7 +1212,7 @@ Public Class FrmEditor
                 Next x
             Next y
 
-            ActiveMap.MapTitle += " (Imported ActionScript)"
+            ActiveMap.Title += " (Imported ActionScript)"
             UpdateMapTabs()
             UpdateFormTitle()
             picMap.Invalidate()
@@ -1243,10 +1243,13 @@ Public Class FrmEditor
             For i As Integer = 0 To mapTabs.TabPages.Count - 1
                 Dim tabText As String = Maps(i).FileName
                 If String.IsNullOrEmpty(tabText) Then
-                    tabText = Maps(i).MapTitle
+                    tabText = Maps(i).Title
                 End If
                 mapTabs.TabPages(i).Text = tabText
-                mapTabs.TabPages(i).ToolTipText = Maps(i).MapTitle
+                mapTabs.TabPages(i).ToolTipText = Maps(i).Title
+                If Not String.IsNullOrEmpty(Maps(i).Author) Then
+                    mapTabs.TabPages(i).ToolTipText += vbNewLine + "Author: " + Maps(i).Author
+                End If
                 If Not String.IsNullOrEmpty(Maps(i).FilePath) Then
                     mapTabs.TabPages(i).ToolTipText += vbNewLine + Maps(i).FilePath
                 End If
@@ -1256,10 +1259,13 @@ Public Class FrmEditor
             For i As Integer = mapTabs.TabPages.Count To Maps.Count - 1
                 Dim tabText As String = Maps(i).FileName
                 If String.IsNullOrEmpty(tabText) Then
-                    tabText = Maps(i).MapTitle
+                    tabText = Maps(i).Title
                 End If
                 Dim newTab = New TabPage(tabText)
-                newTab.ToolTipText = Maps(i).MapTitle
+                newTab.ToolTipText = Maps(i).Title
+                If Not String.IsNullOrEmpty(Maps(i).Author) Then
+                    newTab.ToolTipText += vbNewLine + "Author: " + Maps(i).Author
+                End If
                 If Not String.IsNullOrEmpty(Maps(i).FilePath) Then
                     newTab.ToolTipText += vbNewLine + Maps(i).FilePath
                 End If
@@ -1272,7 +1278,7 @@ Public Class FrmEditor
     Private Sub UpdateFormTitle()
         Dim title As String = baseFormTitle
         If Maps.Count > 0 Then
-            title += " - " + ActiveMap.MapTitle
+            title += " - " + ActiveMap.Title
             If Not String.IsNullOrEmpty(ActiveMap.FilePath) Then
                 title += " - " + My.Computer.FileSystem.GetFileInfo(ActiveMap.FilePath).Name
             Else

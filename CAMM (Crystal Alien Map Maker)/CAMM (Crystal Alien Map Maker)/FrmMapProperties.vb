@@ -6,7 +6,8 @@
         txtStartCashEnemy.Minimum = Integer.MinValue
         txtStartCashPlayer.Minimum = Integer.MinValue
 
-        txtMapTitle.Text = FrmEditor.ActiveMap.MapTitle
+        txtTitle.Text = FrmEditor.ActiveMap.Title
+        txtAuthor.Text = FrmEditor.ActiveMap.Author
         cboTeam.SelectedIndex = CInt(FrmEditor.ActiveMap.Faction)
         txtStartCashPlayer.Value = FrmEditor.ActiveMap.CashPlayer
         txtStartCashEnemy.Value = FrmEditor.ActiveMap.CashEnemy
@@ -18,7 +19,8 @@
     End Sub
 
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
-        FrmEditor.ActiveMap.MapTitle = txtMapTitle.Text
+        FrmEditor.ActiveMap.Title = txtTitle.Text
+        FrmEditor.ActiveMap.Author = txtAuthor.Text
         FrmEditor.ActiveMap.Faction = CType(cboTeam.SelectedIndex, Team)
         FrmEditor.ActiveMap.CashPlayer = Integer.Parse(txtStartCashPlayer.Text)
         FrmEditor.ActiveMap.CashEnemy = Integer.Parse(txtStartCashEnemy.Text)
