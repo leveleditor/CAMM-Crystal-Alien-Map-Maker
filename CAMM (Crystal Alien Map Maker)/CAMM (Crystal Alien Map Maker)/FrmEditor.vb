@@ -93,6 +93,7 @@ Public Class FrmEditor
         mnuMain.Renderer = customToolStripRenderer
         staInfoBar.Renderer = customToolStripRenderer
         ctxMapTabs.Renderer = customToolStripRenderer
+        ctxMap.Renderer = customToolStripRenderer
 
         For Each menuItem As ToolStripMenuItem In mnuMain.Items.OfType(Of ToolStripMenuItem)()
             'Dim dropDown As ToolStripDropDownMenu = MenuItem.DropDown
@@ -279,7 +280,11 @@ Public Class FrmEditor
                     If ActiveToolMode = ToolMode.Pointer Then
                         selectedUnit = closestUnit
                         If selectedUnit IsNot Nothing Then
-                            btnDeleteSelected.Enabled = True
+                            btnDeleteSelectedUnit.Enabled = True
+                            btnUnitProperties.Enabled = True
+                        Else
+                            btnDeleteSelectedUnit.Enabled = False
+                            btnUnitProperties.Enabled = False
                         End If
                     ElseIf ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                         ActiveMap.Eraser(mouseXNoSnap, mouseYNoSnap, ActiveEditMode)
@@ -954,7 +959,7 @@ Public Class FrmEditor
         picMap.Invalidate()
     End Sub
 
-    Private Sub btnDeleteUnit_Click(sender As Object, e As EventArgs) Handles btnDeleteSelected.Click
+    Private Sub btnDeleteUnit_Click(sender As Object, e As EventArgs) Handles btnDeleteSelectedUnit.Click, btnMapDeleteUnit.Click
         Select Case ActiveEditMode
             Case EditMode.Tiles
                 'TODO: Deleted selected tile(s).
@@ -962,7 +967,8 @@ Public Class FrmEditor
                 'TODO: Delete selected building.
             Case EditMode.Units
                 If selectedUnit IsNot Nothing Then
-                    btnDeleteSelected.Enabled = False
+                    btnDeleteSelectedUnit.Enabled = False
+                    btnUnitProperties.Enabled = False
                     ActiveMap.DeleteUnit(selectedUnit)
                     selectedUnit = Nothing
                     closestUnit = Nothing
@@ -1098,6 +1104,28 @@ Public Class FrmEditor
 
         'Draw the item's File Name.
         g.DrawString(item.FileName, smallFont, fontBrush, e.Bounds.X + item.Preview.Width + smallFont.Height, e.Bounds.Y + smallFont.Height + e.Font.Height)
+    End Sub
+
+    Private Sub ctxMap_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ctxMap.Opening
+        If selectedUnit IsNot Nothing Then
+            lblMapNoActionsAvailable.Visible = False
+            ctxMapSeparator1.Visible = True
+            btnMapDeleteUnit.Visible = True
+            btnMapDeleteUnit.Enabled = True
+            btnMapUnitProperties.Visible = True
+            btnMapUnitProperties.Enabled = True
+        Else
+            lblMapNoActionsAvailable.Visible = True
+            ctxMapSeparator1.Visible = False
+            btnMapDeleteUnit.Visible = False
+            btnMapDeleteUnit.Enabled = False
+            btnMapUnitProperties.Visible = False
+            btnMapUnitProperties.Enabled = False
+        End If
+    End Sub
+
+    Private Sub btnMapUnitProperties_Click(sender As Object, e As EventArgs) Handles btnMapUnitProperties.Click, btnUnitProperties.Click
+        MsgBox("Unit Properties, coming soon!")
     End Sub
 
 #End Region
