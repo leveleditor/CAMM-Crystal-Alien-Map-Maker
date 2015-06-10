@@ -150,6 +150,12 @@
     <Compile Include="Config.vb" />
     <Compile Include="Constants.vb" />
     <Compile Include="CustomColorTable.vb" />
+    <Compile Include="FrmUnitProperties.Designer.vb">
+      <DependentUpon>FrmUnitProperties.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUnitProperties.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FrmMapProperties.Designer.vb">
       <DependentUpon>FrmMapProperties.vb</DependentUpon>
     </Compile>
@@ -215,6 +221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BuildingEntry.resx">
       <DependentUpon>BuildingEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUnitProperties.resx">
+      <DependentUpon>FrmUnitProperties.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TileEntry.resx">
       <DependentUpon>TileEntry.vb</DependentUpon>

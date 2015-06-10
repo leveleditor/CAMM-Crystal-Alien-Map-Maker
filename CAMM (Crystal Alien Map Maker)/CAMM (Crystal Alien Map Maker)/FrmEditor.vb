@@ -1125,7 +1125,8 @@ Public Class FrmEditor
     End Sub
 
     Private Sub btnMapUnitProperties_Click(sender As Object, e As EventArgs) Handles btnMapUnitProperties.Click, btnUnitProperties.Click
-        MsgBox("Unit Properties, coming soon!")
+        FrmUnitProperties.TargetUnit = selectedUnit
+        FrmUnitProperties.ShowDialog(Me)
     End Sub
 
 #End Region
