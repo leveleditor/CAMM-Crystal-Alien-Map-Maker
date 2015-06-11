@@ -245,6 +245,12 @@ Public Class FrmEditor
 
 #Region "picMap Events"
 
+    Private Sub picMap_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles picMap.MouseDoubleClick
+        If ActiveToolMode = ToolMode.Pointer Then
+            ctxMap.Show(picMap, e.Location)
+        End If
+    End Sub
+
     Private Sub picMap_MouseDown(sender As Object, e As MouseEventArgs) Handles picMap.MouseDown
         If e.Button = MouseButtons.Left Then
             If IsDrawing = False Then
