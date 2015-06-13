@@ -50,6 +50,7 @@ Public Class FrmEditor
 
     Public DrawGrid As Boolean = True
     Public DrawShadows As Boolean = True
+    Public DrawTeamIndicators As Boolean = False
     Public DrawBuildingDebugPos As Boolean = False
     Public DrawUnitDebugPos As Boolean = False
     Private isMouseOnSelections As Boolean = False
@@ -190,7 +191,7 @@ Public Class FrmEditor
     Dim sIntro1 As String = "Welcome to CAMM!"
     Dim sIntro2 As String = "Crystal Alien Map Maker"
     Dim sIntro3 As String = "By Leveleditor6680 // Josh"
-    Sub DrawIntro(ByRef g As Graphics)
+    Sub DrawIntro(g As Graphics)
         sIntro1Width = g.MeasureString(sIntro1, introFont).Width
         sIntro2Width = g.MeasureString(sIntro2, introFont2).Width
         sIntro3Width = g.MeasureString(sIntro3, introFont).Width
@@ -390,7 +391,7 @@ Public Class FrmEditor
         If isLoaded Then
             Dim g As Graphics = e.Graphics
 
-            ActiveMap.Draw(g, DrawGrid, DrawShadows, DrawBuildingDebugPos, DrawUnitDebugPos)
+            ActiveMap.Draw(g, DrawGrid, DrawShadows, DrawTeamIndicators, DrawBuildingDebugPos, DrawUnitDebugPos)
 
             ' Draw the rectangle cursor / selector thingy.
             If IsMouseInBounds() Then
@@ -419,7 +420,14 @@ Public Class FrmEditor
                 ElseIf ActiveEditMode = EditMode.Units Then
                     If ActiveToolMode = ToolMode.Pointer Then
                         If closestUnit IsNot Nothing Then
-                            g.DrawEllipse(PenSelectionHover, closestUnit.X - 10, closestUnit.Y - closestUnit.Altitude - 10, 20, 20)
+                            If DrawTeamIndicators Then
+                                g.DrawImage(closestUnit.TeamIndicatorImage, _
+                                    closestUnit.Position.X - CInt(closestUnit.TeamIndicatorImage.Width / 2), _
+                                    closestUnit.Position.Y - CInt(closestUnit.TeamIndicatorImage.Height / 2) - closestUnit.Altitude, _
+                                    closestUnit.TeamIndicatorImage.Width, _
+                                    closestUnit.TeamIndicatorImage.Height)
+                            End If
+                            g.DrawImage(UnitSelectionHover, closestUnit.X - CInt(UnitSelectionHover.Width / 2), closestUnit.Y - closestUnit.Altitude - CInt(UnitSelectionHover.Height / 2), UnitSelectionHover.Width, UnitSelectionHover.Height)
                             'g.DrawString(closestUnit.UnitId, New Font(FontFamily.GenericMonospace, 12, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.GreenYellow, closestUnit.X, closestUnit.Y)
                         End If
                     ElseIf ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
@@ -450,7 +458,14 @@ Public Class FrmEditor
             If ActiveEditMode = EditMode.Units Then
                 If ActiveToolMode = ToolMode.Pointer Then
                     If selectedUnit IsNot Nothing Then
-                        g.DrawEllipse(PenSelected, selectedUnit.X - 10, selectedUnit.Y - selectedUnit.Altitude - 10, 20, 20)
+                        If DrawTeamIndicators Then
+                            g.DrawImage(selectedUnit.TeamIndicatorImage, _
+                            selectedUnit.Position.X - CInt(selectedUnit.TeamIndicatorImage.Width / 2), _
+                            selectedUnit.Position.Y - CInt(selectedUnit.TeamIndicatorImage.Height / 2) - selectedUnit.Altitude, _
+                            selectedUnit.TeamIndicatorImage.Width, _
+                            selectedUnit.TeamIndicatorImage.Height)
+                        End If
+                        g.DrawImage(UnitSelectionClick, selectedUnit.X - CInt(UnitSelectionHover.Width / 2), selectedUnit.Y - selectedUnit.Altitude - CInt(UnitSelectionHover.Height / 2), UnitSelectionHover.Width, UnitSelectionHover.Height)
                         'g.DrawString(selectedUnit.UnitId, New Font(FontFamily.GenericMonospace, 12, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.GreenYellow, selectedUnit.X + 10, selectedUnit.Y - selectedUnit.Altitude - 10)
                     End If
                 End If
@@ -946,12 +961,18 @@ Public Class FrmEditor
 
     Private Sub chkGrid_CheckedChanged(sender As Object, e As EventArgs) Handles chkGrid.CheckedChanged, mnuchkGrid.CheckedChanged
         DrawGrid = sender.Checked
+        chkGrid.Checked = DrawGrid
         mnuchkGrid.Checked = DrawGrid
         picMap.Invalidate()
     End Sub
 
     Private Sub mnuchkShadows_CheckedChanged(sender As Object, e As EventArgs) Handles mnuchkShadows.CheckedChanged
         DrawShadows = sender.Checked
+        picMap.Invalidate()
+    End Sub
+
+    Private Sub mnuchkTeamIndicators_Click(sender As Object, e As EventArgs) Handles mnuchkTeamIndicators.Click
+        DrawTeamIndicators = sender.Checked
         picMap.Invalidate()
     End Sub
 
@@ -1177,7 +1198,7 @@ Public Class FrmEditor
             Dim h As Integer = (ActiveMap.SizeY * TileSizeY) + 1
             Dim img As Image = New Bitmap(w, h, PixelFormat.Format24bppRgb)
             Dim g As Graphics = Graphics.FromImage(img)
-            ActiveMap.Draw(g, DrawGrid, DrawShadows, False)
+            ActiveMap.Draw(g, DrawGrid, DrawShadows, DrawTeamIndicators, False, False)
             g.Dispose()
             img.Save(savePng.FileName, ImageFormat.Png)
         End If

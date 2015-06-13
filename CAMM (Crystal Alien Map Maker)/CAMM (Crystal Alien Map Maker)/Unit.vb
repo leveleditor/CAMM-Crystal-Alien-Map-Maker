@@ -3,7 +3,7 @@
     Public Sub New(x As Integer, y As Integer)
         Me.Position = New Point(x, y)
         Me.UnitId = ""
-        Me.Team = Team.Astros
+        Me.Team = Team.Neutral
         Me.Angle = 0.0
         Me.Damage = 0.0
     End Sub
@@ -85,6 +85,18 @@
                 Return UnitShadowImageLookup(UnitId)
             Else
                 Return Nothing
+            End If
+        End Get
+    End Property
+
+    Public ReadOnly Property TeamIndicatorImage As Image
+        Get
+            If Team = Team.Astros Then
+                Return TeamIndicatorAstro
+            ElseIf Team = Team.Aliens Then
+                Return TeamIndicatorAlien
+            Else
+                Return TeamIndicatorNeutral
             End If
         End Get
     End Property

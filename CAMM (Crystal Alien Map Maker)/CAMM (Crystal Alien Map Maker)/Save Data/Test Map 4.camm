@@ -1,0 +1,121 @@
+﻿[CAMM]
+vFormat = 5
+
+[Level]
+Title = Test Map 3
+Author = 
+W = 10
+H = 10
+Team = 0
+CashPlayer = 2100
+CashEnemy = 20100
+isTraining = False
+isConflict = False
+isSpecialLevel = False
+isLastSpecialLevel = False
+isBonusLevel = True
+
+[Terrain]
+; Terrain Format: {str_ID|i_posX|i_posY}
+Terrain0 = {4|1|0}
+Terrain1 = {2|2|0}
+Terrain2 = {47|6|0}
+Terrain3 = {47|7|0}
+Terrain4 = {4|1|1}
+Terrain5 = {2|2|1}
+Terrain6 = {47|6|1}
+Terrain7 = {47|7|1}
+Terrain8 = {8|0|2}
+Terrain9 = {15|1|2}
+Terrain10 = {6|2|2}
+Terrain11 = {47|6|2}
+Terrain12 = {47|7|2}
+Terrain13 = {4|0|3}
+Terrain14 = {2|1|3}
+Terrain15 = {47|6|3}
+Terrain16 = {47|7|3}
+Terrain17 = {4|0|4}
+Terrain18 = {2|1|4}
+Terrain19 = {47|6|4}
+Terrain20 = {47|7|4}
+Terrain21 = {4|0|5}
+Terrain22 = {11|1|5}
+Terrain23 = {1|2|5}
+Terrain24 = {1|3|5}
+Terrain25 = {1|4|5}
+Terrain26 = {5|5|5}
+Terrain27 = {47|6|5}
+Terrain28 = {47|7|5}
+Terrain29 = {7|0|6}
+Terrain30 = {3|1|6}
+Terrain31 = {3|2|6}
+Terrain32 = {3|3|6}
+Terrain33 = {3|4|6}
+Terrain34 = {6|5|6}
+Terrain35 = {47|6|6}
+Terrain36 = {47|7|6}
+Terrain37 = {29|0|7}
+Terrain38 = {29|1|7}
+Terrain39 = {29|2|7}
+Terrain40 = {33|3|7}
+Terrain41 = {40|0|8}
+Terrain42 = {31|1|8}
+Terrain43 = {41|2|8}
+Terrain44 = {39|3|8}
+Terrain45 = {29|4|8}
+Terrain46 = {29|5|8}
+Terrain47 = {33|6|8}
+Terrain48 = {39|0|9}
+Terrain49 = {29|1|9}
+Terrain50 = {42|2|9}
+Terrain51 = {37|3|9}
+Terrain52 = {37|4|9}
+Terrain53 = {51|5|9}
+Terrain54 = {30|6|9}
+
+[Buildings]
+; Building Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
+Building0 = {BL_good|6|0|0|0|0}
+Building1 = {BD_good|8|0|0|0|0}
+Building2 = {BH_good|9|0|0|0|0}
+Building3 = {BF_good|3|1|0|0|0}
+Building4 = {BB_good|5|1|0|0|0}
+Building5 = {BG_good|8|2|0|0|0}
+Building6 = {BD_good|9|2|0|0|0}
+Building7 = {BD_good|2|3|0|0|0}
+Building8 = {BB_good|5|3|0|0|0}
+
+[Units]
+; Unit Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}
+Unit0 = {UA_evil|56|29|1|0|0}
+Unit1 = {UB_good|309|38|0|0|0}
+Unit2 = {UA_evil|22|81|1|0|0}
+Unit3 = {UG_good|353|154|0|0|0}
+Unit4 = {UA_good|438|158|0|0|0}
+Unit5 = {UG_good|303|164|0|0|0}
+Unit6 = {UG_evil|809|169|1|0|0}
+Unit7 = {UG_good|322|173|0|0|0}
+Unit8 = {UA_good|459|178|0|0|0}
+Unit9 = {UG_good|361|179|0|0|0}
+Unit10 = {UA_good|408|179|0|0|0}
+Unit11 = {UF_evil|897|216|1|0|0}
+Unit12 = {UD_good|621|219|0|0|0}
+Unit13 = {UI_good|332|223|0|0|0}
+Unit14 = {UA_good|438|223|0|0|0}
+Unit15 = {UE_evil|907|281|1|0|0}
+Unit16 = {UD_evil|717|318|1|0|0}
+Unit17 = {UB_evil|832|320|1|0|0}
+Unit18 = {UN_evil|404|353|1|0|0}
+Unit19 = {UA_evil|890|353|1|0|0}
+Unit20 = {UR_good|528|363|0|0|0}
+Unit21 = {UA_evil|797|382|1|0|0}
+Unit22 = {UC_evil|694|408|1|0|0}
+Unit23 = {UA_evil|877|417|1|0|0}
+Unit24 = {UB_evil|787|419|1|0|0}
+Unit25 = {UB_evil|853|438|1|0|0}
+Unit26 = {UH_evil|300|458|1|0|0}
+Unit27 = {UB_evil|810|464|1|0|0}
+Unit28 = {UB_evil|714|465|1|0|0}
+Unit29 = {UA_evil|910|477|1|0|0}
+
+; Map Created Using CAMM Crystal Alien Map Maker

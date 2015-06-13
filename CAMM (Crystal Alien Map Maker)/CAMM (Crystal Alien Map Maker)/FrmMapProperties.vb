@@ -33,4 +33,14 @@
         Me.DialogResult = DialogResult.OK
         Me.Close()
     End Sub
+
+    Private Sub cboTeam_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboTeam.SelectedIndexChanged
+        Select Case cboTeam.SelectedIndex
+            Case 0
+                picTeam.Image = TeamIndicatorAstro
+            Case 1
+                picTeam.Image = TeamIndicatorAlien
+        End Select
+    End Sub
+
 End Class

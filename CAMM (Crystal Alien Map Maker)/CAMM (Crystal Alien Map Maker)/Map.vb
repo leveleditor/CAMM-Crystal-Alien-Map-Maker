@@ -348,7 +348,7 @@ Public Class Map
         Return mapUnits.Remove(unit)
     End Function
 
-    Public Sub Draw(ByRef g As Graphics, drawGrid As Boolean, drawShadows As Boolean, Optional debugBuildingPos As Boolean = False, Optional debugUnitPos As Boolean = False)
+    Public Sub Draw(g As Graphics, drawGrid As Boolean, drawShadows As Boolean, drawTeamIndicators As Boolean, Optional ByVal debugBuildingPos As Boolean = False, Optional ByVal debugUnitPos As Boolean = False)
         g.Clear(Color.FromKnownColor(KnownColor.Control))
 
         ' Draw the background
@@ -474,6 +474,19 @@ Public Class Map
                     g.DrawLine(PenGrid, x, y, x + TileSizeX, y + 0.5F)
                 Next y
             Next x
+        End If
+
+        If drawTeamIndicators Then
+            ' Draw team indicator icons.
+            For i As Integer = 0 To mapUnits.Count() - 1
+                If mapUnits(i).HasData Then
+                    g.DrawImage(mapUnits(i).TeamIndicatorImage, _
+                         mapUnits(i).Position.X - CInt(mapUnits(i).TeamIndicatorImage.Width / 2), _
+                         mapUnits(i).Position.Y - CInt(mapUnits(i).TeamIndicatorImage.Height / 2) - mapUnits(i).Altitude, _
+                         mapUnits(i).TeamIndicatorImage.Width, _
+                         mapUnits(i).TeamIndicatorImage.Height)
+                End If
+            Next
         End If
     End Sub
 

@@ -109,6 +109,7 @@ Partial Class FrmEditor
         Me.btnMapCancel = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnMapDeleteUnit = New System.Windows.Forms.ToolStripMenuItem()
         Me.ctxMapSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuchkTeamIndicators = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.picMap, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ctxMap.SuspendLayout()
         CType(Me.picActive, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -178,7 +179,7 @@ Partial Class FrmEditor
         Me.ctxMap.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblMapNoActionsAvailable, Me.btnMapUnitProperties, Me.ctxMapSeparator1, Me.btnMapDeleteUnit, Me.ctxMapSeparator2, Me.btnMapCancel})
         Me.ctxMap.Name = "ctxMap"
         Me.ctxMap.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.ctxMap.Size = New System.Drawing.Size(203, 126)
+        Me.ctxMap.Size = New System.Drawing.Size(203, 104)
         '
         'btnMapUnitProperties
         '
@@ -434,7 +435,7 @@ Partial Class FrmEditor
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuchkGrid, Me.mnuchkShadows, Me.mnuchkDebugBuildingPos, Me.mnuchkDebugUnitPos})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuchkGrid, Me.mnuchkShadows, Me.mnuchkTeamIndicators, Me.mnuchkDebugBuildingPos, Me.mnuchkDebugUnitPos})
         Me.mnuView.Name = "mnuView"
         Me.mnuView.Size = New System.Drawing.Size(44, 24)
         Me.mnuView.Text = "&View"
@@ -865,6 +866,15 @@ Partial Class FrmEditor
         Me.ctxMapSeparator2.Name = "ctxMapSeparator2"
         Me.ctxMapSeparator2.Size = New System.Drawing.Size(199, 6)
         '
+        'mnuchkTeamIndicators
+        '
+        Me.mnuchkTeamIndicators.CheckOnClick = True
+        Me.mnuchkTeamIndicators.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.mnuchkTeamIndicators.Name = "mnuchkTeamIndicators"
+        Me.mnuchkTeamIndicators.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
+        Me.mnuchkTeamIndicators.Size = New System.Drawing.Size(247, 22)
+        Me.mnuchkTeamIndicators.Text = "Show &Team Indicators"
+        '
         'FrmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1008,4 +1018,5 @@ Partial Class FrmEditor
     Friend WithEvents btnMapDeleteUnit As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ctxMapSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents btnMapCancel As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuchkTeamIndicators As System.Windows.Forms.ToolStripMenuItem
 End Class

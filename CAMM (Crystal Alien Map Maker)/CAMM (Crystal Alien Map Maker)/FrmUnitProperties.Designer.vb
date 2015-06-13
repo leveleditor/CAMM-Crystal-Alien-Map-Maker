@@ -32,9 +32,11 @@ Partial Class FrmUnitProperties
         Me.lblAngle = New System.Windows.Forms.Label()
         Me.lblDamage = New System.Windows.Forms.Label()
         Me.txtDamage = New System.Windows.Forms.NumericUpDown()
+        Me.picTeam = New System.Windows.Forms.PictureBox()
         Me.tblButtons.SuspendLayout()
         CType(Me.txtAngle, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtDamage, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.picTeam, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblTeam
@@ -50,7 +52,7 @@ Partial Class FrmUnitProperties
         '
         Me.cboTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboTeam.FormattingEnabled = True
-        Me.cboTeam.Items.AddRange(New Object() {"Astros (""good"")", "Aliens (""evil"")"})
+        Me.cboTeam.Items.AddRange(New Object() {"Astros (""good"")", "Aliens (""evil"")", "Neutral (""???"")"})
         Me.cboTeam.Location = New System.Drawing.Point(126, 12)
         Me.cboTeam.Name = "cboTeam"
         Me.cboTeam.Size = New System.Drawing.Size(100, 21)
@@ -128,6 +130,14 @@ Partial Class FrmUnitProperties
         Me.txtDamage.Size = New System.Drawing.Size(100, 20)
         Me.txtDamage.TabIndex = 15
         '
+        'picTeam
+        '
+        Me.picTeam.Location = New System.Drawing.Point(232, 6)
+        Me.picTeam.Name = "picTeam"
+        Me.picTeam.Size = New System.Drawing.Size(33, 33)
+        Me.picTeam.TabIndex = 16
+        Me.picTeam.TabStop = False
+        '
         'FrmUnitProperties
         '
         Me.AcceptButton = Me.btnOk
@@ -135,6 +145,7 @@ Partial Class FrmUnitProperties
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(334, 299)
+        Me.Controls.Add(Me.picTeam)
         Me.Controls.Add(Me.txtDamage)
         Me.Controls.Add(Me.lblDamage)
         Me.Controls.Add(Me.txtAngle)
@@ -153,6 +164,7 @@ Partial Class FrmUnitProperties
         Me.tblButtons.ResumeLayout(False)
         CType(Me.txtAngle, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtDamage, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.picTeam, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -166,4 +178,5 @@ Partial Class FrmUnitProperties
     Friend WithEvents lblAngle As System.Windows.Forms.Label
     Friend WithEvents lblDamage As System.Windows.Forms.Label
     Friend WithEvents txtDamage As System.Windows.Forms.NumericUpDown
+    Friend WithEvents picTeam As System.Windows.Forms.PictureBox
 End Class

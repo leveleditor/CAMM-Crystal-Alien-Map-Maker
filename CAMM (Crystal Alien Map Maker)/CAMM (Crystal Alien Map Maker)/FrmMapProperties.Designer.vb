@@ -42,9 +42,11 @@ Partial Class FrmMapProperties
         Me.txtTitle = New System.Windows.Forms.TextBox()
         Me.txtAuthor = New System.Windows.Forms.TextBox()
         Me.lblAuthor = New System.Windows.Forms.Label()
+        Me.picTeam = New System.Windows.Forms.PictureBox()
         CType(Me.txtStartCashPlayer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtStartCashEnemy, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tblButtons.SuspendLayout()
+        CType(Me.picTeam, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lblTeam
@@ -239,6 +241,14 @@ Partial Class FrmMapProperties
         Me.lblAuthor.TabIndex = 13
         Me.lblAuthor.Text = "Author"
         '
+        'picTeam
+        '
+        Me.picTeam.Location = New System.Drawing.Point(232, 58)
+        Me.picTeam.Name = "picTeam"
+        Me.picTeam.Size = New System.Drawing.Size(33, 33)
+        Me.picTeam.TabIndex = 17
+        Me.picTeam.TabStop = False
+        '
         'FrmMapProperties
         '
         Me.AcceptButton = Me.btnOk
@@ -246,6 +256,7 @@ Partial Class FrmMapProperties
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(334, 299)
+        Me.Controls.Add(Me.picTeam)
         Me.Controls.Add(Me.lblAuthor)
         Me.Controls.Add(Me.lblTitle)
         Me.Controls.Add(Me.txtAuthor)
@@ -274,6 +285,7 @@ Partial Class FrmMapProperties
         CType(Me.txtStartCashPlayer, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtStartCashEnemy, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tblButtons.ResumeLayout(False)
+        CType(Me.picTeam, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -297,4 +309,5 @@ Partial Class FrmMapProperties
     Friend WithEvents lblTitle As System.Windows.Forms.Label
     Friend WithEvents txtAuthor As System.Windows.Forms.TextBox
     Friend WithEvents lblAuthor As System.Windows.Forms.Label
+    Friend WithEvents picTeam As System.Windows.Forms.PictureBox
 End Class
