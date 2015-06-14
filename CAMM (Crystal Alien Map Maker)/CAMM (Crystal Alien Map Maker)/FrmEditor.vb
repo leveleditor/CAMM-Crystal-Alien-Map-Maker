@@ -421,11 +421,7 @@ Public Class FrmEditor
                     If ActiveToolMode = ToolMode.Pointer Then
                         If closestUnit IsNot Nothing Then
                             If DrawTeamIndicators Then
-                                g.DrawImage(closestUnit.TeamIndicatorImage, _
-                                    closestUnit.Position.X - CInt(closestUnit.TeamIndicatorImage.Width / 2), _
-                                    closestUnit.Position.Y - CInt(closestUnit.TeamIndicatorImage.Height / 2) - closestUnit.Altitude, _
-                                    closestUnit.TeamIndicatorImage.Width, _
-                                    closestUnit.TeamIndicatorImage.Height)
+                                closestUnit.DrawTeamIndicator(g)
                             End If
                             g.DrawImage(UnitSelectionHover, closestUnit.X - CInt(UnitSelectionHover.Width / 2), closestUnit.Y - closestUnit.Altitude - CInt(UnitSelectionHover.Height / 2), UnitSelectionHover.Width, UnitSelectionHover.Height)
                             'g.DrawString(closestUnit.UnitId, New Font(FontFamily.GenericMonospace, 12, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.GreenYellow, closestUnit.X, closestUnit.Y)
@@ -435,18 +431,7 @@ Public Class FrmEditor
                     End If
                     If isMouseOnMap And Not IsDrawing And ActiveToolMode <> ToolMode.Eraser And Not My.Computer.Keyboard.CtrlKeyDown And ActiveToolMode <> ToolMode.Pointer And activeUnit.UnitId <> "" Then
                         If mouseYNoSnap - activeUnit.Altitude > 0 Then
-                            If DrawShadows Then
-                                g.DrawImage(activeUnit.ShadowImage, _
-                                mouseXNoSnap - CInt(activeUnit.ShadowImage.Width / 2), _
-                                mouseYNoSnap - CInt(activeUnit.ShadowImage.Height / 2), _
-                                activeUnit.ShadowImage.Width, _
-                                activeUnit.ShadowImage.Height)
-                            End If
-                            g.DrawImage(activeUnit.FullImage, _
-                                mouseXNoSnap - CInt(activeUnit.FullImage.Width / 2), _
-                                mouseYNoSnap - CInt(activeUnit.FullImage.Height / 2) - activeUnit.Altitude, _
-                                activeUnit.FullImage.Width, _
-                                activeUnit.FullImage.Height)
+                            activeUnit.Draw(g, mouseXNoSnap, mouseYNoSnap, DrawShadows)
                         Else
                             g.DrawLine(New Pen(Color.Red, 2), mouseXNoSnap - 5, mouseYNoSnap - 5, mouseXNoSnap + 5, mouseYNoSnap + 5)
                             g.DrawLine(New Pen(Color.Red, 2), mouseXNoSnap + 5, mouseYNoSnap - 5, mouseXNoSnap - 5, mouseYNoSnap + 5)
@@ -459,11 +444,7 @@ Public Class FrmEditor
                 If ActiveToolMode = ToolMode.Pointer Then
                     If selectedUnit IsNot Nothing Then
                         If DrawTeamIndicators Then
-                            g.DrawImage(selectedUnit.TeamIndicatorImage, _
-                            selectedUnit.Position.X - CInt(selectedUnit.TeamIndicatorImage.Width / 2), _
-                            selectedUnit.Position.Y - CInt(selectedUnit.TeamIndicatorImage.Height / 2) - selectedUnit.Altitude, _
-                            selectedUnit.TeamIndicatorImage.Width, _
-                            selectedUnit.TeamIndicatorImage.Height)
+                            selectedUnit.DrawTeamIndicator(g)
                         End If
                         g.DrawImage(UnitSelectionClick, selectedUnit.X - CInt(UnitSelectionHover.Width / 2), selectedUnit.Y - selectedUnit.Altitude - CInt(UnitSelectionHover.Height / 2), UnitSelectionHover.Width, UnitSelectionHover.Height)
                         'g.DrawString(selectedUnit.UnitId, New Font(FontFamily.GenericMonospace, 12, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.GreenYellow, selectedUnit.X + 10, selectedUnit.Y - selectedUnit.Altitude - 10)
@@ -672,15 +653,7 @@ Public Class FrmEditor
             ' Draw the object selections.
             For i As Integer = 0 To UnitDefs.Length - 1
                 If UnitDefs(i).HasData Then
-                    If UnitDefs(i).Team = Team.Astros Then
-                        e.Graphics.DrawImage(ButtonAstro, UnitDefs(i).Position)
-                    ElseIf UnitDefs(i).Team = Team.Aliens Then
-                        e.Graphics.DrawImage(ButtonAlien, UnitDefs(i).Position)
-                    Else
-                        e.Graphics.DrawImage(ButtonNeutral, UnitDefs(i).Position.X, UnitDefs(i).Position.Y, ButtonNeutral.Width, ButtonNeutral.Height)
-                    End If
-                    e.Graphics.DrawImage(UnitDefs(i).SmallImage, UnitDefs(i).Position)
-                    'e.Graphics.DrawImage(ButtonOverlay, SelUnits(i).Location)
+                    UnitDefs(i).DrawThumbnail(e.Graphics, True)
                 End If
             Next
 
@@ -911,15 +884,7 @@ Public Class FrmEditor
             ElseIf ActiveEditMode = EditMode.Units Then
                 If activeUnit.HasData And activeUnit.UnitId <> "" And ActiveToolMode <> ToolMode.Eraser Then
                     e.Graphics.Clear(picActive.BackColor)
-                    If activeUnit.Team = Team.Astros Then
-                        e.Graphics.DrawImage(ButtonAstro, New Point(0, 0))
-                    ElseIf activeUnit.Team = Team.Aliens Then
-                        e.Graphics.DrawImage(ButtonAlien, New Point(0, 0))
-                    Else
-                        e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
-                    End If
-                    e.Graphics.DrawImage(activeUnit.SmallImage, New Point(0, 0))
-                    'e.Graphics.DrawImage(ButtonOverlay, New Point(0, 0))
+                    activeUnit.DrawThumbnail(e.Graphics, True)
                 Else
                     e.Graphics.Clear(picActive.BackColor)
                     e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)

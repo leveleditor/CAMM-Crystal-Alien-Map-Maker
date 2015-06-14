@@ -421,12 +421,7 @@ Public Class Map
             ' Draw any existing unit shadows.
             For i As Integer = 0 To mapUnits.Count() - 1
                 If mapUnits(i).HasData Then
-
-                    g.DrawImage(mapUnits(i).ShadowImage, _
-                         mapUnits(i).Position.X - CInt(mapUnits(i).ShadowImage.Width / 2), _
-                         mapUnits(i).Position.Y - CInt(mapUnits(i).ShadowImage.Height / 2), _
-                         mapUnits(i).ShadowImage.Width, _
-                         mapUnits(i).ShadowImage.Height)
+                    mapUnits(i).DrawShadow(g)
                 End If
             Next
         End If
@@ -451,12 +446,7 @@ Public Class Map
         ' Draw any existing units.
         For i As Integer = 0 To mapUnits.Count() - 1
             If mapUnits(i).HasData Then
-
-                g.DrawImage(mapUnits(i).FullImage, _
-                     mapUnits(i).Position.X - CInt(mapUnits(i).FullImage.Width / 2), _
-                     mapUnits(i).Position.Y - CInt(mapUnits(i).FullImage.Height / 2) - mapUnits(i).Altitude, _
-                     mapUnits(i).FullImage.Width, _
-                     mapUnits(i).FullImage.Height)
+                mapUnits(i).Draw(g)
 
                 If debugUnitPos Then
                     g.DrawLine(Pens.LightSkyBlue, mapUnits(i).X, mapUnits(i).Y, mapUnits(i).X, mapUnits(i).Y - mapUnits(i).Altitude)
@@ -480,11 +470,7 @@ Public Class Map
             ' Draw team indicator icons.
             For i As Integer = 0 To mapUnits.Count() - 1
                 If mapUnits(i).HasData Then
-                    g.DrawImage(mapUnits(i).TeamIndicatorImage, _
-                         mapUnits(i).Position.X - CInt(mapUnits(i).TeamIndicatorImage.Width / 2), _
-                         mapUnits(i).Position.Y - CInt(mapUnits(i).TeamIndicatorImage.Height / 2) - mapUnits(i).Altitude, _
-                         mapUnits(i).TeamIndicatorImage.Width, _
-                         mapUnits(i).TeamIndicatorImage.Height)
+                    mapUnits(i).DrawTeamIndicator(g)
                 End If
             Next
         End If

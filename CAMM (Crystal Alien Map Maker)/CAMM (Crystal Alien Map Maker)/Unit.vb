@@ -111,4 +111,67 @@
 
     Public Property Altitude As Integer
 
+    Public Sub DrawThumbnail(g As Graphics, Optional drawButtonImage As Boolean = False)
+        If drawButtonImage Then
+            If Team = Team.Astros Then
+                g.DrawImage(ButtonAstro, X, Y, ButtonAstro.Width, ButtonAstro.Height)
+            ElseIf Team = Team.Aliens Then
+                g.DrawImage(ButtonAlien, X, Y, ButtonAlien.Width, ButtonAlien.Height)
+            Else
+                g.DrawImage(ButtonNeutral, X, Y, ButtonNeutral.Width, ButtonNeutral.Height)
+            End If
+        End If
+
+        g.DrawImage(SmallImage, X, Y, SmallImage.Width, SmallImage.Height)
+        'g.DrawImage(ButtonOverlay, X, Y, ButtonOverlay.Width, ButtonOverlay.Height)
+    End Sub
+
+    Public Sub Draw(g As Graphics, Optional drawShadows As Boolean = True)
+        If drawShadows Then
+            DrawShadow(g)
+        End If
+
+        g.DrawImage(FullImage,
+                    X - CInt(FullImage.Width / 2),
+                    Y - CInt(FullImage.Height / 2) - Altitude,
+                    FullImage.Width,
+                    FullImage.Height)
+    End Sub
+
+    Public Sub Draw(g As Graphics, drawX As Integer, drawY As Integer, Optional drawShadows As Boolean = True)
+        If drawShadows Then
+            DrawShadow(g, drawX, drawY)
+        End If
+
+        g.DrawImage(FullImage,
+                    drawX - CInt(FullImage.Width / 2),
+                    drawY - CInt(FullImage.Height / 2) - Altitude,
+                    FullImage.Width,
+                    FullImage.Height)
+    End Sub
+
+    Public Sub DrawShadow(g As Graphics)
+        g.DrawImage(ShadowImage,
+                    X - CInt(ShadowImage.Width / 2),
+                    Y - CInt(ShadowImage.Height / 2),
+                    ShadowImage.Width,
+                    ShadowImage.Height)
+    End Sub
+
+    Public Sub DrawShadow(g As Graphics, drawX As Integer, drawY As Integer)
+        g.DrawImage(ShadowImage,
+                    drawX - CInt(ShadowImage.Width / 2),
+                    drawY - CInt(ShadowImage.Height / 2),
+                    ShadowImage.Width,
+                    ShadowImage.Height)
+    End Sub
+
+    Public Sub DrawTeamIndicator(g As Graphics)
+        g.DrawImage(TeamIndicatorImage,
+                    X - CInt(TeamIndicatorImage.Width / 2),
+                    Y - CInt(TeamIndicatorImage.Height / 2) - Altitude,
+                    TeamIndicatorImage.Width,
+                    TeamIndicatorImage.Height)
+    End Sub
+
 End Class
