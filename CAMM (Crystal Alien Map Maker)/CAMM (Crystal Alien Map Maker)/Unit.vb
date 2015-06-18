@@ -126,7 +126,7 @@
         'g.DrawImage(ButtonOverlay, X, Y, ButtonOverlay.Width, ButtonOverlay.Height)
     End Sub
 
-    Public Sub Draw(g As Graphics, Optional drawShadows As Boolean = True)
+    Public Sub Draw(g As Graphics, Optional drawShadows As Boolean = False)
         If drawShadows Then
             DrawShadow(g)
         End If
@@ -138,7 +138,7 @@
                     FullImage.Height)
     End Sub
 
-    Public Sub Draw(g As Graphics, drawX As Integer, drawY As Integer, Optional drawShadows As Boolean = True)
+    Public Sub Draw(g As Graphics, drawX As Integer, drawY As Integer, Optional drawShadows As Boolean = False)
         If drawShadows Then
             DrawShadow(g, drawX, drawY)
         End If
