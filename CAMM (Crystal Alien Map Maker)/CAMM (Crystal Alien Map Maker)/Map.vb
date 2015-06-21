@@ -373,35 +373,7 @@ Public Class Map
         ' Draw building baseplates.
         For i As Integer = 0 To mapBuildings.Count() - 1
             If mapBuildings(i).HasData Then
-                Dim teamBaseplate As Image = Nothing
-                If mapBuildings(i).Team = Team.Astros And mapBuildings(i).BuildingW = 1 Then
-                    teamBaseplate = BaseplateAstroSmall
-                ElseIf mapBuildings(i).Team = Team.Aliens And mapBuildings(i).BuildingW = 1 Then
-                    teamBaseplate = BaseplateAlienSmall
-                ElseIf mapBuildings(i).Team = Team.Astros Then
-                    teamBaseplate = BaseplateAstroWide
-                ElseIf mapBuildings(i).Team = Team.Aliens Then
-                    teamBaseplate = BaseplateAlienWide
-                End If
-                If teamBaseplate IsNot Nothing Then
-                    Dim location As Point = mapBuildings(i).Location
-                    If mapBuildings(i).BuildingW > 1 Then
-                        location.X += (mapBuildings(i).BuildingW * TileSizeX) / 2
-                        location.X -= TileSizeX
-                    Else
-                        location.X -= TileSizeX / 2
-                    End If
-                    If mapBuildings(i).BuildingH > 1 Then
-                        location.Y += (mapBuildings(i).BuildingH * TileSizeY) - TileSizeY
-                    End If
-                    location.Y -= TileSizeY + 10
-
-                    g.DrawImage(teamBaseplate, _
-                             location.X, _
-                             location.Y, _
-                             teamBaseplate.Width, _
-                             teamBaseplate.Height)
-                End If
+                mapBuildings(i).DrawBaseplate(g)
             End If
         Next
 
@@ -409,12 +381,7 @@ Public Class Map
             ' Draw any existing building shadows.
             For i As Integer = 0 To mapBuildings.Count() - 1
                 If mapBuildings(i).HasData Then
-
-                    g.DrawImage(mapBuildings(i).ShadowImage, _
-                         mapBuildings(i).DrawPos.X, _
-                         mapBuildings(i).DrawPos.Y, _
-                         mapBuildings(i).FullImage.Width, _
-                         mapBuildings(i).FullImage.Height)
+                    mapBuildings(i).DrawShadow(g)
                 End If
             Next
 
@@ -429,12 +396,7 @@ Public Class Map
         ' Draw any existing buildings.
         For i As Integer = 0 To mapBuildings.Count() - 1
             If mapBuildings(i).HasData Then
-
-                g.DrawImage(mapBuildings(i).FullImage, _
-                     mapBuildings(i).DrawPos.X, _
-                     mapBuildings(i).DrawPos.Y, _
-                     mapBuildings(i).FullImage.Width, _
-                     mapBuildings(i).FullImage.Height)
+                mapBuildings(i).Draw(g)
 
                 If debugBuildingPos Then
                     g.DrawRectangle(Pens.Lime, mapBuildings(i).Location.X - 1, mapBuildings(i).Location.Y - 1, 2, 2)

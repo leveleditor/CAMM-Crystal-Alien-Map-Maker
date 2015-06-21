@@ -408,15 +408,8 @@ Public Class FrmEditor
                 If ActiveEditMode = EditMode.Tiles Then
                     'g.DrawImage(ActiveTile.Image, MouseX, MouseY)
                 ElseIf ActiveEditMode = EditMode.Buildings And activeBuilding.BuildingId <> "" Then
-                    'OffY2 = TileSizeY
-
-                    'g.DrawImage(ActiveBuilding.FullImage, _
-                    '     ActiveBuilding.DrawPos.X - CInt(ActiveBuilding.FullImage.Width / 2), _
-                    '     ActiveBuilding.DrawPos.Y - CInt(ActiveBuilding.FullImage.Height / 2) + OffY, _
-                    '     ActiveBuilding.FullImage.Width, _
-                    '     ActiveBuilding.FullImage.Height)
-
-                    'g.DrawImage(ActiveBuilding.FullImage, MouseX, MouseY, ActiveBuilding.FullImage.Width, ActiveBuilding.FullImage.Height)
+                    'activeBuilding.DrawBaseplate(g, mouseX, mouseY)
+                    'activeBuilding.Draw(g, mouseX, mouseY, True)
                 ElseIf ActiveEditMode = EditMode.Units Then
                     If ActiveToolMode = ToolMode.Pointer Then
                         If closestUnit IsNot Nothing Then
@@ -558,20 +551,11 @@ Public Class FrmEditor
     Private Sub picBuildings_Paint(sender As Object, e As PaintEventArgs) Handles picBuildings.Paint
         If isLoaded Then
             e.Graphics.Clear(picBuildings.BackColor)
-            'e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
 
             ' Draw the object selections.
             For i As Integer = 0 To BuildingDefs.Length - 1
                 If BuildingDefs(i).HasData Then
-                    If BuildingDefs(i).Team = Team.Astros Then
-                        e.Graphics.DrawImage(ButtonAstro, BuildingDefs(i).Location.X, BuildingDefs(i).Location.Y, ButtonAstro.Width, ButtonAstro.Height)
-                    ElseIf BuildingDefs(i).Team = Team.Aliens Then
-                        e.Graphics.DrawImage(ButtonAlien, BuildingDefs(i).Location.X, BuildingDefs(i).Location.Y, ButtonAlien.Width, ButtonAlien.Height)
-                    Else
-                        e.Graphics.DrawImage(ButtonNeutral, BuildingDefs(i).Location.X, BuildingDefs(i).Location.Y, ButtonNeutral.Width, ButtonNeutral.Height)
-                    End If
-                    e.Graphics.DrawImage(BuildingDefs(i).SmallImage, BuildingDefs(i).Location)
-                    e.Graphics.DrawImage(ButtonOverlay, BuildingDefs(i).Location)
+                    BuildingDefs(i).DrawThumbnail(e.Graphics, True)
                 End If
             Next
 
@@ -867,15 +851,7 @@ Public Class FrmEditor
             If ActiveEditMode = EditMode.Buildings Then
                 If activeBuilding.HasData And activeBuilding.BuildingId <> "" And ActiveToolMode <> ToolMode.Eraser Then
                     e.Graphics.Clear(picActive.BackColor)
-                    If activeBuilding.Team = Team.Astros Then
-                        e.Graphics.DrawImage(ButtonAstro, New Point(0, 0))
-                    ElseIf activeBuilding.Team = Team.Aliens Then
-                        e.Graphics.DrawImage(ButtonAlien, New Point(0, 0))
-                    Else
-                        e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
-                    End If
-                    e.Graphics.DrawImage(activeBuilding.SmallImage, New Point(0, 0))
-                    e.Graphics.DrawImage(ButtonOverlay, New Point(0, 0))
+                    activeBuilding.DrawThumbnail(e.Graphics, True)
                 Else
                     e.Graphics.Clear(picActive.BackColor)
                     e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
