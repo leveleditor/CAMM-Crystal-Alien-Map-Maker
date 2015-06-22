@@ -475,7 +475,7 @@ Public Class FrmEditor
 
             For i As Integer = 0 To TileDefs.Length - 1
                 If TileDefs(i).HasData Then
-                    e.Graphics.DrawImage(TileDefs(i).Image, TileDefs(i).Position)
+                    TileDefs(i).Draw(e.Graphics)
                 End If
             Next
 

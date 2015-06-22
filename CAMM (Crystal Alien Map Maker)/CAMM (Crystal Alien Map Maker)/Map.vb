@@ -366,7 +366,7 @@ Public Class Map
         ' Draw any existing tiles.
         For i As Integer = 0 To mapTiles.Length - 1
             If mapTiles(i).HasData Then
-                g.DrawImage(mapTiles(i).Image, mapTiles(i).Position)
+                mapTiles(i).Draw(g)
             End If
         Next
 

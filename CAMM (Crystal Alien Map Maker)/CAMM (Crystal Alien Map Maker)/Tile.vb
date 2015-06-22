@@ -66,4 +66,8 @@
 
     Public Property IsMinerals As Boolean
 
+    Public Sub Draw(g As Graphics)
+        g.DrawImage(Image, X, Y, TileSizeX, TileSizeY)
+    End Sub
+
 End Class
