@@ -25,6 +25,23 @@ Public Module Utils
     End Sub
 
     ''' <summary>
+    ''' Draws grid lines on the specified graphics at the specified size.
+    ''' </summary>
+    ''' <param name="g">A reference to the graphics to draw onto.</param>
+    ''' <param name="gridWidth">The width of the entire grid.</param>
+    ''' <param name="gridHeight">The height of the entire grid.</param>
+    ''' <param name="tileWidth">Optional width of each tile. Default is <code>TileSizeX</code>.</param>
+    ''' <param name="tileHeight">Optional height of each tile. Default is <code>TileSizeY</code>.</param>
+    Public Sub DrawGridLines(g As Graphics, gridWidth As Integer, gridHeight As Integer, Optional tileWidth As Integer = TileSizeX, Optional tileHeight As Integer = TileSizeY)
+        For x As Integer = 0 To gridWidth Step tileWidth
+            For y As Integer = 0 To gridHeight Step tileHeight
+                g.DrawLine(PenGrid, x, y, x, y + tileHeight)
+                g.DrawLine(PenGrid, x, y, x + tileWidth, y)
+            Next y
+        Next x
+    End Sub
+
+    ''' <summary>
     ''' Returns the distance between two points.
     ''' </summary>
     ''' <param name="x1">First point x position</param>

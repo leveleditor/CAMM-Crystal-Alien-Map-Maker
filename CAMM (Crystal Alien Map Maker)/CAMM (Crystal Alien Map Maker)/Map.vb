@@ -420,12 +420,7 @@ Public Class Map
 
         If drawGrid Then
             ' Draw the grid.
-            For x As Integer = 0 To SizeX * TileSizeX Step TileSizeX
-                For y As Integer = 0 To SizeY * TileSizeY Step TileSizeY
-                    g.DrawLine(PenGrid, x, y, x, y + TileSizeY)
-                    g.DrawLine(PenGrid, x, y, x + TileSizeX, y)
-                Next y
-            Next x
+            DrawGridLines(g, SizeX * TileSizeX, SizeY * TileSizeY)
         End If
 
         If drawTeamIndicators Then

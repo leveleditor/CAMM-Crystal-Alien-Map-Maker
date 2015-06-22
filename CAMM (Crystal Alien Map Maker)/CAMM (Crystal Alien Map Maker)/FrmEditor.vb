@@ -480,12 +480,7 @@ Public Class FrmEditor
             Next
 
             ' Draw the grid.
-            For x As Integer = 0 To picTiles.ClientSize.Width Step TileSizeX
-                For y As Integer = 0 To picTiles.ClientSize.Height Step TileSizeY
-                    e.Graphics.DrawLine(PenGrid, x, y, x, y + TileSizeY)
-                    e.Graphics.DrawLine(PenGrid, x, y, x + TileSizeX, y)
-                Next y
-            Next x
+            DrawGridLines(e.Graphics, picTiles.ClientSize.Width, picTiles.ClientSize.Height)
 
             'Draw Rectangle around selected Tile.
             If ActiveEditMode = EditMode.Tiles And activeTile.TileId <> -1 And ActiveToolMode <> ToolMode.Eraser And ActiveToolMode <> ToolMode.Pointer Then
@@ -560,12 +555,7 @@ Public Class FrmEditor
             Next
 
             ' Draw the grid.
-            For x As Integer = 0 To picBuildings.ClientSize.Width Step TileSizeX
-                For y As Integer = 0 To picBuildings.ClientSize.Height Step TileSizeY
-                    e.Graphics.DrawLine(PenGrid, x, y, x, y + TileSizeY)
-                    e.Graphics.DrawLine(PenGrid, x, y, x + TileSizeX, y)
-                Next y
-            Next x
+            DrawGridLines(e.Graphics, picBuildings.ClientSize.Width, picBuildings.ClientSize.Height)
 
             'Draw Rectangle around selected Buildings.
             If ActiveEditMode = EditMode.Buildings And activeBuilding.BuildingId <> "" And ActiveToolMode <> ToolMode.Eraser And ActiveToolMode <> ToolMode.Pointer Then
@@ -642,12 +632,7 @@ Public Class FrmEditor
             Next
 
             ' Draw the grid.
-            For x As Integer = 0 To picUnits.ClientSize.Width Step TileSizeX
-                For y As Integer = 0 To picUnits.ClientSize.Height Step TileSizeY
-                    e.Graphics.DrawLine(PenGrid, x, y, x, y + TileSizeY)
-                    e.Graphics.DrawLine(PenGrid, x, y, x + TileSizeX, y)
-                Next y
-            Next x
+            DrawGridLines(e.Graphics, picUnits.ClientSize.Width, picUnits.ClientSize.Height)
 
             'Draw Rectangle around selected Units.
             If ActiveEditMode = EditMode.Units And activeUnit.UnitId <> "" And ActiveToolMode <> ToolMode.Eraser And ActiveToolMode <> ToolMode.Pointer Then
