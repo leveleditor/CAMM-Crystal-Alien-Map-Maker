@@ -106,6 +106,22 @@
         End Get
     End Property
 
+    Public ReadOnly Property BaseplateImage As Image
+        Get
+            If Team = Team.Astros And BuildingW = 1 Then
+                Return BaseplateAstroSmall
+            ElseIf Team = Team.Aliens And BuildingW = 1 Then
+                Return BaseplateAlienSmall
+            ElseIf Team = Team.Astros Then
+                Return BaseplateAstroWide
+            ElseIf Team = Team.Aliens Then
+                Return BaseplateAlienWide
+            Else
+                Return Nothing
+            End If
+        End Get
+    End Property
+
     Public Property BuildingId As String
 
     Public Property Team As Team
@@ -117,5 +133,79 @@
     Public Property BuildingW As Integer
 
     Public Property BuildingH As Integer
+
+    Public Sub DrawThumbnail(g As Graphics, Optional drawButtonImage As Boolean = False)
+        If drawButtonImage Then
+            If Team = Team.Astros Then
+                g.DrawImage(ButtonAstro, X, Y, ButtonAstro.Width, ButtonAstro.Height)
+            ElseIf Team = Team.Aliens Then
+                g.DrawImage(ButtonAlien, X, Y, ButtonAlien.Width, ButtonAlien.Height)
+            Else
+                g.DrawImage(ButtonNeutral, X, Y, ButtonNeutral.Width, ButtonNeutral.Height)
+            End If
+        End If
+        g.DrawImage(SmallImage, X, Y, SmallImage.Width, SmallImage.Height)
+        g.DrawImage(ButtonOverlay, X, Y, ButtonOverlay.Width, ButtonOverlay.Height)
+    End Sub
+
+    Public Sub Draw(g As Graphics, Optional drawShadows As Boolean = False)
+        If drawShadows Then
+            DrawShadow(g)
+        End If
+
+        g.DrawImage(FullImage, DrawPos.X, DrawPos.Y, FullImage.Width, FullImage.Height)
+    End Sub
+
+    Public Sub Draw(g As Graphics, drawX As Integer, drawY As Integer, Optional drawShadows As Boolean = False)
+        If drawShadows Then
+            DrawShadow(g, DrawPos.X + drawX, DrawPos.Y + drawY)
+        End If
+
+        g.DrawImage(FullImage, DrawPos.X + drawX, DrawPos.Y + drawY, FullImage.Width, FullImage.Height)
+    End Sub
+
+    Public Sub DrawShadow(g As Graphics)
+        g.DrawImage(ShadowImage, DrawPos.X, DrawPos.Y, ShadowImage.Width, ShadowImage.Height)
+    End Sub
+
+    Public Sub DrawShadow(g As Graphics, drawX As Integer, drawY As Integer)
+        g.DrawImage(ShadowImage, drawX, drawY, ShadowImage.Width, ShadowImage.Height)
+    End Sub
+
+    Public Sub DrawBaseplate(g As Graphics)
+        If BaseplateImage IsNot Nothing Then
+            Dim drawPoint As Point = Location
+            If BuildingW > 1 Then
+                drawPoint.X += (BuildingW * TileSizeX) / 2
+                drawPoint.X -= TileSizeX
+            Else
+                drawPoint.X -= TileSizeX / 2
+            End If
+            If BuildingH > 1 Then
+                drawPoint.Y += (BuildingH * TileSizeY) - TileSizeY
+            End If
+            drawPoint.Y -= TileSizeY + 10
+
+            g.DrawImage(BaseplateImage, drawPoint.X, drawPoint.Y, BaseplateImage.Width, BaseplateImage.Height)
+        End If
+    End Sub
+
+    Public Sub DrawBaseplate(g As Graphics, drawX As Integer, drawY As Integer)
+        If BaseplateImage IsNot Nothing Then
+            Dim drawPoint As Point = Location
+            If BuildingW > 1 Then
+                drawPoint.X += (BuildingW * TileSizeX) / 2
+                drawPoint.X -= TileSizeX
+            Else
+                drawPoint.X -= TileSizeX / 2
+            End If
+            If BuildingH > 1 Then
+                drawPoint.Y += (BuildingH * TileSizeY) - TileSizeY
+            End If
+            drawPoint.Y -= TileSizeY + 10
+
+            g.DrawImage(BaseplateImage, drawPoint.X + drawX, drawPoint.Y + drawY, BaseplateImage.Width, BaseplateImage.Height)
+        End If
+    End Sub
 
 End Class

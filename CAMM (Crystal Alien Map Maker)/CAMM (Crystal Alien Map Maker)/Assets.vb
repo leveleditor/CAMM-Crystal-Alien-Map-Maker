@@ -10,6 +10,11 @@
         BaseplateAlienWide = Image.FromFile(FullBasePath + "/Other Data/AlienBaseplateAlphaWide.png")
         BaseplateAstroSmall = Image.FromFile(FullBasePath + "/Other Data/AstroBaseplateAlphaSmall.png")
         BaseplateAlienSmall = Image.FromFile(FullBasePath + "/Other Data/AlienBaseplateAlphaSmall.png")
+        TeamIndicatorAstro = Image.FromFile(FullBasePath + "/Other Data/AstroTeamIndicatorIcon.png")
+        TeamIndicatorAlien = Image.FromFile(FullBasePath + "/Other Data/AlienTeamIndicatorIcon.png")
+        TeamIndicatorNeutral = Image.FromFile(FullBasePath + "/Other Data/NeutralTeamIndicatorIcon.png")
+        UnitSelectionHover = Image.FromFile(FullBasePath + "/Other Data/UnitSelectionHover.png")
+        UnitSelectionClick = Image.FromFile(FullBasePath + "/Other Data/UnitSelectionClick.png")
 
         TileImageLookup = New Dictionary(Of Integer, Image)()
         BuildingSmallImageLookup = New Dictionary(Of String, Image)()
@@ -34,6 +39,15 @@
     Public BaseplateAlienWide As Image
     Public BaseplateAstroSmall As Image
     Public BaseplateAlienSmall As Image
+
+    'Team Indicator Icon graphics.
+    Public TeamIndicatorAlien As Image
+    Public TeamIndicatorAstro As Image
+    Public TeamIndicatorNeutral As Image
+
+    'Unit selection graphics.
+    Public UnitSelectionHover As Image
+    Public UnitSelectionClick As Image
 
     'Lookup for Tile Image graphics.
     Public TileImageLookup As Dictionary(Of Integer, Image)

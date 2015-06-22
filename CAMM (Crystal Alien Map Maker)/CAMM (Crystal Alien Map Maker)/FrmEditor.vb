@@ -50,6 +50,7 @@ Public Class FrmEditor
 
     Public DrawGrid As Boolean = True
     Public DrawShadows As Boolean = True
+    Public DrawTeamIndicators As Boolean = False
     Public DrawBuildingDebugPos As Boolean = False
     Public DrawUnitDebugPos As Boolean = False
     Private isMouseOnSelections As Boolean = False
@@ -93,6 +94,7 @@ Public Class FrmEditor
         mnuMain.Renderer = customToolStripRenderer
         staInfoBar.Renderer = customToolStripRenderer
         ctxMapTabs.Renderer = customToolStripRenderer
+        ctxMap.Renderer = customToolStripRenderer
 
         For Each menuItem As ToolStripMenuItem In mnuMain.Items.OfType(Of ToolStripMenuItem)()
             'Dim dropDown As ToolStripDropDownMenu = MenuItem.DropDown
@@ -189,7 +191,7 @@ Public Class FrmEditor
     Dim sIntro1 As String = "Welcome to CAMM!"
     Dim sIntro2 As String = "Crystal Alien Map Maker"
     Dim sIntro3 As String = "By Leveleditor6680 // Josh"
-    Sub DrawIntro(ByRef g As Graphics)
+    Sub DrawIntro(g As Graphics)
         sIntro1Width = g.MeasureString(sIntro1, introFont).Width
         sIntro2Width = g.MeasureString(sIntro2, introFont2).Width
         sIntro3Width = g.MeasureString(sIntro3, introFont).Width
@@ -244,6 +246,12 @@ Public Class FrmEditor
 
 #Region "picMap Events"
 
+    Private Sub picMap_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles picMap.MouseDoubleClick
+        If ActiveToolMode = ToolMode.Pointer Then
+            ctxMap.Show(picMap, e.Location)
+        End If
+    End Sub
+
     Private Sub picMap_MouseDown(sender As Object, e As MouseEventArgs) Handles picMap.MouseDown
         If e.Button = MouseButtons.Left Then
             If IsDrawing = False Then
@@ -279,7 +287,11 @@ Public Class FrmEditor
                     If ActiveToolMode = ToolMode.Pointer Then
                         selectedUnit = closestUnit
                         If selectedUnit IsNot Nothing Then
-                            btnDeleteSelected.Enabled = True
+                            btnDeleteSelectedUnit.Enabled = True
+                            btnUnitProperties.Enabled = True
+                        Else
+                            btnDeleteSelectedUnit.Enabled = False
+                            btnUnitProperties.Enabled = False
                         End If
                     ElseIf ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                         ActiveMap.Eraser(mouseXNoSnap, mouseYNoSnap, ActiveEditMode)
@@ -379,7 +391,7 @@ Public Class FrmEditor
         If isLoaded Then
             Dim g As Graphics = e.Graphics
 
-            ActiveMap.Draw(g, DrawGrid, DrawShadows, DrawBuildingDebugPos, DrawUnitDebugPos)
+            ActiveMap.Draw(g, DrawGrid, DrawShadows, DrawTeamIndicators, DrawBuildingDebugPos, DrawUnitDebugPos)
 
             ' Draw the rectangle cursor / selector thingy.
             If IsMouseInBounds() Then
@@ -396,19 +408,15 @@ Public Class FrmEditor
                 If ActiveEditMode = EditMode.Tiles Then
                     'g.DrawImage(ActiveTile.Image, MouseX, MouseY)
                 ElseIf ActiveEditMode = EditMode.Buildings And activeBuilding.BuildingId <> "" Then
-                    'OffY2 = TileSizeY
-
-                    'g.DrawImage(ActiveBuilding.FullImage, _
-                    '     ActiveBuilding.DrawPos.X - CInt(ActiveBuilding.FullImage.Width / 2), _
-                    '     ActiveBuilding.DrawPos.Y - CInt(ActiveBuilding.FullImage.Height / 2) + OffY, _
-                    '     ActiveBuilding.FullImage.Width, _
-                    '     ActiveBuilding.FullImage.Height)
-
-                    'g.DrawImage(ActiveBuilding.FullImage, MouseX, MouseY, ActiveBuilding.FullImage.Width, ActiveBuilding.FullImage.Height)
+                    'activeBuilding.DrawBaseplate(g, mouseX, mouseY)
+                    'activeBuilding.Draw(g, mouseX, mouseY, True)
                 ElseIf ActiveEditMode = EditMode.Units Then
                     If ActiveToolMode = ToolMode.Pointer Then
                         If closestUnit IsNot Nothing Then
-                            g.DrawEllipse(PenSelectionHover, closestUnit.X - 10, closestUnit.Y - closestUnit.Altitude - 10, 20, 20)
+                            If DrawTeamIndicators Then
+                                closestUnit.DrawTeamIndicator(g)
+                            End If
+                            g.DrawImage(UnitSelectionHover, closestUnit.X - CInt(UnitSelectionHover.Width / 2), closestUnit.Y - closestUnit.Altitude - CInt(UnitSelectionHover.Height / 2), UnitSelectionHover.Width, UnitSelectionHover.Height)
                             'g.DrawString(closestUnit.UnitId, New Font(FontFamily.GenericMonospace, 12, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.GreenYellow, closestUnit.X, closestUnit.Y)
                         End If
                     ElseIf ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
@@ -416,18 +424,7 @@ Public Class FrmEditor
                     End If
                     If isMouseOnMap And Not IsDrawing And ActiveToolMode <> ToolMode.Eraser And Not My.Computer.Keyboard.CtrlKeyDown And ActiveToolMode <> ToolMode.Pointer And activeUnit.UnitId <> "" Then
                         If mouseYNoSnap - activeUnit.Altitude > 0 Then
-                            If DrawShadows Then
-                                g.DrawImage(activeUnit.ShadowImage, _
-                                mouseXNoSnap - CInt(activeUnit.ShadowImage.Width / 2), _
-                                mouseYNoSnap - CInt(activeUnit.ShadowImage.Height / 2), _
-                                activeUnit.ShadowImage.Width, _
-                                activeUnit.ShadowImage.Height)
-                            End If
-                            g.DrawImage(activeUnit.FullImage, _
-                                mouseXNoSnap - CInt(activeUnit.FullImage.Width / 2), _
-                                mouseYNoSnap - CInt(activeUnit.FullImage.Height / 2) - activeUnit.Altitude, _
-                                activeUnit.FullImage.Width, _
-                                activeUnit.FullImage.Height)
+                            activeUnit.Draw(g, mouseXNoSnap, mouseYNoSnap, DrawShadows)
                         Else
                             g.DrawLine(New Pen(Color.Red, 2), mouseXNoSnap - 5, mouseYNoSnap - 5, mouseXNoSnap + 5, mouseYNoSnap + 5)
                             g.DrawLine(New Pen(Color.Red, 2), mouseXNoSnap + 5, mouseYNoSnap - 5, mouseXNoSnap - 5, mouseYNoSnap + 5)
@@ -439,7 +436,10 @@ Public Class FrmEditor
             If ActiveEditMode = EditMode.Units Then
                 If ActiveToolMode = ToolMode.Pointer Then
                     If selectedUnit IsNot Nothing Then
-                        g.DrawEllipse(PenSelected, selectedUnit.X - 10, selectedUnit.Y - selectedUnit.Altitude - 10, 20, 20)
+                        If DrawTeamIndicators Then
+                            selectedUnit.DrawTeamIndicator(g)
+                        End If
+                        g.DrawImage(UnitSelectionClick, selectedUnit.X - CInt(UnitSelectionHover.Width / 2), selectedUnit.Y - selectedUnit.Altitude - CInt(UnitSelectionHover.Height / 2), UnitSelectionHover.Width, UnitSelectionHover.Height)
                         'g.DrawString(selectedUnit.UnitId, New Font(FontFamily.GenericMonospace, 12, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.GreenYellow, selectedUnit.X + 10, selectedUnit.Y - selectedUnit.Altitude - 10)
                     End If
                 End If
@@ -475,7 +475,7 @@ Public Class FrmEditor
 
             For i As Integer = 0 To TileDefs.Length - 1
                 If TileDefs(i).HasData Then
-                    e.Graphics.DrawImage(TileDefs(i).Image, TileDefs(i).Position)
+                    TileDefs(i).Draw(e.Graphics)
                 End If
             Next
 
@@ -551,20 +551,11 @@ Public Class FrmEditor
     Private Sub picBuildings_Paint(sender As Object, e As PaintEventArgs) Handles picBuildings.Paint
         If isLoaded Then
             e.Graphics.Clear(picBuildings.BackColor)
-            'e.Graphics.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
 
             ' Draw the object selections.
             For i As Integer = 0 To BuildingDefs.Length - 1
                 If BuildingDefs(i).HasData Then
-                    If BuildingDefs(i).Team = Team.Astros Then
-                        e.Graphics.DrawImage(ButtonAstro, BuildingDefs(i).Location.X, BuildingDefs(i).Location.Y, ButtonAstro.Width, ButtonAstro.Height)
-                    ElseIf BuildingDefs(i).Team = Team.Aliens Then
-                        e.Graphics.DrawImage(ButtonAlien, BuildingDefs(i).Location.X, BuildingDefs(i).Location.Y, ButtonAlien.Width, ButtonAlien.Height)
-                    Else
-                        e.Graphics.DrawImage(ButtonNeutral, BuildingDefs(i).Location.X, BuildingDefs(i).Location.Y, ButtonNeutral.Width, ButtonNeutral.Height)
-                    End If
-                    e.Graphics.DrawImage(BuildingDefs(i).SmallImage, BuildingDefs(i).Location)
-                    e.Graphics.DrawImage(ButtonOverlay, BuildingDefs(i).Location)
+                    BuildingDefs(i).DrawThumbnail(e.Graphics, True)
                 End If
             Next
 
@@ -646,15 +637,7 @@ Public Class FrmEditor
             ' Draw the object selections.
             For i As Integer = 0 To UnitDefs.Length - 1
                 If UnitDefs(i).HasData Then
-                    If UnitDefs(i).Team = Team.Astros Then
-                        e.Graphics.DrawImage(ButtonAstro, UnitDefs(i).Position)
-                    ElseIf UnitDefs(i).Team = Team.Aliens Then
-                        e.Graphics.DrawImage(ButtonAlien, UnitDefs(i).Position)
-                    Else
-                        e.Graphics.DrawImage(ButtonNeutral, UnitDefs(i).Position.X, UnitDefs(i).Position.Y, ButtonNeutral.Width, ButtonNeutral.Height)
-                    End If
-                    e.Graphics.DrawImage(UnitDefs(i).SmallImage, UnitDefs(i).Position)
-                    'e.Graphics.DrawImage(ButtonOverlay, SelUnits(i).Location)
+                    UnitDefs(i).DrawThumbnail(e.Graphics, True)
                 End If
             Next
 
@@ -868,15 +851,7 @@ Public Class FrmEditor
             If ActiveEditMode = EditMode.Buildings Then
                 If activeBuilding.HasData And activeBuilding.BuildingId <> "" And ActiveToolMode <> ToolMode.Eraser Then
                     e.Graphics.Clear(picActive.BackColor)
-                    If activeBuilding.Team = Team.Astros Then
-                        e.Graphics.DrawImage(ButtonAstro, New Point(0, 0))
-                    ElseIf activeBuilding.Team = Team.Aliens Then
-                        e.Graphics.DrawImage(ButtonAlien, New Point(0, 0))
-                    Else
-                        e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
-                    End If
-                    e.Graphics.DrawImage(activeBuilding.SmallImage, New Point(0, 0))
-                    e.Graphics.DrawImage(ButtonOverlay, New Point(0, 0))
+                    activeBuilding.DrawThumbnail(e.Graphics, True)
                 Else
                     e.Graphics.Clear(picActive.BackColor)
                     e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
@@ -885,15 +860,7 @@ Public Class FrmEditor
             ElseIf ActiveEditMode = EditMode.Units Then
                 If activeUnit.HasData And activeUnit.UnitId <> "" And ActiveToolMode <> ToolMode.Eraser Then
                     e.Graphics.Clear(picActive.BackColor)
-                    If activeUnit.Team = Team.Astros Then
-                        e.Graphics.DrawImage(ButtonAstro, New Point(0, 0))
-                    ElseIf activeUnit.Team = Team.Aliens Then
-                        e.Graphics.DrawImage(ButtonAlien, New Point(0, 0))
-                    Else
-                        e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
-                    End If
-                    e.Graphics.DrawImage(activeUnit.SmallImage, New Point(0, 0))
-                    'e.Graphics.DrawImage(ButtonOverlay, New Point(0, 0))
+                    activeUnit.DrawThumbnail(e.Graphics, True)
                 Else
                     e.Graphics.Clear(picActive.BackColor)
                     e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
@@ -935,12 +902,18 @@ Public Class FrmEditor
 
     Private Sub chkGrid_CheckedChanged(sender As Object, e As EventArgs) Handles chkGrid.CheckedChanged, mnuchkGrid.CheckedChanged
         DrawGrid = sender.Checked
+        chkGrid.Checked = DrawGrid
         mnuchkGrid.Checked = DrawGrid
         picMap.Invalidate()
     End Sub
 
     Private Sub mnuchkShadows_CheckedChanged(sender As Object, e As EventArgs) Handles mnuchkShadows.CheckedChanged
         DrawShadows = sender.Checked
+        picMap.Invalidate()
+    End Sub
+
+    Private Sub mnuchkTeamIndicators_Click(sender As Object, e As EventArgs) Handles mnuchkTeamIndicators.Click
+        DrawTeamIndicators = sender.Checked
         picMap.Invalidate()
     End Sub
 
@@ -954,7 +927,7 @@ Public Class FrmEditor
         picMap.Invalidate()
     End Sub
 
-    Private Sub btnDeleteUnit_Click(sender As Object, e As EventArgs) Handles btnDeleteSelected.Click
+    Private Sub btnDeleteUnit_Click(sender As Object, e As EventArgs) Handles btnDeleteSelectedUnit.Click, btnMapDeleteUnit.Click
         Select Case ActiveEditMode
             Case EditMode.Tiles
                 'TODO: Deleted selected tile(s).
@@ -962,7 +935,8 @@ Public Class FrmEditor
                 'TODO: Delete selected building.
             Case EditMode.Units
                 If selectedUnit IsNot Nothing Then
-                    btnDeleteSelected.Enabled = False
+                    btnDeleteSelectedUnit.Enabled = False
+                    btnUnitProperties.Enabled = False
                     ActiveMap.DeleteUnit(selectedUnit)
                     selectedUnit = Nothing
                     closestUnit = Nothing
@@ -1100,6 +1074,30 @@ Public Class FrmEditor
         g.DrawString(item.FileName, smallFont, fontBrush, e.Bounds.X + item.Preview.Width + smallFont.Height, e.Bounds.Y + smallFont.Height + e.Font.Height)
     End Sub
 
+    Private Sub ctxMap_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ctxMap.Opening
+        If selectedUnit IsNot Nothing Then
+            lblMapNoActionsAvailable.Visible = False
+            ctxMapSeparator1.Visible = True
+            btnMapDeleteUnit.Visible = True
+            btnMapDeleteUnit.Enabled = True
+            btnMapUnitProperties.Visible = True
+            btnMapUnitProperties.Enabled = True
+        Else
+            lblMapNoActionsAvailable.Visible = True
+            ctxMapSeparator1.Visible = False
+            btnMapDeleteUnit.Visible = False
+            btnMapDeleteUnit.Enabled = False
+            btnMapUnitProperties.Visible = False
+            btnMapUnitProperties.Enabled = False
+        End If
+    End Sub
+
+    Private Sub btnMapUnitProperties_Click(sender As Object, e As EventArgs) Handles btnMapUnitProperties.Click, btnUnitProperties.Click
+        FrmUnitProperties.TargetUnit = selectedUnit
+        FrmUnitProperties.ShowDialog(Me)
+        picMap.Invalidate()
+    End Sub
+
 #End Region
 
     Private Sub CheckFileAssociations()
@@ -1142,7 +1140,7 @@ Public Class FrmEditor
             Dim h As Integer = (ActiveMap.SizeY * TileSizeY) + 1
             Dim img As Image = New Bitmap(w, h, PixelFormat.Format24bppRgb)
             Dim g As Graphics = Graphics.FromImage(img)
-            ActiveMap.Draw(g, DrawGrid, DrawShadows, False)
+            ActiveMap.Draw(g, DrawGrid, DrawShadows, DrawTeamIndicators, False, False)
             g.Dispose()
             img.Save(savePng.FileName, ImageFormat.Png)
         End If
