@@ -482,8 +482,8 @@ Public Class FrmEditor
             ' Draw the grid.
             For x As Integer = 0 To picTiles.ClientSize.Width Step TileSizeX
                 For y As Integer = 0 To picTiles.ClientSize.Height Step TileSizeY
-                    e.Graphics.DrawLine(PenGrid, x, y, x + 0.5F, y + TileSizeY)
-                    e.Graphics.DrawLine(PenGrid, x, y, x + TileSizeX, y + 0.5F)
+                    e.Graphics.DrawLine(PenGrid, x, y, x, y + TileSizeY)
+                    e.Graphics.DrawLine(PenGrid, x, y, x + TileSizeX, y)
                 Next y
             Next x
 
@@ -562,8 +562,8 @@ Public Class FrmEditor
             ' Draw the grid.
             For x As Integer = 0 To picBuildings.ClientSize.Width Step TileSizeX
                 For y As Integer = 0 To picBuildings.ClientSize.Height Step TileSizeY
-                    e.Graphics.DrawLine(PenGrid, x, y, x + 0.5F, y + TileSizeY)
-                    e.Graphics.DrawLine(PenGrid, x, y, x + TileSizeX, y + 0.5F)
+                    e.Graphics.DrawLine(PenGrid, x, y, x, y + TileSizeY)
+                    e.Graphics.DrawLine(PenGrid, x, y, x + TileSizeX, y)
                 Next y
             Next x
 
@@ -644,8 +644,8 @@ Public Class FrmEditor
             ' Draw the grid.
             For x As Integer = 0 To picUnits.ClientSize.Width Step TileSizeX
                 For y As Integer = 0 To picUnits.ClientSize.Height Step TileSizeY
-                    e.Graphics.DrawLine(PenGrid, x, y, x + 0.5F, y + TileSizeY)
-                    e.Graphics.DrawLine(PenGrid, x, y, x + TileSizeX, y + 0.5F)
+                    e.Graphics.DrawLine(PenGrid, x, y, x, y + TileSizeY)
+                    e.Graphics.DrawLine(PenGrid, x, y, x + TileSizeX, y)
                 Next y
             Next x
 
