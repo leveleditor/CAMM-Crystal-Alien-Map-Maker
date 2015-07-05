@@ -742,16 +742,10 @@ Public Class FrmEditor
                 NewMap()
                 ActiveMap.LoadMapv1(source)
 
-                'TODO: Temp fix for bug unplacable grid spaces after loading a map.
-                ResizeMap(ActiveMap.SizeX, ActiveMap.SizeY)
-
                 EndLoadMap()
             ElseIf v = 2 Or v = 3 Or v = 4 Or v = MapFormat Then
                 NewMap()
                 ActiveMap.LoadMap(source, v)
-
-                'TODO: Temp fix for bug unplacable grid spaces after loading a map.
-                ResizeMap(ActiveMap.SizeX, ActiveMap.SizeY)
 
                 EndLoadMap()
             End If

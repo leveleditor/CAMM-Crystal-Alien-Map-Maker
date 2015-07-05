@@ -87,33 +87,32 @@ Public Class Map
     Public IsBonusLevel As Boolean
 
     Public Sub SetSize(width As Integer, height As Integer)
-        ' TODO: The map shouldn't resize if it's already at the specified size, but due to a tempfix for bug "unplacable grid spaces after loading a map" it has to be able to set the map to it's own size...
-        'If (width <> MapSizeX And height <> MapSizeY) Then
-        Dim tempTiles As Tile(,) = mapTiles
+        If width <> SizeX Or height <> SizeY Then
+            Dim tempTiles As Tile(,) = mapTiles
 
-        Dim smallestSizeX As Integer = If(width > SizeX, SizeX, width)
-        Dim smallestSizeY As Integer = If(height > SizeY, SizeY, height)
+            Dim smallestSizeX As Integer = If(width > SizeX, SizeX, width)
+            Dim smallestSizeY As Integer = If(height > SizeY, SizeY, height)
 
-        _sizeX = width
-        _sizeY = height
+            _sizeX = width
+            _sizeY = height
 
-        InitTiles()
+            InitTiles()
 
-        For x As Integer = 0 To smallestSizeX - 1
-            For y As Integer = 0 To smallestSizeY - 1
-                mapTiles(x, y) = tempTiles(x, y)
+            For x As Integer = 0 To smallestSizeX - 1
+                For y As Integer = 0 To smallestSizeY - 1
+                    mapTiles(x, y) = tempTiles(x, y)
+                Next
             Next
-        Next
 
-        Dim tempUnits As List(Of Unit) = mapUnits.ToList()
-        For i As Integer = 0 To mapUnits.Count() - 1
-            Dim pos As Point = mapUnits(i).Position
-            If pos.X < 0 Or pos.Y < 0 Or pos.X > (SizeX * TileSizeX) - 1 Or pos.Y > (SizeY * TileSizeY) - 1 Then
-                tempUnits.Remove(mapUnits(i))
-            End If
-        Next
-        mapUnits = tempUnits
-        'End If
+            Dim tempUnits As List(Of Unit) = mapUnits.ToList()
+            For i As Integer = 0 To mapUnits.Count() - 1
+                Dim pos As Point = mapUnits(i).Position
+                If pos.X < 0 Or pos.Y < 0 Or pos.X > (SizeX * TileSizeX) - 1 Or pos.Y > (SizeY * TileSizeY) - 1 Then
+                    tempUnits.Remove(mapUnits(i))
+                End If
+            Next
+            mapUnits = tempUnits
+        End If
     End Sub
 
     Public Sub Clear()
