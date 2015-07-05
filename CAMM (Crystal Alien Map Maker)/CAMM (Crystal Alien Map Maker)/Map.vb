@@ -513,14 +513,20 @@ Public Class Map
             For y As Integer = 0 To SizeY - 1
                 Dim tempName As String = "Tile_1_" + tileCount.ToString
                 Dim tempArray As String() = config.Get(tempName).Trim("()".ToCharArray).Split(New Char() {Char.Parse(":")}, StringSplitOptions.None)
-                Dim tempTileId As Integer = Integer.Parse(tempArray(0))
+                Dim tempTileId As Integer
+                If String.IsNullOrEmpty(tempArray(0)) Then
+                    tempTileId = -1
+                Else
+                    tempTileId = Integer.Parse(tempArray(0))
+                End If
 
                 'There is no need of getting the 'Team' info since it should have always been set as 'Neutral' and it's useless now.
 
                 ' Upgrade old terrain Ids
                 UpgradeTerrainId(0, MapFormat, tempTileId)
 
-                mapTiles(x, y).TileId = tempTileId
+                ' Note: Old maps had inverted x and y axis. Don't blame me, blame old me.
+                mapTiles(y, x).TileId = tempTileId
 
                 tileCount += 1
             Next
