@@ -71,7 +71,7 @@ Public Module Config
                 TileImageLookup.Add(tileId, theImage)
 
                 ReDim Preserve TileDefs(i)
-                TileDefs(i) = New Tile(0, i * TileSizeY, tileId, isPassable, isMinerals)
+                TileDefs(i) = New Tile(tileId, isPassable, isMinerals)
             End If
         Next
 

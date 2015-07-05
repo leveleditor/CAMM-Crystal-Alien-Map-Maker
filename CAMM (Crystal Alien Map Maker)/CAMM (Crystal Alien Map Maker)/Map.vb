@@ -14,8 +14,6 @@ Public Class Map
         Author = ""
         IsMapFinal = False
 
-        mapTiles = New Tile() {}
-        tempTiles = New Tile() {}
         InitTiles()
         mapBuildings = New List(Of Building)
         mapUnits = New List(Of Unit)
@@ -74,11 +72,9 @@ Public Class Map
     Public Author As String
     Public IsMapFinal As Boolean
 
-    Private mapTiles As Tile()
+    Private mapTiles As Tile(,)
     Private mapBuildings As List(Of Building)
     Private mapUnits As List(Of Unit)
-    'Temporary array for resizing the map.
-    Private tempTiles As Tile()
 
     Public Faction As Team
     Public CashPlayer As Integer
@@ -93,22 +89,22 @@ Public Class Map
     Public Sub SetSize(width As Integer, height As Integer)
         ' TODO: The map shouldn't resize if it's already at the specified size, but due to a tempfix for bug "unplacable grid spaces after loading a map" it has to be able to set the map to it's own size...
         'If (width <> MapSizeX And height <> MapSizeY) Then
-        ReDim tempTiles(SizeX * SizeY)
-        tempTiles = mapTiles
+        Dim tempTiles As Tile(,) = mapTiles
+
+        Dim smallestSizeX As Integer = If(width > SizeX, SizeX, width)
+        Dim smallestSizeY As Integer = If(height > SizeY, SizeY, height)
 
         _sizeX = width
         _sizeY = height
 
         InitTiles()
 
-        For i As Integer = 0 To mapTiles.Length - 1
-            For j As Integer = 0 To tempTiles.Length - 1
-                If mapTiles(i).Position = tempTiles(j).Position Then
-                    mapTiles(i) = tempTiles(j)
-                    Exit For
-                End If
+        For x As Integer = 0 To smallestSizeX - 1
+            For y As Integer = 0 To smallestSizeY - 1
+                mapTiles(x, y) = tempTiles(x, y)
             Next
         Next
+
         Dim tempUnits As List(Of Unit) = mapUnits.ToList()
         For i As Integer = 0 To mapUnits.Count() - 1
             Dim pos As Point = mapUnits(i).Position
@@ -121,31 +117,33 @@ Public Class Map
     End Sub
 
     Public Sub Clear()
-        For i As Integer = 0 To mapTiles.Length - 1
-            mapTiles(i) = New Tile(0, 0)
+        For x As Integer = 0 To SizeX - 1
+            For y As Integer = 0 To SizeY - 1
+                mapTiles(x, y) = New Tile()
+            Next
         Next
         mapBuildings.Clear()
         mapUnits.Clear()
     End Sub
 
     Private Sub InitTiles()
-        Dim tilesCounted As Integer = 0
-        For y As Integer = 0 To (SizeY - 1) * TileSizeY Step TileSizeY
-            For x As Integer = 0 To (SizeX - 1) * TileSizeX Step TileSizeX
-                ReDim Preserve mapTiles(tilesCounted)
-                mapTiles(tilesCounted) = New Tile(x, y)
-                tilesCounted += 1
-            Next x
-        Next y
+        mapTiles = New Tile(SizeX, SizeY) {}
+        For x As Integer = 0 To SizeX - 1
+            For y As Integer = 0 To SizeY - 1
+                mapTiles(x, y) = New Tile()
+            Next
+        Next
     End Sub
 
     Public Function GetTileAt(mouseX As Integer, mouseY As Integer) As Tile
         Dim returnTile As Tile = Nothing
-        For i As Integer = 0 To mapTiles.Length - 1
-            If mapTiles(i).Position = New Point(mouseX, mouseY) Then
-                returnTile = mapTiles(i)
-                Exit For
-            End If
+        For x As Integer = 0 To SizeX - 1
+            For y As Integer = 0 To SizeY - 1
+                If x * TileSizeX = mouseX And y * TileSizeY = mouseY Then
+                    returnTile = mapTiles(x, y)
+                    Exit For
+                End If
+            Next
         Next
         Return returnTile
     End Function
@@ -185,10 +183,12 @@ Public Class Map
 
     Public Sub SetTile(mouseX As Integer, mouseY As Integer, tile As Tile)
         If IsMouseInBounds(mouseX, mouseY) Then
-            For i As Integer = 0 To mapTiles.Length - 1
-                If mapTiles(i).Position.X = mouseX And mapTiles(i).Position.Y = mouseY Then
-                    mapTiles(i) = New Tile(mouseX, mouseY, tile.TileId, tile.IsPassable, tile.IsMinerals)
-                End If
+            For x As Integer = 0 To SizeX - 1
+                For y As Integer = 0 To SizeY - 1
+                    If mouseX = x * TileSizeX And mouseY = y * TileSizeY Then
+                        mapTiles(x, y) = New Tile(tile.TileId, tile.IsPassable, tile.IsMinerals)
+                    End If
+                Next
             Next
         End If
     End Sub
@@ -257,7 +257,7 @@ Public Class Map
                     'Somewhere in the middle
                     tileId = data(1)(1)
                 End If
-                SetTile(x, y, New Tile(x, y, tileId))
+                SetTile(x, y, New Tile(tileId))
             Next
         Next
     End Sub
@@ -325,7 +325,7 @@ Public Class Map
     Public Sub Eraser(mouseX As Integer, mouseY As Integer, mode As EditMode)
         Select Case mode
             Case EditMode.Tiles
-                SetTile(mouseX, mouseY, New Tile(mouseX, mouseY))
+                SetTile(mouseX, mouseY, New Tile())
             Case EditMode.Buildings
                 Dim temp As List(Of Building) = mapBuildings.ToList()
                 For i As Integer = 0 To mapBuildings.Count() - 1
@@ -364,10 +364,12 @@ Public Class Map
         Loop
 
         ' Draw any existing tiles.
-        For i As Integer = 0 To mapTiles.Length - 1
-            If mapTiles(i).HasData Then
-                mapTiles(i).Draw(g)
-            End If
+        For x As Integer = 0 To SizeX - 1
+            For y As Integer = 0 To SizeY - 1
+                If mapTiles(x, y).HasData Then
+                    mapTiles(x, y).Draw(g, x * TileSizeX, y * TileSizeY)
+                End If
+            Next
         Next
 
         ' Draw building baseplates.
@@ -461,11 +463,13 @@ Public Class Map
             "; Terrain Format: {str_ID|i_posX|i_posY}" + vbNewLine
 
         Dim terrainNumber As Integer = 0
-        For i As Integer = 0 To mapTiles.Length - 1
-            If mapTiles(i).HasData Then
-                saveFileData += "Terrain" + terrainNumber.ToString + " = {" + mapTiles(i).TileId.ToString + "|" + (mapTiles(i).X / TileSizeX).ToString + "|" + (mapTiles(i).Y / TileSizeY).ToString + "}" + vbNewLine
-                terrainNumber += 1
-            End If
+        For x As Integer = 0 To SizeX - 1
+            For y As Integer = 0 To SizeY - 1
+                If mapTiles(x, y).HasData Then
+                    saveFileData += "Terrain" + terrainNumber.ToString + " = {" + mapTiles(x, y).TileId.ToString + "|" + x.ToString + "|" + y.ToString + "}" + vbNewLine
+                    terrainNumber += 1
+                End If
+            Next
         Next
 
         saveFileData += vbNewLine + "[Buildings]" + vbNewLine + _
@@ -504,17 +508,22 @@ Public Class Map
         Title = "Converted Map"
 
         config = source.Configs.Item("Tile Data")
-        For i As Integer = 0 To mapTiles.Length - 1
-            Dim tempName As String = "Tile_1_" + (i + 1).ToString
-            Dim tempArray As String() = config.Get(tempName).Trim("()".ToCharArray).Split(New Char() {Char.Parse(":")}, StringSplitOptions.None)
-            Dim tempTileId As Integer = Integer.Parse(tempArray(0))
+        Dim tileCount = 1
+        For x As Integer = 0 To SizeX - 1
+            For y As Integer = 0 To SizeY - 1
+                Dim tempName As String = "Tile_1_" + tileCount.ToString
+                Dim tempArray As String() = config.Get(tempName).Trim("()".ToCharArray).Split(New Char() {Char.Parse(":")}, StringSplitOptions.None)
+                Dim tempTileId As Integer = Integer.Parse(tempArray(0))
 
-            'There is no need of getting the 'Team' info since it should have always been set as 'Neutral' and it's useless now.
+                'There is no need of getting the 'Team' info since it should have always been set as 'Neutral' and it's useless now.
 
-            ' Upgrade old terrain Ids
-            UpgradeTerrainId(0, MapFormat, tempTileId)
+                ' Upgrade old terrain Ids
+                UpgradeTerrainId(0, MapFormat, tempTileId)
 
-            mapTiles(i).TileId = tempTileId
+                mapTiles(x, y).TileId = tempTileId
+
+                tileCount += 1
+            Next
         Next
     End Sub
 
@@ -539,8 +548,7 @@ Public Class Map
                     ' Upgrade old terrain Ids
                     UpgradeTerrainId(1, MapFormat, terrainId)
 
-                    mapTiles(i).TileId = terrainId
-                    mapTiles(i).Position = New Point(posX * TileSizeX, posY * TileSizeY)
+                    mapTiles(posX, posY).TileId = terrainId
                 End If
             Next
         End If
@@ -619,9 +627,7 @@ Public Class Map
                 ' Upgrade old terrain Ids
                 UpgradeTerrainId(v, MapFormat, terrainId)
 
-                mapTiles(i).TileId = terrainId
-
-                mapTiles(i).Position = New Point(posX * TileSizeX, posY * TileSizeY)
+                mapTiles(posX, posY).TileId = terrainId
             End If
         Next
 

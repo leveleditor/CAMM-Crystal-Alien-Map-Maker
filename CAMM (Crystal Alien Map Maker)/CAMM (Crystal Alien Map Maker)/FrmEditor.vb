@@ -131,7 +131,7 @@ Public Class FrmEditor
         picUnits.Invalidate()
 
         'Setting default blank values.
-        activeTile = New Tile(0, 0)
+        activeTile = New Tile()
         activeBuilding = New Building(0, 0)
         activeUnit = New Unit(0, 0)
         picActive.Image = Nothing
@@ -475,7 +475,7 @@ Public Class FrmEditor
 
             For i As Integer = 0 To TileDefs.Length - 1
                 If TileDefs(i).HasData Then
-                    TileDefs(i).Draw(e.Graphics)
+                    TileDefs(i).Draw(e.Graphics, 0, i * TileSizeY)
                 End If
             Next
 
@@ -530,7 +530,7 @@ Public Class FrmEditor
             selYTiles = mouseY
 
             For i As Integer = 0 To TileDefs.Length - 1
-                If TileDefs(i).Position = New Point(mouseX, mouseY) Then
+                If mouseY = i * TileSizeY Then
                     picActive.Image = TileDefs(i).Image
                     activeTile.TileId = TileDefs(i).TileId
                 End If
@@ -1186,7 +1186,7 @@ Public Class FrmEditor
 
                     For j As Integer = 0 To TileDefs.Length - 1
                         If tileId = TileDefs(j).TileId Then
-                            ActiveMap.SetTile(x, y, New Tile(x, y, tileId))
+                            ActiveMap.SetTile(x, y, New Tile(tileId))
                             Exit For
                         End If
                     Next
