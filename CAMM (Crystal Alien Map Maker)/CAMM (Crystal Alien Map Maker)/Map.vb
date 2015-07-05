@@ -186,6 +186,7 @@ Public Class Map
                 For y As Integer = 0 To SizeY - 1
                     If mouseX = x * TileSizeX And mouseY = y * TileSizeY Then
                         mapTiles(x, y) = New Tile(tile.TileId, tile.IsPassable, tile.IsMinerals)
+                        Exit For
                     End If
                 Next
             Next
