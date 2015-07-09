@@ -135,26 +135,22 @@ Public Class Map
     End Sub
 
     Public Function GetTileAt(mouseX As Integer, mouseY As Integer) As Tile
-        Dim returnTile As Tile = Nothing
         For x As Integer = 0 To SizeX - 1
             For y As Integer = 0 To SizeY - 1
                 If x * TileSizeX = mouseX And y * TileSizeY = mouseY Then
-                    returnTile = mapTiles(x, y)
-                    Exit For
+                    Return mapTiles(x, y)
                 End If
             Next
         Next
-        Return returnTile
+        Return Nothing
     End Function
     Public Function GetBuildingAt(mouseX As Integer, mouseY As Integer) As Building
-        Dim returnBuilding As Building = Nothing
         For i As Integer = 0 To mapBuildings.Count() - 1
             If mapBuildings(i).Location = New Point(mouseX, mouseY) And mapBuildings(i).BuildingId <> "" Then
-                returnBuilding = mapBuildings(i)
-                Exit For
+                Return mapBuildings(i)
             End If
         Next
-        Return returnBuilding
+        Return Nothing
     End Function
     Public Function GetUnitsNear(mouseX As Integer, mouseY As Integer, maxDistance As Integer) As List(Of Unit)
         Dim returnUnits As List(Of Unit) = New List(Of Unit)
@@ -186,7 +182,7 @@ Public Class Map
                 For y As Integer = 0 To SizeY - 1
                     If mouseX = x * TileSizeX And mouseY = y * TileSizeY Then
                         mapTiles(x, y) = New Tile(tile.TileId, tile.IsPassable, tile.IsMinerals)
-                        Exit For
+                        Return
                     End If
                 Next
             Next
