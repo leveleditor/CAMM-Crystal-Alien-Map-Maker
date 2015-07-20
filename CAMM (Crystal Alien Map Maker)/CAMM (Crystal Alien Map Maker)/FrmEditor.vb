@@ -238,7 +238,7 @@ Public Class FrmEditor
         UpdateMapSize()
     End Sub
 
-    Public Sub UpdateMapSize()
+    Private Sub UpdateMapSize()
         txtWidth.Text = ActiveMap.SizeX
         txtHeight.Text = ActiveMap.SizeY
         picMap.Size = New Size((ActiveMap.SizeX * TileSizeX) + 1, (ActiveMap.SizeY * TileSizeY) + 1)
@@ -711,10 +711,7 @@ Public Class FrmEditor
         UpdateMapTabs()
         ActiveMapNum = Maps.IndexOf(newMap)
         UpdateFormTitle()
-
-        picMap.Size = New Size((ActiveMap.SizeX * TileSizeX) + 1, (ActiveMap.SizeY * TileSizeY) + 1)
-        txtWidth.Text = ActiveMap.SizeX
-        txtHeight.Text = ActiveMap.SizeY
+        UpdateMapSize()
     End Sub
 
     Private Sub btnOpen_Click(sender As Object, e As EventArgs) Handles btnOpen.Click
@@ -759,8 +756,8 @@ Public Class FrmEditor
         ActiveMap.FilePath = openMap.FileName
 
         UpdateFormTitle()
-        UpdateMapSize()
         UpdateMapTabs()
+        UpdateMapSize()
 
         picMap.Invalidate()
     End Sub
@@ -1197,6 +1194,7 @@ Public Class FrmEditor
             ActiveMap.Title += " (Imported ActionScript)"
             UpdateMapTabs()
             UpdateFormTitle()
+            UpdateMapSize()
             picMap.Invalidate()
         End If
     End Sub
@@ -1282,6 +1280,8 @@ Public Class FrmEditor
                 End If
                 Maps.RemoveAt(i)
                 UpdateMapTabs()
+                UpdateFormTitle()
+                UpdateMapSize()
                 If i - 1 >= 0 Then
                     mapTabs.SelectedIndex = i - 1
                 End If
@@ -1300,6 +1300,8 @@ Public Class FrmEditor
                     If i > 0 Then
                         Maps.RemoveRange(0, i)
                         UpdateMapTabs()
+                        UpdateFormTitle()
+                        UpdateMapSize()
                         mapTabs.SelectedIndex = 0
                     End If
                     Exit For
@@ -1318,6 +1320,8 @@ Public Class FrmEditor
                     If i < Maps.Count Then
                         Maps.RemoveRange(i + 1, (Maps.Count - 1) - (i + 1) + 1)
                         UpdateMapTabs()
+                        UpdateFormTitle()
+                        UpdateMapSize()
                         mapTabs.SelectedIndex = Maps.Count - 1
                     End If
                     Exit For
