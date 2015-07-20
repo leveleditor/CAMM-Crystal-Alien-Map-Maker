@@ -235,6 +235,10 @@ Public Class FrmEditor
     Private Sub ResizeMap(width As Integer, height As Integer)
         ActiveMap.SetSize(width, height)
 
+        UpdateMapSize()
+    End Sub
+
+    Public Sub UpdateMapSize()
         txtWidth.Text = ActiveMap.SizeX
         txtHeight.Text = ActiveMap.SizeY
         picMap.Size = New Size((ActiveMap.SizeX * TileSizeX) + 1, (ActiveMap.SizeY * TileSizeY) + 1)
@@ -755,6 +759,7 @@ Public Class FrmEditor
         ActiveMap.FilePath = openMap.FileName
 
         UpdateFormTitle()
+        UpdateMapSize()
         UpdateMapTabs()
 
         picMap.Invalidate()
@@ -1207,6 +1212,7 @@ Public Class FrmEditor
     Private Sub mapTabs_SelectedIndexChanged(sender As Object, e As EventArgs) Handles mapTabs.SelectedIndexChanged
         'ActiveLevelNum = CBOLevel.SelectedIndex
         UpdateFormTitle()
+        UpdateMapSize()
         picMap.Invalidate()
     End Sub
 
