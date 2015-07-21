@@ -55,7 +55,7 @@ Public Module Utils
     End Function
 
     Public Sub UpgradeBuildingId(fromVersion As Integer, toVersion As Integer, ByRef objectId As String)
-        If fromVersion < 4 And (toVersion = 4 Or toVersion = 5) Then
+        If fromVersion < 4 And toVersion >= 4 Then
             ' The easy way to map old building Ids to new ones.
             Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeBuildings.dat"
             Dim upgradeHeader As String = "Buildings data v3 -> v4"
@@ -77,7 +77,7 @@ Public Module Utils
     End Sub
 
     Public Sub UpgradeUnitId(fromVersion As Integer, toVersion As Integer, ByRef unitId As String)
-        If fromVersion < 4 And (toVersion = 4 Or toVersion = 5) Then
+        If fromVersion < 4 And toVersion >= 4 Then
             ' The easy way to map old unit Ids to new ones.
             Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeUnits.dat"
             Dim upgradeHeader As String = "Units data v3 -> v4"
@@ -99,7 +99,7 @@ Public Module Utils
     End Sub
 
     Public Sub UpgradeTerrainId(fromVersion As Integer, toVersion As Integer, ByRef terrainId As Integer)
-        If fromVersion < 5 And toVersion = 5 Then
+        If fromVersion < 5 And toVersion >= 5 Then
             ' The easy way to map old terrain Ids to new ones.
             Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeTerrain.dat"
             Dim upgradeHeader As String = "Terrain data v4 -> v5"
@@ -121,7 +121,7 @@ Public Module Utils
     End Sub
 
     Public Sub UpgradeBuildingLocation(fromVersion As Integer, toVersion As Integer, buildingW As Integer, buildingH As Integer, fullImageWidth As Integer, fullImageHeight As Integer, ByRef buildingLocation As Point)
-        If fromVersion < 4 And (toVersion = 4 Or toVersion = 5) Then
+        If fromVersion < 4 And toVersion >= 4 Then
             ' <<< Start old SetDrawPos code >>>
             Dim tempDrawPos As Point = buildingLocation
 

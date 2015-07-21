@@ -737,18 +737,22 @@ Public Class FrmEditor
             EndLoadMap()
         Else
             Dim v As Integer = config.GetInt("vFormat", -1)
-            If v > MapFormat Then
+            If v = -1 Then
+                MsgBox("This map file is missing the format specifier or has an invalid value and cannot be opened.")
+            ElseIf v > MapFormat Then
                 MsgBox("This map file was created with a newer version of CAMM and cannot be opened.")
             ElseIf v = 1 Then
                 NewMap()
                 ActiveMap.LoadMapv1(source)
 
                 EndLoadMap()
-            ElseIf v = 2 Or v = 3 Or v = 4 Or v = MapFormat Then
+            ElseIf v >= 2 And v <= MapFormat Then
                 NewMap()
                 ActiveMap.LoadMap(source, v)
 
                 EndLoadMap()
+            Else
+                MsgBox("This map file has an invalid value of '" + v.ToString() + "' for the map format and cannot be opened.")
             End If
         End If
     End Sub
