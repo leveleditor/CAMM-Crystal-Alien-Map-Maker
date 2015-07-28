@@ -138,9 +138,10 @@ Public Module Config
                 Dim unitId As String = keyArray(0)
                 Dim team As Team = CType(Integer.Parse(keyArray(1)), Team)
                 Dim altitude As Integer = Integer.Parse(keyArray(2))
-                Dim offsetY As Integer = Integer.Parse(keyArray(3))
-                Dim fullImageUrl As String = FullBasePath + "/" + keyArray(4)
-                Dim shadowImageUrl As String = FullBasePath + "/" + keyArray(5)
+                Dim isPickup As Boolean = Boolean.Parse(keyArray(3))
+                Dim offsetY As Integer = Integer.Parse(keyArray(4))
+                Dim fullImageUrl As String = FullBasePath + "/" + keyArray(5)
+                Dim shadowImageUrl As String = FullBasePath + "/" + keyArray(6)
 
                 Dim test As Bitmap = Bitmap.FromFile(fullImageUrl)
                 Dim w As Integer = TileSizeX
@@ -173,7 +174,7 @@ Public Module Config
                 UnitShadowImageLookup.Add(unitId, Image.FromFile(shadowImageUrl))
 
                 ReDim Preserve UnitDefs(i)
-                UnitDefs(i) = New Unit(0, i * TileSizeY, unitId, team, altitude)
+                UnitDefs(i) = New Unit(0, i * TileSizeY, unitId, team, altitude, isPickup)
             End If
         Next
 

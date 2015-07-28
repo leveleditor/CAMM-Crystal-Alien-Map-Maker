@@ -6,6 +6,8 @@
         Me.Team = Team.Neutral
         Me.Angle = 0.0
         Me.Damage = 0.0
+        Me.Altitude = 0
+        Me.IsPickup = False
     End Sub
     Public Sub New(x As Integer, y As Integer, unitId As String)
         Me.New(x, y)
@@ -19,8 +21,13 @@
         Me.New(x, y, unitId, team)
         Me.Altitude = altitude
     End Sub
-    Public Sub New(x As Integer, y As Integer, unitId As String, team As Team, altitude As Integer, angle As Single, damage As Single)
-        Me.New(x, y, unitId, team, altitude)
+    Public Sub New(x As Integer, y As Integer, unitId As String, team As Team, altitude As Integer, isPickup As Boolean)
+        Me.New(x, y, unitId, team)
+        Me.Altitude = altitude
+        Me.IsPickup = isPickup
+    End Sub
+    Public Sub New(x As Integer, y As Integer, unitId As String, team As Team, altitude As Integer, isPickup As Boolean, angle As Single, damage As Single)
+        Me.New(x, y, unitId, team, altitude, isPickup)
         Me.Angle = angle
         Me.Damage = damage
     End Sub
@@ -110,6 +117,8 @@
     Public Property Damage As Single
 
     Public Property Altitude As Integer
+
+    Public Property IsPickup As Boolean
 
     Public Sub DrawThumbnail(g As Graphics, Optional drawButtonImage As Boolean = False)
         If drawButtonImage Then

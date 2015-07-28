@@ -690,6 +690,7 @@ Public Class FrmEditor
                     activeUnit.UnitId = UnitDefs(i).UnitId
                     activeUnit.Team = UnitDefs(i).Team
                     activeUnit.Altitude = UnitDefs(i).Altitude
+                    activeUnit.IsPickup = UnitDefs(i).IsPickup
                 End If
             Next
 

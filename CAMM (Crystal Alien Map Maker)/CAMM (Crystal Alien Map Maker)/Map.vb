@@ -293,7 +293,7 @@ Public Class Map
                 End If
             Next
             If Not found Then
-                Dim newUnit As Unit = New Unit(mouseX, mouseY, unit.UnitId, unit.Team, unit.Altitude, unit.Angle, unit.Damage)
+                Dim newUnit As Unit = New Unit(mouseX, mouseY, unit.UnitId, unit.Team, unit.Altitude, unit.IsPickup, unit.Angle, unit.Damage)
                 mapUnits.Add(newUnit)
 
                 ' Reorder the list based on the Y locations of the units.
@@ -714,7 +714,8 @@ Public Class Map
                 UpgradeUnitId(v, MapFormat, unitId)
 
                 Dim unitAltitude As Integer = (From u In UnitDefs Where u.UnitId = unitId Select u.Altitude).First()
-                Dim temp As Unit = New Unit(unitX, unitY, unitId, team, unitAltitude, angle, damage)
+                Dim unitIsPickup As Boolean = (From u In UnitDefs Where u.UnitId = unitId Select u.IsPickup).First()
+                Dim temp As Unit = New Unit(unitX, unitY, unitId, team, unitAltitude, unitIsPickup, angle, damage)
                 mapUnits.Add(temp)
             End If
         Next
