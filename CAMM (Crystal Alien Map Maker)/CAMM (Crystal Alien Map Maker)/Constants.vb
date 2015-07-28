@@ -25,7 +25,7 @@
     Public Const TerrainFormat As Integer = 8
     Public Const BuildingsFormat As Integer = 9
     Public Const UnitsFormat As Integer = 10
-    Public Const MapFormat As Integer = 5
+    Public Const MapFormat As Integer = 6
 
     Public Const IniArray As String = "{}"
     Public Const IniSeparator As String = "|"

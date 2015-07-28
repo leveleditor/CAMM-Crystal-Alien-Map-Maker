@@ -1079,7 +1079,7 @@ Public Class FrmEditor
     End Sub
 
     Private Sub btnMapUnitProperties_Click(sender As Object, e As EventArgs) Handles btnMapUnitProperties.Click, btnUnitProperties.Click
-        FrmUnitProperties.TargetUnit = selectedUnit
+        FrmUnitProperties.Subject = selectedUnit
         FrmUnitProperties.ShowDialog(Me)
         picMap.Invalidate()
     End Sub

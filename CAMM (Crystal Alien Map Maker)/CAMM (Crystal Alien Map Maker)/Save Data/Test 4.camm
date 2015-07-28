@@ -1,0 +1,35 @@
+﻿[CAMM]
+vFormat = 6
+
+[Level]
+Title = Test 4
+Author = 
+W = 10
+H = 10
+Team = 0
+CashPlayer = 2000
+CashEnemy = 20000
+isTraining = False
+isConflict = False
+isSpecialLevel = False
+isLastSpecialLevel = False
+isBonusLevel = True
+
+[Terrain]
+; Terrain Format: {str_Id|i_PosX|i_PosY}
+
+[Buildings]
+; Building Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage}
+
+[Units]
+; Unit Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage|str_AiTarget|str_AiObj|bool_Respawn}
+Unit0 = {UA_evil|426|70|1|0|0|seek|1000|True}
+Unit1 = {UA_evil|143|74|1|0|0|seek|null|False}
+Unit2 = {UA_evil|241|74|1|0|0|roam|null|True}
+Unit3 = {UA_evil|337|74|1|0|0|still|null|True}
+Unit4 = {UI_evil|429|122|1|0|0|null|1234|True}
+Unit5 = {UI_evil|340|123|2|0|0|null|special|False}
+Unit6 = {UI_evil|145|124|0|0|0|null|null|False}
+Unit7 = {UI_evil|236|124|1|0|0|null|powerup|True}
+
+; Map Created Using CAMM Crystal Alien Map Maker

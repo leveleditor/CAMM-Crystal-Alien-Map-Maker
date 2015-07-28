@@ -8,6 +8,9 @@
         Me.Damage = 0.0
         Me.Altitude = 0
         Me.IsPickup = False
+        Me.AiTarget = "seek"
+        Me.AiObj = "null"
+        Me.Respawn = False
     End Sub
     Public Sub New(x As Integer, y As Integer, unitId As String)
         Me.New(x, y)
@@ -30,6 +33,12 @@
         Me.New(x, y, unitId, team, altitude, isPickup)
         Me.Angle = angle
         Me.Damage = damage
+    End Sub
+    Public Sub New(x As Integer, y As Integer, unitId As String, team As Team, altitude As Integer, isPickup As Boolean, angle As Single, damage As Single, aiTarget As String, aiObj As String, respawn As Boolean)
+        Me.New(x, y, unitId, team, altitude, isPickup, angle, damage)
+        Me.AiTarget = aiTarget
+        Me.AiObj = aiObj
+        Me.Respawn = respawn
     End Sub
 
     Public ReadOnly Property HasData As Boolean
@@ -119,6 +128,12 @@
     Public Property Altitude As Integer
 
     Public Property IsPickup As Boolean
+
+    Public Property AiTarget As String
+
+    Public Property AiObj As String
+
+    Public Property Respawn As Boolean
 
     Public Sub DrawThumbnail(g As Graphics, Optional drawButtonImage As Boolean = False)
         If drawButtonImage Then

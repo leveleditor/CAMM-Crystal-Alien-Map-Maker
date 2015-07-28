@@ -456,7 +456,7 @@ Public Class Map
             vbNewLine
 
         saveFileData += "[Terrain]" + vbNewLine + _
-            "; Terrain Format: {str_ID|i_posX|i_posY}" + vbNewLine
+            "; Terrain Format: {str_Id|i_PosX|i_PosY}" + vbNewLine
 
         Dim terrainNumber As Integer = 0
         For x As Integer = 0 To SizeX - 1
@@ -469,7 +469,7 @@ Public Class Map
         Next
 
         saveFileData += vbNewLine + "[Buildings]" + vbNewLine + _
-                        "; Building Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}" + vbNewLine
+                        "; Building Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage}" + vbNewLine
 
         Dim buildingNumber As Integer = 0
         For i As Integer = 0 To mapBuildings.Count() - 1
@@ -480,12 +480,12 @@ Public Class Map
         Next
 
         saveFileData += vbNewLine + "[Units]" + vbNewLine + _
-                        "; Unit Format: {str_ID|i_posX|i_posY|bool_isFriend|f_angle|f_damage}" + vbNewLine
+                        "; Unit Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage|str_AiTarget|str_AiObj|bool_Respawn}" + vbNewLine
 
         Dim unitNumber As Integer = 0
         For i As Integer = 0 To mapUnits.Count() - 1
             If mapUnits(i).HasData Then
-                saveFileData += "Unit" + unitNumber.ToString + " = {" + mapUnits(i).UnitId + "|" + mapUnits(i).X.ToString + "|" + mapUnits(i).Y.ToString + "|" + CInt(mapUnits(i).Team).ToString + "|" + mapUnits(i).Angle.ToString + "|" + mapUnits(i).Damage.ToString + "}" + vbNewLine
+                saveFileData += "Unit" + unitNumber.ToString + " = {" + mapUnits(i).UnitId + "|" + mapUnits(i).X.ToString + "|" + mapUnits(i).Y.ToString + "|" + CInt(mapUnits(i).Team).ToString + "|" + mapUnits(i).Angle.ToString + "|" + mapUnits(i).Damage.ToString + "|" + mapUnits(i).AiTarget + "|" + mapUnits(i).AiObj + "|" + mapUnits(i).Respawn.ToString() + "}" + vbNewLine
                 unitNumber += 1
             End If
         Next
@@ -564,11 +564,7 @@ Public Class Map
                     Dim buildingId As String = keyArray(0)
                     Dim posX As Integer = keyArray(1)
                     Dim posY As Integer = keyArray(2)
-                    Dim isFriend As Boolean = keyArray(3)
-                    Dim team As Team = team.Astros
-                    If isFriend Then
-                        team = team.Aliens
-                    End If
+                    Dim team As Team = CType(keyArray(3), Team)
                     Dim angle As Single = keyArray(4)
                     Dim damage As Single = keyArray(5)
 
@@ -640,11 +636,7 @@ Public Class Map
                 Dim objectId As String = keyArray(0)
                 Dim posX As Integer = keyArray(1)
                 Dim posY As Integer = keyArray(2)
-                Dim isFriend As Boolean = keyArray(3)
-                Dim team As Team = team.Astros
-                If isFriend Then
-                    team = team.Aliens
-                End If
+                Dim team As Team = CType(keyArray(3), Team)
                 Dim angle As Single = keyArray(4)
                 Dim damage As Single = keyArray(5)
 
@@ -681,13 +673,17 @@ Public Class Map
                 Dim unitId As String = keyArray(0)
                 Dim posX As Integer = keyArray(1)
                 Dim posY As Integer = keyArray(2)
-                Dim isFriend As Boolean = keyArray(3)
-                Dim team As Team = team.Astros
-                If isFriend Then
-                    team = team.Aliens
-                End If
+                Dim team As Team = CType(keyArray(3), Team)
                 Dim angle As Single = keyArray(4)
                 Dim damage As Single = keyArray(5)
+                Dim aiTarget As String = "seek"
+                Dim aiObj As String = "null"
+                Dim respawn As Boolean = False
+                If v >= 6 Then
+                    aiTarget = keyArray(6)
+                    aiObj = keyArray(7)
+                    respawn = keyArray(8)
+                End If
 
                 Dim unitX, unitY As Integer
                 If v = 2 Then
@@ -715,7 +711,12 @@ Public Class Map
 
                 Dim unitAltitude As Integer = (From u In UnitDefs Where u.UnitId = unitId Select u.Altitude).First()
                 Dim unitIsPickup As Boolean = (From u In UnitDefs Where u.UnitId = unitId Select u.IsPickup).First()
-                Dim temp As Unit = New Unit(unitX, unitY, unitId, team, unitAltitude, unitIsPickup, angle, damage)
+                Dim temp As Unit
+                If v >= 6 Then
+                    temp = New Unit(unitX, unitY, unitId, team, unitAltitude, unitIsPickup, angle, damage, aiTarget, aiObj, respawn)
+                Else
+                    temp = New Unit(unitX, unitY, unitId, team, unitAltitude, unitIsPickup, angle, damage)
+                End If
                 mapUnits.Add(temp)
             End If
         Next
