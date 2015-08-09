@@ -100,8 +100,8 @@ Partial Class FrmUnitProperties
         '
         'txtAngle
         '
-        Me.txtAngle.DecimalPlaces = 2
-        Me.txtAngle.Increment = New Decimal(New Integer() {15, 0, 0, 131072})
+        Me.txtAngle.DecimalPlaces = 4
+        Me.txtAngle.Increment = New Decimal(New Integer() {625, 0, 0, 262144})
         Me.txtAngle.Location = New System.Drawing.Point(157, 39)
         Me.txtAngle.Maximum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.txtAngle.Name = "txtAngle"
@@ -191,13 +191,13 @@ Partial Class FrmUnitProperties
         '
         'lblUnitId
         '
+        Me.lblUnitId.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lblUnitId.AutoSize = True
-        Me.lblUnitId.Location = New System.Drawing.Point(12, 9)
+        Me.lblUnitId.Location = New System.Drawing.Point(12, 266)
         Me.lblUnitId.Name = "lblUnitId"
-        Me.lblUnitId.Size = New System.Drawing.Size(25, 13)
+        Me.lblUnitId.Size = New System.Drawing.Size(62, 13)
         Me.lblUnitId.TabIndex = 23
-        Me.lblUnitId.Text = "???"
-        Me.lblUnitId.Visible = False
+        Me.lblUnitId.Text = "Unit Id: ???"
         '
         'FrmUnitProperties
         '

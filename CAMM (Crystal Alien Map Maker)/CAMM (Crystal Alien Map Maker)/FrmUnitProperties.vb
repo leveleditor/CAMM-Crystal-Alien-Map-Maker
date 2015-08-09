@@ -60,10 +60,7 @@
         End If
         chkRespawn.Checked = Subject.Respawn
 
-#If DEBUG Then
-        lblUnitId.Text = Subject.UnitId
-        lblUnitId.Visible = True
-#End If
+        lblUnitId.Text = "Unit Id: " + Subject.UnitId
     End Sub
 
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
@@ -105,4 +102,9 @@
         End Select
     End Sub
 
+    Private Sub txtAngle_ValueChanged(sender As Object, e As EventArgs) Handles txtAngle.ValueChanged
+        If txtAngle.Value = 1 Then
+            txtAngle.Value = 0
+        End If
+    End Sub
 End Class
