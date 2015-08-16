@@ -147,6 +147,7 @@
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Assets.vb" />
     <Compile Include="Building.vb" />
+    <Compile Include="BuildingDef.vb" />
     <Compile Include="Config.vb" />
     <Compile Include="Constants.vb" />
     <Compile Include="CustomColorTable.vb" />
@@ -164,6 +165,7 @@
     </Compile>
     <Compile Include="Map.vb" />
     <Compile Include="RectangleBrushPreset.vb" />
+    <Compile Include="TileDef.vb" />
     <Compile Include="Unit.vb" />
     <Compile Include="FrmExportAS.Designer.vb">
       <DependentUpon>FrmExportAS.vb</DependentUpon>
@@ -207,6 +209,7 @@
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
     <Compile Include="Tile.vb" />
+    <Compile Include="UnitDef.vb" />
     <Compile Include="UnitEntry.Designer.vb">
       <DependentUpon>UnitEntry.vb</DependentUpon>
     </Compile>

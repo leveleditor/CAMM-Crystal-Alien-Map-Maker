@@ -2,16 +2,19 @@
 
     Public Event BtnNewClicked(sender As BuildingEntry, e As EventArgs)
     Public Event BtnRemoveClicked(sender As BuildingEntry, e As EventArgs)
-    Public Event BtnBrowseClicked(sender As BuildingEntry, e As EventArgs)
-    Public Event TxtImageUrlMouseEntered(sender As BuildingEntry, e As EventArgs)
-    Public Event TxtImageUrlMouseLeft(sender As BuildingEntry, e As EventArgs)
+    Public Event BtnBrowseFullImageClicked(sender As BuildingEntry, e As EventArgs)
+    Public Event BtnBrowseShadowImageClicked(sender As BuildingEntry, e As EventArgs)
+    Public Event TxtFullImageUrlMouseEntered(sender As BuildingEntry, e As EventArgs)
+    Public Event TxtFullImageUrlMouseLeft(sender As BuildingEntry, e As EventArgs)
+    Public Event TxtShadowImageUrlMouseEntered(sender As BuildingEntry, e As EventArgs)
+    Public Event TxtShadowImageUrlMouseLeft(sender As BuildingEntry, e As EventArgs)
 
     Public Property BuildingId As String
         Get
-            Return txtObjectID.Text
+            Return txtBuildingId.Text
         End Get
         Set(value As String)
-            txtObjectID.Text = value
+            txtBuildingId.Text = value
         End Set
     End Property
 
@@ -42,7 +45,7 @@
         End Set
     End Property
 
-    Public Property OffSetY As Integer
+    Public Property OffsetY As Integer
         Get
             Return txtOffsetY.Text
         End Get
@@ -51,12 +54,21 @@
         End Set
     End Property
 
-    Public Property ImageUrl As String
+    Public Property FullImageUrl As String
         Get
-            Return txtImageUrl.Text
+            Return txtFullImageUrl.Text
         End Get
         Set(value As String)
-            txtImageUrl.Text = value
+            txtFullImageUrl.Text = value
+        End Set
+    End Property
+
+    Public Property ShadowImageUrl As String
+        Get
+            Return txtShadowImageUrl.Text
+        End Get
+        Set(value As String)
+            txtShadowImageUrl.Text = value
         End Set
     End Property
 
@@ -68,32 +80,43 @@
         RaiseEvent BtnRemoveClicked(Me, e)
     End Sub
 
-    Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
-        RaiseEvent BtnBrowseClicked(Me, e)
+    Private Sub btnBrowseFullImage_Click(sender As Object, e As EventArgs) Handles btnBrowseFullImage.Click
+        RaiseEvent BtnBrowseFullImageClicked(Me, e)
     End Sub
 
-    Private Sub txtImageUrl_MouseEnter(sender As Object, e As EventArgs) Handles txtImageUrl.MouseEnter
-        RaiseEvent TxtImageUrlMouseEntered(Me, e)
+    Private Sub btnBrowseShadowImage_Click(sender As Object, e As EventArgs) Handles btnBrowseShadowImage.Click
+        RaiseEvent BtnBrowseShadowImageClicked(Me, e)
     End Sub
 
-    Private Sub txtImageUrl_MouseLeave(sender As Object, e As EventArgs) Handles txtImageUrl.MouseLeave
-        RaiseEvent TxtImageUrlMouseLeft(Me, e)
+    Private Sub txtFullImageUrl_MouseEnter(sender As Object, e As EventArgs) Handles txtFullImageUrl.MouseEnter
+        RaiseEvent TxtFullImageUrlMouseEntered(Me, e)
+    End Sub
+
+    Private Sub txtFullImageUrl_MouseLeave(sender As Object, e As EventArgs) Handles txtFullImageUrl.MouseLeave
+        RaiseEvent TxtFullImageUrlMouseLeft(Me, e)
+    End Sub
+
+    Private Sub txtShadowImageUrl_MouseEnter(sender As Object, e As EventArgs) Handles txtShadowImageUrl.MouseEnter
+        RaiseEvent TxtShadowImageUrlMouseEntered(Me, e)
+    End Sub
+
+    Private Sub txtShadowImageUrl_MouseLeave(sender As Object, e As EventArgs) Handles txtShadowImageUrl.MouseLeave
+        RaiseEvent TxtShadowImageUrlMouseLeft(Me, e)
     End Sub
 
     Public Sub New()
-        InitializeComponent()
-        Me.cboTeam.SelectedIndex = 0
-        txtOffsetY.Text = "0"
+        Me.New("", 1, 1, Team.Astros, 0, "", "")
     End Sub
-    Public Sub New(buildingId As String, width As Integer, height As Integer, team As Team, offsetY As Integer, imageUrl As String)
+    Public Sub New(buildingId As String, width As Integer, height As Integer, team As Team, offsetY As Integer, fullImageUrl As String, shadowImageUrl As String)
         InitializeComponent()
         Me.cboTeam.SelectedIndex = 0
         Me.BuildingId = buildingId
         Me.BuildingW = width
         Me.BuildingH = height
         Me.Team = team
-        Me.OffSetY = offsetY
-        Me.ImageUrl = imageUrl
+        Me.OffsetY = offsetY
+        Me.FullImageUrl = fullImageUrl
+        Me.ShadowImageUrl = shadowImageUrl
     End Sub
 
 End Class

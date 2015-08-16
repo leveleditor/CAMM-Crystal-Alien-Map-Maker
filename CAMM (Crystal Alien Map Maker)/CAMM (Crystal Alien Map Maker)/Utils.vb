@@ -54,6 +54,16 @@ Public Module Utils
         Return Math.Sqrt(((x1 - x2) ^ 2) + ((y1 - y2) ^ 2))
     End Function
 
+    Public Function GetIniFileHeader(format As Integer) As String
+        Return "[CAMM]" + vbNewLine +
+               "Format = " + format.ToString + vbNewLine +
+               vbNewLine
+    End Function
+
+    Public Function GetIniFileFooter() As String
+        Return vbNewLine + "; CAMM Crystal Alien Map Maker (c) 2015 Leveleditor6680 // Josh"
+    End Function
+
     Public Sub UpgradeBuildingId(fromVersion As Integer, toVersion As Integer, ByRef objectId As String)
         If fromVersion < 4 And toVersion >= 4 Then
             ' The easy way to map old building Ids to new ones.
@@ -164,4 +174,5 @@ Public Module Utils
             buildingLocation = fixedLocation
         End If
     End Sub
+
 End Module

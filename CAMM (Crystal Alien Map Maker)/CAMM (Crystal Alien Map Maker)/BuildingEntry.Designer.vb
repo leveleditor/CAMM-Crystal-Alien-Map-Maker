@@ -22,13 +22,13 @@ Partial Class BuildingEntry
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnBrowse = New System.Windows.Forms.Button()
+        Me.btnBrowseFullImage = New System.Windows.Forms.Button()
         Me.tblControls = New System.Windows.Forms.TableLayoutPanel()
         Me.btnNew = New System.Windows.Forms.Button()
         Me.btnRemove = New System.Windows.Forms.Button()
-        Me.txtImageUrl = New System.Windows.Forms.TextBox()
-        Me.lblObjectID = New System.Windows.Forms.Label()
-        Me.txtObjectID = New System.Windows.Forms.TextBox()
+        Me.txtFullImageUrl = New System.Windows.Forms.TextBox()
+        Me.lblBuildingId = New System.Windows.Forms.Label()
+        Me.txtBuildingId = New System.Windows.Forms.TextBox()
         Me.pnlContainer = New System.Windows.Forms.Panel()
         Me.txtOffsetY = New System.Windows.Forms.TextBox()
         Me.lblOffsetY = New System.Windows.Forms.Label()
@@ -38,23 +38,25 @@ Partial Class BuildingEntry
         Me.txtHeight = New System.Windows.Forms.TextBox()
         Me.lblWidth = New System.Windows.Forms.Label()
         Me.txtWidth = New System.Windows.Forms.TextBox()
-        Me.lblImageUrl = New System.Windows.Forms.Label()
+        Me.txtShadowImageUrl = New System.Windows.Forms.TextBox()
+        Me.btnBrowseShadowImage = New System.Windows.Forms.Button()
+        Me.lblShadowImageUrl = New System.Windows.Forms.Label()
+        Me.lblFullImageUrl = New System.Windows.Forms.Label()
         Me.tblControls.SuspendLayout()
         Me.pnlContainer.SuspendLayout()
         Me.SuspendLayout()
         '
-        'btnBrowse
+        'btnBrowseFullImage
         '
-        Me.btnBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBrowse.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnBrowse.Location = New System.Drawing.Point(753, 4)
-        Me.btnBrowse.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(70, 20)
-        Me.btnBrowse.TabIndex = 16
-        Me.btnBrowse.Text = "Browse..."
-        Me.btnBrowse.UseVisualStyleBackColor = False
+        Me.btnBrowseFullImage.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.btnBrowseFullImage.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnBrowseFullImage.Location = New System.Drawing.Point(772, 4)
+        Me.btnBrowseFullImage.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnBrowseFullImage.Name = "btnBrowseFullImage"
+        Me.btnBrowseFullImage.Size = New System.Drawing.Size(70, 20)
+        Me.btnBrowseFullImage.TabIndex = 16
+        Me.btnBrowseFullImage.Text = "Browse..."
+        Me.btnBrowseFullImage.UseVisualStyleBackColor = False
         '
         'tblControls
         '
@@ -67,7 +69,7 @@ Partial Class BuildingEntry
         Me.tblControls.Controls.Add(Me.btnNew, 0, 0)
         Me.tblControls.Controls.Add(Me.btnRemove, 1, 0)
         Me.tblControls.Dock = System.Windows.Forms.DockStyle.Right
-        Me.tblControls.Location = New System.Drawing.Point(826, 0)
+        Me.tblControls.Location = New System.Drawing.Point(1139, 0)
         Me.tblControls.Name = "tblControls"
         Me.tblControls.RowCount = 1
         Me.tblControls.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -103,33 +105,31 @@ Partial Class BuildingEntry
         Me.btnRemove.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnRemove.UseVisualStyleBackColor = True
         '
-        'txtImageUrl
+        'txtFullImageUrl
         '
-        Me.txtImageUrl.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtImageUrl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtImageUrl.Location = New System.Drawing.Point(617, 4)
-        Me.txtImageUrl.Margin = New System.Windows.Forms.Padding(0)
-        Me.txtImageUrl.Name = "txtImageUrl"
-        Me.txtImageUrl.Size = New System.Drawing.Size(136, 20)
-        Me.txtImageUrl.TabIndex = 15
+        Me.txtFullImageUrl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtFullImageUrl.Location = New System.Drawing.Point(636, 4)
+        Me.txtFullImageUrl.Margin = New System.Windows.Forms.Padding(0)
+        Me.txtFullImageUrl.Name = "txtFullImageUrl"
+        Me.txtFullImageUrl.Size = New System.Drawing.Size(136, 20)
+        Me.txtFullImageUrl.TabIndex = 15
         '
-        'lblObjectID
+        'lblBuildingId
         '
-        Me.lblObjectID.AutoSize = True
-        Me.lblObjectID.Location = New System.Drawing.Point(3, 8)
-        Me.lblObjectID.Name = "lblObjectID"
-        Me.lblObjectID.Size = New System.Drawing.Size(56, 13)
-        Me.lblObjectID.TabIndex = 0
-        Me.lblObjectID.Text = "BuildingId:"
+        Me.lblBuildingId.AutoSize = True
+        Me.lblBuildingId.Location = New System.Drawing.Point(3, 8)
+        Me.lblBuildingId.Name = "lblBuildingId"
+        Me.lblBuildingId.Size = New System.Drawing.Size(56, 13)
+        Me.lblBuildingId.TabIndex = 0
+        Me.lblBuildingId.Text = "BuildingId:"
         '
-        'txtObjectID
+        'txtBuildingId
         '
-        Me.txtObjectID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtObjectID.Location = New System.Drawing.Point(65, 4)
-        Me.txtObjectID.Name = "txtObjectID"
-        Me.txtObjectID.Size = New System.Drawing.Size(87, 20)
-        Me.txtObjectID.TabIndex = 1
+        Me.txtBuildingId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtBuildingId.Location = New System.Drawing.Point(65, 4)
+        Me.txtBuildingId.Name = "txtBuildingId"
+        Me.txtBuildingId.Size = New System.Drawing.Size(87, 20)
+        Me.txtBuildingId.TabIndex = 1
         '
         'pnlContainer
         '
@@ -141,16 +141,19 @@ Partial Class BuildingEntry
         Me.pnlContainer.Controls.Add(Me.txtHeight)
         Me.pnlContainer.Controls.Add(Me.lblWidth)
         Me.pnlContainer.Controls.Add(Me.txtWidth)
-        Me.pnlContainer.Controls.Add(Me.txtImageUrl)
-        Me.pnlContainer.Controls.Add(Me.btnBrowse)
+        Me.pnlContainer.Controls.Add(Me.txtShadowImageUrl)
+        Me.pnlContainer.Controls.Add(Me.btnBrowseShadowImage)
+        Me.pnlContainer.Controls.Add(Me.txtFullImageUrl)
+        Me.pnlContainer.Controls.Add(Me.btnBrowseFullImage)
         Me.pnlContainer.Controls.Add(Me.tblControls)
-        Me.pnlContainer.Controls.Add(Me.lblObjectID)
-        Me.pnlContainer.Controls.Add(Me.txtObjectID)
-        Me.pnlContainer.Controls.Add(Me.lblImageUrl)
+        Me.pnlContainer.Controls.Add(Me.lblBuildingId)
+        Me.pnlContainer.Controls.Add(Me.lblShadowImageUrl)
+        Me.pnlContainer.Controls.Add(Me.txtBuildingId)
+        Me.pnlContainer.Controls.Add(Me.lblFullImageUrl)
         Me.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlContainer.Location = New System.Drawing.Point(0, 0)
         Me.pnlContainer.Name = "pnlContainer"
-        Me.pnlContainer.Size = New System.Drawing.Size(961, 28)
+        Me.pnlContainer.Size = New System.Drawing.Size(1274, 28)
         Me.pnlContainer.TabIndex = 0
         '
         'txtOffsetY
@@ -227,14 +230,47 @@ Partial Class BuildingEntry
         Me.txtWidth.TabIndex = 3
         Me.txtWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'lblImageUrl
+        'txtShadowImageUrl
         '
-        Me.lblImageUrl.AutoSize = True
-        Me.lblImageUrl.Location = New System.Drawing.Point(575, 8)
-        Me.lblImageUrl.Name = "lblImageUrl"
-        Me.lblImageUrl.Size = New System.Drawing.Size(39, 13)
-        Me.lblImageUrl.TabIndex = 14
-        Me.lblImageUrl.Text = "Image:"
+        Me.txtShadowImageUrl.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtShadowImageUrl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtShadowImageUrl.Location = New System.Drawing.Point(929, 4)
+        Me.txtShadowImageUrl.Margin = New System.Windows.Forms.Padding(0)
+        Me.txtShadowImageUrl.Name = "txtShadowImageUrl"
+        Me.txtShadowImageUrl.Size = New System.Drawing.Size(136, 20)
+        Me.txtShadowImageUrl.TabIndex = 15
+        '
+        'btnBrowseShadowImage
+        '
+        Me.btnBrowseShadowImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnBrowseShadowImage.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.btnBrowseShadowImage.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnBrowseShadowImage.Location = New System.Drawing.Point(1065, 4)
+        Me.btnBrowseShadowImage.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnBrowseShadowImage.Name = "btnBrowseShadowImage"
+        Me.btnBrowseShadowImage.Size = New System.Drawing.Size(70, 20)
+        Me.btnBrowseShadowImage.TabIndex = 16
+        Me.btnBrowseShadowImage.Text = "Browse..."
+        Me.btnBrowseShadowImage.UseVisualStyleBackColor = False
+        '
+        'lblShadowImageUrl
+        '
+        Me.lblShadowImageUrl.AutoSize = True
+        Me.lblShadowImageUrl.Location = New System.Drawing.Point(845, 8)
+        Me.lblShadowImageUrl.Name = "lblShadowImageUrl"
+        Me.lblShadowImageUrl.Size = New System.Drawing.Size(81, 13)
+        Me.lblShadowImageUrl.TabIndex = 14
+        Me.lblShadowImageUrl.Text = "Shadow Image:"
+        '
+        'lblFullImageUrl
+        '
+        Me.lblFullImageUrl.AutoSize = True
+        Me.lblFullImageUrl.Location = New System.Drawing.Point(575, 8)
+        Me.lblFullImageUrl.Name = "lblFullImageUrl"
+        Me.lblFullImageUrl.Size = New System.Drawing.Size(58, 13)
+        Me.lblFullImageUrl.TabIndex = 14
+        Me.lblFullImageUrl.Text = "Full Image:"
         '
         'BuildingEntry
         '
@@ -245,7 +281,7 @@ Partial Class BuildingEntry
         Me.Controls.Add(Me.pnlContainer)
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "BuildingEntry"
-        Me.Size = New System.Drawing.Size(961, 28)
+        Me.Size = New System.Drawing.Size(1274, 28)
         Me.tblControls.ResumeLayout(False)
         Me.tblControls.PerformLayout()
         Me.pnlContainer.ResumeLayout(False)
@@ -253,15 +289,15 @@ Partial Class BuildingEntry
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents btnBrowse As System.Windows.Forms.Button
+    Friend WithEvents btnBrowseFullImage As System.Windows.Forms.Button
     Friend WithEvents tblControls As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnNew As System.Windows.Forms.Button
     Friend WithEvents btnRemove As System.Windows.Forms.Button
-    Friend WithEvents txtImageUrl As System.Windows.Forms.TextBox
-    Friend WithEvents lblObjectID As System.Windows.Forms.Label
-    Friend WithEvents txtObjectID As System.Windows.Forms.TextBox
+    Friend WithEvents txtFullImageUrl As System.Windows.Forms.TextBox
+    Friend WithEvents lblBuildingId As System.Windows.Forms.Label
+    Friend WithEvents txtBuildingId As System.Windows.Forms.TextBox
     Friend WithEvents pnlContainer As System.Windows.Forms.Panel
-    Friend WithEvents lblImageUrl As System.Windows.Forms.Label
+    Friend WithEvents lblFullImageUrl As System.Windows.Forms.Label
     Friend WithEvents lblWidth As System.Windows.Forms.Label
     Friend WithEvents txtWidth As System.Windows.Forms.TextBox
     Friend WithEvents lblHeight As System.Windows.Forms.Label
@@ -270,5 +306,8 @@ Partial Class BuildingEntry
     Friend WithEvents cboTeam As System.Windows.Forms.ComboBox
     Friend WithEvents txtOffsetY As System.Windows.Forms.TextBox
     Friend WithEvents lblOffsetY As System.Windows.Forms.Label
+    Friend WithEvents txtShadowImageUrl As System.Windows.Forms.TextBox
+    Friend WithEvents btnBrowseShadowImage As System.Windows.Forms.Button
+    Friend WithEvents lblShadowImageUrl As System.Windows.Forms.Label
 
 End Class

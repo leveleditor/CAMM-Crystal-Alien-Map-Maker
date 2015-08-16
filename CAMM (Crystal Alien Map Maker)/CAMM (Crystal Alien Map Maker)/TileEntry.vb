@@ -6,12 +6,12 @@
     Public Event TxtImageUrlMouseEntered(sender As TileEntry, e As EventArgs)
     Public Event TxtImageUrlMouseLeft(sender As TileEntry, e As EventArgs)
 
-    Public Property TerrainId As String
+    Public Property TileId As String
         Get
-            Return txtTerrainID.Text
+            Return txtTileId.Text
         End Get
         Set(value As String)
-            txtTerrainID.Text = value
+            txtTileId.Text = value
         End Set
     End Property
 
@@ -63,11 +63,11 @@
     End Sub
 
     Public Sub New()
-        InitializeComponent()
+        Me.New("", True, False, "")
     End Sub
     Public Sub New(terrainId As String, isPassable As Boolean, isMinerals As Boolean, imageUrl As String)
         InitializeComponent()
-        Me.TerrainId = terrainId
+        Me.TileId = terrainId
         Me.IsPassable = isPassable
         Me.IsMinerals = isMinerals
         Me.ImageUrl = imageUrl

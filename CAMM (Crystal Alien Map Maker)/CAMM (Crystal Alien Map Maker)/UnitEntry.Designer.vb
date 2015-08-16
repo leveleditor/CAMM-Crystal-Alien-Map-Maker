@@ -22,35 +22,40 @@ Partial Class UnitEntry
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnBrowse = New System.Windows.Forms.Button()
+        Me.btnBrowseFullImage = New System.Windows.Forms.Button()
         Me.tblControls = New System.Windows.Forms.TableLayoutPanel()
         Me.btnNew = New System.Windows.Forms.Button()
         Me.btnRemove = New System.Windows.Forms.Button()
-        Me.txtImageUrl = New System.Windows.Forms.TextBox()
-        Me.lblObjectID = New System.Windows.Forms.Label()
-        Me.txtObjectID = New System.Windows.Forms.TextBox()
+        Me.txtFullImageUrl = New System.Windows.Forms.TextBox()
+        Me.lblUnitId = New System.Windows.Forms.Label()
+        Me.txtUnitId = New System.Windows.Forms.TextBox()
         Me.pnlContainer = New System.Windows.Forms.Panel()
+        Me.chkIsPickup = New System.Windows.Forms.CheckBox()
+        Me.txtAltitude = New System.Windows.Forms.TextBox()
         Me.txtOffsetY = New System.Windows.Forms.TextBox()
+        Me.lblAltitude = New System.Windows.Forms.Label()
         Me.lblOffsetY = New System.Windows.Forms.Label()
         Me.cboTeam = New System.Windows.Forms.ComboBox()
         Me.lblTeam = New System.Windows.Forms.Label()
-        Me.lblImageUrl = New System.Windows.Forms.Label()
+        Me.txtShadowImageUrl = New System.Windows.Forms.TextBox()
+        Me.btnBrowseShadowImage = New System.Windows.Forms.Button()
+        Me.lblShadowImageUrl = New System.Windows.Forms.Label()
+        Me.lblFullImageUrl = New System.Windows.Forms.Label()
         Me.tblControls.SuspendLayout()
         Me.pnlContainer.SuspendLayout()
         Me.SuspendLayout()
         '
-        'btnBrowse
+        'btnBrowseFullImage
         '
-        Me.btnBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnBrowse.BackColor = System.Drawing.SystemColors.ControlLight
-        Me.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnBrowse.Location = New System.Drawing.Point(590, 4)
-        Me.btnBrowse.Margin = New System.Windows.Forms.Padding(0)
-        Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(70, 20)
-        Me.btnBrowse.TabIndex = 16
-        Me.btnBrowse.Text = "Browse..."
-        Me.btnBrowse.UseVisualStyleBackColor = False
+        Me.btnBrowseFullImage.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.btnBrowseFullImage.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnBrowseFullImage.Location = New System.Drawing.Point(793, 4)
+        Me.btnBrowseFullImage.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnBrowseFullImage.Name = "btnBrowseFullImage"
+        Me.btnBrowseFullImage.Size = New System.Drawing.Size(70, 20)
+        Me.btnBrowseFullImage.TabIndex = 16
+        Me.btnBrowseFullImage.Text = "Browse..."
+        Me.btnBrowseFullImage.UseVisualStyleBackColor = False
         '
         'tblControls
         '
@@ -63,7 +68,7 @@ Partial Class UnitEntry
         Me.tblControls.Controls.Add(Me.btnNew, 0, 0)
         Me.tblControls.Controls.Add(Me.btnRemove, 1, 0)
         Me.tblControls.Dock = System.Windows.Forms.DockStyle.Right
-        Me.tblControls.Location = New System.Drawing.Point(663, 0)
+        Me.tblControls.Location = New System.Drawing.Point(1167, 0)
         Me.tblControls.Name = "tblControls"
         Me.tblControls.RowCount = 1
         Me.tblControls.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -99,65 +104,98 @@ Partial Class UnitEntry
         Me.btnRemove.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnRemove.UseVisualStyleBackColor = True
         '
-        'txtImageUrl
+        'txtFullImageUrl
         '
-        Me.txtImageUrl.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtImageUrl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtImageUrl.Location = New System.Drawing.Point(446, 4)
-        Me.txtImageUrl.Margin = New System.Windows.Forms.Padding(0)
-        Me.txtImageUrl.Name = "txtImageUrl"
-        Me.txtImageUrl.Size = New System.Drawing.Size(144, 20)
-        Me.txtImageUrl.TabIndex = 15
+        Me.txtFullImageUrl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtFullImageUrl.Location = New System.Drawing.Point(649, 4)
+        Me.txtFullImageUrl.Margin = New System.Windows.Forms.Padding(0)
+        Me.txtFullImageUrl.Name = "txtFullImageUrl"
+        Me.txtFullImageUrl.Size = New System.Drawing.Size(144, 20)
+        Me.txtFullImageUrl.TabIndex = 15
         '
-        'lblObjectID
+        'lblUnitId
         '
-        Me.lblObjectID.AutoSize = True
-        Me.lblObjectID.Location = New System.Drawing.Point(3, 8)
-        Me.lblObjectID.Name = "lblObjectID"
-        Me.lblObjectID.Size = New System.Drawing.Size(38, 13)
-        Me.lblObjectID.TabIndex = 0
-        Me.lblObjectID.Text = "UnitId:"
+        Me.lblUnitId.AutoSize = True
+        Me.lblUnitId.Location = New System.Drawing.Point(3, 8)
+        Me.lblUnitId.Name = "lblUnitId"
+        Me.lblUnitId.Size = New System.Drawing.Size(38, 13)
+        Me.lblUnitId.TabIndex = 0
+        Me.lblUnitId.Text = "UnitId:"
         '
-        'txtObjectID
+        'txtUnitId
         '
-        Me.txtObjectID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtObjectID.Location = New System.Drawing.Point(47, 4)
-        Me.txtObjectID.Name = "txtObjectID"
-        Me.txtObjectID.Size = New System.Drawing.Size(87, 20)
-        Me.txtObjectID.TabIndex = 1
+        Me.txtUnitId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtUnitId.Location = New System.Drawing.Point(47, 4)
+        Me.txtUnitId.Name = "txtUnitId"
+        Me.txtUnitId.Size = New System.Drawing.Size(87, 20)
+        Me.txtUnitId.TabIndex = 1
         '
         'pnlContainer
         '
+        Me.pnlContainer.Controls.Add(Me.chkIsPickup)
+        Me.pnlContainer.Controls.Add(Me.txtAltitude)
         Me.pnlContainer.Controls.Add(Me.txtOffsetY)
+        Me.pnlContainer.Controls.Add(Me.lblAltitude)
         Me.pnlContainer.Controls.Add(Me.lblOffsetY)
         Me.pnlContainer.Controls.Add(Me.cboTeam)
         Me.pnlContainer.Controls.Add(Me.lblTeam)
-        Me.pnlContainer.Controls.Add(Me.txtImageUrl)
-        Me.pnlContainer.Controls.Add(Me.btnBrowse)
+        Me.pnlContainer.Controls.Add(Me.txtShadowImageUrl)
+        Me.pnlContainer.Controls.Add(Me.txtFullImageUrl)
+        Me.pnlContainer.Controls.Add(Me.btnBrowseShadowImage)
+        Me.pnlContainer.Controls.Add(Me.btnBrowseFullImage)
         Me.pnlContainer.Controls.Add(Me.tblControls)
-        Me.pnlContainer.Controls.Add(Me.lblObjectID)
-        Me.pnlContainer.Controls.Add(Me.txtObjectID)
-        Me.pnlContainer.Controls.Add(Me.lblImageUrl)
+        Me.pnlContainer.Controls.Add(Me.lblUnitId)
+        Me.pnlContainer.Controls.Add(Me.txtUnitId)
+        Me.pnlContainer.Controls.Add(Me.lblShadowImageUrl)
+        Me.pnlContainer.Controls.Add(Me.lblFullImageUrl)
         Me.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlContainer.Location = New System.Drawing.Point(0, 0)
         Me.pnlContainer.Name = "pnlContainer"
-        Me.pnlContainer.Size = New System.Drawing.Size(798, 28)
+        Me.pnlContainer.Size = New System.Drawing.Size(1302, 28)
         Me.pnlContainer.TabIndex = 0
+        '
+        'chkIsPickup
+        '
+        Me.chkIsPickup.AutoSize = True
+        Me.chkIsPickup.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.chkIsPickup.Location = New System.Drawing.Point(369, 7)
+        Me.chkIsPickup.Name = "chkIsPickup"
+        Me.chkIsPickup.Size = New System.Drawing.Size(73, 17)
+        Me.chkIsPickup.TabIndex = 17
+        Me.chkIsPickup.Text = "Is Pickup:"
+        Me.chkIsPickup.UseVisualStyleBackColor = True
+        '
+        'txtAltitude
+        '
+        Me.txtAltitude.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtAltitude.Location = New System.Drawing.Point(315, 4)
+        Me.txtAltitude.MaxLength = 5
+        Me.txtAltitude.Name = "txtAltitude"
+        Me.txtAltitude.Size = New System.Drawing.Size(48, 20)
+        Me.txtAltitude.TabIndex = 13
         '
         'txtOffsetY
         '
         Me.txtOffsetY.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtOffsetY.Location = New System.Drawing.Point(350, 4)
+        Me.txtOffsetY.Location = New System.Drawing.Point(534, 4)
         Me.txtOffsetY.MaxLength = 5
         Me.txtOffsetY.Name = "txtOffsetY"
         Me.txtOffsetY.Size = New System.Drawing.Size(48, 20)
         Me.txtOffsetY.TabIndex = 13
         '
+        'lblAltitude
+        '
+        Me.lblAltitude.AutoSize = True
+        Me.lblAltitude.Location = New System.Drawing.Point(264, 8)
+        Me.lblAltitude.Name = "lblAltitude"
+        Me.lblAltitude.Size = New System.Drawing.Size(45, 13)
+        Me.lblAltitude.TabIndex = 12
+        Me.lblAltitude.Text = "Altitude:"
+        '
         'lblOffsetY
         '
         Me.lblOffsetY.AutoSize = True
-        Me.lblOffsetY.Location = New System.Drawing.Point(264, 8)
+        Me.lblOffsetY.Location = New System.Drawing.Point(448, 8)
         Me.lblOffsetY.Name = "lblOffsetY"
         Me.lblOffsetY.Size = New System.Drawing.Size(80, 13)
         Me.lblOffsetY.TabIndex = 12
@@ -181,14 +219,44 @@ Partial Class UnitEntry
         Me.lblTeam.TabIndex = 6
         Me.lblTeam.Text = "Team:"
         '
-        'lblImageUrl
+        'txtShadowImageUrl
         '
-        Me.lblImageUrl.AutoSize = True
-        Me.lblImageUrl.Location = New System.Drawing.Point(404, 8)
-        Me.lblImageUrl.Name = "lblImageUrl"
-        Me.lblImageUrl.Size = New System.Drawing.Size(39, 13)
-        Me.lblImageUrl.TabIndex = 14
-        Me.lblImageUrl.Text = "Image:"
+        Me.txtShadowImageUrl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtShadowImageUrl.Location = New System.Drawing.Point(950, 4)
+        Me.txtShadowImageUrl.Margin = New System.Windows.Forms.Padding(0)
+        Me.txtShadowImageUrl.Name = "txtShadowImageUrl"
+        Me.txtShadowImageUrl.Size = New System.Drawing.Size(144, 20)
+        Me.txtShadowImageUrl.TabIndex = 15
+        '
+        'btnBrowseShadowImage
+        '
+        Me.btnBrowseShadowImage.BackColor = System.Drawing.SystemColors.ControlLight
+        Me.btnBrowseShadowImage.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnBrowseShadowImage.Location = New System.Drawing.Point(1094, 4)
+        Me.btnBrowseShadowImage.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnBrowseShadowImage.Name = "btnBrowseShadowImage"
+        Me.btnBrowseShadowImage.Size = New System.Drawing.Size(70, 20)
+        Me.btnBrowseShadowImage.TabIndex = 16
+        Me.btnBrowseShadowImage.Text = "Browse..."
+        Me.btnBrowseShadowImage.UseVisualStyleBackColor = False
+        '
+        'lblShadowImageUrl
+        '
+        Me.lblShadowImageUrl.AutoSize = True
+        Me.lblShadowImageUrl.Location = New System.Drawing.Point(866, 8)
+        Me.lblShadowImageUrl.Name = "lblShadowImageUrl"
+        Me.lblShadowImageUrl.Size = New System.Drawing.Size(81, 13)
+        Me.lblShadowImageUrl.TabIndex = 14
+        Me.lblShadowImageUrl.Text = "Shadow Image:"
+        '
+        'lblFullImageUrl
+        '
+        Me.lblFullImageUrl.AutoSize = True
+        Me.lblFullImageUrl.Location = New System.Drawing.Point(588, 8)
+        Me.lblFullImageUrl.Name = "lblFullImageUrl"
+        Me.lblFullImageUrl.Size = New System.Drawing.Size(58, 13)
+        Me.lblFullImageUrl.TabIndex = 14
+        Me.lblFullImageUrl.Text = "Full Image:"
         '
         'UnitEntry
         '
@@ -199,7 +267,7 @@ Partial Class UnitEntry
         Me.Controls.Add(Me.pnlContainer)
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "UnitEntry"
-        Me.Size = New System.Drawing.Size(798, 28)
+        Me.Size = New System.Drawing.Size(1302, 28)
         Me.tblControls.ResumeLayout(False)
         Me.tblControls.PerformLayout()
         Me.pnlContainer.ResumeLayout(False)
@@ -207,18 +275,24 @@ Partial Class UnitEntry
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents btnBrowse As System.Windows.Forms.Button
+    Friend WithEvents btnBrowseFullImage As System.Windows.Forms.Button
     Friend WithEvents tblControls As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents btnNew As System.Windows.Forms.Button
     Friend WithEvents btnRemove As System.Windows.Forms.Button
-    Friend WithEvents txtImageUrl As System.Windows.Forms.TextBox
-    Friend WithEvents lblObjectID As System.Windows.Forms.Label
-    Friend WithEvents txtObjectID As System.Windows.Forms.TextBox
+    Friend WithEvents txtFullImageUrl As System.Windows.Forms.TextBox
+    Friend WithEvents lblUnitId As System.Windows.Forms.Label
+    Friend WithEvents txtUnitId As System.Windows.Forms.TextBox
     Friend WithEvents pnlContainer As System.Windows.Forms.Panel
-    Friend WithEvents lblImageUrl As System.Windows.Forms.Label
+    Friend WithEvents lblFullImageUrl As System.Windows.Forms.Label
     Friend WithEvents lblTeam As System.Windows.Forms.Label
     Friend WithEvents cboTeam As System.Windows.Forms.ComboBox
     Friend WithEvents txtOffsetY As System.Windows.Forms.TextBox
     Friend WithEvents lblOffsetY As System.Windows.Forms.Label
+    Friend WithEvents chkIsPickup As System.Windows.Forms.CheckBox
+    Friend WithEvents txtAltitude As System.Windows.Forms.TextBox
+    Friend WithEvents lblAltitude As System.Windows.Forms.Label
+    Friend WithEvents txtShadowImageUrl As System.Windows.Forms.TextBox
+    Friend WithEvents btnBrowseShadowImage As System.Windows.Forms.Button
+    Friend WithEvents lblShadowImageUrl As System.Windows.Forms.Label
 
 End Class

@@ -23,36 +23,35 @@ Partial Class FrmTileData
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTileData))
-        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnSaveAll = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.lblSaved = New System.Windows.Forms.Label()
         Me.openImage = New System.Windows.Forms.OpenFileDialog()
         Me.editTabs = New System.Windows.Forms.TabControl()
-        Me.tabTerrain = New System.Windows.Forms.TabPage()
+        Me.tabTiles = New System.Windows.Forms.TabPage()
         Me.pnlTerrain = New System.Windows.Forms.Panel()
         Me.tabBuildings = New System.Windows.Forms.TabPage()
         Me.pnlBuildings = New System.Windows.Forms.Panel()
         Me.tabUnits = New System.Windows.Forms.TabPage()
         Me.pnlUnits = New System.Windows.Forms.Panel()
         Me.picPreview = New System.Windows.Forms.PictureBox()
-        Me.txtAsciiSeparator = New System.Windows.Forms.TextBox()
-        Me.lblAsciiSeparator = New System.Windows.Forms.Label()
+        Me.tabConfig = New System.Windows.Forms.TabPage()
         Me.editTabs.SuspendLayout()
-        Me.tabTerrain.SuspendLayout()
+        Me.tabTiles.SuspendLayout()
         Me.tabBuildings.SuspendLayout()
         Me.tabUnits.SuspendLayout()
         CType(Me.picPreview, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'btnSave
+        'btnSaveAll
         '
-        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSave.Location = New System.Drawing.Point(596, 417)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
-        Me.btnSave.TabIndex = 13
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
+        Me.btnSaveAll.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSaveAll.Location = New System.Drawing.Point(596, 417)
+        Me.btnSaveAll.Name = "btnSaveAll"
+        Me.btnSaveAll.Size = New System.Drawing.Size(75, 23)
+        Me.btnSaveAll.TabIndex = 13
+        Me.btnSaveAll.Text = "Save All"
+        Me.btnSaveAll.UseVisualStyleBackColor = True
         '
         'btnClose
         '
@@ -87,29 +86,30 @@ Partial Class FrmTileData
         Me.editTabs.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.editTabs.Controls.Add(Me.tabTerrain)
+        Me.editTabs.Controls.Add(Me.tabTiles)
         Me.editTabs.Controls.Add(Me.tabBuildings)
         Me.editTabs.Controls.Add(Me.tabUnits)
-        Me.editTabs.Location = New System.Drawing.Point(9, 30)
+        Me.editTabs.Controls.Add(Me.tabConfig)
+        Me.editTabs.Location = New System.Drawing.Point(9, 9)
         Me.editTabs.Margin = New System.Windows.Forms.Padding(0)
         Me.editTabs.Name = "editTabs"
         Me.editTabs.SelectedIndex = 0
-        Me.editTabs.Size = New System.Drawing.Size(746, 384)
+        Me.editTabs.Size = New System.Drawing.Size(746, 405)
         Me.editTabs.TabIndex = 11
         '
-        'tabTerrain
+        'tabTiles
         '
-        Me.tabTerrain.AutoScroll = True
-        Me.tabTerrain.BackColor = System.Drawing.Color.Silver
-        Me.tabTerrain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.tabTerrain.Controls.Add(Me.pnlTerrain)
-        Me.tabTerrain.Location = New System.Drawing.Point(4, 22)
-        Me.tabTerrain.Margin = New System.Windows.Forms.Padding(0)
-        Me.tabTerrain.Name = "tabTerrain"
-        Me.tabTerrain.Size = New System.Drawing.Size(738, 358)
-        Me.tabTerrain.TabIndex = 0
-        Me.tabTerrain.Text = "Edit Terrain"
-        Me.tabTerrain.UseVisualStyleBackColor = True
+        Me.tabTiles.AutoScroll = True
+        Me.tabTiles.BackColor = System.Drawing.Color.Silver
+        Me.tabTiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tabTiles.Controls.Add(Me.pnlTerrain)
+        Me.tabTiles.Location = New System.Drawing.Point(4, 22)
+        Me.tabTiles.Margin = New System.Windows.Forms.Padding(0)
+        Me.tabTiles.Name = "tabTiles"
+        Me.tabTiles.Size = New System.Drawing.Size(738, 379)
+        Me.tabTiles.TabIndex = 0
+        Me.tabTiles.Text = "Edit Tiles"
+        Me.tabTiles.UseVisualStyleBackColor = True
         '
         'pnlTerrain
         '
@@ -131,7 +131,7 @@ Partial Class FrmTileData
         Me.tabBuildings.Location = New System.Drawing.Point(4, 22)
         Me.tabBuildings.Margin = New System.Windows.Forms.Padding(0)
         Me.tabBuildings.Name = "tabBuildings"
-        Me.tabBuildings.Size = New System.Drawing.Size(738, 358)
+        Me.tabBuildings.Size = New System.Drawing.Size(738, 379)
         Me.tabBuildings.TabIndex = 1
         Me.tabBuildings.Text = "Edit Buildings"
         Me.tabBuildings.UseVisualStyleBackColor = True
@@ -156,7 +156,7 @@ Partial Class FrmTileData
         Me.tabUnits.Location = New System.Drawing.Point(4, 22)
         Me.tabUnits.Margin = New System.Windows.Forms.Padding(0)
         Me.tabUnits.Name = "tabUnits"
-        Me.tabUnits.Size = New System.Drawing.Size(738, 358)
+        Me.tabUnits.Size = New System.Drawing.Size(738, 379)
         Me.tabUnits.TabIndex = 2
         Me.tabUnits.Text = "Edit Units"
         Me.tabUnits.UseVisualStyleBackColor = True
@@ -184,25 +184,18 @@ Partial Class FrmTileData
         Me.picPreview.TabStop = False
         Me.picPreview.Visible = False
         '
-        'txtAsciiSeparator
+        'tabConfig
         '
-        Me.txtAsciiSeparator.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtAsciiSeparator.Font = New System.Drawing.Font("Courier New", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAsciiSeparator.Location = New System.Drawing.Point(95, 5)
-        Me.txtAsciiSeparator.Name = "txtAsciiSeparator"
-        Me.txtAsciiSeparator.ReadOnly = True
-        Me.txtAsciiSeparator.Size = New System.Drawing.Size(55, 22)
-        Me.txtAsciiSeparator.TabIndex = 10
-        Me.txtAsciiSeparator.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'lblAsciiSeparator
-        '
-        Me.lblAsciiSeparator.AutoSize = True
-        Me.lblAsciiSeparator.Location = New System.Drawing.Point(8, 9)
-        Me.lblAsciiSeparator.Name = "lblAsciiSeparator"
-        Me.lblAsciiSeparator.Size = New System.Drawing.Size(81, 13)
-        Me.lblAsciiSeparator.TabIndex = 9
-        Me.lblAsciiSeparator.Text = "Ascii Separator:"
+        Me.tabConfig.AutoScroll = True
+        Me.tabConfig.BackColor = System.Drawing.Color.Silver
+        Me.tabConfig.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tabConfig.Location = New System.Drawing.Point(4, 22)
+        Me.tabConfig.Margin = New System.Windows.Forms.Padding(0)
+        Me.tabConfig.Name = "tabConfig"
+        Me.tabConfig.Size = New System.Drawing.Size(738, 379)
+        Me.tabConfig.TabIndex = 3
+        Me.tabConfig.Text = "Edit Config"
+        Me.tabConfig.UseVisualStyleBackColor = True
         '
         'FrmTileData
         '
@@ -212,19 +205,17 @@ Partial Class FrmTileData
         Me.ClientSize = New System.Drawing.Size(764, 452)
         Me.Controls.Add(Me.picPreview)
         Me.Controls.Add(Me.editTabs)
-        Me.Controls.Add(Me.lblAsciiSeparator)
-        Me.Controls.Add(Me.txtAsciiSeparator)
         Me.Controls.Add(Me.lblSaved)
         Me.Controls.Add(Me.btnClose)
-        Me.Controls.Add(Me.btnSave)
+        Me.Controls.Add(Me.btnSaveAll)
         Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FrmTileData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Tile Data Editor [Tiles.dat]"
+        Me.Text = "Tile Data Editor"
         Me.editTabs.ResumeLayout(False)
-        Me.tabTerrain.ResumeLayout(False)
-        Me.tabTerrain.PerformLayout()
+        Me.tabTiles.ResumeLayout(False)
+        Me.tabTiles.PerformLayout()
         Me.tabBuildings.ResumeLayout(False)
         Me.tabBuildings.PerformLayout()
         Me.tabUnits.ResumeLayout(False)
@@ -234,18 +225,17 @@ Partial Class FrmTileData
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents btnSave As System.Windows.Forms.Button
+    Friend WithEvents btnSaveAll As System.Windows.Forms.Button
     Friend WithEvents btnClose As System.Windows.Forms.Button
     Friend WithEvents lblSaved As System.Windows.Forms.Label
     Friend WithEvents openImage As System.Windows.Forms.OpenFileDialog
     Friend WithEvents editTabs As System.Windows.Forms.TabControl
-    Friend WithEvents tabTerrain As System.Windows.Forms.TabPage
+    Friend WithEvents tabTiles As System.Windows.Forms.TabPage
     Friend WithEvents tabBuildings As System.Windows.Forms.TabPage
     Friend WithEvents pnlTerrain As System.Windows.Forms.Panel
     Friend WithEvents pnlBuildings As System.Windows.Forms.Panel
     Friend WithEvents picPreview As System.Windows.Forms.PictureBox
     Friend WithEvents tabUnits As System.Windows.Forms.TabPage
     Friend WithEvents pnlUnits As System.Windows.Forms.Panel
-    Friend WithEvents txtAsciiSeparator As System.Windows.Forms.TextBox
-    Friend WithEvents lblAsciiSeparator As System.Windows.Forms.Label
+    Friend WithEvents tabConfig As System.Windows.Forms.TabPage
 End Class

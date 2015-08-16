@@ -22,8 +22,8 @@ Partial Class TileEntry
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.lblTerrainID = New System.Windows.Forms.Label()
-        Me.txtTerrainID = New System.Windows.Forms.TextBox()
+        Me.lblTileId = New System.Windows.Forms.Label()
+        Me.txtTileId = New System.Windows.Forms.TextBox()
         Me.chkIsPassable = New System.Windows.Forms.CheckBox()
         Me.pnlContainer = New System.Windows.Forms.Panel()
         Me.txtImageUrl = New System.Windows.Forms.TextBox()
@@ -37,27 +37,27 @@ Partial Class TileEntry
         Me.tblControls.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lblTerrainID
+        'lblTileId
         '
-        Me.lblTerrainID.AutoSize = True
-        Me.lblTerrainID.Location = New System.Drawing.Point(3, 8)
-        Me.lblTerrainID.Name = "lblTerrainID"
-        Me.lblTerrainID.Size = New System.Drawing.Size(54, 13)
-        Me.lblTerrainID.TabIndex = 0
-        Me.lblTerrainID.Text = "TerrainID:"
+        Me.lblTileId.AutoSize = True
+        Me.lblTileId.Location = New System.Drawing.Point(3, 8)
+        Me.lblTileId.Name = "lblTileId"
+        Me.lblTileId.Size = New System.Drawing.Size(36, 13)
+        Me.lblTileId.TabIndex = 0
+        Me.lblTileId.Text = "TileId:"
         '
-        'txtTerrainID
+        'txtTileId
         '
-        Me.txtTerrainID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTerrainID.Location = New System.Drawing.Point(63, 4)
-        Me.txtTerrainID.Name = "txtTerrainID"
-        Me.txtTerrainID.Size = New System.Drawing.Size(87, 20)
-        Me.txtTerrainID.TabIndex = 1
+        Me.txtTileId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTileId.Location = New System.Drawing.Point(45, 4)
+        Me.txtTileId.Name = "txtTileId"
+        Me.txtTileId.Size = New System.Drawing.Size(87, 20)
+        Me.txtTileId.TabIndex = 1
         '
         'chkIsPassable
         '
         Me.chkIsPassable.AutoSize = True
-        Me.chkIsPassable.Location = New System.Drawing.Point(156, 7)
+        Me.chkIsPassable.Location = New System.Drawing.Point(138, 7)
         Me.chkIsPassable.Name = "chkIsPassable"
         Me.chkIsPassable.Size = New System.Drawing.Size(77, 17)
         Me.chkIsPassable.TabIndex = 2
@@ -69,21 +69,21 @@ Partial Class TileEntry
         Me.pnlContainer.Controls.Add(Me.txtImageUrl)
         Me.pnlContainer.Controls.Add(Me.btnBrowse)
         Me.pnlContainer.Controls.Add(Me.tblControls)
-        Me.pnlContainer.Controls.Add(Me.lblTerrainID)
-        Me.pnlContainer.Controls.Add(Me.txtTerrainID)
+        Me.pnlContainer.Controls.Add(Me.lblTileId)
+        Me.pnlContainer.Controls.Add(Me.txtTileId)
         Me.pnlContainer.Controls.Add(Me.chkIsMinerals)
         Me.pnlContainer.Controls.Add(Me.lblImageUrl)
         Me.pnlContainer.Controls.Add(Me.chkIsPassable)
         Me.pnlContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlContainer.Location = New System.Drawing.Point(0, 0)
         Me.pnlContainer.Name = "pnlContainer"
-        Me.pnlContainer.Size = New System.Drawing.Size(707, 28)
+        Me.pnlContainer.Size = New System.Drawing.Size(689, 28)
         Me.pnlContainer.TabIndex = 0
         '
         'txtImageUrl
         '
         Me.txtImageUrl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtImageUrl.Location = New System.Drawing.Point(360, 4)
+        Me.txtImageUrl.Location = New System.Drawing.Point(342, 4)
         Me.txtImageUrl.Margin = New System.Windows.Forms.Padding(0)
         Me.txtImageUrl.Name = "txtImageUrl"
         Me.txtImageUrl.Size = New System.Drawing.Size(138, 20)
@@ -93,7 +93,7 @@ Partial Class TileEntry
         '
         Me.btnBrowse.BackColor = System.Drawing.SystemColors.ControlLight
         Me.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnBrowse.Location = New System.Drawing.Point(498, 4)
+        Me.btnBrowse.Location = New System.Drawing.Point(480, 4)
         Me.btnBrowse.Margin = New System.Windows.Forms.Padding(0)
         Me.btnBrowse.Name = "btnBrowse"
         Me.btnBrowse.Size = New System.Drawing.Size(70, 20)
@@ -112,7 +112,7 @@ Partial Class TileEntry
         Me.tblControls.Controls.Add(Me.btnNew, 0, 0)
         Me.tblControls.Controls.Add(Me.btnRemove, 1, 0)
         Me.tblControls.Dock = System.Windows.Forms.DockStyle.Right
-        Me.tblControls.Location = New System.Drawing.Point(572, 0)
+        Me.tblControls.Location = New System.Drawing.Point(554, 0)
         Me.tblControls.Name = "tblControls"
         Me.tblControls.RowCount = 1
         Me.tblControls.RowStyles.Add(New System.Windows.Forms.RowStyle())
@@ -151,7 +151,7 @@ Partial Class TileEntry
         'chkIsMinerals
         '
         Me.chkIsMinerals.AutoSize = True
-        Me.chkIsMinerals.Location = New System.Drawing.Point(239, 7)
+        Me.chkIsMinerals.Location = New System.Drawing.Point(221, 7)
         Me.chkIsMinerals.Name = "chkIsMinerals"
         Me.chkIsMinerals.Size = New System.Drawing.Size(73, 17)
         Me.chkIsMinerals.TabIndex = 3
@@ -161,7 +161,7 @@ Partial Class TileEntry
         'lblImageUrl
         '
         Me.lblImageUrl.AutoSize = True
-        Me.lblImageUrl.Location = New System.Drawing.Point(318, 8)
+        Me.lblImageUrl.Location = New System.Drawing.Point(300, 8)
         Me.lblImageUrl.Name = "lblImageUrl"
         Me.lblImageUrl.Size = New System.Drawing.Size(39, 13)
         Me.lblImageUrl.TabIndex = 4
@@ -176,7 +176,7 @@ Partial Class TileEntry
         Me.Controls.Add(Me.pnlContainer)
         Me.Margin = New System.Windows.Forms.Padding(0)
         Me.Name = "TileEntry"
-        Me.Size = New System.Drawing.Size(707, 28)
+        Me.Size = New System.Drawing.Size(689, 28)
         Me.pnlContainer.ResumeLayout(False)
         Me.pnlContainer.PerformLayout()
         Me.tblControls.ResumeLayout(False)
@@ -184,8 +184,8 @@ Partial Class TileEntry
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents lblTerrainID As System.Windows.Forms.Label
-    Friend WithEvents txtTerrainID As System.Windows.Forms.TextBox
+    Friend WithEvents lblTileId As System.Windows.Forms.Label
+    Friend WithEvents txtTileId As System.Windows.Forms.TextBox
     Friend WithEvents chkIsPassable As System.Windows.Forms.CheckBox
     Friend WithEvents pnlContainer As System.Windows.Forms.Panel
     Friend WithEvents chkIsMinerals As System.Windows.Forms.CheckBox

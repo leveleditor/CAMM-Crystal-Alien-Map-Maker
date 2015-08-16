@@ -537,6 +537,8 @@ Public Class FrmEditor
                 If mouseY = i * TileSizeY Then
                     picActive.Image = TileDefs(i).Image
                     activeTile.TileId = TileDefs(i).TileId
+                    activeTile.IsPassable = TileDefs(i).IsPassable
+                    activeTile.IsMinerals = TileDefs(i).IsMinerals
                 End If
             Next
 
@@ -554,7 +556,7 @@ Public Class FrmEditor
             ' Draw the object selections.
             For i As Integer = 0 To BuildingDefs.Length - 1
                 If BuildingDefs(i).HasData Then
-                    BuildingDefs(i).DrawThumbnail(e.Graphics, True)
+                    BuildingDefs(i).DrawThumbnail(e.Graphics, 0, i * TileSizeY, True)
                 End If
             Next
 
@@ -608,7 +610,7 @@ Public Class FrmEditor
             selYBuildings = mouseY
 
             For i As Integer = 0 To BuildingDefs.Length - 1
-                If BuildingDefs(i).Location = New Point(mouseX, mouseY) Then
+                If mouseY = i * TileSizeY Then
                     picActive.Image = BuildingDefs(i).SmallImage
                     activeBuilding.BuildingId = BuildingDefs(i).BuildingId
                     activeBuilding.Team = BuildingDefs(i).Team
@@ -631,7 +633,7 @@ Public Class FrmEditor
             ' Draw the object selections.
             For i As Integer = 0 To UnitDefs.Length - 1
                 If UnitDefs(i).HasData Then
-                    UnitDefs(i).DrawThumbnail(e.Graphics, True)
+                    UnitDefs(i).DrawThumbnail(e.Graphics, 0, i * TileSizeY, True)
                 End If
             Next
 
@@ -685,7 +687,7 @@ Public Class FrmEditor
             selYUnits = mouseY
 
             For i As Integer = 0 To UnitDefs.Length - 1
-                If UnitDefs(i).Position = New Point(mouseX, mouseY) Then
+                If mouseY = i * TileSizeY Then
                     picActive.Image = UnitDefs(i).SmallImage
                     activeUnit.UnitId = UnitDefs(i).UnitId
                     activeUnit.Team = UnitDefs(i).Team
@@ -1151,8 +1153,8 @@ Public Class FrmEditor
         Dim output As String = vbTab + "this.data = {" + vbNewLine
         output += vbTab + vbTab + "tiles : ""0"
         '0AAAAAAAA AAAAAAAAAAAAAAA    AAAAAAAAAAAAAAAAA 1A A"
-        Dim tiles As List(Of Tile) = (From t In TileDefs Order By t.TileId Where t.HasData).ToList()
-        For Each t As Tile In tiles
+        Dim tiles As List(Of TileDef) = (From t In TileDefs Order By t.TileId Where t.HasData).ToList()
+        For Each t As TileDef In tiles
             If t.IsMinerals Then
                 output += "1"
             ElseIf Not t.IsPassable Then

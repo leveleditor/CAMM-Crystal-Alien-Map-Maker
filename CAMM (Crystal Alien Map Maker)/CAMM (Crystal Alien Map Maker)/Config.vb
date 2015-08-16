@@ -7,9 +7,9 @@ Public Module Config
     Public Function LoadConfig() As Boolean
         AsciiLookup = New List(Of Char)()
 
-        TileDefs = New Tile() {}
-        BuildingDefs = New Building() {}
-        UnitDefs = New Unit() {}
+        TileDefs = New TileDef() {}
+        BuildingDefs = New BuildingDef() {}
+        UnitDefs = New UnitDef() {}
 
         RectangleBrushPresets = New List(Of RectangleBrushPreset)()
 
@@ -38,8 +38,8 @@ Public Module Config
 
         config = source.Configs.Item("ASCII LOOKUP")
 
-        Dim asciiSeparator As String = config.GetString("Ascii Separator")
-        Dim ascii As String() = config.Get("Ascii Array").Trim(IniArray.ToCharArray).Trim(asciiSeparator.ToCharArray()).Split(New String() {asciiSeparator}, StringSplitOptions.None)
+        AsciiSeparator = config.GetString("Ascii Separator")
+        Dim ascii As String() = config.Get("Ascii Array").Trim(IniArray.ToCharArray).Trim(AsciiSeparator.ToCharArray()).Split(New String() {AsciiSeparator}, StringSplitOptions.None)
         For Each str As String In ascii
             AsciiLookup.Add(Char.Parse(str))
         Next
@@ -60,7 +60,7 @@ Public Module Config
             Dim keyName As String = "Terrain" + i.ToString
             If config.Get(keyName, "-1") <> "-1" Then
                 Dim keyArray As String() = config.Get(keyName).Trim(IniArray.ToCharArray).Split(New Char() {IniSeparator}, StringSplitOptions.None)
-                Dim tileId As String = keyArray(0)
+                Dim tileId As Integer = CInt(keyArray(0))
                 Dim isPassable As Boolean = CBool(keyArray(1))
                 Dim isMinerals As Boolean = CBool(keyArray(2))
                 Dim imageUrl As String = keyArray(3)
@@ -71,7 +71,7 @@ Public Module Config
                 TileImageLookup.Add(tileId, theImage)
 
                 ReDim Preserve TileDefs(i)
-                TileDefs(i) = New Tile(tileId, isPassable, isMinerals)
+                TileDefs(i) = New TileDef(tileId, isPassable, isMinerals, imageUrl)
             End If
         Next
 
@@ -96,8 +96,11 @@ Public Module Config
                 Dim height As Integer = CInt(keyArray(2))
                 Dim team As Team = CType(Integer.Parse(keyArray(3)), Team)
                 Dim offsetY As Integer = CInt(keyArray(4))
-                Dim fullImageUrl As String = FullBasePath + "/" + keyArray(5)
-                Dim shadowImageUrl As String = FullBasePath + "/" + keyArray(6)
+                Dim imageUrl As String = keyArray(5)
+                Dim shadowImageUrl As String = keyArray(6)
+
+                Dim fullImageUrl As String = FullBasePath + "/" + imageUrl
+                Dim fullShadowImageUrl As String = FullBasePath + "/" + shadowImageUrl
 
                 Dim test As Bitmap = Bitmap.FromFile(fullImageUrl)
                 Dim thumbnail As New Bitmap(TileSizeX, TileSizeY)
@@ -112,10 +115,10 @@ Public Module Config
 
                 BuildingSmallImageLookup.Add(buildingId, thumbnail)
                 BuildingFullImageLookup.Add(buildingId, Image.FromFile(fullImageUrl))
-                BuildingShadowImageLookup.Add(buildingId, Image.FromFile(shadowImageUrl))
+                BuildingShadowImageLookup.Add(buildingId, Image.FromFile(fullShadowImageUrl))
 
                 ReDim Preserve BuildingDefs(i)
-                BuildingDefs(i) = New Building(0, i * TileSizeY, buildingId, team, width, height)
+                BuildingDefs(i) = New BuildingDef(buildingId, width, height, team, offsetY, imageUrl, shadowImageUrl)
             End If
         Next
 
@@ -140,8 +143,11 @@ Public Module Config
                 Dim altitude As Integer = Integer.Parse(keyArray(2))
                 Dim isPickup As Boolean = Boolean.Parse(keyArray(3))
                 Dim offsetY As Integer = Integer.Parse(keyArray(4))
-                Dim fullImageUrl As String = FullBasePath + "/" + keyArray(5)
-                Dim shadowImageUrl As String = FullBasePath + "/" + keyArray(6)
+                Dim imageUrl As String = keyArray(5)
+                Dim shadowImageUrl As String = keyArray(6)
+
+                Dim fullImageUrl As String = FullBasePath + "/" + imageUrl
+                Dim fullShadowImageUrl As String = FullBasePath + "/" + shadowImageUrl
 
                 Dim test As Bitmap = Bitmap.FromFile(fullImageUrl)
                 Dim w As Integer = TileSizeX
@@ -171,10 +177,10 @@ Public Module Config
 
                 UnitSmallImageLookup.Add(unitId, thumbnail)
                 UnitFullImageLookup.Add(unitId, Image.FromFile(fullImageUrl))
-                UnitShadowImageLookup.Add(unitId, Image.FromFile(shadowImageUrl))
+                UnitShadowImageLookup.Add(unitId, Image.FromFile(fullShadowImageUrl))
 
                 ReDim Preserve UnitDefs(i)
-                UnitDefs(i) = New Unit(0, i * TileSizeY, unitId, team, altitude, isPickup)
+                UnitDefs(i) = New UnitDef(unitId, team, altitude, isPickup, offsetY, imageUrl, shadowImageUrl)
             End If
         Next
 
@@ -232,17 +238,20 @@ Public Module Config
         End If
     End Function
 
+    'ASCII Characters Separator
+    Public AsciiSeparator As String
+
     'ASCII Lookup Array
     Public AsciiLookup As List(Of Char)
 
     'Tile Definitions.
-    Public TileDefs() As Tile
+    Public TileDefs() As TileDef
 
     'Building Definitions.
-    Public BuildingDefs() As Building
+    Public BuildingDefs() As BuildingDef
 
     'Unit Definitions.
-    Public UnitDefs() As Unit
+    Public UnitDefs() As UnitDef
 
     'Rectangle Brush Preset Definitions.
     Public RectangleBrushPresets As List(Of RectangleBrushPreset)

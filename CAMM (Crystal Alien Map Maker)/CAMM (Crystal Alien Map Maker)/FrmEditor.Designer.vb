@@ -540,8 +540,8 @@ Partial Class FrmEditor
         '
         Me.btnTileDataEditor.Name = "btnTileDataEditor"
         Me.btnTileDataEditor.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.btnTileDataEditor.Size = New System.Drawing.Size(250, 22)
-        Me.btnTileDataEditor.Text = "&Tile Data Editor [Tiles.dat]"
+        Me.btnTileDataEditor.Size = New System.Drawing.Size(248, 22)
+        Me.btnTileDataEditor.Text = "&Tile Data Editor"
         '
         'btnDeveloper
         '
@@ -549,7 +549,7 @@ Partial Class FrmEditor
         Me.btnDeveloper.Name = "btnDeveloper"
         Me.btnDeveloper.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
             Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
-        Me.btnDeveloper.Size = New System.Drawing.Size(250, 22)
+        Me.btnDeveloper.Size = New System.Drawing.Size(248, 22)
         Me.btnDeveloper.Text = "Activate Dev Mode"
         Me.btnDeveloper.Visible = False
         '
