@@ -432,14 +432,14 @@ Public Class Map
     End Sub
 
     Public Function GetSaveData() As String
-        Dim saveFileData As String = ""
+        Dim data As String = ""
 
-        saveFileData += _
+        data += _
             "[CAMM]" + vbNewLine + _
             "vFormat = " + MapFormat.ToString() + vbNewLine + _
             vbNewLine
 
-        saveFileData += _
+        data += _
             "[Level]" + vbNewLine + _
             "Title = " + Title + vbNewLine + _
             "Author = " + Author + vbNewLine + _
@@ -455,44 +455,44 @@ Public Class Map
             "isBonusLevel = " + IsBonusLevel.ToString() + vbNewLine + _
             vbNewLine
 
-        saveFileData += "[Terrain]" + vbNewLine + _
+        data += "[Terrain]" + vbNewLine + _
             "; Terrain Format: {str_Id|i_PosX|i_PosY}" + vbNewLine
 
         Dim terrainNumber As Integer = 0
         For x As Integer = 0 To SizeX - 1
             For y As Integer = 0 To SizeY - 1
                 If mapTiles(x, y).HasData Then
-                    saveFileData += "Terrain" + terrainNumber.ToString() + " = {" + mapTiles(x, y).TileId.ToString() + "|" + x.ToString() + "|" + y.ToString() + "}" + vbNewLine
+                    data += "Terrain" + terrainNumber.ToString() + " = {" + mapTiles(x, y).TileId.ToString() + "|" + x.ToString() + "|" + y.ToString() + "}" + vbNewLine
                     terrainNumber += 1
                 End If
             Next
         Next
 
-        saveFileData += vbNewLine + "[Buildings]" + vbNewLine + _
+        data += vbNewLine + "[Buildings]" + vbNewLine + _
                         "; Building Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage}" + vbNewLine
 
         Dim buildingNumber As Integer = 0
         For i As Integer = 0 To mapBuildings.Count() - 1
             If mapBuildings(i).HasData Then
-                saveFileData += "Building" + buildingNumber.ToString() + " = {" + mapBuildings(i).BuildingId + "|" + (mapBuildings(i).Location.X / TileSizeX).ToString() + "|" + (mapBuildings(i).Location.Y / TileSizeY).ToString() + "|" + CInt(mapBuildings(i).Team).ToString() + "|" + mapBuildings(i).Angle.ToString() + "|" + mapBuildings(i).Damage.ToString() + "}" + vbNewLine
+                data += "Building" + buildingNumber.ToString() + " = {" + mapBuildings(i).BuildingId + "|" + (mapBuildings(i).Location.X / TileSizeX).ToString() + "|" + (mapBuildings(i).Location.Y / TileSizeY).ToString() + "|" + CInt(mapBuildings(i).Team).ToString() + "|" + mapBuildings(i).Angle.ToString() + "|" + mapBuildings(i).Damage.ToString() + "}" + vbNewLine
                 buildingNumber += 1
             End If
         Next
 
-        saveFileData += vbNewLine + "[Units]" + vbNewLine + _
+        data += vbNewLine + "[Units]" + vbNewLine + _
                         "; Unit Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage|str_AiTarget|str_AiObj|bool_Respawn}" + vbNewLine
 
         Dim unitNumber As Integer = 0
         For i As Integer = 0 To mapUnits.Count() - 1
             If mapUnits(i).HasData Then
-                saveFileData += "Unit" + unitNumber.ToString() + " = {" + mapUnits(i).UnitId + "|" + mapUnits(i).X.ToString() + "|" + mapUnits(i).Y.ToString() + "|" + CInt(mapUnits(i).Team).ToString() + "|" + mapUnits(i).Angle.ToString() + "|" + mapUnits(i).Damage.ToString() + "|" + mapUnits(i).AiTarget + "|" + mapUnits(i).AiObj + "|" + mapUnits(i).Respawn.ToString() + "}" + vbNewLine
+                data += "Unit" + unitNumber.ToString() + " = {" + mapUnits(i).UnitId + "|" + mapUnits(i).X.ToString() + "|" + mapUnits(i).Y.ToString() + "|" + CInt(mapUnits(i).Team).ToString() + "|" + mapUnits(i).Angle.ToString() + "|" + mapUnits(i).Damage.ToString() + "|" + mapUnits(i).AiTarget + "|" + mapUnits(i).AiObj + "|" + mapUnits(i).Respawn.ToString() + "}" + vbNewLine
                 unitNumber += 1
             End If
         Next
 
-        saveFileData += vbNewLine + "; Map Created Using CAMM Crystal Alien Map Maker"
+        data += vbNewLine + "; Map Created Using CAMM Crystal Alien Map Maker"
 
-        Return saveFileData
+        Return data
     End Function
 
     Public Sub LoadMapv0(source As IniConfigSource)

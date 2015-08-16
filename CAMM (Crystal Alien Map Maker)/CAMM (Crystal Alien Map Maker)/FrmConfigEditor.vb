@@ -1,7 +1,7 @@
 ﻿Imports System.Text
 
 Public Class FrmConfigEditor
-    Private Saved As Boolean
+    Private saved As Boolean
 
     Private Sub FrmConfigEditor_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         'Reload configuration data.
@@ -11,22 +11,22 @@ Public Class FrmConfigEditor
             Me.Close()
         End If
 
-        Saved = True
+        saved = True
 
-        pnlTerrain.Controls.Clear()
+        pnlTiles.Controls.Clear()
         pnlBuildings.Controls.Clear()
         pnlUnits.Controls.Clear()
 
         'Add Tiles to editor.
         For Each td As TileDef In TileDefs
             Dim newTileEntry As TileEntry = New TileEntry(td.TileId, td.IsPassable, td.IsMinerals, td.ImageUrl)
-            'NewTerrainEntry.Location = New Point(3, (i * 31) + 3)
+            'NewTileEntry.Location = New Point(3, (i * 31) + 3)
             AddHandler newTileEntry.BtnNewClicked, AddressOf tileEntry_btnNew_Clicked
             AddHandler newTileEntry.BtnRemoveClicked, AddressOf tileEntry_btnRemove_Clicked
             AddHandler newTileEntry.BtnBrowseClicked, AddressOf tileEntry_btnBrowse_Clicked
             AddHandler newTileEntry.TxtImageUrlMouseEntered, AddressOf tileEntry_txtImageUrl_MouseEnter
             AddHandler newTileEntry.TxtImageUrlMouseLeft, AddressOf tileEntry_txtImageUrl_MouseLeave
-            pnlTerrain.Controls.Add(newTileEntry)
+            pnlTiles.Controls.Add(newTileEntry)
         Next
 
         'Add Buildings to editor.
@@ -59,23 +59,23 @@ Public Class FrmConfigEditor
             Me.pnlUnits.Controls.Add(newObjectEntry)
         Next
 
-        ReorderTerrainEntries()
+        ReorderTileEntries()
         ReorderBuildingEntries()
         ReorderUnitEntries()
     End Sub
 
-    Private Sub ReorderTerrainEntries()
-        pnlTerrain.SuspendLayout()
+    Private Sub ReorderTileEntries()
+        pnlTiles.SuspendLayout()
         tabTiles.SuspendLayout()
-        For i As Integer = 0 To pnlTerrain.Controls.Count - 1
-            pnlTerrain.Controls(i).Location = New Point(pnlTerrain.AutoScrollPosition.X + 3, pnlTerrain.AutoScrollPosition.Y + (i * 31) + 3)
-            pnlTerrain.Controls(i).PerformLayout()
+        For i As Integer = 0 To pnlTiles.Controls.Count - 1
+            pnlTiles.Controls(i).Location = New Point(pnlTiles.AutoScrollPosition.X + 3, pnlTiles.AutoScrollPosition.Y + (i * 31) + 3)
+            pnlTiles.Controls(i).PerformLayout()
         Next
-        pnlTerrain.ResumeLayout()
+        pnlTiles.ResumeLayout()
         tabTiles.ResumeLayout()
-        pnlTerrain.PerformLayout()
+        pnlTiles.PerformLayout()
         tabTiles.PerformLayout()
-        pnlTerrain.PerformLayout()
+        pnlTiles.PerformLayout()
         tabTiles.PerformLayout()
     End Sub
 
@@ -110,24 +110,24 @@ Public Class FrmConfigEditor
     End Sub
 
     Private Sub tileEntry_btnNew_Clicked(sender As TileEntry, e As EventArgs)
-        pnlTerrain.SuspendLayout()
-        Dim newTileEntry As TileEntry = New TileEntry() With {.Location = New Point(pnlTerrain.AutoScrollPosition.X + 3, pnlTerrain.AutoScrollPosition.Y + 3)}
+        pnlTiles.SuspendLayout()
+        Dim newTileEntry As TileEntry = New TileEntry() With {.Location = New Point(pnlTiles.AutoScrollPosition.X + 3, pnlTiles.AutoScrollPosition.Y + 3)}
         AddHandler newTileEntry.BtnNewClicked, AddressOf tileEntry_btnNew_Clicked
         AddHandler newTileEntry.BtnRemoveClicked, AddressOf tileEntry_btnRemove_Clicked
         AddHandler newTileEntry.BtnBrowseClicked, AddressOf tileEntry_btnBrowse_Clicked
         AddHandler newTileEntry.TxtImageUrlMouseEntered, AddressOf tileEntry_txtImageUrl_MouseEnter
         AddHandler newTileEntry.TxtImageUrlMouseLeft, AddressOf tileEntry_txtImageUrl_MouseLeave
-        pnlTerrain.Controls.Add(newTileEntry)
-        ReorderTerrainEntries()
-        Saved = False
+        pnlTiles.Controls.Add(newTileEntry)
+        ReorderTileEntries()
+        saved = False
     End Sub
 
     Private Sub tileEntry_btnRemove_Clicked(sender As TileEntry, e As EventArgs)
-        pnlTerrain.SuspendLayout()
-        pnlTerrain.Controls.Remove(sender)
+        pnlTiles.SuspendLayout()
+        pnlTiles.Controls.Remove(sender)
         sender.Dispose()
-        ReorderTerrainEntries()
-        Saved = False
+        ReorderTileEntries()
+        saved = False
     End Sub
 
     Private Sub tileEntry_btnBrowse_Clicked(sender As TileEntry, e As EventArgs)
@@ -143,7 +143,7 @@ Public Class FrmConfigEditor
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
             sender.ImageUrl = Uri.UnescapeDataString(test3.ToString())
-            Saved = False
+            saved = False
         End If
     End Sub
 
@@ -174,7 +174,7 @@ Public Class FrmConfigEditor
         AddHandler bEntry.TxtShadowImageUrlMouseLeft, AddressOf BuildingEntryTxtShadowImageUrlMouseLeave
         pnlBuildings.Controls.Add(bEntry)
         ReorderBuildingEntries()
-        Saved = False
+        saved = False
     End Sub
 
     Private Sub buildingEntry_btnRemove_Clicked(sender As BuildingEntry, e As EventArgs)
@@ -182,7 +182,7 @@ Public Class FrmConfigEditor
         pnlBuildings.Controls.Remove(sender)
         sender.Dispose()
         ReorderBuildingEntries()
-        Saved = False
+        saved = False
     End Sub
 
     Private Sub BuildingEntryBtnBrowseFullImageClicked(sender As BuildingEntry, e As EventArgs)
@@ -198,7 +198,7 @@ Public Class FrmConfigEditor
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
             sender.FullImageUrl = Uri.UnescapeDataString(test3.ToString())
-            Saved = False
+            saved = False
         End If
     End Sub
 
@@ -215,7 +215,7 @@ Public Class FrmConfigEditor
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
             sender.ShadowImageUrl = Uri.UnescapeDataString(test3.ToString())
-            Saved = False
+            saved = False
         End If
     End Sub
 
@@ -260,7 +260,7 @@ Public Class FrmConfigEditor
         AddHandler uEntry.TxtShadowImageUrlMouseLeft, AddressOf UnitEntryTxtShadowImageUrlMouseLeave
         pnlUnits.Controls.Add(uEntry)
         ReorderUnitEntries()
-        Saved = False
+        saved = False
     End Sub
 
     Private Sub unitEntry_btnRemove_Clicked(sender As UnitEntry, e As EventArgs)
@@ -268,7 +268,7 @@ Public Class FrmConfigEditor
         pnlUnits.Controls.Remove(sender)
         sender.Dispose()
         ReorderUnitEntries()
-        Saved = False
+        saved = False
     End Sub
 
     Private Sub UnitEntryBtnBrowseFullImageClicked(sender As UnitEntry, e As EventArgs)
@@ -284,7 +284,7 @@ Public Class FrmConfigEditor
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
             sender.FullImageUrl = Uri.UnescapeDataString(test3.ToString())
-            Saved = False
+            saved = False
         End If
     End Sub
 
@@ -301,7 +301,7 @@ Public Class FrmConfigEditor
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
             sender.ShadowImageUrl = Uri.UnescapeDataString(test3.ToString())
-            Saved = False
+            saved = False
         End If
     End Sub
 
@@ -335,7 +335,7 @@ Public Class FrmConfigEditor
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Dim msgResult As DialogResult = DialogResult.None
-        If Not Saved Then
+        If Not saved Then
             msgResult = MsgBox("Do you want to save all changes you've made?", MsgBoxStyle.Question + MsgBoxStyle.YesNoCancel)
         End If
 
@@ -357,7 +357,7 @@ Public Class FrmConfigEditor
         SaveTiles()
         SaveBuildings()
         SaveUnits()
-        Saved = True
+        saved = True
     End Sub
 
     Private Sub SaveConfig()
@@ -386,8 +386,8 @@ Public Class FrmConfigEditor
             "; Terrain Definition Format:" + vbNewLine +
             "; {str_Id|bool_IsPassable|bool_IsMinerals|url_Image}" + vbNewLine
 
-        For i As Integer = 0 To pnlTerrain.Controls.Count - 1
-            Dim t As TileEntry = pnlTerrain.Controls(i)
+        For i As Integer = 0 To pnlTiles.Controls.Count - 1
+            Dim t As TileEntry = pnlTiles.Controls(i)
             data += "Terrain" + i.ToString() + " = " + IniArray(0) + t.TileId + "|" + t.IsPassable.ToString() + "|" + t.IsMinerals.ToString() + "|" + t.ImageUrl + IniArray(1) + vbNewLine
         Next
 

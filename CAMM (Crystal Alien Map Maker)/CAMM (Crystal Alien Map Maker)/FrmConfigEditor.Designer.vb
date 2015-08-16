@@ -29,7 +29,7 @@ Partial Class FrmConfigEditor
         Me.openImage = New System.Windows.Forms.OpenFileDialog()
         Me.editTabs = New System.Windows.Forms.TabControl()
         Me.tabTiles = New System.Windows.Forms.TabPage()
-        Me.pnlTerrain = New System.Windows.Forms.Panel()
+        Me.pnlTiles = New System.Windows.Forms.Panel()
         Me.tabBuildings = New System.Windows.Forms.TabPage()
         Me.pnlBuildings = New System.Windows.Forms.Panel()
         Me.tabUnits = New System.Windows.Forms.TabPage()
@@ -102,25 +102,24 @@ Partial Class FrmConfigEditor
         Me.tabTiles.AutoScroll = True
         Me.tabTiles.BackColor = System.Drawing.Color.Silver
         Me.tabTiles.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.tabTiles.Controls.Add(Me.pnlTerrain)
+        Me.tabTiles.Controls.Add(Me.pnlTiles)
         Me.tabTiles.Location = New System.Drawing.Point(4, 22)
         Me.tabTiles.Margin = New System.Windows.Forms.Padding(0)
         Me.tabTiles.Name = "tabTiles"
         Me.tabTiles.Size = New System.Drawing.Size(738, 379)
         Me.tabTiles.TabIndex = 0
         Me.tabTiles.Text = "Edit Tiles"
-        Me.tabTiles.UseVisualStyleBackColor = True
         '
-        'pnlTerrain
+        'pnlTiles
         '
-        Me.pnlTerrain.AutoSize = True
-        Me.pnlTerrain.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.pnlTerrain.Location = New System.Drawing.Point(0, 0)
-        Me.pnlTerrain.Margin = New System.Windows.Forms.Padding(0)
-        Me.pnlTerrain.Name = "pnlTerrain"
-        Me.pnlTerrain.Padding = New System.Windows.Forms.Padding(3)
-        Me.pnlTerrain.Size = New System.Drawing.Size(6, 6)
-        Me.pnlTerrain.TabIndex = 0
+        Me.pnlTiles.AutoSize = True
+        Me.pnlTiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.pnlTiles.Location = New System.Drawing.Point(0, 0)
+        Me.pnlTiles.Margin = New System.Windows.Forms.Padding(0)
+        Me.pnlTiles.Name = "pnlTiles"
+        Me.pnlTiles.Padding = New System.Windows.Forms.Padding(3)
+        Me.pnlTiles.Size = New System.Drawing.Size(6, 6)
+        Me.pnlTiles.TabIndex = 0
         '
         'tabBuildings
         '
@@ -134,7 +133,6 @@ Partial Class FrmConfigEditor
         Me.tabBuildings.Size = New System.Drawing.Size(738, 379)
         Me.tabBuildings.TabIndex = 1
         Me.tabBuildings.Text = "Edit Buildings"
-        Me.tabBuildings.UseVisualStyleBackColor = True
         '
         'pnlBuildings
         '
@@ -159,7 +157,6 @@ Partial Class FrmConfigEditor
         Me.tabUnits.Size = New System.Drawing.Size(738, 379)
         Me.tabUnits.TabIndex = 2
         Me.tabUnits.Text = "Edit Units"
-        Me.tabUnits.UseVisualStyleBackColor = True
         '
         'pnlUnits
         '
@@ -195,7 +192,6 @@ Partial Class FrmConfigEditor
         Me.tabConfig.Size = New System.Drawing.Size(738, 379)
         Me.tabConfig.TabIndex = 3
         Me.tabConfig.Text = "Edit Config"
-        Me.tabConfig.UseVisualStyleBackColor = True
         '
         'FrmConfigEditor
         '
@@ -232,7 +228,7 @@ Partial Class FrmConfigEditor
     Friend WithEvents editTabs As System.Windows.Forms.TabControl
     Friend WithEvents tabTiles As System.Windows.Forms.TabPage
     Friend WithEvents tabBuildings As System.Windows.Forms.TabPage
-    Friend WithEvents pnlTerrain As System.Windows.Forms.Panel
+    Friend WithEvents pnlTiles As System.Windows.Forms.Panel
     Friend WithEvents pnlBuildings As System.Windows.Forms.Panel
     Friend WithEvents picPreview As System.Windows.Forms.PictureBox
     Friend WithEvents tabUnits As System.Windows.Forms.TabPage

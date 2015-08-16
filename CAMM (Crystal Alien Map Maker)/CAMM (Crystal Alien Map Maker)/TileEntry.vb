@@ -65,9 +65,9 @@
     Public Sub New()
         Me.New("", True, False, "")
     End Sub
-    Public Sub New(terrainId As String, isPassable As Boolean, isMinerals As Boolean, imageUrl As String)
+    Public Sub New(tileId As String, isPassable As Boolean, isMinerals As Boolean, imageUrl As String)
         InitializeComponent()
-        Me.TileId = terrainId
+        Me.TileId = tileId
         Me.IsPassable = isPassable
         Me.IsMinerals = isMinerals
         Me.ImageUrl = imageUrl
