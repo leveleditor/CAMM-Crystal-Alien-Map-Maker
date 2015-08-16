@@ -82,11 +82,11 @@ Public Class FrmEditor
         LoadAssets()
 
         'Setting version information.
-        lblAboutVersion.Text = BuildType + " v" + My.Application.Info.Version.Major.ToString + "." + My.Application.Info.Version.Minor.ToString
+        lblAboutVersion.Text = BuildType + " v" + My.Application.Info.Version.Major.ToString() + "." + My.Application.Info.Version.Minor.ToString()
         If My.Application.Info.Version.Revision > 0 Then
-            lblAboutVersion.Text += "." + My.Application.Info.Version.Build.ToString + "." + My.Application.Info.Version.Revision.ToString
+            lblAboutVersion.Text += "." + My.Application.Info.Version.Build.ToString() + "." + My.Application.Info.Version.Revision.ToString()
         ElseIf My.Application.Info.Version.Build > 0 And My.Application.Info.Version.Revision <= 0 Then
-            lblAboutVersion.Text += "." + My.Application.Info.Version.Build.ToString
+            lblAboutVersion.Text += "." + My.Application.Info.Version.Build.ToString()
         End If
         lblAboutVersion.Text += " by Leveleditor6680 // Josh"
 
@@ -371,15 +371,15 @@ Public Class FrmEditor
         If IsMouseInBounds() Then
             If debug = True Then
                 If ActiveMap.GetTileAt(mouseX, mouseY) IsNot Nothing Then
-                    lblCursorLoc.Text = ActiveMap.GetTileAt(mouseX, mouseY).TileId.ToString + " [" + ((mouseX / TileSizeX) + 1).ToString + ", " + ((mouseY / TileSizeY) + 1).ToString + "]"
+                    lblCursorLoc.Text = ActiveMap.GetTileAt(mouseX, mouseY).TileId.ToString() + " [" + ((mouseX / TileSizeX) + 1).ToString() + ", " + ((mouseY / TileSizeY) + 1).ToString() + "]"
                 Else
-                    lblCursorLoc.Text = "null [" + ((mouseX / TileSizeX) + 1).ToString + ", " + ((mouseY / TileSizeY) + 1).ToString + "]"
+                    lblCursorLoc.Text = "null [" + ((mouseX / TileSizeX) + 1).ToString() + ", " + ((mouseY / TileSizeY) + 1).ToString() + "]"
                 End If
                 If ActiveMap.GetBuildingAt(mouseX, mouseY) IsNot Nothing Then
                     lblCursorLoc.Text = ActiveMap.GetBuildingAt(mouseX, mouseY).BuildingId + " : " + lblCursorLoc.Text
                 End If
             Else
-                lblCursorLoc.Text = "[" + ((mouseX / TileSizeX) + 1).ToString + ", " + ((mouseY / TileSizeY) + 1).ToString + "]"
+                lblCursorLoc.Text = "[" + ((mouseX / TileSizeX) + 1).ToString() + ", " + ((mouseY / TileSizeY) + 1).ToString() + "]"
             End If
         End If
 

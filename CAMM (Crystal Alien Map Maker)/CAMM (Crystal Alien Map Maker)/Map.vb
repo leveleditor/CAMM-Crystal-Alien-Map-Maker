@@ -436,23 +436,23 @@ Public Class Map
 
         saveFileData += _
             "[CAMM]" + vbNewLine + _
-            "vFormat = " + MapFormat.ToString + vbNewLine + _
+            "vFormat = " + MapFormat.ToString() + vbNewLine + _
             vbNewLine
 
         saveFileData += _
             "[Level]" + vbNewLine + _
             "Title = " + Title + vbNewLine + _
             "Author = " + Author + vbNewLine + _
-            "W = " + SizeX.ToString + vbNewLine + _
-            "H = " + SizeY.ToString + vbNewLine + _
-            "Team = " + CInt(Faction).ToString + vbNewLine + _
-            "CashPlayer = " + CashPlayer.ToString + vbNewLine + _
-            "CashEnemy = " + CashEnemy.ToString + vbNewLine + _
-            "isTraining = " + IsTraining.ToString + vbNewLine + _
-            "isConflict = " + IsConflict.ToString + vbNewLine + _
-            "isSpecialLevel = " + IsSpecialLevel.ToString + vbNewLine + _
-            "isLastSpecialLevel = " + IsLastSpecialLevel.ToString + vbNewLine + _
-            "isBonusLevel = " + IsBonusLevel.ToString + vbNewLine + _
+            "W = " + SizeX.ToString() + vbNewLine + _
+            "H = " + SizeY.ToString() + vbNewLine + _
+            "Team = " + CInt(Faction).ToString() + vbNewLine + _
+            "CashPlayer = " + CashPlayer.ToString() + vbNewLine + _
+            "CashEnemy = " + CashEnemy.ToString() + vbNewLine + _
+            "isTraining = " + IsTraining.ToString() + vbNewLine + _
+            "isConflict = " + IsConflict.ToString() + vbNewLine + _
+            "isSpecialLevel = " + IsSpecialLevel.ToString() + vbNewLine + _
+            "isLastSpecialLevel = " + IsLastSpecialLevel.ToString() + vbNewLine + _
+            "isBonusLevel = " + IsBonusLevel.ToString() + vbNewLine + _
             vbNewLine
 
         saveFileData += "[Terrain]" + vbNewLine + _
@@ -462,7 +462,7 @@ Public Class Map
         For x As Integer = 0 To SizeX - 1
             For y As Integer = 0 To SizeY - 1
                 If mapTiles(x, y).HasData Then
-                    saveFileData += "Terrain" + terrainNumber.ToString + " = {" + mapTiles(x, y).TileId.ToString + "|" + x.ToString + "|" + y.ToString + "}" + vbNewLine
+                    saveFileData += "Terrain" + terrainNumber.ToString() + " = {" + mapTiles(x, y).TileId.ToString() + "|" + x.ToString() + "|" + y.ToString() + "}" + vbNewLine
                     terrainNumber += 1
                 End If
             Next
@@ -474,7 +474,7 @@ Public Class Map
         Dim buildingNumber As Integer = 0
         For i As Integer = 0 To mapBuildings.Count() - 1
             If mapBuildings(i).HasData Then
-                saveFileData += "Building" + buildingNumber.ToString + " = {" + mapBuildings(i).BuildingId + "|" + (mapBuildings(i).Location.X / TileSizeX).ToString + "|" + (mapBuildings(i).Location.Y / TileSizeY).ToString + "|" + CInt(mapBuildings(i).Team).ToString + "|" + mapBuildings(i).Angle.ToString + "|" + mapBuildings(i).Damage.ToString + "}" + vbNewLine
+                saveFileData += "Building" + buildingNumber.ToString() + " = {" + mapBuildings(i).BuildingId + "|" + (mapBuildings(i).Location.X / TileSizeX).ToString() + "|" + (mapBuildings(i).Location.Y / TileSizeY).ToString() + "|" + CInt(mapBuildings(i).Team).ToString() + "|" + mapBuildings(i).Angle.ToString() + "|" + mapBuildings(i).Damage.ToString() + "}" + vbNewLine
                 buildingNumber += 1
             End If
         Next
@@ -485,7 +485,7 @@ Public Class Map
         Dim unitNumber As Integer = 0
         For i As Integer = 0 To mapUnits.Count() - 1
             If mapUnits(i).HasData Then
-                saveFileData += "Unit" + unitNumber.ToString + " = {" + mapUnits(i).UnitId + "|" + mapUnits(i).X.ToString + "|" + mapUnits(i).Y.ToString + "|" + CInt(mapUnits(i).Team).ToString + "|" + mapUnits(i).Angle.ToString + "|" + mapUnits(i).Damage.ToString + "|" + mapUnits(i).AiTarget + "|" + mapUnits(i).AiObj + "|" + mapUnits(i).Respawn.ToString() + "}" + vbNewLine
+                saveFileData += "Unit" + unitNumber.ToString() + " = {" + mapUnits(i).UnitId + "|" + mapUnits(i).X.ToString() + "|" + mapUnits(i).Y.ToString() + "|" + CInt(mapUnits(i).Team).ToString() + "|" + mapUnits(i).Angle.ToString() + "|" + mapUnits(i).Damage.ToString() + "|" + mapUnits(i).AiTarget + "|" + mapUnits(i).AiObj + "|" + mapUnits(i).Respawn.ToString() + "}" + vbNewLine
                 unitNumber += 1
             End If
         Next
@@ -507,7 +507,7 @@ Public Class Map
         Dim tileCount = 1
         For x As Integer = 0 To SizeX - 1
             For y As Integer = 0 To SizeY - 1
-                Dim tempName As String = "Tile_1_" + tileCount.ToString
+                Dim tempName As String = "Tile_1_" + tileCount.ToString()
                 Dim tempArray As String() = config.Get(tempName).Trim("()".ToCharArray).Split(New Char() {Char.Parse(":")}, StringSplitOptions.None)
                 Dim tempTileId As Integer
                 If String.IsNullOrEmpty(tempArray(0)) Then

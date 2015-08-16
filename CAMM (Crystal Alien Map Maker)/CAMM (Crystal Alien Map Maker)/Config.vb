@@ -57,7 +57,7 @@ Public Module Config
         config = source.Configs.Item("DEFINE TERRAIN")
 
         For i As Integer = 0 To config.GetKeys().Length - 1
-            Dim keyName As String = "Terrain" + i.ToString
+            Dim keyName As String = "Terrain" + i.ToString()
             If config.Get(keyName, "-1") <> "-1" Then
                 Dim keyArray As String() = config.Get(keyName).Trim(IniArray.ToCharArray).Split(New Char() {IniSeparator}, StringSplitOptions.None)
                 Dim tileId As Integer = CInt(keyArray(0))
@@ -88,7 +88,7 @@ Public Module Config
         config = source.Configs.Item("DEFINE BUILDINGS")
 
         For i As Integer = 0 To config.GetKeys().Length - 1
-            Dim keyName As String = "Building" + i.ToString
+            Dim keyName As String = "Building" + i.ToString()
             If config.Get(keyName, "-1") <> "-1" Then
                 Dim keyArray As String() = config.Get(keyName).Trim(IniArray.ToCharArray).Split(New Char() {IniSeparator}, StringSplitOptions.None)
                 Dim buildingId As String = keyArray(0)
@@ -135,7 +135,7 @@ Public Module Config
         config = source.Configs.Item("DEFINE UNITS")
 
         For i As Integer = 0 To config.GetKeys().Length - 1
-            Dim keyName As String = "Unit" + i.ToString
+            Dim keyName As String = "Unit" + i.ToString()
             If config.Get(keyName, "-1") <> "-1" Then
                 Dim keyArray As String() = config.Get(keyName).Trim(IniArray.ToCharArray).Split(New Char() {IniSeparator}, StringSplitOptions.None)
                 Dim unitId As String = keyArray(0)

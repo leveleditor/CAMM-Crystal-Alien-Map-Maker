@@ -135,14 +135,14 @@ Public Class FrmTileData
             openImage.InitialDirectory = New Uri(FullBasePath + "/" + sender.ImageUrl).ToString().Replace(My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.ImageUrl).Name, "")
             openImage.FileName = My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.ImageUrl).Name
         Else
-            openImage.InitialDirectory = New Uri(FullBasePath + "/Tiles").ToString
+            openImage.InitialDirectory = New Uri(FullBasePath + "/Tiles").ToString()
             openImage.FileName = ""
         End If
         If openImage.ShowDialog(Me) = DialogResult.OK Then
             Dim test1 As Uri = New Uri(FullBasePath + "/")
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
-            sender.ImageUrl = Uri.UnescapeDataString(test3.ToString)
+            sender.ImageUrl = Uri.UnescapeDataString(test3.ToString())
             Saved = False
         End If
     End Sub
@@ -187,34 +187,34 @@ Public Class FrmTileData
 
     Private Sub BuildingEntryBtnBrowseFullImageClicked(sender As BuildingEntry, e As EventArgs)
         If My.Computer.FileSystem.FileExists(FullBasePath + "/" + sender.FullImageUrl) Then
-            openImage.InitialDirectory = New Uri(FullBasePath + "/" + sender.FullImageUrl).ToString.Replace(My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.FullImageUrl).Name, "")
+            openImage.InitialDirectory = New Uri(FullBasePath + "/" + sender.FullImageUrl).ToString().Replace(My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.FullImageUrl).Name, "")
             openImage.FileName = My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.FullImageUrl).Name
         Else
-            openImage.InitialDirectory = New Uri(FullBasePath + "/Buildings").ToString
+            openImage.InitialDirectory = New Uri(FullBasePath + "/Buildings").ToString()
             openImage.FileName = ""
         End If
         If openImage.ShowDialog(Me) = DialogResult.OK Then
             Dim test1 As Uri = New Uri(FullBasePath + "/")
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
-            sender.FullImageUrl = Uri.UnescapeDataString(test3.ToString)
+            sender.FullImageUrl = Uri.UnescapeDataString(test3.ToString())
             Saved = False
         End If
     End Sub
 
     Private Sub BuildingEntryBtnBrowseShadowImageClicked(sender As BuildingEntry, e As EventArgs)
         If My.Computer.FileSystem.FileExists(FullBasePath + "/" + sender.ShadowImageUrl) Then
-            openImage.InitialDirectory = New Uri(FullBasePath + "/" + sender.ShadowImageUrl).ToString.Replace(My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.ShadowImageUrl).Name, "")
+            openImage.InitialDirectory = New Uri(FullBasePath + "/" + sender.ShadowImageUrl).ToString().Replace(My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.ShadowImageUrl).Name, "")
             openImage.FileName = My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.ShadowImageUrl).Name
         Else
-            openImage.InitialDirectory = New Uri(FullBasePath + "/Buildings").ToString
+            openImage.InitialDirectory = New Uri(FullBasePath + "/Buildings").ToString()
             openImage.FileName = ""
         End If
         If openImage.ShowDialog(Me) = DialogResult.OK Then
             Dim test1 As Uri = New Uri(FullBasePath + "/")
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
-            sender.ShadowImageUrl = Uri.UnescapeDataString(test3.ToString)
+            sender.ShadowImageUrl = Uri.UnescapeDataString(test3.ToString())
             Saved = False
         End If
     End Sub
@@ -273,34 +273,34 @@ Public Class FrmTileData
 
     Private Sub UnitEntryBtnBrowseFullImageClicked(sender As UnitEntry, e As EventArgs)
         If My.Computer.FileSystem.FileExists(FullBasePath + "/" + sender.FullImageUrl) Then
-            openImage.InitialDirectory = New Uri(FullBasePath + "/" + sender.FullImageUrl).ToString.Replace(My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.FullImageUrl).Name, "")
+            openImage.InitialDirectory = New Uri(FullBasePath + "/" + sender.FullImageUrl).ToString().Replace(My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.FullImageUrl).Name, "")
             openImage.FileName = My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.FullImageUrl).Name
         Else
-            openImage.InitialDirectory = New Uri(FullBasePath + "/Units").ToString
+            openImage.InitialDirectory = New Uri(FullBasePath + "/Units").ToString()
             openImage.FileName = ""
         End If
         If openImage.ShowDialog(Me) = DialogResult.OK Then
             Dim test1 As Uri = New Uri(FullBasePath + "/")
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
-            sender.FullImageUrl = Uri.UnescapeDataString(test3.ToString)
+            sender.FullImageUrl = Uri.UnescapeDataString(test3.ToString())
             Saved = False
         End If
     End Sub
 
     Private Sub UnitEntryBtnBrowseShadowImageClicked(sender As UnitEntry, e As EventArgs)
         If My.Computer.FileSystem.FileExists(FullBasePath + "/" + sender.ShadowImageUrl) Then
-            openImage.InitialDirectory = New Uri(FullBasePath + "/" + sender.ShadowImageUrl).ToString.Replace(My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.ShadowImageUrl).Name, "")
+            openImage.InitialDirectory = New Uri(FullBasePath + "/" + sender.ShadowImageUrl).ToString().Replace(My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.ShadowImageUrl).Name, "")
             openImage.FileName = My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.ShadowImageUrl).Name
         Else
-            openImage.InitialDirectory = New Uri(FullBasePath + "/Units").ToString
+            openImage.InitialDirectory = New Uri(FullBasePath + "/Units").ToString()
             openImage.FileName = ""
         End If
         If openImage.ShowDialog(Me) = DialogResult.OK Then
             Dim test1 As Uri = New Uri(FullBasePath + "/")
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
-            sender.ShadowImageUrl = Uri.UnescapeDataString(test3.ToString)
+            sender.ShadowImageUrl = Uri.UnescapeDataString(test3.ToString())
             Saved = False
         End If
     End Sub
@@ -388,7 +388,7 @@ Public Class FrmTileData
 
         For i As Integer = 0 To pnlTerrain.Controls.Count - 1
             Dim t As TileEntry = pnlTerrain.Controls(i)
-            data += "Terrain" + i.ToString + " = " + IniArray(0) + t.TileId + "|" + t.IsPassable.ToString + "|" + t.IsMinerals.ToString + "|" + t.ImageUrl + IniArray(1) + vbNewLine
+            data += "Terrain" + i.ToString() + " = " + IniArray(0) + t.TileId + "|" + t.IsPassable.ToString() + "|" + t.IsMinerals.ToString() + "|" + t.ImageUrl + IniArray(1) + vbNewLine
         Next
 
         data += GetIniFileFooter()
@@ -405,7 +405,7 @@ Public Class FrmTileData
 
         For i As Integer = 0 To pnlBuildings.Controls.Count - 1
             Dim b As BuildingEntry = pnlBuildings.Controls(i)
-            data += "Building" + i.ToString + " = " + IniArray(0) + b.BuildingId + "|" + b.BuildingW.ToString + "|" + b.BuildingH.ToString + "|" + CInt(b.Team).ToString + "|" + b.OffsetY.ToString + "|" + b.FullImageUrl + "|" + b.ShadowImageUrl + IniArray(1) + vbNewLine
+            data += "Building" + i.ToString() + " = " + IniArray(0) + b.BuildingId + "|" + b.BuildingW.ToString() + "|" + b.BuildingH.ToString() + "|" + CInt(b.Team).ToString() + "|" + b.OffsetY.ToString() + "|" + b.FullImageUrl + "|" + b.ShadowImageUrl + IniArray(1) + vbNewLine
         Next
 
         data += GetIniFileFooter()
@@ -422,7 +422,7 @@ Public Class FrmTileData
 
         For i As Integer = 0 To pnlUnits.Controls.Count - 1
             Dim u As UnitEntry = pnlUnits.Controls(i)
-            data += "Unit" + i.ToString + " = " + IniArray(0) + u.UnitId + "|" + CInt(u.Team).ToString() + "|" + u.Altitude.ToString() + "|" + u.IsPickup.ToString() + "|" + u.OffsetY.ToString() + "|" + u.FullImageUrl + "|" + u.ShadowImageUrl + IniArray(1) + vbNewLine
+            data += "Unit" + i.ToString() + " = " + IniArray(0) + u.UnitId + "|" + CInt(u.Team).ToString() + "|" + u.Altitude.ToString() + "|" + u.IsPickup.ToString() + "|" + u.OffsetY.ToString() + "|" + u.FullImageUrl + "|" + u.ShadowImageUrl + IniArray(1) + vbNewLine
         Next
 
         data += GetIniFileFooter()

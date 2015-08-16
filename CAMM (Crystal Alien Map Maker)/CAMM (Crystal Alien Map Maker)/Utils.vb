@@ -56,7 +56,7 @@ Public Module Utils
 
     Public Function GetIniFileHeader(format As Integer) As String
         Return "[CAMM]" + vbNewLine +
-               "Format = " + format.ToString + vbNewLine +
+               "Format = " + format.ToString() + vbNewLine +
                vbNewLine
     End Function
 
@@ -119,7 +119,7 @@ Public Module Utils
                 Dim reader As StringReader = New StringReader(upgradeData)
                 Dim source As New IniConfigSource(reader)
                 Dim config As IConfig = source.Configs.Item(upgradeHeader)
-                Dim newId As String = config.GetString(terrainId.ToString, "")
+                Dim newId As String = config.GetString(terrainId.ToString(), "")
 
                 reader.Close()
 

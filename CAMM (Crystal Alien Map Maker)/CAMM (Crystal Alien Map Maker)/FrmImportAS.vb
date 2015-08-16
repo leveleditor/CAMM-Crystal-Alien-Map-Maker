@@ -2,20 +2,20 @@
 
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
         'MsgBox("""" + Ascii(45) + """") '45 should be an "N" according to the tiler.php...
-        'MsgBox("""" + Ascii("+").ToString + """") '"+" should be 10
-        'MsgBox("""" + Ascii("?").ToString + """") '"?" should be 30
-        'MsgBox("""" + Ascii(" ").ToString + """") '" " should be 0
-        'MsgBox("""" + Ascii("ÿ").ToString + """") '"ÿ" should be 214
+        'MsgBox("""" + Ascii("+").ToString() + """") '"+" should be 10
+        'MsgBox("""" + Ascii("?").ToString() + """") '"?" should be 30
+        'MsgBox("""" + Ascii(" ").ToString() + """") '" " should be 0
+        'MsgBox("""" + Ascii("ÿ").ToString() + """") '"ÿ" should be 214
 
         Dim line As String = ""
         For i As Integer = 0 To txtPaste.Lines.Length - 1
-            If txtPaste.Lines(i).StartsWith(cboPickMap.SelectedItem.ToString) Then
+            If txtPaste.Lines(i).StartsWith(cboPickMap.SelectedItem.ToString()) Then
                 line = txtPaste.Lines(i).Trim()
                 Exit For
             End If
         Next
 
-        line = line.Replace(cboPickMap.SelectedItem.ToString, "")
+        line = line.Replace(cboPickMap.SelectedItem.ToString(), "")
         line = line.Replace(".split("""",10000)", "")
         line = line.Trim()
         line = line.Trim(New Char() {Char.Parse(",")})
@@ -95,7 +95,7 @@
 
     Private Sub FrmImportAS_Shown(sender As Object, e As EventArgs) Handles Me.Shown, Me.Load
         cboPickMap.SelectedIndex = 0
-        'MsgBox(CBOPickMap.Items.Count.ToString)
+        'MsgBox(CBOPickMap.Items.Count.ToString())
     End Sub
 
     Private Sub cboPickMap_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboPickMap.SelectedIndexChanged
