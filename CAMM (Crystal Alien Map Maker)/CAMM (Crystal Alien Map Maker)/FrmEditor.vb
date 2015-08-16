@@ -935,8 +935,8 @@ Public Class FrmEditor
         End Select
     End Sub
 
-    Private Sub btnTileDataEditor_Click(sender As Object, e As EventArgs) Handles btnTileDataEditor.Click
-        FrmTileData.ShowDialog(Me)
+    Private Sub btnConfigEditor_Click(sender As Object, e As EventArgs) Handles btnConfigEditor.Click
+        FrmConfigEditor.ShowDialog(Me)
     End Sub
 
     Private Sub btnDeveloper_Click(sender As Object, e As EventArgs) Handles btnDeveloper.Click
@@ -1135,7 +1135,7 @@ Public Class FrmEditor
     End Sub
 
     Private Sub btnExportAS_Click(sender As Object, e As EventArgs) Handles btnExportAS.Click
-        Dim exportAsTileData As String = AsciiLookup(ActiveMap.SizeX) + AsciiLookup(ActiveMap.SizeY)
+        Dim exportASTileData As String = AsciiLookup(ActiveMap.SizeX) + AsciiLookup(ActiveMap.SizeY)
 
         For y As Integer = 0 To ActiveMap.SizeY - 1
             For x As Integer = 0 To ActiveMap.SizeX - 1
@@ -1146,7 +1146,7 @@ Public Class FrmEditor
 
                 Dim chr As String = AsciiLookup(idx)
 
-                exportAsTileData += chr
+                exportASTileData += chr
             Next x
         Next y
 
@@ -1164,16 +1164,16 @@ Public Class FrmEditor
             End If
         Next
         output += """.split("""",10000)," + vbNewLine
-        output += vbTab + vbTab + "map_new : """ + exportAsTileData + """.split("""",10000)" + vbNewLine
+        output += vbTab + vbTab + "map_new : """ + exportASTileData + """.split("""",10000)" + vbNewLine
         output += vbTab + "};"
         FrmExportAS.txtOutput.Text = output
 
         FrmExportAS.ShowDialog(Me)
     End Sub
 
-    Public ImportAsTileData As String = ""
+    Public ImportASTileData As String = ""
     Private Sub btnImportAS_Click(sender As Object, e As EventArgs) Handles btnImportAS.Click
-        If FrmImportAS.ShowDialog(Me) = DialogResult.OK And ImportAsTileData <> "" Then
+        If FrmImportAS.ShowDialog(Me) = DialogResult.OK And ImportASTileData <> "" Then
             'TODO: This will have to do for now.
             Dim count As Integer = 0
             For y As Integer = 0 To (ActiveMap.SizeY - 1) * TileSizeY Step TileSizeY
@@ -1181,7 +1181,7 @@ Public Class FrmEditor
                     'ReDim Preserve MapTiles(count)
                     'MapTiles(count) = New Tile(x, y)
 
-                    Dim idx As Integer = AsciiLookup.IndexOf(ImportAsTileData.ToCharArray()(count).ToString())
+                    Dim idx As Integer = AsciiLookup.IndexOf(ImportASTileData.ToCharArray()(count).ToString())
                     Dim tileId As Integer = -1
                     If idx > 0 Then
                         tileId = idx ' Old calculation: (4350 + 2 * idx)

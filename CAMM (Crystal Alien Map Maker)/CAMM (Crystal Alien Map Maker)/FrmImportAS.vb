@@ -23,7 +23,7 @@
         line = line.Trim()
         line = line.Trim(New Char() {Char.Parse("""")})
 
-        FrmEditor.ImportAsTileData = line.Remove(0, 2)
+        FrmEditor.ImportASTileData = line.Remove(0, 2)
         FrmEditor.NewMap()
         FrmEditor.ActiveMap.SetSize(AsciiLookup.IndexOf(line(0)), AsciiLookup.IndexOf(line(1)))
         FrmEditor.ActiveMap.Title = cboPickMap.SelectedItem.ToString().Trim()

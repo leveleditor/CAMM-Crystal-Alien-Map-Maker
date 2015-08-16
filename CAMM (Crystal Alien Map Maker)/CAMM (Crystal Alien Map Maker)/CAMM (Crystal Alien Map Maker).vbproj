@@ -197,10 +197,10 @@
     <Compile Include="FrmImportAS.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmTileData.Designer.vb">
-      <DependentUpon>FrmTileData.vb</DependentUpon>
+    <Compile Include="FrmConfigEditor.Designer.vb">
+      <DependentUpon>FrmConfigEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmTileData.vb">
+    <Compile Include="FrmConfigEditor.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -240,8 +240,8 @@
     <EmbeddedResource Include="FrmMapProperties.resx">
       <DependentUpon>FrmMapProperties.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmTileData.resx">
-      <DependentUpon>FrmTileData.vb</DependentUpon>
+    <EmbeddedResource Include="FrmConfigEditor.resx">
+      <DependentUpon>FrmConfigEditor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UnitEntry.resx">
       <DependentUpon>UnitEntry.vb</DependentUpon>

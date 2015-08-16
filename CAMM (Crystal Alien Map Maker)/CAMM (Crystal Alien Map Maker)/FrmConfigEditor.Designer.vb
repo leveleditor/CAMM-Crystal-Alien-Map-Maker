@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FrmTileData
+Partial Class FrmConfigEditor
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class FrmTileData
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmTileData))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmConfigEditor))
         Me.btnSaveAll = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.lblSaved = New System.Windows.Forms.Label()
@@ -197,7 +197,7 @@ Partial Class FrmTileData
         Me.tabConfig.Text = "Edit Config"
         Me.tabConfig.UseVisualStyleBackColor = True
         '
-        'FrmTileData
+        'FrmConfigEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -210,9 +210,9 @@ Partial Class FrmTileData
         Me.Controls.Add(Me.btnSaveAll)
         Me.DoubleBuffered = True
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Name = "FrmTileData"
+        Me.Name = "FrmConfigEditor"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Tile Data Editor"
+        Me.Text = "Configuration Editor"
         Me.editTabs.ResumeLayout(False)
         Me.tabTiles.ResumeLayout(False)
         Me.tabTiles.PerformLayout()

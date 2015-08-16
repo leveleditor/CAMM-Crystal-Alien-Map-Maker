@@ -1,13 +1,13 @@
 ﻿Imports System.Text
 
-Public Class FrmTileData
+Public Class FrmConfigEditor
     Private Saved As Boolean
 
-    Private Sub FrmTileData_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+    Private Sub FrmConfigEditor_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         'Reload configuration data.
         LoadAssets()
         If Not LoadConfig() Then
-            MsgBox("Tile Data Editor could not open: Could not reload the configuration data.", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly)
+            MsgBox("Configuration Editor could not open: Could not reload the configuration data.", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly)
             Me.Close()
         End If
 

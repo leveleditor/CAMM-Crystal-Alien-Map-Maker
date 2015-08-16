@@ -30,8 +30,12 @@ Partial Class FrmEditor
         Me.lblHeight = New System.Windows.Forms.Label()
         Me.picMap = New System.Windows.Forms.PictureBox()
         Me.ctxMap = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.lblMapNoActionsAvailable = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnMapUnitProperties = New System.Windows.Forms.ToolStripMenuItem()
         Me.ctxMapSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnMapDeleteUnit = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ctxMapSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnMapCancel = New System.Windows.Forms.ToolStripMenuItem()
         Me.picActive = New System.Windows.Forms.PictureBox()
         Me.lblSelected = New System.Windows.Forms.Label()
         Me.staInfoBar = New System.Windows.Forms.StatusStrip()
@@ -65,6 +69,7 @@ Partial Class FrmEditor
         Me.mnuView = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuchkGrid = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuchkShadows = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuchkTeamIndicators = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuchkDebugBuildingPos = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuchkDebugUnitPos = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator7 = New System.Windows.Forms.ToolStripSeparator()
@@ -75,7 +80,7 @@ Partial Class FrmEditor
         Me.chkAssociateFileTypeMap = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDev = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnTileDataEditor = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnConfigEditor = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnDeveloper = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnEditBuildings = New System.Windows.Forms.Button()
@@ -105,11 +110,6 @@ Partial Class FrmEditor
         Me.btnToolPointer = New System.Windows.Forms.Button()
         Me.btnToolRectangleBrush = New System.Windows.Forms.Button()
         Me.cboRectangleBrush = New System.Windows.Forms.ComboBox()
-        Me.lblMapNoActionsAvailable = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnMapCancel = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnMapDeleteUnit = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ctxMapSeparator2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuchkTeamIndicators = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.picMap, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ctxMap.SuspendLayout()
         CType(Me.picActive, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -181,6 +181,13 @@ Partial Class FrmEditor
         Me.ctxMap.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         Me.ctxMap.Size = New System.Drawing.Size(203, 104)
         '
+        'lblMapNoActionsAvailable
+        '
+        Me.lblMapNoActionsAvailable.Enabled = False
+        Me.lblMapNoActionsAvailable.Name = "lblMapNoActionsAvailable"
+        Me.lblMapNoActionsAvailable.Size = New System.Drawing.Size(202, 22)
+        Me.lblMapNoActionsAvailable.Text = "No actions available."
+        '
         'btnMapUnitProperties
         '
         Me.btnMapUnitProperties.Enabled = False
@@ -194,6 +201,27 @@ Partial Class FrmEditor
         '
         Me.ctxMapSeparator1.Name = "ctxMapSeparator1"
         Me.ctxMapSeparator1.Size = New System.Drawing.Size(199, 6)
+        '
+        'btnMapDeleteUnit
+        '
+        Me.btnMapDeleteUnit.Enabled = False
+        Me.btnMapDeleteUnit.Name = "btnMapDeleteUnit"
+        Me.btnMapDeleteUnit.ShortcutKeys = System.Windows.Forms.Keys.Delete
+        Me.btnMapDeleteUnit.Size = New System.Drawing.Size(202, 22)
+        Me.btnMapDeleteUnit.Text = "&Delete Unit"
+        Me.btnMapDeleteUnit.Visible = False
+        '
+        'ctxMapSeparator2
+        '
+        Me.ctxMapSeparator2.Name = "ctxMapSeparator2"
+        Me.ctxMapSeparator2.Size = New System.Drawing.Size(199, 6)
+        '
+        'btnMapCancel
+        '
+        Me.btnMapCancel.Name = "btnMapCancel"
+        Me.btnMapCancel.ShortcutKeyDisplayString = "Esc"
+        Me.btnMapCancel.Size = New System.Drawing.Size(202, 22)
+        Me.btnMapCancel.Text = "&Cancel"
         '
         'picActive
         '
@@ -462,6 +490,15 @@ Partial Class FrmEditor
         Me.mnuchkShadows.Size = New System.Drawing.Size(247, 22)
         Me.mnuchkShadows.Text = "Show &Shadows"
         '
+        'mnuchkTeamIndicators
+        '
+        Me.mnuchkTeamIndicators.CheckOnClick = True
+        Me.mnuchkTeamIndicators.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.mnuchkTeamIndicators.Name = "mnuchkTeamIndicators"
+        Me.mnuchkTeamIndicators.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
+        Me.mnuchkTeamIndicators.Size = New System.Drawing.Size(247, 22)
+        Me.mnuchkTeamIndicators.Text = "Show &Team Indicators"
+        '
         'mnuchkDebugBuildingPos
         '
         Me.mnuchkDebugBuildingPos.CheckOnClick = True
@@ -530,18 +567,19 @@ Partial Class FrmEditor
         'mnuDev
         '
         Me.mnuDev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.mnuDev.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnTileDataEditor, Me.btnDeveloper})
+        Me.mnuDev.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnConfigEditor, Me.btnDeveloper})
         Me.mnuDev.Name = "mnuDev"
         Me.mnuDev.Size = New System.Drawing.Size(39, 24)
         Me.mnuDev.Text = "Dev"
         Me.mnuDev.Visible = False
         '
-        'btnTileDataEditor
+        'btnConfigEditor
         '
-        Me.btnTileDataEditor.Name = "btnTileDataEditor"
-        Me.btnTileDataEditor.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.btnTileDataEditor.Size = New System.Drawing.Size(248, 22)
-        Me.btnTileDataEditor.Text = "&Tile Data Editor"
+        Me.btnConfigEditor.Name = "btnConfigEditor"
+        Me.btnConfigEditor.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
+            Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
+        Me.btnConfigEditor.Size = New System.Drawing.Size(256, 22)
+        Me.btnConfigEditor.Text = "&Configuration Editor"
         '
         'btnDeveloper
         '
@@ -549,7 +587,7 @@ Partial Class FrmEditor
         Me.btnDeveloper.Name = "btnDeveloper"
         Me.btnDeveloper.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
             Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
-        Me.btnDeveloper.Size = New System.Drawing.Size(248, 22)
+        Me.btnDeveloper.Size = New System.Drawing.Size(256, 22)
         Me.btnDeveloper.Text = "Activate Dev Mode"
         Me.btnDeveloper.Visible = False
         '
@@ -838,43 +876,6 @@ Partial Class FrmEditor
         Me.cboRectangleBrush.TabIndex = 16
         Me.cboRectangleBrush.Visible = False
         '
-        'lblMapNoActionsAvailable
-        '
-        Me.lblMapNoActionsAvailable.Enabled = False
-        Me.lblMapNoActionsAvailable.Name = "lblMapNoActionsAvailable"
-        Me.lblMapNoActionsAvailable.Size = New System.Drawing.Size(202, 22)
-        Me.lblMapNoActionsAvailable.Text = "No actions available."
-        '
-        'btnMapCancel
-        '
-        Me.btnMapCancel.Name = "btnMapCancel"
-        Me.btnMapCancel.ShortcutKeyDisplayString = "Esc"
-        Me.btnMapCancel.Size = New System.Drawing.Size(202, 22)
-        Me.btnMapCancel.Text = "&Cancel"
-        '
-        'btnMapDeleteUnit
-        '
-        Me.btnMapDeleteUnit.Enabled = False
-        Me.btnMapDeleteUnit.Name = "btnMapDeleteUnit"
-        Me.btnMapDeleteUnit.ShortcutKeys = System.Windows.Forms.Keys.Delete
-        Me.btnMapDeleteUnit.Size = New System.Drawing.Size(202, 22)
-        Me.btnMapDeleteUnit.Text = "&Delete Unit"
-        Me.btnMapDeleteUnit.Visible = False
-        '
-        'ctxMapSeparator2
-        '
-        Me.ctxMapSeparator2.Name = "ctxMapSeparator2"
-        Me.ctxMapSeparator2.Size = New System.Drawing.Size(199, 6)
-        '
-        'mnuchkTeamIndicators
-        '
-        Me.mnuchkTeamIndicators.CheckOnClick = True
-        Me.mnuchkTeamIndicators.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.mnuchkTeamIndicators.Name = "mnuchkTeamIndicators"
-        Me.mnuchkTeamIndicators.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.mnuchkTeamIndicators.Size = New System.Drawing.Size(247, 22)
-        Me.mnuchkTeamIndicators.Text = "Show &Team Indicators"
-        '
         'FrmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -967,7 +968,7 @@ Partial Class FrmEditor
     Friend WithEvents openMap As System.Windows.Forms.OpenFileDialog
     Friend WithEvents chkGrid As System.Windows.Forms.CheckBox
     Friend WithEvents mnuDev As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents btnTileDataEditor As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnConfigEditor As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnToolBrush As System.Windows.Forms.Button
     Friend WithEvents tmrIntro As System.Windows.Forms.Timer
     Friend WithEvents btnToolSmartBrush As System.Windows.Forms.Button
