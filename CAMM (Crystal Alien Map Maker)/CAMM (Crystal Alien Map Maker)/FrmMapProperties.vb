@@ -1,6 +1,8 @@
 ﻿Public Class FrmMapProperties
 
     Private Sub FrmMapProperties_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        txtTitle.Focus()
+
         txtStartCashEnemy.Maximum = Integer.MaxValue
         txtStartCashPlayer.Maximum = Integer.MaxValue
         txtStartCashEnemy.Minimum = Integer.MinValue

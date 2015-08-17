@@ -43,6 +43,7 @@ Partial Class FrmMapProperties
         Me.txtAuthor = New System.Windows.Forms.TextBox()
         Me.lblAuthor = New System.Windows.Forms.Label()
         Me.picTeam = New System.Windows.Forms.PictureBox()
+        Me.rbtNone = New System.Windows.Forms.RadioButton()
         CType(Me.txtStartCashPlayer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtStartCashEnemy, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tblButtons.SuspendLayout()
@@ -55,7 +56,7 @@ Partial Class FrmMapProperties
         Me.lblTeam.Location = New System.Drawing.Point(86, 67)
         Me.lblTeam.Name = "lblTeam"
         Me.lblTeam.Size = New System.Drawing.Size(34, 13)
-        Me.lblTeam.TabIndex = 0
+        Me.lblTeam.TabIndex = 4
         Me.lblTeam.Text = "Team"
         '
         'lblStartCashPlayer
@@ -64,7 +65,7 @@ Partial Class FrmMapProperties
         Me.lblStartCashPlayer.Location = New System.Drawing.Point(12, 94)
         Me.lblStartCashPlayer.Name = "lblStartCashPlayer"
         Me.lblStartCashPlayer.Size = New System.Drawing.Size(108, 13)
-        Me.lblStartCashPlayer.TabIndex = 1
+        Me.lblStartCashPlayer.TabIndex = 6
         Me.lblStartCashPlayer.Text = "Starting Cash (Player)"
         '
         'lblStartCashEnemy
@@ -73,7 +74,7 @@ Partial Class FrmMapProperties
         Me.lblStartCashEnemy.Location = New System.Drawing.Point(9, 120)
         Me.lblStartCashEnemy.Name = "lblStartCashEnemy"
         Me.lblStartCashEnemy.Size = New System.Drawing.Size(111, 13)
-        Me.lblStartCashEnemy.TabIndex = 1
+        Me.lblStartCashEnemy.TabIndex = 8
         Me.lblStartCashEnemy.Text = "Starting Cash (Enemy)"
         '
         'lblLevelFlags
@@ -82,7 +83,7 @@ Partial Class FrmMapProperties
         Me.lblLevelFlags.Location = New System.Drawing.Point(59, 144)
         Me.lblLevelFlags.Name = "lblLevelFlags"
         Me.lblLevelFlags.Size = New System.Drawing.Size(61, 13)
-        Me.lblLevelFlags.TabIndex = 6
+        Me.lblLevelFlags.TabIndex = 10
         Me.lblLevelFlags.Text = "Level Flags"
         '
         'lblTitle
@@ -91,7 +92,7 @@ Partial Class FrmMapProperties
         Me.lblTitle.Location = New System.Drawing.Point(93, 14)
         Me.lblTitle.Name = "lblTitle"
         Me.lblTitle.Size = New System.Drawing.Size(27, 13)
-        Me.lblTitle.TabIndex = 13
+        Me.lblTitle.TabIndex = 0
         Me.lblTitle.Text = "Title"
         '
         'txtStartCashPlayer
@@ -102,7 +103,7 @@ Partial Class FrmMapProperties
         Me.txtStartCashPlayer.Minimum = New Decimal(New Integer() {2147483647, 0, 0, -2147483648})
         Me.txtStartCashPlayer.Name = "txtStartCashPlayer"
         Me.txtStartCashPlayer.Size = New System.Drawing.Size(100, 20)
-        Me.txtStartCashPlayer.TabIndex = 3
+        Me.txtStartCashPlayer.TabIndex = 7
         '
         'cboTeam
         '
@@ -112,7 +113,7 @@ Partial Class FrmMapProperties
         Me.cboTeam.Location = New System.Drawing.Point(126, 64)
         Me.cboTeam.Name = "cboTeam"
         Me.cboTeam.Size = New System.Drawing.Size(100, 21)
-        Me.cboTeam.TabIndex = 4
+        Me.cboTeam.TabIndex = 5
         '
         'txtStartCashEnemy
         '
@@ -122,7 +123,7 @@ Partial Class FrmMapProperties
         Me.txtStartCashEnemy.Minimum = New Decimal(New Integer() {2147483647, 0, 0, -2147483648})
         Me.txtStartCashEnemy.Name = "txtStartCashEnemy"
         Me.txtStartCashEnemy.Size = New System.Drawing.Size(100, 20)
-        Me.txtStartCashEnemy.TabIndex = 3
+        Me.txtStartCashEnemy.TabIndex = 9
         '
         'chkIsTraining
         '
@@ -130,51 +131,47 @@ Partial Class FrmMapProperties
         Me.chkIsTraining.Location = New System.Drawing.Point(126, 143)
         Me.chkIsTraining.Name = "chkIsTraining"
         Me.chkIsTraining.Size = New System.Drawing.Size(71, 17)
-        Me.chkIsTraining.TabIndex = 5
+        Me.chkIsTraining.TabIndex = 11
         Me.chkIsTraining.Text = "isTraining"
         Me.chkIsTraining.UseVisualStyleBackColor = True
         '
         'rbtIsConflict
         '
         Me.rbtIsConflict.AutoSize = True
-        Me.rbtIsConflict.Location = New System.Drawing.Point(126, 166)
+        Me.rbtIsConflict.Location = New System.Drawing.Point(126, 189)
         Me.rbtIsConflict.Name = "rbtIsConflict"
         Me.rbtIsConflict.Size = New System.Drawing.Size(67, 17)
-        Me.rbtIsConflict.TabIndex = 7
-        Me.rbtIsConflict.TabStop = True
+        Me.rbtIsConflict.TabIndex = 13
         Me.rbtIsConflict.Text = "isConflict"
         Me.rbtIsConflict.UseVisualStyleBackColor = True
         '
         'rbtIsSpecialLevel
         '
         Me.rbtIsSpecialLevel.AutoSize = True
-        Me.rbtIsSpecialLevel.Location = New System.Drawing.Point(126, 189)
+        Me.rbtIsSpecialLevel.Location = New System.Drawing.Point(126, 212)
         Me.rbtIsSpecialLevel.Name = "rbtIsSpecialLevel"
         Me.rbtIsSpecialLevel.Size = New System.Drawing.Size(93, 17)
-        Me.rbtIsSpecialLevel.TabIndex = 8
-        Me.rbtIsSpecialLevel.TabStop = True
+        Me.rbtIsSpecialLevel.TabIndex = 14
         Me.rbtIsSpecialLevel.Text = "isSpecialLevel"
         Me.rbtIsSpecialLevel.UseVisualStyleBackColor = True
         '
         'rbtIsLastSpecialLevel
         '
         Me.rbtIsLastSpecialLevel.AutoSize = True
-        Me.rbtIsLastSpecialLevel.Location = New System.Drawing.Point(126, 212)
+        Me.rbtIsLastSpecialLevel.Location = New System.Drawing.Point(126, 235)
         Me.rbtIsLastSpecialLevel.Name = "rbtIsLastSpecialLevel"
         Me.rbtIsLastSpecialLevel.Size = New System.Drawing.Size(113, 17)
-        Me.rbtIsLastSpecialLevel.TabIndex = 9
-        Me.rbtIsLastSpecialLevel.TabStop = True
+        Me.rbtIsLastSpecialLevel.TabIndex = 15
         Me.rbtIsLastSpecialLevel.Text = "isLastSpecialLevel"
         Me.rbtIsLastSpecialLevel.UseVisualStyleBackColor = True
         '
         'rbtIsBonusLevel
         '
         Me.rbtIsBonusLevel.AutoSize = True
-        Me.rbtIsBonusLevel.Location = New System.Drawing.Point(126, 235)
+        Me.rbtIsBonusLevel.Location = New System.Drawing.Point(126, 258)
         Me.rbtIsBonusLevel.Name = "rbtIsBonusLevel"
         Me.rbtIsBonusLevel.Size = New System.Drawing.Size(88, 17)
-        Me.rbtIsBonusLevel.TabIndex = 10
-        Me.rbtIsBonusLevel.TabStop = True
+        Me.rbtIsBonusLevel.TabIndex = 16
         Me.rbtIsBonusLevel.Text = "isBonusLevel"
         Me.rbtIsBonusLevel.UseVisualStyleBackColor = True
         '
@@ -186,12 +183,12 @@ Partial Class FrmMapProperties
         Me.tblButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.tblButtons.Controls.Add(Me.btnOk, 0, 0)
         Me.tblButtons.Controls.Add(Me.btnCancel, 1, 0)
-        Me.tblButtons.Location = New System.Drawing.Point(176, 258)
+        Me.tblButtons.Location = New System.Drawing.Point(176, 281)
         Me.tblButtons.Name = "tblButtons"
         Me.tblButtons.RowCount = 1
         Me.tblButtons.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.tblButtons.Size = New System.Drawing.Size(146, 29)
-        Me.tblButtons.TabIndex = 11
+        Me.tblButtons.TabIndex = 17
         '
         'btnOk
         '
@@ -220,7 +217,7 @@ Partial Class FrmMapProperties
         Me.txtTitle.Location = New System.Drawing.Point(126, 12)
         Me.txtTitle.Name = "txtTitle"
         Me.txtTitle.Size = New System.Drawing.Size(196, 20)
-        Me.txtTitle.TabIndex = 12
+        Me.txtTitle.TabIndex = 1
         '
         'txtAuthor
         '
@@ -230,7 +227,7 @@ Partial Class FrmMapProperties
         Me.txtAuthor.Location = New System.Drawing.Point(126, 38)
         Me.txtAuthor.Name = "txtAuthor"
         Me.txtAuthor.Size = New System.Drawing.Size(196, 20)
-        Me.txtAuthor.TabIndex = 12
+        Me.txtAuthor.TabIndex = 3
         '
         'lblAuthor
         '
@@ -238,7 +235,7 @@ Partial Class FrmMapProperties
         Me.lblAuthor.Location = New System.Drawing.Point(82, 40)
         Me.lblAuthor.Name = "lblAuthor"
         Me.lblAuthor.Size = New System.Drawing.Size(38, 13)
-        Me.lblAuthor.TabIndex = 13
+        Me.lblAuthor.TabIndex = 2
         Me.lblAuthor.Text = "Author"
         '
         'picTeam
@@ -249,13 +246,26 @@ Partial Class FrmMapProperties
         Me.picTeam.TabIndex = 17
         Me.picTeam.TabStop = False
         '
+        'rbtNone
+        '
+        Me.rbtNone.AutoSize = True
+        Me.rbtNone.Checked = True
+        Me.rbtNone.Location = New System.Drawing.Point(126, 166)
+        Me.rbtNone.Name = "rbtNone"
+        Me.rbtNone.Size = New System.Drawing.Size(132, 17)
+        Me.rbtNone.TabIndex = 12
+        Me.rbtNone.TabStop = True
+        Me.rbtNone.Text = "N/A (None Applicable)"
+        Me.rbtNone.UseVisualStyleBackColor = True
+        '
         'FrmMapProperties
         '
         Me.AcceptButton = Me.btnOk
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(334, 299)
+        Me.ClientSize = New System.Drawing.Size(334, 322)
+        Me.Controls.Add(Me.rbtNone)
         Me.Controls.Add(Me.picTeam)
         Me.Controls.Add(Me.lblAuthor)
         Me.Controls.Add(Me.lblTitle)
@@ -310,4 +320,5 @@ Partial Class FrmMapProperties
     Friend WithEvents txtAuthor As System.Windows.Forms.TextBox
     Friend WithEvents lblAuthor As System.Windows.Forms.Label
     Friend WithEvents picTeam As System.Windows.Forms.PictureBox
+    Friend WithEvents rbtNone As System.Windows.Forms.RadioButton
 End Class
