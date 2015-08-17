@@ -19,49 +19,70 @@ Public Class FrmConfigEditor
 
         'Add Tiles to editor.
         For Each td As TileDef In TileDefs
-            Dim newTileEntry As TileEntry = New TileEntry(td.TileId, td.IsPassable, td.IsMinerals, td.ImageUrl)
-            'NewTileEntry.Location = New Point(3, (i * 31) + 3)
-            AddHandler newTileEntry.BtnNewClicked, AddressOf tileEntry_btnNew_Clicked
-            AddHandler newTileEntry.BtnRemoveClicked, AddressOf tileEntry_btnRemove_Clicked
-            AddHandler newTileEntry.BtnBrowseClicked, AddressOf tileEntry_btnBrowse_Clicked
-            AddHandler newTileEntry.TxtImageUrlMouseEntered, AddressOf tileEntry_txtImageUrl_MouseEnter
-            AddHandler newTileEntry.TxtImageUrlMouseLeft, AddressOf tileEntry_txtImageUrl_MouseLeave
-            pnlTiles.Controls.Add(newTileEntry)
+            Dim tEntry As TileEntry = New TileEntry(td.TileId, td.IsPassable, td.IsMinerals, td.ImageUrl)
+            AddHandler tEntry.BtnNewClicked, AddressOf tileEntry_btnNew_Clicked
+            AddHandler tEntry.BtnRemoveClicked, AddressOf tileEntry_btnRemove_Clicked
+            AddHandler tEntry.BtnBrowseClicked, AddressOf tileEntry_btnBrowse_Clicked
+            AddHandler tEntry.TxtImageUrlMouseEntered, AddressOf tileEntry_txtImageUrl_MouseEnter
+            AddHandler tEntry.TxtImageUrlMouseLeft, AddressOf tileEntry_txtImageUrl_MouseLeave
+            pnlTiles.Controls.Add(tEntry)
         Next
 
         'Add Buildings to editor.
         For Each bd As BuildingDef In BuildingDefs
-            Dim newObjectEntry As BuildingEntry = New BuildingEntry(bd.BuildingId, bd.BuildingW, bd.BuildingH, bd.Team, bd.OffsetY, bd.FullImageUrl, bd.ShadowImageUrl)
-            'NewObjectEntry.Location = New Point(3, (i * 31) + 3)
-            AddHandler newObjectEntry.BtnNewClicked, AddressOf buildingEntry_btnNew_Clicked
-            AddHandler newObjectEntry.BtnRemoveClicked, AddressOf buildingEntry_btnRemove_Clicked
-            AddHandler newObjectEntry.BtnBrowseFullImageClicked, AddressOf BuildingEntryBtnBrowseFullImageClicked
-            AddHandler newObjectEntry.BtnBrowseShadowImageClicked, AddressOf BuildingEntryBtnBrowseShadowImageClicked
-            AddHandler newObjectEntry.TxtFullImageUrlMouseEntered, AddressOf BuildingEntryTxtFullImageUrlMouseEnter
-            AddHandler newObjectEntry.TxtFullImageUrlMouseLeft, AddressOf BuildingEntryTxtFullImageUrlMouseLeave
-            AddHandler newObjectEntry.TxtShadowImageUrlMouseEntered, AddressOf BuildingEntryTxtShadowImageUrlMouseEnter
-            AddHandler newObjectEntry.TxtShadowImageUrlMouseLeft, AddressOf BuildingEntryTxtShadowImageUrlMouseLeave
-            pnlBuildings.Controls.Add(newObjectEntry)
+            Dim bEntry As BuildingEntry = New BuildingEntry(bd.BuildingId, bd.BuildingW, bd.BuildingH, bd.Team, bd.OffsetY, bd.FullImageUrl, bd.ShadowImageUrl)
+            AddHandler bEntry.BtnNewClicked, AddressOf buildingEntry_btnNew_Clicked
+            AddHandler bEntry.BtnRemoveClicked, AddressOf buildingEntry_btnRemove_Clicked
+            AddHandler bEntry.BtnBrowseFullImageClicked, AddressOf BuildingEntryBtnBrowseFullImageClicked
+            AddHandler bEntry.BtnBrowseShadowImageClicked, AddressOf BuildingEntryBtnBrowseShadowImageClicked
+            AddHandler bEntry.TxtFullImageUrlMouseEntered, AddressOf BuildingEntryTxtFullImageUrlMouseEnter
+            AddHandler bEntry.TxtFullImageUrlMouseLeft, AddressOf BuildingEntryTxtFullImageUrlMouseLeave
+            AddHandler bEntry.TxtShadowImageUrlMouseEntered, AddressOf BuildingEntryTxtShadowImageUrlMouseEnter
+            AddHandler bEntry.TxtShadowImageUrlMouseLeft, AddressOf BuildingEntryTxtShadowImageUrlMouseLeave
+            pnlBuildings.Controls.Add(bEntry)
         Next
 
         'Add Units to editor.
         For Each ud As UnitDef In UnitDefs
-            Dim newObjectEntry As UnitEntry = New UnitEntry(ud.UnitId, ud.Team, ud.Altitude, ud.IsPickup, ud.OffsetY, ud.FullImageUrl, ud.ShadowImageUrl)
-            'NewObjectEntry.Location = New Point(3, (i * 31) + 3)
-            AddHandler newObjectEntry.BtnNewClicked, AddressOf unitEntry_btnNew_Clicked
-            AddHandler newObjectEntry.BtnRemoveClicked, AddressOf unitEntry_btnRemove_Clicked
-            AddHandler newObjectEntry.BtnBrowseFullImageClicked, AddressOf UnitEntryBtnBrowseFullImageClicked
-            AddHandler newObjectEntry.BtnBrowseShadowImageClicked, AddressOf UnitEntryBtnBrowseShadowImageClicked
-            AddHandler newObjectEntry.TxtFullImageUrlMouseEntered, AddressOf UnitEntryTxtFullImageUrlMouseEnter
-            AddHandler newObjectEntry.TxtFullImageUrlMouseLeft, AddressOf UnitEntryTxtFullImageUrlMouseLeave
-            AddHandler newObjectEntry.TxtShadowImageUrlMouseEntered, AddressOf UnitEntryTxtShadowImageUrlMouseEnter
-            AddHandler newObjectEntry.TxtShadowImageUrlMouseLeft, AddressOf UnitEntryTxtShadowImageUrlMouseLeave
-            Me.pnlUnits.Controls.Add(newObjectEntry)
+            Dim uEntry As UnitEntry = New UnitEntry(ud.UnitId, ud.Team, ud.Altitude, ud.IsPickup, ud.OffsetY, ud.FullImageUrl, ud.ShadowImageUrl)
+            AddHandler uEntry.BtnNewClicked, AddressOf unitEntry_btnNew_Clicked
+            AddHandler uEntry.BtnRemoveClicked, AddressOf unitEntry_btnRemove_Clicked
+            AddHandler uEntry.BtnBrowseFullImageClicked, AddressOf UnitEntryBtnBrowseFullImageClicked
+            AddHandler uEntry.BtnBrowseShadowImageClicked, AddressOf UnitEntryBtnBrowseShadowImageClicked
+            AddHandler uEntry.TxtFullImageUrlMouseEntered, AddressOf UnitEntryTxtFullImageUrlMouseEnter
+            AddHandler uEntry.TxtFullImageUrlMouseLeft, AddressOf UnitEntryTxtFullImageUrlMouseLeave
+            AddHandler uEntry.TxtShadowImageUrlMouseEntered, AddressOf UnitEntryTxtShadowImageUrlMouseEnter
+            AddHandler uEntry.TxtShadowImageUrlMouseLeft, AddressOf UnitEntryTxtShadowImageUrlMouseLeave
+            Me.pnlUnits.Controls.Add(uEntry)
         Next
 
         ReorderTileEntries()
         ReorderBuildingEntries()
         ReorderUnitEntries()
+    End Sub
+
+    Private Sub FrmConfigEditor_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        Dim msgResult As DialogResult = DialogResult.None
+        Dim doReload As Boolean = False
+        If Not saved Then
+            msgResult = MsgBox("Do you want to save all changes you've made?", MsgBoxStyle.Question + MsgBoxStyle.YesNoCancel)
+        End If
+
+        If msgResult = DialogResult.Yes Then
+            SaveAll()
+            doReload = True
+        ElseIf msgResult <> DialogResult.No And msgResult <> DialogResult.None Then
+            e.Cancel = True
+        End If
+
+        If doReload And Not e.Cancel Then
+            'Reload configuration data.
+            LoadAssets()
+            If Not LoadConfig() Then
+                MsgBox("Configuration Editor could not reload the configuration data." + vbNewLine + "You may need to fix this manually and restart the program.", MsgBoxStyle.Critical + MsgBoxStyle.OkOnly)
+                Me.Close()
+            End If
+        End If
     End Sub
 
     Private Sub ReorderTileEntries()
@@ -111,13 +132,13 @@ Public Class FrmConfigEditor
 
     Private Sub tileEntry_btnNew_Clicked(sender As TileEntry, e As EventArgs)
         pnlTiles.SuspendLayout()
-        Dim newTileEntry As TileEntry = New TileEntry() With {.Location = New Point(pnlTiles.AutoScrollPosition.X + 3, pnlTiles.AutoScrollPosition.Y + 3)}
-        AddHandler newTileEntry.BtnNewClicked, AddressOf tileEntry_btnNew_Clicked
-        AddHandler newTileEntry.BtnRemoveClicked, AddressOf tileEntry_btnRemove_Clicked
-        AddHandler newTileEntry.BtnBrowseClicked, AddressOf tileEntry_btnBrowse_Clicked
-        AddHandler newTileEntry.TxtImageUrlMouseEntered, AddressOf tileEntry_txtImageUrl_MouseEnter
-        AddHandler newTileEntry.TxtImageUrlMouseLeft, AddressOf tileEntry_txtImageUrl_MouseLeave
-        pnlTiles.Controls.Add(newTileEntry)
+        Dim tEntry As TileEntry = New TileEntry() With {.Location = New Point(pnlTiles.AutoScrollPosition.X + 3, pnlTiles.AutoScrollPosition.Y + 3)}
+        AddHandler tEntry.BtnNewClicked, AddressOf tileEntry_btnNew_Clicked
+        AddHandler tEntry.BtnRemoveClicked, AddressOf tileEntry_btnRemove_Clicked
+        AddHandler tEntry.BtnBrowseClicked, AddressOf tileEntry_btnBrowse_Clicked
+        AddHandler tEntry.TxtImageUrlMouseEntered, AddressOf tileEntry_txtImageUrl_MouseEnter
+        AddHandler tEntry.TxtImageUrlMouseLeft, AddressOf tileEntry_txtImageUrl_MouseLeave
+        pnlTiles.Controls.Add(tEntry)
         ReorderTileEntries()
         saved = False
     End Sub
@@ -334,17 +355,7 @@ Public Class FrmConfigEditor
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Dim msgResult As DialogResult = DialogResult.None
-        If Not saved Then
-            msgResult = MsgBox("Do you want to save all changes you've made?", MsgBoxStyle.Question + MsgBoxStyle.YesNoCancel)
-        End If
-
-        If msgResult <> MsgBoxResult.Cancel Then
-            If msgResult = DialogResult.Yes Then
-                SaveAll()
-            End If
-            Me.Close()
-        End If
+        Me.Close()
     End Sub
 
     Private Sub btnSaveAll_Click(sender As Object, e As EventArgs) Handles btnSaveAll.Click
