@@ -3,11 +3,11 @@
 #If DEBUG Then
     Public Const BuildType As String = "[Debug]"
     Public Const DataPath As String = "/../../../CAMM_Data"
-    Public Const SavePath As String = "/../../../Save Data"
+    Public Const SavePath As String = "/../../../Maps"
 #Else
     Public Const BuildType As String = "[Stable]"
     Public Const DataPath As String = "/CAMM_Data"
-    Public Const SavePath As String = "/Save Data"
+    Public Const SavePath As String = "/Maps"
 #End If
 
     Public ReadOnly FullBasePath As String = My.Application.Info.DirectoryPath + DataPath
