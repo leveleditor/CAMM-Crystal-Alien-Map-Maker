@@ -500,9 +500,7 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy /Y /B "$(TargetPath)" "$(TargetPath).tmp"
-"$(ProjectDir)InsertIcons.exe" "$(TargetPath).tmp" "$(ProjectDir)\icons"
-move /Y "$(TargetPath).tmp" "$(TargetPath)"</PostBuildEvent>
+    <PostBuildEvent>"$(ProjectDir)InsertIcons.exe" "$(TargetPath)" "$(ProjectDir)icons"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
