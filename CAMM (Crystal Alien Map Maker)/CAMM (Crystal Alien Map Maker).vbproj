@@ -288,8 +288,8 @@
     <Content Include="CAMM_Data\Brushes\Rectangle\RockBorders.ini" />
     <Content Include="CAMM_Data\Brushes\Rectangle\Valley-NS.ini" />
     <Content Include="CAMM_Data\Brushes\Rectangle\Valley-WE.ini" />
-    <Content Include="CAMM_Data\Default Maps\Astro Level 1.camm" />
-    <Content Include="CAMM_Data\Default Maps\Astro Level 6.map" />
+    <Content Include="CAMM_Data\Default_Maps\Astro Level 1.camm" />
+    <Content Include="CAMM_Data\Default_Maps\Astro Level 6.map" />
     <Content Include="CAMM_Data\Backgrounds\Mars.png" />
     <Content Include="CAMM_Data\Baseplates\Alien1x2.png" />
     <Content Include="CAMM_Data\Baseplates\Alien2x2.png" />
