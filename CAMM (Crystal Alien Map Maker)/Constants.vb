@@ -2,24 +2,26 @@
 
 #If DEBUG Then
     Public Const BuildType As String = "[Debug]"
-    Public Const DataPath As String = "/../../../CAMM_Data"
-    Public Const SavePath As String = "/../../../Maps"
+    Public Const DataDir As String = "/../../../CAMM_Data"
+    Public Const SaveDir As String = "/../../../Maps"
 #Else
     Public Const BuildType As String = "[Stable]"
-    Public Const DataPath As String = "/CAMM_Data"
-    Public Const SavePath As String = "/Maps"
+    Public Const DataDir As String = "/CAMM_Data"
+    Public Const SaveDir As String = "/Maps"
 #End If
 
-    Public ReadOnly FullBasePath As String = My.Application.Info.DirectoryPath + DataPath
+    Public ReadOnly AppPath As String = My.Application.Info.DirectoryPath
+    Public ReadOnly DataPath As String = AppPath + DataDir
+    Public ReadOnly SavePath As String = AppPath + SaveDir
     Public Const ConfigFileName As String = "Config.ini"
     Public Const TerrainFileName As String = "Terrain.ini"
     Public Const BuildingsFileName As String = "Buildings.ini"
     Public Const UnitsFileName As String = "Units.ini"
-    Public ReadOnly ConfigFile As String = FullBasePath + "/" + ConfigFileName
-    Public ReadOnly TerrainFile As String = FullBasePath + "/" + TerrainFileName
-    Public ReadOnly BuildingsFile As String = FullBasePath + "/" + BuildingsFileName
-    Public ReadOnly UnitsFile As String = FullBasePath + "/" + UnitsFileName
-    Public ReadOnly RectangleBrushPath As String = FullBasePath + "/Brushes/Rectangle"
+    Public ReadOnly ConfigFile As String = DataPath + "/" + ConfigFileName
+    Public ReadOnly TerrainFile As String = DataPath + "/" + TerrainFileName
+    Public ReadOnly BuildingsFile As String = DataPath + "/" + BuildingsFileName
+    Public ReadOnly UnitsFile As String = DataPath + "/" + UnitsFileName
+    Public ReadOnly RectangleBrushPath As String = DataPath + "/Brushes/Rectangle"
 
     Public Const ConfigFormat As Integer = 7
     Public Const TerrainFormat As Integer = 8

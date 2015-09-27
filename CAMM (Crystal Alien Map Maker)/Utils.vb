@@ -67,7 +67,7 @@ Public Module Utils
     Public Sub UpgradeBuildingId(fromVersion As Integer, toVersion As Integer, ByRef objectId As String)
         If fromVersion < 4 And toVersion >= 4 Then
             ' The easy way to map old building Ids to new ones.
-            Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeBuildings.dat"
+            Dim upgradeFile As String = DataPath + "/UpgradeBuildings.dat"
             Dim upgradeHeader As String = "Buildings data v3 -> v4"
             Dim upgradeData As String = My.Computer.FileSystem.ReadAllText(upgradeFile)
 
@@ -89,7 +89,7 @@ Public Module Utils
     Public Sub UpgradeUnitId(fromVersion As Integer, toVersion As Integer, ByRef unitId As String)
         If fromVersion < 4 And toVersion >= 4 Then
             ' The easy way to map old unit Ids to new ones.
-            Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeUnits.dat"
+            Dim upgradeFile As String = DataPath + "/UpgradeUnits.dat"
             Dim upgradeHeader As String = "Units data v3 -> v4"
             Dim upgradeData As String = My.Computer.FileSystem.ReadAllText(upgradeFile)
 
@@ -111,7 +111,7 @@ Public Module Utils
     Public Sub UpgradeTerrainId(fromVersion As Integer, toVersion As Integer, ByRef terrainId As Integer)
         If fromVersion < 5 And toVersion >= 5 Then
             ' The easy way to map old terrain Ids to new ones.
-            Dim upgradeFile As String = My.Application.Info.DirectoryPath + DataPath + "/UpgradeTerrain.dat"
+            Dim upgradeFile As String = DataPath + "/UpgradeTerrain.dat"
             Dim upgradeHeader As String = "Terrain data v4 -> v5"
             Dim upgradeData As String = My.Computer.FileSystem.ReadAllText(upgradeFile)
 

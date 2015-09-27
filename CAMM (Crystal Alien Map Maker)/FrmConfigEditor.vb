@@ -152,15 +152,15 @@ Public Class FrmConfigEditor
     End Sub
 
     Private Sub tileEntry_btnBrowse_Clicked(sender As TileEntry, e As EventArgs)
-        If My.Computer.FileSystem.FileExists(FullBasePath + "/" + sender.ImageUrl) Then
-            openImage.InitialDirectory = New Uri(FullBasePath + "/" + sender.ImageUrl).ToString().Replace(My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.ImageUrl).Name, "")
-            openImage.FileName = My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.ImageUrl).Name
+        If My.Computer.FileSystem.FileExists(DataPath + "/" + sender.ImageUrl) Then
+            openImage.InitialDirectory = New Uri(DataPath + "/" + sender.ImageUrl).ToString().Replace(My.Computer.FileSystem.GetFileInfo(DataPath + "/" + sender.ImageUrl).Name, "")
+            openImage.FileName = My.Computer.FileSystem.GetFileInfo(DataPath + "/" + sender.ImageUrl).Name
         Else
-            openImage.InitialDirectory = New Uri(FullBasePath + "/Tiles").ToString()
+            openImage.InitialDirectory = New Uri(DataPath + "/Tiles").ToString()
             openImage.FileName = ""
         End If
         If openImage.ShowDialog(Me) = DialogResult.OK Then
-            Dim test1 As Uri = New Uri(FullBasePath + "/")
+            Dim test1 As Uri = New Uri(DataPath + "/")
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
             sender.ImageUrl = Uri.UnescapeDataString(test3.ToString())
@@ -170,7 +170,7 @@ Public Class FrmConfigEditor
 
     Private Sub tileEntry_txtImageUrl_MouseEnter(sender As TileEntry, e As EventArgs)
         Try
-            picPreview.Image = Image.FromFile(FullBasePath + "/" + sender.ImageUrl)
+            picPreview.Image = Image.FromFile(DataPath + "/" + sender.ImageUrl)
         Catch ex As Exception
             picPreview.Image = Nothing
         End Try
@@ -207,15 +207,15 @@ Public Class FrmConfigEditor
     End Sub
 
     Private Sub BuildingEntryBtnBrowseFullImageClicked(sender As BuildingEntry, e As EventArgs)
-        If My.Computer.FileSystem.FileExists(FullBasePath + "/" + sender.FullImageUrl) Then
-            openImage.InitialDirectory = New Uri(FullBasePath + "/" + sender.FullImageUrl).ToString().Replace(My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.FullImageUrl).Name, "")
-            openImage.FileName = My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.FullImageUrl).Name
+        If My.Computer.FileSystem.FileExists(DataPath + "/" + sender.FullImageUrl) Then
+            openImage.InitialDirectory = New Uri(DataPath + "/" + sender.FullImageUrl).ToString().Replace(My.Computer.FileSystem.GetFileInfo(DataPath + "/" + sender.FullImageUrl).Name, "")
+            openImage.FileName = My.Computer.FileSystem.GetFileInfo(DataPath + "/" + sender.FullImageUrl).Name
         Else
-            openImage.InitialDirectory = New Uri(FullBasePath + "/Buildings").ToString()
+            openImage.InitialDirectory = New Uri(DataPath + "/Buildings").ToString()
             openImage.FileName = ""
         End If
         If openImage.ShowDialog(Me) = DialogResult.OK Then
-            Dim test1 As Uri = New Uri(FullBasePath + "/")
+            Dim test1 As Uri = New Uri(DataPath + "/")
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
             sender.FullImageUrl = Uri.UnescapeDataString(test3.ToString())
@@ -224,15 +224,15 @@ Public Class FrmConfigEditor
     End Sub
 
     Private Sub BuildingEntryBtnBrowseShadowImageClicked(sender As BuildingEntry, e As EventArgs)
-        If My.Computer.FileSystem.FileExists(FullBasePath + "/" + sender.ShadowImageUrl) Then
-            openImage.InitialDirectory = New Uri(FullBasePath + "/" + sender.ShadowImageUrl).ToString().Replace(My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.ShadowImageUrl).Name, "")
-            openImage.FileName = My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.ShadowImageUrl).Name
+        If My.Computer.FileSystem.FileExists(DataPath + "/" + sender.ShadowImageUrl) Then
+            openImage.InitialDirectory = New Uri(DataPath + "/" + sender.ShadowImageUrl).ToString().Replace(My.Computer.FileSystem.GetFileInfo(DataPath + "/" + sender.ShadowImageUrl).Name, "")
+            openImage.FileName = My.Computer.FileSystem.GetFileInfo(DataPath + "/" + sender.ShadowImageUrl).Name
         Else
-            openImage.InitialDirectory = New Uri(FullBasePath + "/Buildings").ToString()
+            openImage.InitialDirectory = New Uri(DataPath + "/Buildings").ToString()
             openImage.FileName = ""
         End If
         If openImage.ShowDialog(Me) = DialogResult.OK Then
-            Dim test1 As Uri = New Uri(FullBasePath + "/")
+            Dim test1 As Uri = New Uri(DataPath + "/")
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
             sender.ShadowImageUrl = Uri.UnescapeDataString(test3.ToString())
@@ -242,7 +242,7 @@ Public Class FrmConfigEditor
 
     Private Sub BuildingEntryTxtFullImageUrlMouseEnter(sender As BuildingEntry, e As EventArgs)
         Try
-            picPreview.Image = Image.FromFile(FullBasePath + "/" + sender.FullImageUrl)
+            picPreview.Image = Image.FromFile(DataPath + "/" + sender.FullImageUrl)
         Catch ex As Exception
             picPreview.Image = Nothing
         End Try
@@ -256,7 +256,7 @@ Public Class FrmConfigEditor
 
     Private Sub BuildingEntryTxtShadowImageUrlMouseEnter(sender As BuildingEntry, e As EventArgs)
         Try
-            picPreview.Image = Image.FromFile(FullBasePath + "/" + sender.ShadowImageUrl)
+            picPreview.Image = Image.FromFile(DataPath + "/" + sender.ShadowImageUrl)
         Catch ex As Exception
             picPreview.Image = Nothing
         End Try
@@ -293,15 +293,15 @@ Public Class FrmConfigEditor
     End Sub
 
     Private Sub UnitEntryBtnBrowseFullImageClicked(sender As UnitEntry, e As EventArgs)
-        If My.Computer.FileSystem.FileExists(FullBasePath + "/" + sender.FullImageUrl) Then
-            openImage.InitialDirectory = New Uri(FullBasePath + "/" + sender.FullImageUrl).ToString().Replace(My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.FullImageUrl).Name, "")
-            openImage.FileName = My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.FullImageUrl).Name
+        If My.Computer.FileSystem.FileExists(DataPath + "/" + sender.FullImageUrl) Then
+            openImage.InitialDirectory = New Uri(DataPath + "/" + sender.FullImageUrl).ToString().Replace(My.Computer.FileSystem.GetFileInfo(DataPath + "/" + sender.FullImageUrl).Name, "")
+            openImage.FileName = My.Computer.FileSystem.GetFileInfo(DataPath + "/" + sender.FullImageUrl).Name
         Else
-            openImage.InitialDirectory = New Uri(FullBasePath + "/Units").ToString()
+            openImage.InitialDirectory = New Uri(DataPath + "/Units").ToString()
             openImage.FileName = ""
         End If
         If openImage.ShowDialog(Me) = DialogResult.OK Then
-            Dim test1 As Uri = New Uri(FullBasePath + "/")
+            Dim test1 As Uri = New Uri(DataPath + "/")
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
             sender.FullImageUrl = Uri.UnescapeDataString(test3.ToString())
@@ -310,15 +310,15 @@ Public Class FrmConfigEditor
     End Sub
 
     Private Sub UnitEntryBtnBrowseShadowImageClicked(sender As UnitEntry, e As EventArgs)
-        If My.Computer.FileSystem.FileExists(FullBasePath + "/" + sender.ShadowImageUrl) Then
-            openImage.InitialDirectory = New Uri(FullBasePath + "/" + sender.ShadowImageUrl).ToString().Replace(My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.ShadowImageUrl).Name, "")
-            openImage.FileName = My.Computer.FileSystem.GetFileInfo(FullBasePath + "/" + sender.ShadowImageUrl).Name
+        If My.Computer.FileSystem.FileExists(DataPath + "/" + sender.ShadowImageUrl) Then
+            openImage.InitialDirectory = New Uri(DataPath + "/" + sender.ShadowImageUrl).ToString().Replace(My.Computer.FileSystem.GetFileInfo(DataPath + "/" + sender.ShadowImageUrl).Name, "")
+            openImage.FileName = My.Computer.FileSystem.GetFileInfo(DataPath + "/" + sender.ShadowImageUrl).Name
         Else
-            openImage.InitialDirectory = New Uri(FullBasePath + "/Units").ToString()
+            openImage.InitialDirectory = New Uri(DataPath + "/Units").ToString()
             openImage.FileName = ""
         End If
         If openImage.ShowDialog(Me) = DialogResult.OK Then
-            Dim test1 As Uri = New Uri(FullBasePath + "/")
+            Dim test1 As Uri = New Uri(DataPath + "/")
             Dim test2 As Uri = New Uri(openImage.FileName)
             Dim test3 As Uri = test1.MakeRelativeUri(test2)
             sender.ShadowImageUrl = Uri.UnescapeDataString(test3.ToString())
@@ -328,7 +328,7 @@ Public Class FrmConfigEditor
 
     Private Sub UnitEntryTxtFullImageUrlMouseEnter(sender As UnitEntry, e As EventArgs)
         Try
-            picPreview.Image = Image.FromFile(FullBasePath + "/" + sender.FullImageUrl)
+            picPreview.Image = Image.FromFile(DataPath + "/" + sender.FullImageUrl)
         Catch ex As Exception
             picPreview.Image = Nothing
         End Try
@@ -342,7 +342,7 @@ Public Class FrmConfigEditor
 
     Private Sub UnitEntryTxtShadowImageUrlMouseEnter(sender As UnitEntry, e As EventArgs)
         Try
-            picPreview.Image = Image.FromFile(FullBasePath + "/" + sender.ShadowImageUrl)
+            picPreview.Image = Image.FromFile(DataPath + "/" + sender.ShadowImageUrl)
         Catch ex As Exception
             picPreview.Image = Nothing
         End Try
