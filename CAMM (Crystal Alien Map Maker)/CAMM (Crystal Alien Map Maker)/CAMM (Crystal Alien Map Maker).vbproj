@@ -254,45 +254,18 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="icons\CAMMFile.ico" />
+    <None Include="icons\Crystal.ico" />
+    <None Include="CAMM_Data\Sources\BuildingButtonTest.xcf" />
     <None Include="app.config" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
-    <None Include="CAMM_Data\Brushes\Rectangle\LakeFill.ini" />
-    <None Include="CAMM_Data\Brushes\Rectangle\MountainFill.ini" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="icons\CAMMFile.ico" />
-    <None Include="icons\Crystal.ico" />
-    <Content Include="lib\*" />
-    <Content Include="Maps\AnotherTest.map" />
-    <Content Include="Maps\Blank.map" />
-    <Content Include="Maps\Building_Debug.map" />
-    <Content Include="Maps\Building_Upgrade_Test.map" />
-    <Content Include="Maps\Building_Upgrade_Test_2.map" />
-    <Content Include="Maps\Crystal Valley.camm" />
-    <Content Include="Maps\Format.map" />
-    <Content Include="Maps\Import Test.map" />
-    <Content Include="Maps\Map4.camm" />
-    <Content Include="Maps\Overlap Test.map" />
-    <Content Include="Maps\ReadOnly.map" />
-    <Content Include="Maps\Spiral.map" />
-    <Content Include="Maps\Strange Map Design.camm" />
-    <Content Include="Maps\Test 2.map" />
-    <Content Include="Maps\Test 3.map" />
-    <Content Include="Maps\Test 4.camm" />
-    <Content Include="Maps\Test Map 2.map" />
-    <Content Include="Maps\Test Map 3.camm" />
-    <Content Include="Maps\Test Map 3.map" />
-    <Content Include="Maps\Test Map 4.camm" />
-    <Content Include="Maps\Test Map 4.map" />
-    <Content Include="Maps\Test Map.map" />
-    <Content Include="Maps\Test.map" />
-    <Content Include="Maps\Test1.camm" />
-    <Content Include="Maps\Test2.camm" />
-    <Content Include="Maps\TestBlank.map" />
+    <Content Include="lib\Nini.dll" />
     <Content Include="CAMM_Data\Buildings.ini" />
     <Content Include="CAMM_Data\Config.ini" />
     <Content Include="CAMM_Data\Terrain.ini" />
@@ -305,7 +278,9 @@
     <Content Include="CAMM_Data\Brushes\Rectangle\Isthmus-NS.ini" />
     <Content Include="CAMM_Data\Brushes\Rectangle\Isthmus-WE.ini" />
     <Content Include="CAMM_Data\Brushes\Rectangle\Lake.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\LakeFill.ini" />
     <Content Include="CAMM_Data\Brushes\Rectangle\Montain.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\MountainFill.ini" />
     <Content Include="CAMM_Data\Brushes\Rectangle\Ridge-NS.ini" />
     <Content Include="CAMM_Data\Brushes\Rectangle\Ridge-WE.ini" />
     <Content Include="CAMM_Data\Brushes\Rectangle\River-NS.ini" />
@@ -315,22 +290,21 @@
     <Content Include="CAMM_Data\Brushes\Rectangle\Valley-WE.ini" />
     <Content Include="CAMM_Data\Default Maps\Astro Level 1.camm" />
     <Content Include="CAMM_Data\Default Maps\Astro Level 6.map" />
-    <Content Include="CAMM_Data\Buttons\Blank.png" />
-    <Content Include="CAMM_Data\Other Data\AlienBaseplateAlphaSmall.png" />
-    <Content Include="CAMM_Data\Other Data\AlienBaseplateAlphaWide.png" />
-    <Content Include="CAMM_Data\Other Data\AlienTeamIndicatorIcon.png" />
-    <Content Include="CAMM_Data\Other Data\AstroBaseplateAlphaSmall.png" />
-    <Content Include="CAMM_Data\Other Data\AstroBaseplateAlphaWide.png" />
-    <Content Include="CAMM_Data\Other Data\AstroTeamIndicatorIcon.png" />
-    <Content Include="CAMM_Data\Other Data\Background.png" />
-    <Content Include="CAMM_Data\Other Data\BuildingButtonTest.xcf" />
-    <Content Include="CAMM_Data\Other Data\ButtonAlienUnderlay.png" />
-    <Content Include="CAMM_Data\Other Data\ButtonAstroUnderlay.png" />
-    <Content Include="CAMM_Data\Other Data\ButtonNeutralUnderlay.png" />
-    <Content Include="CAMM_Data\Other Data\ButtonOverlay.png" />
-    <Content Include="CAMM_Data\Other Data\NeutralTeamIndicatorIcon.png" />
-    <Content Include="CAMM_Data\Other Data\UnitSelectionClick.png" />
-    <Content Include="CAMM_Data\Other Data\UnitSelectionHover.png" />
+    <Content Include="CAMM_Data\Backgrounds\Mars.png" />
+    <Content Include="CAMM_Data\Baseplates\Alien1x2.png" />
+    <Content Include="CAMM_Data\Baseplates\Alien2x2.png" />
+    <Content Include="CAMM_Data\Baseplates\Astro1x2.png" />
+    <Content Include="CAMM_Data\Baseplates\Astro2x2.png" />
+    <Content Include="CAMM_Data\UI\Buttons\AlienBackground.png" />
+    <Content Include="CAMM_Data\UI\Buttons\AstroBackground.png" />
+    <Content Include="CAMM_Data\UI\Buttons\Blank.png" />
+    <Content Include="CAMM_Data\UI\Buttons\NeutralBackground.png" />
+    <Content Include="CAMM_Data\UI\Buttons\Overlay.png" />
+    <Content Include="CAMM_Data\UI\Indicators\AlienTeam.png" />
+    <Content Include="CAMM_Data\UI\Indicators\AstroTeam.png" />
+    <Content Include="CAMM_Data\UI\Indicators\NeutralTeam.png" />
+    <Content Include="CAMM_Data\UI\Overlays\UnitSelectionClick.png" />
+    <Content Include="CAMM_Data\UI\Overlays\UnitSelectionHover.png" />
     <Content Include="CAMM_Data\Units\Aliens\UA_evil.png" />
     <Content Include="CAMM_Data\Units\Aliens\UA_evil_shadow.png" />
     <Content Include="CAMM_Data\Units\Aliens\UB_evil.png" />
