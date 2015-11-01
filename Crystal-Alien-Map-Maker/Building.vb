@@ -175,6 +175,9 @@
     Public Sub DrawBaseplate(g As Graphics)
         If BaseplateImage IsNot Nothing Then
             Dim drawPoint As Point = Location
+
+            drawPoint.X = X - (BaseplateImage.Width / 2) + TileSizeX
+
             If BuildingW > 1 Then
                 drawPoint.X += (BuildingW * TileSizeX) / 2
                 drawPoint.X -= TileSizeX
