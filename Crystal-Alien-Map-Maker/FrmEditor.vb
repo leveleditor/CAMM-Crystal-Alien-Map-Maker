@@ -725,7 +725,7 @@ Public Class FrmEditor
         Me.openMap.FilterIndex = 1
         Me.openMap.RestoreDirectory = False
         Me.openMap.Title = "Select Map File To Open..."
-        Me.openMap.InitialDirectory = FullBasePath + SavePath
+        Me.openMap.InitialDirectory = SavePath
 
         If Me.openMap.ShowDialog = DialogResult.OK Then
             BeginLoadMap(Me.openMap.FileName)
@@ -781,7 +781,7 @@ Public Class FrmEditor
         Me.saveMap.FilterIndex = 1
         Me.saveMap.RestoreDirectory = False
         Me.saveMap.Title = "Select Where To Save Map File..."
-        Me.saveMap.InitialDirectory = FullBasePath + SavePath
+        Me.saveMap.InitialDirectory = SavePath
 
         If Me.saveMap.ShowDialog = DialogResult.OK Then
             SaveFile(saveMap.FileName)

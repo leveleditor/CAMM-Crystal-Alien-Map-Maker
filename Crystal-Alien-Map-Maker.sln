@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CAMM (Crystal Alien Map Maker)", "CAMM (Crystal Alien Map Maker)\CAMM (Crystal Alien Map Maker).vbproj", "{E1C3D508-E62F-4986-8DA9-BF3C930F903A}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CAMM", "Crystal-Alien-Map-Maker\CAMM.vbproj", "{E1C3D508-E62F-4986-8DA9-BF3C930F903A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,11 +32,11 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = CAMM (Crystal Alien Map Maker)\CAMM (Crystal Alien Map Maker).vbproj
+		StartupItem = Crystal-Alien-Map-Maker\CAMM.vbproj
 		Policies = $0
 		$0.StandardHeader = $1
 		$1.Text = 
 		$1.IncludeInNewFiles = True
-		outputpath = CAMM (Crystal Alien Map Maker)\bin
+		outputpath = Crystal-Alien-Map-Maker\bin
 	EndGlobalSection
 EndGlobal

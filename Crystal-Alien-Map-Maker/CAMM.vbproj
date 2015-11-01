@@ -1,0 +1,516 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E1C3D508-E62F-4986-8DA9-BF3C930F903A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>CAMM.My.MyApplication</StartupObject>
+    <RootNamespace>CAMM</RootNamespace>
+    <AssemblyName>Crystal Alien Map Maker</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <OptionInfer>On</OptionInfer>
+    <ApplicationIcon>icons\Crystal.ico</ApplicationIcon>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
+    <SignManifests>false</SignManifests>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>false</GenerateManifests>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Background</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\AnyCPU\Debug\</OutputPath>
+    <DocumentationFile>Crystal Alien Map Maker.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <AdditionalParameters>
+    </AdditionalParameters>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\AnyCPU\Release\</OutputPath>
+    <DocumentationFile>Crystal Alien Map Maker.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <AdditionalParameters>
+    </AdditionalParameters>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>Crystal Alien Map Maker.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>Crystal Alien Map Maker.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DocumentationFile>Crystal Alien Map Maker.xml</DocumentationFile>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DocumentationFile>Crystal Alien Map Maker.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036,42353,42354,42355</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Nini">
+      <HintPath>lib\Nini.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
+    <Compile Include="Assets.vb" />
+    <Compile Include="Building.vb" />
+    <Compile Include="BuildingDef.vb" />
+    <Compile Include="Config.vb" />
+    <Compile Include="Constants.vb" />
+    <Compile Include="CustomColorTable.vb" />
+    <Compile Include="FrmUnitProperties.Designer.vb">
+      <DependentUpon>FrmUnitProperties.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUnitProperties.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMapProperties.Designer.vb">
+      <DependentUpon>FrmMapProperties.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmMapProperties.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Map.vb" />
+    <Compile Include="RectangleBrushPreset.vb" />
+    <Compile Include="TileDef.vb" />
+    <Compile Include="Unit.vb" />
+    <Compile Include="FrmExportAS.Designer.vb">
+      <DependentUpon>FrmExportAS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmExportAS.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BuildingEntry.Designer.vb">
+      <DependentUpon>BuildingEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="BuildingEntry.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="TileEntry.Designer.vb">
+      <DependentUpon>TileEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="TileEntry.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FrmEditor.Designer.vb">
+      <DependentUpon>FrmEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmImportAS.Designer.vb">
+      <DependentUpon>FrmImportAS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmImportAS.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmConfigEditor.Designer.vb">
+      <DependentUpon>FrmConfigEditor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmConfigEditor.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="Tile.vb" />
+    <Compile Include="UnitDef.vb" />
+    <Compile Include="UnitEntry.Designer.vb">
+      <DependentUpon>UnitEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UnitEntry.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Utils.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FrmExportAS.resx">
+      <DependentUpon>FrmExportAS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BuildingEntry.resx">
+      <DependentUpon>BuildingEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUnitProperties.resx">
+      <DependentUpon>FrmUnitProperties.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TileEntry.resx">
+      <DependentUpon>TileEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmEditor.resx">
+      <DependentUpon>FrmEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmImportAS.resx">
+      <DependentUpon>FrmImportAS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMapProperties.resx">
+      <DependentUpon>FrmMapProperties.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmConfigEditor.resx">
+      <DependentUpon>FrmConfigEditor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UnitEntry.resx">
+      <DependentUpon>UnitEntry.vb</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="icons\CAMMFile.ico" />
+    <None Include="icons\Crystal.ico" />
+    <None Include="CAMM_Data\Sources\BuildingButtonTest.xcf" />
+    <None Include="app.config" />
+    <None Include="My Project\app.manifest" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="lib\Nini.dll" />
+    <Content Include="CAMM_Data\Buildings.ini" />
+    <Content Include="CAMM_Data\Config.ini" />
+    <Content Include="CAMM_Data\Terrain.ini" />
+    <Content Include="CAMM_Data\Units.ini" />
+    <Content Include="CAMM_Data\UpgradeBuildings.dat" />
+    <Content Include="CAMM_Data\UpgradeTerrain.dat" />
+    <Content Include="CAMM_Data\UpgradeUnits.dat" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Crystals.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Island.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Isthmus-NS.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Isthmus-WE.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Lake.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\LakeFill.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Montain.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\MountainFill.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Ridge-NS.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Ridge-WE.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\River-NS.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\River-WE.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\RockBorders.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Valley-NS.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Valley-WE.ini" />
+    <Content Include="CAMM_Data\Default_Maps\Astro Level 1.camm" />
+    <Content Include="CAMM_Data\Default_Maps\Astro Level 6.map" />
+    <Content Include="CAMM_Data\Backgrounds\Mars.png" />
+    <Content Include="CAMM_Data\Baseplates\Alien1x2.png" />
+    <Content Include="CAMM_Data\Baseplates\Alien2x2.png" />
+    <Content Include="CAMM_Data\Baseplates\Astro1x2.png" />
+    <Content Include="CAMM_Data\Baseplates\Astro2x2.png" />
+    <Content Include="CAMM_Data\UI\Buttons\AlienBackground.png" />
+    <Content Include="CAMM_Data\UI\Buttons\AstroBackground.png" />
+    <Content Include="CAMM_Data\UI\Buttons\Blank.png" />
+    <Content Include="CAMM_Data\UI\Buttons\NeutralBackground.png" />
+    <Content Include="CAMM_Data\UI\Buttons\Overlay.png" />
+    <Content Include="CAMM_Data\UI\Indicators\AlienTeam.png" />
+    <Content Include="CAMM_Data\UI\Indicators\AstroTeam.png" />
+    <Content Include="CAMM_Data\UI\Indicators\NeutralTeam.png" />
+    <Content Include="CAMM_Data\UI\Overlays\UnitSelectionClick.png" />
+    <Content Include="CAMM_Data\UI\Overlays\UnitSelectionHover.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UA_evil.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UA_evil_shadow.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UB_evil.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UB_evil_shadow.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UC_evil.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UC_evil_shadow.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UD_evil.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UD_evil_shadow.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UE_evil.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UE_evil_shadow.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UF_evil.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UF_evil_shadow.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UG_evil.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UG_evil_shadow.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UH_evil.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UH_evil_shadow.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UP_evil.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UP_evil_shadow.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UQ_evil.png" />
+    <Content Include="CAMM_Data\Units\Aliens\UQ_evil_shadow.png" />
+    <Content Include="CAMM_Data\Units\Astros\UA_good.png" />
+    <Content Include="CAMM_Data\Units\Astros\UA_good_shadow.png" />
+    <Content Include="CAMM_Data\Units\Astros\UB_good.png" />
+    <Content Include="CAMM_Data\Units\Astros\UB_good_shadow.png" />
+    <Content Include="CAMM_Data\Units\Astros\UC_good.png" />
+    <Content Include="CAMM_Data\Units\Astros\UC_good_shadow.png" />
+    <Content Include="CAMM_Data\Units\Astros\UD_good.png" />
+    <Content Include="CAMM_Data\Units\Astros\UD_good_shadow.png" />
+    <Content Include="CAMM_Data\Units\Astros\UE_good.png" />
+    <Content Include="CAMM_Data\Units\Astros\UE_good_shadow.png" />
+    <Content Include="CAMM_Data\Units\Astros\UF_good.png" />
+    <Content Include="CAMM_Data\Units\Astros\UF_good_shadow.png" />
+    <Content Include="CAMM_Data\Units\Astros\UG_good.png" />
+    <Content Include="CAMM_Data\Units\Astros\UG_good_shadow.png" />
+    <Content Include="CAMM_Data\Units\Astros\UH_good.png" />
+    <Content Include="CAMM_Data\Units\Astros\UH_good_shadow.png" />
+    <Content Include="CAMM_Data\Units\Astros\UM_evil.png" />
+    <Content Include="CAMM_Data\Units\Astros\UM_evil_shadow.png" />
+    <Content Include="CAMM_Data\Units\Astros\UP_good.png" />
+    <Content Include="CAMM_Data\Units\Astros\UP_good_shadow.png" />
+    <Content Include="CAMM_Data\Units\Astros\UR_good.png" />
+    <Content Include="CAMM_Data\Units\Astros\UR_good_shadow.png" />
+    <Content Include="CAMM_Data\Units\Items\UI_evil.png" />
+    <Content Include="CAMM_Data\Units\Items\UI_evil_shadow.png" />
+    <Content Include="CAMM_Data\Units\Items\UI_good.png" />
+    <Content Include="CAMM_Data\Units\Items\UI_good_shadow.png" />
+    <Content Include="CAMM_Data\Units\Items\UJ_good.png" />
+    <Content Include="CAMM_Data\Units\Items\UJ_good_shadow.png" />
+    <Content Include="CAMM_Data\Units\Items\UO_evil_01.png" />
+    <Content Include="CAMM_Data\Units\Items\UO_evil_02.png" />
+    <Content Include="CAMM_Data\Units\Items\UO_evil_03.png" />
+    <Content Include="CAMM_Data\Units\Items\UO_evil_04.png" />
+    <Content Include="CAMM_Data\Units\Items\UO_evil_05.png" />
+    <Content Include="CAMM_Data\Units\Items\UO_evil_shadow.png" />
+    <Content Include="CAMM_Data\Units\Santa\UM_evil.png" />
+    <Content Include="CAMM_Data\Units\Santa\UM_evil_shadow.png" />
+    <Content Include="CAMM_Data\Units\Santa\UN_evil.png" />
+    <Content Include="CAMM_Data\Units\Santa\UN_evil_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BA_evil.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BA_evil_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BB_evil.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BB_evil_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BC_evil.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BC_evil_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BD_evil.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BD_evil_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BE_evil.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BE_evil_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BF_evil.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BF_evil_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BG_evil.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BG_evil_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BH_evil.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BH_evil_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BK_evil.png" />
+    <Content Include="CAMM_Data\Buildings\Aliens\BK_evil_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BA_good.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BA_good_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BB_good.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BB_good_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BC_good.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BC_good_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BD_good.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BD_good_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BE_good.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BE_good_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BF_good.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BF_good_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BG_good.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BG_good_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BH_good.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BH_good_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BK_good.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BK_good_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BL_good.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BL_good_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BX_good.png" />
+    <Content Include="CAMM_Data\Buildings\Astros\BX_good_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Neutral\BI_good.png" />
+    <Content Include="CAMM_Data\Buildings\Neutral\BI_good_shadow.png" />
+    <Content Include="CAMM_Data\Buildings\Santa\BJ_evil.png" />
+    <Content Include="CAMM_Data\Buildings\Santa\BJ_evil_shadow.png" />
+    <Content Include="CAMM_Data\Tiles\Tile1.png" />
+    <Content Include="CAMM_Data\Tiles\Tile10.png" />
+    <Content Include="CAMM_Data\Tiles\Tile11.png" />
+    <Content Include="CAMM_Data\Tiles\Tile12.png" />
+    <Content Include="CAMM_Data\Tiles\Tile13.png" />
+    <Content Include="CAMM_Data\Tiles\Tile14.png" />
+    <Content Include="CAMM_Data\Tiles\Tile15.png" />
+    <Content Include="CAMM_Data\Tiles\Tile16.png" />
+    <Content Include="CAMM_Data\Tiles\Tile17.png" />
+    <Content Include="CAMM_Data\Tiles\Tile18.png" />
+    <Content Include="CAMM_Data\Tiles\Tile19.png" />
+    <Content Include="CAMM_Data\Tiles\Tile2.png" />
+    <Content Include="CAMM_Data\Tiles\Tile20.png" />
+    <Content Include="CAMM_Data\Tiles\Tile21.png" />
+    <Content Include="CAMM_Data\Tiles\Tile22.png" />
+    <Content Include="CAMM_Data\Tiles\Tile23.png" />
+    <Content Include="CAMM_Data\Tiles\Tile24.png" />
+    <Content Include="CAMM_Data\Tiles\Tile25.png" />
+    <Content Include="CAMM_Data\Tiles\Tile26.png" />
+    <Content Include="CAMM_Data\Tiles\Tile27.png" />
+    <Content Include="CAMM_Data\Tiles\Tile28.png" />
+    <Content Include="CAMM_Data\Tiles\Tile29.png" />
+    <Content Include="CAMM_Data\Tiles\Tile3.png" />
+    <Content Include="CAMM_Data\Tiles\Tile30.png" />
+    <Content Include="CAMM_Data\Tiles\Tile31.png" />
+    <Content Include="CAMM_Data\Tiles\Tile32.png" />
+    <Content Include="CAMM_Data\Tiles\Tile33.png" />
+    <Content Include="CAMM_Data\Tiles\Tile34.png" />
+    <Content Include="CAMM_Data\Tiles\Tile35.png" />
+    <Content Include="CAMM_Data\Tiles\Tile36.png" />
+    <Content Include="CAMM_Data\Tiles\Tile37.png" />
+    <Content Include="CAMM_Data\Tiles\Tile38.png" />
+    <Content Include="CAMM_Data\Tiles\Tile39.png" />
+    <Content Include="CAMM_Data\Tiles\Tile4.png" />
+    <Content Include="CAMM_Data\Tiles\Tile40.png" />
+    <Content Include="CAMM_Data\Tiles\Tile41.png" />
+    <Content Include="CAMM_Data\Tiles\Tile42.png" />
+    <Content Include="CAMM_Data\Tiles\Tile43.png" />
+    <Content Include="CAMM_Data\Tiles\Tile44.png" />
+    <Content Include="CAMM_Data\Tiles\Tile45.png" />
+    <Content Include="CAMM_Data\Tiles\Tile46.png" />
+    <Content Include="CAMM_Data\Tiles\Tile47.png" />
+    <Content Include="CAMM_Data\Tiles\Tile48.png" />
+    <Content Include="CAMM_Data\Tiles\Tile49.png" />
+    <Content Include="CAMM_Data\Tiles\Tile5.png" />
+    <Content Include="CAMM_Data\Tiles\Tile50.png" />
+    <Content Include="CAMM_Data\Tiles\Tile51.png" />
+    <Content Include="CAMM_Data\Tiles\Tile52.png" />
+    <Content Include="CAMM_Data\Tiles\Tile6.png" />
+    <Content Include="CAMM_Data\Tiles\Tile7.png" />
+    <Content Include="CAMM_Data\Tiles\Tile8.png" />
+    <Content Include="CAMM_Data\Tiles\Tile9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.4.5">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 4.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>"$(ProjectDir)InsertIcons.exe" "$(TargetPath)" "$(ProjectDir)icons"</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
