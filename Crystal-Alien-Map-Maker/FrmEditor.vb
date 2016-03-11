@@ -136,11 +136,12 @@ Public Class FrmEditor
         activeUnit = New Unit(0, 0)
         picActive.Image = Nothing
 
-        'Start a new map.
-        NewMap()
-
         If My.Application.CommandLineArgs.Count > 0 Then
+            'Load the map file passed on the command line.
             BeginLoadMap(My.Application.CommandLineArgs(0))
+        Else
+            'Start a new map.
+            NewMap()
         End If
 
         isLoaded = True
@@ -737,7 +738,7 @@ Public Class FrmEditor
         If config Is Nothing Then
             NewMap()
             ActiveMap.LoadMapv0(source)
-            EndLoadMap()
+            EndLoadMap(fileName)
         Else
             Dim v As Integer = config.GetInt("vFormat", -1)
             If v = -1 Then
@@ -748,19 +749,19 @@ Public Class FrmEditor
                 NewMap()
                 ActiveMap.LoadMapv1(source)
 
-                EndLoadMap()
+                EndLoadMap(fileName)
             ElseIf v >= 2 And v <= MapFormat Then
                 NewMap()
                 ActiveMap.LoadMap(source, v)
 
-                EndLoadMap()
+                EndLoadMap(fileName)
             Else
                 MsgBox("This map file has an invalid value of '" + v.ToString() + "' for the map format and cannot be opened.")
             End If
         End If
     End Sub
-    Private Sub EndLoadMap()
-        ActiveMap.FilePath = openMap.FileName
+    Private Sub EndLoadMap(fileName As String)
+        ActiveMap.FilePath = fileName
 
         UpdateFormTitle()
         UpdateMapTabs()
