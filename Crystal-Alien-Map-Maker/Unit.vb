@@ -4,7 +4,7 @@
         Me.Position = New Point(x, y)
         Me.UnitId = ""
         Me.Team = Team.Neutral
-        Me.Angle = 0.0
+        Me.Angle = 0.25
         Me.Damage = 0.0
         Me.Altitude = 0
         Me.IsPickup = False
