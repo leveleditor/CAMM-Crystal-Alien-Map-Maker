@@ -1,0 +1,95 @@
+[CAMM]
+vFormat = 6
+
+[Level]
+Title = dump - Level 2
+Author = 4t2 Multimedia , ported by the Crystalien Redux organization
+W = 15
+H = 15
+Team = 0
+CashPlayer = 2000
+CashEnemy  = 0
+isTraining = True
+isConflict = False
+isSpecialLevel = False
+isLastSpecialLevel = False
+isBonusLevel = False
+
+[Terrain]
+; Terrain Format: {str_Id|i_PosX|i_PosY}
+Terrain0 = {10|0|0}
+Terrain1 = {12|1|0}
+Terrain2 = {6|2|0}
+Terrain3 = {12|0|1}
+Terrain4 = {6|1|1}
+Terrain5 = {47|8|1}
+Terrain6 = {47|9|1}
+Terrain7 = {8|13|1}
+Terrain8 = {1|14|1}
+Terrain9 = {6|0|2}
+Terrain10 = {8|7|2}
+Terrain11 = {5|8|2}
+Terrain12 = {47|9|2}
+Terrain13 = {47|10|2}
+Terrain14 = {8|12|2}
+Terrain15 = {14|13|2}
+Terrain16 = {9|14|2}
+Terrain17 = {7|7|3}
+Terrain18 = {16|8|3}
+Terrain19 = {5|9|3}
+Terrain20 = {47|10|3}
+Terrain21 = {4|12|3}
+Terrain22 = {9|13|3}
+Terrain23 = {9|14|3}
+Terrain24 = {47|7|4}
+Terrain25 = {7|8|4}
+Terrain26 = {6|9|4}
+Terrain27 = {7|12|4}
+Terrain28 = {20|13|4}
+Terrain29 = {27|14|4}
+Terrain30 = {36|4|8}
+Terrain31 = {29|5|8}
+Terrain32 = {33|6|8}
+Terrain33 = {47|14|8}
+Terrain34 = {47|3|9}
+Terrain35 = {35|4|9}
+Terrain36 = {41|5|9}
+Terrain37 = {30|6|9}
+Terrain38 = {47|13|9}
+Terrain39 = {47|14|9}
+Terrain40 = {36|4|10}
+Terrain41 = {44|5|10}
+Terrain42 = {34|6|10}
+Terrain43 = {47|13|10}
+Terrain44 = {8|14|10}
+Terrain45 = {35|4|11}
+Terrain46 = {34|5|11}
+Terrain47 = {47|6|11}
+Terrain48 = {47|12|11}
+Terrain49 = {47|13|11}
+Terrain50 = {4|14|11}
+Terrain51 = {47|12|12}
+Terrain52 = {8|13|12}
+Terrain53 = {14|14|12}
+Terrain54 = {47|12|13}
+Terrain55 = {4|13|13}
+Terrain56 = {10|14|13}
+Terrain57 = {46|12|14}
+Terrain58 = {4|13|14}
+Terrain59 = {9|14|14}
+
+[Buildings]
+; Building Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage}
+Building0 = {BA_good|0|8|0|0|0}
+Building1 = {BB_good|2|10|0|0|0}
+
+[Units]
+; Unit Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage|str_AiTarget|str_AiObj|bool_Respawn}
+Unit0 = {UD_good|912|216|0|0.5|0|still|0|False}
+Unit1 = {UA_good|248|413|0|0.25|0|still|0|False}
+Unit2 = {UA_good|308|405|0|0.5|0|still|0|False}
+Unit3 = {UA_good|333|399|0|0.125|0|still|0|False}
+Unit4 = {UA_good|235|418|0|0.375|0|still|0|False}
+Unit5 = {UA_evil|1389|17|1|0.75|0|roam|10|False}
+Unit6 = {UA_evil|1214|692|1|0.75|0|roam|20|False}
+Unit7 = {UA_evil|1369|114|1|0.75|0|still|0|False}

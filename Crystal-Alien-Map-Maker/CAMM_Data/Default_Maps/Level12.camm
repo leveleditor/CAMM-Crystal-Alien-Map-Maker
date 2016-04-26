@@ -1,0 +1,138 @@
+﻿[CAMM]
+vFormat = 6
+
+[Level]
+Title = Aliens - Level 2
+Author = 4t2 Multimedia , ported by the Crystalien Redux organization
+W = 13
+H = 14
+Team = 1
+CashPlayer = 0
+CashEnemy = 999999900
+isTraining = True
+isConflict = False
+isSpecialLevel = False
+isLastSpecialLevel = False
+isBonusLevel = False
+
+[Terrain]
+; Terrain Format: {str_Id|i_PosX|i_PosY}
+Terrain0 = {12|0|0}
+Terrain1 = {2|0|1}
+Terrain2 = {11|0|2}
+Terrain3 = {9|0|3}
+Terrain4 = {27|0|4}
+Terrain5 = {5|0|9}
+Terrain6 = {11|0|10}
+Terrain7 = {13|0|11}
+Terrain8 = {4|0|12}
+Terrain9 = {14|0|13}
+Terrain10 = {3|1|0}
+Terrain11 = {47|1|1}
+Terrain12 = {5|1|2}
+Terrain13 = {2|1|3}
+Terrain14 = {22|1|4}
+Terrain15 = {1|1|10}
+Terrain16 = {10|1|11}
+Terrain17 = {9|1|12}
+Terrain18 = {9|1|13}
+Terrain19 = {3|2|0}
+Terrain20 = {47|2|1}
+Terrain21 = {47|2|2}
+Terrain22 = {47|2|3}
+Terrain23 = {47|2|4}
+Terrain24 = {1|2|10}
+Terrain25 = {9|2|11}
+Terrain26 = {9|2|12}
+Terrain27 = {12|2|13}
+Terrain28 = {13|3|0}
+Terrain29 = {7|3|1}
+Terrain30 = {47|3|2}
+Terrain31 = {47|3|3}
+Terrain32 = {47|3|4}
+Terrain33 = {5|3|10}
+Terrain34 = {11|3|11}
+Terrain35 = {9|3|12}
+Terrain36 = {13|3|13}
+Terrain37 = {10|4|0}
+Terrain38 = {3|4|1}
+Terrain39 = {47|4|2}
+Terrain40 = {47|4|3}
+Terrain41 = {47|4|4}
+Terrain42 = {1|4|11}
+Terrain43 = {9|4|12}
+Terrain44 = {9|4|13}
+Terrain45 = {12|5|0}
+Terrain46 = {6|5|1}
+Terrain47 = {47|5|2}
+Terrain48 = {47|5|3}
+Terrain49 = {1|5|11}
+Terrain50 = {9|5|12}
+Terrain51 = {9|5|13}
+Terrain52 = {3|6|0}
+Terrain53 = {47|6|1}
+Terrain54 = {47|6|2}
+Terrain55 = {8|6|10}
+Terrain56 = {14|6|11}
+Terrain57 = {9|6|12}
+Terrain58 = {9|6|13}
+Terrain59 = {6|7|0}
+Terrain60 = {17|7|9}
+Terrain61 = {14|7|10}
+Terrain62 = {9|7|11}
+Terrain63 = {9|7|12}
+Terrain64 = {9|7|13}
+Terrain65 = {35|8|0}
+Terrain66 = {25|8|9}
+Terrain67 = {9|8|10}
+Terrain68 = {9|8|11}
+Terrain69 = {9|8|12}
+Terrain70 = {9|8|13}
+Terrain71 = {31|9|0}
+Terrain72 = {25|9|9}
+Terrain73 = {9|9|10}
+Terrain74 = {9|9|11}
+Terrain75 = {9|9|12}
+Terrain76 = {9|9|13}
+Terrain77 = {34|10|0}
+Terrain78 = {18|10|9}
+Terrain79 = {11|10|10}
+Terrain80 = {9|10|11}
+Terrain81 = {9|10|12}
+Terrain82 = {9|10|13}
+Terrain83 = {35|11|0}
+Terrain84 = {46|11|1}
+Terrain85 = {8|11|9}
+Terrain86 = {14|11|10}
+Terrain87 = {9|11|11}
+Terrain88 = {9|11|12}
+Terrain89 = {12|11|13}
+Terrain90 = {41|12|0}
+Terrain91 = {35|12|1}
+Terrain92 = {36|12|2}
+Terrain93 = {35|12|3}
+Terrain94 = {8|12|6}
+Terrain95 = {4|12|7}
+Terrain96 = {4|12|8}
+Terrain97 = {14|12|9}
+Terrain98 = {9|12|10}
+Terrain99 = {9|12|11}
+Terrain100 = {12|12|12}
+Terrain101 = {6|12|13}
+
+[Buildings]
+; Building Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage}
+
+[Units]
+; Unit Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage|str_AiTarget|str_AiObj|bool_Respawn}
+Unit0 = {UD_good|336|168|0|0.25|0.3|still|0|False}
+Unit1 = {UA_good|267|159|0|0.75|0|guard|[object Object]|False}
+Unit2 = {UA_good|433|174|0|0.75|0|guard|[object Object]|False}
+Unit3 = {UA_good|322|109|0|0.75|0|roam|8|False}
+Unit4 = {UA_good|309|211|0|0.75|0|roam|8|False}
+Unit5 = {UA_evil|809|546|1|0.8125|0|still|0|False}
+Unit6 = {UA_evil|888|563|1|0.875|0|still|0|False}
+Unit7 = {UA_evil|981|543|1|0.9375|0|still|0|False}
+Unit8 = {UI_evil|48|168|1|0.5|0|still|UA_evil|False}
+
+; Map Created Using CAMM Crystal Alien Map Maker
