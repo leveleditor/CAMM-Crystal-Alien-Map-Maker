@@ -4,9 +4,6 @@ Dumped using JavaScript by https://github.com/Brian151
 The data in these files may not be 100% accurate. 
 This is mainly due to discrepencies in the CAMM format and CAC's level data.
 
-Level27 aka 'Alien Bonus 2 - Chess' took a serious hit, 
-it should be regarded as corrupted.
-
 Astro Level 5 uses a main base whose type and team depends on the player's current team,
 the dump does not reflect that.
 
@@ -30,3 +27,6 @@ This data is also not present.
 There also were cases due to CAMM being otherwise unable to read the data that has reaulted
 in null having to be given a default value. That said, the AI target parameter of units
 is to be assumed always wrong in these dumps.
+
+update:
+level27 repaired, i didn't change a 96 to a 48 in a 'rejig' function, whoops!
