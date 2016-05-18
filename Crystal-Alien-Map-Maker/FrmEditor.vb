@@ -406,6 +406,8 @@ Public Class FrmEditor
                     ElseIf ActiveToolMode = ToolMode.RectangleBrush And rectSelectStartX <> -1 And rectSelectStartY <> -1 Then
                         g.DrawRectangle(PenTileHover, rectSelectStartX - (PenTileHover.Width / 2), rectSelectStartY - (PenTileHover.Width / 2), mouseX - rectSelectStartX + TileSizeX + PenTileHover.Width + 1, mouseY - rectSelectStartY + TileSizeY + PenTileHover.Width + 1)
                         g.DrawRectangle(PenTileHover, rectSelectStartX + PenTileHover.Width, rectSelectStartY + PenTileHover.Width, mouseX - rectSelectStartX + TileSizeX - PenTileHover.Width - 1, mouseY - rectSelectStartY + TileSizeY - PenTileHover.Width - 1)
+                    ElseIf ActiveEditMode = EditMode.Buildings And activeBuilding.BuildingId <> ""
+                        g.FillRectangle(BrushBuildingPlacement, mouseX, mouseY, activeBuilding.BuildingW * TileSizeX + 1, activeBuilding.BuildingH * TileSizeY + 1)
                     Else
                         g.DrawRectangle(PenTileHover, mouseX - (PenTileHover.Width / 2), mouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
                     End If

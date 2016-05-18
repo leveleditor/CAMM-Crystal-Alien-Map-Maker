@@ -50,6 +50,7 @@
     Public ReadOnly PenGrid As Pen = Pens.Black
     Public ReadOnly PenSelectionHover As Pen = New Pen(Pens.DarkOrange.Brush, 2)
     Public ReadOnly PenSelected As Pen = New Pen(Pens.LimeGreen.Brush, 3)
+    Public ReadOnly BrushBuildingPlacement As SolidBrush = New SolidBrush(Color.FromArgb(128, 0, 255, 0))
 
     Public Enum EditMode
         Tiles
