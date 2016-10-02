@@ -253,7 +253,9 @@ Public Class Map
                     'Somewhere in the middle
                     tileId = data(1)(1)
                 End If
-                SetTile(x, y, New Tile(tileId))
+                If tileId <> -1 Then
+                    SetTile(x, y, New Tile(tileId))
+                End If
             Next
         Next
     End Sub
