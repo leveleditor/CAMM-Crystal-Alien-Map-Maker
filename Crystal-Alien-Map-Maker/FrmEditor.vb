@@ -137,8 +137,10 @@ Public Class FrmEditor
         picActive.Image = Nothing
 
         If My.Application.CommandLineArgs.Count > 0 Then
-            'Load the map file passed on the command line.
-            BeginLoadMap(My.Application.CommandLineArgs(0))
+            'Load the map file(s) passed on the command line.
+            For Each fileName As String In My.Application.CommandLineArgs
+                BeginLoadMap(fileName)
+            Next
         Else
             'Start a new map.
             NewMap()
@@ -406,7 +408,7 @@ Public Class FrmEditor
                     ElseIf ActiveToolMode = ToolMode.RectangleBrush And rectSelectStartX <> -1 And rectSelectStartY <> -1 Then
                         g.DrawRectangle(PenTileHover, rectSelectStartX - (PenTileHover.Width / 2), rectSelectStartY - (PenTileHover.Width / 2), mouseX - rectSelectStartX + TileSizeX + PenTileHover.Width + 1, mouseY - rectSelectStartY + TileSizeY + PenTileHover.Width + 1)
                         g.DrawRectangle(PenTileHover, rectSelectStartX + PenTileHover.Width, rectSelectStartY + PenTileHover.Width, mouseX - rectSelectStartX + TileSizeX - PenTileHover.Width - 1, mouseY - rectSelectStartY + TileSizeY - PenTileHover.Width - 1)
-                    ElseIf ActiveEditMode = EditMode.Buildings And activeBuilding.BuildingId <> ""
+                    ElseIf ActiveEditMode = EditMode.Buildings And activeBuilding.BuildingId <> "" Then
                         g.FillRectangle(BrushBuildingPlacement, mouseX, mouseY, activeBuilding.BuildingW * TileSizeX + 1, activeBuilding.BuildingH * TileSizeY + 1)
                     Else
                         g.DrawRectangle(PenTileHover, mouseX - (PenTileHover.Width / 2), mouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
@@ -721,17 +723,15 @@ Public Class FrmEditor
     End Sub
 
     Private Sub btnOpen_Click(sender As Object, e As EventArgs) Handles btnOpen.Click
-        'Me.OpenMap.Reset()
-        'Me.OpenMap.DefaultExt = "CAMM Map Files|*.map"
         Me.openMap.FileName = "Map1.camm"
-        'Me.OpenMap.Filter = "CAMM Map Files|*.map|All Files|*.*"
         Me.openMap.FilterIndex = 1
         Me.openMap.RestoreDirectory = False
-        Me.openMap.Title = "Select Map File To Open..."
         Me.openMap.InitialDirectory = SavePath
 
         If Me.openMap.ShowDialog = DialogResult.OK Then
-            BeginLoadMap(Me.openMap.FileName)
+            For Each fileName As String In Me.openMap.FileNames
+                BeginLoadMap(fileName)
+            Next
         End If
     End Sub
     Public Sub BeginLoadMap(fileName As String)
