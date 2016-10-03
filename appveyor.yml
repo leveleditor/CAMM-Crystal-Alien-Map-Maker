@@ -14,3 +14,10 @@ assembly_info:
 build:
   project: Crystal-Alien-Map-Maker.sln
   verbosity: minimal
+  after_build:
+- cmd: 7z a "CAMM-Windows-%PLATFORM%-%APPVEYOR_BUILD_VERSION%-%APPVEYOR_REPO_COMMIT%.zip" "%APPVEYOR_BUILD_FOLDER%\Crystal-Alien-Map-Maker\bin\%PLATFORM%\%CONFIGURATION%\Crystal Alien Map Maker.exe" "%APPVEYOR_BUILD_FOLDER%\Crystal-Alien-Map-Maker\bin\%PLATFORM%\%CONFIGURATION%\*.dll" "%APPVEYOR_BUILD_FOLDER%\Crystal-Alien-Map-Maker\CAMM_Data" "%APPVEYOR_BUILD_FOLDER%\Crystal-Alien-Map-Maker\Maps" "%APPVEYOR_BUILD_FOLDER%\LICENSE" "%APPVEYOR_BUILD_FOLDER%\README.md"
+artifacts:
+- path: CAMM-Windows-$(PLATFORM)-$(APPVEYOR_BUILD_VERSION)-$(APPVEYOR_REPO_COMMIT).zip
+deploy:
+- provider: Environment
+  name: CACRedux-CAMM
