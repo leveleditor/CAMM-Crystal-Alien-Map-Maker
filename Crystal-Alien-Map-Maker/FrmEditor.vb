@@ -779,6 +779,16 @@ Public Class FrmEditor
         End If
     End Sub
     Public Sub BeginLoadMap(fileName As String)
+        'Check if the same map is already open in a tab.
+        For Each map As Map In Maps
+            If map.FilePath = fileName Then
+                'Avoid loading the same map into two different tabs.
+                'Instead, select the current tab and abort loading.
+                ActiveMapNum = Maps.IndexOf(map)
+                Return
+            End If
+        Next
+
         Dim source As New IniConfigSource(fileName)
         Dim config As IConfig = source.Configs.Item("CAMM")
         If config Is Nothing Then
