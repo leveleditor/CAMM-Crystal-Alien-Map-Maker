@@ -2,6 +2,7 @@
 '  CAMM (Crystal Alien Map Maker) program created by Josh (aka. leveleditor / Leveleditor6680) '
 '-============================================================================================-'
 
+Imports System.Collections.ObjectModel
 Imports System.Drawing.Imaging
 Imports System.Security
 Imports Microsoft.Win32
@@ -115,6 +116,49 @@ Public Class FrmEditor
             cboRectangleBrush.ValueMember = "FileName"
             cboRectangleBrush.SelectedIndex = 0
         End If
+
+        'Fill "New From Template" menu with maps from the default maps folder.
+        Dim defaultMaps As IEnumerable(Of String) = My.Computer.FileSystem.GetFiles(DefaultMapsPath, FileIO.SearchOption.SearchTopLevelOnly, New String() {"*.camm"}).ToList()
+        'TODO: Custom sorting algorithm (a bit messy and unconventional, but it does the job). Perhaps find something better later.
+        defaultMaps = defaultMaps.OrderBy(Function(a)
+                                              If a.Contains("Bonus") Then
+                                                  Return "3"
+                                              ElseIf a.Contains("Astro") Then
+                                                  Return "1"
+                                              ElseIf a.Contains("Alien") Then
+                                                  Return "2"
+                                              End If
+                                              Return "4"
+                                          End Function).ThenBy(Function(a As String)
+                                                                   Return a.Sum(Function(b)
+                                                                                    Return Asc(b)
+                                                                                End Function)
+                                                               End Function)
+        For Each filePath As String In defaultMaps
+            Dim fileName As String = My.Computer.FileSystem.GetFileInfo(filePath).Name
+
+            'Get information from the map file.
+            Dim source As New IniConfigSource(filePath)
+            Dim config As IniConfig = source.Configs.Item("Level")
+            Dim title As String = config.GetString("Title")
+            Dim author As String = config.GetString("Author", "")
+
+            'Create a new menu item for this template map.
+            Dim menuItem As New ToolStripMenuItem(title)
+            menuItem.ToolTipText = title + Environment.NewLine + "by " + author + Environment.NewLine + Environment.NewLine + fileName
+
+            'Add an event handler for clicking the item.
+            AddHandler menuItem.Click, Sub()
+                                           BeginLoadMap(filePath)
+                                           'Clear the map's file information so that a copy must be saved
+                                           'and the original template map remains untouched.
+                                           ActiveMap.FilePath = ""
+                                           UpdateMapTabs()
+                                       End Sub
+
+            'Add the item to the menu.
+            mnuNewFromTemplate.DropDownItems.Add(menuItem)
+        Next
 
         CheckFileAssociations()
 

@@ -22,6 +22,7 @@
     Public ReadOnly BuildingsFile As String = DataPath + "/" + BuildingsFileName
     Public ReadOnly UnitsFile As String = DataPath + "/" + UnitsFileName
     Public ReadOnly RectangleBrushPath As String = DataPath + "/Brushes/Rectangle"
+    Public ReadOnly DefaultMapsPath As String = DataPath + "/Default_Maps"
 
     Public Const ConfigFormat As Integer = 7
     Public Const TerrainFormat As Integer = 8

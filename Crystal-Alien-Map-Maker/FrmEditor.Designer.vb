@@ -110,6 +110,7 @@ Partial Class FrmEditor
         Me.btnToolPointer = New System.Windows.Forms.Button()
         Me.btnToolRectangleBrush = New System.Windows.Forms.Button()
         Me.cboRectangleBrush = New System.Windows.Forms.ComboBox()
+        Me.mnuNewFromTemplate = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.picMap, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ctxMap.SuspendLayout()
         CType(Me.picActive, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -331,7 +332,7 @@ Partial Class FrmEditor
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnNew, Me.btnOpen, Me.btnSave, Me.btnSaveAs, Me.separator1, Me.mnuImport, Me.mnuExport, Me.separator2, Me.btnExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnNew, Me.mnuNewFromTemplate, Me.btnOpen, Me.btnSave, Me.btnSaveAs, Me.separator1, Me.mnuImport, Me.mnuExport, Me.separator2, Me.btnExit})
         Me.mnuFile.Name = "mnuFile"
         Me.mnuFile.Size = New System.Drawing.Size(37, 24)
         Me.mnuFile.Text = "&File"
@@ -340,39 +341,39 @@ Partial Class FrmEditor
         '
         Me.btnNew.Name = "btnNew"
         Me.btnNew.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.btnNew.Size = New System.Drawing.Size(155, 22)
+        Me.btnNew.Size = New System.Drawing.Size(223, 22)
         Me.btnNew.Text = "&New"
         '
         'btnOpen
         '
         Me.btnOpen.Name = "btnOpen"
         Me.btnOpen.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.btnOpen.Size = New System.Drawing.Size(155, 22)
+        Me.btnOpen.Size = New System.Drawing.Size(223, 22)
         Me.btnOpen.Text = "&Open..."
         '
         'btnSave
         '
         Me.btnSave.Name = "btnSave"
         Me.btnSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.btnSave.Size = New System.Drawing.Size(155, 22)
+        Me.btnSave.Size = New System.Drawing.Size(223, 22)
         Me.btnSave.Text = "&Save"
         '
         'btnSaveAs
         '
         Me.btnSaveAs.Name = "btnSaveAs"
-        Me.btnSaveAs.Size = New System.Drawing.Size(155, 22)
+        Me.btnSaveAs.Size = New System.Drawing.Size(223, 22)
         Me.btnSaveAs.Text = "Save &As..."
         '
         'separator1
         '
         Me.separator1.Name = "separator1"
-        Me.separator1.Size = New System.Drawing.Size(152, 6)
+        Me.separator1.Size = New System.Drawing.Size(220, 6)
         '
         'mnuImport
         '
         Me.mnuImport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnImportAS})
         Me.mnuImport.Name = "mnuImport"
-        Me.mnuImport.Size = New System.Drawing.Size(155, 22)
+        Me.mnuImport.Size = New System.Drawing.Size(223, 22)
         Me.mnuImport.Text = "&Import"
         Me.mnuImport.Visible = False
         '
@@ -386,7 +387,7 @@ Partial Class FrmEditor
         '
         Me.mnuExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnExportPNG, Me.btnExportAS})
         Me.mnuExport.Name = "mnuExport"
-        Me.mnuExport.Size = New System.Drawing.Size(155, 22)
+        Me.mnuExport.Size = New System.Drawing.Size(223, 22)
         Me.mnuExport.Text = "&Export"
         '
         'btnExportPNG
@@ -405,13 +406,13 @@ Partial Class FrmEditor
         'separator2
         '
         Me.separator2.Name = "separator2"
-        Me.separator2.Size = New System.Drawing.Size(152, 6)
+        Me.separator2.Size = New System.Drawing.Size(220, 6)
         '
         'btnExit
         '
         Me.btnExit.Name = "btnExit"
         Me.btnExit.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.btnExit.Size = New System.Drawing.Size(155, 22)
+        Me.btnExit.Size = New System.Drawing.Size(223, 22)
         Me.btnExit.Text = "E&xit"
         '
         'separator5
@@ -877,6 +878,13 @@ Partial Class FrmEditor
         Me.cboRectangleBrush.TabIndex = 16
         Me.cboRectangleBrush.Visible = False
         '
+        'mnuNewFromTemplate
+        '
+        Me.mnuNewFromTemplate.Name = "mnuNewFromTemplate"
+        Me.mnuNewFromTemplate.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
+        Me.mnuNewFromTemplate.Size = New System.Drawing.Size(223, 22)
+        Me.mnuNewFromTemplate.Text = "New From &Template"
+        '
         'FrmEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1021,4 +1029,5 @@ Partial Class FrmEditor
     Friend WithEvents ctxMapSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents btnMapCancel As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuchkTeamIndicators As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuNewFromTemplate As ToolStripMenuItem
 End Class
