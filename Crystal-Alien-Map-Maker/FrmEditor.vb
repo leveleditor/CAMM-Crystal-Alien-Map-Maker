@@ -574,6 +574,8 @@ Public Class FrmEditor
 
     Private Sub picTiles_MouseDown(sender As Object, e As MouseEventArgs) Handles picTiles.MouseDown
         If e.Button = MouseButtons.Left Then
+            SwitchToolMode(ToolMode.Brush)
+
             mouseX = e.X
             mouseY = e.Y
             PointToGrid(mouseX, mouseY)
@@ -650,6 +652,8 @@ Public Class FrmEditor
 
     Private Sub picBuildings_MouseDown(sender As Object, e As MouseEventArgs) Handles picBuildings.MouseDown
         If e.Button = MouseButtons.Left Then
+            SwitchToolMode(ToolMode.Brush)
+
             mouseX = e.X
             mouseY = e.Y
             PointToGrid(mouseX, mouseY)
@@ -727,6 +731,8 @@ Public Class FrmEditor
 
     Private Sub picUnits_MouseDown(sender As Object, e As MouseEventArgs) Handles picUnits.MouseDown
         If e.Button = MouseButtons.Left Then
+            SwitchToolMode(ToolMode.Brush)
+
             mouseX = e.X
             mouseY = e.Y
             PointToGrid(mouseX, mouseY)
