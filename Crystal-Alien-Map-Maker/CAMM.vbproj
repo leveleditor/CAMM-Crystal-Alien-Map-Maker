@@ -150,63 +150,62 @@
     <Import Include="System.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="Assets.vb" />
-    <Compile Include="Building.vb" />
-    <Compile Include="BuildingDef.vb" />
-    <Compile Include="Config.vb" />
-    <Compile Include="Constants.vb" />
-    <Compile Include="CustomColorTable.vb" />
-    <Compile Include="FrmUnitProperties.Designer.vb">
+    <Compile Include="src\Helpers\Assets.vb" />
+    <Compile Include="src\Objects\Building.vb" />
+    <Compile Include="src\GUI\Toolbox\BuildingDef.vb" />
+    <Compile Include="src\Helpers\Config.vb" />
+    <Compile Include="src\Helpers\Constants.vb" />
+    <Compile Include="src\GUI\CustomColorTable.vb" />
+    <Compile Include="src\GUI\Forms\FrmUnitProperties.Designer.vb">
       <DependentUpon>FrmUnitProperties.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmUnitProperties.vb">
+    <Compile Include="src\GUI\Forms\FrmUnitProperties.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmMapProperties.Designer.vb">
+    <Compile Include="src\GUI\Forms\FrmMapProperties.Designer.vb">
       <DependentUpon>FrmMapProperties.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmMapProperties.vb">
+    <Compile Include="src\GUI\Forms\FrmMapProperties.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Map.vb" />
-    <Compile Include="RectangleBrushPreset.vb" />
-    <Compile Include="TileDef.vb" />
-    <Compile Include="Unit.vb" />
-    <Compile Include="FrmExportAS.Designer.vb">
+    <Compile Include="src\Objects\Map.vb" />
+    <Compile Include="src\GUI\Toolbox\RectangleBrushPreset.vb" />
+    <Compile Include="src\GUI\Toolbox\TileDef.vb" />
+    <Compile Include="src\Objects\Unit.vb" />
+    <Compile Include="src\GUI\Forms\FrmExportAS.Designer.vb">
       <DependentUpon>FrmExportAS.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmExportAS.vb">
+    <Compile Include="src\GUI\Forms\FrmExportAS.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BuildingEntry.Designer.vb">
+    <Compile Include="src\GUI\UserControls\BuildingEntry.Designer.vb">
       <DependentUpon>BuildingEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="BuildingEntry.vb">
+    <Compile Include="src\GUI\UserControls\BuildingEntry.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="TileEntry.Designer.vb">
+    <Compile Include="src\GUI\UserControls\TileEntry.Designer.vb">
       <DependentUpon>TileEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="TileEntry.vb">
+    <Compile Include="src\GUI\UserControls\TileEntry.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="FrmEditor.Designer.vb">
+    <Compile Include="src\GUI\Forms\FrmEditor.Designer.vb">
       <DependentUpon>FrmEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmEditor.vb">
+    <Compile Include="src\GUI\Forms\FrmEditor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmImportAS.Designer.vb">
+    <Compile Include="src\GUI\Forms\FrmImportAS.Designer.vb">
       <DependentUpon>FrmImportAS.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmImportAS.vb">
+    <Compile Include="src\GUI\Forms\FrmImportAS.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmConfigEditor.Designer.vb">
+    <Compile Include="src\GUI\Forms\FrmConfigEditor.Designer.vb">
       <DependentUpon>FrmConfigEditor.vb</DependentUpon>
     </Compile>
-    <Compile Include="FrmConfigEditor.vb">
+    <Compile Include="src\GUI\Forms\FrmConfigEditor.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -214,42 +213,42 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
-    <Compile Include="Tile.vb" />
-    <Compile Include="UnitDef.vb" />
-    <Compile Include="UnitEntry.Designer.vb">
+    <Compile Include="src\Objects\Tile.vb" />
+    <Compile Include="src\GUI\Toolbox\UnitDef.vb" />
+    <Compile Include="src\GUI\UserControls\UnitEntry.Designer.vb">
       <DependentUpon>UnitEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="UnitEntry.vb">
+    <Compile Include="src\GUI\UserControls\UnitEntry.vb">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Utils.vb" />
+    <Compile Include="src\Helpers\Utils.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FrmExportAS.resx">
+    <EmbeddedResource Include="src\GUI\Forms\FrmExportAS.resx">
       <DependentUpon>FrmExportAS.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BuildingEntry.resx">
+    <EmbeddedResource Include="src\GUI\UserControls\BuildingEntry.resx">
       <DependentUpon>BuildingEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmUnitProperties.resx">
+    <EmbeddedResource Include="src\GUI\Forms\FrmUnitProperties.resx">
       <DependentUpon>FrmUnitProperties.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TileEntry.resx">
+    <EmbeddedResource Include="src\GUI\UserControls\TileEntry.resx">
       <DependentUpon>TileEntry.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmEditor.resx">
+    <EmbeddedResource Include="src\GUI\Forms\FrmEditor.resx">
       <DependentUpon>FrmEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmImportAS.resx">
+    <EmbeddedResource Include="src\GUI\Forms\FrmImportAS.resx">
       <DependentUpon>FrmImportAS.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmMapProperties.resx">
+    <EmbeddedResource Include="src\GUI\Forms\FrmMapProperties.resx">
       <DependentUpon>FrmMapProperties.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmConfigEditor.resx">
+    <EmbeddedResource Include="src\GUI\Forms\FrmConfigEditor.resx">
       <DependentUpon>FrmConfigEditor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UnitEntry.resx">
+    <EmbeddedResource Include="src\GUI\UserControls\UnitEntry.resx">
       <DependentUpon>UnitEntry.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
