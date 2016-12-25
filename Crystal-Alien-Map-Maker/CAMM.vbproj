@@ -130,14 +130,19 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nini, Version=1.1.0.0, Culture=neutral, PublicKeyToken=691faec150a7fa7b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Nini.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="Nini">
-      <HintPath>lib\Nini.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -172,6 +177,9 @@
     <Compile Include="src\GUI\Toolbox\RectangleBrushPreset.vb" />
     <Compile Include="src\GUI\Toolbox\TileDef.vb" />
     <Compile Include="src\Objects\Unit.vb" />
+    <Compile Include="src\Serializables\BuildingData.vb" />
+    <Compile Include="src\Serializables\MapData.vb" />
+    <Compile Include="src\Serializables\UnitData.vb" />
     <Compile Include="src\GUI\Forms\FrmExportAS.Designer.vb">
       <DependentUpon>FrmExportAS.vb</DependentUpon>
     </Compile>
@@ -262,6 +270,7 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\Nini.dll" />

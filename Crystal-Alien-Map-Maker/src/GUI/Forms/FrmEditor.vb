@@ -2,10 +2,11 @@
 '  CAMM (Crystal Alien Map Maker) program created by Josh (aka. leveleditor / Leveleditor6680) '
 '-============================================================================================-'
 
-Imports System.Collections.ObjectModel
 Imports System.Drawing.Imaging
+Imports System.IO
 Imports System.Security
 Imports Microsoft.Win32
+Imports Newtonsoft.Json
 Imports Nini.Config
 
 Public Class FrmEditor
@@ -798,13 +799,16 @@ Public Class FrmEditor
         NewMap()
     End Sub
 
-    Public Sub NewMap()
-        Dim newMap As Map = New Map()
-        Maps.Add(newMap)
+    Public Sub AddMap(map As Map)
+        Maps.Add(map)
         UpdateMapTabs()
-        ActiveMapNum = Maps.IndexOf(newMap)
+        ActiveMapNum = Maps.IndexOf(map)
         UpdateFormTitle()
         UpdateMapSize()
+    End Sub
+
+    Public Sub NewMap()
+        AddMap(New Map())
     End Sub
 
     Private Sub btnOpen_Click(sender As Object, e As EventArgs) Handles btnOpen.Click
@@ -821,39 +825,62 @@ Public Class FrmEditor
     End Sub
     Public Sub BeginLoadMap(fileName As String)
         'Check if the same map is already open in a tab.
-        For Each map As Map In Maps
-            If map.FilePath = fileName Then
+        For Each otherMap As Map In Maps
+            If otherMap.FilePath = fileName Then
                 'Avoid loading the same map into two different tabs.
                 'Instead, select the current tab and abort loading.
-                ActiveMapNum = Maps.IndexOf(map)
+                ActiveMapNum = Maps.IndexOf(otherMap)
                 Return
             End If
         Next
 
-        Dim source As New IniConfigSource(fileName)
-        Dim config As IConfig = source.Configs.Item("CAMM")
-        If config Is Nothing Then
-            NewMap()
-            ActiveMap.LoadMapv0(source)
-            EndLoadMap(fileName)
-        Else
-            Dim v As Integer = config.GetInt("vFormat", -1)
-            If v = -1 Then
-                MsgBox("This map file is missing the format specifier or has an invalid value and cannot be opened.")
-            ElseIf v > MapFormat Then
-                MsgBox("This map file was created with a newer version of CAMM and cannot be opened.")
-            ElseIf v = 1 Then
-                NewMap()
-                ActiveMap.LoadMapv1(source)
+        Dim mapData As MapData? = Nothing
+        Try
+            'Attempt to load the map file as a JSON object.
+            mapData = JsonConvert.DeserializeObject(Of MapData)(File.ReadAllText(fileName))
+        Catch ex As Exception
+            'Loading as JSON failed.
+        End Try
 
+        If mapData IsNot Nothing Then
+            Dim map As Map = New Map()
+            If mapData.Value.Format = MapFormat Then
+                map.LoadMap(mapData)
+                AddMap(map)
                 EndLoadMap(fileName)
-            ElseIf v >= 2 And v <= MapFormat Then
+            Else If mapData.Value.Format > MapFormat
+                MsgBox("This map file was created with a newer version of CAMM and cannot be opened.")
+            Else
+                MsgBox("This map file has an invalid value of '" + mapData.Value.Format.ToString() + "' for the map format and cannot be opened.")
+            End If
+        Else
+            'Attempt to load the map as the older INI format as a fallback for now,
+            'although INI will be removed altogether in the future.
+            Dim source As New IniConfigSource(fileName)
+            Dim config As IConfig = source.Configs.Item("CAMM")
+            If config Is Nothing Then
                 NewMap()
-                ActiveMap.LoadMap(source, v)
-
+                ActiveMap.LoadMapv0(source)
                 EndLoadMap(fileName)
             Else
-                MsgBox("This map file has an invalid value of '" + v.ToString() + "' for the map format and cannot be opened.")
+                Dim v As Integer = config.GetInt("vFormat", -1)
+                If v = -1 Then
+                    MsgBox("This map file is missing the format specifier or has an invalid value and cannot be opened.")
+                ElseIf v > MapFormat Then
+                    MsgBox("This map file was created with a newer version of CAMM and cannot be opened.")
+                ElseIf v = 1 Then
+                    NewMap()
+                    ActiveMap.LoadMapv1(source)
+
+                    EndLoadMap(fileName)
+                ElseIf v >= 2 And v <= 6 Then
+                    NewMap()
+                    ActiveMap.LoadMapLegacy(source, v)
+
+                    EndLoadMap(fileName)
+                Else
+                    MsgBox("This map file has an invalid value of '" + v.ToString() + "' for the map format and cannot be opened.")
+                End If
             End If
         End If
     End Sub
@@ -907,8 +934,8 @@ Public Class FrmEditor
         If isReadOnly Then
             MsgBox("Unable to save map file, the file is set to read-only." + vbNewLine + "Please try saving using File > SaveAs.")
         Else
-            My.Computer.FileSystem.WriteAllText(fileName, ActiveMap.GetSaveData(), False)
             ActiveMap.IsMapFinal = False
+            My.Computer.FileSystem.WriteAllText(fileName, ActiveMap.GetSaveData(), False)
             ActiveMap.FilePath = fileName
             UpdateMapTabs()
             UpdateFormTitle()

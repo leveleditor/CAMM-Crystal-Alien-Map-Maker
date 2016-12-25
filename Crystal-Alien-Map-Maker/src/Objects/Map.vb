@@ -1,4 +1,5 @@
-﻿Imports Nini.Config
+﻿Imports Newtonsoft.Json
+Imports Nini.Config
 
 Public Class Map
 
@@ -181,7 +182,7 @@ Public Class Map
             For x As Integer = 0 To SizeX - 1
                 For y As Integer = 0 To SizeY - 1
                     If mouseX = x * TileSizeX And mouseY = y * TileSizeY Then
-                        mapTiles(x, y) = New Tile(tile.TileId, tile.IsPassable, tile.IsMinerals)
+                            mapTiles(x, y) = New Tile(tile.TileId, tile.IsPassable, tile.IsMinerals)
                         Return
                     End If
                 Next
@@ -434,67 +435,61 @@ Public Class Map
     End Sub
 
     Public Function GetSaveData() As String
-        Dim data As String = ""
-
-        data += _
-            "[CAMM]" + vbNewLine + _
-            "vFormat = " + MapFormat.ToString() + vbNewLine + _
-            vbNewLine
-
-        data += _
-            "[Level]" + vbNewLine + _
-            "Title = " + Title + vbNewLine + _
-            "Author = " + Author + vbNewLine + _
-            "W = " + SizeX.ToString() + vbNewLine + _
-            "H = " + SizeY.ToString() + vbNewLine + _
-            "Team = " + CInt(Faction).ToString() + vbNewLine + _
-            "CashPlayer = " + CashPlayer.ToString() + vbNewLine + _
-            "CashEnemy = " + CashEnemy.ToString() + vbNewLine + _
-            "isTraining = " + IsTraining.ToString() + vbNewLine + _
-            "isConflict = " + IsConflict.ToString() + vbNewLine + _
-            "isSpecialLevel = " + IsSpecialLevel.ToString() + vbNewLine + _
-            "isLastSpecialLevel = " + IsLastSpecialLevel.ToString() + vbNewLine + _
-            "isBonusLevel = " + IsBonusLevel.ToString() + vbNewLine + _
-            vbNewLine
-
-        data += "[Terrain]" + vbNewLine + _
-            "; Terrain Format: {str_Id|i_PosX|i_PosY}" + vbNewLine
-
-        Dim terrainNumber As Integer = 0
-        For x As Integer = 0 To SizeX - 1
-            For y As Integer = 0 To SizeY - 1
+        Dim tileData As New List(Of Integer)
+        For y As Integer = 0 To SizeY - 1
+            For x As Integer = 0 To SizeX - 1
                 If mapTiles(x, y).HasData Then
-                    data += "Terrain" + terrainNumber.ToString() + " = {" + mapTiles(x, y).TileId.ToString() + "|" + x.ToString() + "|" + y.ToString() + "}" + vbNewLine
-                    terrainNumber += 1
+                    tileData.Add(mapTiles(x, y).TileId)
+                Else
+                    tileData.Add(-1)
                 End If
             Next
         Next
 
-        data += vbNewLine + "[Buildings]" + vbNewLine + _
-                        "; Building Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage}" + vbNewLine
+        Dim buildingData As New List(Of BuildingData)(From b As Building In mapBuildings Where b.HasData Select New BuildingData() With
+        {
+            .Id = b.BuildingId,
+            .X = (b.Location.X / TileSizeX),
+            .Y = (b.Location.Y / TileSizeY),
+            .Team = CInt(b.Team),
+            .Angle = b.Angle,
+            .Damage = b.Damage
+        })
 
-        Dim buildingNumber As Integer = 0
-        For i As Integer = 0 To mapBuildings.Count() - 1
-            If mapBuildings(i).HasData Then
-                data += "Building" + buildingNumber.ToString() + " = {" + mapBuildings(i).BuildingId + "|" + (mapBuildings(i).Location.X / TileSizeX).ToString() + "|" + (mapBuildings(i).Location.Y / TileSizeY).ToString() + "|" + CInt(mapBuildings(i).Team).ToString() + "|" + mapBuildings(i).Angle.ToString() + "|" + mapBuildings(i).Damage.ToString() + "}" + vbNewLine
-                buildingNumber += 1
-            End If
-        Next
+        Dim unitData As New List(Of UnitData)(From u As Unit In mapUnits Where u.HasData Select New UnitData() With
+        {
+            .Id = u.UnitId,
+            .X = u.X,
+            .Y = u.Y,
+            .Team = CInt(u.Team),
+            .Angle = u.Angle,
+            .Damage = u.Damage,
+            .AiTarget = u.AiTarget,
+            .AiObj = u.AiObj,
+            .Respawn = u.Respawn
+        })
 
-        data += vbNewLine + "[Units]" + vbNewLine + _
-                        "; Unit Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage|str_AiTarget|str_AiObj|bool_Respawn}" + vbNewLine
+        Dim mapData As New MapData() With {
+            .Format = MapFormat,
+            .Title = Title,
+            .Author = Author,
+            .Width = SizeX,
+            .Height = SizeY,
+            .Team = CInt(Faction),
+            .CashPlayer = CashPlayer,
+            .CashEnemy = CashEnemy,
+            .IsTraining = IsTraining,
+            .IsConflict = IsConflict,
+            .IsSpecialLevel = IsSpecialLevel,
+            .IsLastSpecialLevel = IsLastSpecialLevel,
+            .IsBonusLevel = IsBonusLevel,
+            .IsFinal = IsMapFinal,
+            .Tiles = tileData,
+            .Buildings = buildingData,
+            .Units = unitData
+        }
 
-        Dim unitNumber As Integer = 0
-        For i As Integer = 0 To mapUnits.Count() - 1
-            If mapUnits(i).HasData Then
-                data += "Unit" + unitNumber.ToString() + " = {" + mapUnits(i).UnitId + "|" + mapUnits(i).X.ToString() + "|" + mapUnits(i).Y.ToString() + "|" + CInt(mapUnits(i).Team).ToString() + "|" + mapUnits(i).Angle.ToString() + "|" + mapUnits(i).Damage.ToString() + "|" + mapUnits(i).AiTarget + "|" + mapUnits(i).AiObj + "|" + mapUnits(i).Respawn.ToString() + "}" + vbNewLine
-                unitNumber += 1
-            End If
-        Next
-
-        data += vbNewLine + "; Map Created Using CAMM Crystal Alien Map Maker"
-
-        Return data
+        Return JsonConvert.SerializeObject(mapData, Formatting.Indented)
     End Function
 
     Public Sub LoadMapv0(source As IniConfigSource)
@@ -599,7 +594,7 @@ Public Class Map
         End If
     End Sub
 
-    Public Sub LoadMap(source As IniConfigSource, v As Integer)
+    Public Sub LoadMapLegacy(source As IniConfigSource, v As Integer)
         Dim config As IniConfig
 
         config = source.Configs.Item("Level")
@@ -721,6 +716,45 @@ Public Class Map
                 End If
                 mapUnits.Add(temp)
             End If
+        Next
+    End Sub
+
+    Public Sub LoadMap(mapData As MapData)
+        Title = mapData.Title
+        Author = mapData.Author
+        SetSize(mapData.Width, mapData.Height)
+        Faction = mapData.Team
+        CashPlayer = mapData.CashPlayer
+        CashEnemy = mapData.CashEnemy
+        IsTraining = mapData.IsTraining
+        IsConflict = mapData.IsConflict
+        IsSpecialLevel = mapData.IsSpecialLevel
+        IsLastSpecialLevel = mapData.IsLastSpecialLevel
+        IsBonusLevel = mapData.IsBonusLevel
+        IsMapFinal = mapData.IsFinal
+
+        Dim i As Integer = 0
+        For y As Integer = 0 To mapData.Height - 1
+            For x As Integer = 0 To mapData.Width - 1
+                mapTiles(x, y) = New Tile(mapData.Tiles(i))
+                i += 1
+            Next
+        Next
+
+        For Each unit As UnitData In mapData.Units
+            'TODO: There should be a better place to do this lookup than right here.
+            Dim unitAltitude As Integer = (From u In UnitDefs Where u.UnitId = unit.Id Select u.Altitude).First()
+            Dim unitIsPickup As Boolean = (From u In UnitDefs Where u.UnitId = unit.Id Select u.IsPickup).First()
+
+            mapUnits.Add(New Unit(unit.X, unit.Y, unit.Id, unit.Team, unitAltitude, unitIsPickup, unit.Angle, unit.Damage, unit.AiTarget, unit.AiObj, unit.Respawn))
+        Next
+
+        For Each building As BuildingData In mapData.Buildings
+            'TODO: There should be a better place to do this lookup than right here.
+            Dim w As Integer = (From b In BuildingDefs Where b.BuildingId = building.Id Select b.BuildingW).First()
+            Dim h As Integer = (From b In BuildingDefs Where b.BuildingId = building.Id Select b.BuildingH).First()
+
+            mapBuildings.Add(New Building(building.X * TileSizeX, building.Y * TileSizeY, building.Id, building.Team, w, h, building.Angle, building.Damage))
         Next
     End Sub
 
