@@ -1,0 +1,754 @@
+﻿{
+  "Format": 11,
+  "TileAscii": [" ","!","#","$","%","&","'","(",")","*","+",",","-",".","/","0","1","2","3","4","5","6","7","8","9",":",";","<","=",">","?","@","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[","]","^","_","`","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","{","|","}","~","€","ƒ","„","…","†","‡","ˆ","‰","Š","‹","Œ","Ž","‘","’","“","”","•","–","—","˜","™","š","›","œ","","ž","Ÿ","¡","¢","£","¤","¥","¦","§","¨","©","ª","«","¬","­","®","¯","°","±","²","³","´","µ","¶","·","¸","¹","º","»","¼","½","¾","¿","À","Á","Â","Ã","Ä","Å","Æ","Ç","È","É","Ê","Ë","Ì","Í","Î","Ï","Ð","Ñ","Ò","Ó","Ô","Õ","Ö","×","Ø","Ù","Ú","Û","Ü","Ý","Þ","ß","à","á","â","ã","ä","å","æ","ç","è","é","ê","ë","ì","í","î","ï","ð","ñ","ò","ó","ô","õ","ö","÷","ø","ù","ú","û","ü","ý","þ","ÿ"],
+  "Tiles": [
+    {
+      "Id": 5,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile5.png"
+    },
+    {
+      "Id": 2,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile2.png"
+    },
+    {
+      "Id": 6,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile6.png"
+    },
+    {
+      "Id": 8,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile8.png"
+    },
+    {
+      "Id": 4,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile4.png"
+    },
+    {
+      "Id": 7,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile7.png"
+    },
+    {
+      "Id": 1,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile1.png"
+    },
+    {
+      "Id": 9,
+      "IsPassable": true,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile9.png"
+    },
+    {
+      "Id": 10,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile10.png"
+    },
+    {
+      "Id": 3,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile3.png"
+    },
+    {
+      "Id": 12,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile12.png"
+    },
+    {
+      "Id": 11,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile11.png"
+    },
+    {
+      "Id": 13,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile13.png"
+    },
+    {
+      "Id": 14,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile14.png"
+    },
+    {
+      "Id": 15,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile15.png"
+    },
+    {
+      "Id": 16,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile16.png"
+    },
+    {
+      "Id": 17,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile17.png"
+    },
+    {
+      "Id": 21,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile21.png"
+    },
+    {
+      "Id": 18,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile18.png"
+    },
+    {
+      "Id": 22,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile22.png"
+    },
+    {
+      "Id": 19,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile19.png"
+    },
+    {
+      "Id": 20,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile20.png"
+    },
+    {
+      "Id": 23,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile23.png"
+    },
+    {
+      "Id": 24,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile24.png"
+    },
+    {
+      "Id": 25,
+      "IsPassable": true,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile25.png"
+    },
+    {
+      "Id": 26,
+      "IsPassable": true,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile26.png"
+    },
+    {
+      "Id": 27,
+      "IsPassable": true,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile27.png"
+    },
+    {
+      "Id": 28,
+      "IsPassable": true,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile28.png"
+    },
+    {
+      "Id": 33,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile33.png"
+    },
+    {
+      "Id": 30,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile30.png"
+    },
+    {
+      "Id": 34,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile34.png"
+    },
+    {
+      "Id": 36,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile36.png"
+    },
+    {
+      "Id": 32,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile32.png"
+    },
+    {
+      "Id": 35,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile35.png"
+    },
+    {
+      "Id": 29,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile29.png"
+    },
+    {
+      "Id": 37,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile37.png"
+    },
+    {
+      "Id": 38,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile38.png"
+    },
+    {
+      "Id": 31,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile31.png"
+    },
+    {
+      "Id": 40,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile40.png"
+    },
+    {
+      "Id": 39,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile39.png"
+    },
+    {
+      "Id": 41,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile41.png"
+    },
+    {
+      "Id": 42,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile42.png"
+    },
+    {
+      "Id": 44,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile44.png"
+    },
+    {
+      "Id": 43,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile43.png"
+    },
+    {
+      "Id": 47,
+      "IsPassable": true,
+      "IsMinerals": true,
+      "ImageUrl": "Tiles/Tile47.png"
+    },
+    {
+      "Id": 45,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile45.png"
+    },
+    {
+      "Id": 46,
+      "IsPassable": true,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile46.png"
+    },
+    {
+      "Id": 48,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile48.png"
+    },
+    {
+      "Id": 49,
+      "IsPassable": true,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile49.png"
+    },
+    {
+      "Id": 50,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile50.png"
+    },
+    {
+      "Id": 51,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile51.png"
+    },
+    {
+      "Id": 52,
+      "IsPassable": false,
+      "IsMinerals": false,
+      "ImageUrl": "Tiles/Tile52.png"
+    }
+  ],
+  "Buildings": [
+    {
+      "Id": "BA_good",
+      "Width": 2,
+      "Height": 4,
+      "Team": 0,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Astros/BA_good.png",
+      "ShadowImageUrl": "Buildings/Astros/BA_good_shadow.png"
+    },
+    {
+      "Id": "BB_good",
+      "Width": 1,
+      "Height": 2,
+      "Team": 0,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Astros/BB_good.png",
+      "ShadowImageUrl": "Buildings/Astros/BB_good_shadow.png"
+    },
+    {
+      "Id": "BC_good",
+      "Width": 2,
+      "Height": 2,
+      "Team": 0,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Astros/BC_good.png",
+      "ShadowImageUrl": "Buildings/Astros/BC_good_shadow.png"
+    },
+    {
+      "Id": "BD_good",
+      "Width": 1,
+      "Height": 2,
+      "Team": 0,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Astros/BD_good.png",
+      "ShadowImageUrl": "Buildings/Astros/BD_good_shadow.png"
+    },
+    {
+      "Id": "BE_good",
+      "Width": 2,
+      "Height": 3,
+      "Team": 0,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Astros/BE_good.png",
+      "ShadowImageUrl": "Buildings/Astros/BE_good_shadow.png"
+    },
+    {
+      "Id": "BF_good",
+      "Width": 2,
+      "Height": 3,
+      "Team": 0,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Astros/BF_good.png",
+      "ShadowImageUrl": "Buildings/Astros/BF_good_shadow.png"
+    },
+    {
+      "Id": "BG_good",
+      "Width": 1,
+      "Height": 2,
+      "Team": 0,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Astros/BG_good.png",
+      "ShadowImageUrl": "Buildings/Astros/BG_good_shadow.png"
+    },
+    {
+      "Id": "BH_good",
+      "Width": 1,
+      "Height": 2,
+      "Team": 0,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Astros/BH_good.png",
+      "ShadowImageUrl": "Buildings/Astros/BH_good_shadow.png"
+    },
+    {
+      "Id": "BK_good",
+      "Width": 2,
+      "Height": 4,
+      "Team": 0,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Astros/BK_good.png",
+      "ShadowImageUrl": "Buildings/Astros/BK_good_shadow.png"
+    },
+    {
+      "Id": "BL_good",
+      "Width": 2,
+      "Height": 3,
+      "Team": 0,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Astros/BL_good.png",
+      "ShadowImageUrl": "Buildings/Astros/BL_good_shadow.png"
+    },
+    {
+      "Id": "BX_good",
+      "Width": 2,
+      "Height": 4,
+      "Team": 0,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Astros/BX_good.png",
+      "ShadowImageUrl": "Buildings/Astros/BX_good_shadow.png"
+    },
+    {
+      "Id": "BJ_evil",
+      "Width": 1,
+      "Height": 2,
+      "Team": 1,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Santa/BJ_evil.png",
+      "ShadowImageUrl": "Buildings/Santa/BJ_evil_shadow.png"
+    },
+    {
+      "Id": "BA_evil",
+      "Width": 2,
+      "Height": 4,
+      "Team": 1,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Aliens/BA_evil.png",
+      "ShadowImageUrl": "Buildings/Aliens/BA_evil_shadow.png"
+    },
+    {
+      "Id": "BB_evil",
+      "Width": 1,
+      "Height": 2,
+      "Team": 1,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Aliens/BB_evil.png",
+      "ShadowImageUrl": "Buildings/Aliens/BB_evil_shadow.png"
+    },
+    {
+      "Id": "BC_evil",
+      "Width": 2,
+      "Height": 2,
+      "Team": 1,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Aliens/BC_evil.png",
+      "ShadowImageUrl": "Buildings/Aliens/BC_evil_shadow.png"
+    },
+    {
+      "Id": "BD_evil",
+      "Width": 1,
+      "Height": 2,
+      "Team": 1,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Aliens/BD_evil.png",
+      "ShadowImageUrl": "Buildings/Aliens/BD_evil_shadow.png"
+    },
+    {
+      "Id": "BE_evil",
+      "Width": 2,
+      "Height": 3,
+      "Team": 1,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Aliens/BE_evil.png",
+      "ShadowImageUrl": "Buildings/Aliens/BE_evil_shadow.png"
+    },
+    {
+      "Id": "BF_evil",
+      "Width": 2,
+      "Height": 3,
+      "Team": 1,
+      "OffsetY": 20,
+      "ImageUrl": "Buildings/Aliens/BF_evil.png",
+      "ShadowImageUrl": "Buildings/Aliens/BF_evil_shadow.png"
+    },
+    {
+      "Id": "BG_evil",
+      "Width": 1,
+      "Height": 2,
+      "Team": 1,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Aliens/BG_evil.png",
+      "ShadowImageUrl": "Buildings/Aliens/BG_evil_shadow.png"
+    },
+    {
+      "Id": "BH_evil",
+      "Width": 1,
+      "Height": 2,
+      "Team": 1,
+      "OffsetY": 0,
+      "ImageUrl": "Buildings/Aliens/BH_evil.png",
+      "ShadowImageUrl": "Buildings/Aliens/BH_evil_shadow.png"
+    },
+    {
+      "Id": "BK_evil",
+      "Width": 2,
+      "Height": 4,
+      "Team": 1,
+      "OffsetY": 40,
+      "ImageUrl": "Buildings/Aliens/BK_evil.png",
+      "ShadowImageUrl": "Buildings/Aliens/BK_evil_shadow.png"
+    },
+    {
+      "Id": "BI_good",
+      "Width": 4,
+      "Height": 3,
+      "Team": 0,
+      "OffsetY": 25,
+      "ImageUrl": "Buildings/Neutral/BI_good.png",
+      "ShadowImageUrl": "Buildings/Neutral/BI_good_shadow.png"
+    }
+  ],
+  "Units": [
+    {
+      "Id": "UB_evil",
+      "Team": 1,
+      "Altitude": 0,
+      "IsPickup": false,
+      "OffsetY": 10,
+      "ImageUrl": "Units/Aliens/UB_evil.png",
+      "ShadowImageUrl": "Units/Aliens/UB_evil_shadow.png"
+    },
+    {
+      "Id": "UA_evil",
+      "Team": 1,
+      "Altitude": 0,
+      "IsPickup": false,
+      "OffsetY": 10,
+      "ImageUrl": "Units/Aliens/UA_evil.png",
+      "ShadowImageUrl": "Units/Aliens/UA_evil_shadow.png"
+    },
+    {
+      "Id": "UQ_evil",
+      "Team": 1,
+      "Altitude": 0,
+      "IsPickup": false,
+      "OffsetY": 10,
+      "ImageUrl": "Units/Aliens/UQ_evil.png",
+      "ShadowImageUrl": "Units/Aliens/UQ_evil_shadow.png"
+    },
+    {
+      "Id": "UC_evil",
+      "Team": 1,
+      "Altitude": 50,
+      "IsPickup": false,
+      "OffsetY": 20,
+      "ImageUrl": "Units/Aliens/UC_evil.png",
+      "ShadowImageUrl": "Units/Aliens/UC_evil_shadow.png"
+    },
+    {
+      "Id": "UD_evil",
+      "Team": 1,
+      "Altitude": 20,
+      "IsPickup": false,
+      "OffsetY": 5,
+      "ImageUrl": "Units/Aliens/UD_evil.png",
+      "ShadowImageUrl": "Units/Aliens/UD_evil_shadow.png"
+    },
+    {
+      "Id": "UE_evil",
+      "Team": 1,
+      "Altitude": 20,
+      "IsPickup": false,
+      "OffsetY": 20,
+      "ImageUrl": "Units/Aliens/UE_evil.png",
+      "ShadowImageUrl": "Units/Aliens/UE_evil_shadow.png"
+    },
+    {
+      "Id": "UF_evil",
+      "Team": 1,
+      "Altitude": 20,
+      "IsPickup": false,
+      "OffsetY": 15,
+      "ImageUrl": "Units/Aliens/UF_evil.png",
+      "ShadowImageUrl": "Units/Aliens/UF_evil_shadow.png"
+    },
+    {
+      "Id": "UG_evil",
+      "Team": 1,
+      "Altitude": 100,
+      "IsPickup": false,
+      "OffsetY": 18,
+      "ImageUrl": "Units/Aliens/UG_evil.png",
+      "ShadowImageUrl": "Units/Aliens/UG_evil_shadow.png"
+    },
+    {
+      "Id": "UH_evil",
+      "Team": 1,
+      "Altitude": 100,
+      "IsPickup": false,
+      "OffsetY": 15,
+      "ImageUrl": "Units/Aliens/UH_evil.png",
+      "ShadowImageUrl": "Units/Aliens/UH_evil_shadow.png"
+    },
+    {
+      "Id": "UP_evil",
+      "Team": 1,
+      "Altitude": 60,
+      "IsPickup": false,
+      "OffsetY": 20,
+      "ImageUrl": "Units/Aliens/UP_evil.png",
+      "ShadowImageUrl": "Units/Aliens/UP_evil_shadow.png"
+    },
+    {
+      "Id": "UM_evil",
+      "Team": 1,
+      "Altitude": 0,
+      "IsPickup": false,
+      "OffsetY": 10,
+      "ImageUrl": "Units/Santa/UM_evil.png",
+      "ShadowImageUrl": "Units/Santa/UM_evil_shadow.png"
+    },
+    {
+      "Id": "UN_evil",
+      "Team": 1,
+      "Altitude": 0,
+      "IsPickup": false,
+      "OffsetY": 12,
+      "ImageUrl": "Units/Santa/UN_evil.png",
+      "ShadowImageUrl": "Units/Santa/UN_evil_shadow.png"
+    },
+    {
+      "Id": "UB_good",
+      "Team": 0,
+      "Altitude": 0,
+      "IsPickup": false,
+      "OffsetY": 10,
+      "ImageUrl": "Units/Astros/UB_good.png",
+      "ShadowImageUrl": "Units/Astros/UB_good_shadow.png"
+    },
+    {
+      "Id": "UA_good",
+      "Team": 0,
+      "Altitude": 0,
+      "IsPickup": false,
+      "OffsetY": 10,
+      "ImageUrl": "Units/Astros/UA_good.png",
+      "ShadowImageUrl": "Units/Astros/UA_good_shadow.png"
+    },
+    {
+      "Id": "UC_good",
+      "Team": 0,
+      "Altitude": 50,
+      "IsPickup": false,
+      "OffsetY": 15,
+      "ImageUrl": "Units/Astros/UC_good.png",
+      "ShadowImageUrl": "Units/Astros/UC_good_shadow.png"
+    },
+    {
+      "Id": "UF_good",
+      "Team": 0,
+      "Altitude": 0,
+      "IsPickup": false,
+      "OffsetY": 10,
+      "ImageUrl": "Units/Astros/UF_good.png",
+      "ShadowImageUrl": "Units/Astros/UF_good_shadow.png"
+    },
+    {
+      "Id": "UD_good",
+      "Team": 0,
+      "Altitude": 0,
+      "IsPickup": false,
+      "OffsetY": 10,
+      "ImageUrl": "Units/Astros/UD_good.png",
+      "ShadowImageUrl": "Units/Astros/UD_good_shadow.png"
+    },
+    {
+      "Id": "UE_good",
+      "Team": 0,
+      "Altitude": 0,
+      "IsPickup": false,
+      "OffsetY": 17,
+      "ImageUrl": "Units/Astros/UE_good.png",
+      "ShadowImageUrl": "Units/Astros/UE_good_shadow.png"
+    },
+    {
+      "Id": "UG_good",
+      "Team": 0,
+      "Altitude": 100,
+      "IsPickup": false,
+      "OffsetY": 20,
+      "ImageUrl": "Units/Astros/UG_good.png",
+      "ShadowImageUrl": "Units/Astros/UG_good_shadow.png"
+    },
+    {
+      "Id": "UH_good",
+      "Team": 0,
+      "Altitude": 100,
+      "IsPickup": false,
+      "OffsetY": 7,
+      "ImageUrl": "Units/Astros/UH_good.png",
+      "ShadowImageUrl": "Units/Astros/UH_good_shadow.png"
+    },
+    {
+      "Id": "UP_good",
+      "Team": 0,
+      "Altitude": 60,
+      "IsPickup": false,
+      "OffsetY": 20,
+      "ImageUrl": "Units/Astros/UP_good.png",
+      "ShadowImageUrl": "Units/Astros/UP_good_shadow.png"
+    },
+    {
+      "Id": "UR_good",
+      "Team": 0,
+      "Altitude": 0,
+      "IsPickup": false,
+      "OffsetY": 5,
+      "ImageUrl": "Units/Astros/UR_good.png",
+      "ShadowImageUrl": "Units/Astros/UR_good_shadow.png"
+    },
+    {
+      "Id": "UI_evil",
+      "Team": 1,
+      "Altitude": 0,
+      "IsPickup": true,
+      "OffsetY": 20,
+      "ImageUrl": "Units/Items/UI_evil.png",
+      "ShadowImageUrl": "Units/Items/UI_evil_shadow.png"
+    },
+    {
+      "Id": "UI_good",
+      "Team": 0,
+      "Altitude": 0,
+      "IsPickup": true,
+      "OffsetY": 15,
+      "ImageUrl": "Units/Items/UI_good.png",
+      "ShadowImageUrl": "Units/Items/UI_good_shadow.png"
+    },
+    {
+      "Id": "UO_evil",
+      "Team": 1,
+      "Altitude": 0,
+      "IsPickup": true,
+      "OffsetY": 15,
+      "ImageUrl": "Units/Items/UO_evil_01.png",
+      "ShadowImageUrl": "Units/Items/UO_evil_shadow.png"
+    },
+    {
+      "Id": "UJ_good",
+      "Team": 0,
+      "Altitude": 0,
+      "IsPickup": true,
+      "OffsetY": 15,
+      "ImageUrl": "Units/Items/UJ_good.png",
+      "ShadowImageUrl": "Units/Items/UJ_good_shadow.png"
+    }
+  ]
+}

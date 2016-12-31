@@ -1,4 +1,6 @@
-﻿Imports System.Text
+﻿Imports System.IO
+Imports System.Text
+Imports Newtonsoft.Json
 
 Public Class FrmConfigEditor
     Private saved As Boolean
@@ -364,80 +366,47 @@ Public Class FrmConfigEditor
     End Sub
 
     Private Sub SaveAll()
-        SaveConfig()
-        SaveTiles()
-        SaveBuildings()
-        SaveUnits()
+        Dim tileData As New List(Of TileDefData)(From t As TileEntry In pnlTiles.Controls Select New TileDefData() With
+        {
+            .Id = t.TileId,
+            .IsPassable = t.IsPassable,
+            .IsMinerals = t.IsMinerals,
+            .ImageUrl = t.ImageUrl
+        })
+
+        Dim buildingData As New List(Of BuildingDefData)(From b As BuildingEntry In pnlBuildings.Controls Select New BuildingDefData() With
+        {
+            .Id = b.BuildingId,
+            .Width = b.BuildingW,
+            .Height = b.BuildingH,
+            .Team = CInt(b.Team),
+            .OffsetY = b.OffsetY,
+            .ImageUrl = b.FullImageUrl,
+            .ShadowImageUrl = b.ShadowImageUrl
+        })
+
+        Dim unitData As New List(Of UnitDefData)(From u As UnitEntry In pnlUnits.Controls Select New UnitDefData() With
+        {
+            .Id = u.UnitId,
+            .Team = CInt(u.Team),
+            .Altitude = u.Altitude,
+            .IsPickup = u.IsPickup,
+            .OffsetY = u.OffsetY,
+            .ImageUrl = u.FullImageUrl,
+            .ShadowImageUrl = u.ShadowImageUrl
+        })
+
+        Dim configData As New ConfigData() With {
+            .Format = ConfigFormat,
+            .TileAscii = AsciiLookup,
+            .Tiles = tileData,
+            .Buildings = buildingData,
+            .Units = unitData
+        }
+
+        File.WriteAllText(ConfigFile, JsonConvert.SerializeObject(configData, Formatting.Indented), Encoding.UTF8)
+
         saved = True
-    End Sub
-
-    Private Sub SaveConfig()
-        Dim ascii As String = IniArray(0)
-        For Each c As Char In AsciiLookup
-            ascii += AsciiSeparator(1) + c.ToString() + AsciiSeparator(0)
-        Next
-        ascii += IniArray(1)
-
-        Dim data As String = GetIniFileHeader(ConfigFormat)
-
-        data +=
-            "[ASCII LOOKUP]" + vbNewLine +
-            "Ascii Separator = """ + AsciiSeparator + """" + vbNewLine +
-            "Ascii Array = " + ascii + vbNewLine
-
-        data += GetIniFileFooter()
-        My.Computer.FileSystem.WriteAllText(ConfigFile, data, False, Encoding.UTF8)
-    End Sub
-
-    Private Sub SaveTiles()
-        Dim data As String = GetIniFileHeader(TerrainFormat)
-
-        data +=
-            "[DEFINE TERRAIN]" + vbNewLine +
-            "; Terrain Definition Format:" + vbNewLine +
-            "; {str_Id|bool_IsPassable|bool_IsMinerals|url_Image}" + vbNewLine
-
-        For i As Integer = 0 To pnlTiles.Controls.Count - 1
-            Dim t As TileEntry = pnlTiles.Controls(i)
-            data += "Terrain" + i.ToString() + " = " + IniArray(0) + t.TileId + "|" + t.IsPassable.ToString() + "|" + t.IsMinerals.ToString() + "|" + t.ImageUrl + IniArray(1) + vbNewLine
-        Next
-
-        data += GetIniFileFooter()
-        My.Computer.FileSystem.WriteAllText(TerrainFile, data, False, Encoding.ASCII)
-    End Sub
-
-    Private Sub SaveBuildings()
-        Dim data As String = GetIniFileHeader(BuildingsFormat)
-
-        data +=
-            "[DEFINE BUILDINGS]" + vbNewLine +
-            "; Building Definition Format:" + vbNewLine +
-            "; {str_Id|i_Width|i_Height|i_Team|i_OffsetY|url_FullImage|url_ShadowImage}" + vbNewLine
-
-        For i As Integer = 0 To pnlBuildings.Controls.Count - 1
-            Dim b As BuildingEntry = pnlBuildings.Controls(i)
-            data += "Building" + i.ToString() + " = " + IniArray(0) + b.BuildingId + "|" + b.BuildingW.ToString() + "|" + b.BuildingH.ToString() + "|" + CInt(b.Team).ToString() + "|" + b.OffsetY.ToString() + "|" + b.FullImageUrl + "|" + b.ShadowImageUrl + IniArray(1) + vbNewLine
-        Next
-
-        data += GetIniFileFooter()
-        My.Computer.FileSystem.WriteAllText(BuildingsFile, data, False, Encoding.ASCII)
-    End Sub
-
-    Private Sub SaveUnits()
-        Dim data As String = GetIniFileHeader(UnitsFormat)
-
-        data +=
-            "[DEFINE UNITS]" + vbNewLine +
-            "; Unit Definition Format:" + vbNewLine +
-            "; {str_Id|i_Team|i_Altitude|bool_IsPickup|i_OffsetY|url_FullImage|url_ShadowImage}" + vbNewLine
-
-        For i As Integer = 0 To pnlUnits.Controls.Count - 1
-            Dim u As UnitEntry = pnlUnits.Controls(i)
-            data += "Unit" + i.ToString() + " = " + IniArray(0) + u.UnitId + "|" + CInt(u.Team).ToString() + "|" + u.Altitude.ToString() + "|" + u.IsPickup.ToString() + "|" + u.OffsetY.ToString() + "|" + u.FullImageUrl + "|" + u.ShadowImageUrl + IniArray(1) + vbNewLine
-        Next
-
-        data += GetIniFileFooter()
-        My.Computer.FileSystem.WriteAllText(UnitsFile, data, False, Encoding.ASCII)
     End Sub
 
 End Class

@@ -155,6 +155,9 @@
     <Import Include="System.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Serializables\BuildingDefData.vb" />
+    <Compile Include="src\Serializables\UnitDefData.vb" />
+    <Compile Include="src\Serializables\TileDefData.vb" />
     <Compile Include="src\Helpers\Assets.vb" />
     <Compile Include="src\Objects\Building.vb" />
     <Compile Include="src\GUI\Toolbox\BuildingDef.vb" />
@@ -178,6 +181,7 @@
     <Compile Include="src\GUI\Toolbox\TileDef.vb" />
     <Compile Include="src\Objects\Unit.vb" />
     <Compile Include="src\Serializables\BuildingData.vb" />
+    <Compile Include="src\Serializables\ConfigData.vb" />
     <Compile Include="src\Serializables\MapData.vb" />
     <Compile Include="src\Serializables\UnitData.vb" />
     <Compile Include="src\GUI\Forms\FrmExportAS.Designer.vb">
@@ -274,28 +278,25 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="lib\Nini.dll" />
-    <Content Include="CAMM_Data\Buildings.ini" />
-    <Content Include="CAMM_Data\Config.ini" />
-    <Content Include="CAMM_Data\Terrain.ini" />
-    <Content Include="CAMM_Data\Units.ini" />
+    <Content Include="CAMM_Data\Config.json" />
     <Content Include="CAMM_Data\UpgradeBuildings.dat" />
     <Content Include="CAMM_Data\UpgradeTerrain.dat" />
     <Content Include="CAMM_Data\UpgradeUnits.dat" />
-    <Content Include="CAMM_Data\Brushes\Rectangle\Crystals.ini" />
-    <Content Include="CAMM_Data\Brushes\Rectangle\Island.ini" />
-    <Content Include="CAMM_Data\Brushes\Rectangle\Isthmus-NS.ini" />
-    <Content Include="CAMM_Data\Brushes\Rectangle\Isthmus-WE.ini" />
-    <Content Include="CAMM_Data\Brushes\Rectangle\Lake.ini" />
-    <Content Include="CAMM_Data\Brushes\Rectangle\LakeFill.ini" />
-    <Content Include="CAMM_Data\Brushes\Rectangle\Montain.ini" />
-    <Content Include="CAMM_Data\Brushes\Rectangle\MountainFill.ini" />
-    <Content Include="CAMM_Data\Brushes\Rectangle\Ridge-NS.ini" />
-    <Content Include="CAMM_Data\Brushes\Rectangle\Ridge-WE.ini" />
-    <Content Include="CAMM_Data\Brushes\Rectangle\River-NS.ini" />
-    <Content Include="CAMM_Data\Brushes\Rectangle\River-WE.ini" />
-    <Content Include="CAMM_Data\Brushes\Rectangle\RockBorders.ini" />
-    <Content Include="CAMM_Data\Brushes\Rectangle\Valley-NS.ini" />
-    <Content Include="CAMM_Data\Brushes\Rectangle\Valley-WE.ini" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Crystals.json" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Island.json" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Isthmus-NS.json" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Isthmus-WE.json" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Lake.json" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\LakeFill.json" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Montain.json" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\MountainFill.json" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Ridge-NS.json" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Ridge-WE.json" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\River-NS.json" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\River-WE.json" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\RockBorders.json" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Valley-NS.json" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Valley-WE.json" />
     <Content Include="CAMM_Data\Backgrounds\Mars.png" />
     <Content Include="CAMM_Data\Baseplates\Alien1x2.png" />
     <Content Include="CAMM_Data\Baseplates\Alien2x2.png" />

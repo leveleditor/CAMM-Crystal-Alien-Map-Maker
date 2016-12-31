@@ -13,25 +13,13 @@
     Public ReadOnly AppPath As String = My.Application.Info.DirectoryPath
     Public ReadOnly DataPath As String = AppPath + DataDir
     Public ReadOnly SavePath As String = AppPath + SaveDir
-    Public Const ConfigFileName As String = "Config.ini"
-    Public Const TerrainFileName As String = "Terrain.ini"
-    Public Const BuildingsFileName As String = "Buildings.ini"
-    Public Const UnitsFileName As String = "Units.ini"
+    Public Const ConfigFileName As String = "Config.json"
     Public ReadOnly ConfigFile As String = DataPath + "/" + ConfigFileName
-    Public ReadOnly TerrainFile As String = DataPath + "/" + TerrainFileName
-    Public ReadOnly BuildingsFile As String = DataPath + "/" + BuildingsFileName
-    Public ReadOnly UnitsFile As String = DataPath + "/" + UnitsFileName
     Public ReadOnly RectangleBrushPath As String = DataPath + "/Brushes/Rectangle"
     Public ReadOnly DefaultMapsPath As String = DataPath + "/Default_Maps"
 
-    Public Const ConfigFormat As Integer = 7
-    Public Const TerrainFormat As Integer = 8
-    Public Const BuildingsFormat As Integer = 9
-    Public Const UnitsFormat As Integer = 10
+    Public Const ConfigFormat As Integer = 11
     Public Const MapFormat As Integer = 7
-
-    Public Const IniArray As String = "{}"
-    Public Const IniSeparator As String = "|"
 
     Public Const TileSizeX As Integer = 96
     Public Const TileSizeY As Integer = 48

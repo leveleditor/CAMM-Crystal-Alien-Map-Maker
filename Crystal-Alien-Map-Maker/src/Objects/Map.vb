@@ -231,25 +231,25 @@ Public Class Map
                     tileId = data(0)(0)
                 ElseIf x = endX And y = startY Then
                     'Top Right
-                    tileId = data(2)(0)
+                    tileId = data(0)(2)
                 ElseIf x = startX And y = endY Then
                     'Bottom Left
-                    tileId = data(0)(2)
+                    tileId = data(2)(0)
                 ElseIf x = endX And y = endY Then
                     'Bottom Right
                     tileId = data(2)(2)
                 ElseIf x <> startX And x <> endX And y = startY Then
                     'Top Middle
-                    tileId = data(1)(0)
+                    tileId = data(0)(1)
                 ElseIf x = startX And y <> startY And y <> endY Then
                     'Left Middle
-                    tileId = data(0)(1)
+                    tileId = data(1)(0)
                 ElseIf x = endX And y <> startY And y <> endY Then
                     'Right Middle
-                    tileId = data(2)(1)
+                    tileId = data(1)(2)
                 ElseIf x <> startX And x <> endX And y = endY Then
                     'Bottom Middle
-                    tileId = data(1)(2)
+                    tileId = data(2)(1)
                 Else
                     'Somewhere in the middle
                     tileId = data(1)(1)
@@ -575,7 +575,7 @@ Public Class Map
                     building.Team = team
                     building.Angle = angle
                     building.Damage = damage
-                    For j As Integer = 0 To BuildingDefs.Length - 1
+                    For j As Integer = 0 To BuildingDefs.Count - 1
                         If building.BuildingId = BuildingDefs(j).BuildingId Then
                             'Note to self:
                             'I wasted half a day trying to figure out what was going wrong,
@@ -647,7 +647,7 @@ Public Class Map
                 building.Team = team
                 building.Angle = angle
                 building.Damage = damage
-                For j As Integer = 0 To BuildingDefs.Length - 1
+                For j As Integer = 0 To BuildingDefs.Count - 1
                     If building.BuildingId = BuildingDefs(j).BuildingId Then
                         building.BuildingW = BuildingDefs(j).BuildingW
                         building.BuildingH = BuildingDefs(j).BuildingH

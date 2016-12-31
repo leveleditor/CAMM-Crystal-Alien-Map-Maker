@@ -16,10 +16,10 @@
         Dim g As Graphics = Graphics.FromImage(_preview)
 
         'Pre-render the preview image based on the tiles in the data.
-        For x As Integer = 0 To 2
-            For y As Integer = 0 To 2
-                If _data(x)(y) <> -1 Then
-                    g.DrawImage(TileImageLookup(_data(x)(y)), x * ScaledTileSizeX, y * ScaledTileSizeY, ScaledTileSizeX, ScaledTileSizeY)
+        For y As Integer = 0 To 2
+            For x As Integer = 0 To 2
+                If _data(y)(x) <> -1 Then
+                    g.DrawImage(TileImageLookup(_data(y)(x)), x * ScaledTileSizeX, y * ScaledTileSizeY, ScaledTileSizeX, ScaledTileSizeY)
                 End If
             Next
         Next

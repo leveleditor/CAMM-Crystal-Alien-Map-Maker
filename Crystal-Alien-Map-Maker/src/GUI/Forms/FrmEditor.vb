@@ -164,15 +164,15 @@ Public Class FrmEditor
         CheckFileAssociations()
 
         'Dynamically setting picTiles size.
-        picTiles.Size = New Size(TileSizeX + 1, (TileDefs.Length * TileSizeY) + 1)
+        picTiles.Size = New Size(TileSizeX + 1, (TileDefs.Count * TileSizeY) + 1)
         picTiles.Invalidate()
 
         'Dynamically setting picBuildings size.
-        picBuildings.Size = New Size(TileSizeX + 1, (BuildingDefs.Length * TileSizeY) + 1)
+        picBuildings.Size = New Size(TileSizeX + 1, (BuildingDefs.Count * TileSizeY) + 1)
         picBuildings.Invalidate()
 
         'Dynamically setting picUnits size.
-        picUnits.Size = New Size(TileSizeX + 1, (UnitDefs.Length * TileSizeY) + 1)
+        picUnits.Size = New Size(TileSizeX + 1, (UnitDefs.Count * TileSizeY) + 1)
         picUnits.Invalidate()
 
         'Setting default blank values.
@@ -562,7 +562,7 @@ Public Class FrmEditor
         If isLoaded Then
             e.Graphics.Clear(picTiles.BackColor)
 
-            For i As Integer = 0 To TileDefs.Length - 1
+            For i As Integer = 0 To TileDefs.Count - 1
                 If TileDefs(i).HasData Then
                     TileDefs(i).Draw(e.Graphics, 0, i * TileSizeY)
                 End If
@@ -620,7 +620,7 @@ Public Class FrmEditor
             selXTiles = mouseX
             selYTiles = mouseY
 
-            For i As Integer = 0 To TileDefs.Length - 1
+            For i As Integer = 0 To TileDefs.Count - 1
                 If mouseY = i * TileSizeY Then
                     picActive.Image = TileDefs(i).Image
                     activeTile.TileId = TileDefs(i).TileId
@@ -641,7 +641,7 @@ Public Class FrmEditor
             e.Graphics.Clear(picBuildings.BackColor)
 
             ' Draw the object selections.
-            For i As Integer = 0 To BuildingDefs.Length - 1
+            For i As Integer = 0 To BuildingDefs.Count - 1
                 If BuildingDefs(i).HasData Then
                     BuildingDefs(i).DrawThumbnail(e.Graphics, 0, i * TileSizeY, True)
                 End If
@@ -698,7 +698,7 @@ Public Class FrmEditor
             selXBuildings = mouseX
             selYBuildings = mouseY
 
-            For i As Integer = 0 To BuildingDefs.Length - 1
+            For i As Integer = 0 To BuildingDefs.Count - 1
                 If mouseY = i * TileSizeY Then
                     picActive.Image = BuildingDefs(i).SmallImage
                     activeBuilding.BuildingId = BuildingDefs(i).BuildingId
@@ -720,7 +720,7 @@ Public Class FrmEditor
             e.Graphics.Clear(picUnits.BackColor)
 
             ' Draw the object selections.
-            For i As Integer = 0 To UnitDefs.Length - 1
+            For i As Integer = 0 To UnitDefs.Count - 1
                 If UnitDefs(i).HasData Then
                     UnitDefs(i).DrawThumbnail(e.Graphics, 0, i * TileSizeY, True)
                 End If
@@ -777,7 +777,7 @@ Public Class FrmEditor
             selXUnits = mouseX
             selYUnits = mouseY
 
-            For i As Integer = 0 To UnitDefs.Length - 1
+            For i As Integer = 0 To UnitDefs.Count - 1
                 If mouseY = i * TileSizeY Then
                     picActive.Image = UnitDefs(i).SmallImage
                     activeUnit.UnitId = UnitDefs(i).UnitId
@@ -1312,7 +1312,7 @@ Public Class FrmEditor
                         tileId = idx ' Old calculation: (4350 + 2 * idx)
                     End If
 
-                    For j As Integer = 0 To TileDefs.Length - 1
+                    For j As Integer = 0 To TileDefs.Count - 1
                         If tileId = TileDefs(j).TileId Then
                             ActiveMap.SetTile(x, y, New Tile(tileId))
                             Exit For
