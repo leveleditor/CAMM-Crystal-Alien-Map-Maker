@@ -1,739 +1,1377 @@
-﻿[CAMM]
-vFormat = 6
-
-[Level]
-Title = Alien Special Ops 1
-Author = 4T2 Multimedia
-W = 30
-H = 30
-Team = 1
-CashPlayer = 0
-CashEnemy = 999999900
-isTraining = False
-isConflict = False
-isSpecialLevel = False
-isLastSpecialLevel = True
-isBonusLevel = False
-
-[Terrain]
-; Terrain Format: {str_Id|i_PosX|i_PosY}
-Terrain0 = {13|0|0}
-Terrain1 = {14|0|1}
-Terrain2 = {12|0|2}
-Terrain3 = {2|0|3}
-Terrain4 = {6|0|4}
-Terrain5 = {33|0|5}
-Terrain6 = {39|0|6}
-Terrain7 = {37|0|7}
-Terrain8 = {31|0|8}
-Terrain9 = {1|0|9}
-Terrain10 = {12|0|10}
-Terrain11 = {2|0|11}
-Terrain12 = {6|0|12}
-Terrain13 = {36|0|13}
-Terrain14 = {44|0|14}
-Terrain15 = {30|0|15}
-Terrain16 = {34|0|16}
-Terrain17 = {33|0|17}
-Terrain18 = {30|0|18}
-Terrain19 = {34|0|19}
-Terrain20 = {33|0|29}
-Terrain21 = {10|1|0}
-Terrain22 = {9|1|1}
-Terrain23 = {3|1|2}
-Terrain24 = {47|1|5}
-Terrain25 = {33|1|6}
-Terrain26 = {30|1|7}
-Terrain27 = {34|1|8}
-Terrain28 = {5|1|9}
-Terrain29 = {6|1|10}
-Terrain30 = {8|1|11}
-Terrain31 = {7|1|12}
-Terrain32 = {33|1|13}
-Terrain33 = {34|1|14}
-Terrain34 = {8|1|19}
-Terrain35 = {4|1|20}
-Terrain36 = {4|1|21}
-Terrain37 = {4|1|22}
-Terrain38 = {7|1|23}
-Terrain39 = {8|1|24}
-Terrain40 = {4|1|25}
-Terrain41 = {4|1|26}
-Terrain42 = {4|1|27}
-Terrain43 = {7|1|28}
-Terrain44 = {2|2|0}
-Terrain45 = {2|2|1}
-Terrain46 = {6|2|2}
-Terrain47 = {36|2|6}
-Terrain48 = {35|2|7}
-Terrain49 = {47|2|8}
-Terrain50 = {5|2|11}
-Terrain51 = {6|2|12}
-Terrain52 = {17|2|18}
-Terrain53 = {14|2|19}
-Terrain54 = {9|2|20}
-Terrain55 = {9|2|21}
-Terrain56 = {9|2|22}
-Terrain57 = {13|2|23}
-Terrain58 = {14|2|24}
-Terrain59 = {9|2|25}
-Terrain60 = {9|2|26}
-Terrain61 = {9|2|27}
-Terrain62 = {3|2|28}
-Terrain63 = {4|3|0}
-Terrain64 = {7|3|1}
-Terrain65 = {33|3|6}
-Terrain66 = {34|3|7}
-Terrain67 = {25|3|18}
-Terrain68 = {9|3|19}
-Terrain69 = {9|3|20}
-Terrain70 = {9|3|21}
-Terrain71 = {9|3|22}
-Terrain72 = {9|3|23}
-Terrain73 = {9|3|24}
-Terrain74 = {9|3|25}
-Terrain75 = {9|3|26}
-Terrain76 = {9|3|27}
-Terrain77 = {3|3|28}
-Terrain78 = {9|4|0}
-Terrain79 = {3|4|1}
-Terrain80 = {8|4|6}
-Terrain81 = {7|4|7}
-Terrain82 = {36|4|11}
-Terrain83 = {35|4|12}
-Terrain84 = {47|4|13}
-Terrain85 = {25|4|18}
-Terrain86 = {9|4|19}
-Terrain87 = {9|4|20}
-Terrain88 = {9|4|21}
-Terrain89 = {9|4|22}
-Terrain90 = {9|4|23}
-Terrain91 = {9|4|24}
-Terrain92 = {9|4|25}
-Terrain93 = {9|4|26}
-Terrain94 = {9|4|27}
-Terrain95 = {3|4|28}
-Terrain96 = {12|5|0}
-Terrain97 = {6|5|1}
-Terrain98 = {5|5|6}
-Terrain99 = {6|5|7}
-Terrain100 = {33|5|11}
-Terrain101 = {34|5|12}
-Terrain102 = {47|5|13}
-Terrain103 = {18|5|18}
-Terrain104 = {11|5|19}
-Terrain105 = {9|5|20}
-Terrain106 = {12|5|21}
-Terrain107 = {2|5|22}
-Terrain108 = {2|5|23}
-Terrain109 = {11|5|24}
-Terrain110 = {9|5|25}
-Terrain111 = {9|5|26}
-Terrain112 = {9|5|27}
-Terrain113 = {3|5|28}
-Terrain114 = {3|6|0}
-Terrain115 = {8|6|8}
-Terrain116 = {4|6|9}
-Terrain117 = {7|6|10}
-Terrain118 = {36|6|15}
-Terrain119 = {35|6|16}
-Terrain120 = {5|6|19}
-Terrain121 = {2|6|20}
-Terrain122 = {6|6|21}
-Terrain123 = {47|6|22}
-Terrain124 = {47|6|23}
-Terrain125 = {5|6|24}
-Terrain126 = {2|6|25}
-Terrain127 = {2|6|26}
-Terrain128 = {2|6|27}
-Terrain129 = {6|6|28}
-Terrain130 = {6|7|0}
-Terrain131 = {47|7|3}
-Terrain132 = {1|7|8}
-Terrain133 = {10|7|9}
-Terrain134 = {3|7|10}
-Terrain135 = {33|7|15}
-Terrain136 = {34|7|16}
-Terrain137 = {47|7|17}
-Terrain138 = {47|7|23}
-Terrain139 = {47|7|24}
-Terrain140 = {36|7|25}
-Terrain141 = {32|7|26}
-Terrain142 = {32|7|27}
-Terrain143 = {32|7|28}
-Terrain144 = {32|7|29}
-Terrain145 = {23|8|0}
-Terrain146 = {28|8|1}
-Terrain147 = {24|8|2}
-Terrain148 = {36|8|3}
-Terrain149 = {32|8|4}
-Terrain150 = {32|8|5}
-Terrain151 = {32|8|6}
-Terrain152 = {35|8|7}
-Terrain153 = {5|8|8}
-Terrain154 = {2|8|9}
-Terrain155 = {6|8|10}
-Terrain156 = {47|8|11}
-Terrain157 = {36|8|12}
-Terrain158 = {32|8|13}
-Terrain159 = {32|8|14}
-Terrain160 = {35|8|15}
-Terrain161 = {47|8|16}
-Terrain162 = {36|8|17}
-Terrain163 = {32|8|18}
-Terrain164 = {32|8|19}
-Terrain165 = {32|8|20}
-Terrain166 = {32|8|21}
-Terrain167 = {32|8|22}
-Terrain168 = {35|8|23}
-Terrain169 = {47|8|24}
-Terrain170 = {29|8|25}
-Terrain171 = {37|8|26}
-Terrain172 = {37|8|27}
-Terrain173 = {37|8|28}
-Terrain174 = {37|8|29}
-Terrain175 = {1|9|0}
-Terrain176 = {9|9|1}
-Terrain177 = {3|9|2}
-Terrain178 = {29|9|3}
-Terrain179 = {37|9|4}
-Terrain180 = {37|9|5}
-Terrain181 = {37|9|6}
-Terrain182 = {41|9|7}
-Terrain183 = {32|9|8}
-Terrain184 = {32|9|9}
-Terrain185 = {32|9|10}
-Terrain186 = {32|9|11}
-Terrain187 = {42|9|12}
-Terrain188 = {37|9|13}
-Terrain189 = {37|9|14}
-Terrain190 = {41|9|15}
-Terrain191 = {32|9|16}
-Terrain192 = {42|9|17}
-Terrain193 = {37|9|18}
-Terrain194 = {40|9|19}
-Terrain195 = {30|9|20}
-Terrain196 = {39|9|21}
-Terrain197 = {37|9|22}
-Terrain198 = {41|9|23}
-Terrain199 = {32|9|24}
-Terrain200 = {42|9|25}
-Terrain201 = {40|9|26}
-Terrain202 = {30|9|27}
-Terrain203 = {39|9|28}
-Terrain204 = {37|9|29}
-Terrain205 = {1|10|0}
-Terrain206 = {9|10|1}
-Terrain207 = {3|10|2}
-Terrain208 = {29|10|3}
-Terrain209 = {37|10|4}
-Terrain210 = {38|10|5}
-Terrain211 = {37|10|6}
-Terrain212 = {37|10|7}
-Terrain213 = {37|10|8}
-Terrain214 = {37|10|9}
-Terrain215 = {37|10|10}
-Terrain216 = {37|10|11}
-Terrain217 = {40|10|12}
-Terrain218 = {30|10|13}
-Terrain219 = {30|10|14}
-Terrain220 = {39|10|15}
-Terrain221 = {37|10|16}
-Terrain222 = {40|10|17}
-Terrain223 = {30|10|18}
-Terrain224 = {34|10|19}
-Terrain225 = {47|10|20}
-Terrain226 = {29|10|21}
-Terrain227 = {37|10|22}
-Terrain228 = {37|10|23}
-Terrain229 = {37|10|24}
-Terrain230 = {38|10|25}
-Terrain231 = {31|10|26}
-Terrain232 = {47|10|27}
-Terrain233 = {33|10|28}
-Terrain234 = {30|10|29}
-Terrain235 = {1|11|0}
-Terrain236 = {9|11|1}
-Terrain237 = {3|11|2}
-Terrain238 = {33|11|3}
-Terrain239 = {30|11|4}
-Terrain240 = {30|11|5}
-Terrain241 = {30|11|6}
-Terrain242 = {30|11|7}
-Terrain243 = {30|11|8}
-Terrain244 = {30|11|9}
-Terrain245 = {30|11|10}
-Terrain246 = {30|11|11}
-Terrain247 = {34|11|12}
-Terrain248 = {29|11|15}
-Terrain249 = {37|11|16}
-Terrain250 = {31|11|17}
-Terrain251 = {33|11|21}
-Terrain252 = {30|11|22}
-Terrain253 = {30|11|23}
-Terrain254 = {30|11|24}
-Terrain255 = {30|11|25}
-Terrain256 = {34|11|26}
-Terrain257 = {47|11|27}
-Terrain258 = {47|11|28}
-Terrain259 = {8|11|29}
-Terrain260 = {14|12|0}
-Terrain261 = {9|12|1}
-Terrain262 = {13|12|2}
-Terrain263 = {4|12|3}
-Terrain264 = {4|12|4}
-Terrain265 = {4|12|5}
-Terrain266 = {4|12|6}
-Terrain267 = {4|12|7}
-Terrain268 = {4|12|8}
-Terrain269 = {4|12|9}
-Terrain270 = {4|12|10}
-Terrain271 = {7|12|11}
-Terrain272 = {47|12|13}
-Terrain273 = {36|12|14}
-Terrain274 = {42|12|15}
-Terrain275 = {37|12|16}
-Terrain276 = {31|12|17}
-Terrain277 = {46|12|27}
-Terrain278 = {47|12|28}
-Terrain279 = {5|12|29}
-Terrain280 = {11|13|0}
-Terrain281 = {9|13|1}
-Terrain282 = {9|13|2}
-Terrain283 = {9|13|3}
-Terrain284 = {9|13|4}
-Terrain285 = {9|13|5}
-Terrain286 = {9|13|6}
-Terrain287 = {9|13|7}
-Terrain288 = {9|13|8}
-Terrain289 = {9|13|9}
-Terrain290 = {9|13|10}
-Terrain291 = {3|13|11}
-Terrain292 = {29|13|14}
-Terrain293 = {38|13|15}
-Terrain294 = {40|13|16}
-Terrain295 = {34|13|17}
-Terrain296 = {47|13|18}
-Terrain297 = {17|13|22}
-Terrain298 = {4|13|23}
-Terrain299 = {7|13|24}
-Terrain300 = {23|13|25}
-Terrain301 = {28|13|26}
-Terrain302 = {28|13|27}
-Terrain303 = {24|13|28}
-Terrain304 = {8|13|29}
-Terrain305 = {1|14|0}
-Terrain306 = {9|14|1}
-Terrain307 = {9|14|2}
-Terrain308 = {9|14|3}
-Terrain309 = {9|14|4}
-Terrain310 = {9|14|5}
-Terrain311 = {9|14|6}
-Terrain312 = {9|14|7}
-Terrain313 = {9|14|8}
-Terrain314 = {9|14|9}
-Terrain315 = {9|14|10}
-Terrain316 = {13|14|11}
-Terrain317 = {4|14|12}
-Terrain318 = {21|14|13}
-Terrain319 = {33|14|14}
-Terrain320 = {30|14|15}
-Terrain321 = {34|14|16}
-Terrain322 = {8|14|17}
-Terrain323 = {7|14|18}
-Terrain324 = {25|14|22}
-Terrain325 = {9|14|23}
-Terrain326 = {13|14|24}
-Terrain327 = {14|14|25}
-Terrain328 = {9|14|26}
-Terrain329 = {9|14|27}
-Terrain330 = {13|14|28}
-Terrain331 = {14|14|29}
-Terrain332 = {1|15|0}
-Terrain333 = {9|15|1}
-Terrain334 = {9|15|2}
-Terrain335 = {9|15|3}
-Terrain336 = {9|15|4}
-Terrain337 = {9|15|5}
-Terrain338 = {9|15|6}
-Terrain339 = {9|15|7}
-Terrain340 = {9|15|8}
-Terrain341 = {9|15|9}
-Terrain342 = {9|15|10}
-Terrain343 = {9|15|11}
-Terrain344 = {9|15|12}
-Terrain345 = {27|15|13}
-Terrain346 = {5|15|17}
-Terrain347 = {6|15|18}
-Terrain348 = {25|15|22}
-Terrain349 = {9|15|23}
-Terrain350 = {9|15|24}
-Terrain351 = {9|15|25}
-Terrain352 = {9|15|26}
-Terrain353 = {9|15|27}
-Terrain354 = {9|15|28}
-Terrain355 = {9|15|29}
-Terrain356 = {1|16|0}
-Terrain357 = {9|16|1}
-Terrain358 = {9|16|2}
-Terrain359 = {9|16|3}
-Terrain360 = {9|16|4}
-Terrain361 = {9|16|5}
-Terrain362 = {9|16|6}
-Terrain363 = {9|16|7}
-Terrain364 = {9|16|8}
-Terrain365 = {9|16|9}
-Terrain366 = {9|16|10}
-Terrain367 = {9|16|11}
-Terrain368 = {12|16|12}
-Terrain369 = {22|16|13}
-Terrain370 = {18|16|22}
-Terrain371 = {11|16|23}
-Terrain372 = {9|16|24}
-Terrain373 = {9|16|25}
-Terrain374 = {12|16|26}
-Terrain375 = {11|16|27}
-Terrain376 = {9|16|28}
-Terrain377 = {9|16|29}
-Terrain378 = {14|17|0}
-Terrain379 = {9|17|1}
-Terrain380 = {9|17|2}
-Terrain381 = {9|17|3}
-Terrain382 = {9|17|4}
-Terrain383 = {9|17|5}
-Terrain384 = {9|17|6}
-Terrain385 = {9|17|7}
-Terrain386 = {12|17|8}
-Terrain387 = {11|17|9}
-Terrain388 = {9|17|10}
-Terrain389 = {9|17|11}
-Terrain390 = {3|17|12}
-Terrain391 = {36|17|13}
-Terrain392 = {35|17|14}
-Terrain393 = {36|17|15}
-Terrain394 = {32|17|16}
-Terrain395 = {35|17|17}
-Terrain396 = {47|17|18}
-Terrain397 = {47|17|19}
-Terrain398 = {47|17|20}
-Terrain399 = {19|17|23}
-Terrain400 = {26|17|24}
-Terrain401 = {26|17|25}
-Terrain402 = {20|17|26}
-Terrain403 = {1|17|27}
-Terrain404 = {9|17|28}
-Terrain405 = {9|17|29}
-Terrain406 = {2|18|0}
-Terrain407 = {11|18|1}
-Terrain408 = {9|18|2}
-Terrain409 = {9|18|3}
-Terrain410 = {9|18|4}
-Terrain411 = {9|18|5}
-Terrain412 = {9|18|6}
-Terrain413 = {9|18|7}
-Terrain414 = {13|18|8}
-Terrain415 = {14|18|9}
-Terrain416 = {9|18|10}
-Terrain417 = {9|18|11}
-Terrain418 = {3|18|12}
-Terrain419 = {29|18|13}
-Terrain420 = {31|18|14}
-Terrain421 = {33|18|15}
-Terrain422 = {30|18|16}
-Terrain423 = {34|18|17}
-Terrain424 = {47|18|18}
-Terrain425 = {47|18|19}
-Terrain426 = {47|18|20}
-Terrain427 = {47|18|21}
-Terrain428 = {47|18|22}
-Terrain429 = {5|18|27}
-Terrain430 = {2|18|28}
-Terrain431 = {2|18|29}
-Terrain432 = {35|19|0}
-Terrain433 = {5|19|1}
-Terrain434 = {2|19|2}
-Terrain435 = {2|19|3}
-Terrain436 = {2|19|4}
-Terrain437 = {2|19|5}
-Terrain438 = {11|19|6}
-Terrain439 = {9|19|7}
-Terrain440 = {9|19|8}
-Terrain441 = {9|19|9}
-Terrain442 = {9|19|10}
-Terrain443 = {12|19|11}
-Terrain444 = {6|19|12}
-Terrain445 = {29|19|13}
-Terrain446 = {31|19|14}
-Terrain447 = {47|19|15}
-Terrain448 = {47|19|16}
-Terrain449 = {47|19|17}
-Terrain450 = {47|19|18}
-Terrain451 = {47|19|19}
-Terrain452 = {47|19|20}
-Terrain453 = {47|19|21}
-Terrain454 = {36|19|22}
-Terrain455 = {32|19|23}
-Terrain456 = {35|19|24}
-Terrain457 = {8|19|28}
-Terrain458 = {4|19|29}
-Terrain459 = {41|20|0}
-Terrain460 = {32|20|1}
-Terrain461 = {32|20|2}
-Terrain462 = {32|20|3}
-Terrain463 = {32|20|4}
-Terrain464 = {35|20|5}
-Terrain465 = {5|20|6}
-Terrain466 = {2|20|7}
-Terrain467 = {2|20|8}
-Terrain468 = {2|20|9}
-Terrain469 = {11|20|10}
-Terrain470 = {3|20|11}
-Terrain471 = {36|20|12}
-Terrain472 = {42|20|13}
-Terrain473 = {41|20|14}
-Terrain474 = {32|20|15}
-Terrain475 = {32|20|16}
-Terrain476 = {32|20|17}
-Terrain477 = {35|20|18}
-Terrain478 = {36|20|19}
-Terrain479 = {32|20|20}
-Terrain480 = {35|20|21}
-Terrain481 = {33|20|22}
-Terrain482 = {30|20|23}
-Terrain483 = {34|20|24}
-Terrain484 = {47|20|25}
-Terrain485 = {1|20|28}
-Terrain486 = {12|20|29}
-Terrain487 = {37|21|0}
-Terrain488 = {37|21|1}
-Terrain489 = {37|21|2}
-Terrain490 = {37|21|3}
-Terrain491 = {38|21|4}
-Terrain492 = {41|21|5}
-Terrain493 = {32|21|6}
-Terrain494 = {32|21|7}
-Terrain495 = {32|21|8}
-Terrain496 = {35|21|9}
-Terrain497 = {5|21|10}
-Terrain498 = {6|21|11}
-Terrain499 = {29|21|12}
-Terrain500 = {37|21|13}
-Terrain501 = {37|21|14}
-Terrain502 = {37|21|15}
-Terrain503 = {37|21|16}
-Terrain504 = {37|21|17}
-Terrain505 = {41|21|18}
-Terrain506 = {42|21|19}
-Terrain507 = {37|21|20}
-Terrain508 = {41|21|21}
-Terrain509 = {32|21|22}
-Terrain510 = {32|21|23}
-Terrain511 = {32|21|24}
-Terrain512 = {35|21|25}
-Terrain513 = {1|21|28}
-Terrain514 = {3|21|29}
-Terrain515 = {37|22|0}
-Terrain516 = {40|22|1}
-Terrain517 = {30|22|2}
-Terrain518 = {30|22|3}
-Terrain519 = {30|22|4}
-Terrain520 = {39|22|5}
-Terrain521 = {37|22|6}
-Terrain522 = {37|22|7}
-Terrain523 = {37|22|8}
-Terrain524 = {41|22|9}
-Terrain525 = {32|22|10}
-Terrain526 = {32|22|11}
-Terrain527 = {42|22|12}
-Terrain528 = {40|22|13}
-Terrain529 = {30|22|14}
-Terrain530 = {30|22|15}
-Terrain531 = {30|22|16}
-Terrain532 = {30|22|17}
-Terrain533 = {39|22|18}
-Terrain534 = {37|22|19}
-Terrain535 = {37|22|20}
-Terrain536 = {37|22|21}
-Terrain537 = {37|22|22}
-Terrain538 = {37|22|23}
-Terrain539 = {38|22|24}
-Terrain540 = {31|22|25}
-Terrain541 = {1|22|28}
-Terrain542 = {13|22|29}
-Terrain543 = {30|23|0}
-Terrain544 = {34|23|1}
-Terrain545 = {8|23|3}
-Terrain546 = {7|23|4}
-Terrain547 = {33|23|5}
-Terrain548 = {30|23|6}
-Terrain549 = {30|23|7}
-Terrain550 = {39|23|8}
-Terrain551 = {37|23|9}
-Terrain552 = {37|23|10}
-Terrain553 = {37|23|11}
-Terrain554 = {38|23|12}
-Terrain555 = {31|23|13}
-Terrain556 = {8|23|14}
-Terrain557 = {7|23|15}
-Terrain558 = {33|23|18}
-Terrain559 = {30|23|19}
-Terrain560 = {39|23|20}
-Terrain561 = {40|23|21}
-Terrain562 = {30|23|22}
-Terrain563 = {30|23|23}
-Terrain564 = {30|23|24}
-Terrain565 = {34|23|25}
-Terrain566 = {5|23|28}
-Terrain567 = {11|23|29}
-Terrain568 = {4|24|0}
-Terrain569 = {7|24|1}
-Terrain570 = {5|24|3}
-Terrain571 = {6|24|4}
-Terrain572 = {47|24|7}
-Terrain573 = {33|24|8}
-Terrain574 = {30|24|9}
-Terrain575 = {30|24|10}
-Terrain576 = {30|24|11}
-Terrain577 = {30|24|12}
-Terrain578 = {34|24|13}
-Terrain579 = {5|24|14}
-Terrain580 = {6|24|15}
-Terrain581 = {47|24|19}
-Terrain582 = {33|24|20}
-Terrain583 = {34|24|21}
-Terrain584 = {36|24|22}
-Terrain585 = {35|24|23}
-Terrain586 = {47|24|24}
-Terrain587 = {1|24|29}
-Terrain588 = {12|25|0}
-Terrain589 = {6|25|1}
-Terrain590 = {47|25|8}
-Terrain591 = {47|25|9}
-Terrain592 = {8|25|10}
-Terrain593 = {7|25|11}
-Terrain594 = {47|25|12}
-Terrain595 = {8|25|15}
-Terrain596 = {4|25|16}
-Terrain597 = {7|25|17}
-Terrain598 = {47|25|21}
-Terrain599 = {33|25|22}
-Terrain600 = {34|25|23}
-Terrain601 = {5|25|29}
-Terrain602 = {3|26|0}
-Terrain603 = {5|26|10}
-Terrain604 = {16|26|11}
-Terrain605 = {7|26|12}
-Terrain606 = {1|26|15}
-Terrain607 = {10|26|16}
-Terrain608 = {3|26|17}
-Terrain609 = {36|26|20}
-Terrain610 = {35|26|21}
-Terrain611 = {47|26|22}
-Terrain612 = {8|26|29}
-Terrain613 = {6|27|0}
-Terrain614 = {5|27|11}
-Terrain615 = {6|27|12}
-Terrain616 = {5|27|15}
-Terrain617 = {2|27|16}
-Terrain618 = {6|27|17}
-Terrain619 = {33|27|20}
-Terrain620 = {34|27|21}
-Terrain621 = {1|27|29}
-Terrain622 = {4|28|0}
-Terrain623 = {7|28|1}
-Terrain624 = {8|28|7}
-Terrain625 = {4|28|8}
-Terrain626 = {4|28|9}
-Terrain627 = {7|28|10}
-Terrain628 = {8|28|18}
-Terrain629 = {4|28|19}
-Terrain630 = {7|28|20}
-Terrain631 = {8|28|21}
-Terrain632 = {4|28|22}
-Terrain633 = {7|28|23}
-Terrain634 = {8|28|28}
-Terrain635 = {14|28|29}
-Terrain636 = {9|29|0}
-Terrain637 = {13|29|1}
-Terrain638 = {4|29|2}
-Terrain639 = {4|29|3}
-Terrain640 = {4|29|4}
-Terrain641 = {7|29|5}
-Terrain642 = {8|29|6}
-Terrain643 = {14|29|7}
-Terrain644 = {9|29|8}
-Terrain645 = {9|29|9}
-Terrain646 = {13|29|10}
-Terrain647 = {4|29|11}
-Terrain648 = {4|29|12}
-Terrain649 = {4|29|13}
-Terrain650 = {4|29|14}
-Terrain651 = {7|29|15}
-Terrain652 = {8|29|16}
-Terrain653 = {4|29|17}
-Terrain654 = {14|29|18}
-Terrain655 = {9|29|19}
-Terrain656 = {13|29|20}
-Terrain657 = {14|29|21}
-Terrain658 = {9|29|22}
-Terrain659 = {13|29|23}
-Terrain660 = {4|29|24}
-Terrain661 = {4|29|25}
-Terrain662 = {7|29|26}
-Terrain663 = {8|29|27}
-Terrain664 = {14|29|28}
-Terrain665 = {9|29|29}
-
-[Buildings]
-; Building Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage}
-Building0 = {BK_good|3|24|0|0|0}
-Building1 = {BB_good|5|26|0|0|0}
-Building2 = {BB_good|2|26|0|0|0}
-Building3 = {BB_good|17|3|0|0|0}
-Building4 = {BB_good|14|3|0|0|0}
-Building5 = {BB_good|23|16|0|0|0}
-Building6 = {BB_good|24|16|0|0|0}
-Building7 = {BB_good|1|3|0|0|0}
-Building8 = {BB_good|2|9|0|0|0}
-Building9 = {BC_good|26|26|0|0|0}
-Building10 = {BD_good|3|18|0|0|0}
-Building11 = {BD_good|4|18|0|0|0}
-Building12 = {BD_good|15|8|0|0|0}
-Building13 = {BD_good|7|6|0|0|0}
-Building14 = {BE_good|15|3|0|0|0}
-Building15 = {BG_good|28|26|0|0|0}
-Building16 = {BL_good|18|18|0|0|0}
-
-[Units]
-; Unit Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage|str_AiTarget|str_AiObj|bool_Respawn}
-Unit0 = {UQ_evil|2659|117|1|0.5|0|still|0|False}
-Unit1 = {UA_good|2347|350|0|0|0|[object Object]|0|False}
-Unit2 = {UA_good|2626|360|0|0|0|[object Object]|0|False}
-Unit3 = {UA_good|2424|412|0|0|0|[object Object]|0|False}
-Unit4 = {UA_good|2657|404|0|0|0|[object Object]|0|False}
-Unit5 = {UA_good|2468|466|0|0|0|[object Object]|0|False}
-Unit6 = {UA_good|2558|442|0|0|0|[object Object]|0|False}
-Unit7 = {UA_good|2616|460|0|0|0|[object Object]|0|False}
-Unit8 = {UC_good|1762|124|0|0.25|0|still|1000|False}
-Unit9 = {UC_good|1664|1377|0|0|0|still|1000|False}
-Unit10 = {UA_good|736|998|0|0|0|still|1000|False}
-Unit11 = {UA_good|427|230|0|0|0|still|1000|False}
-Unit12 = {UA_good|1957|1230|0|0|0|still|1000|False}
-Unit13 = {UE_good|2448|1320|0|0|0|[object Object]|0|False}
-Unit14 = {UC_good|2472|607|0|0.125|0|still|10000|False}
-Unit15 = {UC_good|2755|597|0|0.875|0|still|10000|False}
-Unit16 = {UC_good|2534|1165|0|0.1875|0|roam|2|False}
-Unit17 = {UC_good|2662|1172|0|0.8666667|0|roam|2|False}
-Unit18 = {UC_good|154|692|0|0.1875|0|still|10000|False}
-Unit19 = {UC_good|316|706|0|0.0625|0|still|10000|False}
-Unit20 = {UC_good|545|696|0|0.9375|0|still|10000|False}
-Unit21 = {UC_good|693|710|0|0.8125|0|still|10000|False}
-Unit22 = {UR_good|1488|1272|0|0|0|roam|6|False}
-Unit23 = {UP_good|1220|945|0|0|0|roam|10|False}
-Unit24 = {UE_good|1488|216|0|0|0|roam|6|False}
-Unit25 = {UI_good|2256|792|0|0.5|0|still|1500|False}
-Unit26 = {UI_good|1680|168|0|0.5|0|still|1500|False}
-Unit27 = {UI_good|2736|1272|0|0.5|0|still|1500|False}
-Unit28 = {UI_good|240|456|0|0.5|0|still|1500|False}
-
-; Map Created Using CAMM Crystal Alien Map Maker
+﻿{
+  "Format": 7,
+  "Title": "Alien Special Ops 1",
+  "Author": "4T2 Multimedia",
+  "Width": 30,
+  "Height": 30,
+  "Team": 1,
+  "CashPlayer": 0,
+  "CashEnemy": 999999900,
+  "IsTraining": false,
+  "IsConflict": false,
+  "IsSpecialLevel": false,
+  "IsLastSpecialLevel": true,
+  "IsBonusLevel": false,
+  "IsFinal": false,
+  "Tiles": [
+    13,
+    10,
+    2,
+    4,
+    9,
+    12,
+    3,
+    6,
+    23,
+    1,
+    1,
+    1,
+    14,
+    11,
+    1,
+    1,
+    1,
+    14,
+    2,
+    35,
+    41,
+    37,
+    37,
+    30,
+    4,
+    12,
+    3,
+    6,
+    4,
+    9,
+    14,
+    9,
+    2,
+    7,
+    3,
+    6,
+    -1,
+    -1,
+    28,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    11,
+    5,
+    32,
+    37,
+    40,
+    34,
+    7,
+    6,
+    -1,
+    -1,
+    7,
+    13,
+    12,
+    3,
+    6,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    24,
+    3,
+    3,
+    3,
+    13,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    2,
+    32,
+    37,
+    30,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    4,
+    2,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    47,
+    36,
+    29,
+    29,
+    33,
+    4,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    2,
+    32,
+    37,
+    30,
+    8,
+    5,
+    -1,
+    -1,
+    -1,
+    -1,
+    4,
+    6,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    32,
+    37,
+    37,
+    30,
+    4,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    2,
+    32,
+    38,
+    30,
+    7,
+    6,
+    -1,
+    -1,
+    -1,
+    -1,
+    4,
+    33,
+    47,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    32,
+    37,
+    38,
+    30,
+    4,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    2,
+    35,
+    41,
+    39,
+    33,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    7,
+    39,
+    33,
+    36,
+    33,
+    8,
+    5,
+    -1,
+    -1,
+    32,
+    37,
+    37,
+    30,
+    4,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    11,
+    5,
+    32,
+    37,
+    30,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    8,
+    37,
+    30,
+    35,
+    34,
+    7,
+    6,
+    -1,
+    -1,
+    35,
+    41,
+    37,
+    30,
+    4,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    2,
+    32,
+    37,
+    30,
+    47,
+    -1,
+    -1,
+    -1,
+    8,
+    14,
+    31,
+    34,
+    47,
+    -1,
+    -1,
+    -1,
+    8,
+    1,
+    5,
+    32,
+    37,
+    30,
+    4,
+    9,
+    9,
+    9,
+    9,
+    12,
+    13,
+    9,
+    2,
+    32,
+    37,
+    39,
+    33,
+    47,
+    -1,
+    -1,
+    4,
+    9,
+    1,
+    5,
+    -1,
+    -1,
+    -1,
+    -1,
+    4,
+    10,
+    2,
+    32,
+    37,
+    30,
+    4,
+    9,
+    9,
+    9,
+    9,
+    11,
+    14,
+    9,
+    2,
+    35,
+    41,
+    37,
+    30,
+    47,
+    -1,
+    -1,
+    4,
+    9,
+    12,
+    6,
+    -1,
+    -1,
+    -1,
+    -1,
+    7,
+    3,
+    6,
+    32,
+    37,
+    30,
+    4,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    9,
+    11,
+    5,
+    32,
+    37,
+    30,
+    8,
+    5,
+    -1,
+    7,
+    13,
+    2,
+    8,
+    5,
+    -1,
+    36,
+    33,
+    -1,
+    -1,
+    47,
+    32,
+    37,
+    30,
+    7,
+    3,
+    13,
+    9,
+    9,
+    9,
+    9,
+    12,
+    3,
+    6,
+    32,
+    37,
+    30,
+    7,
+    16,
+    5,
+    -1,
+    4,
+    6,
+    7,
+    6,
+    -1,
+    35,
+    34,
+    -1,
+    -1,
+    36,
+    42,
+    40,
+    34,
+    -1,
+    -1,
+    4,
+    9,
+    12,
+    3,
+    3,
+    6,
+    36,
+    29,
+    42,
+    38,
+    30,
+    47,
+    7,
+    6,
+    -1,
+    4,
+    36,
+    33,
+    -1,
+    -1,
+    47,
+    47,
+    -1,
+    -1,
+    32,
+    37,
+    30,
+    -1,
+    47,
+    -1,
+    21,
+    27,
+    22,
+    36,
+    29,
+    29,
+    42,
+    37,
+    40,
+    31,
+    34,
+    -1,
+    -1,
+    -1,
+    -1,
+    4,
+    44,
+    34,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    32,
+    37,
+    30,
+    -1,
+    36,
+    29,
+    33,
+    -1,
+    -1,
+    35,
+    31,
+    31,
+    41,
+    37,
+    30,
+    8,
+    5,
+    -1,
+    -1,
+    -1,
+    -1,
+    4,
+    30,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    36,
+    33,
+    35,
+    41,
+    39,
+    29,
+    42,
+    38,
+    30,
+    -1,
+    -1,
+    36,
+    33,
+    47,
+    32,
+    37,
+    30,
+    7,
+    6,
+    8,
+    1,
+    5,
+    -1,
+    7,
+    34,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    35,
+    34,
+    47,
+    32,
+    37,
+    37,
+    37,
+    40,
+    34,
+    -1,
+    -1,
+    32,
+    30,
+    47,
+    32,
+    37,
+    30,
+    -1,
+    -1,
+    4,
+    10,
+    2,
+    -1,
+    8,
+    33,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    47,
+    36,
+    42,
+    40,
+    31,
+    31,
+    34,
+    8,
+    5,
+    -1,
+    35,
+    34,
+    47,
+    32,
+    37,
+    30,
+    -1,
+    -1,
+    7,
+    3,
+    6,
+    -1,
+    4,
+    30,
+    -1,
+    17,
+    25,
+    25,
+    18,
+    -1,
+    -1,
+    32,
+    37,
+    30,
+    -1,
+    -1,
+    47,
+    7,
+    6,
+    -1,
+    47,
+    47,
+    47,
+    35,
+    41,
+    39,
+    33,
+    -1,
+    -1,
+    -1,
+    -1,
+    8,
+    14,
+    34,
+    8,
+    14,
+    9,
+    9,
+    11,
+    5,
+    -1,
+    32,
+    40,
+    34,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    47,
+    47,
+    47,
+    36,
+    42,
+    37,
+    30,
+    47,
+    -1,
+    -1,
+    -1,
+    4,
+    9,
+    -1,
+    4,
+    9,
+    9,
+    9,
+    9,
+    2,
+    -1,
+    32,
+    30,
+    47,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    47,
+    47,
+    47,
+    32,
+    37,
+    37,
+    39,
+    33,
+    -1,
+    36,
+    33,
+    7,
+    13,
+    -1,
+    4,
+    9,
+    9,
+    9,
+    12,
+    6,
+    -1,
+    32,
+    39,
+    29,
+    33,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    47,
+    47,
+    35,
+    41,
+    37,
+    40,
+    34,
+    47,
+    35,
+    34,
+    8,
+    14,
+    -1,
+    4,
+    9,
+    9,
+    9,
+    2,
+    47,
+    -1,
+    32,
+    37,
+    37,
+    30,
+    -1,
+    17,
+    25,
+    25,
+    18,
+    -1,
+    47,
+    36,
+    33,
+    32,
+    37,
+    30,
+    36,
+    33,
+    47,
+    -1,
+    4,
+    9,
+    -1,
+    7,
+    13,
+    9,
+    9,
+    2,
+    47,
+    47,
+    35,
+    41,
+    37,
+    30,
+    -1,
+    4,
+    9,
+    9,
+    11,
+    19,
+    -1,
+    32,
+    30,
+    32,
+    37,
+    30,
+    35,
+    34,
+    -1,
+    -1,
+    7,
+    13,
+    -1,
+    8,
+    14,
+    9,
+    9,
+    11,
+    5,
+    47,
+    47,
+    32,
+    37,
+    30,
+    -1,
+    7,
+    13,
+    9,
+    9,
+    26,
+    -1,
+    35,
+    34,
+    32,
+    38,
+    30,
+    47,
+    -1,
+    -1,
+    -1,
+    -1,
+    4,
+    -1,
+    4,
+    9,
+    9,
+    9,
+    9,
+    2,
+    36,
+    29,
+    42,
+    38,
+    30,
+    -1,
+    23,
+    14,
+    9,
+    9,
+    26,
+    -1,
+    -1,
+    47,
+    35,
+    31,
+    34,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    4,
+    -1,
+    4,
+    9,
+    9,
+    9,
+    9,
+    2,
+    32,
+    37,
+    40,
+    31,
+    34,
+    -1,
+    28,
+    9,
+    9,
+    12,
+    20,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    7,
+    -1,
+    4,
+    9,
+    9,
+    9,
+    9,
+    2,
+    32,
+    37,
+    30,
+    47,
+    47,
+    46,
+    28,
+    9,
+    9,
+    11,
+    1,
+    5,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    8,
+    -1,
+    7,
+    3,
+    3,
+    3,
+    3,
+    6,
+    32,
+    37,
+    39,
+    33,
+    47,
+    47,
+    24,
+    13,
+    9,
+    9,
+    9,
+    2,
+    8,
+    1,
+    1,
+    1,
+    5,
+    -1,
+    -1,
+    -1,
+    -1,
+    8,
+    14,
+    33,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    32,
+    37,
+    37,
+    30,
+    8,
+    5,
+    8,
+    14,
+    9,
+    9,
+    9,
+    2,
+    4,
+    12,
+    3,
+    13,
+    11,
+    1,
+    5,
+    8,
+    1,
+    14,
+    9
+  ],
+  "Buildings": [
+    {
+      "Id": "BK_good",
+      "X": 3,
+      "Y": 24,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BB_good",
+      "X": 5,
+      "Y": 26,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BB_good",
+      "X": 2,
+      "Y": 26,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BB_good",
+      "X": 17,
+      "Y": 3,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BB_good",
+      "X": 14,
+      "Y": 3,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BB_good",
+      "X": 23,
+      "Y": 16,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BB_good",
+      "X": 24,
+      "Y": 16,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BB_good",
+      "X": 1,
+      "Y": 3,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BB_good",
+      "X": 2,
+      "Y": 9,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BC_good",
+      "X": 26,
+      "Y": 26,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BD_good",
+      "X": 3,
+      "Y": 18,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BD_good",
+      "X": 4,
+      "Y": 18,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BD_good",
+      "X": 15,
+      "Y": 8,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BD_good",
+      "X": 7,
+      "Y": 6,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BE_good",
+      "X": 15,
+      "Y": 3,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BG_good",
+      "X": 28,
+      "Y": 26,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BL_good",
+      "X": 18,
+      "Y": 18,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    }
+  ],
+  "Units": [
+    {
+      "Id": "UQ_evil",
+      "X": 2659,
+      "Y": 117,
+      "Team": 1,
+      "Angle": 0.5,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UA_good",
+      "X": 2347,
+      "Y": 350,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0,
+      "AiTarget": "[object Object]",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UA_good",
+      "X": 2626,
+      "Y": 360,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0,
+      "AiTarget": "[object Object]",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UA_good",
+      "X": 2424,
+      "Y": 412,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0,
+      "AiTarget": "[object Object]",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UA_good",
+      "X": 2657,
+      "Y": 404,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0,
+      "AiTarget": "[object Object]",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UA_good",
+      "X": 2468,
+      "Y": 466,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0,
+      "AiTarget": "[object Object]",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UA_good",
+      "X": 2558,
+      "Y": 442,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0,
+      "AiTarget": "[object Object]",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UA_good",
+      "X": 2616,
+      "Y": 460,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0,
+      "AiTarget": "[object Object]",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_good",
+      "X": 1762,
+      "Y": 124,
+      "Team": 0,
+      "Angle": 0.25,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "1000",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_good",
+      "X": 1664,
+      "Y": 1377,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "1000",
+      "Respawn": false
+    },
+    {
+      "Id": "UA_good",
+      "X": 736,
+      "Y": 998,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "1000",
+      "Respawn": false
+    },
+    {
+      "Id": "UA_good",
+      "X": 427,
+      "Y": 230,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "1000",
+      "Respawn": false
+    },
+    {
+      "Id": "UA_good",
+      "X": 1957,
+      "Y": 1230,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "1000",
+      "Respawn": false
+    },
+    {
+      "Id": "UE_good",
+      "X": 2448,
+      "Y": 1320,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0,
+      "AiTarget": "[object Object]",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_good",
+      "X": 2472,
+      "Y": 607,
+      "Team": 0,
+      "Angle": 0.125,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "10000",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_good",
+      "X": 2755,
+      "Y": 597,
+      "Team": 0,
+      "Angle": 0.875,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "10000",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_good",
+      "X": 2534,
+      "Y": 1165,
+      "Team": 0,
+      "Angle": 0.1875,
+      "Damage": 0.0,
+      "AiTarget": "roam",
+      "AiObj": "2",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_good",
+      "X": 2662,
+      "Y": 1172,
+      "Team": 0,
+      "Angle": 0.8666667,
+      "Damage": 0.0,
+      "AiTarget": "roam",
+      "AiObj": "2",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_good",
+      "X": 154,
+      "Y": 692,
+      "Team": 0,
+      "Angle": 0.1875,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "10000",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_good",
+      "X": 316,
+      "Y": 706,
+      "Team": 0,
+      "Angle": 0.0625,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "10000",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_good",
+      "X": 545,
+      "Y": 696,
+      "Team": 0,
+      "Angle": 0.9375,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "10000",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_good",
+      "X": 693,
+      "Y": 710,
+      "Team": 0,
+      "Angle": 0.8125,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "10000",
+      "Respawn": false
+    },
+    {
+      "Id": "UR_good",
+      "X": 1488,
+      "Y": 1272,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0,
+      "AiTarget": "roam",
+      "AiObj": "6",
+      "Respawn": false
+    },
+    {
+      "Id": "UP_good",
+      "X": 1220,
+      "Y": 945,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0,
+      "AiTarget": "roam",
+      "AiObj": "10",
+      "Respawn": false
+    },
+    {
+      "Id": "UE_good",
+      "X": 1488,
+      "Y": 216,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0,
+      "AiTarget": "roam",
+      "AiObj": "6",
+      "Respawn": false
+    },
+    {
+      "Id": "UI_good",
+      "X": 2256,
+      "Y": 792,
+      "Team": 0,
+      "Angle": 0.5,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "1500",
+      "Respawn": false
+    },
+    {
+      "Id": "UI_good",
+      "X": 1680,
+      "Y": 168,
+      "Team": 0,
+      "Angle": 0.5,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "1500",
+      "Respawn": false
+    },
+    {
+      "Id": "UI_good",
+      "X": 2736,
+      "Y": 1272,
+      "Team": 0,
+      "Angle": 0.5,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "1500",
+      "Respawn": false
+    },
+    {
+      "Id": "UI_good",
+      "X": 240,
+      "Y": 456,
+      "Team": 0,
+      "Angle": 0.5,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "1500",
+      "Respawn": false
+    }
+  ]
+}

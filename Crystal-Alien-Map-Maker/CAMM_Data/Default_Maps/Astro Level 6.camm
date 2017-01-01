@@ -1,188 +1,466 @@
-﻿[CAMM]
-vFormat = 6
-
-[Level]
-Title = Astro Level 6
-Author = 4T2 Multimedia
-W = 17
-H = 17
-Team = 0
-CashPlayer = 4000
-CashEnemy = 20000
-isTraining = False
-isConflict = False
-isSpecialLevel = False
-isLastSpecialLevel = False
-isBonusLevel = False
-
-[Terrain]
-; Terrain Format: {str_Id|i_PosX|i_PosY}
-Terrain0 = {8|1|7}
-Terrain1 = {7|1|8}
-Terrain2 = {7|2|0}
-Terrain3 = {8|2|6}
-Terrain4 = {15|2|7}
-Terrain5 = {6|2|8}
-Terrain6 = {3|3|0}
-Terrain7 = {5|3|6}
-Terrain8 = {6|3|7}
-Terrain9 = {3|4|0}
-Terrain10 = {6|5|0}
-Terrain11 = {36|6|0}
-Terrain12 = {32|6|1}
-Terrain13 = {32|6|2}
-Terrain14 = {32|6|3}
-Terrain15 = {32|6|4}
-Terrain16 = {35|6|5}
-Terrain17 = {47|6|6}
-Terrain18 = {47|6|7}
-Terrain19 = {47|6|8}
-Terrain20 = {47|6|9}
-Terrain21 = {8|6|16}
-Terrain22 = {42|7|0}
-Terrain23 = {37|7|1}
-Terrain24 = {38|7|2}
-Terrain25 = {37|7|3}
-Terrain26 = {37|7|4}
-Terrain27 = {41|7|5}
-Terrain28 = {32|7|6}
-Terrain29 = {32|7|7}
-Terrain30 = {35|7|8}
-Terrain31 = {47|7|9}
-Terrain32 = {47|7|10}
-Terrain33 = {47|7|11}
-Terrain34 = {47|7|12}
-Terrain35 = {47|7|13}
-Terrain36 = {5|7|16}
-Terrain37 = {37|8|0}
-Terrain38 = {37|8|1}
-Terrain39 = {37|8|2}
-Terrain40 = {37|8|3}
-Terrain41 = {37|8|4}
-Terrain42 = {37|8|5}
-Terrain43 = {37|8|6}
-Terrain44 = {37|8|7}
-Terrain45 = {31|8|8}
-Terrain46 = {47|8|9}
-Terrain47 = {47|8|10}
-Terrain48 = {47|8|11}
-Terrain49 = {47|8|12}
-Terrain50 = {47|8|13}
-Terrain51 = {47|8|14}
-Terrain52 = {47|8|15}
-Terrain53 = {47|8|16}
-Terrain54 = {30|9|0}
-Terrain55 = {30|9|1}
-Terrain56 = {30|9|2}
-Terrain57 = {39|9|3}
-Terrain58 = {37|9|4}
-Terrain59 = {40|9|5}
-Terrain60 = {30|9|6}
-Terrain61 = {30|9|7}
-Terrain62 = {43|9|8}
-Terrain63 = {32|9|9}
-Terrain64 = {32|9|10}
-Terrain65 = {35|9|11}
-Terrain66 = {47|9|12}
-Terrain67 = {47|9|13}
-Terrain68 = {36|9|14}
-Terrain69 = {32|9|15}
-Terrain70 = {32|9|16}
-Terrain71 = {7|10|0}
-Terrain72 = {29|10|3}
-Terrain73 = {37|10|4}
-Terrain74 = {31|10|5}
-Terrain75 = {29|10|8}
-Terrain76 = {37|10|9}
-Terrain77 = {37|10|10}
-Terrain78 = {41|10|11}
-Terrain79 = {32|10|12}
-Terrain80 = {32|10|13}
-Terrain81 = {42|10|14}
-Terrain82 = {37|10|15}
-Terrain83 = {37|10|16}
-Terrain84 = {6|11|0}
-Terrain85 = {33|11|3}
-Terrain86 = {30|11|4}
-Terrain87 = {43|11|5}
-Terrain88 = {32|11|6}
-Terrain89 = {32|11|7}
-Terrain90 = {44|11|8}
-Terrain91 = {30|11|9}
-Terrain92 = {39|11|10}
-Terrain93 = {37|11|11}
-Terrain94 = {37|11|12}
-Terrain95 = {37|11|13}
-Terrain96 = {37|11|14}
-Terrain97 = {37|11|15}
-Terrain98 = {37|11|16}
-Terrain99 = {47|12|4}
-Terrain100 = {33|12|5}
-Terrain101 = {30|12|6}
-Terrain102 = {30|12|7}
-Terrain103 = {34|12|8}
-Terrain104 = {36|12|9}
-Terrain105 = {44|12|10}
-Terrain106 = {30|12|11}
-Terrain107 = {30|12|12}
-Terrain108 = {39|12|13}
-Terrain109 = {37|12|14}
-Terrain110 = {37|12|15}
-Terrain111 = {37|12|16}
-Terrain112 = {29|13|9}
-Terrain113 = {31|13|10}
-Terrain114 = {29|13|13}
-Terrain115 = {37|13|14}
-Terrain116 = {37|13|15}
-Terrain117 = {37|13|16}
-Terrain118 = {29|14|9}
-Terrain119 = {41|14|10}
-Terrain120 = {32|14|11}
-Terrain121 = {32|14|12}
-Terrain122 = {42|14|13}
-Terrain123 = {37|14|14}
-Terrain124 = {37|14|15}
-Terrain125 = {37|14|16}
-Terrain126 = {33|15|9}
-Terrain127 = {39|15|10}
-Terrain128 = {37|15|11}
-Terrain129 = {37|15|12}
-Terrain130 = {37|15|13}
-Terrain131 = {38|15|14}
-Terrain132 = {37|15|15}
-Terrain133 = {37|15|16}
-Terrain134 = {46|16|0}
-Terrain135 = {8|16|7}
-Terrain136 = {4|16|8}
-Terrain137 = {7|16|9}
-Terrain138 = {29|16|10}
-Terrain139 = {37|16|11}
-Terrain140 = {37|16|12}
-Terrain141 = {37|16|13}
-Terrain142 = {37|16|14}
-Terrain143 = {37|16|15}
-Terrain144 = {37|16|16}
-
-[Buildings]
-; Building Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage}
-Building0 = {BA_good|3|12|0|0|0}
-Building1 = {BB_good|0|14|0|0|0}
-Building2 = {BG_good|0|12|0|0|0}
-Building3 = {BC_evil|14|4|1|0|0}
-Building4 = {BD_evil|10|6|1|0|0}
-Building5 = {BD_evil|13|11|1|0|0}
-Building6 = {BB_evil|14|1|1|0|0}
-
-[Units]
-; Unit Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage|str_AiTarget|str_AiObj|bool_Respawn}
-Unit0 = {UD_good|336|744|0|0.5|0|still|0|False}
-Unit1 = {UC_good|501|649|0|0.5|0|still|0|False}
-Unit2 = {UC_good|502|701|0|0.5|0|still|0|False}
-Unit3 = {UC_good|537|748|0|0.5|0|still|0|False}
-Unit4 = {UC_good|546|694|0|0.5|0|still|0|False}
-Unit5 = {UC_good|550|735|0|0.5|0|still|0|False}
-Unit6 = {UC_evil|1399|270|1|0.4375|0|still|30|True}
-Unit7 = {UC_evil|1380|270|1|0.25|0|still|35|True}
-Unit8 = {UC_evil|1418|269|1|0.5625|0|still|40|True}
-
-; Map Created Using CAMM Crystal Alien Map Maker
+﻿{
+  "Format": 7,
+  "Title": "Astro Level 6",
+  "Author": "4T2 Multimedia",
+  "Width": 17,
+  "Height": 17,
+  "Team": 0,
+  "CashPlayer": 4000,
+  "CashEnemy": 20000,
+  "IsTraining": false,
+  "IsConflict": false,
+  "IsSpecialLevel": false,
+  "IsLastSpecialLevel": false,
+  "IsBonusLevel": false,
+  "IsFinal": false,
+  "Tiles": [
+    -1,
+    -1,
+    7,
+    3,
+    3,
+    6,
+    36,
+    42,
+    37,
+    30,
+    7,
+    6,
+    -1,
+    -1,
+    -1,
+    -1,
+    46,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    32,
+    37,
+    37,
+    30,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    32,
+    38,
+    37,
+    30,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    32,
+    37,
+    37,
+    39,
+    29,
+    33,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    32,
+    37,
+    37,
+    37,
+    37,
+    30,
+    47,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    35,
+    41,
+    37,
+    40,
+    31,
+    43,
+    33,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    8,
+    5,
+    -1,
+    -1,
+    47,
+    32,
+    37,
+    30,
+    -1,
+    32,
+    30,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    8,
+    15,
+    6,
+    -1,
+    -1,
+    47,
+    32,
+    37,
+    30,
+    -1,
+    32,
+    30,
+    -1,
+    -1,
+    -1,
+    8,
+    -1,
+    7,
+    6,
+    -1,
+    -1,
+    -1,
+    47,
+    35,
+    31,
+    43,
+    29,
+    44,
+    34,
+    -1,
+    -1,
+    -1,
+    4,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    47,
+    47,
+    47,
+    32,
+    37,
+    30,
+    36,
+    29,
+    29,
+    33,
+    7,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    47,
+    47,
+    32,
+    37,
+    39,
+    44,
+    31,
+    41,
+    39,
+    29,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    47,
+    47,
+    35,
+    41,
+    37,
+    30,
+    -1,
+    32,
+    37,
+    37,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    47,
+    47,
+    47,
+    32,
+    37,
+    30,
+    -1,
+    32,
+    37,
+    37,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    47,
+    47,
+    47,
+    32,
+    37,
+    39,
+    29,
+    42,
+    37,
+    37,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    47,
+    36,
+    42,
+    37,
+    37,
+    37,
+    37,
+    38,
+    37,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    47,
+    32,
+    37,
+    37,
+    37,
+    37,
+    37,
+    37,
+    37,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    8,
+    5,
+    47,
+    32,
+    37,
+    37,
+    37,
+    37,
+    37,
+    37,
+    37
+  ],
+  "Buildings": [
+    {
+      "Id": "BA_good",
+      "X": 3,
+      "Y": 12,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BB_good",
+      "X": 0,
+      "Y": 14,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BG_good",
+      "X": 0,
+      "Y": 12,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BC_evil",
+      "X": 14,
+      "Y": 4,
+      "Team": 1,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BD_evil",
+      "X": 10,
+      "Y": 6,
+      "Team": 1,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BD_evil",
+      "X": 13,
+      "Y": 11,
+      "Team": 1,
+      "Angle": 0.0,
+      "Damage": 0.0
+    },
+    {
+      "Id": "BB_evil",
+      "X": 14,
+      "Y": 1,
+      "Team": 1,
+      "Angle": 0.0,
+      "Damage": 0.0
+    }
+  ],
+  "Units": [
+    {
+      "Id": "UD_good",
+      "X": 336,
+      "Y": 744,
+      "Team": 0,
+      "Angle": 0.5,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_good",
+      "X": 501,
+      "Y": 649,
+      "Team": 0,
+      "Angle": 0.5,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_good",
+      "X": 502,
+      "Y": 701,
+      "Team": 0,
+      "Angle": 0.5,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_good",
+      "X": 537,
+      "Y": 748,
+      "Team": 0,
+      "Angle": 0.5,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_good",
+      "X": 546,
+      "Y": 694,
+      "Team": 0,
+      "Angle": 0.5,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_good",
+      "X": 550,
+      "Y": 735,
+      "Team": 0,
+      "Angle": 0.5,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UC_evil",
+      "X": 1399,
+      "Y": 270,
+      "Team": 1,
+      "Angle": 0.4375,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "30",
+      "Respawn": true
+    },
+    {
+      "Id": "UC_evil",
+      "X": 1380,
+      "Y": 270,
+      "Team": 1,
+      "Angle": 0.25,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "35",
+      "Respawn": true
+    },
+    {
+      "Id": "UC_evil",
+      "X": 1418,
+      "Y": 269,
+      "Team": 1,
+      "Angle": 0.5625,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "40",
+      "Respawn": true
+    }
+  ]
+}

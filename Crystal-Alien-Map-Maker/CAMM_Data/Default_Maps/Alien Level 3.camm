@@ -1,146 +1,239 @@
-﻿[CAMM]
-vFormat = 6
-
-[Level]
-Title = Alien Level 3
-Author = 4T2 Multimedia
-W = 13
-H = 11
-Team = 1
-CashPlayer = 800
-CashEnemy = 0
-isTraining = True
-isConflict = False
-isSpecialLevel = False
-isLastSpecialLevel = False
-isBonusLevel = False
-
-[Terrain]
-; Terrain Format: {str_Id|i_PosX|i_PosY}
-Terrain0 = {9|0|0}
-Terrain1 = {9|0|1}
-Terrain2 = {9|0|2}
-Terrain3 = {12|0|3}
-Terrain4 = {2|0|4}
-Terrain5 = {2|0|5}
-Terrain6 = {6|0|6}
-Terrain7 = {33|0|7}
-Terrain8 = {30|0|8}
-Terrain9 = {30|0|9}
-Terrain10 = {39|0|10}
-Terrain11 = {2|1|0}
-Terrain12 = {11|1|1}
-Terrain13 = {12|1|2}
-Terrain14 = {6|1|3}
-Terrain15 = {47|1|4}
-Terrain16 = {47|1|8}
-Terrain17 = {47|1|9}
-Terrain18 = {33|1|10}
-Terrain19 = {1|2|1}
-Terrain20 = {13|2|2}
-Terrain21 = {4|2|3}
-Terrain22 = {7|2|4}
-Terrain23 = {47|2|5}
-Terrain24 = {47|2|7}
-Terrain25 = {47|2|8}
-Terrain26 = {47|2|9}
-Terrain27 = {8|2|10}
-Terrain28 = {1|3|1}
-Terrain29 = {9|3|2}
-Terrain30 = {9|3|3}
-Terrain31 = {3|3|4}
-Terrain32 = {47|3|5}
-Terrain33 = {47|3|7}
-Terrain34 = {47|3|8}
-Terrain35 = {47|3|9}
-Terrain36 = {1|3|10}
-Terrain37 = {1|4|1}
-Terrain38 = {9|4|2}
-Terrain39 = {10|4|3}
-Terrain40 = {3|4|4}
-Terrain41 = {47|4|5}
-Terrain42 = {8|4|6}
-Terrain43 = {7|4|7}
-Terrain44 = {47|4|8}
-Terrain45 = {47|4|9}
-Terrain46 = {1|4|10}
-Terrain47 = {4|5|0}
-Terrain48 = {14|5|1}
-Terrain49 = {9|5|2}
-Terrain50 = {12|5|3}
-Terrain51 = {6|5|4}
-Terrain52 = {1|5|6}
-Terrain53 = {3|5|7}
-Terrain54 = {47|5|8}
-Terrain55 = {1|5|10}
-Terrain56 = {12|6|0}
-Terrain57 = {2|6|1}
-Terrain58 = {2|6|2}
-Terrain59 = {6|6|3}
-Terrain60 = {8|6|5}
-Terrain61 = {14|6|6}
-Terrain62 = {13|6|7}
-Terrain63 = {4|6|8}
-Terrain64 = {4|6|9}
-Terrain65 = {14|6|10}
-Terrain66 = {3|7|0}
-Terrain67 = {1|7|5}
-Terrain68 = {10|7|6}
-Terrain69 = {12|7|7}
-Terrain70 = {11|7|8}
-Terrain71 = {9|7|9}
-Terrain72 = {9|7|10}
-Terrain73 = {3|8|0}
-Terrain74 = {1|8|5}
-Terrain75 = {9|8|6}
-Terrain76 = {3|8|7}
-Terrain77 = {5|8|8}
-Terrain78 = {11|8|9}
-Terrain79 = {9|8|10}
-Terrain80 = {3|9|0}
-Terrain81 = {1|9|5}
-Terrain82 = {10|9|6}
-Terrain83 = {13|9|7}
-Terrain84 = {4|9|8}
-Terrain85 = {14|9|9}
-Terrain86 = {9|9|10}
-Terrain87 = {3|10|0}
-Terrain88 = {1|10|5}
-Terrain89 = {9|10|6}
-Terrain90 = {10|10|7}
-Terrain91 = {9|10|8}
-Terrain92 = {9|10|9}
-Terrain93 = {9|10|10}
-Terrain94 = {3|11|0}
-Terrain95 = {1|11|5}
-Terrain96 = {10|11|6}
-Terrain97 = {9|11|7}
-Terrain98 = {12|11|8}
-Terrain99 = {2|11|9}
-Terrain100 = {11|11|10}
-Terrain101 = {13|12|0}
-Terrain102 = {4|12|1}
-Terrain103 = {4|12|2}
-Terrain104 = {4|12|3}
-Terrain105 = {4|12|4}
-Terrain106 = {14|12|5}
-Terrain107 = {9|12|6}
-Terrain108 = {10|12|7}
-Terrain109 = {3|12|8}
-Terrain110 = {46|12|9}
-Terrain111 = {1|12|10}
-
-[Buildings]
-; Building Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage}
-Building0 = {BA_evil|8|1|1|0|0}
-
-[Units]
-; Unit Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage|str_AiTarget|str_AiObj|bool_Respawn}
-Unit0 = {UD_evil|816|216|1|0.75|0|still|0|False}
-Unit1 = {UA_evil|717|212|1|0.625|0|still|0|False}
-Unit2 = {UA_evil|699|176|1|0.5|0|still|0|False}
-Unit3 = {UA_good|139|254|0|0.25|0|still|0|False}
-Unit4 = {UA_good|315|518|0|0.75|0|roam|2|False}
-Unit5 = {UI_evil|528|456|1|0.5|0|still|UA_evil|False}
-
-; Map Created Using CAMM Crystal Alien Map Maker
+﻿{
+  "Format": 7,
+  "Title": "Alien Level 3",
+  "Author": "4T2 Multimedia",
+  "Width": 13,
+  "Height": 11,
+  "Team": 1,
+  "CashPlayer": 800,
+  "CashEnemy": 0,
+  "IsTraining": true,
+  "IsConflict": false,
+  "IsSpecialLevel": false,
+  "IsLastSpecialLevel": false,
+  "IsBonusLevel": false,
+  "IsFinal": false,
+  "Tiles": [
+    9,
+    2,
+    -1,
+    -1,
+    -1,
+    4,
+    12,
+    3,
+    3,
+    3,
+    3,
+    3,
+    13,
+    9,
+    11,
+    1,
+    1,
+    1,
+    14,
+    2,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    4,
+    9,
+    12,
+    13,
+    9,
+    9,
+    9,
+    2,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    4,
+    12,
+    6,
+    4,
+    9,
+    10,
+    12,
+    6,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    4,
+    2,
+    47,
+    7,
+    3,
+    3,
+    6,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    4,
+    2,
+    -1,
+    47,
+    47,
+    47,
+    -1,
+    8,
+    1,
+    1,
+    1,
+    1,
+    1,
+    14,
+    6,
+    -1,
+    -1,
+    -1,
+    8,
+    1,
+    14,
+    10,
+    9,
+    10,
+    9,
+    10,
+    9,
+    33,
+    -1,
+    47,
+    47,
+    7,
+    3,
+    13,
+    12,
+    3,
+    13,
+    10,
+    9,
+    10,
+    30,
+    47,
+    47,
+    47,
+    47,
+    47,
+    4,
+    11,
+    5,
+    4,
+    9,
+    12,
+    3,
+    30,
+    47,
+    47,
+    47,
+    47,
+    -1,
+    4,
+    9,
+    11,
+    14,
+    9,
+    2,
+    46,
+    39,
+    33,
+    8,
+    1,
+    1,
+    1,
+    14,
+    9,
+    9,
+    9,
+    9,
+    11,
+    1
+  ],
+  "Buildings": [
+    {
+      "Id": "BA_evil",
+      "X": 8,
+      "Y": 1,
+      "Team": 1,
+      "Angle": 0.0,
+      "Damage": 0.0
+    }
+  ],
+  "Units": [
+    {
+      "Id": "UD_evil",
+      "X": 816,
+      "Y": 216,
+      "Team": 1,
+      "Angle": 0.75,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UA_evil",
+      "X": 717,
+      "Y": 212,
+      "Team": 1,
+      "Angle": 0.625,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UA_evil",
+      "X": 699,
+      "Y": 176,
+      "Team": 1,
+      "Angle": 0.5,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UA_good",
+      "X": 139,
+      "Y": 254,
+      "Team": 0,
+      "Angle": 0.25,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "0",
+      "Respawn": false
+    },
+    {
+      "Id": "UA_good",
+      "X": 315,
+      "Y": 518,
+      "Team": 0,
+      "Angle": 0.75,
+      "Damage": 0.0,
+      "AiTarget": "roam",
+      "AiObj": "2",
+      "Respawn": false
+    },
+    {
+      "Id": "UI_evil",
+      "X": 528,
+      "Y": 456,
+      "Team": 1,
+      "Angle": 0.5,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "UA_evil",
+      "Respawn": false
+    }
+  ]
+}

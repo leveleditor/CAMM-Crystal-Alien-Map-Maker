@@ -1,113 +1,141 @@
-﻿[CAMM]
-vFormat = 6
-
-[Level]
-Title = Astro Level 1
-Author = 4T2 Multimedia
-W = 10
-H = 10
-Team = 0
-CashPlayer = 0
-CashEnemy = 0
-isTraining = True
-isConflict = False
-isSpecialLevel = False
-isLastSpecialLevel = False
-isBonusLevel = False
-
-[Terrain]
-; Terrain Format: {str_Id|i_PosX|i_PosY}
-Terrain0 = {12|0|0}
-Terrain1 = {11|0|1}
-Terrain2 = {10|0|2}
-Terrain3 = {9|0|3}
-Terrain4 = {12|0|4}
-Terrain5 = {6|0|5}
-Terrain6 = {16|1|0}
-Terrain7 = {15|1|1}
-Terrain8 = {11|1|2}
-Terrain9 = {10|1|3}
-Terrain10 = {3|1|4}
-Terrain11 = {14|2|0}
-Terrain12 = {13|2|1}
-Terrain13 = {14|2|2}
-Terrain14 = {9|2|3}
-Terrain15 = {3|2|4}
-Terrain16 = {12|3|0}
-Terrain17 = {2|3|1}
-Terrain18 = {11|3|2}
-Terrain19 = {10|3|3}
-Terrain20 = {13|3|4}
-Terrain21 = {7|3|5}
-Terrain22 = {8|3|7}
-Terrain23 = {4|3|8}
-Terrain24 = {4|3|9}
-Terrain25 = {3|4|0}
-Terrain26 = {47|4|1}
-Terrain27 = {5|4|2}
-Terrain28 = {11|4|3}
-Terrain29 = {12|4|4}
-Terrain30 = {6|4|5}
-Terrain31 = {5|4|7}
-Terrain32 = {11|4|8}
-Terrain33 = {10|4|9}
-Terrain34 = {3|5|0}
-Terrain35 = {47|5|1}
-Terrain36 = {47|5|2}
-Terrain37 = {5|5|3}
-Terrain38 = {6|5|4}
-Terrain39 = {47|5|5}
-Terrain40 = {8|5|6}
-Terrain41 = {4|5|7}
-Terrain42 = {14|5|8}
-Terrain43 = {9|5|9}
-Terrain44 = {3|6|0}
-Terrain45 = {47|6|1}
-Terrain46 = {47|6|2}
-Terrain47 = {47|6|3}
-Terrain48 = {47|6|4}
-Terrain49 = {47|6|5}
-Terrain50 = {5|6|6}
-Terrain51 = {11|6|7}
-Terrain52 = {10|6|8}
-Terrain53 = {9|6|9}
-Terrain54 = {3|7|0}
-Terrain55 = {47|7|1}
-Terrain56 = {47|7|2}
-Terrain57 = {47|7|3}
-Terrain58 = {47|7|4}
-Terrain59 = {8|7|5}
-Terrain60 = {4|7|6}
-Terrain61 = {14|7|7}
-Terrain62 = {9|7|8}
-Terrain63 = {9|7|9}
-Terrain64 = {3|8|0}
-Terrain65 = {46|8|1}
-Terrain66 = {47|8|2}
-Terrain67 = {8|8|3}
-Terrain68 = {4|8|4}
-Terrain69 = {15|8|5}
-Terrain70 = {11|8|6}
-Terrain71 = {9|8|7}
-Terrain72 = {9|8|8}
-Terrain73 = {10|8|9}
-Terrain74 = {13|9|0}
-Terrain75 = {4|9|1}
-Terrain76 = {4|9|2}
-Terrain77 = {14|9|3}
-Terrain78 = {10|9|4}
-Terrain79 = {13|9|5}
-Terrain80 = {14|9|6}
-Terrain81 = {9|9|7}
-Terrain82 = {10|9|8}
-Terrain83 = {9|9|9}
-
-[Buildings]
-; Building Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage}
-Building0 = {BA_good|1|4|0|0|0}
-
-[Units]
-; Unit Format: {str_Id|i_PosX|i_PosY|i_Team|f_Angle|f_Damage|str_AiTarget|str_AiObj|bool_Respawn}
-Unit0 = {UD_good|144|360|0|0.5|0|still|0|False}
-
-; Map Created Using CAMM Crystal Alien Map Maker
+﻿{
+  "Format": 7,
+  "Title": "Astro Level 1",
+  "Author": "4T2 Multimedia",
+  "Width": 10,
+  "Height": 10,
+  "Team": 0,
+  "CashPlayer": 0,
+  "CashEnemy": 0,
+  "IsTraining": true,
+  "IsConflict": false,
+  "IsSpecialLevel": false,
+  "IsLastSpecialLevel": false,
+  "IsBonusLevel": false,
+  "IsFinal": false,
+  "Tiles": [
+    12,
+    16,
+    14,
+    12,
+    3,
+    3,
+    3,
+    3,
+    3,
+    13,
+    11,
+    15,
+    13,
+    2,
+    47,
+    47,
+    47,
+    47,
+    46,
+    4,
+    10,
+    11,
+    14,
+    11,
+    5,
+    47,
+    47,
+    47,
+    47,
+    4,
+    9,
+    10,
+    9,
+    10,
+    11,
+    5,
+    47,
+    47,
+    8,
+    14,
+    12,
+    3,
+    3,
+    13,
+    12,
+    6,
+    47,
+    47,
+    4,
+    10,
+    6,
+    -1,
+    -1,
+    7,
+    6,
+    47,
+    47,
+    8,
+    15,
+    13,
+    -1,
+    -1,
+    -1,
+    -1,
+    -1,
+    8,
+    5,
+    4,
+    11,
+    14,
+    -1,
+    -1,
+    -1,
+    8,
+    5,
+    4,
+    11,
+    14,
+    9,
+    9,
+    -1,
+    -1,
+    -1,
+    4,
+    11,
+    14,
+    10,
+    9,
+    9,
+    10,
+    -1,
+    -1,
+    -1,
+    4,
+    10,
+    9,
+    9,
+    9,
+    10,
+    9
+  ],
+  "Buildings": [
+    {
+      "Id": "BA_good",
+      "X": 1,
+      "Y": 4,
+      "Team": 0,
+      "Angle": 0.0,
+      "Damage": 0.0
+    }
+  ],
+  "Units": [
+    {
+      "Id": "UD_good",
+      "X": 144,
+      "Y": 360,
+      "Team": 0,
+      "Angle": 0.5,
+      "Damage": 0.0,
+      "AiTarget": "still",
+      "AiObj": "0",
+      "Respawn": false
+    }
+  ]
+}
