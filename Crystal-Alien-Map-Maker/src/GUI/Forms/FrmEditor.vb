@@ -139,14 +139,13 @@ Public Class FrmEditor
             Dim fileName As String = My.Computer.FileSystem.GetFileInfo(filePath).Name
 
             'Get information from the map file.
-            Dim source As New IniConfigSource(filePath)
-            Dim config As IniConfig = source.Configs.Item("Level")
-            Dim title As String = config.GetString("Title")
-            Dim author As String = config.GetString("Author", "")
+            Dim mapData As MapData = JsonConvert.DeserializeObject(Of MapData)(File.ReadAllText(filePath))
+            Dim title As String = mapData.Title
+            Dim author As String = mapData.Author
 
             'Create a new menu item for this template map.
             Dim menuItem As New ToolStripMenuItem(title)
-            menuItem.ToolTipText = title + Environment.NewLine + "by " + author + Environment.NewLine + Environment.NewLine + fileName
+            menuItem.ToolTipText = title + " [" + fileName + "]" + Environment.NewLine + "by " + author
 
             'Add an event handler for clicking the item.
             AddHandler menuItem.Click, Sub()
