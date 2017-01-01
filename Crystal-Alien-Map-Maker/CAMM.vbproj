@@ -14,7 +14,7 @@
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <OptionInfer>On</OptionInfer>
-    <ApplicationIcon>icons\Crystal.ico</ApplicationIcon>
+    <ApplicationIcon>CAMM_Data\Icons\Crystal.ico</ApplicationIcon>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
     <SignManifests>false</SignManifests>
     <TargetZone>LocalIntranet</TargetZone>
@@ -265,8 +265,8 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="icons\CAMMFile.ico" />
-    <None Include="icons\Crystal.ico" />
+    <Content Include="CAMM_Data\Icons\CAMMFile.ico" />
+    <None Include="CAMM_Data\Icons\Crystal.ico" />
     <None Include="CAMM_Data\Sources\BuildingButtonTest.xcf" />
     <None Include="app.config" />
     <None Include="My Project\app.manifest" />
@@ -509,7 +509,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>
-    <PostBuildEvent>"$(ProjectDir)InsertIcons.exe" "$(TargetPath)" "$(ProjectDir)icons"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

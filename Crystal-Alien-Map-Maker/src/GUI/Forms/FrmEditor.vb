@@ -1114,14 +1114,14 @@ Public Class FrmEditor
 
                 Try
                     My.Computer.Registry.ClassesRoot.CreateSubKey(".camm").SetValue("", "CAMM", RegistryValueKind.String)
-                    My.Computer.Registry.ClassesRoot.CreateSubKey(".camm").SetValue("Content Type", "text/plain", RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey(".camm").SetValue("Content Type", "application/json", RegistryValueKind.String)
                     My.Computer.Registry.ClassesRoot.CreateSubKey(".camm").SetValue("PerceivedType", "document", RegistryValueKind.String)
                     My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("", "CAMM Map File", RegistryValueKind.String)
                     My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("AlwaysShowExt", "", RegistryValueKind.String)
                     My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("BrowserFlags", 8, RegistryValueKind.DWord)
                     My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM").SetValue("EditFlags", 302144, RegistryValueKind.DWord)
                     ' Thanks to ETXAlienRobot201 for making the .camm file icon.
-                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\DefaultIcon").SetValue("", """" + Application.ExecutablePath + """" + ",1", RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\DefaultIcon").SetValue("", """" + DataPath + "/Icons/CAMMFile.ico""", RegistryValueKind.String)
                     My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\shell").SetValue("", "open")
                     My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\shell\open").SetValue("", "&Edit with CAMM")
                     My.Computer.Registry.ClassesRoot.CreateSubKey("CAMM\shell\open\command").SetValue("", Application.ExecutablePath + " ""%l"" ", RegistryValueKind.String)
@@ -1154,10 +1154,6 @@ Public Class FrmEditor
 
             CheckFileAssociations()
         End If
-    End Sub
-
-    Private Sub chkAssociateFileTypeMap_CheckStateChanged(sender As Object, e As EventArgs) Handles chkAssociateFileTypeMap.CheckStateChanged
-        ' TODO: Associate .map files, though it may not be such a good idea.
     End Sub
 
     Private Sub cboRectangleBrush_DrawItem(sender As Object, e As DrawItemEventArgs) Handles cboRectangleBrush.DrawItem

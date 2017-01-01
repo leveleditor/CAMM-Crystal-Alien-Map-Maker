@@ -77,7 +77,6 @@ Partial Class FrmEditor
         Me.btnAbout = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.chkAssociateFileTypeCAMM = New System.Windows.Forms.ToolStripMenuItem()
-        Me.chkAssociateFileTypeMap = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDev = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnConfigEditor = New System.Windows.Forms.ToolStripMenuItem()
@@ -526,7 +525,7 @@ Partial Class FrmEditor
         '
         'mnuHelp
         '
-        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAbout, Me.separator4, Me.chkAssociateFileTypeCAMM, Me.chkAssociateFileTypeMap})
+        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAbout, Me.separator4, Me.chkAssociateFileTypeCAMM})
         Me.mnuHelp.Name = "mnuHelp"
         Me.mnuHelp.Size = New System.Drawing.Size(44, 24)
         Me.mnuHelp.Text = "&Help"
@@ -545,19 +544,12 @@ Partial Class FrmEditor
         '
         'chkAssociateFileTypeCAMM
         '
+        Me.chkAssociateFileTypeCAMM.Checked = True
         Me.chkAssociateFileTypeCAMM.CheckOnClick = True
+        Me.chkAssociateFileTypeCAMM.CheckState = System.Windows.Forms.CheckState.Indeterminate
         Me.chkAssociateFileTypeCAMM.Name = "chkAssociateFileTypeCAMM"
         Me.chkAssociateFileTypeCAMM.Size = New System.Drawing.Size(209, 22)
         Me.chkAssociateFileTypeCAMM.Text = "Associate file type .camm"
-        '
-        'chkAssociateFileTypeMap
-        '
-        Me.chkAssociateFileTypeMap.CheckOnClick = True
-        Me.chkAssociateFileTypeMap.Enabled = False
-        Me.chkAssociateFileTypeMap.Name = "chkAssociateFileTypeMap"
-        Me.chkAssociateFileTypeMap.Size = New System.Drawing.Size(209, 22)
-        Me.chkAssociateFileTypeMap.Text = "Associate file type .map"
-        Me.chkAssociateFileTypeMap.Visible = False
         '
         'separator8
         '
@@ -942,7 +934,7 @@ Partial Class FrmEditor
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
-    End Sub
+End Sub
     Friend WithEvents lblx As System.Windows.Forms.Label
     Friend WithEvents lblTools As System.Windows.Forms.Label
     Friend WithEvents lblWidth As System.Windows.Forms.Label
@@ -1001,7 +993,6 @@ Partial Class FrmEditor
     Friend WithEvents mnuchkDebugBuildingPos As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents separator4 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents chkAssociateFileTypeCAMM As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents chkAssociateFileTypeMap As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents separator5 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents separator6 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents separator7 As System.Windows.Forms.ToolStripSeparator
