@@ -317,20 +317,24 @@ Public Class FrmEditor
 
                 If ActiveEditMode = EditMode.Tiles Then
                     If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                        ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
+                        'ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
+                        ActiveMap.UndoRedoTimeline.PerformAction(New EraserAction(mouseX, mouseY, ActiveEditMode))
                     ElseIf ActiveToolMode = ToolMode.RectangleBrush Then
                         rectSelectStartX = mouseX
                         rectSelectStartY = mouseY
                     ElseIf ActiveToolMode = ToolMode.SmartBrush Then
                         ActiveMap.SetTileSmart(mouseX, mouseY)
                     ElseIf activeTile.TileId = -1 Then
-                        ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
+                        'ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
+                        ActiveMap.UndoRedoTimeline.PerformAction(New EraserAction(mouseX, mouseY, ActiveEditMode))
                     Else
-                        ActiveMap.SetTile(mouseX, mouseY, activeTile)
+                        'ActiveMap.SetTile(mouseX, mouseY, activeTile)
+                        ActiveMap.UndoRedoTimeline.PerformAction(New SetTileAction(mouseX, mouseY, activeTile))
                     End If
                 ElseIf ActiveEditMode = EditMode.Buildings Then
                     If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                        ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
+                        'ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
+                        ActiveMap.UndoRedoTimeline.PerformAction(New EraserAction(mouseX, mouseY, ActiveEditMode))
                     Else
                         ActiveMap.SetBuilding(mouseX, mouseY, activeBuilding)
                     End If
@@ -345,7 +349,8 @@ Public Class FrmEditor
                             btnUnitProperties.Enabled = False
                         End If
                     ElseIf ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                        ActiveMap.Eraser(mouseXNoSnap, mouseYNoSnap, ActiveEditMode)
+                        'ActiveMap.Eraser(mouseXNoSnap, mouseYNoSnap, ActiveEditMode)
+                        ActiveMap.UndoRedoTimeline.PerformAction(New EraserAction(mouseXNoSnap, mouseYNoSnap, ActiveEditMode))
                     Else
                         If mouseYNoSnap - activeUnit.Altitude > 0 Then
                             ActiveMap.SetUnit(mouseXNoSnap, mouseYNoSnap, activeUnit)
@@ -397,25 +402,30 @@ Public Class FrmEditor
         If IsDrawing Then
             If ActiveEditMode = EditMode.Tiles Then
                 If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                    ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
+                    'ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
+                    ActiveMap.UndoRedoTimeline.PerformAction(New EraserAction(mouseX, mouseY, ActiveEditMode))
                 ElseIf ActiveToolMode = ToolMode.SmartBrush Then
                     ActiveMap.SetTileSmart(mouseX, mouseY)
                 ElseIf ActiveToolMode = ToolMode.RectangleBrush Then
                     'Placeholder
                 ElseIf activeTile.TileId = -1 Then
-                    ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
+                    'ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
+                    ActiveMap.UndoRedoTimeline.PerformAction(New EraserAction(mouseX, mouseY, ActiveEditMode))
                 Else
-                    ActiveMap.SetTile(mouseX, mouseY, activeTile)
+                    'ActiveMap.SetTile(mouseX, mouseY, activeTile)
+                    ActiveMap.UndoRedoTimeline.PerformAction(New SetTileAction(mouseX, mouseY, activeTile))
                 End If
             ElseIf ActiveEditMode = EditMode.Buildings Then
                 If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                    ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
+                    'ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
+                    ActiveMap.UndoRedoTimeline.PerformAction(New EraserAction(mouseX, mouseY, ActiveEditMode))
                 Else
                     ActiveMap.SetBuilding(mouseX, mouseY, activeBuilding)
                 End If
             ElseIf ActiveEditMode = EditMode.Units Then
                 If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
-                    ActiveMap.Eraser(mouseXNoSnap, mouseYNoSnap, ActiveEditMode)
+                    'ActiveMap.Eraser(mouseXNoSnap, mouseYNoSnap, ActiveEditMode)
+                    ActiveMap.UndoRedoTimeline.PerformAction(New EraserAction(mouseXNoSnap, mouseYNoSnap, ActiveEditMode))
                 Else
                     'No click & drag for units, just imagine the spam...
                     'SetUnit(MouseXNoSnap, MouseYNoSnap)
@@ -1203,6 +1213,20 @@ Public Class FrmEditor
     Private Sub btnMapUnitProperties_Click(sender As Object, e As EventArgs) Handles btnMapUnitProperties.Click, btnUnitProperties.Click
         FrmUnitProperties.Subject = selectedUnit
         FrmUnitProperties.ShowDialog(Me)
+        picMap.Invalidate()
+    End Sub
+
+    Private Sub btnUndo_Click(sender As Object, e As EventArgs) Handles btnUndo.Click
+        ActiveMap.UndoRedoTimeline.Undo()
+
+        ' Redraw.
+        picMap.Invalidate()
+    End Sub
+
+    Private Sub btnRedo_Click(sender As Object, e As EventArgs) Handles btnRedo.Click
+        ActiveMap.UndoRedoTimeline.Redo()
+
+        ' Redraw.
         picMap.Invalidate()
     End Sub
 

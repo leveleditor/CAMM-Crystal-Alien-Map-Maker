@@ -155,6 +155,8 @@
     <Import Include="System.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\ActionTimeline.vb" />
+    <Compile Include="src\EditorAction.vb" />
     <Compile Include="src\Serializables\BuildingDefData.vb" />
     <Compile Include="src\Serializables\UnitDefData.vb" />
     <Compile Include="src\Serializables\TileDefData.vb" />
@@ -234,6 +236,8 @@
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="src\Helpers\Utils.vb" />
+    <Compile Include="src\EraserAction.vb" />
+    <Compile Include="src\SetTileAction.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="src\GUI\Forms\FrmExportAS.resx">

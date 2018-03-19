@@ -48,6 +48,7 @@ Partial Class FrmEditor
         Me.mnuMain = New System.Windows.Forms.MenuStrip()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnNew = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuNewFromTemplate = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnOpen = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnSave = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnSaveAs = New System.Windows.Forms.ToolStripMenuItem()
@@ -109,7 +110,9 @@ Partial Class FrmEditor
         Me.btnToolPointer = New System.Windows.Forms.Button()
         Me.btnToolRectangleBrush = New System.Windows.Forms.Button()
         Me.cboRectangleBrush = New System.Windows.Forms.ComboBox()
-        Me.mnuNewFromTemplate = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnUndo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnRedo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.separator10 = New System.Windows.Forms.ToolStripSeparator()
         CType(Me.picMap, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ctxMap.SuspendLayout()
         CType(Me.picActive, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -340,39 +343,46 @@ Partial Class FrmEditor
         '
         Me.btnNew.Name = "btnNew"
         Me.btnNew.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.btnNew.Size = New System.Drawing.Size(223, 22)
+        Me.btnNew.Size = New System.Drawing.Size(222, 22)
         Me.btnNew.Text = "&New"
+        '
+        'mnuNewFromTemplate
+        '
+        Me.mnuNewFromTemplate.Name = "mnuNewFromTemplate"
+        Me.mnuNewFromTemplate.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
+        Me.mnuNewFromTemplate.Size = New System.Drawing.Size(222, 22)
+        Me.mnuNewFromTemplate.Text = "New From &Template"
         '
         'btnOpen
         '
         Me.btnOpen.Name = "btnOpen"
         Me.btnOpen.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.btnOpen.Size = New System.Drawing.Size(223, 22)
+        Me.btnOpen.Size = New System.Drawing.Size(222, 22)
         Me.btnOpen.Text = "&Open..."
         '
         'btnSave
         '
         Me.btnSave.Name = "btnSave"
         Me.btnSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.btnSave.Size = New System.Drawing.Size(223, 22)
+        Me.btnSave.Size = New System.Drawing.Size(222, 22)
         Me.btnSave.Text = "&Save"
         '
         'btnSaveAs
         '
         Me.btnSaveAs.Name = "btnSaveAs"
-        Me.btnSaveAs.Size = New System.Drawing.Size(223, 22)
+        Me.btnSaveAs.Size = New System.Drawing.Size(222, 22)
         Me.btnSaveAs.Text = "Save &As..."
         '
         'separator1
         '
         Me.separator1.Name = "separator1"
-        Me.separator1.Size = New System.Drawing.Size(220, 6)
+        Me.separator1.Size = New System.Drawing.Size(219, 6)
         '
         'mnuImport
         '
         Me.mnuImport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnImportAS})
         Me.mnuImport.Name = "mnuImport"
-        Me.mnuImport.Size = New System.Drawing.Size(223, 22)
+        Me.mnuImport.Size = New System.Drawing.Size(222, 22)
         Me.mnuImport.Text = "&Import"
         Me.mnuImport.Visible = False
         '
@@ -386,7 +396,7 @@ Partial Class FrmEditor
         '
         Me.mnuExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnExportPNG, Me.btnExportAS})
         Me.mnuExport.Name = "mnuExport"
-        Me.mnuExport.Size = New System.Drawing.Size(223, 22)
+        Me.mnuExport.Size = New System.Drawing.Size(222, 22)
         Me.mnuExport.Text = "&Export"
         '
         'btnExportPNG
@@ -405,13 +415,13 @@ Partial Class FrmEditor
         'separator2
         '
         Me.separator2.Name = "separator2"
-        Me.separator2.Size = New System.Drawing.Size(220, 6)
+        Me.separator2.Size = New System.Drawing.Size(219, 6)
         '
         'btnExit
         '
         Me.btnExit.Name = "btnExit"
         Me.btnExit.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.btnExit.Size = New System.Drawing.Size(223, 22)
+        Me.btnExit.Size = New System.Drawing.Size(222, 22)
         Me.btnExit.Text = "E&xit"
         '
         'separator5
@@ -422,7 +432,7 @@ Partial Class FrmEditor
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnDeleteSelectedUnit, Me.btnUnitProperties, Me.separator9, Me.btnMapProperties})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnUndo, Me.btnRedo, Me.separator10, Me.btnDeleteSelectedUnit, Me.btnUnitProperties, Me.separator9, Me.btnMapProperties})
         Me.mnuEdit.Name = "mnuEdit"
         Me.mnuEdit.Size = New System.Drawing.Size(39, 24)
         Me.mnuEdit.Text = "&Edit"
@@ -870,12 +880,24 @@ Partial Class FrmEditor
         Me.cboRectangleBrush.TabIndex = 16
         Me.cboRectangleBrush.Visible = False
         '
-        'mnuNewFromTemplate
+        'btnUndo
         '
-        Me.mnuNewFromTemplate.Name = "mnuNewFromTemplate"
-        Me.mnuNewFromTemplate.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.mnuNewFromTemplate.Size = New System.Drawing.Size(223, 22)
-        Me.mnuNewFromTemplate.Text = "New From &Template"
+        Me.btnUndo.Name = "btnUndo"
+        Me.btnUndo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
+        Me.btnUndo.Size = New System.Drawing.Size(249, 22)
+        Me.btnUndo.Text = "Undo"
+        '
+        'btnRedo
+        '
+        Me.btnRedo.Name = "btnRedo"
+        Me.btnRedo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Y), System.Windows.Forms.Keys)
+        Me.btnRedo.Size = New System.Drawing.Size(249, 22)
+        Me.btnRedo.Text = "Redo"
+        '
+        'separator10
+        '
+        Me.separator10.Name = "separator10"
+        Me.separator10.Size = New System.Drawing.Size(246, 6)
         '
         'FrmEditor
         '
@@ -934,7 +956,7 @@ Partial Class FrmEditor
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
-End Sub
+    End Sub
     Friend WithEvents lblx As System.Windows.Forms.Label
     Friend WithEvents lblTools As System.Windows.Forms.Label
     Friend WithEvents lblWidth As System.Windows.Forms.Label
@@ -1021,4 +1043,7 @@ End Sub
     Friend WithEvents btnMapCancel As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuchkTeamIndicators As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuNewFromTemplate As ToolStripMenuItem
+    Friend WithEvents btnUndo As ToolStripMenuItem
+    Friend WithEvents btnRedo As ToolStripMenuItem
+    Friend WithEvents separator10 As ToolStripSeparator
 End Class

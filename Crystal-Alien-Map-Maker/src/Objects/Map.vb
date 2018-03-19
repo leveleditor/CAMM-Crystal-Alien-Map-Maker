@@ -28,6 +28,8 @@ Public Class Map
         IsSpecialLevel = IsSpecialLevelDefault
         IsLastSpecialLevel = IsLastSpecialLevelDefault
         IsBonusLevel = IsBonusLevelDefault
+
+        UndoRedoTimeline = New ActionTimeline(Me)
     End Sub
 
     Private Shared mapIdPool As Integer
@@ -86,6 +88,8 @@ Public Class Map
     Public IsSpecialLevel As Boolean
     Public IsLastSpecialLevel As Boolean
     Public IsBonusLevel As Boolean
+
+    Public UndoRedoTimeline As ActionTimeline
 
     Public Sub SetSize(width As Integer, height As Integer)
         If width <> SizeX Or height <> SizeY Then
