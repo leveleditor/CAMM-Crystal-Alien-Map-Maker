@@ -31,8 +31,8 @@
     End Sub
     Public Sub New(x As Integer, y As Integer, unitId As String, team As Team, altitude As Integer, isPickup As Boolean, angle As Single, damage As Single)
         Me.New(x, y, unitId, team, altitude, isPickup)
-        Me.Angle = angle
-        Me.Damage = damage
+        Me.Angle = Clamp(angle, 0, 1)
+        Me.Damage = Clamp(damage, 0, 1)
     End Sub
     Public Sub New(x As Integer, y As Integer, unitId As String, team As Team, altitude As Integer, isPickup As Boolean, angle As Single, damage As Single, aiTarget As String, aiObj As String, respawn As Boolean)
         Me.New(x, y, unitId, team, altitude, isPickup, angle, damage)

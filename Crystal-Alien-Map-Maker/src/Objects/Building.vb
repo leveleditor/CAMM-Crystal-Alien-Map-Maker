@@ -22,8 +22,8 @@
     End Sub
     Public Sub New(x As Integer, y As Integer, buildingId As String, team As Team, width As Integer, height As Integer, angle As Single, damage As Single)
         Me.New(x, y, buildingId, team, width, height)
-        Me.Angle = angle
-        Me.Damage = damage
+        Me.Angle = Clamp(angle, 0, 1)
+        Me.Damage = Clamp(damage, 0, 1)
     End Sub
 
     Public ReadOnly Property HasData As Boolean

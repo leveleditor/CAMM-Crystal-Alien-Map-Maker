@@ -54,6 +54,17 @@ Public Module Utils
         Return Math.Sqrt(((x1 - x2) ^ 2) + ((y1 - y2) ^ 2))
     End Function
 
+    ''' <summary>
+    ''' Forces a value to be no lower than min and no higher than max.
+    ''' </summary>
+    ''' <param name="value">The value to clamp</param>
+    ''' <param name="min">The lowest possible value</param>
+    ''' <param name="max">The highest possible value</param>
+    ''' <returns></returns>
+    Public Function Clamp(value As Single, min As Single, max As Single) As Single
+        Return If(value < min, min, If(value > max, max, value))
+    End Function
+
     Public Sub UpgradeBuildingId(fromVersion As Integer, toVersion As Integer, ByRef objectId As String)
         If fromVersion < 4 And toVersion >= 4 Then
             ' The easy way to map old building Ids to new ones.
