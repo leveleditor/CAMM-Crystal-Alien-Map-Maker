@@ -1,13 +1,20 @@
 ﻿Public Class FrmUnitProperties
 
-    Public Property Subject As Unit = Nothing
+    Private subject As Unit
+
+    Public Sub New(ByRef subject As Unit)
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        Me.subject = subject
+    End Sub
 
     Private Sub FrmUnitProperties_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         cboTarget.Items.Clear()
         cboObj.Items.Clear()
 
         'TODO: Externalize to config file.
-        If Not Subject.IsPickup Then
+        If Not subject.IsPickup Then
             cboTarget.Items.AddRange({
                 New KeyValuePair(Of String, String)("seek", """seek"""),
                 New KeyValuePair(Of String, String)("roam", """roam"""),
@@ -24,7 +31,7 @@
         cboObj.Items.AddRange({
             New KeyValuePair(Of String, String)("null", "None (null)")
         })
-        If Subject.IsPickup Then
+        If subject.IsPickup Then
             cboObj.Items.AddRange({
                 New KeyValuePair(Of String, String)("powerup", """powerup"""),
                 New KeyValuePair(Of String, String)("special", """special""")
@@ -35,7 +42,7 @@
         cboObj.ValueMember = "Key"
         cboObj.SelectedIndex = 0
 
-        If Subject.IsPickup Then
+        If subject.IsPickup Then
             cboTarget.Enabled = False
             lblObj.Text = "Item Pickup Parameters"
         Else
@@ -43,24 +50,31 @@
             lblObj.Text = "Monolithic property of things"
         End If
 
-        cboTeam.SelectedIndex = CInt(Subject.Team)
-        txtAngle.Value = Subject.Angle
-        txtDamage.Value = Subject.Damage
-        If Not Subject.IsPickup Then
-            cboTarget.SelectedIndex = (From i As KeyValuePair(Of String, String) In cboTarget.Items Where i.Key = Subject.AiTarget Select cboTarget.Items.IndexOf(i)).FirstOrDefault()
+        If subject.Team >= 2 Then
+            'Fallback to neutral team, but this shouldn't be used.
+            cboTeam.Items.Add("Neutral (""???"")")
+            cboTeam.SelectedIndex = 2
+        Else
+            cboTeam.SelectedIndex = CInt(subject.Team)
         End If
-        If Not String.IsNullOrEmpty(Subject.AiObj) Then
-            Dim item As KeyValuePair(Of String, String) = (From i As KeyValuePair(Of String, String) In cboObj.Items Where i.Key = Subject.AiObj Select i).FirstOrDefault()
+
+        txtAngle.Value = subject.Angle
+        txtDamage.Value = subject.Damage
+        If Not subject.IsPickup Then
+            cboTarget.SelectedIndex = (From i As KeyValuePair(Of String, String) In cboTarget.Items Where i.Key = subject.AiTarget Select cboTarget.Items.IndexOf(i)).FirstOrDefault()
+        End If
+        If Not String.IsNullOrEmpty(subject.AiObj) Then
+            Dim item As KeyValuePair(Of String, String) = (From i As KeyValuePair(Of String, String) In cboObj.Items Where i.Key = subject.AiObj Select i).FirstOrDefault()
             If item.Key Is Nothing Then
                 cboObj.SelectedItem = Nothing
-                cboObj.Text = Subject.AiObj
+                cboObj.Text = subject.AiObj
             Else
                 cboObj.SelectedIndex = cboObj.Items.IndexOf(item)
             End If
         End If
-        chkRespawn.Checked = Subject.Respawn
+        chkRespawn.Checked = subject.Respawn
 
-        lblUnitId.Text = "Unit Id: " + Subject.UnitId
+        lblUnitId.Text = "Unit Id: " + subject.UnitId
     End Sub
 
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
@@ -72,20 +86,20 @@
             End If
         End If
 
-        Subject.Team = CType(cboTeam.SelectedIndex, Team)
-        Subject.Angle = txtAngle.Value
-        Subject.Damage = txtDamage.Value
-        If Subject.IsPickup Then
-            Subject.AiTarget = "null"
+        subject.Team = CType(cboTeam.SelectedIndex, Team)
+        subject.Angle = txtAngle.Value
+        subject.Damage = txtDamage.Value
+        If subject.IsPickup Then
+            subject.AiTarget = "null"
         Else
-            Subject.AiTarget = cboTarget.SelectedItem.Key
+            subject.AiTarget = cboTarget.SelectedItem.Key
         End If
         If cboObj.SelectedItem Is Nothing Then
-            Subject.AiObj = cboObj.Text
+            subject.AiObj = cboObj.Text
         Else
-            Subject.AiObj = cboObj.SelectedItem.Key
+            subject.AiObj = cboObj.SelectedItem.Key
         End If
-        Subject.Respawn = chkRespawn.Checked
+        subject.Respawn = chkRespawn.Checked
 
         Me.DialogResult = DialogResult.OK
         Me.Close()

@@ -58,7 +58,7 @@ Partial Class FrmUnitProperties
         '
         Me.cboTeam.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cboTeam.FormattingEnabled = True
-        Me.cboTeam.Items.AddRange(New Object() {"Astros (""good"")", "Aliens (""evil"")", "Neutral (""???"")"})
+        Me.cboTeam.Items.AddRange(New Object() {"Astros (""good"")", "Aliens (""evil"")"})
         Me.cboTeam.Location = New System.Drawing.Point(157, 12)
         Me.cboTeam.Name = "cboTeam"
         Me.cboTeam.Size = New System.Drawing.Size(100, 21)
