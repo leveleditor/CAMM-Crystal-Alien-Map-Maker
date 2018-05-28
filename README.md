@@ -9,7 +9,7 @@ Currently it lacks the ability to load the maps into the game, but we're working
 
 CAMM is part of the [CrystAlien Redux project](http://marsmissionwiki.wikifoundry.com/page/CrystAlien+Redux+Project) which aims to extend the CrystAlien Conflict game.
 
-Early test builds for CAMM can be found on [the AppVeyor build system](https://ci.appveyor.com/project/leveleditor/camm-crystal-alien-map-maker/build/artifacts) and [mirrored to crystalien-redux.com](https://crystalien-redux.com/builds/CAMM/).
+Early test builds for CAMM can be found on [the AppVeyor build system](https://ci.appveyor.com/project/leveleditor/camm-crystal-alien-map-maker/branch/master/artifacts) and [mirrored to crystalien-redux.com](https://crystalien-redux.com/builds/CAMM/).
 
 ## More Information
 
