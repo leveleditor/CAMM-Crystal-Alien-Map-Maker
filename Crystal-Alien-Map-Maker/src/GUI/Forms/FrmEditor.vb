@@ -1074,8 +1074,7 @@ Public Class FrmEditor
                     'TODO: Building properties button!
                     'btnBuildingProperties.Enabled = False
                     ActiveMap.DeleteBuilding(ActiveMap.SelectedBuilding)
-                    ActiveMap.SelectedBuilding = Nothing
-                    ActiveMap.ClosestBuilding = Nothing
+                    ActiveMap.ClearSelection()
                     picMap.Invalidate()
                 End If
             Case EditMode.Units
@@ -1083,8 +1082,7 @@ Public Class FrmEditor
                     btnDeleteSelectedObject.Enabled = False
                     btnUnitProperties.Enabled = False
                     ActiveMap.DeleteUnit(ActiveMap.SelectedUnit)
-                    ActiveMap.SelectedUnit = Nothing
-                    ActiveMap.ClosestUnit = Nothing
+                    ActiveMap.ClearSelection()
                     picMap.Invalidate()
                 End If
             Case EditMode.Shroud
@@ -1580,6 +1578,9 @@ Public Class FrmEditor
             End If
         End If
 
+        ' Clear currently selected objects.
+        ActiveMap.ClearSelection()
+
         ' Redraw the map.
         picMap.Invalidate()
     End Sub
@@ -1620,6 +1621,9 @@ Public Class FrmEditor
         If ActiveEditMode <> EditMode.Tiles Then
             btnToolRectangleBrush.Enabled = False
         End If
+
+        ' Clear currently selected objects.
+        ActiveMap.ClearSelection()
 
         ' Refresh drawing surfaces.
         picTiles.Invalidate()

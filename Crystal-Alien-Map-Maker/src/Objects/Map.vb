@@ -92,6 +92,21 @@ Public Class Map
     Public IsLastSpecialLevel As Boolean
     Public IsBonusLevel As Boolean
 
+    Public Sub ClearSelection()
+        ClearSelectedUnit()
+        ClearSelectedBuilding()
+    End Sub
+
+    Public Sub ClearSelectedUnit()
+        SelectedUnit = Nothing
+        ClosestUnit = Nothing
+    End Sub
+
+    Public Sub ClearSelectedBuilding()
+        SelectedBuilding = Nothing
+        ClosestBuilding = Nothing
+    End Sub
+
     Public Sub SetSize(width As Integer, height As Integer)
         If width <> SizeX Or height <> SizeY Then
             Dim tempTiles As Tile(,) = mapTiles
