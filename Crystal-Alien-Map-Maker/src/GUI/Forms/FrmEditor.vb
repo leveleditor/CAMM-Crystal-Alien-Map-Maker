@@ -11,6 +11,13 @@ Imports Nini.Config
 
 Public Class FrmEditor
 
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        Icon = My.Resources.Crystal
+    End Sub
+
     Private baseFormTitle As String
 
     Private Property ActiveMapNum As Integer
@@ -1337,6 +1344,7 @@ Public Class FrmEditor
     End Sub
 
     Public ImportASTileData As String = ""
+
     Private Sub btnImportAS_Click(sender As Object, e As EventArgs) Handles btnImportAS.Click
         If FrmImportAS.ShowDialog(Me) = DialogResult.OK And ImportASTileData <> "" Then
             'TODO: This will have to do for now.

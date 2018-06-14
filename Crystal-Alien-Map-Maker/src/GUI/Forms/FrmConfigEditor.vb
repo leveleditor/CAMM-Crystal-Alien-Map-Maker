@@ -5,6 +5,13 @@ Imports Newtonsoft.Json
 Public Class FrmConfigEditor
     Private saved As Boolean
 
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        Icon = My.Resources.Crystal
+    End Sub
+
     Private Sub FrmConfigEditor_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         'Reload configuration data.
         LoadAssets()

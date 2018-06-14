@@ -1,5 +1,12 @@
 ﻿Public Class FrmMapProperties
 
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        Icon = My.Resources.Crystal
+    End Sub
+
     Private Sub FrmMapProperties_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         txtTitle.Focus()
 

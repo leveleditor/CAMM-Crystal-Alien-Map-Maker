@@ -153,7 +153,6 @@ Partial Class FrmImportAS
         Me.Controls.Add(Me.lblPaste)
         Me.Controls.Add(Me.lblExample)
         Me.Controls.Add(Me.tblButtons)
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(530, 303)

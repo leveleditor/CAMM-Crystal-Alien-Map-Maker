@@ -23,7 +23,6 @@ Partial Class FrmEditor
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmEditor))
         Me.lblx = New System.Windows.Forms.Label()
         Me.lblTools = New System.Windows.Forms.Label()
         Me.lblWidth = New System.Windows.Forms.Label()
@@ -910,7 +909,6 @@ Partial Class FrmEditor
         Me.Controls.Add(Me.pnlBuildings)
         Me.Controls.Add(Me.mapTabs)
         Me.DoubleBuffered = True
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
         Me.MainMenuStrip = Me.mnuMain
         Me.Name = "FrmEditor"

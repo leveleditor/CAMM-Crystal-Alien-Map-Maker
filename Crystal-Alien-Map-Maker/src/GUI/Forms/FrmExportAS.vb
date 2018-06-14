@@ -1,6 +1,11 @@
-﻿Imports System.Windows.Forms
+﻿Public Class FrmExportAS
 
-Public Class FrmExportAS
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        Icon = My.Resources.Crystal
+    End Sub
 
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
         Me.DialogResult = DialogResult.OK

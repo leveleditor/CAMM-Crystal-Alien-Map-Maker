@@ -1,5 +1,12 @@
 ﻿Public Class FrmImportAS
 
+    Public Sub New()
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        Icon = My.Resources.Crystal
+    End Sub
+
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
         'MsgBox("""" + Ascii(45) + """") '45 should be an "N" according to the tiler.php...
         'MsgBox("""" + Ascii("+").ToString() + """") '"+" should be 10

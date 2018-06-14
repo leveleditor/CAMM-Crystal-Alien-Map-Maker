@@ -6,6 +6,7 @@
         ' This call is required by the designer.
         InitializeComponent()
 
+        Icon = My.Resources.Crystal
         Me.subject = subject
     End Sub
 

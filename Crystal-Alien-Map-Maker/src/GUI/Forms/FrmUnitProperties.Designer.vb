@@ -22,7 +22,6 @@ Partial Class FrmUnitProperties
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmUnitProperties))
         Me.lblTeam = New System.Windows.Forms.Label()
         Me.cboTeam = New System.Windows.Forms.ComboBox()
         Me.tblButtons = New System.Windows.Forms.TableLayoutPanel()
@@ -221,7 +220,6 @@ Partial Class FrmUnitProperties
         Me.Controls.Add(Me.cboTeam)
         Me.Controls.Add(Me.lblTeam)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FrmUnitProperties"

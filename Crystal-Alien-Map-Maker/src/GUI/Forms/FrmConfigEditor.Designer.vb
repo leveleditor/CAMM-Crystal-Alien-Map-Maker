@@ -22,7 +22,6 @@ Partial Class FrmConfigEditor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmConfigEditor))
         Me.btnSaveAll = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.lblSaved = New System.Windows.Forms.Label()
@@ -34,8 +33,8 @@ Partial Class FrmConfigEditor
         Me.pnlBuildings = New System.Windows.Forms.Panel()
         Me.tabUnits = New System.Windows.Forms.TabPage()
         Me.pnlUnits = New System.Windows.Forms.Panel()
-        Me.picPreview = New System.Windows.Forms.PictureBox()
         Me.tabConfig = New System.Windows.Forms.TabPage()
+        Me.picPreview = New System.Windows.Forms.PictureBox()
         Me.editTabs.SuspendLayout()
         Me.tabTiles.SuspendLayout()
         Me.tabBuildings.SuspendLayout()
@@ -169,18 +168,6 @@ Partial Class FrmConfigEditor
         Me.pnlUnits.Size = New System.Drawing.Size(6, 6)
         Me.pnlUnits.TabIndex = 2
         '
-        'picPreview
-        '
-        Me.picPreview.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.picPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.picPreview.Location = New System.Drawing.Point(0, 404)
-        Me.picPreview.Name = "picPreview"
-        Me.picPreview.Size = New System.Drawing.Size(96, 48)
-        Me.picPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.picPreview.TabIndex = 14
-        Me.picPreview.TabStop = False
-        Me.picPreview.Visible = False
-        '
         'tabConfig
         '
         Me.tabConfig.AutoScroll = True
@@ -192,6 +179,18 @@ Partial Class FrmConfigEditor
         Me.tabConfig.Size = New System.Drawing.Size(738, 379)
         Me.tabConfig.TabIndex = 3
         Me.tabConfig.Text = "Edit Config"
+        '
+        'picPreview
+        '
+        Me.picPreview.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.picPreview.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.picPreview.Location = New System.Drawing.Point(0, 404)
+        Me.picPreview.Name = "picPreview"
+        Me.picPreview.Size = New System.Drawing.Size(96, 48)
+        Me.picPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.picPreview.TabIndex = 14
+        Me.picPreview.TabStop = False
+        Me.picPreview.Visible = False
         '
         'FrmConfigEditor
         '
@@ -205,7 +204,6 @@ Partial Class FrmConfigEditor
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnSaveAll)
         Me.DoubleBuffered = True
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "FrmConfigEditor"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Configuration Editor"

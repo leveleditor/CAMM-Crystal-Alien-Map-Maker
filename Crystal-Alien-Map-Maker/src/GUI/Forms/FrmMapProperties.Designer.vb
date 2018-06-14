@@ -22,7 +22,6 @@ Partial Class FrmMapProperties
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmMapProperties))
         Me.lblTeam = New System.Windows.Forms.Label()
         Me.lblStartCashPlayer = New System.Windows.Forms.Label()
         Me.lblStartCashEnemy = New System.Windows.Forms.Label()
@@ -285,7 +284,6 @@ Partial Class FrmMapProperties
         Me.Controls.Add(Me.lblStartCashPlayer)
         Me.Controls.Add(Me.lblTeam)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "FrmMapProperties"
