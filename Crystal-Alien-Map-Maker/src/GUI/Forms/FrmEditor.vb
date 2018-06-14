@@ -402,7 +402,7 @@ Public Class FrmEditor
         mouseXNoSnap = e.X
         mouseYNoSnap = e.Y
 
-        If IsDrawing Then
+        If IsDrawing And ActiveToolMode <> ToolMode.Pointer Then
             If ActiveEditMode = EditMode.Tiles Then
                 If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                     ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
@@ -469,7 +469,7 @@ Public Class FrmEditor
             ' Draw the rectangle cursor / selector thingy.
             If IsMouseInBounds() Then
                 If ActiveEditMode <> EditMode.Units Then
-                    If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
+                    If (ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown) And ActiveToolMode <> ToolMode.Pointer Then
                         g.DrawRectangle(PenTileErase, mouseX - (PenTileHover.Width / 2), mouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
                     ElseIf ActiveToolMode = ToolMode.RectangleBrush And rectSelectStartX <> -1 And rectSelectStartY <> -1 Then
                         Dim startx, starty, endx, endy As Single
