@@ -511,10 +511,7 @@ Public Class FrmEditor
                 End If
                 If ActiveEditMode = EditMode.Tiles Then
                     'g.DrawImage(ActiveTile.Image, MouseX, MouseY)
-                ElseIf ActiveEditMode = EditMode.Buildings And activeBuilding.BuildingId <> "" Then
-                    'activeBuilding.DrawBaseplate(g, mouseX, mouseY)
-                    'activeBuilding.Draw(g, mouseX, mouseY, True)
-
+                ElseIf ActiveEditMode = EditMode.Buildings Then
                     If ActiveToolMode = ToolMode.Pointer Then
                         If ActiveMap.ClosestBuilding IsNot Nothing Then
                             g.FillRectangle(BrushBuildingSelectionHover, mouseX, mouseY, ActiveMap.ClosestBuilding.BuildingW * TileSizeX + 1, ActiveMap.ClosestBuilding.BuildingH * TileSizeY + 1)
