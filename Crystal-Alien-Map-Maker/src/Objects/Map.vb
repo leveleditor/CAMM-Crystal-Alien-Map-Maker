@@ -69,6 +69,11 @@ Public Class Map
         End Set
     End Property
 
+    Public ClosestUnit As Unit = Nothing 'The closest unit to the cursor position.
+    Public SelectedUnit As Unit = Nothing 'The currently selected unit.
+    Public ClosestBuilding As Building = Nothing 'The closest building to the cursor position.
+    Public SelectedBuilding As Building = Nothing 'The currently selected building.
+
     Public Title As String
     Public Author As String
     Public IsMapFinal As Boolean
@@ -182,7 +187,7 @@ Public Class Map
             For x As Integer = 0 To SizeX - 1
                 For y As Integer = 0 To SizeY - 1
                     If mouseX = x * TileSizeX And mouseY = y * TileSizeY Then
-                            mapTiles(x, y) = New Tile(tile.TileId, tile.IsPassable, tile.IsMinerals)
+                        mapTiles(x, y) = New Tile(tile.TileId, tile.IsPassable, tile.IsMinerals)
                         Return
                     End If
                 Next
