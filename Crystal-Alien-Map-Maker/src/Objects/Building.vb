@@ -106,6 +106,18 @@
         End Get
     End Property
 
+    Public ReadOnly Property TeamIndicatorImage As Image
+        Get
+            If Team = Team.Astros Then
+                Return TeamIndicatorAstro
+            ElseIf Team = Team.Aliens Then
+                Return TeamIndicatorAlien
+            Else
+                Return TeamIndicatorNeutral
+            End If
+        End Get
+    End Property
+
     Public ReadOnly Property BaseplateImage As Image
         Get
             If Team = Team.Astros And BuildingW = 1 Then
@@ -209,6 +221,14 @@
 
             g.DrawImage(BaseplateImage, drawPoint.X + drawX, drawPoint.Y + drawY, BaseplateImage.Width, BaseplateImage.Height)
         End If
+    End Sub
+
+    Public Sub DrawTeamIndicator(g As Graphics)
+        g.DrawImage(TeamIndicatorImage,
+                    (X + (BuildingW * TileSizeX) * 0.5f) - CInt(TeamIndicatorImage.Width / 2),
+                    (Y + (BuildingH * TileSizeY) * 0.5f) - CInt(TeamIndicatorImage.Height / 2),
+                    TeamIndicatorImage.Width,
+                    TeamIndicatorImage.Height)
     End Sub
 
 End Class

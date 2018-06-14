@@ -40,6 +40,8 @@
     Public ReadOnly PenSelectionHover As Pen = New Pen(Pens.DarkOrange.Brush, 2)
     Public ReadOnly PenSelected As Pen = New Pen(Pens.LimeGreen.Brush, 3)
     Public ReadOnly BrushBuildingPlacement As SolidBrush = New SolidBrush(Color.FromArgb(128, 0, 255, 0))
+    Public ReadOnly BrushBuildingSelectionHover As SolidBrush = New SolidBrush(Color.FromArgb(128, 255, 255, 255))
+    Public ReadOnly BrushBuildingSelected As SolidBrush = New SolidBrush(Color.FromArgb(128, 142, 255, 255))
 
     Public Enum EditMode
         Tiles

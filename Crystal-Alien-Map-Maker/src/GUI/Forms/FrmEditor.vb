@@ -76,6 +76,9 @@ Public Class FrmEditor
     Private closestUnit As Unit = Nothing 'The closest unit to the cursor position.
     Private selectedUnit As Unit = Nothing 'The currently selected unit.
 
+    Private closestBuilding As Building = Nothing 'The closest building to the cursor position.
+    Private selectedBuilding As Building = Nothing 'The currently selected building.
+
     Private Sub FRMEditor_Load(sender As Object, e As EventArgs) Handles Me.Load
         'Storing default form title.
         baseFormTitle = Me.Text
@@ -329,7 +332,18 @@ Public Class FrmEditor
                         ActiveMap.SetTile(mouseX, mouseY, activeTile)
                     End If
                 ElseIf ActiveEditMode = EditMode.Buildings Then
-                    If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
+                    If ActiveToolMode = ToolMode.Pointer Then
+                        selectedBuilding = closestBuilding
+                        If selectedBuilding IsNot Nothing Then
+                            btnDeleteSelectedObject.Enabled = True
+                            'TODO: Building properties button!
+                            'btnBuildingProperties.Enabled = True
+                        Else
+                            btnDeleteSelectedObject.Enabled = False
+                            'TODO: Building properties button!
+                            'btnBuildingProperties.Enabled = False
+                        End If
+                    ElseIf ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                         ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
                     Else
                         ActiveMap.SetBuilding(mouseX, mouseY, activeBuilding)
@@ -338,10 +352,10 @@ Public Class FrmEditor
                     If ActiveToolMode = ToolMode.Pointer Then
                         selectedUnit = closestUnit
                         If selectedUnit IsNot Nothing Then
-                            btnDeleteSelectedUnit.Enabled = True
+                            btnDeleteSelectedObject.Enabled = True
                             btnUnitProperties.Enabled = True
                         Else
-                            btnDeleteSelectedUnit.Enabled = False
+                            btnDeleteSelectedObject.Enabled = False
                             btnUnitProperties.Enabled = False
                         End If
                     ElseIf ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
@@ -410,7 +424,7 @@ Public Class FrmEditor
             ElseIf ActiveEditMode = EditMode.Buildings Then
                 If ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                     ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
-                Else
+                ElseIf ActiveToolMode = ToolMode.Brush Then
                     ActiveMap.SetBuilding(mouseX, mouseY, activeBuilding)
                 End If
             ElseIf ActiveEditMode = EditMode.Units Then
@@ -443,6 +457,7 @@ Public Class FrmEditor
 
         If ActiveToolMode = ToolMode.Pointer Then
             closestUnit = ActiveMap.GetClosestUnit(mouseXNoSnap, mouseYNoSnap, 30)
+            closestBuilding = ActiveMap.GetBuildingAt(mouseX, mouseY)
         End If
 
         ' Redraw.
@@ -453,7 +468,9 @@ Public Class FrmEditor
         If isLoaded Then
             Dim g As Graphics = e.Graphics
 
-            ActiveMap.Draw(g, DrawGrid, DrawShadows, DrawTeamIndicators, DrawBuildingDebugPos, DrawUnitDebugPos)
+            Dim drawUnitTeamIndicators As Boolean = DrawTeamIndicators And ActiveEditMode = EditMode.Units
+            Dim drawBuildingTeamIndicators As Boolean = DrawTeamIndicators And ActiveEditMode = EditMode.Buildings
+            ActiveMap.Draw(g, DrawGrid, DrawShadows, drawUnitTeamIndicators, drawBuildingTeamIndicators, DrawBuildingDebugPos, DrawUnitDebugPos)
 
             ' Draw the rectangle cursor / selector thingy.
             If IsMouseInBounds() Then
@@ -487,9 +504,9 @@ Public Class FrmEditor
                         o2 = PenTileHover.Width
                         g.DrawRectangle(PenTileHover, rect.X - o1, rect.Y - o1, rect.Width + PenTileHover.Width + 1, rect.Height + PenTileHover.Width + 1)
                         g.DrawRectangle(PenTileHover, rect.X + o2, rect.Y + o2, rect.Width - PenTileHover.Width - 1, rect.Height - PenTileHover.Width - 1)
-                    ElseIf ActiveEditMode = EditMode.Buildings And activeBuilding.BuildingId <> "" Then
+                    ElseIf ActiveEditMode = EditMode.Buildings And ActiveToolMode = ToolMode.Brush And activeBuilding.BuildingId <> "" Then
                         g.FillRectangle(BrushBuildingPlacement, mouseX, mouseY, activeBuilding.BuildingW * TileSizeX + 1, activeBuilding.BuildingH * TileSizeY + 1)
-                    Else
+                    ElseIf ActiveEditMode = EditMode.Tiles Then
                         g.DrawRectangle(PenTileHover, mouseX - (PenTileHover.Width / 2), mouseY - (PenTileHover.Width / 2), TileSizeX + PenTileHover.Width + 1, TileSizeY + PenTileHover.Width + 1)
                     End If
                 End If
@@ -498,6 +515,12 @@ Public Class FrmEditor
                 ElseIf ActiveEditMode = EditMode.Buildings And activeBuilding.BuildingId <> "" Then
                     'activeBuilding.DrawBaseplate(g, mouseX, mouseY)
                     'activeBuilding.Draw(g, mouseX, mouseY, True)
+
+                    If ActiveToolMode = ToolMode.Pointer Then
+                        If closestBuilding IsNot Nothing Then
+                            g.FillRectangle(BrushBuildingSelectionHover, mouseX, mouseY, closestBuilding.BuildingW * TileSizeX + 1, closestBuilding.BuildingH * TileSizeY + 1)
+                        End If
+                    End If
                 ElseIf ActiveEditMode = EditMode.Units Then
                     If ActiveToolMode = ToolMode.Pointer Then
                         If closestUnit IsNot Nothing Then
@@ -521,14 +544,22 @@ Public Class FrmEditor
                 End If
             End If
 
-            If ActiveEditMode = EditMode.Units Then
-                If ActiveToolMode = ToolMode.Pointer Then
+            If ActiveToolMode = ToolMode.Pointer Then
+                If ActiveEditMode = EditMode.Units Then
                     If selectedUnit IsNot Nothing Then
                         If DrawTeamIndicators Then
                             selectedUnit.DrawTeamIndicator(g)
                         End If
                         g.DrawImage(UnitSelectionClick, selectedUnit.X - CInt(UnitSelectionHover.Width / 2), selectedUnit.Y - selectedUnit.Altitude - CInt(UnitSelectionHover.Height / 2), UnitSelectionHover.Width, UnitSelectionHover.Height)
                         'g.DrawString(selectedUnit.UnitId, New Font(FontFamily.GenericMonospace, 12, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.GreenYellow, selectedUnit.X + 10, selectedUnit.Y - selectedUnit.Altitude - 10)
+                    End If
+                ElseIf ActiveEditMode = EditMode.Buildings Then
+                    If selectedBuilding IsNot Nothing Then
+                        If DrawTeamIndicators Then
+                            selectedBuilding.DrawTeamIndicator(g)
+                        End If
+                        g.FillRectangle(BrushBuildingSelected, selectedBuilding.X, selectedBuilding.Y, selectedBuilding.BuildingW * TileSizeX + 1, selectedBuilding.BuildingH * TileSizeY + 1)
+                        'g.DrawString(selectedBuilding.BuildingId, New Font(FontFamily.GenericMonospace, 12, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.GreenYellow, selectedBuilding.X, selectedBuilding.Y)
                     End If
                 End If
             End If
@@ -847,7 +878,7 @@ Public Class FrmEditor
                 map.LoadMap(mapData)
                 AddMap(map)
                 EndLoadMap(fileName)
-            Else If mapData.Value.Format > MapFormat
+            ElseIf mapData.Value.Format > MapFormat Then
                 MsgBox("This map file was created with a newer version of CAMM and cannot be opened.")
             Else
                 MsgBox("This map file has an invalid value of '" + mapData.Value.Format.ToString() + "' for the map format and cannot be opened.")
@@ -1039,15 +1070,23 @@ Public Class FrmEditor
         picMap.Invalidate()
     End Sub
 
-    Private Sub btnDeleteUnit_Click(sender As Object, e As EventArgs) Handles btnDeleteSelectedUnit.Click, btnMapDeleteUnit.Click
+    Private Sub btnDeleteObject_Click(sender As Object, e As EventArgs) Handles btnDeleteSelectedObject.Click, btnMapDeleteObject.Click
         Select Case ActiveEditMode
             Case EditMode.Tiles
                 'TODO: Deleted selected tile(s).
             Case EditMode.Buildings
-                'TODO: Delete selected building.
+                If selectedBuilding IsNot Nothing Then
+                    btnDeleteSelectedObject.Enabled = False
+                    'TODO: Building properties button!
+                    'btnBuildingProperties.Enabled = False
+                    ActiveMap.DeleteBuilding(selectedBuilding)
+                    selectedBuilding = Nothing
+                    closestBuilding = Nothing
+                    picMap.Invalidate()
+                End If
             Case EditMode.Units
                 If selectedUnit IsNot Nothing Then
-                    btnDeleteSelectedUnit.Enabled = False
+                    btnDeleteSelectedObject.Enabled = False
                     btnUnitProperties.Enabled = False
                     ActiveMap.DeleteUnit(selectedUnit)
                     selectedUnit = Nothing
@@ -1183,20 +1222,32 @@ Public Class FrmEditor
     End Sub
 
     Private Sub ctxMap_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles ctxMap.Opening
+        Dim hasAction As Boolean = False
+
+        If selectedUnit IsNot Nothing Or selectedBuilding IsNot Nothing Then
+            hasAction = True
+            btnMapDeleteObject.Visible = True
+            btnMapDeleteObject.Enabled = True
+        Else
+            btnMapDeleteObject.Visible = False
+            btnMapDeleteObject.Enabled = False
+        End If
+
         If selectedUnit IsNot Nothing Then
-            lblMapNoActionsAvailable.Visible = False
-            ctxMapSeparator1.Visible = True
-            btnMapDeleteUnit.Visible = True
-            btnMapDeleteUnit.Enabled = True
+            hasAction = True
             btnMapUnitProperties.Visible = True
             btnMapUnitProperties.Enabled = True
+            ctxMapSeparator1.Visible = True
         Else
-            lblMapNoActionsAvailable.Visible = True
-            ctxMapSeparator1.Visible = False
-            btnMapDeleteUnit.Visible = False
-            btnMapDeleteUnit.Enabled = False
             btnMapUnitProperties.Visible = False
             btnMapUnitProperties.Enabled = False
+            ctxMapSeparator1.Visible = False
+        End If
+
+        If hasAction Then
+            lblMapNoActionsAvailable.Visible = False
+        Else
+            lblMapNoActionsAvailable.Visible = True
         End If
     End Sub
 
@@ -1248,7 +1299,9 @@ Public Class FrmEditor
             Dim h As Integer = (ActiveMap.SizeY * TileSizeY) + 1
             Dim img As Image = New Bitmap(w, h, PixelFormat.Format24bppRgb)
             Dim g As Graphics = Graphics.FromImage(img)
-            ActiveMap.Draw(g, DrawGrid, DrawShadows, DrawTeamIndicators, False, False)
+            Dim drawUnitTeamIndicators As Boolean = DrawTeamIndicators And ActiveEditMode = EditMode.Units
+            Dim drawBuildingTeamIndicators As Boolean = DrawTeamIndicators And ActiveEditMode = EditMode.Buildings
+            ActiveMap.Draw(g, DrawGrid, DrawShadows, drawUnitTeamIndicators, drawBuildingTeamIndicators, False, False)
             g.Dispose()
             img.Save(savePng.FileName, ImageFormat.Png)
         End If

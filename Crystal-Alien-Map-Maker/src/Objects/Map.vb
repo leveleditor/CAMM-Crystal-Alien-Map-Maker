@@ -346,8 +346,11 @@ Public Class Map
     Public Function DeleteUnit(unit As Unit) As Boolean
         Return mapUnits.Remove(unit)
     End Function
+    Public Function DeleteBuilding(building As Building) As Boolean
+        Return mapBuildings.Remove(building)
+    End Function
 
-    Public Sub Draw(g As Graphics, drawGrid As Boolean, drawShadows As Boolean, drawTeamIndicators As Boolean, Optional ByVal debugBuildingPos As Boolean = False, Optional ByVal debugUnitPos As Boolean = False)
+    Public Sub Draw(g As Graphics, drawGrid As Boolean, drawShadows As Boolean, drawUnitTeamIndicators As Boolean, drawBuildingTeamIndicators As Boolean, Optional ByVal debugBuildingPos As Boolean = False, Optional ByVal debugUnitPos As Boolean = False)
         g.Clear(Color.FromKnownColor(KnownColor.Control))
 
         ' Draw the background
@@ -424,11 +427,18 @@ Public Class Map
             DrawGridLines(g, SizeX * TileSizeX, SizeY * TileSizeY)
         End If
 
-        If drawTeamIndicators Then
-            ' Draw team indicator icons.
+        ' Draw team indicator icons.
+        If drawUnitTeamIndicators Then
             For i As Integer = 0 To mapUnits.Count() - 1
                 If mapUnits(i).HasData Then
                     mapUnits(i).DrawTeamIndicator(g)
+                End If
+            Next
+        End If
+        If drawBuildingTeamIndicators Then
+            For i As Integer = 0 To mapBuildings.Count() - 1
+                If mapBuildings(i).HasData Then
+                    mapBuildings(i).DrawTeamIndicator(g)
                 End If
             Next
         End If
