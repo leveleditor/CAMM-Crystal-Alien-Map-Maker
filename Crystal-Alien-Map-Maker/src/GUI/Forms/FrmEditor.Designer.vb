@@ -30,7 +30,7 @@ Partial Class FrmEditor
         Me.picMap = New System.Windows.Forms.PictureBox()
         Me.ctxMap = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.lblMapNoActionsAvailable = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnMapUnitProperties = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnMapObjectProperties = New System.Windows.Forms.ToolStripMenuItem()
         Me.ctxMapSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnMapDeleteObject = New System.Windows.Forms.ToolStripMenuItem()
         Me.ctxMapSeparator2 = New System.Windows.Forms.ToolStripSeparator()
@@ -62,7 +62,7 @@ Partial Class FrmEditor
         Me.separator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuEdit = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnDeleteSelectedObject = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnUnitProperties = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnObjectProperties = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator9 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnMapProperties = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator6 = New System.Windows.Forms.ToolStripSeparator()
@@ -175,51 +175,51 @@ Partial Class FrmEditor
         '
         'ctxMap
         '
-        Me.ctxMap.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblMapNoActionsAvailable, Me.btnMapUnitProperties, Me.ctxMapSeparator1, Me.btnMapDeleteObject, Me.ctxMapSeparator2, Me.btnMapCancel})
+        Me.ctxMap.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblMapNoActionsAvailable, Me.btnMapObjectProperties, Me.ctxMapSeparator1, Me.btnMapDeleteObject, Me.ctxMapSeparator2, Me.btnMapCancel})
         Me.ctxMap.Name = "ctxMap"
         Me.ctxMap.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.ctxMap.Size = New System.Drawing.Size(203, 104)
+        Me.ctxMap.Size = New System.Drawing.Size(216, 104)
         '
         'lblMapNoActionsAvailable
         '
         Me.lblMapNoActionsAvailable.Enabled = False
         Me.lblMapNoActionsAvailable.Name = "lblMapNoActionsAvailable"
-        Me.lblMapNoActionsAvailable.Size = New System.Drawing.Size(202, 22)
+        Me.lblMapNoActionsAvailable.Size = New System.Drawing.Size(215, 22)
         Me.lblMapNoActionsAvailable.Text = "No actions available."
         '
-        'btnMapUnitProperties
+        'btnMapObjectProperties
         '
-        Me.btnMapUnitProperties.Enabled = False
-        Me.btnMapUnitProperties.Name = "btnMapUnitProperties"
-        Me.btnMapUnitProperties.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.btnMapUnitProperties.Size = New System.Drawing.Size(202, 22)
-        Me.btnMapUnitProperties.Text = "Unit &Properties..."
-        Me.btnMapUnitProperties.Visible = False
+        Me.btnMapObjectProperties.Enabled = False
+        Me.btnMapObjectProperties.Name = "btnMapObjectProperties"
+        Me.btnMapObjectProperties.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
+        Me.btnMapObjectProperties.Size = New System.Drawing.Size(215, 22)
+        Me.btnMapObjectProperties.Text = "Object &Properties..."
+        Me.btnMapObjectProperties.Visible = False
         '
         'ctxMapSeparator1
         '
         Me.ctxMapSeparator1.Name = "ctxMapSeparator1"
-        Me.ctxMapSeparator1.Size = New System.Drawing.Size(199, 6)
+        Me.ctxMapSeparator1.Size = New System.Drawing.Size(212, 6)
         '
         'btnMapDeleteObject
         '
         Me.btnMapDeleteObject.Enabled = False
         Me.btnMapDeleteObject.Name = "btnMapDeleteObject"
         Me.btnMapDeleteObject.ShortcutKeys = System.Windows.Forms.Keys.Delete
-        Me.btnMapDeleteObject.Size = New System.Drawing.Size(202, 22)
+        Me.btnMapDeleteObject.Size = New System.Drawing.Size(215, 22)
         Me.btnMapDeleteObject.Text = "&Delete Object"
         Me.btnMapDeleteObject.Visible = False
         '
         'ctxMapSeparator2
         '
         Me.ctxMapSeparator2.Name = "ctxMapSeparator2"
-        Me.ctxMapSeparator2.Size = New System.Drawing.Size(199, 6)
+        Me.ctxMapSeparator2.Size = New System.Drawing.Size(212, 6)
         '
         'btnMapCancel
         '
         Me.btnMapCancel.Name = "btnMapCancel"
         Me.btnMapCancel.ShortcutKeyDisplayString = "Esc"
-        Me.btnMapCancel.Size = New System.Drawing.Size(202, 22)
+        Me.btnMapCancel.Size = New System.Drawing.Size(215, 22)
         Me.btnMapCancel.Text = "&Cancel"
         '
         'picActive
@@ -428,7 +428,7 @@ Partial Class FrmEditor
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnDeleteSelectedObject, Me.btnUnitProperties, Me.separator9, Me.btnMapProperties})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnDeleteSelectedObject, Me.btnObjectProperties, Me.separator9, Me.btnMapProperties})
         Me.mnuEdit.Name = "mnuEdit"
         Me.mnuEdit.Size = New System.Drawing.Size(39, 24)
         Me.mnuEdit.Text = "&Edit"
@@ -438,27 +438,27 @@ Partial Class FrmEditor
         Me.btnDeleteSelectedObject.Enabled = False
         Me.btnDeleteSelectedObject.Name = "btnDeleteSelectedObject"
         Me.btnDeleteSelectedObject.ShortcutKeys = System.Windows.Forms.Keys.Delete
-        Me.btnDeleteSelectedObject.Size = New System.Drawing.Size(249, 22)
+        Me.btnDeleteSelectedObject.Size = New System.Drawing.Size(262, 22)
         Me.btnDeleteSelectedObject.Text = "Delete Selected Object"
         '
-        'btnUnitProperties
+        'btnObjectProperties
         '
-        Me.btnUnitProperties.Enabled = False
-        Me.btnUnitProperties.Name = "btnUnitProperties"
-        Me.btnUnitProperties.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.btnUnitProperties.Size = New System.Drawing.Size(249, 22)
-        Me.btnUnitProperties.Text = "Selected Unit &Properties..."
+        Me.btnObjectProperties.Enabled = False
+        Me.btnObjectProperties.Name = "btnObjectProperties"
+        Me.btnObjectProperties.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
+        Me.btnObjectProperties.Size = New System.Drawing.Size(262, 22)
+        Me.btnObjectProperties.Text = "Selected Object &Properties..."
         '
         'separator9
         '
         Me.separator9.Name = "separator9"
-        Me.separator9.Size = New System.Drawing.Size(246, 6)
+        Me.separator9.Size = New System.Drawing.Size(259, 6)
         '
         'btnMapProperties
         '
         Me.btnMapProperties.Name = "btnMapProperties"
         Me.btnMapProperties.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.M), System.Windows.Forms.Keys)
-        Me.btnMapProperties.Size = New System.Drawing.Size(249, 22)
+        Me.btnMapProperties.Size = New System.Drawing.Size(262, 22)
         Me.btnMapProperties.Text = "&Map Properties..."
         '
         'separator6
@@ -1010,8 +1010,8 @@ Partial Class FrmEditor
     Friend WithEvents btnToolRectangleBrush As System.Windows.Forms.Button
     Friend WithEvents cboRectangleBrush As System.Windows.Forms.ComboBox
     Friend WithEvents ctxMap As System.Windows.Forms.ContextMenuStrip
-    Friend WithEvents btnMapUnitProperties As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents btnUnitProperties As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnMapObjectProperties As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents btnObjectProperties As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ctxMapSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents lblMapNoActionsAvailable As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnMapDeleteObject As System.Windows.Forms.ToolStripMenuItem

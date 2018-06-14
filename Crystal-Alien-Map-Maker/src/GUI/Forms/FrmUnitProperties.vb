@@ -75,7 +75,7 @@
         End If
         chkRespawn.Checked = subject.Respawn
 
-        lblUnitId.Text = "Unit Id: " + subject.UnitId
+        lblUnitId.Text = "Id: " + subject.UnitId
     End Sub
 
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click

@@ -160,6 +160,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="src\GUI\Forms\FrmBuildingProperties.Designer.vb">
+      <DependentUpon>FrmBuildingProperties.vb</DependentUpon>
+    </Compile>
+    <Compile Include="src\GUI\Forms\FrmBuildingProperties.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="src\Serializables\BuildingDefData.vb" />
     <Compile Include="src\Serializables\UnitDefData.vb" />
     <Compile Include="src\Serializables\TileDefData.vb" />
@@ -248,6 +254,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="src\GUI\Forms\FrmExportAS.resx">
       <DependentUpon>FrmExportAS.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="src\GUI\Forms\FrmBuildingProperties.resx">
+      <DependentUpon>FrmBuildingProperties.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="src\GUI\UserControls\BuildingEntry.resx">
       <DependentUpon>BuildingEntry.vb</DependentUpon>

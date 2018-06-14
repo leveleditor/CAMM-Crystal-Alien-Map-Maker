@@ -337,12 +337,10 @@ Public Class FrmEditor
                         ActiveMap.SelectedBuilding = ActiveMap.ClosestBuilding
                         If ActiveMap.SelectedBuilding IsNot Nothing Then
                             btnDeleteSelectedObject.Enabled = True
-                            'TODO: Building properties button!
-                            'btnBuildingProperties.Enabled = True
+                            btnObjectProperties.Enabled = True
                         Else
                             btnDeleteSelectedObject.Enabled = False
-                            'TODO: Building properties button!
-                            'btnBuildingProperties.Enabled = False
+                            btnObjectProperties.Enabled = False
                         End If
                     ElseIf ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                         ActiveMap.Eraser(mouseX, mouseY, ActiveEditMode)
@@ -354,10 +352,10 @@ Public Class FrmEditor
                         ActiveMap.SelectedUnit = ActiveMap.ClosestUnit
                         If ActiveMap.SelectedUnit IsNot Nothing Then
                             btnDeleteSelectedObject.Enabled = True
-                            btnUnitProperties.Enabled = True
+                            btnObjectProperties.Enabled = True
                         Else
                             btnDeleteSelectedObject.Enabled = False
-                            btnUnitProperties.Enabled = False
+                            btnObjectProperties.Enabled = False
                         End If
                     ElseIf ActiveToolMode = ToolMode.Eraser Or My.Computer.Keyboard.CtrlKeyDown Then
                         ActiveMap.Eraser(mouseXNoSnap, mouseYNoSnap, ActiveEditMode)
@@ -1078,8 +1076,7 @@ Public Class FrmEditor
             Case EditMode.Buildings
                 If ActiveMap.SelectedBuilding IsNot Nothing Then
                     btnDeleteSelectedObject.Enabled = False
-                    'TODO: Building properties button!
-                    'btnBuildingProperties.Enabled = False
+                    btnObjectProperties.Enabled = False
                     ActiveMap.DeleteBuilding(ActiveMap.SelectedBuilding)
                     ActiveMap.ClearSelection()
                     picMap.Invalidate()
@@ -1087,7 +1084,7 @@ Public Class FrmEditor
             Case EditMode.Units
                 If ActiveMap.SelectedUnit IsNot Nothing Then
                     btnDeleteSelectedObject.Enabled = False
-                    btnUnitProperties.Enabled = False
+                    btnObjectProperties.Enabled = False
                     ActiveMap.DeleteUnit(ActiveMap.SelectedUnit)
                     ActiveMap.ClearSelection()
                     picMap.Invalidate()
@@ -1227,19 +1224,14 @@ Public Class FrmEditor
             hasAction = True
             btnMapDeleteObject.Visible = True
             btnMapDeleteObject.Enabled = True
+            btnMapObjectProperties.Visible = True
+            btnMapObjectProperties.Enabled = True
+            ctxMapSeparator1.Visible = True
         Else
             btnMapDeleteObject.Visible = False
             btnMapDeleteObject.Enabled = False
-        End If
-
-        If ActiveMap.SelectedUnit IsNot Nothing Then
-            hasAction = True
-            btnMapUnitProperties.Visible = True
-            btnMapUnitProperties.Enabled = True
-            ctxMapSeparator1.Visible = True
-        Else
-            btnMapUnitProperties.Visible = False
-            btnMapUnitProperties.Enabled = False
+            btnMapObjectProperties.Visible = False
+            btnMapObjectProperties.Enabled = False
             ctxMapSeparator1.Visible = False
         End If
 
@@ -1250,9 +1242,15 @@ Public Class FrmEditor
         End If
     End Sub
 
-    Private Sub btnMapUnitProperties_Click(sender As Object, e As EventArgs) Handles btnMapUnitProperties.Click, btnUnitProperties.Click
-        Dim unitPropertiesForm As New FrmUnitProperties(ActiveMap.SelectedUnit)
-        unitPropertiesForm.ShowDialog(Me)
+    Private Sub btnMapObjectProperties_Click(sender As Object, e As EventArgs) Handles btnMapObjectProperties.Click, btnObjectProperties.Click
+        Select Case ActiveEditMode
+            Case EditMode.Units
+                Dim propertiesForm As New FrmUnitProperties(ActiveMap.SelectedUnit)
+                propertiesForm.ShowDialog(Me)
+            Case EditMode.Buildings
+                Dim propertiesForm As New FrmBuildingProperties(ActiveMap.SelectedBuilding)
+                propertiesForm.ShowDialog(Me)
+        End Select
         picMap.Invalidate()
     End Sub
 

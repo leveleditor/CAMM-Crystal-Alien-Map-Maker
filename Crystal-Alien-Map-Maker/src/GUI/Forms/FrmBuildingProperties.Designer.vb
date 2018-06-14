@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class FrmUnitProperties
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class FrmBuildingProperties
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class FrmUnitProperties
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblTeam = New System.Windows.Forms.Label()
         Me.cboTeam = New System.Windows.Forms.ComboBox()
@@ -32,11 +32,6 @@ Partial Class FrmUnitProperties
         Me.lblDamage = New System.Windows.Forms.Label()
         Me.txtDamage = New System.Windows.Forms.NumericUpDown()
         Me.picTeam = New System.Windows.Forms.PictureBox()
-        Me.cboTarget = New System.Windows.Forms.ComboBox()
-        Me.lblTarget = New System.Windows.Forms.Label()
-        Me.cboObj = New System.Windows.Forms.ComboBox()
-        Me.lblObj = New System.Windows.Forms.Label()
-        Me.chkRespawn = New System.Windows.Forms.CheckBox()
         Me.lblUnitId = New System.Windows.Forms.Label()
         Me.tblButtons.SuspendLayout()
         CType(Me.txtAngle, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -143,51 +138,6 @@ Partial Class FrmUnitProperties
         Me.picTeam.TabIndex = 16
         Me.picTeam.TabStop = False
         '
-        'cboTarget
-        '
-        Me.cboTarget.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboTarget.FormattingEnabled = True
-        Me.cboTarget.Location = New System.Drawing.Point(157, 91)
-        Me.cboTarget.Name = "cboTarget"
-        Me.cboTarget.Size = New System.Drawing.Size(100, 21)
-        Me.cboTarget.TabIndex = 4
-        '
-        'lblTarget
-        '
-        Me.lblTarget.AutoSize = True
-        Me.lblTarget.Location = New System.Drawing.Point(62, 94)
-        Me.lblTarget.Name = "lblTarget"
-        Me.lblTarget.Size = New System.Drawing.Size(89, 13)
-        Me.lblTarget.TabIndex = 18
-        Me.lblTarget.Text = "AI Mode / Target"
-        '
-        'cboObj
-        '
-        Me.cboObj.FormattingEnabled = True
-        Me.cboObj.Location = New System.Drawing.Point(157, 118)
-        Me.cboObj.Name = "cboObj"
-        Me.cboObj.Size = New System.Drawing.Size(100, 21)
-        Me.cboObj.TabIndex = 4
-        '
-        'lblObj
-        '
-        Me.lblObj.Location = New System.Drawing.Point(12, 121)
-        Me.lblObj.Name = "lblObj"
-        Me.lblObj.Size = New System.Drawing.Size(139, 13)
-        Me.lblObj.TabIndex = 21
-        Me.lblObj.Text = "Monolithic property of things"
-        Me.lblObj.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'chkRespawn
-        '
-        Me.chkRespawn.AutoSize = True
-        Me.chkRespawn.Location = New System.Drawing.Point(157, 145)
-        Me.chkRespawn.Name = "chkRespawn"
-        Me.chkRespawn.Size = New System.Drawing.Size(71, 17)
-        Me.chkRespawn.TabIndex = 22
-        Me.chkRespawn.Text = "Respawn"
-        Me.chkRespawn.UseVisualStyleBackColor = True
-        '
         'lblUnitId
         '
         Me.lblUnitId.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
@@ -196,9 +146,10 @@ Partial Class FrmUnitProperties
         Me.lblUnitId.Name = "lblUnitId"
         Me.lblUnitId.Size = New System.Drawing.Size(40, 13)
         Me.lblUnitId.TabIndex = 23
+        Me.lblUnitId.Tag = ""
         Me.lblUnitId.Text = "Id: ???"
         '
-        'FrmUnitProperties
+        'FrmBuildingProperties
         '
         Me.AcceptButton = Me.btnOk
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -206,26 +157,21 @@ Partial Class FrmUnitProperties
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(305, 299)
         Me.Controls.Add(Me.lblUnitId)
-        Me.Controls.Add(Me.chkRespawn)
-        Me.Controls.Add(Me.lblObj)
-        Me.Controls.Add(Me.lblTarget)
         Me.Controls.Add(Me.picTeam)
         Me.Controls.Add(Me.txtDamage)
         Me.Controls.Add(Me.lblDamage)
         Me.Controls.Add(Me.txtAngle)
         Me.Controls.Add(Me.lblAngle)
         Me.Controls.Add(Me.tblButtons)
-        Me.Controls.Add(Me.cboObj)
-        Me.Controls.Add(Me.cboTarget)
         Me.Controls.Add(Me.cboTeam)
         Me.Controls.Add(Me.lblTeam)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "FrmUnitProperties"
+        Me.Name = "FrmBuildingProperties"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Unit Properties"
+        Me.Text = "Building Properties"
         Me.tblButtons.ResumeLayout(False)
         CType(Me.txtAngle, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.txtDamage, System.ComponentModel.ISupportInitialize).EndInit()
@@ -244,10 +190,5 @@ Partial Class FrmUnitProperties
     Friend WithEvents lblDamage As System.Windows.Forms.Label
     Friend WithEvents txtDamage As System.Windows.Forms.NumericUpDown
     Friend WithEvents picTeam As System.Windows.Forms.PictureBox
-    Friend WithEvents cboTarget As System.Windows.Forms.ComboBox
-    Friend WithEvents lblTarget As System.Windows.Forms.Label
-    Friend WithEvents cboObj As System.Windows.Forms.ComboBox
-    Friend WithEvents lblObj As System.Windows.Forms.Label
-    Friend WithEvents chkRespawn As System.Windows.Forms.CheckBox
     Friend WithEvents lblUnitId As System.Windows.Forms.Label
 End Class
