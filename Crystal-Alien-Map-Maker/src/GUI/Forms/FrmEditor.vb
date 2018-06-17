@@ -195,7 +195,6 @@ Public Class FrmEditor
         End If
 
         isLoaded = True
-        tmrIntro.Start()
     End Sub
 
     Private Sub FRMEditor_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -225,61 +224,6 @@ Public Class FrmEditor
             picMap.Invalidate()
         End If
     End Sub
-
-#Region "Intro Effects"
-    'TODO: Need to clean up this mess...
-    Dim fadeAlpha As Integer = 350
-    Dim fadeRate As Integer = 2
-    Dim fadePen As Pen = Pens.Black
-    Dim fadeBrush As SolidBrush = Brushes.Black
-    Dim introFont As Font = New Font(FontFamily.GenericMonospace, 20, FontStyle.Bold, GraphicsUnit.Pixel)
-    Dim introFont2 As Font = New Font(FontFamily.GenericMonospace, 25, FontStyle.Bold, GraphicsUnit.Pixel)
-    Dim introBrush As SolidBrush = New SolidBrush(Color.FromArgb(255, 0, 255, 0))
-    Dim introBrush2 As SolidBrush = Brushes.DarkGreen
-    Dim introFontH As Integer = introFont.GetHeight
-    Dim introFontH2 As Integer = introFont2.GetHeight
-    Dim introX, introY, sIntro1Width, sIntro2Width, sIntro3Width As Integer
-    Dim sIntro1 As String = "Welcome to CAMM!"
-    Dim sIntro2 As String = "Crystal Alien Map Maker"
-    Dim sIntro3 As String = "By Leveleditor6680 // Josh"
-    Sub DrawIntro(g As Graphics)
-        sIntro1Width = g.MeasureString(sIntro1, introFont).Width
-        sIntro2Width = g.MeasureString(sIntro2, introFont2).Width
-        sIntro3Width = g.MeasureString(sIntro3, introFont).Width
-        introX = -(picMap.Location.X) + pnlMap.Width / 2
-        introY = -(picMap.Location.Y) + pnlMap.Height / 3
-
-        g.DrawRectangle(fadePen, picMap.Bounds)
-        g.FillRectangle(fadeBrush, 0, -picMap.Location.Y, picMap.Width, picMap.Height)
-
-        g.DrawString(sIntro1, introFont, introBrush2, introX - sIntro1Width / 2 + 2, introY + 2)
-        g.DrawString(sIntro2, introFont2, introBrush2, introX - sIntro2Width / 2 + 2, introY + introFontH + 2)
-        g.DrawString(sIntro3, introFont, introBrush2, introX - sIntro3Width / 2 + 2, introY + introFontH2 * 2 + 2)
-
-        g.DrawString(sIntro1, introFont, introBrush, introX - sIntro1Width / 2, introY)
-        g.DrawString(sIntro2, introFont2, introBrush, introX - sIntro2Width / 2, introY + introFontH)
-        g.DrawString(sIntro3, introFont, introBrush, introX - sIntro3Width / 2, introY + introFontH2 * 2)
-    End Sub
-    Private Sub tmrIntro_Tick(sender As Object, e As EventArgs) Handles tmrIntro.Tick
-        If fadeAlpha >= 0 And fadeAlpha <= 255 Then
-            fadePen = New Pen(Color.FromArgb(fadeAlpha, 0, 0, 0))
-            fadeBrush = New SolidBrush(Color.FromArgb(fadeAlpha, 0, 0, 0))
-        End If
-
-        If fadeAlpha <= 100 And fadeAlpha >= -155 Then
-            introBrush = New SolidBrush(Color.FromArgb(fadeAlpha + 155, 0, 255, 0))
-            introBrush2 = New SolidBrush(Color.FromArgb(fadeAlpha + 155, Color.DarkGreen.R, Color.DarkGreen.G, Color.DarkGreen.B))
-        End If
-
-        If fadeAlpha <= -155 Then
-            tmrIntro.Stop()
-        Else
-            fadeAlpha -= fadeRate
-        End If
-
-        picMap.Invalidate()
-    End Sub
-#End Region
 
 #Region "Grid and Map Operations"
 
@@ -558,11 +502,6 @@ Public Class FrmEditor
                         'g.DrawString(selectedBuilding.BuildingId, New Font(FontFamily.GenericMonospace, 12, FontStyle.Bold, GraphicsUnit.Pixel), Brushes.GreenYellow, selectedBuilding.X, selectedBuilding.Y)
                     End If
                 End If
-            End If
-
-            'Draw intro animation.
-            If tmrIntro.Enabled Then
-                DrawIntro(g)
             End If
         End If
     End Sub

@@ -95,7 +95,6 @@ Partial Class FrmEditor
         Me.chkGrid = New System.Windows.Forms.CheckBox()
         Me.btnToolSmartBrush = New System.Windows.Forms.Button()
         Me.btnToolBrush = New System.Windows.Forms.Button()
-        Me.tmrIntro = New System.Windows.Forms.Timer(Me.components)
         Me.btnEditUnits = New System.Windows.Forms.Button()
         Me.pnlUnits = New System.Windows.Forms.Panel()
         Me.picUnits = New System.Windows.Forms.PictureBox()
@@ -747,10 +746,6 @@ Partial Class FrmEditor
         Me.btnToolBrush.Text = "Brush"
         Me.btnToolBrush.UseVisualStyleBackColor = True
         '
-        'tmrIntro
-        '
-        Me.tmrIntro.Interval = 15
-        '
         'btnEditUnits
         '
         Me.btnEditUnits.AutoSize = True
@@ -969,7 +964,6 @@ Partial Class FrmEditor
     Friend WithEvents mnuDev As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnConfigEditor As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnToolBrush As System.Windows.Forms.Button
-    Friend WithEvents tmrIntro As System.Windows.Forms.Timer
     Friend WithEvents btnToolSmartBrush As System.Windows.Forms.Button
     Friend WithEvents btnEditUnits As System.Windows.Forms.Button
     Friend WithEvents pnlUnits As System.Windows.Forms.Panel
