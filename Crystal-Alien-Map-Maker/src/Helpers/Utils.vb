@@ -35,8 +35,12 @@ Public Module Utils
     Public Sub DrawGridLines(g As Graphics, gridWidth As Integer, gridHeight As Integer, Optional tileWidth As Integer = TileSizeX, Optional tileHeight As Integer = TileSizeY)
         For x As Integer = 0 To gridWidth Step tileWidth
             For y As Integer = 0 To gridHeight Step tileHeight
-                g.DrawLine(PenGrid, x, y, x, y + tileHeight)
-                g.DrawLine(PenGrid, x, y, x + tileWidth, y)
+                If x > 0 And x < gridWidth Then
+                    g.DrawLine(PenGrid, x, y, x, y + tileHeight)
+                End If
+                If y > 0 And y < gridHeight Then
+                    g.DrawLine(PenGrid, x, y, x + tileWidth, y)
+                End If
             Next y
         Next x
     End Sub

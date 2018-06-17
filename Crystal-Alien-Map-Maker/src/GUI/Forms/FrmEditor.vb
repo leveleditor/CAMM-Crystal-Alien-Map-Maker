@@ -167,15 +167,15 @@ Public Class FrmEditor
         CheckFileAssociations()
 
         'Dynamically setting picTiles size.
-        picTiles.Size = New Size(TileSizeX + 1, (TileDefs.Count * TileSizeY) + 1)
+        picTiles.Size = New Size(TileSizeX + 1, TileDefs.Count * TileSizeY)
         picTiles.Invalidate()
 
         'Dynamically setting picBuildings size.
-        picBuildings.Size = New Size(TileSizeX + 1, (BuildingDefs.Count * TileSizeY) + 1)
+        picBuildings.Size = New Size(TileSizeX + 1, BuildingDefs.Count * TileSizeY)
         picBuildings.Invalidate()
 
         'Dynamically setting picUnits size.
-        picUnits.Size = New Size(TileSizeX + 1, (UnitDefs.Count * TileSizeY) + 1)
+        picUnits.Size = New Size(TileSizeX + 1, UnitDefs.Count * TileSizeY)
         picUnits.Invalidate()
 
         'Setting default blank values.
@@ -538,12 +538,12 @@ Public Class FrmEditor
 
             'Draw Rectangle around selected Tile.
             If ActiveEditMode = EditMode.Tiles And activeTile.TileId <> -1 And ActiveToolMode <> ToolMode.Eraser And ActiveToolMode <> ToolMode.Pointer Then
-                e.Graphics.DrawRectangle(PenSelected, selXTiles + (PenSelected.Width / 2) + 1, selYTiles + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
+                e.Graphics.DrawRectangle(PenSelected, selXTiles + (PenSelected.Width / 2), selYTiles + (PenSelected.Width / 2), TileSizeX - PenSelected.Width, TileSizeY - PenSelected.Width + 1)
             End If
 
             ' Draw the rectangle cursor / selector thingy.
             If isMouseOnSelections Then
-                e.Graphics.DrawRectangle(PenSelectionHover, mouseX + (PenSelectionHover.Width / 2) + 1, mouseY + (PenSelectionHover.Width / 2) + 1, TileSizeX - PenSelectionHover.Width - 1, TileSizeY - PenSelectionHover.Width - 1)
+                e.Graphics.DrawRectangle(PenSelectionHover, mouseX + (PenSelectionHover.Width / 2), mouseY + (PenSelectionHover.Width / 2), TileSizeX - PenSelectionHover.Width, TileSizeY - PenSelectionHover.Width + 1)
             End If
 
         End If
@@ -617,12 +617,12 @@ Public Class FrmEditor
 
             'Draw Rectangle around selected Buildings.
             If ActiveEditMode = EditMode.Buildings And activeBuilding.BuildingId <> "" And ActiveToolMode <> ToolMode.Eraser And ActiveToolMode <> ToolMode.Pointer Then
-                e.Graphics.DrawRectangle(PenSelected, selXBuildings + (PenSelected.Width / 2) + 1, selYBuildings + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
+                e.Graphics.DrawRectangle(PenSelected, selXBuildings + (PenSelected.Width / 2), selYBuildings + (PenSelected.Width / 2), TileSizeX - PenSelected.Width, TileSizeY - PenSelected.Width + 1)
             End If
 
             ' Draw the rectangle cursor / selector thingy.
             If isMouseOnSelections Then
-                e.Graphics.DrawRectangle(PenSelectionHover, mouseX + (PenSelectionHover.Width / 2) + 1, mouseY + (PenSelectionHover.Width / 2) + 1, TileSizeX - PenSelectionHover.Width - 1, TileSizeY - PenSelectionHover.Width - 1)
+                e.Graphics.DrawRectangle(PenSelectionHover, mouseX + (PenSelectionHover.Width / 2), mouseY + (PenSelectionHover.Width / 2), TileSizeX - PenSelectionHover.Width, TileSizeY - PenSelectionHover.Width + 1)
             End If
         End If
     End Sub
@@ -696,12 +696,12 @@ Public Class FrmEditor
 
             'Draw Rectangle around selected Units.
             If ActiveEditMode = EditMode.Units And activeUnit.UnitId <> "" And ActiveToolMode <> ToolMode.Eraser And ActiveToolMode <> ToolMode.Pointer Then
-                e.Graphics.DrawRectangle(PenSelected, selXUnits + (PenSelected.Width / 2) + 1, selYUnits + (PenSelected.Width / 2) + 1, TileSizeX - PenSelected.Width - 1, TileSizeY - PenSelected.Width - 1)
+                e.Graphics.DrawRectangle(PenSelected, selXUnits + (PenSelected.Width / 2), selYUnits + (PenSelected.Width / 2), TileSizeX - PenSelected.Width, TileSizeY - PenSelected.Width + 1)
             End If
 
             ' Draw the rectangle cursor / selector thingy.
             If isMouseOnSelections Then
-                e.Graphics.DrawRectangle(PenSelectionHover, mouseX + (PenSelectionHover.Width / 2) + 1, mouseY + (PenSelectionHover.Width / 2) + 1, TileSizeX - PenSelectionHover.Width - 1, TileSizeY - PenSelectionHover.Width - 1)
+                e.Graphics.DrawRectangle(PenSelectionHover, mouseX + (PenSelectionHover.Width / 2), mouseY + (PenSelectionHover.Width / 2), TileSizeX - PenSelectionHover.Width, TileSizeY - PenSelectionHover.Width + 1)
             End If
         End If
     End Sub
