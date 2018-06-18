@@ -382,6 +382,27 @@ Public Class FrmEditor
             End If
         End If
 
+        If IsDrawing And ActiveToolMode = ToolMode.Pointer Then
+            If ActiveMap.SelectedBuilding IsNot Nothing Then
+                Dim newPos As Point = New Point(
+                    Clamp(mouseX, 0, ActiveMap.SizeX * TileSizeX - TileSizeX),
+                    Clamp(mouseY, 0, ActiveMap.SizeY * TileSizeY - TileSizeY)
+                )
+                If ActiveMap.GetBuildingAt(newPos.X, newPos.Y) Is Nothing Then
+                    ActiveMap.SelectedBuilding.Location = newPos
+                End If
+            End If
+            If ActiveMap.SelectedUnit IsNot Nothing Then
+                Dim newPos As Point = New Point(
+                    Clamp(mouseXNoSnap, 0, ActiveMap.SizeX * TileSizeX),
+                    Clamp(mouseYNoSnap, ActiveMap.SelectedUnit.Altitude, ActiveMap.SizeY * TileSizeY)
+                )
+                If ActiveMap.GetClosestUnit(newPos.X, newPos.Y - ActiveMap.SelectedUnit.Altitude, 0) Is Nothing Then
+                    ActiveMap.SelectedUnit.Position = newPos
+                End If
+            End If
+        End If
+
         Dim debug As Boolean = True
         If IsMouseInBounds() Then
             If debug = True Then
