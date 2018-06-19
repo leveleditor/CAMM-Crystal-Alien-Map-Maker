@@ -236,7 +236,7 @@ Public Class FrmEditor
     Private Sub UpdateMapSize()
         txtWidth.Text = ActiveMap.SizeX
         txtHeight.Text = ActiveMap.SizeY
-        picMap.Size = New Size((ActiveMap.SizeX * TileSizeX) + 1, (ActiveMap.SizeY * TileSizeY) + 1)
+        picMap.Size = New Size(ActiveMap.SizeX * TileSizeX, ActiveMap.SizeY * TileSizeY)
 
         picMap.Invalidate()
     End Sub
@@ -1249,8 +1249,8 @@ Public Class FrmEditor
 
     Private Sub btnExportPNG_Click(sender As Object, e As EventArgs) Handles btnExportPNG.Click
         If savePng.ShowDialog(Me) = DialogResult.OK Then
-            Dim w As Integer = (ActiveMap.SizeX * TileSizeX) + 1
-            Dim h As Integer = (ActiveMap.SizeY * TileSizeY) + 1
+            Dim w As Integer = ActiveMap.SizeX * TileSizeX
+            Dim h As Integer = ActiveMap.SizeY * TileSizeY
             Dim img As Image = New Bitmap(w, h, PixelFormat.Format24bppRgb)
             Dim g As Graphics = Graphics.FromImage(img)
             Dim drawUnitTeamIndicators As Boolean = DrawTeamIndicators And ActiveEditMode = EditMode.Units
