@@ -394,6 +394,11 @@ Public Class Map
             Next
         Next
 
+        If drawGrid Then
+            ' Draw the grid.
+            DrawGridLines(g, SizeX * TileSizeX, SizeY * TileSizeY)
+        End If
+
         ' Draw building baseplates.
         For i As Integer = 0 To mapBuildings.Count() - 1
             If mapBuildings(i).HasData Then
@@ -441,11 +446,6 @@ Public Class Map
                 End If
             End If
         Next
-
-        If drawGrid Then
-            ' Draw the grid.
-            DrawGridLines(g, SizeX * TileSizeX, SizeY * TileSizeY)
-        End If
 
         ' Draw team indicator icons.
         If drawUnitTeamIndicators Then
