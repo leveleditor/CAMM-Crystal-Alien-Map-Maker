@@ -164,7 +164,6 @@ Partial Class FrmEditor
         '
         'picMap
         '
-        Me.picMap.ContextMenuStrip = Me.ctxMap
         Me.picMap.Location = New System.Drawing.Point(0, 0)
         Me.picMap.Margin = New System.Windows.Forms.Padding(0)
         Me.picMap.Name = "picMap"
@@ -272,11 +271,11 @@ Partial Class FrmEditor
         '
         Me.btnToolErase.AutoSize = True
         Me.btnToolErase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnToolErase.Location = New System.Drawing.Point(373, 69)
+        Me.btnToolErase.Location = New System.Drawing.Point(274, 69)
         Me.btnToolErase.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolErase.Name = "btnToolErase"
         Me.btnToolErase.Size = New System.Drawing.Size(47, 23)
-        Me.btnToolErase.TabIndex = 17
+        Me.btnToolErase.TabIndex = 16
         Me.btnToolErase.Text = "Eraser"
         '
         'pnlMap
@@ -605,7 +604,6 @@ Partial Class FrmEditor
         Me.btnEditBuildings.Size = New System.Drawing.Size(80, 23)
         Me.btnEditBuildings.TabIndex = 3
         Me.btnEditBuildings.Text = "Edit Buildings"
-        Me.btnEditBuildings.UseVisualStyleBackColor = True
         '
         'btnEditTiles
         '
@@ -617,7 +615,6 @@ Partial Class FrmEditor
         Me.btnEditTiles.Size = New System.Drawing.Size(80, 23)
         Me.btnEditTiles.TabIndex = 2
         Me.btnEditTiles.Text = "Edit Tiles"
-        Me.btnEditTiles.UseVisualStyleBackColor = True
         '
         'btnEditShroud
         '
@@ -629,7 +626,6 @@ Partial Class FrmEditor
         Me.btnEditShroud.Size = New System.Drawing.Size(80, 23)
         Me.btnEditShroud.TabIndex = 5
         Me.btnEditShroud.Text = "Edit Shroud"
-        Me.btnEditShroud.UseVisualStyleBackColor = True
         Me.btnEditShroud.Visible = False
         '
         'pnlBuildings
@@ -689,7 +685,6 @@ Partial Class FrmEditor
         Me.btnSize.Size = New System.Drawing.Size(100, 23)
         Me.btnSize.TabIndex = 12
         Me.btnSize.Text = "Change Size"
-        Me.btnSize.UseVisualStyleBackColor = True
         '
         'saveMap
         '
@@ -717,7 +712,6 @@ Partial Class FrmEditor
         Me.chkGrid.Size = New System.Drawing.Size(75, 17)
         Me.chkGrid.TabIndex = 6
         Me.chkGrid.Text = "Show Grid"
-        Me.chkGrid.UseVisualStyleBackColor = True
         '
         'btnToolSmartBrush
         '
@@ -730,21 +724,18 @@ Partial Class FrmEditor
         Me.btnToolSmartBrush.Size = New System.Drawing.Size(74, 23)
         Me.btnToolSmartBrush.TabIndex = 18
         Me.btnToolSmartBrush.Text = "Smart Brush"
-        Me.btnToolSmartBrush.UseVisualStyleBackColor = True
         Me.btnToolSmartBrush.Visible = False
         '
         'btnToolBrush
         '
         Me.btnToolBrush.AutoSize = True
         Me.btnToolBrush.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnToolBrush.Enabled = False
         Me.btnToolBrush.Location = New System.Drawing.Point(227, 69)
         Me.btnToolBrush.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolBrush.Name = "btnToolBrush"
         Me.btnToolBrush.Size = New System.Drawing.Size(44, 23)
         Me.btnToolBrush.TabIndex = 15
         Me.btnToolBrush.Text = "Brush"
-        Me.btnToolBrush.UseVisualStyleBackColor = True
         '
         'btnEditUnits
         '
@@ -755,7 +746,6 @@ Partial Class FrmEditor
         Me.btnEditUnits.Size = New System.Drawing.Size(80, 23)
         Me.btnEditUnits.TabIndex = 4
         Me.btnEditUnits.Text = "Edit Units"
-        Me.btnEditUnits.UseVisualStyleBackColor = True
         '
         'pnlUnits
         '
@@ -843,17 +833,16 @@ Partial Class FrmEditor
         Me.btnToolPointer.Size = New System.Drawing.Size(50, 23)
         Me.btnToolPointer.TabIndex = 14
         Me.btnToolPointer.Text = "Pointer"
-        Me.btnToolPointer.UseVisualStyleBackColor = True
         '
         'btnToolRectangleBrush
         '
         Me.btnToolRectangleBrush.AutoSize = True
         Me.btnToolRectangleBrush.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnToolRectangleBrush.Location = New System.Drawing.Point(274, 69)
+        Me.btnToolRectangleBrush.Location = New System.Drawing.Point(324, 69)
         Me.btnToolRectangleBrush.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolRectangleBrush.Name = "btnToolRectangleBrush"
         Me.btnToolRectangleBrush.Size = New System.Drawing.Size(96, 23)
-        Me.btnToolRectangleBrush.TabIndex = 16
+        Me.btnToolRectangleBrush.TabIndex = 17
         Me.btnToolRectangleBrush.Text = "Rectangle Brush"
         '
         'cboRectangleBrush

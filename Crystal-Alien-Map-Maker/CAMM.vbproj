@@ -166,6 +166,10 @@
     <Compile Include="src\GUI\Forms\FrmBuildingProperties.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="src\GUI\Toolbox\Modes\EditMode.vb" />
+    <Compile Include="src\GUI\Toolbox\Modes\BuildingEditMode.vb" />
+    <Compile Include="src\GUI\Toolbox\Modes\UnitEditMode.vb" />
+    <Compile Include="src\GUI\Toolbox\Modes\TileEditMode.vb" />
     <Compile Include="src\Serializables\BuildingDefData.vb" />
     <Compile Include="src\Serializables\UnitDefData.vb" />
     <Compile Include="src\Serializables\TileDefData.vb" />

@@ -43,13 +43,6 @@
     Public ReadOnly BrushBuildingSelectionHover As SolidBrush = New SolidBrush(Color.FromArgb(128, 255, 255, 255))
     Public ReadOnly BrushBuildingSelected As SolidBrush = New SolidBrush(Color.FromArgb(128, 142, 255, 255))
 
-    Public Enum EditMode
-        Tiles
-        Buildings
-        Units
-        Shroud
-    End Enum
-
     Public Enum ToolMode
         Pointer
         Brush

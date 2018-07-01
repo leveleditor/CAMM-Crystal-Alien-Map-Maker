@@ -327,7 +327,7 @@ Public Class Map
         End If
     End Sub
 
-    Public Function IsMouseInBounds(mouseX As Integer, mouseY As Integer)
+    Public Function IsMouseInBounds(mouseX As Integer, mouseY As Integer) As Boolean
         If mouseX < 0 Then
             Return False
         ElseIf mouseY < 0 Then
@@ -341,26 +341,27 @@ Public Class Map
         End If
     End Function
 
-    Public Sub Eraser(mouseX As Integer, mouseY As Integer, mode As EditMode)
-        Select Case mode
-            Case EditMode.Tiles
-                SetTile(mouseX, mouseY, New Tile())
-            Case EditMode.Buildings
-                Dim temp As List(Of Building) = mapBuildings.ToList()
-                For i As Integer = 0 To mapBuildings.Count() - 1
-                    If mapBuildings(i).Location = New Point(mouseX, mouseY) Then
-                        temp.Remove(mapBuildings(i))
-                    End If
-                Next
-                mapBuildings = temp
-            Case EditMode.Units
-                Dim temp As List(Of Unit) = mapUnits.ToList()
-                Dim toRemove As List(Of Unit) = GetUnitsNear(mouseX, mouseY, 30)
-                For i As Integer = 0 To toRemove.Count() - 1
-                    temp.Remove(toRemove(i))
-                Next
-                mapUnits = temp
-        End Select
+    Public Sub EraseTile(mouseX As Integer, mouseY As Integer)
+        SetTile(mouseX, mouseY, New Tile())
+    End Sub
+
+    Public Sub EraseBuildings(mouseX As Integer, mouseY As Integer)
+        Dim temp As List(Of Building) = mapBuildings.ToList()
+        For i As Integer = 0 To mapBuildings.Count() - 1
+            If mapBuildings(i).Location = New Point(mouseX, mouseY) Then
+                temp.Remove(mapBuildings(i))
+            End If
+        Next
+        mapBuildings = temp
+    End Sub
+
+    Public Sub EraseUnits(mouseX As Integer, mouseY As Integer)
+        Dim temp As List(Of Unit) = mapUnits.ToList()
+        Dim toRemove As List(Of Unit) = GetUnitsNear(mouseX, mouseY, 30)
+        For i As Integer = 0 To toRemove.Count() - 1
+            temp.Remove(toRemove(i))
+        Next
+        mapUnits = temp
     End Sub
 
     Public Function DeleteUnit(unit As Unit) As Boolean
