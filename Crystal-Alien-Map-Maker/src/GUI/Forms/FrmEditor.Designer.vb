@@ -83,6 +83,7 @@ Partial Class FrmEditor
         Me.mnuRelatedLinks = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnExternal4 = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnExternal3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnExternal8 = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnExternal6 = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnExternal7 = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator4 = New System.Windows.Forms.ToolStripSeparator()
@@ -118,7 +119,7 @@ Partial Class FrmEditor
         Me.btnToolPointer = New System.Windows.Forms.Button()
         Me.btnToolRectangleBrush = New System.Windows.Forms.Button()
         Me.cboRectangleBrush = New System.Windows.Forms.ComboBox()
-        Me.btnExternal8 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.separator12 = New System.Windows.Forms.ToolStripSeparator()
         CType(Me.picMap, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ctxMap.SuspendLayout()
         CType(Me.picActive, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -558,18 +559,21 @@ Partial Class FrmEditor
         '
         'btnExternal5
         '
+        Me.btnExternal5.AutoToolTip = True
         Me.btnExternal5.Name = "btnExternal5"
         Me.btnExternal5.Size = New System.Drawing.Size(227, 22)
         Me.btnExternal5.Text = "Report bugs on GitHub"
         '
         'btnExternal2
         '
+        Me.btnExternal2.AutoToolTip = True
         Me.btnExternal2.Name = "btnExternal2"
         Me.btnExternal2.Size = New System.Drawing.Size(227, 22)
         Me.btnExternal2.Text = "View Source Code on GitHub"
         '
         'btnExternal1
         '
+        Me.btnExternal1.AutoToolTip = True
         Me.btnExternal1.Name = "btnExternal1"
         Me.btnExternal1.Size = New System.Drawing.Size(227, 22)
         Me.btnExternal1.Text = "Main Project Page"
@@ -581,31 +585,42 @@ Partial Class FrmEditor
         '
         'mnuRelatedLinks
         '
-        Me.mnuRelatedLinks.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnExternal4, Me.btnExternal3, Me.btnExternal8, Me.btnExternal6, Me.btnExternal7})
+        Me.mnuRelatedLinks.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnExternal4, Me.btnExternal3, Me.separator12, Me.btnExternal8, Me.btnExternal6, Me.btnExternal7})
         Me.mnuRelatedLinks.Name = "mnuRelatedLinks"
         Me.mnuRelatedLinks.Size = New System.Drawing.Size(227, 22)
         Me.mnuRelatedLinks.Text = "Related Links"
         '
         'btnExternal4
         '
+        Me.btnExternal4.AutoToolTip = True
         Me.btnExternal4.Name = "btnExternal4"
         Me.btnExternal4.Size = New System.Drawing.Size(256, 22)
         Me.btnExternal4.Text = "CrystAlien Redux Project"
         '
         'btnExternal3
         '
+        Me.btnExternal3.AutoToolTip = True
         Me.btnExternal3.Name = "btnExternal3"
         Me.btnExternal3.Size = New System.Drawing.Size(256, 22)
         Me.btnExternal3.Text = "Lego Mars Mission Fan-Made Wiki"
         '
+        'btnExternal8
+        '
+        Me.btnExternal8.AutoToolTip = True
+        Me.btnExternal8.Name = "btnExternal8"
+        Me.btnExternal8.Size = New System.Drawing.Size(256, 22)
+        Me.btnExternal8.Text = "CAC Flash Wrapper GitHub"
+        '
         'btnExternal6
         '
+        Me.btnExternal6.AutoToolTip = True
         Me.btnExternal6.Name = "btnExternal6"
         Me.btnExternal6.Size = New System.Drawing.Size(256, 22)
         Me.btnExternal6.Text = "CAC Unit Editor GitHub"
         '
         'btnExternal7
         '
+        Me.btnExternal7.AutoToolTip = True
         Me.btnExternal7.Name = "btnExternal7"
         Me.btnExternal7.Size = New System.Drawing.Size(256, 22)
         Me.btnExternal7.Text = "CAC Building Editor GitHub"
@@ -929,11 +944,10 @@ Partial Class FrmEditor
         Me.cboRectangleBrush.TabIndex = 16
         Me.cboRectangleBrush.Visible = False
         '
-        'btnExternal8
+        'separator12
         '
-        Me.btnExternal8.Name = "btnExternal8"
-        Me.btnExternal8.Size = New System.Drawing.Size(256, 22)
-        Me.btnExternal8.Text = "CAC Flash Wrapper"
+        Me.separator12.Name = "separator12"
+        Me.separator12.Size = New System.Drawing.Size(253, 6)
         '
         'FrmEditor
         '
@@ -1088,4 +1102,5 @@ Partial Class FrmEditor
     Friend WithEvents btnExternal6 As ToolStripMenuItem
     Friend WithEvents btnExternal7 As ToolStripMenuItem
     Friend WithEvents btnExternal8 As ToolStripMenuItem
+    Friend WithEvents separator12 As ToolStripSeparator
 End Class

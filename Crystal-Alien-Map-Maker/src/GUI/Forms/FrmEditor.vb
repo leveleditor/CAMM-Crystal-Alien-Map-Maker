@@ -108,6 +108,25 @@ Public Class FrmEditor
             menuItem.Text = menuItem.Text.ToUpper()
         Next
 
+        'Set up external links on menu items
+        btnExternal1.Tag = "http://marsmissionwiki.wikifoundry.com/page/CAMM+(Crystal+Alien+Map+Maker)"
+        btnExternal2.Tag = "https://github.com/leveleditor/CAMM-Crystal-Alien-Map-Maker"
+        btnExternal3.Tag = "http://marsmissionwiki.wikifoundry.com/"
+        btnExternal4.Tag = "https://crystalien-redux.com/"
+        btnExternal5.Tag = "https://github.com/leveleditor/CAMM-Crystal-Alien-Map-Maker/issues"
+        btnExternal6.Tag = "https://github.com/Brian151/CAC-Unit-Editor"
+        btnExternal7.Tag = "https://github.com/Brian151/CAC-Building-Editor"
+        btnExternal8.Tag = "https://github.com/leveleditor/CrystAlien-Conflict-Flash-Wrapper"
+
+        btnExternal1.ToolTipText = btnExternal1.Tag
+        btnExternal2.ToolTipText = btnExternal2.Tag
+        btnExternal3.ToolTipText = btnExternal3.Tag
+        btnExternal4.ToolTipText = btnExternal4.Tag
+        btnExternal5.ToolTipText = btnExternal5.Tag
+        btnExternal6.ToolTipText = btnExternal6.Tag
+        btnExternal7.ToolTipText = btnExternal7.Tag
+        btnExternal8.ToolTipText = btnExternal8.Tag
+
         'Loading the configuration file.
         If Not LoadConfig() Then
             'Close if the configuration data could not be loaded.
@@ -911,36 +930,8 @@ Public Class FrmEditor
         End Using
     End Sub
 
-    Private Sub btnExternal1_Click(sender As Object, e As EventArgs) Handles btnExternal1.Click
-        OpenLinkInDefaultBrowser(Me, "http://marsmissionwiki.wikifoundry.com/page/CAMM+%28Crystal+Alien+Map+Maker%29")
-    End Sub
-
-    Private Sub btnExternal2_Click(sender As Object, e As EventArgs) Handles btnExternal2.Click
-        OpenLinkInDefaultBrowser(Me, "https://github.com/leveleditor/CAMM-Crystal-Alien-Map-Maker")
-    End Sub
-
-    Private Sub btnExternal3_Click(sender As Object, e As EventArgs) Handles btnExternal3.Click
-        OpenLinkInDefaultBrowser(Me, "http://marsmissionwiki.wikifoundry.com/")
-    End Sub
-
-    Private Sub btnExternal4_Click(sender As Object, e As EventArgs) Handles btnExternal4.Click
-        OpenLinkInDefaultBrowser(Me, "https://crystalien-redux.com/")
-    End Sub
-
-    Private Sub btnExternal5_Click(sender As Object, e As EventArgs) Handles btnExternal5.Click
-        OpenLinkInDefaultBrowser(Me, "https://github.com/leveleditor/CAMM-Crystal-Alien-Map-Maker/issues")
-    End Sub
-
-    Private Sub btnExternal6_Click(sender As Object, e As EventArgs) Handles btnExternal6.Click
-        OpenLinkInDefaultBrowser(Me, "https://github.com/Brian151/CAC-Unit-Editor")
-    End Sub
-
-    Private Sub btnExternal7_Click(sender As Object, e As EventArgs) Handles btnExternal7.Click
-        OpenLinkInDefaultBrowser(Me, "https://github.com/Brian151/CAC-Building-Editor")
-    End Sub
-
-    Private Sub btnExternal8_Click(sender As Object, e As EventArgs) Handles btnExternal8.Click
-        OpenLinkInDefaultBrowser(Me, "https://github.com/leveleditor/CrystAlien-Conflict-Flash-Wrapper")
+    Private Sub btnExternal_Click(sender As Object, e As EventArgs) Handles btnExternal1.Click, btnExternal2.Click, btnExternal3.Click, btnExternal4.Click, btnExternal5.Click, btnExternal6.Click, btnExternal7.Click, btnExternal8.Click
+        OpenLinkInDefaultBrowser(Me, CType(sender, ToolStripMenuItem).Tag.ToString())
     End Sub
 
     Private Sub chkAssociateFileTypeCAMM_CheckStateChanged(sender As Object, e As EventArgs) Handles chkAssociateFileTypeCAMM.CheckStateChanged
