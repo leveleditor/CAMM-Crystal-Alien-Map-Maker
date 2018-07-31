@@ -939,6 +939,10 @@ Public Class FrmEditor
         OpenLinkInDefaultBrowser(Me, "https://github.com/Brian151/CAC-Building-Editor")
     End Sub
 
+    Private Sub btnExternal8_Click(sender As Object, e As EventArgs) Handles btnExternal8.Click
+        OpenLinkInDefaultBrowser(Me, "https://github.com/leveleditor/CrystAlien-Conflict-Flash-Wrapper")
+    End Sub
+
     Private Sub chkAssociateFileTypeCAMM_CheckStateChanged(sender As Object, e As EventArgs) Handles chkAssociateFileTypeCAMM.CheckStateChanged
         If isLoaded Then
             If chkAssociateFileTypeCAMM.CheckState = CheckState.Checked Then
