@@ -905,6 +905,40 @@ Public Class FrmEditor
         SwitchToolMode(ToolMode.Eraser)
     End Sub
 
+    Private Sub btnAbout_Click(sender As Object, e As EventArgs) Handles btnAbout.Click
+        Using aboutForm As New FrmAbout()
+            aboutForm.ShowDialog(Me)
+        End Using
+    End Sub
+
+    Private Sub btnExternal1_Click(sender As Object, e As EventArgs) Handles btnExternal1.Click
+        OpenLinkInDefaultBrowser(Me, "http://marsmissionwiki.wikifoundry.com/page/CAMM+%28Crystal+Alien+Map+Maker%29")
+    End Sub
+
+    Private Sub btnExternal2_Click(sender As Object, e As EventArgs) Handles btnExternal2.Click
+        OpenLinkInDefaultBrowser(Me, "https://github.com/leveleditor/CAMM-Crystal-Alien-Map-Maker")
+    End Sub
+
+    Private Sub btnExternal3_Click(sender As Object, e As EventArgs) Handles btnExternal3.Click
+        OpenLinkInDefaultBrowser(Me, "http://marsmissionwiki.wikifoundry.com/")
+    End Sub
+
+    Private Sub btnExternal4_Click(sender As Object, e As EventArgs) Handles btnExternal4.Click
+        OpenLinkInDefaultBrowser(Me, "https://crystalien-redux.com/")
+    End Sub
+
+    Private Sub btnExternal5_Click(sender As Object, e As EventArgs) Handles btnExternal5.Click
+        OpenLinkInDefaultBrowser(Me, "https://github.com/leveleditor/CAMM-Crystal-Alien-Map-Maker/issues")
+    End Sub
+
+    Private Sub btnExternal6_Click(sender As Object, e As EventArgs) Handles btnExternal6.Click
+        OpenLinkInDefaultBrowser(Me, "https://github.com/Brian151/CAC-Unit-Editor")
+    End Sub
+
+    Private Sub btnExternal7_Click(sender As Object, e As EventArgs) Handles btnExternal7.Click
+        OpenLinkInDefaultBrowser(Me, "https://github.com/Brian151/CAC-Building-Editor")
+    End Sub
+
     Private Sub chkAssociateFileTypeCAMM_CheckStateChanged(sender As Object, e As EventArgs) Handles chkAssociateFileTypeCAMM.CheckStateChanged
         If isLoaded Then
             If chkAssociateFileTypeCAMM.CheckState = CheckState.Checked Then

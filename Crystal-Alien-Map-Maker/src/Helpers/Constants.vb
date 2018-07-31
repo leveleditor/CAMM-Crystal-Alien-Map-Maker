@@ -17,6 +17,7 @@
     Public ReadOnly ConfigFile As String = DataPath + "/" + ConfigFileName
     Public ReadOnly RectangleBrushPath As String = DataPath + "/Brushes/Rectangle"
     Public ReadOnly DefaultMapsPath As String = DataPath + "/Default_Maps"
+    Public ReadOnly AboutMenuMapPath As String = DataPath + "/AboutMenuMap.camm"
 
     Public Const ConfigFormat As Integer = 11
     Public Const MapFormat As Integer = 7

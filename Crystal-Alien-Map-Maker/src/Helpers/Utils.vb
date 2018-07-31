@@ -69,6 +69,22 @@ Public Module Utils
         Return If(value < min, min, If(value > max, max, value))
     End Function
 
+    ''' <summary>
+    ''' Opens a link in the default web browser of the computer, and shows a waiting cursor on the form in case the browser is not responding.
+    ''' </summary>
+    ''' <param name="waitingForm">The form to show the waiting cursor on</param>
+    ''' <param name="link">The link to open in the default web browser</param>
+    Friend Sub OpenLinkInDefaultBrowser(waitingForm As Form, link As String)
+        waitingForm.UseWaitCursor = True
+        Try
+            Diagnostics.Process.Start(link)
+        Catch ex As Exception
+
+        Finally
+            waitingForm.UseWaitCursor = False
+        End Try
+    End Sub
+
     Public Sub UpgradeBuildingId(fromVersion As Integer, toVersion As Integer, ByRef objectId As String)
         If fromVersion < 4 And toVersion >= 4 Then
             ' The easy way to map old building Ids to new ones.
