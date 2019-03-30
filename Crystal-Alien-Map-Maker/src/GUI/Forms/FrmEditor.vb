@@ -2,9 +2,11 @@
 '  CAMM (Crystal Alien Map Maker) program created by Josh (aka. leveleditor / Leveleditor6680) '
 '-============================================================================================-'
 
+Imports System.Diagnostics
 Imports System.Drawing.Imaging
 Imports System.IO
 Imports System.Security
+Imports System.Text
 Imports Microsoft.Win32
 Imports Newtonsoft.Json
 Imports Nini.Config
@@ -86,6 +88,9 @@ Public Class FrmEditor
 
         'Loading assets.
         LoadAssets()
+        btnPlayInGame.Image = ButtonPlay
+        btnPlayInGameDefault.Image = ButtonPlay
+        btnPlayInGameMods.Image = ButtonPlay
 
         'Setting version information.
         lblAboutVersion.Text = BuildType + " v" + My.Application.Info.Version.Major.ToString() + "." + My.Application.Info.Version.Minor.ToString()
@@ -102,7 +107,7 @@ Public Class FrmEditor
         ctxMapTabs.Renderer = customToolStripRenderer
         ctxMap.Renderer = customToolStripRenderer
 
-        For Each menuItem As ToolStripMenuItem In mnuMain.Items.OfType(Of ToolStripMenuItem)()
+        For Each menuItem As ToolStripDropDownItem In mnuMain.Items.OfType(Of ToolStripDropDownItem)()
             'Dim dropDown As ToolStripDropDownMenu = MenuItem.DropDown
             'dropDown.ShowImageMargin = False
             menuItem.Text = menuItem.Text.ToUpper()
@@ -356,8 +361,6 @@ Public Class FrmEditor
 
     Private Sub picMap_MouseEnter(sender As Object, e As EventArgs) Handles picMap.MouseEnter
         isMouseOnMap = True
-        pnlMap.Focus()
-        'Windows.Forms.Cursor.Hide()
     End Sub
 
     Private Sub picMap_MouseLeave(sender As Object, e As EventArgs) Handles picMap.MouseLeave
@@ -400,7 +403,6 @@ Public Class FrmEditor
     Private Sub picTiles_MouseEnter(sender As Object, e As EventArgs) Handles picTiles.MouseEnter
         isMouseOnSelections = True
         isMouseOnMap = False
-        pnlTiles.Focus()
     End Sub
 
     Private Sub picTiles_MouseLeave(sender As Object, e As EventArgs) Handles picTiles.MouseLeave
@@ -478,7 +480,6 @@ Public Class FrmEditor
     Private Sub picBuildings_MouseEnter(sender As Object, e As EventArgs) Handles picBuildings.MouseEnter
         isMouseOnSelections = True
         isMouseOnMap = False
-        pnlBuildings.Focus()
     End Sub
 
     Private Sub picBuildings_MouseLeave(sender As Object, e As EventArgs) Handles picBuildings.MouseLeave
@@ -557,7 +558,6 @@ Public Class FrmEditor
     Private Sub picUnits_MouseEnter(sender As Object, e As EventArgs) Handles picUnits.MouseEnter
         isMouseOnSelections = True
         isMouseOnMap = False
-        pnlUnits.Focus()
     End Sub
 
     Private Sub picUnits_MouseLeave(sender As Object, e As EventArgs) Handles picUnits.MouseLeave
@@ -657,7 +657,7 @@ Public Class FrmEditor
 
         If mapData IsNot Nothing Then
             Dim map As Map = New Map()
-            If mapData.Value.Format = MapFormat Then
+            If mapData.Value.Format >= BaseJsonMapFormat And mapData.Value.Format <= MapFormat Then
                 map.LoadMap(mapData)
                 AddMap(map)
                 EndLoadMap(fileName)
@@ -781,7 +781,7 @@ Public Class FrmEditor
                 Else
                     e.Graphics.Clear(picActive.BackColor)
                     e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
-                    e.Graphics.DrawImage(ButtonOverlay, New Point(0, 0))
+                    e.Graphics.DrawImage(ButtonOverlay, 0, 0, TileSizeX, TileSizeY)
                 End If
             ElseIf ActiveEditMode Is unitEditMode Then
                 If unitEditMode.ActiveUnit.HasData And unitEditMode.ActiveUnit.UnitId <> "" And unitEditMode.ActiveToolMode <> ToolMode.Eraser Then
@@ -790,7 +790,6 @@ Public Class FrmEditor
                 Else
                     e.Graphics.Clear(picActive.BackColor)
                     e.Graphics.DrawImage(ButtonNeutral, 0, 0, TileSizeX, TileSizeY)
-                    'e.Graphics.DrawImage(ButtonOverlay, New Point(0, 0))
                 End If
             End If
         End If
@@ -803,27 +802,7 @@ Public Class FrmEditor
     End Sub
 
     Private Sub btnSize_Click(sender As Object, e As EventArgs) Handles btnSize.Click
-        If CInt(txtWidth.Text) > 30 Then
-            MsgBox("Width cannot be greater than 30." + vbNewLine + "At least for now.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            txtWidth.Text = "30"
-        ElseIf CInt(txtHeight.Text) > 30 Then
-            MsgBox("Height cannot be greater than 30." + vbNewLine + "At least for now.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            txtHeight.Text = "30"
-        ElseIf CInt(txtWidth.Text) = 0 Then
-            MsgBox("If a 2-Dimensional object has a width of 0, does it really exist?" + vbNewLine + "Width cannot be 0.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            txtWidth.Text = ActiveMap.SizeX
-        ElseIf CInt(txtHeight.Text) = 0 Then
-            MsgBox("If a 2-Dimensional object has a height of 0, does it really exist?" + vbNewLine + "Height cannot be 0.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            txtHeight.Text = ActiveMap.SizeY
-        ElseIf CInt(txtWidth.Text) < 10 Then
-            MsgBox("Width cannot be less than 10." + vbNewLine + "Gameplay reasons.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            txtWidth.Text = "10"
-        ElseIf CInt(txtHeight.Text) < 10 Then
-            MsgBox("Height cannot be less than 10." + vbNewLine + "Gameplay reasons.", MsgBoxStyle.Exclamation + MsgBoxStyle.OkOnly)
-            txtHeight.Text = "10"
-        Else
-            ResizeMap(txtWidth.Text, txtHeight.Text)
-        End If
+        ResizeMap(txtWidth.Value, txtHeight.Value)
     End Sub
 
     Private Sub chkGrid_CheckedChanged(sender As Object, e As EventArgs) Handles chkGrid.CheckedChanged, mnuchkGrid.CheckedChanged
@@ -879,13 +858,53 @@ Public Class FrmEditor
         FrmConfigEditor.ShowDialog(Me)
     End Sub
 
-    Private Sub btnDeveloper_Click(sender As Object, e As EventArgs) Handles btnDeveloper.Click
-        mnuDev.Visible = True
-        mnuImport.Visible = True
-        btnExportAS.Visible = True
-        separator3.Visible = True
-        mnuchkDebugBuildingPos.Visible = True
-        mnuchkDebugUnitPos.Visible = True
+    Private Sub mnuchkDeveloper_CheckedChanged(sender As Object, e As EventArgs) Handles mnuchkDeveloper.CheckedChanged
+        mnuDev.Visible = mnuchkDeveloper.Checked
+        separator3.Visible = mnuchkDeveloper.Checked
+        mnuImport.Visible = mnuchkDeveloper.Checked
+        btnExportAS.Visible = mnuchkDeveloper.Checked
+        separator13.Visible = mnuchkDeveloper.Checked
+        mnuchkDebugBuildingPos.Visible = mnuchkDeveloper.Checked
+        mnuchkDebugUnitPos.Visible = mnuchkDeveloper.Checked
+    End Sub
+
+    Private Sub btnPlayInGame_Click(sender As Object, e As EventArgs) Handles btnPlayInGame.ButtonClick, btnPlayInGameDefault.Click
+        launchGamePlayer(False)
+    End Sub
+
+    Private Sub btnPlayInGameMods_Click(sender As Object, e As EventArgs) Handles btnPlayInGameMods.Click
+        launchGamePlayer(True)
+    End Sub
+
+    Private Sub launchGamePlayer(modded As Boolean)
+        Dim autoPlay As Boolean = Not modded
+        Dim autoPlayString As String = If(autoPlay, "yes", "no")
+        Dim skipMenu As Boolean = mnuchkSkipMenu.Checked
+        Dim skipMenuString As String = If(skipMenu, "yes", "no")
+        Dim size As Size = New Size(If(modded, 750, 600), 400)
+        Dim sizeString As String = size.Width.ToString() + "x" + size.Height.ToString()
+        Dim levelDataEncoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(ActiveMap.GetSaveData()))
+        Dim commandArgs As String = If(mnuDev.Visible, "-console ", "") + "-autoplay=" + autoPlayString + " -skipmenu=" + skipMenuString + " -size " + sizeString + " -loadlevel " + levelDataEncoded
+
+        If Environment.OSVersion.VersionString.Contains("Windows") Then
+            If File.Exists(CACPlayerPath_Windows1) Then
+                Process.Start(CACPlayerPath_Windows1, commandArgs)
+            ElseIf File.Exists(CACPlayerPath_Windows2) Then
+                Process.Start(CACPlayerPath_Windows2, commandArgs)
+            Else
+                If MsgBox("It appears you're running Windows, so you need to download and install the standalone CrystAlien Conflict Player from http://crystalien-redux.com/ to enable the level player." + Environment.NewLine + "Press OK to open the webpage.", MsgBoxStyle.OkCancel + MsgBoxStyle.Information) = MsgBoxResult.Ok Then
+                    btnExternal_Click(btnExternal4, New EventArgs())
+                End If
+            End If
+        ElseIf Directory.Exists(CACPlayerPath_MacOS) Then
+            Process.Start("open", "'" + CACPlayerPath_MacOS + "' --args " + commandArgs)
+        ElseIf Directory.Exists("/Applications") Then
+            If MsgBox("It appears you're running Mac OS X, so you need to download and install the standalone CrystAlien Conflict Player from http://crystalien-redux.com/ to enable the level player." + Environment.NewLine + "Press OK to open the webpage.", MsgBoxStyle.OkCancel + MsgBoxStyle.Information) = MsgBoxResult.Ok Then
+                btnExternal_Click(btnExternal4, New EventArgs())
+            End If
+        Else
+            MsgBox("Sorry, your operating system is currently not supported by this feature.", MsgBoxStyle.OkOnly, "Play Level: Operating System not supported")
+        End If
     End Sub
 
     Private Sub btnEditTiles_Click(sender As Object, e As EventArgs) Handles btnEditTiles.Click
@@ -1429,5 +1448,4 @@ Public Class FrmEditor
         picActive.Invalidate()
         picMap.Invalidate()
     End Sub
-
 End Class

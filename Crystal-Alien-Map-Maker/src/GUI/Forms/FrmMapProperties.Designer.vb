@@ -43,6 +43,8 @@ Partial Class FrmMapProperties
         Me.lblAuthor = New System.Windows.Forms.Label()
         Me.picTeam = New System.Windows.Forms.PictureBox()
         Me.rbtNone = New System.Windows.Forms.RadioButton()
+        Me.lblAccessCode = New System.Windows.Forms.Label()
+        Me.txtAccessCode = New System.Windows.Forms.TextBox()
         CType(Me.txtStartCashPlayer, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.txtStartCashEnemy, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tblButtons.SuspendLayout()
@@ -182,12 +184,12 @@ Partial Class FrmMapProperties
         Me.tblButtons.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.tblButtons.Controls.Add(Me.btnOk, 0, 0)
         Me.tblButtons.Controls.Add(Me.btnCancel, 1, 0)
-        Me.tblButtons.Location = New System.Drawing.Point(176, 281)
+        Me.tblButtons.Location = New System.Drawing.Point(176, 311)
         Me.tblButtons.Name = "tblButtons"
         Me.tblButtons.RowCount = 1
         Me.tblButtons.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.tblButtons.Size = New System.Drawing.Size(146, 29)
-        Me.tblButtons.TabIndex = 17
+        Me.tblButtons.TabIndex = 19
         '
         'btnOk
         '
@@ -257,13 +259,33 @@ Partial Class FrmMapProperties
         Me.rbtNone.Text = "N/A (None Applicable)"
         Me.rbtNone.UseVisualStyleBackColor = True
         '
+        'lblAccessCode
+        '
+        Me.lblAccessCode.AutoSize = True
+        Me.lblAccessCode.Location = New System.Drawing.Point(50, 284)
+        Me.lblAccessCode.Name = "lblAccessCode"
+        Me.lblAccessCode.Size = New System.Drawing.Size(70, 13)
+        Me.lblAccessCode.TabIndex = 17
+        Me.lblAccessCode.Text = "Access Code"
+        '
+        'txtAccessCode
+        '
+        Me.txtAccessCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtAccessCode.Location = New System.Drawing.Point(126, 281)
+        Me.txtAccessCode.Name = "txtAccessCode"
+        Me.txtAccessCode.Size = New System.Drawing.Size(196, 20)
+        Me.txtAccessCode.TabIndex = 18
+        '
         'FrmMapProperties
         '
         Me.AcceptButton = Me.btnOk
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(334, 322)
+        Me.ClientSize = New System.Drawing.Size(334, 352)
+        Me.Controls.Add(Me.txtAccessCode)
+        Me.Controls.Add(Me.lblAccessCode)
         Me.Controls.Add(Me.rbtNone)
         Me.Controls.Add(Me.picTeam)
         Me.Controls.Add(Me.lblAuthor)
@@ -319,4 +341,6 @@ Partial Class FrmMapProperties
     Friend WithEvents lblAuthor As System.Windows.Forms.Label
     Friend WithEvents picTeam As System.Windows.Forms.PictureBox
     Friend WithEvents rbtNone As System.Windows.Forms.RadioButton
+    Friend WithEvents lblAccessCode As Label
+    Friend WithEvents txtAccessCode As TextBox
 End Class

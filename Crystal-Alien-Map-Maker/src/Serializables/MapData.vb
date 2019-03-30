@@ -8,6 +8,7 @@ Public Structure MapData
     Public CashPlayer, CashEnemy As Integer
     Public IsTraining, IsConflict, IsSpecialLevel, IsLastSpecialLevel, IsBonusLevel As Boolean
     Public IsFinal As Boolean
+    Public AccessCode As String
 
     Public Tiles As List(Of Integer)
     Public Buildings As List(Of BuildingData)

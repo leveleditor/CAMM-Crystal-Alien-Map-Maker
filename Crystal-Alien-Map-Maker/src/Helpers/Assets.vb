@@ -1,20 +1,23 @@
-﻿Public Module Assets
+﻿Imports System.IO
+
+Public Module Assets
 
     Public Sub LoadAssets()
-        Background = Image.FromFile(DataPath + "/Backgrounds/Mars.png")
-        ButtonNeutral = Image.FromFile(DataPath + "/UI/Buttons/NeutralBackground.png")
-        ButtonAstro = Image.FromFile(DataPath + "/UI/Buttons/AstroBackground.png")
-        ButtonAlien = Image.FromFile(DataPath + "/UI/Buttons/AlienBackground.png")
-        ButtonOverlay = Image.FromFile(DataPath + "/UI/Buttons/Overlay.png")
-        BaseplateAstroWide = Image.FromFile(DataPath + "/Baseplates/Astro2x2.png")
-        BaseplateAlienWide = Image.FromFile(DataPath + "/Baseplates/Alien2x2.png")
-        BaseplateAstroSmall = Image.FromFile(DataPath + "/Baseplates/Astro1x2.png")
-        BaseplateAlienSmall = Image.FromFile(DataPath + "/Baseplates/Alien1x2.png")
-        TeamIndicatorAstro = Image.FromFile(DataPath + "/UI/Indicators/AstroTeam.png")
-        TeamIndicatorAlien = Image.FromFile(DataPath + "/UI/Indicators/AlienTeam.png")
-        TeamIndicatorNeutral = Image.FromFile(DataPath + "/UI/Indicators/NeutralTeam.png")
-        UnitSelectionHover = Image.FromFile(DataPath + "/UI/Overlays/UnitSelectionHover.png")
-        UnitSelectionClick = Image.FromFile(DataPath + "/UI/Overlays/UnitSelectionClick.png")
+        Background = LoadImageAsset(DataPath + "/Backgrounds/Mars.png")
+        ButtonNeutral = LoadImageAsset(DataPath + "/UI/Buttons/NeutralBackground.png")
+        ButtonAstro = LoadImageAsset(DataPath + "/UI/Buttons/AstroBackground.png")
+        ButtonAlien = LoadImageAsset(DataPath + "/UI/Buttons/AlienBackground.png")
+        ButtonOverlay = LoadImageAsset(DataPath + "/UI/Buttons/Overlay.png")
+        ButtonPlay = LoadImageAsset(DataPath + "/UI/Buttons/Play.png")
+        BaseplateAstroWide = LoadImageAsset(DataPath + "/Baseplates/Astro2x2.png")
+        BaseplateAlienWide = LoadImageAsset(DataPath + "/Baseplates/Alien2x2.png")
+        BaseplateAstroSmall = LoadImageAsset(DataPath + "/Baseplates/Astro1x2.png")
+        BaseplateAlienSmall = LoadImageAsset(DataPath + "/Baseplates/Alien1x2.png")
+        TeamIndicatorAstro = LoadImageAsset(DataPath + "/UI/Indicators/AstroTeam.png")
+        TeamIndicatorAlien = LoadImageAsset(DataPath + "/UI/Indicators/AlienTeam.png")
+        TeamIndicatorNeutral = LoadImageAsset(DataPath + "/UI/Indicators/NeutralTeam.png")
+        UnitSelectionHover = LoadImageAsset(DataPath + "/UI/Overlays/UnitSelectionHover.png")
+        UnitSelectionClick = LoadImageAsset(DataPath + "/UI/Overlays/UnitSelectionClick.png")
 
         TileImageLookup = New Dictionary(Of Integer, Image)()
         BuildingSmallImageLookup = New Dictionary(Of String, Image)()
@@ -25,6 +28,19 @@
         UnitShadowImageLookup = New Dictionary(Of String, Image)()
     End Sub
 
+    Private Function LoadImageAsset(fileName As String) As Image
+        Try
+            Return Image.FromFile(fileName)
+        Catch ex As FileNotFoundException
+            MsgBox("Error: Required asset file is missing: " + ex.FileName + vbNewLine + "Program cannot continue. Exiting...")
+            Environment.Exit(1)
+        Catch ex As ArgumentException
+            MsgBox("Error: Required asset file is invalid: " + fileName + vbNewLine + "Program cannot continue. Exiting...")
+            Environment.Exit(1)
+        End Try
+        Return Nothing
+    End Function
+
     'Terrain background image.
     Public Background As Image
 
@@ -33,6 +49,7 @@
     Public ButtonAstro As Image
     Public ButtonAlien As Image
     Public ButtonOverlay As Image
+    Public ButtonPlay As Image
 
     'Building baseplate graphics.
     Public BaseplateAstroWide As Image

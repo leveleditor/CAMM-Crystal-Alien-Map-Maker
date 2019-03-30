@@ -8,9 +8,9 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("CAMM (Crystal Alien Map Maker)")> 
-<Assembly: AssemblyDescription("Create maps for the CrystAlien Conflict game.")> 
-<Assembly: AssemblyCompany("Mars Mission Fan Wiki")> 
+<Assembly: AssemblyTitle("CAMM (Crystal Alien Map Maker)")>
+<Assembly: AssemblyDescription("Create custom levels for the CrystAlien Conflict game.")>
+<Assembly: AssemblyCompany("CrystAlien Redux Project")>
 <Assembly: AssemblyProduct("CAMM (Crystal Alien Map Maker)")> 
 <Assembly: AssemblyCopyright("GNU GPL v2 License")> 
 <Assembly: AssemblyTrademark("")> 
@@ -18,7 +18,7 @@ Imports System.Runtime.InteropServices
 <Assembly: ComVisible(True)> 
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("e5d657a2-7294-4ee2-aed5-c830404b6863")> 
+<Assembly: Guid("e5d657a2-7294-4ee2-aed5-c830404b6863")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")>
 
-<Assembly: AssemblyVersion("1.2.*")> 
+<Assembly: AssemblyVersion("1.4.*")>
 '<Assembly: AssemblyFileVersion("1.2")>

@@ -25,9 +25,28 @@
         rbtIsSpecialLevel.Checked = FrmEditor.ActiveMap.IsSpecialLevel
         rbtIsLastSpecialLevel.Checked = FrmEditor.ActiveMap.IsLastSpecialLevel
         rbtIsBonusLevel.Checked = FrmEditor.ActiveMap.IsBonusLevel
+        txtAccessCode.Text = FrmEditor.ActiveMap.AccessCode
     End Sub
 
     Private Sub btnOk_Click(sender As Object, e As EventArgs) Handles btnOk.Click
+        'Sanity checks
+        Dim passed As Boolean = True
+        If String.IsNullOrWhiteSpace(txtAccessCode.Text) Then
+            passed = False
+            MsgBox("Access Code cannot be blank")
+        Else
+            For Each c As Char In txtAccessCode.Text
+                If Not Char.IsLetterOrDigit(c) Then
+                    passed = False
+                    MsgBox("Access Code can only have letters and numbers")
+                    Exit For
+                End If
+            Next
+        End If
+        If Not passed Then
+            Return
+        End If
+
         FrmEditor.ActiveMap.Title = txtTitle.Text
         FrmEditor.ActiveMap.Author = txtAuthor.Text
         FrmEditor.ActiveMap.Faction = CType(cboTeam.SelectedIndex, Team)
@@ -38,6 +57,7 @@
         FrmEditor.ActiveMap.IsSpecialLevel = rbtIsSpecialLevel.Checked
         FrmEditor.ActiveMap.IsLastSpecialLevel = rbtIsLastSpecialLevel.Checked
         FrmEditor.ActiveMap.IsBonusLevel = rbtIsBonusLevel.Checked
+        FrmEditor.ActiveMap.AccessCode = txtAccessCode.Text
 
         Me.DialogResult = DialogResult.OK
         Me.Close()

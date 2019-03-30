@@ -19,8 +19,14 @@
     Public ReadOnly DefaultMapsPath As String = DataPath + "/Default_Maps"
     Public ReadOnly AboutMenuMapPath As String = DataPath + "/AboutMenuMap.camm"
 
+    Public Const CACPlayerAppName = "CAC Player"
+    Public ReadOnly CACPlayerPath_Windows1 As String = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) + "/" + CACPlayerAppName + "/" + CACPlayerAppName + ".exe"
+    Public ReadOnly CACPlayerPath_Windows2 As String = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86) + "/" + CACPlayerAppName + "/" + CACPlayerAppName + ".exe"
+    Public Const CACPlayerPath_MacOS As String = "/Applications/" + CACPlayerAppName + ".app"
+
     Public Const ConfigFormat As Integer = 11
-    Public Const MapFormat As Integer = 7
+    Public Const MapFormat As Integer = 8
+    Public Const BaseJsonMapFormat As Integer = 7
 
     Public Const TileSizeX As Integer = 96
     Public Const TileSizeY As Integer = 48

@@ -14,6 +14,7 @@ Public Class Map
         Title = "New Map " + MapId.ToString()
         Author = ""
         IsMapFinal = False
+        AccessCode = "custom"
 
         InitTiles()
         mapBuildings = New List(Of Building)
@@ -77,6 +78,7 @@ Public Class Map
     Public Title As String
     Public Author As String
     Public IsMapFinal As Boolean
+    Public AccessCode As String
 
     Private mapTiles As Tile(,)
     Private mapBuildings As List(Of Building)
@@ -379,7 +381,7 @@ Public Class Map
         Dim bgY As Integer = 0
         Do Until bgX >= SizeX * TileSizeX
             Do Until bgY >= SizeY * TileSizeY
-                g.DrawImage(Background, bgX, bgY)
+                g.DrawImage(Background, bgX, bgY, Background.Width, Background.Height)
                 bgY += Background.Height
             Loop
             bgY = 0
@@ -515,6 +517,7 @@ Public Class Map
             .IsLastSpecialLevel = IsLastSpecialLevel,
             .IsBonusLevel = IsBonusLevel,
             .IsFinal = IsMapFinal,
+            .AccessCode = AccessCode,
             .Tiles = tileData,
             .Buildings = buildingData,
             .Units = unitData
@@ -763,6 +766,7 @@ Public Class Map
         IsLastSpecialLevel = mapData.IsLastSpecialLevel
         IsBonusLevel = mapData.IsBonusLevel
         IsMapFinal = mapData.IsFinal
+        AccessCode = If(mapData.AccessCode, AccessCode)
 
         Dim i As Integer = 0
         For y As Integer = 0 To mapData.Height - 1

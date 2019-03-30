@@ -297,7 +297,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CAMM_Data\Icons\CAMMFile.ico" />
+    <None Include="CAMM_Data\Icons\CAMMFile.ico" />
     <None Include="CAMM_Data\Icons\Crystal.ico" />
     <None Include="CAMM_Data\Sources\BuildingButtonTest.xcf" />
     <None Include="app.config" />
@@ -328,6 +328,7 @@
     <Content Include="CAMM_Data\Brushes\Rectangle\River-WE.json" />
     <Content Include="CAMM_Data\Brushes\Rectangle\RockBorders.json" />
     <Content Include="CAMM_Data\Brushes\Rectangle\Valley-NS.json" />
+    <Content Include="CAMM_Data\Brushes\Rectangle\Valley.json" />
     <Content Include="CAMM_Data\Brushes\Rectangle\Valley-WE.json" />
     <Content Include="CAMM_Data\Backgrounds\Mars.png" />
     <Content Include="CAMM_Data\Baseplates\Alien1x2.png" />
@@ -339,6 +340,7 @@
     <Content Include="CAMM_Data\UI\Buttons\Blank.png" />
     <Content Include="CAMM_Data\UI\Buttons\NeutralBackground.png" />
     <Content Include="CAMM_Data\UI\Buttons\Overlay.png" />
+    <Content Include="CAMM_Data\UI\Buttons\Play.png" />
     <Content Include="CAMM_Data\UI\Indicators\AlienTeam.png" />
     <Content Include="CAMM_Data\UI\Indicators\AstroTeam.png" />
     <Content Include="CAMM_Data\UI\Indicators\NeutralTeam.png" />

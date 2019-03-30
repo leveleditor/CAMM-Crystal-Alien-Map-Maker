@@ -18,7 +18,7 @@ Partial Class FrmEditor
     Private components As System.ComponentModel.IContainer
 
     'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
+    'It can be modified using the Windows Form Designer.
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
@@ -70,6 +70,8 @@ Partial Class FrmEditor
         Me.mnuchkGrid = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuchkShadows = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuchkTeamIndicators = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuchkDeveloper = New System.Windows.Forms.ToolStripMenuItem()
+        Me.separator13 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuchkDebugBuildingPos = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuchkDebugUnitPos = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator7 = New System.Windows.Forms.ToolStripSeparator()
@@ -83,6 +85,7 @@ Partial Class FrmEditor
         Me.mnuRelatedLinks = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnExternal4 = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnExternal3 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.separator12 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnExternal8 = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnExternal6 = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnExternal7 = New System.Windows.Forms.ToolStripMenuItem()
@@ -91,15 +94,17 @@ Partial Class FrmEditor
         Me.separator8 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuDev = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnConfigEditor = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnDeveloper = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnPlayInGame = New System.Windows.Forms.ToolStripSplitButton()
+        Me.btnPlayInGameDefault = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnPlayInGameMods = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnEditBuildings = New System.Windows.Forms.Button()
         Me.btnEditTiles = New System.Windows.Forms.Button()
         Me.btnEditShroud = New System.Windows.Forms.Button()
         Me.pnlBuildings = New System.Windows.Forms.Panel()
         Me.picBuildings = New System.Windows.Forms.PictureBox()
-        Me.txtHeight = New System.Windows.Forms.TextBox()
-        Me.txtWidth = New System.Windows.Forms.TextBox()
+        Me.txtHeight = New System.Windows.Forms.NumericUpDown()
+        Me.txtWidth = New System.Windows.Forms.NumericUpDown()
         Me.btnSize = New System.Windows.Forms.Button()
         Me.saveMap = New System.Windows.Forms.SaveFileDialog()
         Me.openMap = New System.Windows.Forms.OpenFileDialog()
@@ -119,7 +124,7 @@ Partial Class FrmEditor
         Me.btnToolPointer = New System.Windows.Forms.Button()
         Me.btnToolRectangleBrush = New System.Windows.Forms.Button()
         Me.cboRectangleBrush = New System.Windows.Forms.ComboBox()
-        Me.separator12 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuchkSkipMenu = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.picMap, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ctxMap.SuspendLayout()
         CType(Me.picActive, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -130,6 +135,8 @@ Partial Class FrmEditor
         Me.mnuMain.SuspendLayout()
         Me.pnlBuildings.SuspendLayout()
         CType(Me.picBuildings, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtHeight, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.txtWidth, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlUnits.SuspendLayout()
         CType(Me.picUnits, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ctxMapTabs.SuspendLayout()
@@ -139,9 +146,9 @@ Partial Class FrmEditor
         '
         Me.lblx.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblx.AutoSize = True
-        Me.lblx.Location = New System.Drawing.Point(597, 48)
+        Me.lblx.Location = New System.Drawing.Point(702, 49)
         Me.lblx.Name = "lblx"
-        Me.lblx.Size = New System.Drawing.Size(12, 13)
+        Me.lblx.Size = New System.Drawing.Size(14, 13)
         Me.lblx.TabIndex = 9
         Me.lblx.Text = "x"
         '
@@ -150,16 +157,17 @@ Partial Class FrmEditor
         Me.lblTools.AutoSize = True
         Me.lblTools.Location = New System.Drawing.Point(132, 74)
         Me.lblTools.Name = "lblTools"
-        Me.lblTools.Size = New System.Drawing.Size(36, 13)
+        Me.lblTools.Size = New System.Drawing.Size(41, 13)
         Me.lblTools.TabIndex = 13
         Me.lblTools.Text = "Tools:"
         '
         'lblWidth
         '
         Me.lblWidth.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblWidth.Location = New System.Drawing.Point(547, 31)
+        Me.lblWidth.AutoSize = True
+        Me.lblWidth.Location = New System.Drawing.Point(652, 33)
         Me.lblWidth.Name = "lblWidth"
-        Me.lblWidth.Size = New System.Drawing.Size(42, 13)
+        Me.lblWidth.Size = New System.Drawing.Size(39, 13)
         Me.lblWidth.TabIndex = 7
         Me.lblWidth.Text = "Width"
         Me.lblWidth.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -167,9 +175,10 @@ Partial Class FrmEditor
         'lblHeight
         '
         Me.lblHeight.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblHeight.Location = New System.Drawing.Point(610, 31)
+        Me.lblHeight.AutoSize = True
+        Me.lblHeight.Location = New System.Drawing.Point(715, 33)
         Me.lblHeight.Name = "lblHeight"
-        Me.lblHeight.Size = New System.Drawing.Size(42, 13)
+        Me.lblHeight.Size = New System.Drawing.Size(43, 13)
         Me.lblHeight.TabIndex = 10
         Me.lblHeight.Text = "Height"
         Me.lblHeight.TextAlign = System.Drawing.ContentAlignment.BottomCenter
@@ -247,12 +256,13 @@ Partial Class FrmEditor
         Me.lblSelected.AutoSize = True
         Me.lblSelected.Location = New System.Drawing.Point(7, 30)
         Me.lblSelected.Name = "lblSelected"
-        Me.lblSelected.Size = New System.Drawing.Size(72, 13)
+        Me.lblSelected.Size = New System.Drawing.Size(85, 13)
         Me.lblSelected.TabIndex = 1
         Me.lblSelected.Text = "Selected Tile:"
         '
         'staInfoBar
         '
+        Me.staInfoBar.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
         Me.staInfoBar.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible
         Me.staInfoBar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblCursorLoc, Me.lblAboutVersion})
         Me.staInfoBar.Location = New System.Drawing.Point(0, 430)
@@ -268,13 +278,13 @@ Partial Class FrmEditor
         Me.lblCursorLoc.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.lblCursorLoc.ImageTransparentColor = System.Drawing.Color.Transparent
         Me.lblCursorLoc.Name = "lblCursorLoc"
-        Me.lblCursorLoc.Size = New System.Drawing.Size(18, 17)
+        Me.lblCursorLoc.Size = New System.Drawing.Size(21, 17)
         Me.lblCursorLoc.Text = "[ ]"
         '
         'lblAboutVersion
         '
         Me.lblAboutVersion.Name = "lblAboutVersion"
-        Me.lblAboutVersion.Size = New System.Drawing.Size(733, 17)
+        Me.lblAboutVersion.Size = New System.Drawing.Size(730, 17)
         Me.lblAboutVersion.Spring = True
         Me.lblAboutVersion.Text = "<Version> by Josh"
         Me.lblAboutVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -283,10 +293,10 @@ Partial Class FrmEditor
         '
         Me.btnToolErase.AutoSize = True
         Me.btnToolErase.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnToolErase.Location = New System.Drawing.Point(274, 69)
+        Me.btnToolErase.Location = New System.Drawing.Point(287, 69)
         Me.btnToolErase.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolErase.Name = "btnToolErase"
-        Me.btnToolErase.Size = New System.Drawing.Size(47, 23)
+        Me.btnToolErase.Size = New System.Drawing.Size(54, 23)
         Me.btnToolErase.TabIndex = 16
         Me.btnToolErase.Text = "Eraser"
         '
@@ -329,7 +339,8 @@ Partial Class FrmEditor
         'mnuMain
         '
         Me.mnuMain.AutoSize = False
-        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.separator5, Me.mnuEdit, Me.separator6, Me.mnuView, Me.separator7, Me.mnuHelp, Me.separator8, Me.mnuDev, Me.separator3})
+        Me.mnuMain.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
+        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFile, Me.separator5, Me.mnuEdit, Me.separator6, Me.mnuView, Me.separator7, Me.mnuHelp, Me.separator8, Me.mnuDev, Me.separator3, Me.btnPlayInGame})
         Me.mnuMain.Location = New System.Drawing.Point(0, 0)
         Me.mnuMain.Name = "mnuMain"
         Me.mnuMain.Padding = New System.Windows.Forms.Padding(0)
@@ -342,92 +353,92 @@ Partial Class FrmEditor
         '
         Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnNew, Me.mnuNewFromTemplate, Me.btnOpen, Me.btnSave, Me.btnSaveAs, Me.separator1, Me.mnuImport, Me.mnuExport, Me.separator2, Me.btnExit})
         Me.mnuFile.Name = "mnuFile"
-        Me.mnuFile.Size = New System.Drawing.Size(37, 24)
+        Me.mnuFile.Size = New System.Drawing.Size(40, 24)
         Me.mnuFile.Text = "&File"
         '
         'btnNew
         '
         Me.btnNew.Name = "btnNew"
         Me.btnNew.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.btnNew.Size = New System.Drawing.Size(222, 22)
+        Me.btnNew.Size = New System.Drawing.Size(243, 22)
         Me.btnNew.Text = "&New"
         '
         'mnuNewFromTemplate
         '
         Me.mnuNewFromTemplate.Name = "mnuNewFromTemplate"
         Me.mnuNewFromTemplate.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.mnuNewFromTemplate.Size = New System.Drawing.Size(222, 22)
+        Me.mnuNewFromTemplate.Size = New System.Drawing.Size(243, 22)
         Me.mnuNewFromTemplate.Text = "New From &Template"
         '
         'btnOpen
         '
         Me.btnOpen.Name = "btnOpen"
         Me.btnOpen.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.btnOpen.Size = New System.Drawing.Size(222, 22)
+        Me.btnOpen.Size = New System.Drawing.Size(243, 22)
         Me.btnOpen.Text = "&Open..."
         '
         'btnSave
         '
         Me.btnSave.Name = "btnSave"
         Me.btnSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.btnSave.Size = New System.Drawing.Size(222, 22)
+        Me.btnSave.Size = New System.Drawing.Size(243, 22)
         Me.btnSave.Text = "&Save"
         '
         'btnSaveAs
         '
         Me.btnSaveAs.Name = "btnSaveAs"
-        Me.btnSaveAs.Size = New System.Drawing.Size(222, 22)
+        Me.btnSaveAs.Size = New System.Drawing.Size(243, 22)
         Me.btnSaveAs.Text = "Save &As..."
         '
         'separator1
         '
         Me.separator1.Name = "separator1"
-        Me.separator1.Size = New System.Drawing.Size(219, 6)
+        Me.separator1.Size = New System.Drawing.Size(240, 6)
         '
         'mnuImport
         '
         Me.mnuImport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnImportAS})
         Me.mnuImport.Name = "mnuImport"
-        Me.mnuImport.Size = New System.Drawing.Size(222, 22)
+        Me.mnuImport.Size = New System.Drawing.Size(243, 22)
         Me.mnuImport.Text = "&Import"
         Me.mnuImport.Visible = False
         '
         'btnImportAS
         '
         Me.btnImportAS.Name = "btnImportAS"
-        Me.btnImportAS.Size = New System.Drawing.Size(170, 22)
+        Me.btnImportAS.Size = New System.Drawing.Size(184, 22)
         Me.btnImportAS.Text = "ActionScript Code"
         '
         'mnuExport
         '
         Me.mnuExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnExportPNG, Me.btnExportAS})
         Me.mnuExport.Name = "mnuExport"
-        Me.mnuExport.Size = New System.Drawing.Size(222, 22)
+        Me.mnuExport.Size = New System.Drawing.Size(243, 22)
         Me.mnuExport.Text = "&Export"
         '
         'btnExportPNG
         '
         Me.btnExportPNG.Name = "btnExportPNG"
-        Me.btnExportPNG.Size = New System.Drawing.Size(170, 22)
+        Me.btnExportPNG.Size = New System.Drawing.Size(186, 22)
         Me.btnExportPNG.Text = "PNG Image [.png]"
         '
         'btnExportAS
         '
         Me.btnExportAS.Name = "btnExportAS"
-        Me.btnExportAS.Size = New System.Drawing.Size(170, 22)
+        Me.btnExportAS.Size = New System.Drawing.Size(186, 22)
         Me.btnExportAS.Text = "ActionScript Code"
         Me.btnExportAS.Visible = False
         '
         'separator2
         '
         Me.separator2.Name = "separator2"
-        Me.separator2.Size = New System.Drawing.Size(219, 6)
+        Me.separator2.Size = New System.Drawing.Size(240, 6)
         '
         'btnExit
         '
         Me.btnExit.Name = "btnExit"
         Me.btnExit.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.btnExit.Size = New System.Drawing.Size(222, 22)
+        Me.btnExit.Size = New System.Drawing.Size(243, 22)
         Me.btnExit.Text = "E&xit"
         '
         'separator5
@@ -440,7 +451,7 @@ Partial Class FrmEditor
         '
         Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnDeleteSelectedObject, Me.btnObjectProperties, Me.separator9, Me.btnMapProperties})
         Me.mnuEdit.Name = "mnuEdit"
-        Me.mnuEdit.Size = New System.Drawing.Size(39, 24)
+        Me.mnuEdit.Size = New System.Drawing.Size(43, 24)
         Me.mnuEdit.Text = "&Edit"
         '
         'btnDeleteSelectedObject
@@ -448,7 +459,7 @@ Partial Class FrmEditor
         Me.btnDeleteSelectedObject.Enabled = False
         Me.btnDeleteSelectedObject.Name = "btnDeleteSelectedObject"
         Me.btnDeleteSelectedObject.ShortcutKeys = System.Windows.Forms.Keys.Delete
-        Me.btnDeleteSelectedObject.Size = New System.Drawing.Size(262, 22)
+        Me.btnDeleteSelectedObject.Size = New System.Drawing.Size(300, 22)
         Me.btnDeleteSelectedObject.Text = "Delete Selected Object"
         '
         'btnObjectProperties
@@ -456,19 +467,19 @@ Partial Class FrmEditor
         Me.btnObjectProperties.Enabled = False
         Me.btnObjectProperties.Name = "btnObjectProperties"
         Me.btnObjectProperties.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.P), System.Windows.Forms.Keys)
-        Me.btnObjectProperties.Size = New System.Drawing.Size(262, 22)
+        Me.btnObjectProperties.Size = New System.Drawing.Size(300, 22)
         Me.btnObjectProperties.Text = "Selected Object &Properties..."
         '
         'separator9
         '
         Me.separator9.Name = "separator9"
-        Me.separator9.Size = New System.Drawing.Size(259, 6)
+        Me.separator9.Size = New System.Drawing.Size(297, 6)
         '
         'btnMapProperties
         '
         Me.btnMapProperties.Name = "btnMapProperties"
         Me.btnMapProperties.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.M), System.Windows.Forms.Keys)
-        Me.btnMapProperties.Size = New System.Drawing.Size(262, 22)
+        Me.btnMapProperties.Size = New System.Drawing.Size(300, 22)
         Me.btnMapProperties.Text = "&Map Properties..."
         '
         'separator6
@@ -479,9 +490,9 @@ Partial Class FrmEditor
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuchkGrid, Me.mnuchkShadows, Me.mnuchkTeamIndicators, Me.mnuchkDebugBuildingPos, Me.mnuchkDebugUnitPos})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuchkGrid, Me.mnuchkShadows, Me.mnuchkTeamIndicators, Me.mnuchkDeveloper, Me.separator13, Me.mnuchkDebugBuildingPos, Me.mnuchkDebugUnitPos})
         Me.mnuView.Name = "mnuView"
-        Me.mnuView.Size = New System.Drawing.Size(44, 24)
+        Me.mnuView.Size = New System.Drawing.Size(49, 24)
         Me.mnuView.Text = "&View"
         '
         'mnuchkGrid
@@ -492,7 +503,7 @@ Partial Class FrmEditor
         Me.mnuchkGrid.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.mnuchkGrid.Name = "mnuchkGrid"
         Me.mnuchkGrid.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.G), System.Windows.Forms.Keys)
-        Me.mnuchkGrid.Size = New System.Drawing.Size(247, 22)
+        Me.mnuchkGrid.Size = New System.Drawing.Size(277, 22)
         Me.mnuchkGrid.Text = "Show &Grid"
         '
         'mnuchkShadows
@@ -503,7 +514,7 @@ Partial Class FrmEditor
         Me.mnuchkShadows.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.mnuchkShadows.Name = "mnuchkShadows"
         Me.mnuchkShadows.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.mnuchkShadows.Size = New System.Drawing.Size(247, 22)
+        Me.mnuchkShadows.Size = New System.Drawing.Size(277, 22)
         Me.mnuchkShadows.Text = "Show &Shadows"
         '
         'mnuchkTeamIndicators
@@ -512,15 +523,31 @@ Partial Class FrmEditor
         Me.mnuchkTeamIndicators.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.mnuchkTeamIndicators.Name = "mnuchkTeamIndicators"
         Me.mnuchkTeamIndicators.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.mnuchkTeamIndicators.Size = New System.Drawing.Size(247, 22)
+        Me.mnuchkTeamIndicators.Size = New System.Drawing.Size(277, 22)
         Me.mnuchkTeamIndicators.Text = "Show &Team Indicators"
+        '
+        'mnuchkDeveloper
+        '
+        Me.mnuchkDeveloper.CheckOnClick = True
+        Me.mnuchkDeveloper.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.mnuchkDeveloper.Name = "mnuchkDeveloper"
+        Me.mnuchkDeveloper.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
+            Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
+        Me.mnuchkDeveloper.Size = New System.Drawing.Size(277, 22)
+        Me.mnuchkDeveloper.Text = "Developer Mode"
+        '
+        'separator13
+        '
+        Me.separator13.Name = "separator13"
+        Me.separator13.Size = New System.Drawing.Size(274, 6)
+        Me.separator13.Visible = False
         '
         'mnuchkDebugBuildingPos
         '
         Me.mnuchkDebugBuildingPos.CheckOnClick = True
         Me.mnuchkDebugBuildingPos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.mnuchkDebugBuildingPos.Name = "mnuchkDebugBuildingPos"
-        Me.mnuchkDebugBuildingPos.Size = New System.Drawing.Size(247, 22)
+        Me.mnuchkDebugBuildingPos.Size = New System.Drawing.Size(277, 22)
         Me.mnuchkDebugBuildingPos.Text = "Debug - Show Building Positions"
         Me.mnuchkDebugBuildingPos.Visible = False
         '
@@ -529,7 +556,7 @@ Partial Class FrmEditor
         Me.mnuchkDebugUnitPos.CheckOnClick = True
         Me.mnuchkDebugUnitPos.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.mnuchkDebugUnitPos.Name = "mnuchkDebugUnitPos"
-        Me.mnuchkDebugUnitPos.Size = New System.Drawing.Size(247, 22)
+        Me.mnuchkDebugUnitPos.Size = New System.Drawing.Size(277, 22)
         Me.mnuchkDebugUnitPos.Text = "Debug - Show Unit Positions"
         Me.mnuchkDebugUnitPos.Visible = False
         '
@@ -543,92 +570,97 @@ Partial Class FrmEditor
         '
         Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAbout, Me.separator10, Me.btnExternal5, Me.btnExternal2, Me.btnExternal1, Me.separator11, Me.mnuRelatedLinks, Me.separator4, Me.chkAssociateFileTypeCAMM})
         Me.mnuHelp.Name = "mnuHelp"
-        Me.mnuHelp.Size = New System.Drawing.Size(44, 24)
+        Me.mnuHelp.Size = New System.Drawing.Size(47, 24)
         Me.mnuHelp.Text = "&Help"
         '
         'btnAbout
         '
         Me.btnAbout.Name = "btnAbout"
-        Me.btnAbout.Size = New System.Drawing.Size(227, 22)
+        Me.btnAbout.Size = New System.Drawing.Size(254, 22)
         Me.btnAbout.Text = "&About CAMM..."
         '
         'separator10
         '
         Me.separator10.Name = "separator10"
-        Me.separator10.Size = New System.Drawing.Size(224, 6)
+        Me.separator10.Size = New System.Drawing.Size(251, 6)
         '
         'btnExternal5
         '
         Me.btnExternal5.AutoToolTip = True
         Me.btnExternal5.Name = "btnExternal5"
-        Me.btnExternal5.Size = New System.Drawing.Size(227, 22)
+        Me.btnExternal5.Size = New System.Drawing.Size(254, 22)
         Me.btnExternal5.Text = "Report bugs on GitHub"
         '
         'btnExternal2
         '
         Me.btnExternal2.AutoToolTip = True
         Me.btnExternal2.Name = "btnExternal2"
-        Me.btnExternal2.Size = New System.Drawing.Size(227, 22)
+        Me.btnExternal2.Size = New System.Drawing.Size(254, 22)
         Me.btnExternal2.Text = "View Source Code on GitHub"
         '
         'btnExternal1
         '
         Me.btnExternal1.AutoToolTip = True
         Me.btnExternal1.Name = "btnExternal1"
-        Me.btnExternal1.Size = New System.Drawing.Size(227, 22)
+        Me.btnExternal1.Size = New System.Drawing.Size(254, 22)
         Me.btnExternal1.Text = "Main Project Page"
         '
         'separator11
         '
         Me.separator11.Name = "separator11"
-        Me.separator11.Size = New System.Drawing.Size(224, 6)
+        Me.separator11.Size = New System.Drawing.Size(251, 6)
         '
         'mnuRelatedLinks
         '
         Me.mnuRelatedLinks.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnExternal4, Me.btnExternal3, Me.separator12, Me.btnExternal8, Me.btnExternal6, Me.btnExternal7})
         Me.mnuRelatedLinks.Name = "mnuRelatedLinks"
-        Me.mnuRelatedLinks.Size = New System.Drawing.Size(227, 22)
+        Me.mnuRelatedLinks.Size = New System.Drawing.Size(254, 22)
         Me.mnuRelatedLinks.Text = "Related Links"
         '
         'btnExternal4
         '
         Me.btnExternal4.AutoToolTip = True
         Me.btnExternal4.Name = "btnExternal4"
-        Me.btnExternal4.Size = New System.Drawing.Size(256, 22)
+        Me.btnExternal4.Size = New System.Drawing.Size(284, 22)
         Me.btnExternal4.Text = "CrystAlien Redux Project"
         '
         'btnExternal3
         '
         Me.btnExternal3.AutoToolTip = True
         Me.btnExternal3.Name = "btnExternal3"
-        Me.btnExternal3.Size = New System.Drawing.Size(256, 22)
+        Me.btnExternal3.Size = New System.Drawing.Size(284, 22)
         Me.btnExternal3.Text = "Lego Mars Mission Fan-Made Wiki"
+        '
+        'separator12
+        '
+        Me.separator12.Name = "separator12"
+        Me.separator12.Size = New System.Drawing.Size(281, 6)
         '
         'btnExternal8
         '
         Me.btnExternal8.AutoToolTip = True
         Me.btnExternal8.Name = "btnExternal8"
-        Me.btnExternal8.Size = New System.Drawing.Size(256, 22)
+        Me.btnExternal8.Size = New System.Drawing.Size(284, 22)
         Me.btnExternal8.Text = "CAC Flash Wrapper GitHub"
         '
         'btnExternal6
         '
         Me.btnExternal6.AutoToolTip = True
         Me.btnExternal6.Name = "btnExternal6"
-        Me.btnExternal6.Size = New System.Drawing.Size(256, 22)
+        Me.btnExternal6.Size = New System.Drawing.Size(284, 22)
         Me.btnExternal6.Text = "CAC Unit Editor GitHub"
         '
         'btnExternal7
         '
         Me.btnExternal7.AutoToolTip = True
         Me.btnExternal7.Name = "btnExternal7"
-        Me.btnExternal7.Size = New System.Drawing.Size(256, 22)
+        Me.btnExternal7.Size = New System.Drawing.Size(284, 22)
         Me.btnExternal7.Text = "CAC Building Editor GitHub"
         '
         'separator4
         '
         Me.separator4.Name = "separator4"
-        Me.separator4.Size = New System.Drawing.Size(224, 6)
+        Me.separator4.Size = New System.Drawing.Size(251, 6)
         '
         'chkAssociateFileTypeCAMM
         '
@@ -636,7 +668,7 @@ Partial Class FrmEditor
         Me.chkAssociateFileTypeCAMM.CheckOnClick = True
         Me.chkAssociateFileTypeCAMM.CheckState = System.Windows.Forms.CheckState.Indeterminate
         Me.chkAssociateFileTypeCAMM.Name = "chkAssociateFileTypeCAMM"
-        Me.chkAssociateFileTypeCAMM.Size = New System.Drawing.Size(227, 22)
+        Me.chkAssociateFileTypeCAMM.Size = New System.Drawing.Size(254, 22)
         Me.chkAssociateFileTypeCAMM.Text = "Associate file type .camm"
         '
         'separator8
@@ -648,9 +680,9 @@ Partial Class FrmEditor
         'mnuDev
         '
         Me.mnuDev.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.mnuDev.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnConfigEditor, Me.btnDeveloper})
+        Me.mnuDev.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnConfigEditor})
         Me.mnuDev.Name = "mnuDev"
-        Me.mnuDev.Size = New System.Drawing.Size(39, 24)
+        Me.mnuDev.Size = New System.Drawing.Size(43, 24)
         Me.mnuDev.Text = "Dev"
         Me.mnuDev.Visible = False
         '
@@ -659,18 +691,8 @@ Partial Class FrmEditor
         Me.btnConfigEditor.Name = "btnConfigEditor"
         Me.btnConfigEditor.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
             Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.btnConfigEditor.Size = New System.Drawing.Size(256, 22)
+        Me.btnConfigEditor.Size = New System.Drawing.Size(284, 22)
         Me.btnConfigEditor.Text = "&Configuration Editor"
-        '
-        'btnDeveloper
-        '
-        Me.btnDeveloper.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.btnDeveloper.Name = "btnDeveloper"
-        Me.btnDeveloper.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
-            Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
-        Me.btnDeveloper.Size = New System.Drawing.Size(256, 22)
-        Me.btnDeveloper.Text = "Activate Dev Mode"
-        Me.btnDeveloper.Visible = False
         '
         'separator3
         '
@@ -679,35 +701,64 @@ Partial Class FrmEditor
         Me.separator3.Size = New System.Drawing.Size(3, 24)
         Me.separator3.Visible = False
         '
+        'btnPlayInGame
+        '
+        Me.btnPlayInGame.DropDownButtonWidth = 16
+        Me.btnPlayInGame.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnPlayInGameDefault, Me.btnPlayInGameMods, Me.mnuchkSkipMenu})
+        Me.btnPlayInGame.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.btnPlayInGame.Margin = New System.Windows.Forms.Padding(0)
+        Me.btnPlayInGame.Name = "btnPlayInGame"
+        Me.btnPlayInGame.Size = New System.Drawing.Size(91, 24)
+        Me.btnPlayInGame.Text = "&Play Level"
+        '
+        'btnPlayInGameDefault
+        '
+        Me.btnPlayInGameDefault.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.btnPlayInGameDefault.Name = "btnPlayInGameDefault"
+        Me.btnPlayInGameDefault.ShortcutKeys = System.Windows.Forms.Keys.F5
+        Me.btnPlayInGameDefault.Size = New System.Drawing.Size(254, 22)
+        Me.btnPlayInGameDefault.Text = "&Play Level (default)"
+        '
+        'btnPlayInGameMods
+        '
+        Me.btnPlayInGameMods.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.btnPlayInGameMods.Name = "btnPlayInGameMods"
+        Me.btnPlayInGameMods.ShortcutKeys = System.Windows.Forms.Keys.F6
+        Me.btnPlayInGameMods.Size = New System.Drawing.Size(254, 22)
+        Me.btnPlayInGameMods.Text = "Play Level (&mod selector)"
+        '
         'btnEditBuildings
         '
         Me.btnEditBuildings.AutoSize = True
-        Me.btnEditBuildings.Location = New System.Drawing.Point(215, 43)
+        Me.btnEditBuildings.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnEditBuildings.Location = New System.Drawing.Point(203, 43)
         Me.btnEditBuildings.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnEditBuildings.Name = "btnEditBuildings"
-        Me.btnEditBuildings.Size = New System.Drawing.Size(80, 23)
+        Me.btnEditBuildings.Size = New System.Drawing.Size(93, 23)
         Me.btnEditBuildings.TabIndex = 3
         Me.btnEditBuildings.Text = "Edit Buildings"
         '
         'btnEditTiles
         '
         Me.btnEditTiles.AutoSize = True
+        Me.btnEditTiles.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnEditTiles.Enabled = False
         Me.btnEditTiles.Location = New System.Drawing.Point(132, 43)
         Me.btnEditTiles.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnEditTiles.Name = "btnEditTiles"
-        Me.btnEditTiles.Size = New System.Drawing.Size(80, 23)
+        Me.btnEditTiles.Size = New System.Drawing.Size(68, 23)
         Me.btnEditTiles.TabIndex = 2
         Me.btnEditTiles.Text = "Edit Tiles"
         '
         'btnEditShroud
         '
         Me.btnEditShroud.AutoSize = True
+        Me.btnEditShroud.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnEditShroud.Enabled = False
-        Me.btnEditShroud.Location = New System.Drawing.Point(381, 43)
+        Me.btnEditShroud.Location = New System.Drawing.Point(372, 43)
         Me.btnEditShroud.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnEditShroud.Name = "btnEditShroud"
-        Me.btnEditShroud.Size = New System.Drawing.Size(80, 23)
+        Me.btnEditShroud.Size = New System.Drawing.Size(83, 23)
         Me.btnEditShroud.TabIndex = 5
         Me.btnEditShroud.Text = "Edit Shroud"
         Me.btnEditShroud.Visible = False
@@ -740,35 +791,37 @@ Partial Class FrmEditor
         Me.txtHeight.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtHeight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtHeight.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtHeight.Location = New System.Drawing.Point(612, 45)
-        Me.txtHeight.MaxLength = 3
+        Me.txtHeight.Location = New System.Drawing.Point(717, 46)
+        Me.txtHeight.Maximum = New Decimal(New Integer() {60, 0, 0, 0})
+        Me.txtHeight.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.txtHeight.Name = "txtHeight"
         Me.txtHeight.Size = New System.Drawing.Size(42, 20)
         Me.txtHeight.TabIndex = 11
-        Me.txtHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtHeight.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'txtWidth
         '
         Me.txtWidth.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtWidth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtWidth.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtWidth.Location = New System.Drawing.Point(549, 45)
-        Me.txtWidth.MaxLength = 3
+        Me.txtWidth.Location = New System.Drawing.Point(654, 46)
+        Me.txtWidth.Maximum = New Decimal(New Integer() {60, 0, 0, 0})
+        Me.txtWidth.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.txtWidth.Name = "txtWidth"
         Me.txtWidth.Size = New System.Drawing.Size(42, 20)
         Me.txtWidth.TabIndex = 8
-        Me.txtWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtWidth.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'btnSize
         '
         Me.btnSize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSize.AutoSize = True
-        Me.btnSize.Location = New System.Drawing.Point(657, 43)
+        Me.btnSize.Location = New System.Drawing.Point(654, 69)
         Me.btnSize.Margin = New System.Windows.Forms.Padding(0)
         Me.btnSize.Name = "btnSize"
-        Me.btnSize.Size = New System.Drawing.Size(100, 23)
+        Me.btnSize.Size = New System.Drawing.Size(105, 24)
         Me.btnSize.TabIndex = 12
-        Me.btnSize.Text = "Change Size"
+        Me.btnSize.Text = "Resize Map"
         '
         'saveMap
         '
@@ -791,9 +844,9 @@ Partial Class FrmEditor
         Me.chkGrid.AutoSize = True
         Me.chkGrid.Checked = True
         Me.chkGrid.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.chkGrid.Location = New System.Drawing.Point(468, 47)
+        Me.chkGrid.Location = New System.Drawing.Point(566, 73)
         Me.chkGrid.Name = "chkGrid"
-        Me.chkGrid.Size = New System.Drawing.Size(75, 17)
+        Me.chkGrid.Size = New System.Drawing.Size(85, 17)
         Me.chkGrid.TabIndex = 6
         Me.chkGrid.Text = "Show Grid"
         '
@@ -802,10 +855,10 @@ Partial Class FrmEditor
         Me.btnToolSmartBrush.AutoSize = True
         Me.btnToolSmartBrush.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.btnToolSmartBrush.Enabled = False
-        Me.btnToolSmartBrush.Location = New System.Drawing.Point(423, 69)
+        Me.btnToolSmartBrush.Location = New System.Drawing.Point(457, 69)
         Me.btnToolSmartBrush.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolSmartBrush.Name = "btnToolSmartBrush"
-        Me.btnToolSmartBrush.Size = New System.Drawing.Size(74, 23)
+        Me.btnToolSmartBrush.Size = New System.Drawing.Size(89, 23)
         Me.btnToolSmartBrush.TabIndex = 18
         Me.btnToolSmartBrush.Text = "Smart Brush"
         Me.btnToolSmartBrush.Visible = False
@@ -814,20 +867,21 @@ Partial Class FrmEditor
         '
         Me.btnToolBrush.AutoSize = True
         Me.btnToolBrush.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnToolBrush.Location = New System.Drawing.Point(227, 69)
+        Me.btnToolBrush.Location = New System.Drawing.Point(234, 69)
         Me.btnToolBrush.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolBrush.Name = "btnToolBrush"
-        Me.btnToolBrush.Size = New System.Drawing.Size(44, 23)
+        Me.btnToolBrush.Size = New System.Drawing.Size(50, 23)
         Me.btnToolBrush.TabIndex = 15
         Me.btnToolBrush.Text = "Brush"
         '
         'btnEditUnits
         '
         Me.btnEditUnits.AutoSize = True
-        Me.btnEditUnits.Location = New System.Drawing.Point(298, 43)
+        Me.btnEditUnits.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
+        Me.btnEditUnits.Location = New System.Drawing.Point(299, 43)
         Me.btnEditUnits.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnEditUnits.Name = "btnEditUnits"
-        Me.btnEditUnits.Size = New System.Drawing.Size(80, 23)
+        Me.btnEditUnits.Size = New System.Drawing.Size(70, 23)
         Me.btnEditUnits.TabIndex = 4
         Me.btnEditUnits.Text = "Edit Units"
         '
@@ -914,7 +968,7 @@ Partial Class FrmEditor
         Me.btnToolPointer.Location = New System.Drawing.Point(174, 69)
         Me.btnToolPointer.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolPointer.Name = "btnToolPointer"
-        Me.btnToolPointer.Size = New System.Drawing.Size(50, 23)
+        Me.btnToolPointer.Size = New System.Drawing.Size(57, 23)
         Me.btnToolPointer.TabIndex = 14
         Me.btnToolPointer.Text = "Pointer"
         '
@@ -922,10 +976,10 @@ Partial Class FrmEditor
         '
         Me.btnToolRectangleBrush.AutoSize = True
         Me.btnToolRectangleBrush.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
-        Me.btnToolRectangleBrush.Location = New System.Drawing.Point(324, 69)
+        Me.btnToolRectangleBrush.Location = New System.Drawing.Point(344, 69)
         Me.btnToolRectangleBrush.Margin = New System.Windows.Forms.Padding(3, 0, 0, 0)
         Me.btnToolRectangleBrush.Name = "btnToolRectangleBrush"
-        Me.btnToolRectangleBrush.Size = New System.Drawing.Size(96, 23)
+        Me.btnToolRectangleBrush.Size = New System.Drawing.Size(110, 23)
         Me.btnToolRectangleBrush.TabIndex = 17
         Me.btnToolRectangleBrush.Text = "Rectangle Brush"
         '
@@ -944,15 +998,19 @@ Partial Class FrmEditor
         Me.cboRectangleBrush.TabIndex = 16
         Me.cboRectangleBrush.Visible = False
         '
-        'separator12
+        'mnuchkSkipMenu
         '
-        Me.separator12.Name = "separator12"
-        Me.separator12.Size = New System.Drawing.Size(253, 6)
+        Me.mnuchkSkipMenu.Checked = True
+        Me.mnuchkSkipMenu.CheckOnClick = True
+        Me.mnuchkSkipMenu.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.mnuchkSkipMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.mnuchkSkipMenu.Name = "mnuchkSkipMenu"
+        Me.mnuchkSkipMenu.Size = New System.Drawing.Size(254, 22)
+        Me.mnuchkSkipMenu.Text = "&Skip game menu"
         '
         'FrmEditor
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.ClientSize = New System.Drawing.Size(766, 452)
         Me.Controls.Add(Me.cboRectangleBrush)
         Me.Controls.Add(Me.lblHeight)
@@ -982,8 +1040,10 @@ Partial Class FrmEditor
         Me.Controls.Add(Me.pnlBuildings)
         Me.Controls.Add(Me.mapTabs)
         Me.DoubleBuffered = True
+        Me.Font = New System.Drawing.Font("Verdana", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel, CType(0, Byte))
         Me.KeyPreview = True
         Me.MainMenuStrip = Me.mnuMain
+        Me.MinimumSize = New System.Drawing.Size(720, 400)
         Me.Name = "FrmEditor"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "CAMM (Crystal Alien Map Maker)"
@@ -999,6 +1059,8 @@ Partial Class FrmEditor
         Me.mnuMain.PerformLayout()
         Me.pnlBuildings.ResumeLayout(False)
         CType(Me.picBuildings, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtHeight, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.txtWidth, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlUnits.ResumeLayout(False)
         CType(Me.picUnits, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ctxMapTabs.ResumeLayout(False)
@@ -1033,8 +1095,8 @@ Partial Class FrmEditor
     Friend WithEvents btnEditShroud As System.Windows.Forms.Button
     Friend WithEvents pnlBuildings As System.Windows.Forms.Panel
     Friend WithEvents picBuildings As System.Windows.Forms.PictureBox
-    Friend WithEvents txtHeight As System.Windows.Forms.TextBox
-    Friend WithEvents txtWidth As System.Windows.Forms.TextBox
+    Friend WithEvents txtHeight As System.Windows.Forms.NumericUpDown
+    Friend WithEvents txtWidth As System.Windows.Forms.NumericUpDown
     Friend WithEvents btnSize As System.Windows.Forms.Button
     Friend WithEvents saveMap As System.Windows.Forms.SaveFileDialog
     Friend WithEvents openMap As System.Windows.Forms.OpenFileDialog
@@ -1058,7 +1120,6 @@ Partial Class FrmEditor
     Friend WithEvents savePng As System.Windows.Forms.SaveFileDialog
     Friend WithEvents mnuImport As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnImportAS As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents btnDeveloper As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btnExportAS As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mnuchkDebugBuildingPos As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents separator4 As System.Windows.Forms.ToolStripSeparator
@@ -1103,4 +1164,10 @@ Partial Class FrmEditor
     Friend WithEvents btnExternal7 As ToolStripMenuItem
     Friend WithEvents btnExternal8 As ToolStripMenuItem
     Friend WithEvents separator12 As ToolStripSeparator
+    Friend WithEvents btnPlayInGame As ToolStripSplitButton
+    Friend WithEvents btnPlayInGameMods As ToolStripMenuItem
+    Friend WithEvents btnPlayInGameDefault As ToolStripMenuItem
+    Friend WithEvents mnuchkDeveloper As ToolStripMenuItem
+    Friend WithEvents separator13 As ToolStripSeparator
+    Friend WithEvents mnuchkSkipMenu As ToolStripMenuItem
 End Class

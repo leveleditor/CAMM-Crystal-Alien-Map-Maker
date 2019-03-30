@@ -45,7 +45,7 @@
 
     Public Overrides ReadOnly Property CheckBackground As Color
         Get
-            Return Color.FromArgb(125, 125, 125)
+            Return Color.FromArgb(200, 200, 200)
         End Get
     End Property
 
