@@ -98,6 +98,7 @@ Partial Class FrmEditor
         Me.btnPlayInGame = New System.Windows.Forms.ToolStripSplitButton()
         Me.btnPlayInGameDefault = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnPlayInGameMods = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuchkSkipMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnEditBuildings = New System.Windows.Forms.Button()
         Me.btnEditTiles = New System.Windows.Forms.Button()
         Me.btnEditShroud = New System.Windows.Forms.Button()
@@ -124,7 +125,8 @@ Partial Class FrmEditor
         Me.btnToolPointer = New System.Windows.Forms.Button()
         Me.btnToolRectangleBrush = New System.Windows.Forms.Button()
         Me.cboRectangleBrush = New System.Windows.Forms.ComboBox()
-        Me.mnuchkSkipMenu = New System.Windows.Forms.ToolStripMenuItem()
+        Me.separator14 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnExternal9 = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.picMap, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ctxMap.SuspendLayout()
         CType(Me.picActive, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -568,7 +570,7 @@ Partial Class FrmEditor
         '
         'mnuHelp
         '
-        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAbout, Me.separator10, Me.btnExternal5, Me.btnExternal2, Me.btnExternal1, Me.separator11, Me.mnuRelatedLinks, Me.separator4, Me.chkAssociateFileTypeCAMM})
+        Me.mnuHelp.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.btnAbout, Me.separator10, Me.btnExternal9, Me.btnExternal1, Me.separator14, Me.btnExternal5, Me.btnExternal2, Me.separator11, Me.mnuRelatedLinks, Me.separator4, Me.chkAssociateFileTypeCAMM})
         Me.mnuHelp.Name = "mnuHelp"
         Me.mnuHelp.Size = New System.Drawing.Size(47, 24)
         Me.mnuHelp.Text = "&Help"
@@ -603,7 +605,7 @@ Partial Class FrmEditor
         Me.btnExternal1.AutoToolTip = True
         Me.btnExternal1.Name = "btnExternal1"
         Me.btnExternal1.Size = New System.Drawing.Size(254, 22)
-        Me.btnExternal1.Text = "Main Project Page"
+        Me.btnExternal1.Text = "Project Wiki Page"
         '
         'separator11
         '
@@ -726,6 +728,16 @@ Partial Class FrmEditor
         Me.btnPlayInGameMods.ShortcutKeys = System.Windows.Forms.Keys.F6
         Me.btnPlayInGameMods.Size = New System.Drawing.Size(254, 22)
         Me.btnPlayInGameMods.Text = "Play Level (&mod selector)"
+        '
+        'mnuchkSkipMenu
+        '
+        Me.mnuchkSkipMenu.Checked = True
+        Me.mnuchkSkipMenu.CheckOnClick = True
+        Me.mnuchkSkipMenu.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.mnuchkSkipMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.mnuchkSkipMenu.Name = "mnuchkSkipMenu"
+        Me.mnuchkSkipMenu.Size = New System.Drawing.Size(254, 22)
+        Me.mnuchkSkipMenu.Text = "&Skip game menu"
         '
         'btnEditBuildings
         '
@@ -998,15 +1010,17 @@ Partial Class FrmEditor
         Me.cboRectangleBrush.TabIndex = 16
         Me.cboRectangleBrush.Visible = False
         '
-        'mnuchkSkipMenu
+        'separator14
         '
-        Me.mnuchkSkipMenu.Checked = True
-        Me.mnuchkSkipMenu.CheckOnClick = True
-        Me.mnuchkSkipMenu.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.mnuchkSkipMenu.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.mnuchkSkipMenu.Name = "mnuchkSkipMenu"
-        Me.mnuchkSkipMenu.Size = New System.Drawing.Size(254, 22)
-        Me.mnuchkSkipMenu.Text = "&Skip game menu"
+        Me.separator14.Name = "separator14"
+        Me.separator14.Size = New System.Drawing.Size(251, 6)
+        '
+        'btnExternal9
+        '
+        Me.btnExternal9.AutoToolTip = True
+        Me.btnExternal9.Name = "btnExternal9"
+        Me.btnExternal9.Size = New System.Drawing.Size(254, 22)
+        Me.btnExternal9.Text = "Main Project Page"
         '
         'FrmEditor
         '
@@ -1170,4 +1184,6 @@ Partial Class FrmEditor
     Friend WithEvents mnuchkDeveloper As ToolStripMenuItem
     Friend WithEvents separator13 As ToolStripSeparator
     Friend WithEvents mnuchkSkipMenu As ToolStripMenuItem
+    Friend WithEvents btnExternal9 As ToolStripMenuItem
+    Friend WithEvents separator14 As ToolStripSeparator
 End Class

@@ -122,6 +122,7 @@ Public Class FrmEditor
         btnExternal6.Tag = "https://github.com/Brian151/CAC-Unit-Editor"
         btnExternal7.Tag = "https://github.com/Brian151/CAC-Building-Editor"
         btnExternal8.Tag = "https://github.com/leveleditor/CrystAlien-Conflict-Flash-Wrapper"
+        btnExternal9.Tag = "https://crystalien-redux.com/camm.php"
 
         btnExternal1.ToolTipText = btnExternal1.Tag
         btnExternal2.ToolTipText = btnExternal2.Tag
@@ -131,6 +132,7 @@ Public Class FrmEditor
         btnExternal6.ToolTipText = btnExternal6.Tag
         btnExternal7.ToolTipText = btnExternal7.Tag
         btnExternal8.ToolTipText = btnExternal8.Tag
+        btnExternal9.ToolTipText = btnExternal9.Tag
 
         'Loading the configuration file.
         If Not LoadConfig() Then
@@ -892,14 +894,14 @@ Public Class FrmEditor
             ElseIf File.Exists(CACPlayerPath_Windows2) Then
                 Process.Start(CACPlayerPath_Windows2, commandArgs)
             Else
-                If MsgBox("It appears you're running Windows, so you need to download and install the standalone CrystAlien Conflict Player from http://crystalien-redux.com/ to enable the level player." + Environment.NewLine + "Press OK to open the webpage.", MsgBoxStyle.OkCancel + MsgBoxStyle.Information) = MsgBoxResult.Ok Then
+                If MsgBox("In order to enable the level player, you need to download and install the standalone CAC Player app from " + btnExternal9.Tag + Environment.NewLine + Environment.NewLine + "Press OK to open the webpage." + Environment.NewLine + Environment.NewLine + "Note: CAMM needs to find the CAC Player Windows program (.exe) in the default 'Installation Location' on Windows.", MsgBoxStyle.OkCancel + MsgBoxStyle.Information) = MsgBoxResult.Ok Then
                     btnExternal_Click(btnExternal4, New EventArgs())
                 End If
             End If
         ElseIf Directory.Exists(CACPlayerPath_MacOS) Then
             Process.Start("open", "'" + CACPlayerPath_MacOS + "' --args " + commandArgs)
         ElseIf Directory.Exists("/Applications") Then
-            If MsgBox("It appears you're running Mac OS X, so you need to download and install the standalone CrystAlien Conflict Player from http://crystalien-redux.com/ to enable the level player." + Environment.NewLine + "Press OK to open the webpage.", MsgBoxStyle.OkCancel + MsgBoxStyle.Information) = MsgBoxResult.Ok Then
+            If MsgBox("In order to enable the level player, you need to download and install the standalone CAC Player app from " + btnExternal9.Tag + Environment.NewLine + Environment.NewLine + "Press OK to open the webpage." + Environment.NewLine + Environment.NewLine + "Note: CAMM needs to find the CAC Player Mac app (.app) in the default 'Installation Location' on Macintosh/Mac OS X.", MsgBoxStyle.OkCancel + MsgBoxStyle.Information) = MsgBoxResult.Ok Then
                 btnExternal_Click(btnExternal4, New EventArgs())
             End If
         Else
@@ -949,7 +951,7 @@ Public Class FrmEditor
         End Using
     End Sub
 
-    Private Sub btnExternal_Click(sender As Object, e As EventArgs) Handles btnExternal1.Click, btnExternal2.Click, btnExternal3.Click, btnExternal4.Click, btnExternal5.Click, btnExternal6.Click, btnExternal7.Click, btnExternal8.Click
+    Private Sub btnExternal_Click(sender As Object, e As EventArgs) Handles btnExternal1.Click, btnExternal2.Click, btnExternal3.Click, btnExternal4.Click, btnExternal5.Click, btnExternal6.Click, btnExternal7.Click, btnExternal8.Click, btnExternal9.Click
         OpenLinkInDefaultBrowser(Me, CType(sender, ToolStripMenuItem).Tag.ToString())
     End Sub
 
