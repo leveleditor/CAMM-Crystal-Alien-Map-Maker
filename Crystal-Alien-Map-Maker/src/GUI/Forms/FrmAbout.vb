@@ -34,7 +34,7 @@ Public Class FrmAbout
             {"299792458, 4T2 Multimedia", "  - Developer/Programmer of CrystAlien Conflict"},
             {"ETXAlienRobot201", "  - Default Maps Export, Occasional Graphics Design," + Environment.NewLine + "  - Programmer, Helping with Flash Wrapper"},
             {"Mr.Mars.Mission, rennatnave101, and clawtankfan", "  - User Interface Concept Designs"},
-            {"-= 3RD PARTY CODE =-", "- Json.NET by Newtonsoft" + Environment.NewLine + "- Nini by Brent Matzelle" + Environment.NewLine + "- .NET Framework by Microsoft"}
+            {"-= 3RD PARTY CODE =-", "- Json.NET by Newtonsoft" + Environment.NewLine + "- .NET Framework by Microsoft"}
         }
         totalCredits = credits.Count()
 

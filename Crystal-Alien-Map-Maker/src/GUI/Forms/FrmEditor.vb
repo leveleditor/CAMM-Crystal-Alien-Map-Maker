@@ -9,7 +9,6 @@ Imports System.Security
 Imports System.Text
 Imports Microsoft.Win32
 Imports Newtonsoft.Json
-Imports Nini.Config
 
 Public Class FrmEditor
 
@@ -665,38 +664,13 @@ Public Class FrmEditor
                 EndLoadMap(fileName)
             ElseIf mapData.Value.Format > MapFormat Then
                 MsgBox("This map file was created with a newer version of CAMM and cannot be opened.")
+            ElseIf mapData.Value.Format < BaseJsonMapFormat Then
+                MsgBox("This map file was created with an older version of CAMM and cannot be opened. The file format is no longer supported.")
             Else
                 MsgBox("This map file has an invalid value of '" + mapData.Value.Format.ToString() + "' for the map format and cannot be opened.")
             End If
         Else
-            'Attempt to load the map as the older INI format as a fallback for now,
-            'although INI will be removed altogether in the future.
-            Dim source As New IniConfigSource(fileName)
-            Dim config As IConfig = source.Configs.Item("CAMM")
-            If config Is Nothing Then
-                NewMap()
-                ActiveMap.LoadMapv0(source)
-                EndLoadMap(fileName)
-            Else
-                Dim v As Integer = config.GetInt("vFormat", -1)
-                If v = -1 Then
-                    MsgBox("This map file is missing the format specifier or has an invalid value and cannot be opened.")
-                ElseIf v > MapFormat Then
-                    MsgBox("This map file was created with a newer version of CAMM and cannot be opened.")
-                ElseIf v = 1 Then
-                    NewMap()
-                    ActiveMap.LoadMapv1(source)
-
-                    EndLoadMap(fileName)
-                ElseIf v >= 2 And v <= 6 Then
-                    NewMap()
-                    ActiveMap.LoadMapLegacy(source, v)
-
-                    EndLoadMap(fileName)
-                Else
-                    MsgBox("This map file has an invalid value of '" + v.ToString() + "' for the map format and cannot be opened.")
-                End If
-            End If
+            MsgBox("This map file format is either not supported by this version of CAMM, or is otherwise invalid and cannot be opened. Try opening and re-saving it in an earlier version of CAMM (v1.4.0.53) to upgrade the file format first.")
         End If
     End Sub
     Private Sub EndLoadMap(fileName As String)
