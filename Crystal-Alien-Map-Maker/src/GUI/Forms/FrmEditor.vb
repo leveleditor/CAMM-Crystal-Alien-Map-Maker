@@ -183,6 +183,7 @@ Public Class FrmEditor
                                            'and the original template map remains untouched.
                                            ActiveMap.FilePath = ""
                                            UpdateMapTabs()
+                                           UpdateFormTitle()
                                        End Sub
 
             'Add the item to the menu.
@@ -225,7 +226,10 @@ Public Class FrmEditor
     End Sub
 
     Private Sub FRMEditor_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-        If MsgBox("There may be unsaved changes." + vbNewLine + "Are you sure you want to exit?", MsgBoxStyle.YesNo) <> MsgBoxResult.Yes Then
+        Dim mapsToClose As List(Of Map) = New List(Of Map)(Maps)
+        Dim numberMapsToClose = Maps.Count
+        Dim numberMapsClosed = CloseMaps(mapsToClose)
+        If numberMapsClosed < numberMapsToClose Then
             e.Cancel = True
         End If
     End Sub
@@ -309,6 +313,8 @@ Public Class FrmEditor
 
                 ActiveEditMode.PerformMouseRelease(mouseX, mouseY, mouseXNoSnap, mouseYNoSnap)
 
+                UpdateMapTabs()
+                UpdateFormTitle()
                 picMap.Invalidate()
             End If
         ElseIf e.Button = MouseButtons.Right Then
@@ -726,6 +732,7 @@ Public Class FrmEditor
             ActiveMap.IsMapFinal = False
             My.Computer.FileSystem.WriteAllText(fileName, ActiveMap.GetSaveData(), False)
             ActiveMap.FilePath = fileName
+            ActiveMap.IsModified = False
             UpdateMapTabs()
             UpdateFormTitle()
             picMap.Invalidate()
@@ -816,18 +823,19 @@ Public Class FrmEditor
                 btnDeleteSelectedObject.Enabled = False
                 btnObjectProperties.Enabled = False
                 ActiveMap.DeleteBuilding(ActiveMap.SelectedBuilding)
-                ActiveMap.ClearSelection()
-                picMap.Invalidate()
             End If
         ElseIf ActiveEditMode Is unitEditMode Then
             If ActiveMap.SelectedUnit IsNot Nothing Then
                 btnDeleteSelectedObject.Enabled = False
                 btnObjectProperties.Enabled = False
                 ActiveMap.DeleteUnit(ActiveMap.SelectedUnit)
-                ActiveMap.ClearSelection()
-                picMap.Invalidate()
             End If
         End If
+
+        ActiveMap.ClearSelection()
+        picMap.Invalidate()
+        UpdateMapTabs()
+        UpdateFormTitle()
     End Sub
 
     Private Sub btnConfigEditor_Click(sender As Object, e As EventArgs) Handles btnConfigEditor.Click
@@ -1199,6 +1207,9 @@ Public Class FrmEditor
                 If String.IsNullOrEmpty(tabText) Then
                     tabText = Maps(i).Title
                 End If
+                If Maps(i).IsModified Then
+                    tabText += "*"
+                End If
                 mapTabs.TabPages(i).Text = tabText
                 mapTabs.TabPages(i).ToolTipText = Maps(i).Title
                 If Not String.IsNullOrEmpty(Maps(i).Author) Then
@@ -1214,6 +1225,9 @@ Public Class FrmEditor
                 Dim tabText As String = Maps(i).FileName
                 If String.IsNullOrEmpty(tabText) Then
                     tabText = Maps(i).Title
+                End If
+                If Maps(i).IsModified Then
+                    tabText += "*"
                 End If
                 Dim newTab = New TabPage(tabText)
                 newTab.ToolTipText = Maps(i).Title
@@ -1238,6 +1252,9 @@ Public Class FrmEditor
             Else
                 title += " - (Unsaved)"
             End If
+            If ActiveMap.IsModified Then
+                title += "*"
+            End If
         End If
         Me.Text = title
     End Sub
@@ -1248,16 +1265,9 @@ Public Class FrmEditor
         For i As Integer = 0 To Maps.Count - 1
             Dim rect As Rectangle = mapTabs.GetTabRect(i)
             If rect.Contains(menuLocation) Then
-                If mapTabs.TabPages.Count = 1 Then
-                    NewMap()
-                End If
-                Maps.RemoveAt(i)
-                UpdateMapTabs()
-                UpdateFormTitle()
-                UpdateMapSize()
-                If i - 1 >= 0 Then
-                    mapTabs.SelectedIndex = i - 1
-                End If
+                Dim mapsToClose As List(Of Map) = New List(Of Map)()
+                mapsToClose.Add(Maps(i))
+                CloseMaps(mapsToClose)
                 Exit For
             End If
         Next
@@ -1271,11 +1281,9 @@ Public Class FrmEditor
                 Dim rect As Rectangle = mapTabs.GetTabRect(i)
                 If rect.Contains(menuLocation) Then
                     If i > 0 Then
-                        Maps.RemoveRange(0, i)
-                        UpdateMapTabs()
-                        UpdateFormTitle()
-                        UpdateMapSize()
-                        mapTabs.SelectedIndex = 0
+                        Dim mapsToClose As List(Of Map) = New List(Of Map)()
+                        mapsToClose.AddRange(Maps.GetRange(0, i))
+                        CloseMaps(mapsToClose)
                     End If
                     Exit For
                 End If
@@ -1291,11 +1299,9 @@ Public Class FrmEditor
                 Dim rect As Rectangle = mapTabs.GetTabRect(i)
                 If rect.Contains(menuLocation) Then
                     If i < Maps.Count Then
-                        Maps.RemoveRange(i + 1, (Maps.Count - 1) - (i + 1) + 1)
-                        UpdateMapTabs()
-                        UpdateFormTitle()
-                        UpdateMapSize()
-                        mapTabs.SelectedIndex = Maps.Count - 1
+                        Dim mapsToClose As List(Of Map) = New List(Of Map)()
+                        mapsToClose.AddRange(Maps.GetRange(i + 1, (Maps.Count - 1) - (i + 1) + 1))
+                        CloseMaps(mapsToClose)
                     End If
                     Exit For
                 End If
@@ -1305,10 +1311,10 @@ Public Class FrmEditor
 
     Private Sub btnCloseAllExceptThis_Click(sender As Object, e As EventArgs) Handles btnCloseAllExceptThis.Click
         Dim exceptMap As Map = ActiveMap
-        Maps.Clear()
-        Maps.Add(exceptMap)
-        UpdateMapTabs()
-        mapTabs.SelectedIndex = 0
+        Dim mapsToClose As List(Of Map) = New List(Of Map)()
+        mapsToClose.AddRange(Maps)
+        mapsToClose.Remove(exceptMap)
+        CloseMaps(mapsToClose)
     End Sub
 
     Private Sub mapTabs_MouseDown(sender As Object, e As MouseEventArgs) Handles mapTabs.MouseDown
@@ -1324,6 +1330,61 @@ Public Class FrmEditor
             Next
         End If
     End Sub
+
+    Private Sub UpdateMapTabsMaintainSelected(currentlyActiveMap As Map, currentlySelectedTabIndex As Integer)
+        UpdateMapTabs()
+        If Maps.Contains(currentlyActiveMap) Then
+            mapTabs.SelectedIndex = Maps.IndexOf(currentlyActiveMap)
+        ElseIf currentlySelectedTabIndex >= mapTabs.TabPages.Count Then
+            mapTabs.SelectedIndex = mapTabs.TabPages.Count - 1
+        End If
+    End Sub
+
+    Private Function CloseMaps(mapsToClose As List(Of Map)) As Integer
+        Dim numberMapsClosed As Integer = 0
+
+        Dim currentlyActiveMap As Map = ActiveMap
+        Dim currentlySelectedTabIndex As Integer = mapTabs.SelectedIndex
+
+        Dim unsavedMaps As Integer = 0
+        Dim mapsToCloseForSure As List(Of Map) = New List(Of Map)()
+
+        For Each map As Map In mapsToClose
+            If map.IsModified Then
+                unsavedMaps += 1
+            Else
+                mapsToCloseForSure.Add(map)
+            End If
+        Next
+
+        For Each map In mapsToCloseForSure
+            Maps.Remove(map)
+            mapsToClose.Remove(map)
+            numberMapsClosed += 1
+        Next
+
+        If unsavedMaps > 0 Then
+            UpdateMapTabsMaintainSelected(currentlyActiveMap, currentlySelectedTabIndex)
+
+            If MsgBox("There are " + unsavedMaps.ToString() + " maps to be closed with unsaved changes." + vbNewLine + "Are you sure you want to close them and discard all changes?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                For Each map In mapsToClose
+                    Maps.Remove(map)
+                    numberMapsClosed += 1
+                Next
+            End If
+        End If
+
+        If Maps.Count < 1 Then
+            NewMap()
+        End If
+
+        UpdateMapTabsMaintainSelected(currentlyActiveMap, currentlySelectedTabIndex)
+        UpdateFormTitle()
+        UpdateMapSize()
+        picMap.Invalidate()
+
+        Return numberMapsClosed
+    End Function
 
     Private Sub SwitchEditMode(mode As EditMode)
         ' Update currently active edit mode.

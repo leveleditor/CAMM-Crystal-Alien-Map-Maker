@@ -33,6 +33,7 @@
                         )
                         If Editor.ActiveMap.GetClosestUnit(newPos.X, newPos.Y - Editor.ActiveMap.SelectedUnit.Altitude, 0) Is Nothing Then
                             Editor.ActiveMap.SelectedUnit.Position = newPos
+                            Editor.ActiveMap.IsModified = True
                         End If
                     End If
                 End If

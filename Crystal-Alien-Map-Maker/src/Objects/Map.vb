@@ -28,10 +28,14 @@ Public Class Map
         IsSpecialLevel = IsSpecialLevelDefault
         IsLastSpecialLevel = IsLastSpecialLevelDefault
         IsBonusLevel = IsBonusLevelDefault
+
+        IsModified = False
     End Sub
 
     Private Shared mapIdPool As Integer
     Public ReadOnly MapId As Integer
+
+    Public Property IsModified As Boolean
 
     Private _sizeX As Integer
     Public ReadOnly Property SizeX As Integer
@@ -74,24 +78,141 @@ Public Class Map
     Public ClosestBuilding As Building = Nothing 'The closest building to the cursor position.
     Public SelectedBuilding As Building = Nothing 'The currently selected building.
 
-    Public Title As String
-    Public Author As String
-    Public IsMapFinal As Boolean
-    Public AccessCode As String
+    Private _Title As String
+    Public Property Title As String
+        Get
+            Return _Title
+        End Get
+        Set
+            _Title = Value
+            IsModified = True
+        End Set
+    End Property
+
+    Private _Author As String
+    Public Property Author As String
+        Get
+            Return _Author
+        End Get
+        Set
+            _Author = Value
+            IsModified = True
+        End Set
+    End Property
+
+    Private _IsMapFinal As Boolean
+    Public Property IsMapFinal As Boolean
+        Get
+            Return _IsMapFinal
+        End Get
+        Set
+            _IsMapFinal = Value
+            IsModified = True
+        End Set
+    End Property
+
+    Private _AccessCode As String
+    Public Property AccessCode As String
+        Get
+            Return _AccessCode
+        End Get
+        Set
+            _AccessCode = Value
+            IsModified = True
+        End Set
+    End Property
 
     Private mapTiles As Tile(,)
     Private mapBuildings As List(Of Building)
     Private mapUnits As List(Of Unit)
 
-    Public Faction As Team
-    Public CashPlayer As Integer
-    Public CashEnemy As Integer
+    Private _Faction As Team
+    Public Property Faction As Team
+        Get
+            Return _Faction
+        End Get
+        Set
+            _Faction = Value
+            IsModified = True
+        End Set
+    End Property
 
-    Public IsTraining As Boolean
-    Public IsConflict As Boolean
-    Public IsSpecialLevel As Boolean
-    Public IsLastSpecialLevel As Boolean
-    Public IsBonusLevel As Boolean
+    Private _CashPlayer As Integer
+    Public Property CashPlayer As Integer
+        Get
+            Return _CashPlayer
+        End Get
+        Set
+            _CashPlayer = Value
+            IsModified = True
+        End Set
+    End Property
+
+    Private _CashEnemy As Integer
+    Public Property CashEnemy As Integer
+        Get
+            Return _CashEnemy
+        End Get
+        Set
+            _CashEnemy = Value
+            IsModified = True
+        End Set
+    End Property
+
+    Private _IsTraining As Boolean
+    Public Property IsTraining As Boolean
+        Get
+            Return _IsTraining
+        End Get
+        Set
+            _IsTraining = Value
+            IsModified = True
+        End Set
+    End Property
+
+    Private _IsConflict As Boolean
+    Public Property IsConflict As Boolean
+        Get
+            Return _IsConflict
+        End Get
+        Set
+            _IsConflict = Value
+            IsModified = True
+        End Set
+    End Property
+
+    Private _IsSpecialLevel As Boolean
+    Public Property IsSpecialLevel As Boolean
+        Get
+            Return _IsSpecialLevel
+        End Get
+        Set
+            _IsSpecialLevel = Value
+            IsModified = True
+        End Set
+    End Property
+
+    Private _IsLastSpecialLevel As Boolean
+    Public Property IsLastSpecialLevel As Boolean
+        Get
+            Return _IsLastSpecialLevel
+        End Get
+        Set
+            _IsLastSpecialLevel = Value
+            IsModified = True
+        End Set
+    End Property
+
+    Private _IsBonusLevel As Boolean
+    Public Property IsBonusLevel As Boolean
+        Get
+            Return _IsBonusLevel
+        End Get
+        Set
+            _IsBonusLevel = Value
+            IsModified = True
+        End Set
+    End Property
 
     Public Sub ClearSelection()
         ClearSelectedUnit()
@@ -134,6 +255,8 @@ Public Class Map
                 End If
             Next
             mapUnits = tempUnits
+
+            IsModified = True
         End If
     End Sub
 
@@ -145,6 +268,8 @@ Public Class Map
         Next
         mapBuildings.Clear()
         mapUnits.Clear()
+
+        IsModified = True
     End Sub
 
     Private Sub InitTiles()
@@ -204,6 +329,7 @@ Public Class Map
                 For y As Integer = 0 To SizeY - 1
                     If mouseX = x * TileSizeX And mouseY = y * TileSizeY Then
                         mapTiles(x, y) = New Tile(tile.TileId, tile.IsPassable, tile.IsMinerals)
+                        IsModified = True
                         Return
                     End If
                 Next
@@ -280,6 +406,8 @@ Public Class Map
                 End If
             Next
         Next
+
+        IsModified = True
     End Sub
 
     Public Sub SetBuilding(mouseX As Integer, mouseY As Integer, building As Building)
@@ -303,6 +431,8 @@ Public Class Map
             ' This ensures that buildings closer to the top of the map render
             ' beneath buildings closer to the bottom of the map.
             mapBuildings = (From b In mapBuildings Order By b.Location.Y, b.Location.X).ToList()
+
+            IsModified = True
         End If
     End Sub
 
@@ -325,6 +455,8 @@ Public Class Map
                 ' beneath units closer to the bottom of the map.
                 mapUnits = (From u In mapUnits Order By u.Position.Y, u.Position.X).ToList()
             End If
+
+            IsModified = True
         End If
     End Sub
 
@@ -354,6 +486,8 @@ Public Class Map
             End If
         Next
         mapBuildings = temp
+
+        IsModified = True
     End Sub
 
     Public Sub EraseUnits(mouseX As Integer, mouseY As Integer)
@@ -363,12 +497,16 @@ Public Class Map
             temp.Remove(toRemove(i))
         Next
         mapUnits = temp
+
+        IsModified = True
     End Sub
 
     Public Function DeleteUnit(unit As Unit) As Boolean
+        IsModified = True
         Return mapUnits.Remove(unit)
     End Function
     Public Function DeleteBuilding(building As Building) As Boolean
+        IsModified = True
         Return mapBuildings.Remove(building)
     End Function
 
@@ -563,6 +701,8 @@ Public Class Map
 
             mapBuildings.Add(New Building(building.X * TileSizeX, building.Y * TileSizeY, building.Id, building.Team, w, h, building.Angle, building.Damage))
         Next
+
+        IsModified = False
     End Sub
 
 End Class

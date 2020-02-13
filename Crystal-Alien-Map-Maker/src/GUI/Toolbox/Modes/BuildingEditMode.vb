@@ -33,6 +33,7 @@
                         )
                         If Editor.ActiveMap.GetBuildingAt(newPos.X, newPos.Y) Is Nothing Then
                             Editor.ActiveMap.SelectedBuilding.Location = newPos
+                            Editor.ActiveMap.IsModified = True
                         End If
                     End If
                 End If
