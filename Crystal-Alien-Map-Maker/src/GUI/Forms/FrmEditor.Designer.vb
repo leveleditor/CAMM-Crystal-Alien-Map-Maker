@@ -78,9 +78,11 @@ Partial Class FrmEditor
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnAbout = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator10 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnExternal9 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.btnExternal1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.separator14 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnExternal5 = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnExternal2 = New System.Windows.Forms.ToolStripMenuItem()
-        Me.btnExternal1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator11 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuRelatedLinks = New System.Windows.Forms.ToolStripMenuItem()
         Me.btnExternal4 = New System.Windows.Forms.ToolStripMenuItem()
@@ -125,8 +127,6 @@ Partial Class FrmEditor
         Me.btnToolPointer = New System.Windows.Forms.Button()
         Me.btnToolRectangleBrush = New System.Windows.Forms.Button()
         Me.cboRectangleBrush = New System.Windows.Forms.ComboBox()
-        Me.separator14 = New System.Windows.Forms.ToolStripSeparator()
-        Me.btnExternal9 = New System.Windows.Forms.ToolStripMenuItem()
         CType(Me.picMap, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ctxMap.SuspendLayout()
         CType(Me.picActive, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -530,7 +530,6 @@ Partial Class FrmEditor
         '
         'mnuchkDeveloper
         '
-        Me.mnuchkDeveloper.CheckOnClick = True
         Me.mnuchkDeveloper.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.mnuchkDeveloper.Name = "mnuchkDeveloper"
         Me.mnuchkDeveloper.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
@@ -586,6 +585,25 @@ Partial Class FrmEditor
         Me.separator10.Name = "separator10"
         Me.separator10.Size = New System.Drawing.Size(251, 6)
         '
+        'btnExternal9
+        '
+        Me.btnExternal9.AutoToolTip = True
+        Me.btnExternal9.Name = "btnExternal9"
+        Me.btnExternal9.Size = New System.Drawing.Size(254, 22)
+        Me.btnExternal9.Text = "Main Project Page"
+        '
+        'btnExternal1
+        '
+        Me.btnExternal1.AutoToolTip = True
+        Me.btnExternal1.Name = "btnExternal1"
+        Me.btnExternal1.Size = New System.Drawing.Size(254, 22)
+        Me.btnExternal1.Text = "Project Wiki Page"
+        '
+        'separator14
+        '
+        Me.separator14.Name = "separator14"
+        Me.separator14.Size = New System.Drawing.Size(251, 6)
+        '
         'btnExternal5
         '
         Me.btnExternal5.AutoToolTip = True
@@ -599,13 +617,6 @@ Partial Class FrmEditor
         Me.btnExternal2.Name = "btnExternal2"
         Me.btnExternal2.Size = New System.Drawing.Size(254, 22)
         Me.btnExternal2.Text = "View Source Code on GitHub"
-        '
-        'btnExternal1
-        '
-        Me.btnExternal1.AutoToolTip = True
-        Me.btnExternal1.Name = "btnExternal1"
-        Me.btnExternal1.Size = New System.Drawing.Size(254, 22)
-        Me.btnExternal1.Text = "Project Wiki Page"
         '
         'separator11
         '
@@ -1009,18 +1020,6 @@ Partial Class FrmEditor
         Me.cboRectangleBrush.Size = New System.Drawing.Size(121, 54)
         Me.cboRectangleBrush.TabIndex = 16
         Me.cboRectangleBrush.Visible = False
-        '
-        'separator14
-        '
-        Me.separator14.Name = "separator14"
-        Me.separator14.Size = New System.Drawing.Size(251, 6)
-        '
-        'btnExternal9
-        '
-        Me.btnExternal9.AutoToolTip = True
-        Me.btnExternal9.Name = "btnExternal9"
-        Me.btnExternal9.Size = New System.Drawing.Size(254, 22)
-        Me.btnExternal9.Text = "Main Project Page"
         '
         'FrmEditor
         '

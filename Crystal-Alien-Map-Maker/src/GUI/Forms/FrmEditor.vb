@@ -61,6 +61,8 @@ Public Class FrmEditor
     'The last key that was pressed.
     Private lastKeyDown As Keys = Keys.None
 
+    Private skipDeveloperWarning As Boolean = False
+
     Public ActiveEditMode As EditMode
     Private tileEditMode As TileEditMode
     Private unitEditMode As UnitEditMode
@@ -842,14 +844,26 @@ Public Class FrmEditor
         FrmConfigEditor.ShowDialog(Me)
     End Sub
 
-    Private Sub mnuchkDeveloper_CheckedChanged(sender As Object, e As EventArgs) Handles mnuchkDeveloper.CheckedChanged
-        mnuDev.Visible = mnuchkDeveloper.Checked
-        separator3.Visible = mnuchkDeveloper.Checked
-        mnuImport.Visible = mnuchkDeveloper.Checked
-        btnExportAS.Visible = mnuchkDeveloper.Checked
-        separator13.Visible = mnuchkDeveloper.Checked
-        mnuchkDebugBuildingPos.Visible = mnuchkDeveloper.Checked
-        mnuchkDebugUnitPos.Visible = mnuchkDeveloper.Checked
+    Private Sub mnuchkDeveloper_CheckedChanged(sender As Object, e As EventArgs) Handles mnuchkDeveloper.Click
+        Dim shouldToggle As Boolean = False
+        If Not mnuDev.Visible And Not skipDeveloperWarning Then
+            If MsgBox("Note: Developer Mode is intended for advanced development and modding efforts and is not intended for general use. Changes made using developer options can potentially break normal editing ability.", MsgBoxStyle.OkCancel + MsgBoxStyle.Exclamation, "Enable Developer Mode") = MsgBoxResult.Ok Then
+                shouldToggle = True
+                skipDeveloperWarning = True
+            End If
+        Else
+            shouldToggle = True
+        End If
+        If shouldToggle Then
+            mnuchkDeveloper.Checked = Not mnuchkDeveloper.Checked
+            mnuDev.Visible = mnuchkDeveloper.Checked
+            separator3.Visible = mnuchkDeveloper.Checked
+            mnuImport.Visible = mnuchkDeveloper.Checked
+            btnExportAS.Visible = mnuchkDeveloper.Checked
+            separator13.Visible = mnuchkDeveloper.Checked
+            mnuchkDebugBuildingPos.Visible = mnuchkDeveloper.Checked
+            mnuchkDebugUnitPos.Visible = mnuchkDeveloper.Checked
+        End If
     End Sub
 
     Private Sub btnPlayInGame_Click(sender As Object, e As EventArgs) Handles btnPlayInGame.ButtonClick, btnPlayInGameDefault.Click

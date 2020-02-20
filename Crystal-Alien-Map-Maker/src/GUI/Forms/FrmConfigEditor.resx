@@ -120,6 +120,9 @@
   <metadata name="openImage.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>4, 2</value>
   </metadata>
+  <data name="lblWarning.Text" xml:space="preserve">
+    <value>Note: Changes made on this screen only apply to CAMM and will not be applied when playing the game! This will result in the editor getting out of sync with the game. This screen is really only useful if you wanted to set up CAMM to match your modded version of the game, in which case you would likely be making a modded version of CAMM as well.</value>
+  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>31</value>
   </metadata>

@@ -22,6 +22,7 @@ Partial Class FrmConfigEditor
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FrmConfigEditor))
         Me.btnSaveAll = New System.Windows.Forms.Button()
         Me.btnClose = New System.Windows.Forms.Button()
         Me.lblSaved = New System.Windows.Forms.Label()
@@ -35,6 +36,7 @@ Partial Class FrmConfigEditor
         Me.pnlUnits = New System.Windows.Forms.Panel()
         Me.tabConfig = New System.Windows.Forms.TabPage()
         Me.picPreview = New System.Windows.Forms.PictureBox()
+        Me.lblWarning = New System.Windows.Forms.Label()
         Me.editTabs.SuspendLayout()
         Me.tabTiles.SuspendLayout()
         Me.tabBuildings.SuspendLayout()
@@ -89,11 +91,11 @@ Partial Class FrmConfigEditor
         Me.editTabs.Controls.Add(Me.tabBuildings)
         Me.editTabs.Controls.Add(Me.tabUnits)
         Me.editTabs.Controls.Add(Me.tabConfig)
-        Me.editTabs.Location = New System.Drawing.Point(9, 9)
+        Me.editTabs.Location = New System.Drawing.Point(9, 56)
         Me.editTabs.Margin = New System.Windows.Forms.Padding(0)
         Me.editTabs.Name = "editTabs"
         Me.editTabs.SelectedIndex = 0
-        Me.editTabs.Size = New System.Drawing.Size(746, 405)
+        Me.editTabs.Size = New System.Drawing.Size(746, 358)
         Me.editTabs.TabIndex = 11
         '
         'tabTiles
@@ -105,7 +107,7 @@ Partial Class FrmConfigEditor
         Me.tabTiles.Location = New System.Drawing.Point(4, 22)
         Me.tabTiles.Margin = New System.Windows.Forms.Padding(0)
         Me.tabTiles.Name = "tabTiles"
-        Me.tabTiles.Size = New System.Drawing.Size(738, 379)
+        Me.tabTiles.Size = New System.Drawing.Size(738, 332)
         Me.tabTiles.TabIndex = 0
         Me.tabTiles.Text = "Edit Tiles"
         '
@@ -129,7 +131,7 @@ Partial Class FrmConfigEditor
         Me.tabBuildings.Location = New System.Drawing.Point(4, 22)
         Me.tabBuildings.Margin = New System.Windows.Forms.Padding(0)
         Me.tabBuildings.Name = "tabBuildings"
-        Me.tabBuildings.Size = New System.Drawing.Size(738, 379)
+        Me.tabBuildings.Size = New System.Drawing.Size(738, 347)
         Me.tabBuildings.TabIndex = 1
         Me.tabBuildings.Text = "Edit Buildings"
         '
@@ -153,7 +155,7 @@ Partial Class FrmConfigEditor
         Me.tabUnits.Location = New System.Drawing.Point(4, 22)
         Me.tabUnits.Margin = New System.Windows.Forms.Padding(0)
         Me.tabUnits.Name = "tabUnits"
-        Me.tabUnits.Size = New System.Drawing.Size(738, 379)
+        Me.tabUnits.Size = New System.Drawing.Size(738, 347)
         Me.tabUnits.TabIndex = 2
         Me.tabUnits.Text = "Edit Units"
         '
@@ -176,7 +178,7 @@ Partial Class FrmConfigEditor
         Me.tabConfig.Location = New System.Drawing.Point(4, 22)
         Me.tabConfig.Margin = New System.Windows.Forms.Padding(0)
         Me.tabConfig.Name = "tabConfig"
-        Me.tabConfig.Size = New System.Drawing.Size(738, 379)
+        Me.tabConfig.Size = New System.Drawing.Size(738, 347)
         Me.tabConfig.TabIndex = 3
         Me.tabConfig.Text = "Edit Config"
         '
@@ -192,12 +194,23 @@ Partial Class FrmConfigEditor
         Me.picPreview.TabStop = False
         Me.picPreview.Visible = False
         '
+        'lblWarning
+        '
+        Me.lblWarning.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblWarning.Location = New System.Drawing.Point(12, 9)
+        Me.lblWarning.Name = "lblWarning"
+        Me.lblWarning.Size = New System.Drawing.Size(740, 44)
+        Me.lblWarning.TabIndex = 15
+        Me.lblWarning.Text = resources.GetString("lblWarning.Text")
+        '
         'FrmConfigEditor
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(764, 452)
+        Me.Controls.Add(Me.lblWarning)
         Me.Controls.Add(Me.picPreview)
         Me.Controls.Add(Me.editTabs)
         Me.Controls.Add(Me.lblSaved)
@@ -232,4 +245,5 @@ Partial Class FrmConfigEditor
     Friend WithEvents tabUnits As System.Windows.Forms.TabPage
     Friend WithEvents pnlUnits As System.Windows.Forms.Panel
     Friend WithEvents tabConfig As System.Windows.Forms.TabPage
+    Friend WithEvents lblWarning As Label
 End Class
