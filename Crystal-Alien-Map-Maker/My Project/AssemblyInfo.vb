@@ -11,11 +11,11 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("CAMM (Crystal Alien Map Maker)")>
 <Assembly: AssemblyDescription("Create custom levels for the CrystAlien Conflict game.")>
 <Assembly: AssemblyCompany("CrystAlien Redux Project")>
-<Assembly: AssemblyProduct("CAMM (Crystal Alien Map Maker)")> 
-<Assembly: AssemblyCopyright("GNU GPL v2 License")> 
-<Assembly: AssemblyTrademark("")> 
+<Assembly: AssemblyProduct("CAMM (Crystal Alien Map Maker)")>
+<Assembly: AssemblyCopyright("GNU GPL v2 License")>
+<Assembly: AssemblyTrademark("")>
 
-<Assembly: ComVisible(True)> 
+<Assembly: ComVisible(True)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
 <Assembly: Guid("e5d657a2-7294-4ee2-aed5-c830404b6863")>
@@ -32,4 +32,3 @@ Imports System.Runtime.InteropServices
 ' <Assembly: AssemblyVersion("1.0.*")>
 
 <Assembly: AssemblyVersion("1.4.*")>
-'<Assembly: AssemblyFileVersion("1.2")>
