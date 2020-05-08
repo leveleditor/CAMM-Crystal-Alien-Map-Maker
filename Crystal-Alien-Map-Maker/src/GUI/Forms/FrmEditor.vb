@@ -881,8 +881,15 @@ Public Class FrmEditor
         Dim skipMenuString As String = If(skipMenu, "yes", "no")
         Dim size As Size = New Size(If(modded, 750, 600), 400)
         Dim sizeString As String = size.Width.ToString() + "x" + size.Height.ToString()
-        Dim levelDataEncoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(ActiveMap.GetSaveData()))
-        Dim commandArgs As String = If(mnuDev.Visible, "-console ", "") + "-autoplay=" + autoPlayString + " -skipmenu=" + skipMenuString + " -size " + sizeString + " -loadlevel " + levelDataEncoded
+
+        ' Save the map to a temporary file without changing anything inside the editor such as the unsaved file status.
+        Dim fileName As String = My.Computer.FileSystem.GetTempFileName()
+        My.Computer.FileSystem.WriteAllText(fileName, ActiveMap.GetSaveData(), False)
+
+        ' Basic sanitization of the filename for the command line and for the AIR runtime to use.
+        fileName = """" + fileName.Replace("\", "/") + """"
+
+        Dim commandArgs As String = If(mnuDev.Visible, "-console ", "") + "-autoplay=" + autoPlayString + " -skipmenu=" + skipMenuString + " -size " + sizeString + " -cammfile " + fileName
 
         If Environment.OSVersion.VersionString.Contains("Windows") Then
             If File.Exists(CACPlayerPath_Windows1) Then
