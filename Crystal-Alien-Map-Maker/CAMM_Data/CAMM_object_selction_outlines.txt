@@ -1,0 +1,17 @@
+selection outlines:
+done via drop shadow plugin from this paint dot net plugins pack
+http://users.telenet.be/krisvandermotten/Downloads/PaintDotNetEffects.html
+
+general settings :
+x : 0
+y : 0
+spread : 2
+blur : 0
+
+aliens ['evil'] :
+rgb 113 191 68
+hex 71bf44
+
+astros ['good'] :
+rgb 243 112 32
+hex f37020
